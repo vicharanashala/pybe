@@ -8,14 +8,16 @@ async function ensureDb() {
   try {
     await fs.access(dbPath);
   } catch {
-    await writeDb({ scenarios: [], sessions: [] });
+    await writeDb({ scenarios: [], sessions: [], conversations: [] });
   }
 }
 
 async function readDb() {
   await ensureDb();
   const raw = await fs.readFile(dbPath, 'utf8');
-  return JSON.parse(raw);
+  const db = JSON.parse(raw);
+  if (!db.conversations) db.conversations = [];
+  return db;
 }
 
 async function writeDb(data) {
@@ -90,16 +92,62 @@ async function addSession(input) {
 async function resetData(scenarios) {
   await writeDb({
     scenarios: scenarios.map((scenario) => createRecord(scenario)),
-    sessions: []
+    sessions: [],
+    conversations: []
   });
 }
 
+function hydrateConversation(conversation, db) {
+  return {
+    ...conversation,
+    scenario: db.scenarios.find((scenario) => scenario._id === conversation.scenarioId) || null
+  };
+}
+
+async function addConversation(input) {
+  const db = await readDb();
+  const conversation = createRecord(input);
+  db.conversations.push(conversation);
+  await writeDb(db);
+  return hydrateConversation(conversation, db);
+}
+
+async function getConversation(id) {
+  const db = await readDb();
+  const conversation = db.conversations.find((item) => item._id === id);
+  return conversation ? hydrateConversation(conversation, db) : null;
+}
+
+async function updateConversation(id, updates) {
+  const db = await readDb();
+  const index = db.conversations.findIndex((item) => item._id === id);
+  if (index === -1) return null;
+  db.conversations[index] = {
+    ...db.conversations[index],
+    ...updates,
+    updatedAt: now()
+  };
+  await writeDb(db);
+  return hydrateConversation(db.conversations[index], db);
+}
+
+async function listConversations() {
+  const db = await readDb();
+  return db.conversations
+    .map((conversation) => hydrateConversation(conversation, db))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+}
+
 module.exports = {
+  addConversation,
   addScenario,
   addSession,
+  getConversation,
   getScenario,
+  listConversations,
   listScenarios,
   listSessions,
   readDb,
-  resetData
+  resetData,
+  updateConversation
 };
