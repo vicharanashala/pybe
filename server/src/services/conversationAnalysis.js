@@ -72,9 +72,11 @@ const conceptKeywordPatterns = {
 
 function wordBoundaryMatch(text, phrase) {
   const escaped = phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  // Same trailing-plural tolerance as conversationEngine.js's matcher —
+  // "loop" should still match "loops" without needing a full stemmer.
   const pattern = phrase.includes(' ')
     ? new RegExp(escaped)
-    : new RegExp(`\\b${escaped}\\b`);
+    : new RegExp(`\\b${escaped}s?\\b`);
   return pattern.test(text);
 }
 
