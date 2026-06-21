@@ -5,41 +5,64 @@
 // deterministic style as learningEngine.js.
 //
 // Each scenario's `objectives` array (always 3 entries) is treated as a
-// ladder of sub-questions. Every objective is { text, keywords }, where
-// `keywords` is a small hand-authored list of 3-4 words/phrases that
-// signal a learner has genuinely engaged with that specific step (chosen
-// from the scenario's own context and sample reasoning, not paraphrases of
-// the objective's own wording). Classification is a direct overlap count
-// against that list:
-//   - none of the keywords appear   -> off_topic
-//   - some (but not all) appear     -> partial
-//   - all of the keywords appear    -> solid
-// This intentionally has no length thresholds or generic concept-wide
-// keyword soup — a short, precise answer that hits every keyword is just
-// as "solid" as a long one.
+// ladder of sub-questions, and the system always prompts for them in
+// order. Every objective is { text, keywords }, a small hand-authored
+// list of 2 words/phrases chosen from that scenario's own context.
+//
+// Classification is scenario-wide, not objective-specific: all keywords
+// across the scenario's 3 objectives are pooled into one list (so a
+// learner who answers with the right vocabulary for the *scenario* gets
+// credit even if they expressed it at a different step than the one
+// currently being probed — e.g. naming "for loop" while objective 1 is
+// just asking them to notice the repetition pattern). The answer is
+// checked against that full pooled list with a simple threshold:
+//   - 0 matches    -> off_topic
+//   - 1 match      -> partial
+//   - 2+ matches   -> solid
+// This deliberately favors encouraging genuine engagement with the
+// scenario's concept over strict step-by-step gatekeeping, since this is
+// a learning tool, not an exam.
 
 const MAX_ATTEMPTS_PER_OBJECTIVE = 2;
 
 function wordBoundaryIncludes(text, phrase) {
   const escaped = phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const pattern = phrase.includes(' ') ? new RegExp(escaped) : new RegExp(`\\b${escaped}\\b`);
+  // Multi-word phrases ("each break") match literally. Single words allow
+  // an optional trailing 's' so simple plurals/conjugations still count —
+  // "loop" should match "loops", "store" should match "stores" — without
+  // resorting to a full stemmer for what is just a keyword spot-check.
+  const pattern = phrase.includes(' ')
+    ? new RegExp(escaped)
+    : new RegExp(`\\b${escaped}s?\\b`);
   return pattern.test(text);
 }
 
-// Classify a single learner answer against the objective currently being probed.
+// Pools every objective's keywords into one de-duplicated list for the
+// scenario. Cached per scenario object would be a nice-to-have, but
+// scenario objects here are small (3 objectives, 2 keywords each) so
+// recomputing this on every call is cheap and keeps the function pure.
+function pooledKeywords(scenario) {
+  const all = (scenario.objectives || []).flatMap((objective) => objective.keywords || []);
+  return [...new Set(all)];
+}
+
+// Classify a single learner answer against the scenario as a whole. The
+// objectiveIndex parameter is accepted for API stability (callers still
+// pass it, and it's still used to decide what prompt/hint text to show)
+// but classification itself no longer depends on which objective is
+// currently active — see header comment.
 // Returns { classification: 'off_topic' | 'partial' | 'solid', matchedConcepts, score }
-function classifyAnswer(answerText = '', scenario, objectiveIndex) {
+function classifyAnswer(answerText = '', scenario, _objectiveIndex) {
   const text = answerText.trim();
   const lower = text.toLowerCase();
-  const objective = scenario.objectives[objectiveIndex] || { keywords: [] };
-  const keywords = objective.keywords || [];
+  const keywords = pooledKeywords(scenario);
 
   const matchedConcepts = keywords.filter((keyword) => wordBoundaryIncludes(lower, keyword));
 
   if (text.length === 0 || matchedConcepts.length === 0) {
     return { classification: 'off_topic', matchedConcepts, score: matchedConcepts.length };
   }
-  if (matchedConcepts.length === keywords.length) {
+  if (matchedConcepts.length >= 2) {
     return { classification: 'solid', matchedConcepts, score: matchedConcepts.length };
   }
   return { classification: 'partial', matchedConcepts, score: matchedConcepts.length };
