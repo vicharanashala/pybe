@@ -234,6 +234,120 @@ h2 {
   font-size: .86rem;
 }
 
+.mode-row {
+  justify-content: space-between;
+}
+
+.section-title-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mode-toggle {
+  display: flex;
+  gap: 6px;
+  background: #f1ebdd;
+  border: 1px solid #ded7cb;
+  border-radius: 999px;
+  padding: 4px;
+}
+
+.mode-btn {
+  border: 0;
+  background: transparent;
+  color: #53615c;
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mode-btn.active {
+  background: #17231f;
+  color: #fff;
+}
+
+.conversation {
+  display: grid;
+  gap: 14px;
+}
+
+.conversation-thread {
+  display: grid;
+  gap: 10px;
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.bubble {
+  border-radius: 12px;
+  padding: 12px 14px;
+  max-width: 88%;
+}
+
+.bubble p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.bubble.system {
+  background: #f1ebdd;
+  color: #17201d;
+  justify-self: start;
+  border: 1px solid #ded7cb;
+}
+
+.bubble.learner {
+  background: #17231f;
+  color: #fff;
+  justify-self: end;
+}
+
+.bubble .tag {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.tag-solid {
+  background: #d8f07c;
+  color: #14201c;
+}
+
+.tag-partial {
+  background: #ffe2a6;
+  color: #5c3c00;
+}
+
+.tag-off_topic {
+  background: #f3c4c4;
+  color: #6b1414;
+}
+
+.conversation-input {
+  display: grid;
+  gap: 10px;
+}
+
+.conversation-done {
+  color: #66730a;
+  font-weight: 700;
+}
+
+.conversation-error {
+  color: #a13a3a;
+}
+
 .learning-form {
   display: grid;
   gap: 14px;
