@@ -491,3 +491,349 @@ meter {
     grid-template-columns: 1fr;
   }
 }
+
+/* --- PyBe Interactive Tutorial Styles --- */
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.how-it-works-btn {
+  background: #d8f07c;
+  color: #14201c;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(216, 240, 124, 0.2);
+  transition: transform 0.2s;
+}
+
+.how-it-works-btn:hover {
+  background: #e6f6a0;
+  transform: translateY(-2px);
+}
+
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px;
+  margin: -8px;
+  border-radius: 8px;
+}
+
+.filters-container.highlighted-step {
+  background-color: #20312c !important;
+}
+
+.tutorial-overlay-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(17, 25, 22, 0.75);
+  z-index: 9998;
+  pointer-events: all;
+}
+
+.tutorial-modal-container {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 10001;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.tutorial-modal {
+  background: #fff;
+  border: 1px solid #ded7cb;
+  border-radius: 12px;
+  padding: 32px;
+  width: 550px;
+  max-width: 90vw;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+  margin-bottom: 40px;
+  position: relative;
+  pointer-events: all;
+  transition: all 0.3s ease;
+}
+
+.tutorial-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 6px;
+  background: #d8f07c;
+  transition: width 0.3s ease;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.welcome-modal .tutorial-progress-bar {
+  display: none;
+}
+
+.tutorial-header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tts-btn {
+  background: #f0ede6;
+  border: 1px solid #ded7cb;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  color: #17231f;
+  transition: all 0.2s ease;
+}
+
+.tts-btn:hover {
+  background: #e6e2da;
+}
+
+.tts-btn.active {
+  background: #17231f;
+  color: #fff;
+  border-color: #17231f;
+}
+
+.tutorial-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ded7cb;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s ease;
+}
+
+.dot:hover {
+  background: #b8b1a5;
+}
+
+.dot.active {
+  background: #17231f;
+  transform: scale(1.3);
+}
+
+.welcome-modal {
+  margin: auto !important;
+  width: 900px;
+  padding: 80px;
+  text-align: center;
+  background-color: #ffffff !important;
+  color: #17231f !important;
+  border: 1px solid #ded7cb !important;
+  border-top: 8px solid #d8f07c !important;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.3);
+}
+
+.welcome-modal .tutorial-header h3 {
+  font-size: 3.5rem;
+  margin-bottom: 24px;
+  color: #17231f;
+}
+
+.welcome-modal p {
+  font-size: 1.5rem;
+  color: #53615c;
+}
+
+.tutorial-mockup {
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  text-align: left;
+  border: 1px solid #ded7cb;
+  background: #fdfdfc;
+}
+
+.tutorial-mockup label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #17231f;
+  margin-bottom: 6px;
+}
+
+.mock-input {
+  border: 1px solid #ded7cb;
+  background: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #53615c;
+  margin-bottom: 12px;
+}
+
+.active-mock-input {
+  border-color: #92b1fa;
+  background: #f4f7ff;
+  color: #17231f;
+  border-width: 2px;
+}
+
+.dark-mockup {
+  background: #111916;
+  border-color: #111916;
+  color: #fff;
+}
+
+.mock-score {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #20312c;
+  margin-bottom: 12px;
+}
+
+.mock-score strong {
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+.mock-score span {
+  font-size: 0.85rem;
+  color: #cddbd5;
+}
+
+.mock-mapping {
+  border-left: 3px solid #d8f07c;
+  padding-left: 12px;
+}
+
+.mock-mapping strong {
+  display: block;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.mock-mapping small {
+  color: #d8f07c;
+  font-weight: bold;
+}
+
+.mock-mapping p {
+  font-size: 0.85rem !important;
+  color: #cddbd5 !important;
+  margin-bottom: 0 !important;
+  margin-top: 4px;
+}
+
+.tutorial-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+
+.tutorial-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #17231f;
+}
+
+.tutorial-header span {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #7b867f;
+}
+
+.tutorial-modal p {
+  color: #53615c;
+  line-height: 1.6;
+  font-size: 1.1rem;
+  margin-bottom: 28px;
+}
+
+.tutorial-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tutorial-actions .skip-btn {
+  background: none;
+  border: none;
+  color: #7b867f;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.tutorial-actions .nav-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.tutorial-actions .nav-btns button {
+  padding: 9px 16px;
+  border-radius: 6px;
+  border: 1px solid #d4cdc0;
+  background: #fffaf2;
+  cursor: pointer;
+  font-weight: 700;
+  color: #17231f;
+}
+
+.tutorial-actions .nav-btns .next-btn {
+  background: #17231f;
+  color: #fff;
+  border-color: #17231f;
+}
+
+.highlighted-step {
+  position: relative !important;
+  z-index: 9999 !important;
+  box-shadow: 0 0 0 4px #17231f, 0 0 0 8px #d8f07c !important;
+  border-radius: 8px;
+  pointer-events: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.highlighted-step:not(button) {
+  background-color: #fffdf7 !important;
+}
+
+.highlighted-step::after {
+  content: "↓";
+  position: absolute;
+  top: -65px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 60px;
+  color: #14201c;
+  z-index: 10000;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+
+.tutorial-active .sidebar {
+  position: static !important;
+}
+
+.sidebar.highlighted-step {
+  background-color: #16231f !important;
+  border-radius: 0;
+}
+
