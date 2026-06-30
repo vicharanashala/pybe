@@ -183,7 +183,7 @@ select {
 
 .main-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(360px, .9fr);
+  grid-template-columns: minmax(0, 1fr) minmax(360px, .9fr) minmax(280px, .7fr);
   gap: 20px;
   align-items: start;
 }
@@ -302,6 +302,354 @@ textarea {
 .score span {
   font-size: 3rem;
   font-weight: 900;
+}
+
+.xp-badge {
+  background: #d8f07c;
+  color: #17231f;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.xp-badge small {
+  font-weight: 500;
+  font-size: .85rem;
+  color: #53615c;
+  margin-left: 6px;
+}
+
+.streak-badge {
+  background: #fff2d9;
+  border: 1px solid #ebcd8e;
+  color: #7a4a00;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 800;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.w3h-block {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.w3h-header {
+  background: #17231f;
+  color: #d8f07c;
+  padding: 10px 16px;
+  font-weight: 800;
+  font-size: .9rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.w3h-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: #ded7cb;
+  border: 1px solid #ded7cb;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+}
+
+.w3h-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: #ded7cb;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+.w3h-card {
+  background: #fffdf7;
+  padding: 14px 16px;
+  display: grid;
+  gap: 6px;
+}
+
+.w3h-card strong {
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: #66730a;
+}
+
+.w3h-card span {
+  font-size: .95rem;
+  color: #2a3a35;
+  line-height: 1.5;
+}
+
+.w3h-how {
+  grid-column: 1 / -1;
+  background: #111916;
+}
+
+.w3h-how strong {
+  color: #d8f07c;
+}
+
+.w3h-how pre {
+  margin: 4px 0 0;
+  font-size: .82rem;
+  color: #c8ddd5;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+
+.top-stats-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #17231f;
+  color: #f8f4ec;
+  border-radius: 8px;
+  padding: 14px 20px;
+  font-size: .95rem;
+  flex-wrap: wrap;
+}
+
+.top-stats-bar strong {
+  font-size: 1rem;
+  color: #d8f07c;
+}
+
+.top-xp {
+  margin-left: auto;
+  background: #d8f07c;
+  color: #17231f;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-weight: 800;
+  font-size: .9rem;
+}
+
+.top-xp small {
+  font-weight: 500;
+  color: #53615c;
+  margin-left: 4px;
+}
+
+.top-streak {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-weight: 700;
+  font-size: .9rem;
+}
+
+.textarea-row {
+  position: relative;
+}
+
+.textarea-row textarea {
+  width: 100%;
+  min-height: 105px;
+  border: 1px solid #d4cdc0;
+  border-radius: 8px;
+  padding: 12px;
+  padding-right: 44px;
+  resize: vertical;
+  background: #fffaf2;
+  color: #17201d;
+  font: inherit;
+}
+
+.voice-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: none;
+  border: 1px solid #d4cdc0;
+  border-radius: 6px;
+  padding: 7px 8px;
+  color: #66730a;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: background .15s;
+}
+
+.voice-btn:hover {
+  background: #e7f2cb;
+  border-color: #66730a;
+}
+
+.voice-btn.recording {
+  background: #c94040;
+  border-color: #c94040;
+  color: #fff;
+}
+
+.recording-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c94040;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .3; }
+}
+
+.w3h-panel {
+  position: sticky;
+  top: 24px;
+}
+
+.quiz-trigger {
+  width: 100%;
+  margin-top: 4px;
+  background: #d8f07c;
+  color: #17231f;
+  font-size: 1rem;
+}
+
+.quiz-page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 12px 0;
+  border-bottom: 1px solid #ded7cb;
+}
+
+.quiz-header span {
+  font-weight: 700;
+  font-size: .95rem;
+  color: #53615c;
+}
+
+.quiz-exit {
+  background: none;
+  border: none;
+  color: #66730a;
+  font-weight: 700;
+  font-size: .95rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.quiz-exit:hover {
+  text-decoration: underline;
+}
+
+.quiz-card {
+  background: #fffdf7;
+  border: 1px solid #ded7cb;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 16px 42px rgba(40, 34, 23, .08);
+  display: grid;
+  gap: 20px;
+}
+
+.quiz-concept {
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #66730a;
+  font-weight: 800;
+}
+
+.quiz-question {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  color: #17201d;
+}
+
+.quiz-options {
+  display: grid;
+  gap: 10px;
+}
+
+.quiz-option {
+  background: #fffaf2;
+  border: 2px solid #d4cdc0;
+  border-radius: 8px;
+  padding: 14px 18px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+}
+
+.quiz-option:hover:not(:disabled) {
+  border-color: #66730a;
+  background: #f0f5e0;
+}
+
+.quiz-option:disabled {
+  cursor: default;
+}
+
+.quiz-option.correct {
+  border-color: #4a9a20;
+  background: #e6f5d6;
+  color: #2a5a00;
+}
+
+.quiz-option.wrong {
+  border-color: #c94040;
+  background: #fde8e8;
+  color: #7a1010;
+}
+
+.quiz-option.reveal {
+  border-color: #4a9a20;
+  background: #e6f5d6;
+}
+
+.quiz-feedback {
+  background: #fff;
+  border: 1px solid #ded7cb;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: .95rem;
+  line-height: 1.5;
+  color: #2a3a35;
+}
+
+.quiz-feedback.correct {
+  border-color: #4a9a20;
+  background: #f0f9e8;
+}
+
+.quiz-feedback.wrong {
+  border-color: #c94040;
+  background: #fde8e8;
+}
+
+.quiz-next {
+  justify-self: end;
+}
+
+@media (max-width: 640px) {
+  .quiz-card {
+    padding: 20px;
+  }
+
+  .quiz-question {
+    font-size: 1.1rem;
+  }
 }
 
 .mapping {
@@ -489,5 +837,17 @@ meter {
 
   .analytics-list div {
     grid-template-columns: 1fr;
+  }
+
+  .w3h-panel {
+    position: static;
+  }
+
+  .w3h-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .w3h-how {
+    grid-column: 1;
   }
 }

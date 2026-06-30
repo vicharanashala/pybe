@@ -6,10 +6,16 @@ PyBe is a scenario-driven Python learning prototype built from the supplied PRD 
 
 ## Features
 
-- Scenario browser with difficulty, concept, and search filters
-- Interactive learning session: learner reasoning, abstraction mapping, conversational prompts, Python construct generation, prompt scoring, and reflection capture
-- Dashboard with progress, prompt maturity, concept mastery, misconceptions, and recent sessions
-- Roadmap view covering V0 through V3 from the source documents
+- **Scenario browser** with difficulty, concept, and search filters
+- **Interactive learning session**: learner reasoning, abstraction mapping, conversational prompts, Python construct generation, prompt scoring, and reflection capture
+- **AI Mentor Output** with abstraction map, generated Python code, prompt feedback, and misconception signals
+- **W3H Insight Panel** (What / Why / Where / How) — structured breakdown of the Python concept learned
+- **XP System** — earns XP per session based on prompt score and concept coverage
+- **Streak System** — tracks consecutive daily learning activity
+- **Quiz Engine** — adaptive multiple-choice questions reinforcing the session concept with instant feedback
+- **Voice Input** — microphone support on all textareas using browser SpeechRecognition API
+- **Dashboard** with progress, prompt maturity, concept mastery, misconceptions, and recent sessions
+- **Roadmap view** covering V0 through V3 from the source documents
 - JSON-file backed API with seed data
 
 ## Tech Stack
@@ -18,6 +24,7 @@ PyBe is a scenario-driven Python learning prototype built from the supplied PRD 
 - Express + Node.js
 - React + Vite
 - Plain CSS, no auth
+- Browser SpeechRecognition (native) for voice input
 
 ## Prerequisites
 
@@ -59,3 +66,14 @@ npm run dev
 The AI behavior in this prototype is deterministic and local. The abstraction mapper, prompt evaluator, and Python construct generator use rule-based logic so you can run everything without external AI keys. Later phases can replace those services with OpenAI, RAG, or TinyLLM components.
 
 Learning data is stored in `server/src/data/db.json`. This keeps the prototype simple and fully local, without MongoDB, Docker, Atlas, or any external database.
+
+## V0 Experience Layer
+
+Session submission produces structured learning intelligence:
+
+1. **Abstraction Mapping** — maps natural language reasoning to Python concepts (loops, conditionals, functions, lists, etc.)
+2. **Prompt Evaluation** — scores the AI prompt and provides actionable feedback
+3. **Python Code Generation** — deterministic templates selected based on detected concepts
+4. **W3H Insight** — structured What / Why / Where / How breakdown of the learned concept
+5. **Misconception Detection** — keyword-based flagging of common misconceptions
+6. **Quiz Reinforcement** — adaptive quiz questions after each session with light difficulty adjustment
