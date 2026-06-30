@@ -332,75 +332,211 @@ textarea {
   text-align: center;
 }
 
-.w3h-block {
-  border-radius: 8px;
+.w3h-panel {
+  background: #fffdf7;
+  border: 1px solid #ded7cb;
+  border-radius: 12px;
   overflow: hidden;
+  box-shadow: 0 4px 24px rgba(40, 34, 23, .08);
 }
 
-.w3h-header {
+.w3h-panel-header {
   background: #17231f;
   color: #d8f07c;
-  padding: 10px 16px;
+  padding: 12px 18px;
   font-weight: 800;
-  font-size: .9rem;
+  font-size: .85rem;
   letter-spacing: .06em;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.w3h-cards {
+.w3h-sections {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: #ded7cb;
-  border: 1px solid #ded7cb;
-  border-top: none;
-  border-radius: 0 0 8px 8px;
+  gap: 0;
 }
 
-.w3h-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: #ded7cb;
-  border-radius: 0 0 8px 8px;
-  overflow: hidden;
+.w3h-section {
+  border-bottom: 1px solid #ede8de;
 }
 
-.w3h-card {
-  background: #fffdf7;
-  padding: 14px 16px;
+.w3h-section:last-child {
+  border-bottom: none;
+}
+
+.w3h-section-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  gap: 12px;
+  text-align: left;
+  transition: background .12s;
+}
+
+.w3h-section-toggle:hover {
+  background: #f5f0e5;
+}
+
+.w3h-section.open .w3h-section-toggle {
+  background: #f0ede3;
+}
+
+.w3h-section-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.w3h-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.w3h-dot.blue { background: #3b82f6; }
+.w3h-dot.yellow { background: #eab308; }
+.w3h-dot.orange { background: #f97316; }
+.w3h-dot.red { background: #ef4444; }
+
+.w3h-label {
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  color: #9a9a8a;
+  flex-shrink: 0;
+}
+
+.w3h-title {
+  font-size: .9rem;
+  font-weight: 700;
+  color: #2a3a35;
+}
+
+.accent-blue .w3h-title { color: #1d4ed8; }
+.accent-yellow .w3h-title { color: #a16207; }
+.accent-orange .w3h-title { color: #c2410c; }
+.accent-red .w3h-title { color: #b91c1c; }
+
+.w3h-chevron {
+  color: #9a9a8a;
+  transition: transform .2s;
+  flex-shrink: 0;
+}
+
+.w3h-section.open .w3h-chevron {
+  transform: rotate(180deg);
+}
+
+.w3h-section-body {
+  padding: 0 18px 16px;
+}
+
+.w3h-section-body p {
+  margin: 0;
+  font-size: .9rem;
+  color: #4a5a52;
+  line-height: 1.65;
+}
+
+.w3h-where {
   display: grid;
   gap: 6px;
 }
 
-.w3h-card strong {
-  font-size: .82rem;
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  color: #66730a;
+.w3h-where-label {
+  display: inline-block;
+  background: #f0ede3;
+  border: 1px solid #d4cdc0;
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: .78rem;
+  font-weight: 700;
+  font-family: ui-monospace, monospace;
+  color: #2a3a35;
+  width: fit-content;
 }
 
-.w3h-card span {
-  font-size: .95rem;
-  color: #2a3a35;
+.w3h-where p {
+  margin: 0;
+}
+
+.w3h-code-block {
+  background: #111916;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.w3h-code-line {
+  display: flex;
+  gap: 12px;
+  padding: 5px 14px;
+  font-family: ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+  font-size: .82rem;
   line-height: 1.5;
 }
 
-.w3h-how {
-  grid-column: 1 / -1;
-  background: #111916;
+.w3h-code-line.highlight {
+  background: rgba(216, 240, 124, .08);
+  border-left: 3px solid #d8f07c;
 }
 
-.w3h-how strong {
+.w3h-code-num {
+  color: #4a6258;
+  min-width: 16px;
+  text-align: right;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.w3h-code-text {
+  color: #c8ddd5;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.w3h-code-line.highlight .w3h-code-text {
   color: #d8f07c;
 }
 
-.w3h-how pre {
-  margin: 4px 0 0;
+.w3h-fix-insight {
+  margin: 0;
+  border-top: 1px solid #fde68a;
+  background: #fffbeb;
+  padding: 14px 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.w3h-fix-header {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-weight: 800;
   font-size: .82rem;
-  color: #c8ddd5;
-  white-space: pre-wrap;
-  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #92400e;
+}
+
+.w3h-fix-mistake,
+.w3h-fix-correct {
+  margin: 0;
+  font-size: .88rem;
+  line-height: 1.55;
+  color: #78350f;
+}
+
+.w3h-fix-mistake strong,
+.w3h-fix-correct strong {
+  color: #b45309;
 }
 
 .top-stats-bar {

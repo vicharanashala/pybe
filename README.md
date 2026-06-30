@@ -9,7 +9,7 @@ PyBe is a scenario-driven Python learning prototype built from the supplied PRD 
 - **Scenario browser** with difficulty, concept, and search filters
 - **Interactive learning session**: learner reasoning, abstraction mapping, conversational prompts, Python construct generation, prompt scoring, and reflection capture
 - **AI Mentor Output** with abstraction map, generated Python code, prompt feedback, and misconception signals
-- **W3H Insight Panel** (What / Why / Where / How) — structured breakdown of the Python concept learned
+- **W3H Adaptive Learning Panel** — accordion-style What / Why / Where / How tutor with colored section indicators, real generated code view with syntax highlighting, and a Fix Insight block when mistakes are detected
 - **XP System** — earns XP per session based on prompt score and concept coverage
 - **Streak System** — tracks consecutive daily learning activity
 - **Quiz Engine** — adaptive multiple-choice questions reinforcing the session concept with instant feedback
@@ -74,6 +74,6 @@ Session submission produces structured learning intelligence:
 1. **Abstraction Mapping** — maps natural language reasoning to Python concepts (loops, conditionals, functions, lists, etc.)
 2. **Prompt Evaluation** — scores the AI prompt and provides actionable feedback
 3. **Python Code Generation** — deterministic templates selected based on detected concepts
-4. **W3H Insight** — structured What / Why / Where / How breakdown of the learned concept
+4. **W3H Adaptive Learning Panel** — 4-section accordion tutor (What/Why/Where/How) with colored indicators, adaptive Fix Insight block when mistakes are detected, and real code view with line highlighting
 5. **Misconception Detection** — keyword-based flagging of common misconceptions
 6. **Quiz Reinforcement** — adaptive quiz questions after each session with light difficulty adjustment
