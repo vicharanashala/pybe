@@ -21,6 +21,7 @@ import { generateQuestionPool, getReviewConcepts, getIncorrectQuestions } from '
 import { findConceptKey, getAllConceptKeys } from './utils/quizGenerator';
 import { getConceptsToReview, getScoreCategory, getScoreMessage, getPersonalizedFeedback, recommendNextScenario } from './utils/quizScoring';
 import { saveSessionState, loadSessionState, clearSessionState } from './utils/sessionRecovery';
+import { loadPassport, savePassport, PYTHON_CONCEPTS, BADGES, getPassportCompletion, getNextBadge, getNextStamp, getRecentUnlocks, getStampStatus, getBadgeStatus, updatePassportFromSession, getDefaultPassport } from './utils/passport';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -31,8 +32,8 @@ const JOURNEY_STEPS = [
   { id: 'mentor', label: 'AI Mentor', icon: Lightbulb },
   { id: 'w3h', label: 'W\u00b3H Guide', icon: BookOpen },
   { id: 'quiz', label: 'Quiz', icon: Code2 },
-  { id: 'review', label: 'Review', icon: MessageSquareText },
   { id: 'dashboard', label: 'Dashboard', icon: ChartNoAxesCombined },
+  { id: 'passport', label: 'Passport', icon: BookOpen },
 ];
 
 function TopNav({ view, setView, xp, streak, journeyStep }) {
@@ -147,6 +148,9 @@ function App() {
   const [journeyStep, setJourneyStep] = useState(0);
   const [viewedScenarios, setViewedScenarios] = useState(new Set());
   const [sessionRestored, setSessionRestored] = useState(false);
+  const [passport, setPassport] = useState(() => loadPassport());
+  const [showBadgeCelebration, setShowBadgeCelebration] = useState(null);
+  const [showStampCelebration, setShowStampCelebration] = useState(null);
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
@@ -231,6 +235,14 @@ function App() {
       setStreak(currentStreak);
       setActiveResult({ ...result, earnedXp, totalXp: newXp, streak: currentStreak });
       setForm({ ...form, reasoning: '', promptText: '', reflection: '' });
+
+      const updatedPassport = updatePassportFromSession(passport, { ...result, scenario: selected, earnedXp }, Math.round(result.promptScore));
+      setPassport(updatedPassport);
+      savePassport(updatedPassport);
+      if (updatedPassport.lastBadgeUnlocked) {
+        setShowBadgeCelebration(updatedPassport.lastBadgeUnlocked);
+      }
+
       await refresh();
     } finally {
       setSubmitting(false);
@@ -388,15 +400,40 @@ function App() {
             sessions={sessions}
             xp={xp}
             streak={streak}
+            passport={passport}
             onSelectScenario={(scenario) => {
               setSelected(scenario || null);
               setActiveResult(null);
               setView('explorer');
               setJourneyStep(0);
             }}
+            onOpenPassport={() => setView('passport')}
+          />
+        ) : view === 'passport' ? (
+          <PassportPage
+            passport={passport}
+            xp={xp}
+            streak={streak}
+            sessions={sessions}
+            onClose={() => setView('dashboard')}
+            onDismissBadge={() => setShowBadgeCelebration(null)}
+            onDismissStamp={() => setShowStampCelebration(null)}
           />
         ) : null}
       </section>
+
+      {showBadgeCelebration && (
+        <BadgeCelebration
+          badge={showBadgeCelebration}
+          onClose={() => setShowBadgeCelebration(null)}
+        />
+      )}
+      {showStampCelebration && (
+        <StampCelebration
+          concept={showStampCelebration}
+          onClose={() => setShowStampCelebration(null)}
+        />
+      )}
     </main>
   );
 }
@@ -1543,3 +1580,191 @@ function DashboardPage({ analytics, roadmap, sessions, xp, streak, onSelectScena
 }
 
 createRoot(document.getElementById('root')).render(<App />);
+
+function PassportPage({ passport, xp, streak, sessions, onClose, onDismissBadge, onDismissStamp }) {
+  const completion = getPassportCompletion(passport);
+  const nextBadge = getNextBadge(passport);
+  const nextStamp = getNextStamp(passport);
+  const recentUnlocks = getRecentUnlocks(passport, 5);
+  const earnedBadges = BADGES.filter(b => passport.badges[b.id]);
+
+  return (
+    <div className="page passport-page">
+      <PageHeader
+        title="Learning Passport"
+        subtitle="Your personal Python learning journey"
+      >
+        <button className="secondary" onClick={onClose}>Close</button>
+      </PageHeader>
+
+      <div className="passport-layout">
+        <div className="passport-sidebar">
+          <div className="passport-profile">
+            <div className="passport-avatar">&#128640;</div>
+            <h3>Python Learner</h3>
+            <div className="passport-stats-mini">
+              <span><strong>{xp}</strong> XP</span>
+              <span><strong>{streak}</strong> Day Streak</span>
+            </div>
+          </div>
+
+          <div className="passport-progress">
+            <h4>Passport Progress</h4>
+            <div className="passport-progress-bar">
+              <div className="passport-progress-fill" style={{ width: `${completion.percentage}%` }} />
+            </div>
+            <div className="passport-progress-text">
+              <span>{completion.collected} / {completion.total} Stamps</span>
+              <span>{completion.percentage}%</span>
+            </div>
+          </div>
+
+          <div className="passport-badges-mini">
+            <h4>Badges Earned</h4>
+            <div className="badges-row">
+              {earnedBadges.map(badge => (
+                <div key={badge.id} className="badge-mini" title={badge.name}>
+                  {badge.icon}
+                </div>
+              ))}
+              {BADGES.filter(b => !passport.badges[b.id]).map(badge => (
+                <div key={badge.id} className="badge-mini locked">?</div>
+              ))}
+            </div>
+          </div>
+
+          {nextBadge && (
+            <div className="passport-next-badge">
+              <p>Next Badge:</p>
+              <div className="next-badge-preview">
+                <span className="next-badge-icon">{nextBadge.badge.icon}</span>
+                <span>{nextBadge.badge.name} {nextBadge.badge.title}</span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="passport-main">
+          <div className="passport-section">
+            <h3>Stamp Collection</h3>
+            <div className="stamps-grid">
+              {PYTHON_CONCEPTS.map(concept => {
+                const status = getStampStatus(passport, concept.id);
+                const stamp = passport.stamps[concept.id];
+                return (
+                  <div key={concept.id} className={`stamp-card ${status}`}>
+                    <div className="stamp-icon">{concept.icon}</div>
+                    <div className="stamp-info">
+                      <strong>{concept.name}</strong>
+                      <span>{concept.description}</span>
+                    </div>
+                    <div className="stamp-status">
+                      {status === 'mastered' && <span className="mastered-badge">Mastered</span>}
+                      {status === 'unlocked' && <span className="unlocked-badge">Unlocked</span>}
+                      {status === 'locked' && <span className="locked-badge">Locked</span>}
+                    </div>
+                    {stamp && stamp.unlockedAt && (
+                      <div className="stamp-date">
+                        {new Date(stamp.unlockedAt).toLocaleDateString()}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="passport-section">
+            <h3>Level Badges</h3>
+            <div className="badges-grid">
+              {BADGES.map(badge => {
+                const status = getBadgeStatus(passport, badge.id);
+                const earned = passport.badges[badge.id];
+                return (
+                  <div key={badge.id} className={`badge-card ${status}`}>
+                    <div className="badge-icon-large">{badge.icon}</div>
+                    <div className="badge-info">
+                      <strong>{badge.name}</strong>
+                      <span>{badge.title}</span>
+                      {earned && (
+                        <small>Earned: {new Date(earned.earnedAt).toLocaleDateString()}</small>
+                      )}
+                    </div>
+                    {status === 'earned' && (
+                      <div className="badge-earned-mark">&#10003;</div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {recentUnlocks.length > 0 && (
+            <div className="passport-section">
+              <h3>Recent Achievements</h3>
+              <div className="recent-achievements">
+                {recentUnlocks.map((item, idx) => (
+                  <div key={idx} className="achievement-item">
+                    {item.type === 'stamp' ? (
+                      <>
+                        <span className="achievement-icon">{item.concept.icon}</span>
+                        <span>Unlocked <strong>{item.concept.name}</strong></span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="achievement-icon">{item.badge.icon}</span>
+                        <span>Earned <strong>{item.badge.name} {item.badge.title}</strong></span>
+                      </>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BadgeCelebration({ badge, onClose }) {
+  return (
+    <div className="celebration-overlay" onClick={onClose}>
+      <div className="celebration-modal">
+        <div className="celebration-sparkles">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div key={i} className="sparkle" style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 1}s`,
+              backgroundColor: ['#d8f07c', '#4a9a20', '#f59e0b', '#3b82f6', '#ef4444', '#a855f7'][Math.floor(Math.random() * 6)]
+            }} />
+          ))}
+        </div>
+        <div className="celebration-content">
+          <h2>Congratulations!</h2>
+          <p>You earned</p>
+          <div className="celebration-badge">{badge.icon}</div>
+          <h3>{badge.name} {badge.title}</h3>
+          <p className="celebration-subtitle">Keep learning to unlock more badges!</p>
+          <button className="primary" onClick={onClose}>Continue</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function StampCelebration({ concept, onClose }) {
+  return (
+    <div className="celebration-overlay stamp-celebration" onClick={onClose}>
+      <div className="celebration-modal small">
+        <div className="stamp-appear">
+          <div className="stamp-anim-icon">{concept.icon}</div>
+        </div>
+        <h3>New Stamp Unlocked!</h3>
+        <p><strong>{concept.name}</strong></p>
+        <small>{concept.description}</small>
+        <button className="primary" onClick={onClose}>Collect</button>
+      </div>
+    </div>
+  );
+}
