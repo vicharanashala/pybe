@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { generateQuestionPool, getReviewConcepts, getIncorrectQuestions } from '../utils/quizEngine';
-import { getScoreCategory, getScoreMessage, getPersonalizedFeedback, recommendNextScenario } from '../utils/quizScoring';
+import { getScoreCategory, getScoreMessage, getPersonalizedFeedback, recommendNextScenario, getConceptAccuracyFromQuiz } from '../utils/quizScoring';
 
 const QUIZ_LENGTH = 7;
 const MAX_HEARTS = 3;
 
-export function QuizPage({ quizData, setQuizData, xp, setXp, onExit, scenarios, onSelectScenario }) {
+export function QuizPage({ quizData, setQuizData, xp, setXp, onExit, scenarios, onSelectScenario, onQuizComplete }) {
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
@@ -146,11 +146,15 @@ export function QuizPage({ quizData, setQuizData, xp, setXp, onExit, scenarios, 
   }
 
   function handleFinish() {
+    const conceptAccuracies = getConceptAccuracyFromQuiz(questions, answers);
     setQuizData(prev => ({
       ...prev,
       score: (prev.score || 0) + sessionCorrect,
       questionsSeen: (prev.questionsSeen || 0) + questions.length
     }));
+    if (onQuizComplete) {
+      onQuizComplete(conceptAccuracies);
+    }
     onExit();
   }
 

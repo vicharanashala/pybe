@@ -17,6 +17,26 @@ export function calculateQuizScore(questions, answers) {
   return { correct, total: questions.length };
 }
 
+export function getConceptAccuracyFromQuiz(questions, answers) {
+  const conceptStats = {};
+  for (let i = 0; i < questions.length; i++) {
+    const concept = questions[i].concept;
+    if (!concept) continue;
+    if (!conceptStats[concept]) {
+      conceptStats[concept] = { correct: 0, total: 0 };
+    }
+    conceptStats[concept].total++;
+    if (answers[i] !== null && questions[i].correctIdx === answers[i]) {
+      conceptStats[concept].correct++;
+    }
+  }
+  const result = {};
+  for (const [concept, stats] of Object.entries(conceptStats)) {
+    result[concept] = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+  }
+  return result;
+}
+
 export function getScoreCategory(score, total) {
   const pct = total > 0 ? (score / total) * 100 : 0;
   if (pct >= 90) return 'excellent';

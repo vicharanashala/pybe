@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { ChevronRight, Home } from 'lucide-react';
 import './styles.css';
 import { saveSessionState, loadSessionState } from './utils/sessionRecovery';
-import { loadPassport, savePassport, updatePassportFromSession } from './utils/passport';
+import { loadPassport, savePassport, updatePassportFromSession, updateStampAccuracy, PYTHON_CONCEPTS } from './utils/passport';
 import { TopNav } from './components/TopNavigation';
 import { ExplorerPage, WorkspacePage, SummaryPage, MentorPage, W3HPage, QuizPage, DashboardPage, PassportPage } from './pages';
 
@@ -70,6 +70,7 @@ function App() {
   const [viewedScenarios, setViewedScenarios] = useState(new Set());
   const [sessionRestored, setSessionRestored] = useState(false);
   const [passport, setPassport] = useState(() => loadPassport());
+  const [newlyUnlocked, setNewlyUnlocked] = useState([]);
   const [showBadgeCelebration, setShowBadgeCelebration] = useState(null);
   const [showStampCelebration, setShowStampCelebration] = useState(null);
 
@@ -157,11 +158,20 @@ function App() {
       setActiveResult({ ...result, earnedXp, totalXp: newXp, streak: currentStreak });
       setForm({ ...form, reasoning: '', promptText: '', reflection: '' });
 
+      const existingStamps = Object.keys(passport.stamps || {});
       const updatedPassport = updatePassportFromSession(passport, { ...result, scenario: selected, earnedXp }, Math.round(result.promptScore));
+      const newConcepts = (selected?.concepts || []).filter(c => !existingStamps.includes(c));
+      if (newConcepts.length > 0) {
+        setNewlyUnlocked(newConcepts);
+        updatedPassport.lastNewStamp = newConcepts[0];
+      }
       setPassport(updatedPassport);
       savePassport(updatedPassport);
       if (updatedPassport.lastBadgeUnlocked) {
         setShowBadgeCelebration(updatedPassport.lastBadgeUnlocked);
+      }
+      if (updatedPassport.lastNewStamp) {
+        setShowStampCelebration(PYTHON_CONCEPTS.find(c => c.id === updatedPassport.lastNewStamp));
       }
 
       await refresh();
@@ -269,6 +279,16 @@ function App() {
               setView('explorer');
               setJourneyStep(0);
             }}
+            onQuizComplete={(conceptAccuracies) => {
+              const previousStamps = Object.keys(passport.stamps || {});
+              const updated = updateStampAccuracy(passport, conceptAccuracies);
+              const newlyMastered = Object.keys(updated.stamps).filter(id =>
+                !previousStamps.includes(id) || (updated.stamps[id].status === 'mastered' && passport.stamps[id]?.status !== 'mastered')
+              );
+              setNewlyUnlocked(newlyMastered);
+              setPassport(updated);
+              savePassport(updated);
+            }}
           />
         ) : view === 'explorer' ? (
           <ExplorerPage
@@ -339,6 +359,7 @@ function App() {
             onClose={() => setView('dashboard')}
             onDismissBadge={() => setShowBadgeCelebration(null)}
             onDismissStamp={() => setShowStampCelebration(null)}
+            newlyUnlocked={newlyUnlocked}
           />
         ) : null}
       </section>
