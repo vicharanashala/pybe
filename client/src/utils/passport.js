@@ -220,9 +220,10 @@ export function markStampSeen(passport, conceptId) {
 }
 
 export function updateStampAccuracy(passport, conceptAccuracies) {
-  for (const [concept, accuracy] of Object.entries(conceptAccuracies)) {
+  if (!passport) return passport;
+  for (const [concept, accuracy] of Object.entries(conceptAccuracies || {})) {
     if (!concept) continue;
-    if (passport.stamps[concept]) {
+    if (passport.stamps?.[concept]) {
       if (accuracy > passport.stamps[concept].bestAccuracy) {
         passport.stamps[concept].bestAccuracy = accuracy;
       }
