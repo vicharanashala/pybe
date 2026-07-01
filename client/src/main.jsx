@@ -20,6 +20,7 @@ import './styles.css';
 import { generateQuestionPool, getReviewConcepts, getIncorrectQuestions } from './utils/quizEngine';
 import { findConceptKey, getAllConceptKeys } from './utils/quizGenerator';
 import { getConceptsToReview, getScoreCategory, getScoreMessage, getPersonalizedFeedback, recommendNextScenario } from './utils/quizScoring';
+import { saveSessionState, loadSessionState, clearSessionState } from './utils/sessionRecovery';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -145,6 +146,7 @@ function App() {
   const [quizData, setQuizData] = useState(null);
   const [journeyStep, setJourneyStep] = useState(0);
   const [viewedScenarios, setViewedScenarios] = useState(new Set());
+  const [sessionRestored, setSessionRestored] = useState(false);
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
@@ -162,11 +164,51 @@ function App() {
     setRoadmap(roadmapData);
     setSelected((current) => current || scenarioData[0] || null);
     setLoading(false);
+
+    if (!sessionRestored) {
+      const saved = loadSessionState(scenarioData);
+      if (saved) {
+        if (saved.xp !== undefined) {
+          setXp(saved.xp);
+          localStorage.setItem('pybe_xp', String(saved.xp));
+        }
+        if (saved.streak !== undefined) {
+          setStreak(saved.streak);
+          localStorage.setItem('pybe_streak', String(saved.streak));
+        }
+        if (saved.view && ['explorer', 'workspace', 'summary', 'mentor', 'w3h', 'quiz', 'dashboard'].includes(saved.view)) {
+          setView(saved.view);
+          if (saved.view !== 'explorer') {
+            if (saved.selected) setSelected(saved.selected);
+            if (saved.activeResult) setActiveResult(saved.activeResult);
+            if (saved.journeyStep !== undefined) setJourneyStep(saved.journeyStep);
+            if (saved.form) setForm(saved.form);
+            if (saved.quizData) setQuizData(saved.quizData);
+          }
+        }
+      }
+      setSessionRestored(true);
+    }
   }
 
   useEffect(() => {
     refresh().catch(console.error);
   }, [filters.q, filters.difficulty, filters.concept]);
+
+  useEffect(() => {
+    if (!loading && sessionRestored) {
+      saveSessionState({
+        selected,
+        activeResult,
+        journeyStep,
+        view,
+        quizData,
+        form,
+        xp,
+        streak
+      });
+    }
+  }, [selected, activeResult, journeyStep, view, quizData, form, xp, streak, loading, sessionRestored]);
 
   async function submitSession(event) {
     event.preventDefault();
@@ -347,10 +389,10 @@ function App() {
             xp={xp}
             streak={streak}
             onSelectScenario={(scenario) => {
-              setSelected(scenario);
+              setSelected(scenario || null);
               setActiveResult(null);
-              setView('workspace');
-              setJourneyStep(1);
+              setView('explorer');
+              setJourneyStep(0);
             }}
           />
         ) : null}
