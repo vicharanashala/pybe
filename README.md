@@ -78,3 +78,29 @@ Session submission produces structured learning intelligence:
 4. **W3H Adaptive Learning Panel** — 4-section accordion tutor (What/Why/Where/How) with colored indicators, adaptive Fix Insight block when mistakes are detected, and real code view with line highlighting
 5. **Misconception Detection** — keyword-based flagging of common misconceptions
 6. **Quiz Reinforcement** — adaptive quiz questions after each session with light difficulty adjustment
+
+## Architecture
+
+The codebase follows a page-based structure to keep each screen self-contained.
+
+```
+client/src/
+├── main.jsx              # App shell, routing, state management
+├── pages/                # One file per page/view
+│   ├── ExplorerPage.jsx  # Scenario browser and filters
+│   ├── WorkspacePage.jsx # Learning task form and AI output preview
+│   ├── SummaryPage.jsx   # Session result and abstraction map
+│   ├── MentorPage.jsx    # AI Mentor deep-dive analysis
+│   ├── W3HPage.jsx       # What/Why/Where/How learning guide
+│   ├── QuizPage.jsx      # Adaptive multiple-choice quiz
+│   ├── DashboardPage.jsx # Progress stats, roadmap, recent sessions
+│   └── PassportPage.jsx  # Placeholder for learning passport
+├── components/
+│   ├── TopNavigation.jsx # Nav bar, journey step icons, XP/streak display
+│   └── SharedComponents.jsx # W3H panel, VoiceInput, EmptyResult, Analytics, etc.
+└── styles.css
+```
+
+- **`main.jsx`** — hosts the App component, owns all shared state (scenarios, sessions, XP, streak, view), and renders the correct page based on `view` state.
+- **`pages/`** — each file exports a single React component that renders one full page. Props flow down from `App`.
+- **`components/`** — reusable UI pieces shared across multiple pages (TopNav, W3H accordion, VoiceInput, Analytics, etc.).
