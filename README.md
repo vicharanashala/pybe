@@ -17,6 +17,7 @@ PyBe is a scenario-driven Python learning prototype built from the supplied PRD 
 - **Voice Input** — microphone support on all textareas using browser SpeechRecognition API
 - **Dashboard** with progress, prompt maturity, concept mastery, misconceptions, and recent sessions
 - **Roadmap view** covering V0 through V3 from the source documents
+- **Learning Passport** — personal learning tracker with profile card, XP/streak/sessions stats, progress bar, level badges, and 18 concept stamps (Variables, Loops, Conditionals, Functions, Lists, Tuples, Dictionaries, Sets, Strings, Files, Modules, Comprehensions, Classes, Objects, Exceptions, I/O, Recursion, Algorithms)
 - JSON-file backed API with seed data
 
 ## Tech Stack
