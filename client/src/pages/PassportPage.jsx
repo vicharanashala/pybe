@@ -1,10 +1,12 @@
-import { Compass } from 'lucide-react';
+import React from 'react';
 import { PageHeader } from '../components/TopNavigation';
-import { PYTHON_CONCEPTS, BADGES, getPassportCompletion, getStampStatus, getBadgeStatus } from '../utils/passport';
+import { PYTHON_CONCEPTS, BADGES, getPassportCompletion, getStampStatus, getBadgeStatus, getRecentUnlocks, getNextStamp } from '../utils/passport';
 
-export function PassportPage({ passport, xp, streak, sessions, onClose }) {
+export function PassportPage({ passport, xp, streak, sessions, onClose, newlyUnlocked }) {
   const completion = getPassportCompletion(passport);
   const earnedBadges = BADGES.filter(b => passport.badges[b.id]);
+  const recentUnlocks = getRecentUnlocks(passport, 5);
+  const nextStamp = getNextStamp(passport);
   const levelMap = ['Beginner', 'Explorer', 'Builder', 'Master'];
   const level = levelMap[Math.min(Math.floor(completion.collected / 5), 3)];
 
@@ -69,6 +71,35 @@ export function PassportPage({ passport, xp, streak, sessions, onClose }) {
               })}
             </div>
           </div>
+
+          {nextStamp && (
+            <div className="passport-card">
+              <h4>Next Stamp</h4>
+              <div className="next-stamp-preview">
+                <span className="next-stamp-icon">{nextStamp.icon}</span>
+                <div className="next-stamp-info">
+                  <strong>{nextStamp.name}</strong>
+                  <span>{nextStamp.description}</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {recentUnlocks.length > 0 && (
+            <div className="passport-card">
+              <h4>Recent Unlocks</h4>
+              <div className="recent-unlocks">
+                {recentUnlocks.map((item, idx) => (
+                  <div key={idx} className="recent-unlock-item">
+                    <span className="recent-unlock-icon">{item.type === 'stamp' ? item.concept.icon : item.badge.icon}</span>
+                    <span className="recent-unlock-text">
+                      {item.type === 'stamp' ? `Unlocked ${item.concept.name}` : `Earned ${item.badge.name} ${item.badge.title}`}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </aside>
 
         <div className="passport-main">
@@ -78,8 +109,9 @@ export function PassportPage({ passport, xp, streak, sessions, onClose }) {
               {PYTHON_CONCEPTS.map(concept => {
                 const status = getStampStatus(passport, concept.id);
                 const stamp = passport.stamps[concept.id];
+                const isNewlyUnlocked = newlyUnlocked && newlyUnlocked.includes(concept.id);
                 return (
-                  <div key={concept.id} className={`stamp-card ${status}`}>
+                  <div key={concept.id} className={`stamp-card ${status}${isNewlyUnlocked ? ' stamp-just-unlocked' : ''}`}>
                     <div className="stamp-border">
                       <div className="stamp-icon">{concept.icon}</div>
                     </div>

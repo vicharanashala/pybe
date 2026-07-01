@@ -1,8 +1,14 @@
-import { Compass, ChartNoAxesCombined, Route, MessageSquareText } from 'lucide-react';
+import React from 'react';
+import { Compass, ChartNoAxesCombined, Route, MessageSquareText, BookOpen } from 'lucide-react';
 import { PageHeader } from '../components/TopNavigation';
 import { Analytics, Roadmap, SessionList } from '../components/SharedComponents';
+import { getPassportCompletion, getNextStamp, getRecentUnlocks, PYTHON_CONCEPTS } from '../utils/passport';
 
-export function DashboardPage({ analytics, roadmap, sessions, xp, streak, onSelectScenario }) {
+export function DashboardPage({ analytics, roadmap, sessions, xp, streak, passport, onSelectScenario, onOpenPassport }) {
+  const completion = getPassportCompletion(passport);
+  const nextStamp = getNextStamp(passport);
+  const recentUnlocks = getRecentUnlocks(passport, 1);
+  const lastUnlocked = recentUnlocks.length > 0 && recentUnlocks[0].type === 'stamp' ? recentUnlocks[0].concept : null;
   return (
     <div className="page dashboard-page">
       <PageHeader
@@ -32,6 +38,27 @@ export function DashboardPage({ analytics, roadmap, sessions, xp, streak, onSele
             <span className="stat-value">{analytics?.averagePromptScore || 0}</span>
             <span className="stat-label">Avg Score</span>
           </div>
+        </div>
+
+        <div className="dashboard-passport-card">
+          <div className="passport-card-icon">&#128640;</div>
+          <div className="passport-card-info">
+            <h3>Learning Passport</h3>
+            {lastUnlocked ? (
+              <p>Latest stamp: <strong>{lastUnlocked.name}</strong></p>
+            ) : (
+              <p>Collect stamps as you learn Python concepts</p>
+            )}
+            <div className="passport-card-progress">
+              <div className="passport-card-bar">
+                <div className="passport-card-fill" style={{ width: `${completion.percentage}%` }} />
+              </div>
+              <span>{completion.collected} / {completion.total} stamps</span>
+            </div>
+          </div>
+          <button className="secondary" onClick={onOpenPassport}>
+            Open Passport
+          </button>
         </div>
 
         <div className="dashboard-panels">

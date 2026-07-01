@@ -1,3 +1,4 @@
+import React from 'react';
 import { Search, ChartNoAxesCombined, Route, MessageSquareText } from 'lucide-react';
 import { PageHeader } from '../components/TopNavigation';
 import { Analytics, Roadmap, SessionList } from '../components/SharedComponents';

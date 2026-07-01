@@ -1,3 +1,4 @@
+import React from 'react';
 import { Compass, Sparkles, Code2, ChevronRight, Send } from 'lucide-react';
 import { PageHeader } from '../components/TopNavigation';
 import { VoiceInput, EmptyResult } from '../components/SharedComponents';

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Sparkles, Code2, BookOpen, Lightbulb, ChevronRight } from 'lucide-react';
 import { PageHeader } from '../components/TopNavigation';
 

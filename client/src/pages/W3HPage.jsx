@@ -1,3 +1,4 @@
+import React from 'react';
 import { Sparkles, ChevronRight } from 'lucide-react';
 import { PageHeader } from '../components/TopNavigation';
 import { W3H } from '../components/SharedComponents';

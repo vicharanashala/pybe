@@ -1,3 +1,4 @@
+import React from 'react';
 import { Brain, Code2, MessageSquareText, Lightbulb, Sparkles } from 'lucide-react';
 import { PageHeader } from '../components/TopNavigation';
 
