@@ -14,6 +14,9 @@ import {
   Sparkles
 } from 'lucide-react';
 import './styles.css';
+import { generateQuestionPool, getReviewConcepts, getIncorrectQuestions } from './utils/quizEngine';
+import { findConceptKey, getAllConceptKeys } from './utils/quizGenerator';
+import { getConceptsToReview, getScoreCategory, getScoreMessage, getPersonalizedFeedback, recommendNextScenario } from './utils/quizScoring';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -173,6 +176,11 @@ function App() {
             xp={xp}
             setXp={setXp}
             onExit={() => setView('home')}
+            scenarios={scenarios}
+            onSelectScenario={(scenario) => {
+              setSelected(scenario);
+              setActiveResult(null);
+            }}
           />
         ) : (
           <>
@@ -247,6 +255,7 @@ function App() {
                 {!activeResult ? <EmptyResult /> : <Result result={activeResult} onQuizStart={(result) => {
                   setQuizData({
                     session: result,
+                    scenario: selected,
                     difficulty: 1,
                     score: 0,
                     questionsSeen: 0,
@@ -587,124 +596,372 @@ function Result({ result, onQuizStart }) {
   );
 }
 
-function generateQuestion(concept, difficulty) {
-  const qBank = {
-    'for / while loops': [
-      { q: 'What Python construct repeats actions?', a: 'A for or while loop', opts: ['A for or while loop', 'An if statement', 'A variable assignment', 'A function definition'], exp: 'Loops repeat a block of code multiple times.' },
-      { q: 'Which correctly iterates over a list?', a: 'for item in my_list:', opts: ['for item in my_list:', 'if item in my_list:', 'while item in my_list:', 'def item in my_list:'], exp: 'The for loop iterates over each element in a collection.' },
-      { q: 'When should you use a while loop?', a: 'When you don\'t know the number of iterations', opts: ['When you don\'t know the number of iterations', 'When you want to store a value', 'When you need to compare two values', 'When defining a function'], exp: 'while loops continue until a condition becomes false.' },
-      { q: 'What causes an infinite loop?', a: 'A condition that never becomes false', opts: ['A condition that never becomes false', 'A for loop with a list', 'A function with a return statement', 'An if-else block'], exp: 'If the condition always remains true, the loop never stops.' },
-    ],
-    'if / elif / else': [
-      { q: 'What does an if statement do?', a: 'Executes code only when a condition is true', opts: ['Executes code only when a condition is true', 'Repeats code multiple times', 'Stores a value in memory', 'Defines a reusable function'], exp: 'if checks a condition and runs the block only if it\'s true.' },
-      { q: 'What is the purpose of else?', a: 'Runs when the if condition is false', opts: ['Runs when the if condition is false', 'Checks a second condition', 'Defines a loop', 'Stores a variable'], exp: 'else provides a fallback block when the if condition fails.' },
-      { q: 'When elif is needed?', a: 'When there are multiple conditions to check', opts: ['When there are multiple conditions to check', 'When you need to repeat code', 'When defining a function', 'When storing multiple values'], exp: 'elif lets you chain multiple conditional branches.' },
-    ],
-    'lists and dictionaries': [
-      { q: 'What is a list in Python?', a: 'An ordered collection of items', opts: ['An ordered collection of items', 'A single value', 'A loop construct', 'A conditional check'], exp: 'Lists hold multiple values in a specific order.' },
-      { q: 'How do you access the first item in a list?', a: 'my_list[0]', opts: ['my_list[0]', 'my_list[1]', 'my_list(first)', 'my_list{0}'], exp: 'Python uses zero-based indexing, so the first item is at index 0.' },
-      { q: 'What is a dictionary for?', a: 'Storing key-value pairs', opts: ['Storing key-value pairs', 'Repeating actions', 'Making decisions', 'Creating loops'], exp: 'Dictionaries map unique keys to values for fast lookup.' },
-      { q: 'What does dict["name"] do?', a: 'Retrieves the value for key "name"', opts: ['Retrieves the value for key "name"', 'Stores "name" as a string', 'Creates a new key', 'Deletes the "name" key'], exp: 'Square bracket notation fetches the value associated with that key.' },
-    ],
-    'variables and arithmetic expressions': [
-      { q: 'What is a variable?', a: 'A named container for a value', opts: ['A named container for a value', 'A loop that counts numbers', 'A conditional check', 'A type of data'], exp: 'Variables give names to values so you can reuse them.' },
-      { q: 'What does x = 5 + 3 do?', a: 'Assigns the sum 8 to x', opts: ['Assigns the sum 8 to x', 'Checks if x equals 5', 'Prints 5 + 3', 'Defines a function'], exp: 'The right side is evaluated first, then assigned to the variable.' },
-      { q: 'Which creates a valid variable name?', a: 'student_name', opts: ['student_name', 'my-var', '2nd_place', 'class'], exp: 'Variable names can contain letters, numbers (not first), and underscores.' },
-    ],
-    'functions': [
-      { q: 'What does a function do?', a: 'Encapsulates reusable code logic', opts: ['Encapsulates reusable code logic', 'Stores a single value', 'Makes a decision', 'Creates a loop'], exp: 'Functions bundle code so it can be called multiple times.' },
-      { q: 'What keyword defines a function?', a: 'def', opts: ['def', 'func', 'function', 'define'], exp: 'def is used to define a function in Python.' },
-      { q: 'What is a return statement for?', a: 'Sends a value back to the caller', opts: ['Sends a value back to the caller', 'Repeats the function', 'Stops the program', 'Stores a global variable'], exp: 'return passes a result back from the function.' },
-    ],
-    'comparisons and list comprehensions': [
-      { q: 'What does x > 10 evaluate to?', a: 'True or False', opts: ['True or False', 'A number', 'A string', 'A list'], exp: 'Comparison operators return a boolean value.' },
-      { q: 'What is a list comprehension?', a: 'A compact way to create a list', opts: ['A compact way to create a list', 'A type of loop', 'A dictionary', 'A function call'], exp: 'List comprehensions generate lists using a single line of Python.' },
-    ],
-    'statements and variables': [
-      { q: 'What is a Python statement?', a: 'A complete instruction that Python executes', opts: ['A complete instruction that Python executes', 'A type of loop', 'A comparison', 'A function'], exp: 'Statements are the individual instructions that make up a program.' },
-      { q: 'Which is a valid Python statement?', a: 'print("Hello")', opts: ['print("Hello")', 'print(Hello)', 'print Hello', 'print[Hello]'], exp: 'print() is a function call — a valid Python statement.' },
-    ],
-    'strings': [
-      { q: 'What is a string?', a: 'A sequence of characters in quotes', opts: ['A sequence of characters in quotes', 'A type of loop', 'A number', 'A condition'], exp: 'Strings represent text data wrapped in quotes.' },
-      { q: 'How do you get the length of a string?', a: 'len(text)', opts: ['len(text)', 'text.length()', 'size(text)', 'text.size()'], exp: 'The len() function returns the number of characters in a string.' },
-    ],
-    'default': [
-      { q: 'What Python concept does this scenario teach?', a: 'Using variables to store data', opts: ['Using variables to store data', 'Creating an infinite loop', 'Defining a class', 'Importing modules'], exp: 'This scenario focuses on storing and managing data values.' },
-    ]
-  };
+function QuizPage({ quizData, setQuizData, xp, setXp, onExit, scenarios, onSelectScenario }) {
+  const QUIZ_LENGTH = 7;
+  const MAX_HEARTS = 3;
 
-  const conceptKey = Object.keys(qBank).find(k => concept?.toLowerCase().includes(k.toLowerCase().split('/')[0].trim())) || 'default';
-  const pool = qBank[conceptKey] || qBank['default'];
-  const idx = Math.min(difficulty - 1, pool.length - 1);
-  const question = { ...pool[idx >= 0 ? idx : 0], concept };
-  return question;
-}
-
-function QuizPage({ quizData, setQuizData, xp, setXp, onExit }) {
-  const [question, setQuestion] = useState(null);
-  const [selected, setSelected] = useState(null);
-  const [feedback, setFeedback] = useState(null);
+  const [questions, setQuestions] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [answers, setAnswers] = useState([]);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [sessionCorrect, setSessionCorrect] = useState(0);
+  const [sessionXp, setSessionXp] = useState(0);
+  const [quizStarted, setQuizStarted] = useState(false);
+  const [hearts, setHearts] = useState(MAX_HEARTS);
+  const [gameOver, setGameOver] = useState(false);
+  const [startTime] = useState(Date.now());
 
   useEffect(() => {
-    const q = generateQuestion(quizData.concept, quizData.difficulty);
-    setQuestion(q);
-    setSelected(null);
-    setFeedback(null);
-  }, [quizData.difficulty, quizData.concept, quizData.questionsSeen]);
+    const diff = quizData.difficulty || 1;
+    const session = quizData.session || null;
+    const pool = generateQuestionPool(quizData.concept, QUIZ_LENGTH, session);
+    setQuestions(pool);
+    setAnswers(new Array(pool.length).fill(null));
+    setCurrentIndex(0);
+    setShowFeedback(false);
+    setSessionCorrect(0);
+    setSessionXp(0);
+    setHearts(MAX_HEARTS);
+    setGameOver(false);
+    setQuizStarted(true);
+  }, [quizData.concept, quizData.difficulty]);
 
-  function handleSelect(option) {
-    if (feedback) return;
-    const correct = option === question.a;
-    setSelected(option);
-    setFeedback({ correct, explanation: question.exp });
-    const earnedXp = correct ? 5 + quizData.difficulty * 2 : 2;
+  if (!quizStarted || questions.length === 0) {
+    return (
+      <div className="quiz-page">
+        <div className="quiz-loading">
+          <div className="quiz-loading-icon">&#128640;</div>
+          <h2>Preparing your quiz...</h2>
+          <p>Personalizing questions based on your session</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (gameOver) {
+    const reviewConcepts = getConceptsToReview(questions, answers);
+    const incorrect = getIncorrectQuestions(questions, answers);
+
+    return (
+      <div className="quiz-page">
+        <div className="quiz-header">
+          <button className="quiz-exit" onClick={onExit}>&#8592; Back to Learning</button>
+          <span>XP: {xp}</span>
+        </div>
+        <div className="quiz-card quiz-game-over">
+          <div className="quiz-game-over-icon">&#128148;</div>
+          <h2>Practice Complete</h2>
+          <p>Review your mistakes before trying again.</p>
+
+          {incorrect.length > 0 && (
+            <div className="quiz-review-section">
+              <h3>Questions to Review</h3>
+              {incorrect.map((item, idx) => (
+                <div key={idx} className="quiz-review-item">
+                  <p className="review-question"><strong>Q:</strong> {item.question.q}</p>
+                  <p className="review-correct"><strong>Correct:</strong> {item.correctAnswer}</p>
+                  <p className="review-explanation"><strong>Why:</strong> {item.explanation}</p>
+                  <p className="review-concept">Concept: {item.concept}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="quiz-end-actions">
+            <button className="secondary quiz-retry" onClick={() => {
+              const session = quizData.session || null;
+              const pool = generateQuestionPool(quizData.concept, QUIZ_LENGTH, session);
+              setQuestions(pool);
+              setAnswers(new Array(pool.length).fill(null));
+              setCurrentIndex(0);
+              setShowFeedback(false);
+              setSessionCorrect(0);
+              setSessionXp(0);
+              setHearts(MAX_HEARTS);
+              setGameOver(false);
+            }}>
+              &#8635; Retry Quiz
+            </button>
+            <button className="primary quiz-continue" onClick={onExit}>
+              Return to Learning &#8594;
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const currentQuestion = questions[currentIndex];
+  const currentAnswer = answers[currentIndex];
+  const isCurrentAnswered = currentAnswer !== null;
+  const isFinished = currentIndex >= questions.length;
+  const hasPrevious = currentIndex > 0;
+  const difficulty = quizData.difficulty || 1;
+  const progressPct = Math.round((currentIndex / questions.length) * 100);
+
+  function handleSelect(idx) {
+    if (showFeedback) return;
+    const correct = idx === currentQuestion.correctIdx;
+    const earnedXp = correct ? 5 + difficulty * 2 : 1;
     const newXp = xp + earnedXp;
     setXp(newXp);
     localStorage.setItem('pybe_xp', String(newXp));
-    setQuizData(prev => ({ ...prev, score: prev.score + (correct ? 1 : 0), questionsSeen: prev.questionsSeen + 1 }));
+
+    const newAnswers = [...answers];
+    newAnswers[currentIndex] = idx;
+    setAnswers(newAnswers);
+    setShowFeedback(true);
+    if (correct) {
+      setSessionCorrect(prev => prev + 1);
+    } else {
+      const newHearts = hearts - 1;
+      setHearts(newHearts);
+      if (newHearts <= 0) {
+        setTimeout(() => setGameOver(true), 1500);
+      }
+    }
+    setSessionXp(prev => prev + earnedXp);
   }
 
   function handleNext() {
-    const newDiff = feedback.correct
-      ? Math.min(quizData.difficulty + 1, 4)
-      : Math.max(quizData.difficulty - 1, 1);
-    setQuizData(prev => ({ ...prev, difficulty: newDiff }));
+    if (currentIndex + 1 < questions.length) {
+      setCurrentIndex(prev => prev + 1);
+      setShowFeedback(answers[currentIndex + 1] !== null);
+    } else {
+      setCurrentIndex(questions.length);
+    }
   }
 
-  if (!question) return null;
+  function handlePrevious() {
+    if (currentIndex > 0) {
+      setCurrentIndex(prev => prev - 1);
+      setShowFeedback(answers[currentIndex - 1] !== null);
+    }
+  }
+
+  function handleFinish() {
+    setQuizData(prev => ({
+      ...prev,
+      score: (prev.score || 0) + sessionCorrect,
+      questionsSeen: (prev.questionsSeen || 0) + questions.length
+    }));
+    onExit();
+  }
+
+  if (isFinished) {
+    const pct = Math.round((sessionCorrect / questions.length) * 100);
+    const category = getScoreCategory(sessionCorrect, questions.length);
+    const message = getScoreMessage(category);
+    const reviewConcepts = getConceptsToReview(questions, answers);
+    const incorrect = getIncorrectQuestions(questions, answers);
+    const personalizedFeedback = getPersonalizedFeedback(sessionCorrect, questions.length, quizData.session, reviewConcepts);
+    const timeTaken = Math.round((Date.now() - startTime) / 1000);
+    const timeLabel = timeTaken < 60 ? `${timeTaken}s` : `${Math.floor(timeTaken / 60)}m ${timeTaken % 60}s`;
+    const recommendedScenario = recommendNextScenario(scenarios, quizData.scenario, quizData.session, reviewConcepts);
+
+    return (
+      <div className="quiz-page">
+        <div className="quiz-header">
+          <button className="quiz-exit" onClick={onExit}>&#8592; Back</button>
+          <span>XP: {xp}</span>
+        </div>
+
+        {pct === 100 && (
+          <div className="quiz-confetti">
+            {Array.from({ length: 50 }).map((_, i) => (
+              <div key={i} className="confetti-piece" style={{
+                left: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 2}s`,
+                backgroundColor: ['#d8f07c', '#4a9a20', '#f59e0b', '#3b82f6', '#ef4444'][Math.floor(Math.random() * 5)]
+              }} />
+            ))}
+          </div>
+        )}
+
+        <div className="quiz-card quiz-end">
+          <div className="quiz-end-icon">
+            {pct >= 70 ? '&#127942;' : pct >= 50 ? '&#128516;' : '&#128528;'}
+          </div>
+          <h2>Quiz Summary</h2>
+          <p className="quiz-personalized-feedback">{personalizedFeedback}</p>
+
+          <div className="quiz-end-stats">
+            <div className="quiz-end-stat">
+              <span className="quiz-end-num">{sessionCorrect}/{questions.length}</span>
+              <small>Correct</small>
+            </div>
+            <div className="quiz-end-stat">
+              <span className="quiz-end-num">{pct}%</span>
+              <small>Accuracy</small>
+            </div>
+            <div className="quiz-end-stat">
+              <span className="quiz-end-num">+{sessionXp}</span>
+              <small>XP Earned</small>
+            </div>
+            <div className="quiz-end-stat">
+              <span className="quiz-end-num">{timeLabel}</span>
+              <small>Time</small>
+            </div>
+          </div>
+
+          {incorrect.length > 0 && (
+            <div className="quiz-review-section">
+              <h3>Questions to Review</h3>
+              {incorrect.map((item, idx) => (
+                <div key={idx} className="quiz-review-item">
+                  <p className="review-question"><strong>Question:</strong> {item.question.q}</p>
+                  <p className="review-correct"><strong>Correct Answer:</strong> {item.correctAnswer}</p>
+                  <p className="review-explanation"><strong>Why it is correct:</strong> {item.explanation}</p>
+                  <p className="review-concept">Python Concept: <span className="review-concept-tag">{item.concept}</span></p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {recommendedScenario && (
+            <div className="quiz-recommended">
+              <h3>Recommended Next Challenge</h3>
+              <div className="quiz-recommended-card">
+                <div className="recommended-scenario-info">
+                  <strong>{recommendedScenario.title}</strong>
+                  <span className="recommended-difficulty">{recommendedScenario.difficulty}</span>
+                  <p>{recommendedScenario.concepts?.join(' / ')}</p>
+                </div>
+                <button
+                  className="primary recommended-start"
+                  onClick={() => {
+                    handleFinish();
+                    if (onSelectScenario) {
+                      setTimeout(() => onSelectScenario(recommendedScenario), 100);
+                    }
+                  }}
+                >
+                  Start Next Scenario &#8594;
+                </button>
+              </div>
+            </div>
+          )}
+
+          <div className="quiz-end-actions">
+            <button className="secondary quiz-retry" onClick={() => {
+              const session = quizData.session || null;
+              const pool = generateQuestionPool(quizData.concept, QUIZ_LENGTH, session);
+              setQuestions(pool);
+              setAnswers(new Array(pool.length).fill(null));
+              setCurrentIndex(0);
+              setShowFeedback(false);
+              setSessionCorrect(0);
+              setSessionXp(0);
+              setHearts(MAX_HEARTS);
+              setGameOver(false);
+            }}>
+              &#8635; Retry Quiz
+            </button>
+            <button className="primary quiz-continue" onClick={handleFinish}>
+              Continue Learning &#8594;
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="quiz-page">
       <div className="quiz-header">
         <button className="quiz-exit" onClick={onExit}>&#8592; Back</button>
-        <span>Score: {quizData.score}/{quizData.questionsSeen}</span>
-        <span>XP: {xp}</span>
-      </div>
-      <div className="quiz-card">
-        <div className="quiz-concept">{question.concept}</div>
-        <h2 className="quiz-question">{question.q}</h2>
-        <div className="quiz-options">
-          {question.opts.map((opt) => (
-            <button
-              key={opt}
-              className={`quiz-option${selected === opt ? (feedback?.correct ? ' correct' : ' wrong') : ''}${!feedback && selected !== opt && opt === question.a ? ' reveal' : ''}`}
-              onClick={() => handleSelect(opt)}
-              disabled={!!feedback}
-            >
-              {opt}
-            </button>
+        <div className="quiz-hearts">
+          {Array.from({ length: MAX_HEARTS }).map((_, i) => (
+            <span key={i} className={`heart ${i < hearts ? 'active' : 'lost'}`}>
+              {i < hearts ? '\u2764\ufe0f' : '\u2661'}
+            </span>
           ))}
         </div>
-        {feedback && (
-          <div className={`quiz-feedback${feedback.correct ? ' correct' : ' wrong'}`}>
-            <strong>{feedback.correct ? 'Correct! ' : 'Not quite. '}</strong>{feedback.explanation}
+        <span className="quiz-score">Score: {sessionCorrect}</span>
+      </div>
+
+      <div className="quiz-progress-container">
+        <div className="quiz-progress-info">
+          <span>Question {currentIndex + 1} of {questions.length}</span>
+          <span>{progressPct}% complete</span>
+        </div>
+        <div className="quiz-progress-bar">
+          <div
+            className="quiz-progress-fill"
+            style={{ width: `${progressPct}%` }}
+          />
+        </div>
+      </div>
+
+      <div className="quiz-card">
+        <div className="quiz-concept">{currentQuestion.concept}</div>
+        {currentQuestion.isSessionAware && (
+          <div className="quiz-session-badge">Based on your session</div>
+        )}
+        <h2 className="quiz-question">{currentQuestion.q}</h2>
+
+        <div className="quiz-options">
+          {currentQuestion.opts.map((opt, idx) => {
+            let cls = 'quiz-option';
+            if (showFeedback) {
+              if (idx === currentQuestion.correctIdx) {
+                cls += ' reveal correct-anim';
+              } else if (idx === currentAnswer) {
+                cls += ' wrong wrong-anim';
+              }
+            }
+            return (
+              <button
+                key={idx}
+                className={cls}
+                onClick={() => handleSelect(idx)}
+                disabled={showFeedback}
+              >
+                <span className="quiz-option-marker">{String.fromCharCode(65 + idx)}</span>
+                <span className="quiz-option-text">{opt}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {showFeedback && (
+          <div className={`quiz-feedback${currentAnswer === currentQuestion.correctIdx ? ' correct' : ' wrong'}`}>
+            <div className="quiz-feedback-header">
+              {currentAnswer === currentQuestion.correctIdx ? (
+                <span className="feedback-icon correct">&#10003;</span>
+              ) : (
+                <span className="feedback-icon wrong">&#10007;</span>
+              )}
+              <strong>{currentAnswer === currentQuestion.correctIdx ? 'Correct!' : 'Not quite right'}</strong>
+            </div>
+            {currentAnswer !== currentQuestion.correctIdx && (
+              <p className="quiz-feedback-selected">
+                You selected: <em>{currentQuestion.opts[currentAnswer]}</em>
+              </p>
+            )}
+            <p className="quiz-feedback-why">{currentQuestion.exp}</p>
+            <p className="quiz-feedback-concept">This reinforces: <strong>{currentQuestion.concept}</strong></p>
           </div>
         )}
-        {feedback && (
-          <button className="primary quiz-next" onClick={handleNext}>
-            Next Question &#8594;
+
+        <div className="quiz-nav">
+          {hasPrevious && (
+            <button
+              className="secondary quiz-prev"
+              onClick={handlePrevious}
+              disabled={!isCurrentAnswered}
+            >
+              &#8592; Previous
+            </button>
+          )}
+          <button
+            className="primary quiz-next"
+            onClick={handleNext}
+            disabled={!showFeedback}
+          >
+            {currentIndex + 1 < questions.length ? 'Next Question \u2192' : 'See Results \u2192'}
           </button>
-        )}
+        </div>
       </div>
     </div>
   );
