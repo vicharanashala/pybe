@@ -11,7 +11,10 @@ import {
   Route,
   Search,
   Send,
-  Sparkles
+  Sparkles,
+  BookOpen,
+  ChevronRight,
+  Home
 } from 'lucide-react';
 import './styles.css';
 import { generateQuestionPool, getReviewConcepts, getIncorrectQuestions } from './utils/quizEngine';
@@ -19,6 +22,80 @@ import { findConceptKey, getAllConceptKeys } from './utils/quizGenerator';
 import { getConceptsToReview, getScoreCategory, getScoreMessage, getPersonalizedFeedback, recommendNextScenario } from './utils/quizScoring';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+const JOURNEY_STEPS = [
+  { id: 'explorer', label: 'Scenario Explorer', icon: Compass },
+  { id: 'workspace', label: 'Learning Workspace', icon: Brain },
+  { id: 'summary', label: 'Session Summary', icon: Sparkles },
+  { id: 'mentor', label: 'AI Mentor', icon: Lightbulb },
+  { id: 'w3h', label: 'W\u00b3H Guide', icon: BookOpen },
+  { id: 'quiz', label: 'Quiz', icon: Code2 },
+  { id: 'review', label: 'Review', icon: MessageSquareText },
+  { id: 'dashboard', label: 'Dashboard', icon: ChartNoAxesCombined },
+];
+
+function TopNav({ view, setView, xp, streak, journeyStep }) {
+  return (
+    <nav className="top-nav">
+      <div className="top-nav-brand">
+        <Brain size={24} />
+        <span>PyBe</span>
+      </div>
+      <div className="top-nav-steps">
+        {JOURNEY_STEPS.map((step, idx) => {
+          const isActive = view === step.id;
+          const isCompleted = idx < journeyStep;
+          const Icon = step.icon;
+          return (
+            <button
+              key={step.id}
+              className={`nav-step ${isActive ? 'active' : ''} ${isCompleted ? 'completed' : ''}`}
+              onClick={() => setView(step.id)}
+              title={step.label}
+            >
+              <span className="nav-step-icon"><Icon size={16} /></span>
+              <span className="nav-step-label">{step.label}</span>
+              {isCompleted && <span className="nav-step-check">&#10003;</span>}
+            </button>
+          );
+        })}
+      </div>
+      <div className="top-nav-stats">
+        <span className="nav-xp">&#9733; {xp} XP</span>
+        <span className="nav-streak">&#128293; {streak}</span>
+      </div>
+    </nav>
+  );
+}
+
+function JourneyProgress({ currentStep, onStepClick }) {
+  return (
+    <div className="journey-progress">
+      {JOURNEY_STEPS.map((step, idx) => (
+        <button
+          key={step.id}
+          className={`journey-step ${idx === currentStep ? 'current' : ''} ${idx < currentStep ? 'done' : ''}`}
+          onClick={() => onStepClick(step.id)}
+        >
+          <span className="journey-step-num">{idx + 1}</span>
+          <span className="journey-step-label">{step.label}</span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function PageHeader({ title, subtitle, children }) {
+  return (
+    <header className="page-header">
+      <div className="page-header-content">
+        <h1>{title}</h1>
+        {subtitle && <p>{subtitle}</p>}
+      </div>
+      {children && <div className="page-header-actions">{children}</div>}
+    </header>
+  );
+}
 
 async function api(path, options) {
   const response = await fetch(`${API_URL}${path}`, {
@@ -64,8 +141,10 @@ function App() {
   const [submitting, setSubmitting] = useState(false);
   const [xp, setXp] = useState(() => parseInt(localStorage.getItem('pybe_xp') || '0', 10));
   const [streak, setStreak] = useState(() => calculateStreak());
-  const [view, setView] = useState('home');
+  const [view, setView] = useState('explorer');
   const [quizData, setQuizData] = useState(null);
+  const [journeyStep, setJourneyStep] = useState(0);
+  const [viewedScenarios, setViewedScenarios] = useState(new Set());
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
@@ -118,188 +197,163 @@ function App() {
 
   if (loading) return <main className="loading">Loading PyBe...</main>;
 
+  function handleStartScenario(scenario) {
+    setSelected(scenario);
+    setActiveResult(null);
+    setView('workspace');
+    setJourneyStep(1);
+    setViewedScenarios(prev => new Set([...prev, scenario._id]));
+  }
+
+  function handleCompleteSession() {
+    setView('summary');
+    setJourneyStep(2);
+  }
+
+  function handleViewMentor() {
+    setView('mentor');
+    setJourneyStep(3);
+  }
+
+  function handleViewW3H() {
+    setView('w3h');
+    setJourneyStep(4);
+  }
+
+  function handleTakeQuiz() {
+    setQuizData({
+      session: activeResult,
+      scenario: selected,
+      difficulty: 1,
+      score: 0,
+      questionsSeen: 0,
+      concept: activeResult?.abstractionMap?.[0]?.pythonConcept || 'variables'
+    });
+    setView('quiz');
+    setJourneyStep(5);
+  }
+
+  function handleViewDashboard() {
+    setView('dashboard');
+    setJourneyStep(7);
+  }
+
+  function handleGoHome() {
+    setView('explorer');
+    setJourneyStep(0);
+    setActiveResult(null);
+  }
+
   return (
     <main className="app-shell">
-      <aside className="sidebar">
-        <div className="brand">
-          <Brain size={30} />
-          <div>
-            <strong>PyBe</strong>
-            <span>Scenario-first Python</span>
-          </div>
-        </div>
+      <TopNav view={view} setView={setView} xp={xp} streak={streak} journeyStep={journeyStep} />
 
-        <label className="search">
-          <Search size={18} />
-          <input
-            value={filters.q}
-            onChange={(event) => setFilters({ ...filters, q: event.target.value })}
-            placeholder="Search scenarios"
-          />
-        </label>
-
-        <select value={filters.difficulty} onChange={(event) => setFilters({ ...filters, difficulty: event.target.value })}>
-          <option value="">All levels</option>
-          <option>Beginner</option>
-          <option>Explorer</option>
-          <option>Builder</option>
-        </select>
-
-        <select value={filters.concept} onChange={(event) => setFilters({ ...filters, concept: event.target.value })}>
-          <option value="">All concepts</option>
-          {concepts.map((concept) => <option key={concept}>{concept}</option>)}
-        </select>
-
-        <div className="scenario-list">
-          {scenarios.map((scenario) => (
+      <div className="page-breadcrumb">
+        <button className="breadcrumb-home" onClick={handleGoHome}>
+          <Home size={14} /> Home
+        </button>
+        {JOURNEY_STEPS.filter(s => ['workspace', 'summary', 'mentor', 'w3h', 'quiz', 'review', 'dashboard'].includes(s.id)).map((step, idx) => (
+          <React.Fragment key={step.id}>
+            <ChevronRight size={14} />
             <button
-              key={scenario._id}
-              className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
+              className={`breadcrumb-step ${view === step.id ? 'active' : ''}`}
               onClick={() => {
-                setSelected(scenario);
-                setActiveResult(null);
+                if (step.id === 'dashboard') handleViewDashboard();
+                else if (step.id === 'mentor' && activeResult) handleViewMentor();
+                else if (step.id === 'w3h' && activeResult) handleViewW3H();
+                else if (step.id === 'quiz' && activeResult) handleTakeQuiz();
+                else if (step.id === 'summary' && activeResult) handleCompleteSession();
+                else if (step.id === 'workspace' && selected) setView('workspace');
               }}
+              disabled={
+                (step.id === 'workspace' && !selected) ||
+                (step.id === 'summary' && !activeResult) ||
+                (step.id === 'mentor' && !activeResult) ||
+                (step.id === 'w3h' && !activeResult) ||
+                (step.id === 'quiz' && !activeResult)
+              }
             >
-              <span>{scenario.difficulty}</span>
-              <strong>{scenario.title}</strong>
-              <small>{scenario.concepts.join(' / ')}</small>
+              {step.label}
             </button>
-          ))}
-        </div>
-      </aside>
+          </React.Fragment>
+        ))}
+      </div>
 
-      <section className="workspace">
+      <section className="page-content">
         {view === 'quiz' && quizData ? (
           <QuizPage
             quizData={quizData}
             setQuizData={setQuizData}
             xp={xp}
             setXp={setXp}
-            onExit={() => setView('home')}
+            onExit={handleViewDashboard}
             scenarios={scenarios}
             onSelectScenario={(scenario) => {
               setSelected(scenario);
               setActiveResult(null);
+              setView('explorer');
+              setJourneyStep(0);
             }}
           />
-        ) : (
-          <>
-            <header className="hero">
-              <div>
-                <p>AI-native learning journey</p>
-                <h1>Learn Python by reasoning through real situations first.</h1>
-              </div>
-              <div className="hero-stats">
-                <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
-                <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
-                <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
-              </div>
-            </header>
-
-            <div className="main-grid">
-              <section className="panel learning-panel">
-                <div className="section-title">
-                  <Compass size={20} />
-                  <h2>{selected?.title}</h2>
-                </div>
-                <p className="context">{selected?.context}</p>
-                <div className="objective-row">
-                  {selected?.objectives.map((item) => <span key={item}>{item}</span>)}
-                </div>
-                <form onSubmit={submitSession} className="learning-form">
-                  <label>
-                    Your reasoning
-                    <div className="textarea-row">
-                      <textarea
-                        required
-                        value={form.reasoning}
-                        onChange={(event) => setForm({ ...form, reasoning: event.target.value })}
-                        placeholder={selected?.prompt}
-                      />
-                      <VoiceInput value={form.reasoning} onChange={(v) => setForm({ ...form, reasoning: v })} />
-                    </div>
-                  </label>
-                  <label>
-                    Prompt you would give an AI mentor
-                    <div className="textarea-row">
-                      <textarea
-                        value={form.promptText}
-                        onChange={(event) => setForm({ ...form, promptText: event.target.value })}
-                        placeholder="Explain my approach step by step, then show the Python concept and code..."
-                      />
-                      <VoiceInput value={form.promptText} onChange={(v) => setForm({ ...form, promptText: v })} />
-                    </div>
-                  </label>
-                  <label>
-                    Reflection
-                    <div className="textarea-row">
-                      <textarea
-                        value={form.reflection}
-                        onChange={(event) => setForm({ ...form, reflection: event.target.value })}
-                        placeholder="What did you notice about your thinking?"
-                      />
-                      <VoiceInput value={form.reflection} onChange={(v) => setForm({ ...form, reflection: v })} />
-                    </div>
-                  </label>
-                  <button className="primary" disabled={submitting}>
-                    <Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}
-                  </button>
-                </form>
-              </section>
-
-              <section className="panel result-panel">
-                <div className="section-title">
-                  <Sparkles size={20} />
-                  <h2>AI Mentor Output</h2>
-                </div>
-                {!activeResult ? <EmptyResult /> : <Result result={activeResult} onQuizStart={(result) => {
-                  setQuizData({
-                    session: result,
-                    scenario: selected,
-                    difficulty: 1,
-                    score: 0,
-                    questionsSeen: 0,
-                    concept: result.abstractionMap?.[0]?.pythonConcept || 'variables'
-                  });
-                  setView('quiz');
-                }} />}
-              </section>
-
-              <section className="panel w3h-panel">
-                {activeResult ? <W3H result={activeResult} /> : (
-                  <div className="empty"><Lightbulb size={32} /><p>Submit reasoning to see W3H breakdown.</p></div>
-                )}
-              </section>
-            </div>
-
-            {activeResult && (
-              <div className="top-stats-bar">
-                <span><strong>{selected?.title}</strong></span>
-                {activeResult.earnedXp != null && (
-                  <span className="top-xp">+{activeResult.earnedXp} XP <small>(Total: {activeResult.totalXp})</small></span>
-                )}
-                {activeResult.streak != null && (
-                  <span className="top-streak">&#128293; {activeResult.streak} day{activeResult.streak !== 1 ? 's' : ''}</span>
-                )}
-              </div>
-            )}
-
-            <section className="dashboard">
-              <div className="panel">
-                <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Learner Analytics</h2></div>
-                <Analytics analytics={analytics} />
-              </div>
-              <div className="panel">
-                <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
-                <Roadmap roadmap={roadmap} />
-              </div>
-              <div className="panel">
-                <div className="section-title"><MessageSquareText size={20} /><h2>Recent Sessions</h2></div>
-                <SessionList sessions={sessions} />
-              </div>
-            </section>
-          </>
-        )}
+        ) : view === 'explorer' ? (
+          <ExplorerPage
+            scenarios={scenarios}
+            selected={selected}
+            filters={filters}
+            setFilters={setFilters}
+            concepts={concepts}
+            onSelectScenario={handleStartScenario}
+            analytics={analytics}
+            roadmap={roadmap}
+            sessions={sessions}
+          />
+        ) : view === 'workspace' ? (
+          <WorkspacePage
+            selected={selected}
+            form={form}
+            setForm={setForm}
+            submitting={submitting}
+            onSubmit={submitSession}
+            onComplete={handleCompleteSession}
+            onViewMentor={handleViewMentor}
+            activeResult={activeResult}
+          />
+        ) : view === 'summary' ? (
+          <SummaryPage
+            result={activeResult}
+            selected={selected}
+            onViewMentor={handleViewMentor}
+            onTakeQuiz={handleTakeQuiz}
+            onChangeScenario={() => setView('explorer')}
+          />
+        ) : view === 'mentor' ? (
+          <MentorPage
+            result={activeResult}
+            selected={selected}
+            onViewW3H={handleViewW3H}
+            onTakeQuiz={handleTakeQuiz}
+          />
+        ) : view === 'w3h' ? (
+          <W3HPage
+            result={activeResult}
+            onTakeQuiz={handleTakeQuiz}
+            onViewDashboard={handleViewDashboard}
+          />
+        ) : view === 'dashboard' ? (
+          <DashboardPage
+            analytics={analytics}
+            roadmap={roadmap}
+            sessions={sessions}
+            xp={xp}
+            streak={streak}
+            onSelectScenario={(scenario) => {
+              setSelected(scenario);
+              setActiveResult(null);
+              setView('workspace');
+              setJourneyStep(1);
+            }}
+          />
+        ) : null}
       </section>
     </main>
   );
@@ -1011,6 +1065,437 @@ function SessionList({ sessions }) {
           </div>
         </article>
       )) : <p>No sessions yet.</p>}
+    </div>
+  );
+}
+
+function ExplorerPage({ scenarios, selected, filters, setFilters, concepts, onSelectScenario, analytics, roadmap, sessions }) {
+  return (
+    <div className="page explorer-page">
+      <PageHeader
+        title="Scenario Explorer"
+        subtitle="Choose a scenario to begin your Python learning journey"
+      />
+
+      <div className="explorer-layout">
+        <aside className="explorer-sidebar">
+          <label className="search">
+            <Search size={18} />
+            <input
+              value={filters.q}
+              onChange={(e) => setFilters({ ...filters, q: e.target.value })}
+              placeholder="Search scenarios"
+            />
+          </label>
+
+          <select value={filters.difficulty} onChange={(e) => setFilters({ ...filters, difficulty: e.target.value })}>
+            <option value="">All levels</option>
+            <option>Beginner</option>
+            <option>Explorer</option>
+            <option>Builder</option>
+          </select>
+
+          <select value={filters.concept} onChange={(e) => setFilters({ ...filters, concept: e.target.value })}>
+            <option value="">All concepts</option>
+            {concepts.map((c) => <option key={c}>{c}</option>)}
+          </select>
+
+          <div className="scenario-list">
+            {scenarios.map((scenario) => (
+              <button
+                key={scenario._id}
+                className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
+                onClick={() => onSelectScenario(scenario)}
+              >
+                <span>{scenario.difficulty}</span>
+                <strong>{scenario.title}</strong>
+                <small>{scenario.concepts.join(' / ')}</small>
+              </button>
+            ))}
+          </div>
+        </aside>
+
+        <div className="explorer-main">
+          <div className="explorer-hero">
+            <div>
+              <p className="hero-tag">AI-native learning journey</p>
+              <h1>Learn Python by reasoning through real situations first.</h1>
+            </div>
+            <div className="hero-stats">
+              <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
+              <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
+              <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
+            </div>
+          </div>
+
+          <div className="explorer-dashboard">
+            <div className="panel">
+              <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Learning Analytics</h2></div>
+              <Analytics analytics={analytics} />
+            </div>
+            <div className="panel">
+              <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
+              <Roadmap roadmap={roadmap} />
+            </div>
+            <div className="panel">
+              <div className="section-title"><MessageSquareText size={20} /><h2>Recent Sessions</h2></div>
+              <SessionList sessions={sessions} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function WorkspacePage({ selected, form, setForm, submitting, onSubmit, onComplete, onViewMentor, activeResult }) {
+  return (
+    <div className="page workspace-page">
+      <PageHeader
+        title={selected?.title || 'Learning Workspace'}
+        subtitle={selected?.context}
+      >
+        {activeResult && (
+          <button className="secondary" onClick={onViewMentor}>
+            View AI Mentor <ChevronRight size={16} />
+          </button>
+        )}
+      </PageHeader>
+
+      <div className="workspace-layout">
+        <section className="panel learning-panel">
+          <div className="section-title">
+            <Compass size={20} />
+            <h2>Your Learning Task</h2>
+          </div>
+          <div className="objective-row">
+            {selected?.objectives?.map((item) => <span key={item}>{item}</span>)}
+          </div>
+          <form onSubmit={onSubmit} className="learning-form">
+            <label>
+              Your reasoning
+              <div className="textarea-row">
+                <textarea
+                  required
+                  value={form.reasoning}
+                  onChange={(e) => setForm({ ...form, reasoning: e.target.value })}
+                  placeholder={selected?.prompt}
+                />
+                <VoiceInput value={form.reasoning} onChange={(v) => setForm({ ...form, reasoning: v })} />
+              </div>
+            </label>
+            <label>
+              Prompt you would give an AI mentor
+              <div className="textarea-row">
+                <textarea
+                  value={form.promptText}
+                  onChange={(e) => setForm({ ...form, promptText: e.target.value })}
+                  placeholder="Explain my approach step by step..."
+                />
+                <VoiceInput value={form.promptText} onChange={(v) => setForm({ ...form, promptText: v })} />
+              </div>
+            </label>
+            <label>
+              Reflection
+              <div className="textarea-row">
+                <textarea
+                  value={form.reflection}
+                  onChange={(e) => setForm({ ...form, reflection: e.target.value })}
+                  placeholder="What did you notice about your thinking?"
+                />
+                <VoiceInput value={form.reflection} onChange={(v) => setForm({ ...form, reflection: v })} />
+              </div>
+            </label>
+            <div className="form-actions">
+              <button type="submit" className="primary" disabled={submitting}>
+                <Send size={18} />{submitting ? 'Mapping...' : 'Submit & Continue'}
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <section className="panel result-panel">
+          <div className="section-title">
+            <Sparkles size={20} />
+            <h2>AI Mentor Output</h2>
+          </div>
+          {!activeResult ? (
+            <div className="empty">
+              <Lightbulb size={38} />
+              <p>Submit your reasoning to see AI Mentor analysis and begin your quiz journey.</p>
+            </div>
+          ) : (
+            <div className="workspace-result-preview">
+              <div className="score"><span>{activeResult.promptScore}</span><small>Prompt maturity</small></div>
+              {activeResult.abstractionMap?.map((item) => (
+                <article className="mapping" key={item.pattern}>
+                  <strong>{item.pattern}</strong>
+                  <span>{item.pythonConcept}</span>
+                  <p>{item.explanation}</p>
+                </article>
+              ))}
+              <div className="code-block">
+                <div><Code2 size={18} /> Generated Python</div>
+                <pre>{activeResult.generatedCode}</pre>
+              </div>
+            </div>
+          )}
+        </section>
+      </div>
+
+      {activeResult && (
+        <div className="workspace-next">
+          <button className="primary" onClick={onComplete}>
+            Continue to Session Summary <ChevronRight size={18} />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SummaryPage({ result, selected, onViewMentor, onTakeQuiz, onChangeScenario }) {
+  if (!result) {
+    return (
+      <div className="page summary-page">
+        <div className="empty-state">
+          <p>No session data available. Please complete a learning session first.</p>
+          <button className="primary" onClick={onChangeScenario}>Choose a Scenario</button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="page summary-page">
+      <PageHeader
+        title="Session Summary"
+        subtitle={`You completed: ${selected?.title}`}
+      >
+        <button className="secondary" onClick={onChangeScenario}>Change Scenario</button>
+      </PageHeader>
+
+      <div className="summary-layout">
+        <div className="summary-main">
+          <div className="panel summary-score-panel">
+            <div className="summary-score">
+              <span className="score-big">{result.promptScore}</span>
+              <small>Prompt Maturity Score</small>
+            </div>
+            <div className="summary-stats">
+              <div className="summary-stat">
+                <span className="stat-num">{result.abstractionMap?.length || 0}</span>
+                <small>Concepts Mapped</small>
+              </div>
+              <div className="summary-stat">
+                <span className="stat-num">{result.earnedXp || 0}</span>
+                <small>XP Earned</small>
+              </div>
+            </div>
+          </div>
+
+          <div className="panel">
+            <div className="section-title"><Brain size={20} /><h2>Abstraction Map</h2></div>
+            {result.abstractionMap?.map((item) => (
+              <article className="mapping" key={item.pattern}>
+                <strong>{item.pattern}</strong>
+                <span>{item.pythonConcept}</span>
+                <p>{item.explanation}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="panel">
+            <div className="section-title"><Code2 size={20} /><h2>Generated Python Code</h2></div>
+            <div className="code-block">
+              <pre>{result.generatedCode}</pre>
+            </div>
+            <p>{result.codeExplanation}</p>
+          </div>
+
+          <div className="panel">
+            <div className="section-title"><MessageSquareText size={20} /><h2>Prompt Feedback</h2></div>
+            <ul className="feedback">
+              {result.promptFeedback?.map((item) => <li key={item}>{item}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <div className="summary-actions">
+          <button className="primary" onClick={onViewMentor}>
+            <Lightbulb size={18} /> View AI Mentor Analysis
+          </button>
+          <button className="primary quiz-cta" onClick={onTakeQuiz}>
+            <Sparkles size={18} /> Take Quiz
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MentorPage({ result, selected, onViewW3H, onTakeQuiz }) {
+  if (!result) {
+    return (
+      <div className="page mentor-page">
+        <div className="empty-state">
+          <p>No mentor analysis available.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="page mentor-page">
+      <PageHeader
+        title="AI Mentor Analysis"
+        subtitle={`Deep dive into your ${result.abstractionMap?.[0]?.pythonConcept || 'learning'} understanding`}
+      >
+        <button className="secondary" onClick={onViewW3H}>View W\u00b3H Guide <ChevronRight size={16} /></button>
+      </PageHeader>
+
+      <div className="mentor-layout">
+        <div className="panel mentor-insights">
+          <div className="section-title"><Sparkles size={20} /><h2>Mentor Insights</h2></div>
+
+          <div className="mentor-score">
+            <div className="score"><span>{result.promptScore}</span><small>Prompt Maturity</small></div>
+          </div>
+
+          {result.abstractionMap?.map((item) => (
+            <article className="mapping" key={item.pattern}>
+              <strong>{item.pattern}</strong>
+              <span>{item.pythonConcept}</span>
+              <p>{item.explanation}</p>
+            </article>
+          ))}
+
+          <div className="code-block">
+            <div><Code2 size={18} /> Generated Python</div>
+            <pre>{result.generatedCode}</pre>
+            <p>{result.codeExplanation}</p>
+          </div>
+
+          <ul className="feedback">
+            {result.promptFeedback?.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+
+          {result.misconceptions?.length > 0 && (
+            <div className="note misconception-note">
+              <strong>Misconception Watch</strong>
+              {result.misconceptions.map((item) => <p key={item}>{item}</p>)}
+            </div>
+          )}
+        </div>
+
+        <div className="mentor-actions">
+          <button className="primary" onClick={onViewW3H}>
+            <BookOpen size={18} /> Explore W\u00b3H Guide
+          </button>
+          <button className="primary quiz-cta" onClick={onTakeQuiz}>
+            <Sparkles size={18} /> Take Quiz
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function W3HPage({ result, onTakeQuiz, onViewDashboard }) {
+  if (!result) {
+    return (
+      <div className="page w3h-page">
+        <div className="empty-state">
+          <p>No W\u00b3H data available.</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="page w3h-page">
+      <PageHeader
+        title="W\u00b3H Learning Guide"
+        subtitle="Understand your learning from four perspectives"
+      >
+        <button className="secondary" onClick={onViewDashboard}>Go to Dashboard <ChevronRight size={16} /></button>
+      </PageHeader>
+
+      <div className="w3h-layout">
+        <div className="w3h-main">
+          <W3H result={result} />
+        </div>
+
+        <div className="w3h-actions">
+          <button className="primary quiz-cta" onClick={onTakeQuiz}>
+            <Sparkles size={18} /> Take Quiz
+          </button>
+          <button className="secondary" onClick={onViewDashboard}>
+            View Dashboard
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DashboardPage({ analytics, roadmap, sessions, xp, streak, onSelectScenario }) {
+  return (
+    <div className="page dashboard-page">
+      <PageHeader
+        title="Your Dashboard"
+        subtitle="Track your learning progress and achievements"
+      />
+
+      <div className="dashboard-layout">
+        <div className="dashboard-stats">
+          <div className="stat-card">
+            <span className="stat-icon">&#9733;</span>
+            <span className="stat-value">{xp}</span>
+            <span className="stat-label">Total XP</span>
+          </div>
+          <div className="stat-card">
+            <span className="stat-icon">&#128293;</span>
+            <span className="stat-value">{streak}</span>
+            <span className="stat-label">Day Streak</span>
+          </div>
+          <div className="stat-card">
+            <span className="stat-icon">&#128202;</span>
+            <span className="stat-value">{analytics?.sessionCount || 0}</span>
+            <span className="stat-label">Sessions</span>
+          </div>
+          <div className="stat-card">
+            <span className="stat-icon">&#10003;</span>
+            <span className="stat-value">{analytics?.averagePromptScore || 0}</span>
+            <span className="stat-label">Avg Score</span>
+          </div>
+        </div>
+
+        <div className="dashboard-panels">
+          <div className="panel">
+            <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Concept Analytics</h2></div>
+            <Analytics analytics={analytics} />
+          </div>
+
+          <div className="panel">
+            <div className="section-title"><Route size={20} /><h2>Learning Roadmap</h2></div>
+            <Roadmap roadmap={roadmap} />
+          </div>
+
+          <div className="panel">
+            <div className="section-title"><MessageSquareText size={20} /><h2>Recent Sessions</h2></div>
+            <SessionList sessions={sessions} />
+          </div>
+        </div>
+
+        <div className="dashboard-next">
+          <h3>Continue Learning</h3>
+          <p>Choose a scenario to practice what you have learned.</p>
+          <button className="primary" onClick={() => onSelectScenario(null)}>
+            <Compass size={18} /> Explore Scenarios
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
