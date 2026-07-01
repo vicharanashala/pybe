@@ -5,6 +5,7 @@ import './styles.css';
 import { saveSessionState, loadSessionState } from './utils/sessionRecovery';
 import { loadPassport, savePassport, updatePassportFromSession, updateStampAccuracy, PYTHON_CONCEPTS } from './utils/passport';
 import { TopNav } from './components/TopNavigation';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { ExplorerPage, WorkspacePage, SummaryPage, MentorPage, W3HPage, QuizPage, DashboardPage, PassportPage } from './pages';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -21,12 +22,17 @@ const JOURNEY_STEPS = [
 ];
 
 async function api(path, options) {
-  const response = await fetch(`${API_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
-    ...options
-  });
-  if (!response.ok) throw new Error(await response.text());
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}${path}`, {
+      headers: { 'Content-Type': 'application/json' },
+      ...options
+    });
+    if (!response.ok) throw new Error(await response.text());
+    return response.json();
+  } catch (err) {
+    console.warn('[API Error]', path, err.message || err);
+    throw err;
+  }
 }
 
 function calculateXp(session) {
@@ -77,49 +83,61 @@ function App() {
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
   async function refresh() {
-    const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
-    const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
-      api(`/scenarios?${params}`),
-      api('/sessions'),
-      api('/analytics'),
-      api('/roadmap')
-    ]);
-    setScenarios(scenarioData);
-    setSessions(sessionData);
-    setAnalytics(analyticsData);
-    setRoadmap(roadmapData);
-    setSelected((current) => current || scenarioData[0] || null);
-    setLoading(false);
+    try {
+      const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
+      const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
+        api(`/scenarios?${params}`),
+        api('/sessions'),
+        api('/analytics'),
+        api('/roadmap')
+      ]);
+      setScenarios(scenarioData || []);
+      setSessions(sessionData || []);
+      setAnalytics(analyticsData || { sessionCount: 0, averagePromptScore: 0, conceptCounts: {} });
+      setRoadmap(roadmapData || []);
+      setSelected((current) => current || scenarioData?.[0] || null);
+    } catch (err) {
+      console.warn('[Refresh] API unavailable, showing offline state:', err.message || err);
+      setScenarios([]);
+      setSessions([]);
+      setAnalytics({ sessionCount: 0, averagePromptScore: 0, conceptCounts: {} });
+      setRoadmap([]);
+    } finally {
+      setLoading(false);
 
-    if (!sessionRestored) {
-      const saved = loadSessionState(scenarioData);
-      if (saved) {
-        if (saved.xp !== undefined) {
-          setXp(saved.xp);
-          localStorage.setItem('pybe_xp', String(saved.xp));
-        }
-        if (saved.streak !== undefined) {
-          setStreak(saved.streak);
-          localStorage.setItem('pybe_streak', String(saved.streak));
-        }
-        if (saved.view && ['explorer', 'workspace', 'summary', 'mentor', 'w3h', 'quiz', 'dashboard'].includes(saved.view)) {
-          setView(saved.view);
-          if (saved.view !== 'explorer') {
-            if (saved.selected) setSelected(saved.selected);
-            if (saved.activeResult) setActiveResult(saved.activeResult);
-            if (saved.journeyStep !== undefined) setJourneyStep(saved.journeyStep);
-            if (saved.form) setForm(saved.form);
-            if (saved.quizData) setQuizData(saved.quizData);
+      if (!sessionRestored) {
+        const saved = loadSessionState(null);
+        if (saved) {
+          if (saved.xp !== undefined) {
+            setXp(saved.xp);
+            localStorage.setItem('pybe_xp', String(saved.xp));
+          }
+          if (saved.streak !== undefined) {
+            setStreak(saved.streak);
+            localStorage.setItem('pybe_streak', String(saved.streak));
+          }
+          if (saved.view && ['explorer', 'workspace', 'summary', 'mentor', 'w3h', 'quiz', 'dashboard'].includes(saved.view)) {
+            setView(saved.view);
+            if (saved.view !== 'explorer') {
+              if (saved.selected) setSelected(saved.selected);
+              if (saved.activeResult) setActiveResult(saved.activeResult);
+              if (saved.journeyStep !== undefined) setJourneyStep(saved.journeyStep);
+              if (saved.form) setForm(saved.form);
+              if (saved.quizData) setQuizData(saved.quizData);
+            }
           }
         }
+        setSessionRestored(true);
       }
-      setSessionRestored(true);
     }
   }
 
   useEffect(() => {
-    refresh().catch(console.error);
-  }, [filters.q, filters.difficulty, filters.concept]);
+    refresh().catch((err) => {
+      console.error('[Refresh] Unexpected error:', err);
+      setLoading(false);
+    });
+  }, []);
 
   useEffect(() => {
     if (!loading && sessionRestored) {
@@ -422,4 +440,8 @@ function StampCelebration({ concept, onClose }) {
   );
 }
 
-createRoot(document.getElementById('root')).render(<App />);
+createRoot(document.getElementById('root')).render(
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>
+);
