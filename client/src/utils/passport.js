@@ -255,6 +255,6 @@ export function getRecentUnlocks(passport, limit = 5) {
     }
   }
 
-  unlocks.sort((a, b) => (b.stamp?.unlockedAt || b.earned?.earnedAt) - (a.stamp?.unlockedAt || a.earned?.earnedAt));
+  unlocks.sort((a, b) => ((b.stamp?.unlockedAt || b.earned?.earnedAt) || 0) - ((a.stamp?.unlockedAt || a.earned?.earnedAt) || 0));
   return unlocks.slice(0, limit);
 }

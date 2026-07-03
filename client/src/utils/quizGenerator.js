@@ -358,10 +358,11 @@ export function buildSessionAwareQuestions(session) {
 
   if (session.promptFeedback && session.promptFeedback.length > 0) {
     const feedback = session.promptFeedback[0];
+    const feedbackShort = feedback.substring(0, 40);
     questions.push({
       q: `What feedback was given about your AI prompt?`,
-      a: feedback.substring(0, 60) + (feedback.length > 60 ? '...' : ''),
-      opts: generateDistractors(feedback.substring(0, 40), 'feedback'),
+      a: feedbackShort,
+      opts: generateDistractors(feedbackShort, 'feedback'),
       exp: `Your prompt was evaluated and received this feedback: "${feedback}"`,
       concept: concept,
       isSessionAware: true

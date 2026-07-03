@@ -3,59 +3,191 @@ import {
   Lightbulb,
   Code2,
   Sparkles,
-  ChartNoAxesCombined,
-  Route,
-  MessageSquareText,
   Play,
 } from 'lucide-react';
 
-function buildWhatReasoning(primary, reasoning) {
-  if (!primary) return 'No clear reasoning pattern detected yet.';
+function buildWhatInsight(primary, reasoning, result) {
+  const score = result?.promptScore ?? 0;
+  const misconceptions = result?.misconceptions || [];
+  if (!primary) return { title: 'WHAT', sections: [{ label: 'Your Current Understanding', content: 'No clear reasoning pattern detected yet.' }, { label: 'What is it?', content: 'A reasoning pattern describes how you naturally approached the problem.' }] };
+
   const pattern = primary.pattern || '';
-  if (pattern === 'Repetition') return 'You identified a pattern that repeats — thinking in cycles to handle multiple items one after another.';
-  if (pattern === 'Decision making') return 'You evaluated a condition and chose a path — thinking conditionally based on a true/false check.';
-  if (pattern === 'Collection handling') return 'You grouped related values together — thinking about data as organized collections.';
-  if (pattern === 'Computation') return 'You transformed values through calculation — thinking in terms of arithmetic operations and results.';
-  if (pattern === 'Reusable procedure') return 'You spotted a repeatable process — thinking about logic that can be called multiple times.';
-  if (pattern === 'Selection and filtering') return 'You narrowed down options using a rule — thinking about keeping only what matches a criteria.';
-  if (pattern === 'Sequential thinking') return 'You broke the problem into ordered steps — thinking in a clear top-to-bottom flow.';
-  return `You applied ${primary.pythonConcept} in your reasoning to structure the solution.`;
+  const concept = primary.pythonConcept || '';
+  const misconception = misconceptions[0] || '';
+
+  const personalMap = {
+    'Repetition': 'You recognized a cycle — a task that repeats for each item in a collection.',
+    'Decision making': 'You evaluated a condition and chose a path — thinking in branches.',
+    'Collection handling': 'You grouped related values together — thinking about data as organized collections.',
+    'Computation': 'You broke the problem into steps that transform inputs into results.',
+    'Reusable procedure': 'You spotted a repeatable process — thinking about logic that can be called on demand.',
+    'Selection and filtering': 'You narrowed down options using a rule — thinking about what to keep and what to discard.',
+    'Sequential thinking': 'You broke the problem into ordered steps — thinking in a clear top-to-bottom flow.',
+  };
+
+  const generalMap = {
+    'Repetition': `${concept} lets Python repeat an action for every item in a sequence — like giving the same instruction to each student in a class, one after another.`,
+    'Decision making': `${concept} lets Python choose between different paths based on a condition — like a traffic light choosing which cars can go.`,
+    'Collection handling': `${concept} lets Python store and organize multiple related values — like a shelf holding multiple books together.`,
+    'Computation': `${concept} lets Python transform values through calculation — like a calculator applying a formula to get a result.`,
+    'Reusable procedure': `${concept} lets Python package logic into a reusable block — like a recipe card you can follow any time you need that dish.`,
+    'Selection and filtering': `${concept} lets Python keep only the items that match a rule — like a sieve that lets only the right-sized stones through.`,
+    'Sequential thinking': `${concept} lets Python run instructions one after another — like reading a story from the first line to the last.`,
+  };
+
+  const personalDefault = reasoning
+    ? `You approached this problem with a ${pattern.toLowerCase()} approach. ${reasoning.length > 20 ? 'Your reasoning shows natural problem-solving instincts.' : 'Your reasoning captures the key idea — keep building on that foundation.'}`
+    : `You approached this with a ${pattern.toLowerCase()} mindset. Keep reasoning step by step like this.`;
+
+  const personal = personalMap[pattern] || personalDefault;
+
+  let general = generalMap[pattern] || `${concept} is a fundamental Python building block. Understanding when and how to apply it correctly is key to writing clean, effective code.`;
+
+  if (score < 40 && misconception) {
+    general += ` A small adjustment in how you frame the condition or loop rule will help Python understand your intent better.`;
+  }
+
+  return {
+    title: 'WHAT',
+    sections: [
+      { label: 'Your Current Understanding', content: personal },
+      { label: 'What is it?', content: general },
+    ],
+  };
 }
 
-function buildWhy(primary, feedback, scenario) {
+function buildWhyInsight(primary, feedback, scenario) {
   const fb = (feedback || [])[0] || '';
-  if (fb.includes('Strong prompt')) return 'Your reasoning shows good structure, which maps cleanly to the Python constructs needed for this scenario.';
-  if (fb.includes('context')) return 'Your approach identifies the key data elements before deciding how to process them — the right mindset for this scenario.';
-  if (fb.includes('example')) return 'You included practical details in your reasoning, helping map your thinking directly to real Python code.';
-  if (primary?.pattern === 'Repetition') return 'This scenario involves handling multiple items of the same kind — loops are the natural Python tool for exactly this.';
-  if (primary?.pattern === 'Decision making') return 'This scenario requires choosing between actions based on a condition — conditionals are built for that decision logic.';
-  if (primary?.pattern === 'Collection handling') return 'This scenario works with groups of related data — Python lists and dictionaries are designed to model exactly these situations.';
-  if (primary?.pattern === 'Computation') return 'This scenario needs a numeric result — Python variables and arithmetic let you compute and store results efficiently.';
-  if (primary?.pattern === 'Reusable procedure') return 'This scenario involves a rule applied to different inputs — functions are the Python way to capture and reuse such logic.';
-  return 'Your reasoning connects naturally to the Python concepts this scenario is designed to introduce.';
+  const pattern = primary?.pattern || '';
+
+  const matterMap = {
+    'Repetition': 'Loops help you handle groups of items without repeating yourself — instead of writing the same code 100 times, you write it once and let Python do the repetition.',
+    'Decision making': 'Conditionals let your code think adaptively — it can choose different actions based on different situations, making programs intelligent rather than rigid.',
+    'Collection handling': 'Collections let you work with many values as one unit — instead of managing dozens of variables, you group them and access them by their position or name.',
+    'Computation': 'Computation transforms raw data into useful results — converting temperatures, calculating totals, or combining values into meaningful information.',
+    'Reusable procedure': 'Functions let you capture logic once and use it anywhere — once written, a function can be called whenever you need that task done.',
+    'Selection and filtering': 'Filtering helps you find what you need in large sets of data — like a search filter that shows only relevant results from a long list.',
+    'Sequential thinking': 'Sequential steps form the backbone of every program — Python runs your instructions one by one, so clear ordering makes your code reliable.',
+  };
+
+  const usedMap = {
+    'Repetition': 'Developers use loops to process lists, generate patterns, automate repetitive tasks, and iterate through data structures efficiently without code duplication.',
+    'Decision making': 'Conditionals are used for validation, branching logic, error handling, and user-directed flows — every real program needs to make choices.',
+    'Collection handling': 'Collections are used to group related data, pass multiple values to functions, store results, and model real-world objects like carts, lists, or tables.',
+    'Computation': 'Computations power dashboards, reports, analytics, conversions, and any feature that calculates or transforms data — from billing systems to recommendation engines.',
+    'Reusable procedure': 'Functions reduce repetition, improve readability, and make code testable — well-named functions act as documentation and enable teams to build on each other\'s work.',
+    'Selection and filtering': 'Filtering is used in search results, recommendation systems, data cleaning, and any feature that needs to narrow down a large dataset to relevant items.',
+    'Sequential thinking': 'Sequential logic underlies all program flow — even when programs branch or loop, each step still executes in order, making it the foundation of debugging.',
+  };
+
+  const defaultMatters = 'Understanding this concept helps bridge how you naturally think about problems and how Python solves them programmatically.';
+  const defaultUsed = 'Developers use this pattern to write cleaner, more maintainable code that maps directly to real-world problem solving.';
+
+  if (fb.includes('Strong prompt')) {
+    return { title: 'WHY', sections: [{ label: 'Why This Concept Matters', content: 'Your reasoning shows good structure, which maps cleanly to the Python constructs needed for this scenario.' }, { label: 'Why It Is Used', content: 'The way you broke down the problem aligns with how experienced developers naturally approach this type of challenge.' }] };
+  }
+  if (fb.includes('context')) {
+    return { title: 'WHY', sections: [{ label: 'Why This Concept Matters', content: 'Identifying data elements before deciding how to process them is the right mindset — it helps Python understand your intent.' }, { label: 'Why It Is Used', content: 'Professional developers always start by understanding what data they have before choosing how to transform it.' }] };
+  }
+  if (fb.includes('example')) {
+    return { title: 'WHY', sections: [{ label: 'Why This Concept Matters', content: 'Including practical details in your reasoning shows strong analytical thinking — Python rewards that precision.' }, { label: 'Why It Is Used', content: 'Examples and context help Python map your intent accurately, reducing confusion and misinterpretation.' }] };
+  }
+
+  const matters = matterMap[pattern] || defaultMatters;
+  const used = usedMap[pattern] || defaultUsed;
+
+  return { title: 'WHY', sections: [{ label: 'Why This Concept Matters', content: matters }, { label: 'Why It Is Used', content: used }] };
 }
 
-function buildWhere(codeText) {
-  if (/for\s+\w+\s+in\s+/i.test(codeText)) return { whereLabel: 'for loop', whereText: 'A for loop iterates over each item in a sequence, running the same block for every element.' };
-  if (/while\s+/i.test(codeText)) return { whereLabel: 'while loop', whereText: 'A while loop repeats as long as its condition remains true — useful when you do not know how many iterations needed.' };
-  if (/if\s+/i.test(codeText)) return { whereLabel: 'if statement', whereText: 'An if statement executes a block only when its condition evaluates to true, creating a branching path.' };
-  if (/def\s+\w+/i.test(codeText)) return { whereLabel: 'function def', whereText: 'A function definition packages logic into a reusable unit that can be called multiple times with different inputs.' };
-  if (/print\s*\(/i.test(codeText)) return { whereLabel: 'print output', whereText: 'A print statement outputs values to the console, useful for displaying results and debugging.' };
-  if (/\w+\s*=\s*/i.test(codeText)) return { whereLabel: 'variable assignment', whereText: 'Variable assignment stores a value in memory using a named label, making it reusable throughout the code.' };
-  return { whereLabel: 'not detected', whereText: 'No specific Python structure detected — the reasoning may need to map more clearly to a construct.' };
+function buildWhereInsight(codeText) {
+  if (!codeText || typeof codeText !== 'string') {
+    return { title: 'WHERE', sections: [{ label: 'Where It Appears in Real Code', content: 'No Python code available to analyze.' }, { label: 'Where It Is Used in Real Life', content: 'Submit reasoning to see WHERE your concept appears in real code and everyday life.' }] };
+  }
+  if (/for\s+\w+\s+in\s+/i.test(codeText)) {
+    return { title: 'WHERE', sections: [{ label: 'Where It Appears in Real Code', content: 'For loops process lists in web apps, iterate through database results, generate reports, loop through API responses, and render UI components in frameworks like React.' }, { label: 'Where It Is Used in Real Life', content: 'Like reading through a guest list one by one to find a name — you check each item in order until you reach the end.' }] };
+  }
+  if (/while\s+/i.test(codeText)) {
+    return { title: 'WHERE', sections: [{ label: 'Where It Appears in Real Code', content: 'While loops handle event listeners, polling for data updates, game loops that run continuously, and waiting for user input in interactive applications.' }, { label: 'Where It Is Used in Real Life', content: 'Like waiting at a red traffic light — you keep checking until the condition changes, then proceed with the next action.' }] };
+  }
+  if (/if\s+/i.test(codeText)) {
+    return { title: 'WHERE', sections: [{ label: 'Where It Appears in Real Code', content: 'If statements handle authentication checks, input validation, conditional routing in APIs, access control in applications, and error handling throughout software.' }, { label: 'Where It Is Used in Real Life', content: 'Like deciding to take an umbrella based on the weather forecast — you evaluate a condition and choose the appropriate action.' }] };
+  }
+  if (/def\s+\w+/i.test(codeText)) {
+    return { title: 'WHERE', sections: [{ label: 'Where It Appears in Real Code', content: 'Functions power API endpoints, reusable data processing utilities, business logic components, event handlers, and utility libraries that developers import across projects.' }, { label: 'Where It Is Used in Real Life', content: 'Like following a recipe card — once written, you can follow the same steps whenever you need that dish, without reinventing the process.' }] };
+  }
+  if (/print\s*\(/i.test(codeText)) {
+    return { title: 'WHERE', sections: [{ label: 'Where It Appears in Real Code', content: 'Print statements output logs for debugging, display results in console applications, generate formatted reports, and show status messages in terminal-based tools.' }, { label: 'Where It Is Used in Real Life', content: 'Like writing notes on a whiteboard to share information — a simple way to communicate results that others can read.' }] };
+  }
+  if (/\w+\s*=\s*/i.test(codeText)) {
+    return { title: 'WHERE', sections: [{ label: 'Where It Appears in Real Code', content: 'Variables store configuration settings, hold intermediate calculation results, cache database queries, and manage application state in all software applications.' }, { label: 'Where It Is Used in Real Life', content: 'Like labeling a folder to remember where you stored important documents — you assign a name to something so you can find it again easily.' }] };
+  }
+  return { title: 'WHERE', sections: [{ label: 'Where It Appears in Real Code', content: 'No specific Python structure detected — the reasoning may need to map more clearly to a construct.' }, { label: 'Where It Is Used in Real Life', content: 'Try reasoning about a specific Python concept to see where it appears in real code and everyday life.' }] };
 }
 
-function buildHow(codeText) {
+function buildHowInsight(codeText, pattern) {
+  if (!codeText || typeof codeText !== 'string') {
+    return { title: 'HOW', explanation: 'Submit your reasoning to see how this concept works.', thinking: 'Complete the reasoning step to unlock the thinking process.', code: { lines: [], highlightIndex: 0 }, practice: 'Submit reasoning to unlock practice exercises.' };
+  }
   const allLines = codeText.split('\n').filter(l => l.trim() !== '');
   const lines = allLines.slice(0, 8);
   let highlightIdx = 0;
-  if (/for\s+\w+\s+in\s+/i.test(codeText)) highlightIdx = lines.findIndex(l => /for\s+\w+\s+in\s+/i.test(l));
-  else if (/def\s+\w+/i.test(codeText)) highlightIdx = lines.findIndex(l => /def\s+\w+/i.test(l));
-  else if (/if\s+/i.test(codeText)) highlightIdx = lines.findIndex(l => /if\s+/i.test(l));
-  else if (/while\s+/i.test(codeText)) highlightIdx = lines.findIndex(l => /while\s+/i.test(l));
-  else if (/\w+\s*=\s*[\d"\[']/i.test(codeText)) highlightIdx = lines.findIndex(l => /\w+\s*=\s*[\d"\[']/i.test(l));
-  if (highlightIdx < 0) highlightIdx = 0;
-  return { codeLines: lines, highlightIdx };
+  if (/for\s+\w+\s+in\s+/i.test(codeText)) {
+    highlightIdx = lines.findIndex(l => /for\s+\w+\s+in\s+/i.test(l));
+    return {
+      title: 'HOW',
+      explanation: 'A for loop steps through each item in a sequence one by one. Python executes the body of the loop for every item, then moves to the next until the sequence ends.',
+      thinking: 'Ask yourself: What collection do I need to process? What should happen to each item? Should the loop store results or just perform an action? What happens after the last item?',
+      code: { lines, highlightIndex: highlightIdx >= 0 ? highlightIdx : 0 },
+      practice: 'Try changing the list values to see different outputs. What happens if you add more items to the list?'
+    };
+  }
+  if (/def\s+\w+/i.test(codeText)) {
+    highlightIdx = lines.findIndex(l => /def\s+\w+/i.test(l));
+    return {
+      title: 'HOW',
+      explanation: 'A function definition packages logic into a reusable unit. It can accept inputs (parameters), perform operations, and return results. Once defined, call it by name with actual values (arguments).',
+      thinking: 'Ask yourself: What task will I repeat? What inputs does it need? What should it output? Should it modify data or just return a result? Where will I call this function?',
+      code: { lines, highlightIndex: highlightIdx >= 0 ? highlightIdx : 0 },
+      practice: 'Try modifying one of the parameter values when calling the function. How does the output change?'
+    };
+  }
+  if (/if\s+/i.test(codeText)) {
+    highlightIdx = lines.findIndex(l => /if\s+/i.test(l));
+    return {
+      title: 'HOW',
+      explanation: 'An if statement checks a condition and executes code only when that condition is true. You can add elif for multiple conditions and else as a fallback when no condition matches.',
+      thinking: 'Ask yourself: What specific condition determines which path to take? Is there a case where none of the conditions apply? What should happen in the fallback case?',
+      code: { lines, highlightIndex: highlightIdx >= 0 ? highlightIdx : 0 },
+      practice: 'Try changing the condition values to take different branches. What happens when no condition is true?'
+    };
+  }
+  if (/while\s+/i.test(codeText)) {
+    highlightIdx = lines.findIndex(l => /while\s+/i.test(l));
+    return {
+      title: 'HOW',
+      explanation: 'A while loop repeats as long as its condition remains true. The loop checks the condition before each iteration, and stops when the condition becomes false.',
+      thinking: 'Ask yourself: What condition controls the loop? What will change inside the loop to eventually make it false? How many iterations might this take? What happens if the condition never becomes false?',
+      code: { lines, highlightIndex: highlightIdx >= 0 ? highlightIdx : 0 },
+      practice: 'Try changing the condition value. How does that affect how many times the loop runs?'
+    };
+  }
+  if (/\w+\s*=\s*[\d"\[']/i.test(codeText)) {
+    highlightIdx = lines.findIndex(l => /\w+\s*=\s*[\d"\[']/i.test(l));
+    return {
+      title: 'HOW',
+      explanation: 'Variable assignment stores a value in memory using a named label. The value can be a number, text, list, or any other data type. Variables can be reassigned to new values as the program runs.',
+      thinking: 'Ask yourself: What meaningful name should this variable have? What type of data am I storing? Will this value change later, or stay constant? Will I need this value elsewhere in the code?',
+      code: { lines, highlightIndex: highlightIdx >= 0 ? highlightIdx : 0 },
+      practice: 'Try changing the variable value and observe how it affects the rest of the code output.'
+    };
+  }
+  return {
+    title: 'HOW',
+    explanation: 'Review your reasoning to understand how the code connects to your thought process.',
+    thinking: 'Consider how your reasoning maps to the Python constructs in the generated code.',
+    code: { lines, highlightIndex: 0 },
+    practice: 'Study the code and try explaining each line in your own words.'
+  };
 }
 
 function buildFixInsight(result, primary) {
@@ -91,15 +223,59 @@ export function AccordionSection({ icon, label, title, content, expanded, onTogg
   );
 }
 
+export function W3HInsightSection({ insight }) {
+  return (
+    <div className="w3h-insight">
+      {insight.sections.map((section, i) => (
+        <div className="w3h-insight-part" key={i}>
+          <span className="w3h-insight-label">{section.label}</span>
+          <p>{section.content}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function HowLearningSection({ insight }) {
+  const { explanation, thinking, code, practice } = insight;
+  return (
+    <div className="how-learning">
+      <div className="how-learning-block">
+        <span className="how-learning-label">🧩 How It Works</span>
+        <p>{explanation}</p>
+      </div>
+      <div className="how-learning-block">
+        <span className="how-learning-label">🧠 How to Think</span>
+        <p>{thinking}</p>
+      </div>
+      <div className="how-learning-block">
+        <span className="how-learning-label">💻 How to Write It</span>
+        <div className="w3h-code-block">
+          {code.lines.map((line, i) => (
+            <div key={i} className={`w3h-code-line${i === code.highlightIndex ? ' highlight' : ''}`}>
+              <span className="w3h-code-num">{i + 1}</span>
+              <span className="w3h-code-text">{line || ' '}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="how-learning-block">
+        <span className="how-learning-label">🚀 Apply It Yourself</span>
+        <p>{practice}</p>
+      </div>
+    </div>
+  );
+}
+
 export function W3H({ result }) {
   const [expanded, setExpanded] = useState(null);
   const primary = result.abstractionMap?.[0];
   const codeText = result.generatedCode || '';
 
-  const whatReasoning = buildWhatReasoning(primary, result.reasoning);
-  const whyText = buildWhy(primary, result.promptFeedback, result.scenario);
-  const { whereText, whereLabel } = buildWhere(codeText);
-  const { codeLines, highlightIdx } = buildHow(codeText);
+  const what = buildWhatInsight(primary, result.reasoning, result);
+  const why = buildWhyInsight(primary, result.promptFeedback, result.scenario);
+  const where = buildWhereInsight(codeText);
+  const how = buildHowInsight(codeText, primary?.pattern);
   const needsFix = (result.promptScore != null && result.promptScore < 60) || (result.misconceptions && result.misconceptions.length > 0);
   const fixInsight = buildFixInsight(result, primary);
 
@@ -116,10 +292,10 @@ export function W3H({ result }) {
         W³H Learning Insight
       </div>
       <div className="w3h-sections">
-        <AccordionSection icon={<span className="w3h-dot blue" />} label="WHAT" title="Your Thinking Pattern" content={<p>{whatReasoning}</p>} expanded={expanded === 'what'} onToggle={() => toggle('what')} accent="blue" />
-        <AccordionSection icon={<span className="w3h-dot yellow" />} label="WHY" title="Context & Purpose" content={<p>{whyText}</p>} expanded={expanded === 'why'} onToggle={() => toggle('why')} accent="yellow" />
-        <AccordionSection icon={<span className="w3h-dot orange" />} label="WHERE" title="Code Mapping" content={<div className="w3h-where"><span className="w3h-where-label">{whereLabel}</span><p>{whereText}</p></div>} expanded={expanded === 'where'} onToggle={() => toggle('where')} accent="orange" />
-        <AccordionSection icon={<span className="w3h-dot red" />} label="HOW" title="Real Code View" content={<div className="w3h-code-block">{codeLines.map((line, i) => (<div key={i} className={`w3h-code-line${i === highlightIdx ? ' highlight' : ''}`}><span className="w3h-code-num">{i + 1}</span><span className="w3h-code-text">{line || ' '}</span></div>))}</div>} expanded={expanded === 'how'} onToggle={() => toggle('how')} accent="red" dark />
+        <AccordionSection icon={<span className="w3h-dot blue" />} label="WHAT" title="Your Thinking Pattern" content={<W3HInsightSection insight={what} />} expanded={expanded === 'what'} onToggle={() => toggle('what')} accent="blue" />
+        <AccordionSection icon={<span className="w3h-dot yellow" />} label="WHY" title="Context & Purpose" content={<W3HInsightSection insight={why} />} expanded={expanded === 'why'} onToggle={() => toggle('why')} accent="yellow" />
+        <AccordionSection icon={<span className="w3h-dot orange" />} label="WHERE" title="Code Mapping" content={<W3HInsightSection insight={where} />} expanded={expanded === 'where'} onToggle={() => toggle('where')} accent="orange" />
+        <AccordionSection icon={<span className="w3h-dot red" />} label="HOW" title="Real Code View" content={<HowLearningSection insight={how} />} expanded={expanded === 'how'} onToggle={() => toggle('how')} accent="red" dark />
       </div>
       {needsFix && fixInsight && (
         <div className="w3h-fix-insight">
@@ -201,30 +377,38 @@ export function VoiceInput({ value, onChange }) {
 }
 
 export function Result({ result, onQuizStart }) {
+  if (!result || typeof result !== 'object') {
+    return <div className="empty"><p>No result available.</p></div>;
+  }
+
+  const abstractionMap = result.abstractionMap || [];
+  const promptFeedback = result.promptFeedback || [];
+  const misconceptions = result.misconceptions || [];
+
   return (
     <div className="result-stack">
-      <div className="score"><span>{result.promptScore}</span><small>Prompt maturity</small></div>
+      <div className="score"><span>{result.promptScore ?? '--'}</span><small>Prompt maturity</small></div>
       <div>
-        {result.abstractionMap.map((item) => (
+        {abstractionMap.map((item) => (
           <article className="mapping" key={item.pattern}>
-            <strong>{item.pattern}</strong>
-            <span>{item.pythonConcept}</span>
-            <p>{item.explanation}</p>
+            <strong>{item.pattern || 'Unknown pattern'}</strong>
+            <span>{item.pythonConcept || 'Unknown concept'}</span>
+            <p>{item.explanation || ''}</p>
           </article>
         ))}
       </div>
       <div className="code-block">
         <div><Code2 size={18} /> Generated Python</div>
-        <pre>{result.generatedCode}</pre>
-        <p>{result.codeExplanation}</p>
+        <pre>{result.generatedCode || 'No code generated yet.'}</pre>
+        <p>{result.codeExplanation || ''}</p>
       </div>
       <ul className="feedback">
-        {result.promptFeedback.map((item) => <li key={item}>{item}</li>)}
+        {promptFeedback.map((item) => <li key={item}>{item}</li>)}
       </ul>
-      {result.misconceptions.length > 0 && (
+      {misconceptions.length > 0 && (
         <div className="note">
           <strong>Misconception watch</strong>
-          {result.misconceptions.map((item) => <p key={item}>{item}</p>)}
+          {misconceptions.map((item) => <p key={item}>{item}</p>)}
         </div>
       )}
       <button className="primary quiz-trigger" onClick={() => onQuizStart && onQuizStart(result)}>
@@ -252,13 +436,13 @@ export function Analytics({ analytics }) {
 export function Roadmap({ roadmap }) {
   return (
     <div className="roadmap">
-      {roadmap.map((phase) => (
+      {(roadmap || []).map((phase) => (
         <article key={phase.phase}>
           <strong>{phase.phase}</strong>
           <div>
             <h3>{phase.title}</h3>
             <p>{phase.summary}</p>
-            <small>{phase.items.join(' / ')}</small>
+            <small>{(phase.items || []).join(' / ')}</small>
           </div>
         </article>
       ))}
@@ -267,14 +451,15 @@ export function Roadmap({ roadmap }) {
 }
 
 export function SessionList({ sessions }) {
+  const safeSessions = sessions || [];
   return (
     <div className="sessions">
-      {sessions.length ? sessions.slice(0, 6).map((session) => (
+      {safeSessions.length ? safeSessions.slice(0, 6).map((session) => (
         <article key={session._id}>
           <Play size={16} />
           <div>
             <strong>{session.scenario?.title}</strong>
-            <span>{session.masterySignals.join(' / ')}</span>
+            <span>{(session.masterySignals || []).join(' / ')}</span>
           </div>
         </article>
       )) : <p>No sessions yet.</p>}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { generateQuestionPool, getReviewConcepts, getIncorrectQuestions } from '../utils/quizEngine';
-import { getScoreCategory, getScoreMessage, getPersonalizedFeedback, recommendNextScenario, getConceptAccuracyFromQuiz } from '../utils/quizScoring';
+import { getScoreCategory, getScoreMessage, getPersonalizedFeedback, recommendNextScenario, getConceptAccuracyFromQuiz, getConceptsToReview } from '../utils/quizScoring';
 
 const QUIZ_LENGTH = 7;
 const MAX_HEARTS = 3;

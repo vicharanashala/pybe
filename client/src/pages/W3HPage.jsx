@@ -4,7 +4,20 @@ import { PageHeader } from '../components/TopNavigation';
 import { W3H } from '../components/SharedComponents';
 
 export function W3HPage({ result, onTakeQuiz, onViewDashboard }) {
-  if (!result) {
+  if (!result || typeof result !== 'object') {
+    return (
+      <div className="page w3h-page">
+        <div className="empty-state">
+          <p>No W\u00b3H data available.</p>
+        </div>
+      </div>
+    );
+  }
+
+  const abstractionMap = result.abstractionMap || [];
+  const hasValidData = abstractionMap.length > 0 || result.generatedCode || (result.promptScore != null);
+
+  if (!hasValidData) {
     return (
       <div className="page w3h-page">
         <div className="empty-state">

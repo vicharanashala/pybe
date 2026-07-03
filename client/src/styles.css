@@ -1,3 +1,11 @@
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 :root {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #17201d;
@@ -10,6 +18,24 @@
 
 body {
   margin: 0;
+  width: 100%;
+  min-width: 0;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+  min-width: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
 }
 
 button,
@@ -21,20 +47,9 @@ select {
 
 .app-shell {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 320px 1fr;
-}
-
-.sidebar {
-  background: #16231f;
-  color: #f8f4ec;
-  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  width: 100%;
 }
 
 .brand {
@@ -79,12 +94,6 @@ select {
   padding: 10px 12px;
   background: #fffaf2;
   color: #18221f;
-}
-
-.sidebar select {
-  background: #24342f;
-  border-color: #385149;
-  color: #f8f4ec;
 }
 
 .scenario-list {
@@ -162,16 +171,21 @@ select {
 .hero-stats {
   display: flex;
   gap: 12px;
+  flex-wrap: wrap;
+  min-width: 0;
 }
 
 .hero-stats span {
-  min-width: 88px;
+  min-width: 80px;
+  max-width: 120px;
+  flex: 1;
   background: rgba(255,255,255,.14);
   border: 1px solid rgba(255,255,255,.22);
   border-radius: 8px;
   padding: 14px;
   font-size: 1.7rem;
   font-weight: 800;
+  min-width: 0;
 }
 
 .hero-stats small {
@@ -444,6 +458,78 @@ textarea {
   font-size: .9rem;
   color: #4a5a52;
   line-height: 1.65;
+}
+
+.w3h-two-part {
+  display: grid;
+  gap: 0;
+}
+
+.w3h-part {
+  padding: 12px 0;
+  border-bottom: 1px solid #ede8de;
+}
+
+.w3h-part:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.w3h-part:first-child {
+  padding-top: 0;
+}
+
+.w3h-part-label {
+  display: block;
+  font-size: .7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #66730a;
+  margin-bottom: 6px;
+}
+
+.w3h-part p {
+  margin: 0;
+  font-size: .9rem;
+  color: #2a3a35;
+  line-height: 1.6;
+}
+
+.w3h-insight {
+  display: grid;
+  gap: 0;
+}
+
+.w3h-insight-part {
+  padding: 10px 0;
+  border-bottom: 1px solid #ede8de;
+}
+
+.w3h-insight-part:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.w3h-insight-part:first-child {
+  padding-top: 0;
+}
+
+.w3h-insight-label {
+  display: block;
+  font-size: .7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: #66730a;
+  margin-bottom: 5px;
+}
+
+.w3h-insight-part p {
+  margin: 0;
+  font-size: .9rem;
+  color: #2a3a35;
+  line-height: 1.6;
 }
 
 .w3h-where {
@@ -1169,6 +1255,7 @@ meter {
   align-items: center;
   gap: 24px;
   border-bottom: 1px solid #385149;
+  width: 100%;
 }
 
 .top-nav-brand {
@@ -1178,13 +1265,22 @@ meter {
   color: #d8f07c;
   font-weight: 800;
   font-size: 1.1rem;
+  flex-shrink: 0;
+  min-width: 0;
 }
 
 .top-nav-steps {
   display: flex;
   gap: 4px;
   flex: 1;
+  min-width: 0;
   overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.top-nav-steps::-webkit-scrollbar {
+  display: none;
 }
 
 .nav-step {
@@ -1241,6 +1337,8 @@ meter {
   gap: 12px;
   font-size: .85rem;
   font-weight: 700;
+  flex-shrink: 0;
+  min-width: 0;
 }
 
 .nav-xp {
@@ -1306,11 +1404,14 @@ meter {
 .page-content {
   padding: 24px;
   min-height: calc(100vh - 60px);
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .page {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  min-width: 0;
 }
 
 .page-header {
@@ -1343,19 +1444,60 @@ meter {
 /* Explorer Page */
 .explorer-layout {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 320px minmax(0, 1fr);
   gap: 24px;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .explorer-sidebar {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-width: 0;
+  width: 320px;
+  max-width: 320px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .explorer-layout {
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .explorer-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .explorer-sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .explorer-sidebar select {
+    flex: 1 1 160px;
+  }
+
+  .scenario-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 300px;
+  }
 }
 
 .explorer-main {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 24px;
+  min-width: 0;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .explorer-hero {
@@ -1369,12 +1511,20 @@ meter {
   justify-content: space-between;
   align-items: flex-end;
   gap: 24px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.explorer-hero > div {
+  min-width: 0;
 }
 
 .explorer-hero h1 {
   color: #fff;
   margin: 8px 0 0;
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  max-width: 600px;
 }
 
 .hero-tag {
@@ -1390,6 +1540,15 @@ meter {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 640px) {
+  .explorer-dashboard {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Workspace Page */
@@ -1578,6 +1737,7 @@ meter {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  width: 100%;
 }
 
 .dashboard-next {
@@ -2121,30 +2281,8 @@ meter {
   }
 }
 
-@media (max-width: 1050px) {
-  .app-shell {
-    grid-template-columns: 1fr;
-  }
-
-  .sidebar {
-    position: static;
-    height: auto;
-  }
-
-  .main-grid,
-  .dashboard {
-    grid-template-columns: 1fr;
-  }
-
-  .hero {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-}
-
 @media (max-width: 640px) {
-  .workspace,
-  .sidebar {
+  .workspace {
     padding: 16px;
   }
 
@@ -2159,7 +2297,8 @@ meter {
 
   .hero-stats span {
     flex: 1;
-    min-width: 96px;
+    min-width: 0;
+    max-width: 120px;
   }
 
   .analytics-list div {
@@ -2486,84 +2625,13 @@ meter {
 }
 
 /* =============================================
-   RESPONSIVE LAYOUT STABILITY SYSTEM
+   RESPONSIVE LAYOUT SYSTEM
    ============================================= */
 
-/* Task 1: Global container */
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-/* Task 2: Fluid grid - replace rigid layouts */
-.main-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr) minmax(240px, 0.7fr);
-  gap: 20px;
-  align-items: start;
-  max-width: 100%;
-  overflow: hidden;
-}
-
-.dashboard {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  align-items: start;
-  max-width: 100%;
-}
-
-.dashboard-panels {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.dashboard-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-/* Task 3: Card content safety */
-.panel,
-.card,
-.result-card,
-.scenario-context-card,
-.workspace-input-card,
-.passport-card {
-  max-width: 100%;
-  overflow-wrap: break-word;
-  overflow: hidden;
-}
-
-/* Title clamp for long text */
-h1, h2, h3 {
-  overflow-wrap: break-word;
-}
-
-.title-clamp {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* Task 4: Breakpoint fixes - 1024px tablet/laptop congestion zone */
 @media (max-width: 1200px) {
   .container {
     max-width: 100%;
     padding: 0 20px;
-  }
-
-  .main-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .main-grid > *:last-child {
-    grid-column: 1 / -1;
   }
 }
 
@@ -2573,15 +2641,7 @@ h1, h2, h3 {
     padding: 0 16px;
   }
 
-  .dashboard {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .dashboard-panels {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .dashboard-stats {
+  .explorer-dashboard {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -2597,26 +2657,18 @@ h1, h2, h3 {
     grid-template-columns: 1fr;
   }
 
-  .mentor-actions,
-  .w3h-actions {
-    position: static;
-  }
-
   .top-nav {
     padding: 10px 16px;
     gap: 12px;
   }
+
+  .mentor-actions,
+  .w3h-actions {
+    position: static;
+  }
 }
 
 @media (max-width: 900px) {
-  .main-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .main-grid > *:last-child {
-    grid-column: auto;
-  }
-
   .top-nav-steps {
     gap: 2px;
   }
@@ -2631,61 +2683,75 @@ h1, h2, h3 {
   }
 }
 
-/* Task 5: Section vertical rhythm */
-section,
-.page-section,
-.explorer-main,
-.workspace-left,
-.workspace-right,
-.mentor-insights,
-.w3h-main,
-.summary-main,
-.dashboard-layout,
-.passport-main {
-  margin-bottom: 32px;
-}
-
-.panel,
-.card {
-  margin-bottom: 16px;
-}
-
-/* Task 6: Flexbox safety */
-.top-nav,
-.top-nav-stats,
-.top-nav-steps,
-.hero,
-.hero-stats,
-.summary-score-panel,
-.summary-stats,
-.summary-actions,
-.mentor-actions,
-.w3h-actions,
-.result-continue,
-.form-actions-row,
-.result-score-card,
-.passport-stats-grid,
-.badges-row {
-  flex-wrap: wrap;
-}
-
-/* Prevent fixed-width overflow inside flex */
-.nav-step,
-.nav-stat,
-.top-nav-brand {
-  flex-shrink: 0;
-  max-width: 100%;
-}
-
-/* Task 7: Visual breathing room - minimum padding enforcement */
-.panel,
-.card,
-.workspace-input-card,
-.scenario-context-card {
-  padding: 16px;
-}
-
 @media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+
+  .app-shell {
+    min-height: 100vh;
+  }
+
+  .top-nav {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 56px;
+    padding: 8px 16px;
+    gap: 8px;
+  }
+
+  .top-nav-stats {
+    width: 100%;
+    justify-content: flex-end;
+  }
+
+  .top-nav-brand {
+    flex-shrink: 0;
+  }
+
+  .nav-step-label {
+    display: none;
+  }
+
+  .top-nav-steps {
+    overflow-x: auto;
+  }
+
+  .page-content {
+    padding: 16px;
+  }
+
+  .page-breadcrumb {
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    overflow-x: auto;
+  }
+
+  .explorer-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .explorer-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .mentor-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .w3h-layout {
+    grid-template-columns: 1fr;
+  }
+
   .dashboard {
     grid-template-columns: 1fr;
   }
@@ -2698,23 +2764,26 @@ section,
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .top-nav {
+  .passport-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .passport-sidebar {
+    flex-direction: row;
     flex-wrap: wrap;
-    height: auto;
-    min-height: 56px;
   }
 
-  .top-nav-stats {
-    width: 100%;
-    justify-content: flex-end;
+  .passport-sidebar > .passport-card {
+    flex: 1 1 200px;
   }
 
-  .nav-step-label {
-    display: none;
+  .stamps-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
   }
 
-  .workspace {
-    padding: 16px;
+  .explorer-hero {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .panel {
@@ -2726,8 +2795,8 @@ section,
     text-align: center;
   }
 
-  .result-score-info {
-    text-align: center;
+  .w3h-panel {
+    position: static;
   }
 }
 
@@ -2747,41 +2816,25 @@ section,
   .stat-value {
     font-size: 1.5rem;
   }
-}
-
-/* =============================================
-   EXISTING RESPONSIVE (preserved)
-   ============================================= */
-@media (max-width: 768px) {
-  .passport-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .passport-sidebar {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  .passport-sidebar > .passport-card {
-    flex: 1 1 200px;
-  }
-
-  .stamps-grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  }
-}
-
-@media (max-width: 480px) {
-  .passport-page {
-    padding: 0 0.75rem 2rem;
-  }
 
   .stamps-grid {
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
     gap: 0.75rem;
   }
 
+  .passport-page {
+    padding: 0 0.75rem 2rem;
+  }
+
   .passport-section {
     padding: 1rem;
+  }
+
+  .quiz-card {
+    padding: 20px;
+  }
+
+  .quiz-question {
+    font-size: 1.1rem;
   }
 }
