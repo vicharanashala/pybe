@@ -1,29 +1,60 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import {
-  Brain,
-  ChartNoAxesCombined,
-  Code2,
-  Compass,
-  Lightbulb,
-  MessageSquareText,
-  Play,
-  Route,
-  Search,
-  Send,
-  Sparkles
-} from 'lucide-react';
+import { ChevronRight, Home } from 'lucide-react';
 import './styles.css';
+import { saveSessionState, loadSessionState } from './utils/sessionRecovery';
+import { loadPassport, savePassport, updatePassportFromSession, updateStampAccuracy, PYTHON_CONCEPTS } from './utils/passport';
+import { TopNav } from './components/TopNavigation';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { ExplorerPage, WorkspacePage, SummaryPage, MentorPage, W3HPage, QuizPage, DashboardPage, PassportPage } from './pages';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
+const JOURNEY_STEPS = [
+  { id: 'explorer', label: 'Scenario Explorer' },
+  { id: 'workspace', label: 'Learning Workspace' },
+  { id: 'summary', label: 'Session Summary' },
+  { id: 'mentor', label: 'AI Mentor' },
+  { id: 'w3h', label: 'W\u00b3H Guide' },
+  { id: 'quiz', label: 'Quiz' },
+  { id: 'dashboard', label: 'Dashboard' },
+  { id: 'passport', label: 'Passport' },
+];
+
 async function api(path, options) {
-  const response = await fetch(`${API_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
-    ...options
-  });
-  if (!response.ok) throw new Error(await response.text());
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}${path}`, {
+      headers: { 'Content-Type': 'application/json' },
+      ...options
+    });
+    if (!response.ok) throw new Error(await response.text());
+    return response.json();
+  } catch (err) {
+    console.warn('[API Error]', path, err.message || err);
+    throw err;
+  }
+}
+
+function calculateXp(session) {
+  const base = 10;
+  const scoreBonus = Math.floor((session.promptScore || 0) / 10);
+  const conceptBonus = (session.abstractionMap || []).length * 3;
+  return base + scoreBonus + conceptBonus;
+}
+
+function calculateStreak() {
+  const today = new Date().toISOString().split('T')[0];
+  const lastActive = localStorage.getItem('pybe_last_active');
+  const storedStreak = parseInt(localStorage.getItem('pybe_streak') || '0', 10);
+
+  if (!lastActive) return 1;
+
+  const diffMs = new Date(today).getTime() - new Date(lastActive).getTime();
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffDays === 0) return storedStreak;
+  if (diffDays === 1) return storedStreak + 1;
+  return 1;
 }
 
 function App() {
@@ -37,28 +68,91 @@ function App() {
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [xp, setXp] = useState(() => parseInt(localStorage.getItem('pybe_xp') || '0', 10));
+  const [streak, setStreak] = useState(() => calculateStreak());
+  const [view, setView] = useState('explorer');
+  const [quizData, setQuizData] = useState(null);
+  const [journeyStep, setJourneyStep] = useState(0);
+  const [viewedScenarios, setViewedScenarios] = useState(new Set());
+  const [sessionRestored, setSessionRestored] = useState(false);
+  const [passport, setPassport] = useState(() => loadPassport());
+  const [newlyUnlocked, setNewlyUnlocked] = useState([]);
+  const [showBadgeCelebration, setShowBadgeCelebration] = useState(null);
+  const [showStampCelebration, setShowStampCelebration] = useState(null);
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
   async function refresh() {
-    const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
-    const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
-      api(`/scenarios?${params}`),
-      api('/sessions'),
-      api('/analytics'),
-      api('/roadmap')
-    ]);
-    setScenarios(scenarioData);
-    setSessions(sessionData);
-    setAnalytics(analyticsData);
-    setRoadmap(roadmapData);
-    setSelected((current) => current || scenarioData[0] || null);
-    setLoading(false);
+    try {
+      const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
+      const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
+        api(`/scenarios?${params}`),
+        api('/sessions'),
+        api('/analytics'),
+        api('/roadmap')
+      ]);
+      setScenarios(scenarioData || []);
+      setSessions(sessionData || []);
+      setAnalytics(analyticsData || { sessionCount: 0, averagePromptScore: 0, conceptCounts: {} });
+      setRoadmap(roadmapData || []);
+      setSelected((current) => current || scenarioData?.[0] || null);
+    } catch (err) {
+      console.warn('[Refresh] API unavailable, showing offline state:', err.message || err);
+      setScenarios([]);
+      setSessions([]);
+      setAnalytics({ sessionCount: 0, averagePromptScore: 0, conceptCounts: {} });
+      setRoadmap([]);
+    } finally {
+      setLoading(false);
+
+      if (!sessionRestored) {
+        const saved = loadSessionState(null);
+        if (saved) {
+          if (saved.xp !== undefined) {
+            setXp(saved.xp);
+            localStorage.setItem('pybe_xp', String(saved.xp));
+          }
+          if (saved.streak !== undefined) {
+            setStreak(saved.streak);
+            localStorage.setItem('pybe_streak', String(saved.streak));
+          }
+          if (saved.view && ['explorer', 'workspace', 'summary', 'mentor', 'w3h', 'quiz', 'dashboard'].includes(saved.view)) {
+            setView(saved.view);
+            if (saved.view !== 'explorer') {
+              if (saved.selected) setSelected(saved.selected);
+              if (saved.activeResult) setActiveResult(saved.activeResult);
+              if (saved.journeyStep !== undefined) setJourneyStep(saved.journeyStep);
+              if (saved.form) setForm(saved.form);
+              if (saved.quizData) setQuizData(saved.quizData);
+            }
+          }
+        }
+        setSessionRestored(true);
+      }
+    }
   }
 
   useEffect(() => {
-    refresh().catch(console.error);
-  }, [filters.q, filters.difficulty, filters.concept]);
+    refresh().catch((err) => {
+      console.error('[Refresh] Unexpected error:', err);
+      setLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!loading && sessionRestored) {
+      saveSessionState({
+        selected,
+        activeResult,
+        journeyStep,
+        view,
+        quizData,
+        form,
+        xp,
+        streak
+      });
+    }
+  }, [selected, activeResult, journeyStep, view, quizData, form, xp, streak, loading, sessionRestored]);
 
   async function submitSession(event) {
     event.preventDefault();
@@ -69,8 +163,35 @@ function App() {
         method: 'POST',
         body: JSON.stringify({ ...form, scenarioId: selected._id })
       });
-      setActiveResult(result);
+      const earnedXp = calculateXp(result);
+      const newXp = xp + earnedXp;
+      setXp(newXp);
+      localStorage.setItem('pybe_xp', String(newXp));
+      const today = new Date().toISOString().split('T')[0];
+      const lastActive = localStorage.getItem('pybe_last_active');
+      const currentStreak = lastActive === today ? streak : calculateStreak();
+      localStorage.setItem('pybe_streak', String(currentStreak));
+      localStorage.setItem('pybe_last_active', today);
+      setStreak(currentStreak);
+      setActiveResult({ ...result, earnedXp, totalXp: newXp, streak: currentStreak });
       setForm({ ...form, reasoning: '', promptText: '', reflection: '' });
+
+      const existingStamps = Object.keys(passport.stamps || {});
+      const updatedPassport = updatePassportFromSession(passport, { ...result, scenario: selected, earnedXp }, Math.round(result.promptScore));
+      const newConcepts = (selected?.concepts || []).filter(c => !existingStamps.includes(c));
+      if (newConcepts.length > 0) {
+        setNewlyUnlocked(newConcepts);
+        updatedPassport.lastNewStamp = newConcepts[0];
+      }
+      setPassport(updatedPassport);
+      savePassport(updatedPassport);
+      if (updatedPassport.lastBadgeUnlocked) {
+        setShowBadgeCelebration(updatedPassport.lastBadgeUnlocked);
+      }
+      if (updatedPassport.lastNewStamp) {
+        setShowStampCelebration(PYTHON_CONCEPTS.find(c => c.id === updatedPassport.lastNewStamp));
+      }
+
       await refresh();
     } finally {
       setSubmitting(false);
@@ -79,225 +200,248 @@ function App() {
 
   if (loading) return <main className="loading">Loading PyBe...</main>;
 
+  function handleStartScenario(scenario) {
+    setSelected(scenario);
+    setActiveResult(null);
+    setView('workspace');
+    setJourneyStep(1);
+    setViewedScenarios(prev => new Set([...prev, scenario._id]));
+  }
+
+  function handleCompleteSession() {
+    setView('summary');
+    setJourneyStep(2);
+  }
+
+  function handleViewMentor() {
+    setView('mentor');
+    setJourneyStep(3);
+  }
+
+  function handleViewW3H() {
+    setView('w3h');
+    setJourneyStep(4);
+  }
+
+  function handleTakeQuiz() {
+    setQuizData({
+      session: activeResult,
+      scenario: selected,
+      difficulty: 1,
+      score: 0,
+      questionsSeen: 0,
+      concept: activeResult?.abstractionMap?.[0]?.pythonConcept || 'variables'
+    });
+    setView('quiz');
+    setJourneyStep(5);
+  }
+
+  function handleViewDashboard() {
+    setView('dashboard');
+    setJourneyStep(7);
+  }
+
+  function handleGoHome() {
+    setView('explorer');
+    setJourneyStep(0);
+    setActiveResult(null);
+  }
+
   return (
     <main className="app-shell">
-      <aside className="sidebar">
-        <div className="brand">
-          <Brain size={30} />
-          <div>
-            <strong>PyBe</strong>
-            <span>Scenario-first Python</span>
-          </div>
-        </div>
+      <TopNav view={view} setView={setView} xp={xp} streak={streak} journeyStep={journeyStep} />
 
-        <label className="search">
-          <Search size={18} />
-          <input
-            value={filters.q}
-            onChange={(event) => setFilters({ ...filters, q: event.target.value })}
-            placeholder="Search scenarios"
-          />
-        </label>
-
-        <select value={filters.difficulty} onChange={(event) => setFilters({ ...filters, difficulty: event.target.value })}>
-          <option value="">All levels</option>
-          <option>Beginner</option>
-          <option>Explorer</option>
-          <option>Builder</option>
-        </select>
-
-        <select value={filters.concept} onChange={(event) => setFilters({ ...filters, concept: event.target.value })}>
-          <option value="">All concepts</option>
-          {concepts.map((concept) => <option key={concept}>{concept}</option>)}
-        </select>
-
-        <div className="scenario-list">
-          {scenarios.map((scenario) => (
+      <div className="page-breadcrumb">
+        <button className="breadcrumb-home" onClick={handleGoHome}>
+          <Home size={14} /> Home
+        </button>
+        {JOURNEY_STEPS.filter(s => ['workspace', 'summary', 'mentor', 'w3h', 'quiz', 'dashboard'].includes(s.id)).map((step, idx) => (
+          <React.Fragment key={step.id}>
+            <ChevronRight size={14} />
             <button
-              key={scenario._id}
-              className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
+              className={`breadcrumb-step ${view === step.id ? 'active' : ''}`}
               onClick={() => {
-                setSelected(scenario);
-                setActiveResult(null);
+                if (step.id === 'dashboard') handleViewDashboard();
+                else if (step.id === 'mentor' && activeResult) handleViewMentor();
+                else if (step.id === 'w3h' && activeResult) handleViewW3H();
+                else if (step.id === 'quiz' && activeResult) handleTakeQuiz();
+                else if (step.id === 'summary' && activeResult) handleCompleteSession();
+                else if (step.id === 'workspace' && selected) setView('workspace');
               }}
+              disabled={
+                (step.id === 'workspace' && !selected) ||
+                (step.id === 'summary' && !activeResult) ||
+                (step.id === 'mentor' && !activeResult) ||
+                (step.id === 'w3h' && !activeResult) ||
+                (step.id === 'quiz' && !activeResult)
+              }
             >
-              <span>{scenario.difficulty}</span>
-              <strong>{scenario.title}</strong>
-              <small>{scenario.concepts.join(' / ')}</small>
+              {step.label}
             </button>
-          ))}
-        </div>
-      </aside>
+          </React.Fragment>
+        ))}
+      </div>
 
-      <section className="workspace">
-        <header className="hero">
-          <div>
-            <p>AI-native learning journey</p>
-            <h1>Learn Python by reasoning through real situations first.</h1>
-          </div>
-          <div className="hero-stats">
-            <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
-            <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
-            <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
-          </div>
-        </header>
-
-        <div className="main-grid">
-          <section className="panel learning-panel">
-            <div className="section-title">
-              <Compass size={20} />
-              <h2>{selected?.title}</h2>
-            </div>
-            <p className="context">{selected?.context}</p>
-            <div className="objective-row">
-              {selected?.objectives.map((item) => <span key={item}>{item}</span>)}
-            </div>
-            <form onSubmit={submitSession} className="learning-form">
-              <label>
-                Your reasoning
-                <textarea
-                  required
-                  value={form.reasoning}
-                  onChange={(event) => setForm({ ...form, reasoning: event.target.value })}
-                  placeholder={selected?.prompt}
-                />
-              </label>
-              <label>
-                Prompt you would give an AI mentor
-                <textarea
-                  value={form.promptText}
-                  onChange={(event) => setForm({ ...form, promptText: event.target.value })}
-                  placeholder="Explain my approach step by step, then show the Python concept and code..."
-                />
-              </label>
-              <label>
-                Reflection
-                <textarea
-                  value={form.reflection}
-                  onChange={(event) => setForm({ ...form, reflection: event.target.value })}
-                  placeholder="What did you notice about your thinking?"
-                />
-              </label>
-              <button className="primary" disabled={submitting}>
-                <Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}
-              </button>
-            </form>
-          </section>
-
-          <section className="panel result-panel">
-            <div className="section-title">
-              <Sparkles size={20} />
-              <h2>AI Mentor Output</h2>
-            </div>
-            {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
-          </section>
-        </div>
-
-        <section className="dashboard">
-          <div className="panel">
-            <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Learner Analytics</h2></div>
-            <Analytics analytics={analytics} />
-          </div>
-          <div className="panel">
-            <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
-            <Roadmap roadmap={roadmap} />
-          </div>
-          <div className="panel">
-            <div className="section-title"><MessageSquareText size={20} /><h2>Recent Sessions</h2></div>
-            <SessionList sessions={sessions} />
-          </div>
-        </section>
+      <section className="page-content">
+        {view === 'quiz' && quizData ? (
+          <QuizPage
+            quizData={quizData}
+            setQuizData={setQuizData}
+            xp={xp}
+            setXp={setXp}
+            onExit={handleViewDashboard}
+            scenarios={scenarios}
+            onSelectScenario={(scenario) => {
+              setSelected(scenario);
+              setActiveResult(null);
+              setView('explorer');
+              setJourneyStep(0);
+            }}
+            onQuizComplete={(conceptAccuracies) => {
+              const previousStamps = Object.keys(passport.stamps || {});
+              const updated = updateStampAccuracy(passport, conceptAccuracies);
+              const newlyMastered = Object.keys(updated.stamps).filter(id =>
+                !previousStamps.includes(id) || (updated.stamps[id].status === 'mastered' && passport.stamps[id]?.status !== 'mastered')
+              );
+              setNewlyUnlocked(newlyMastered);
+              setPassport(updated);
+              savePassport(updated);
+            }}
+          />
+        ) : view === 'explorer' ? (
+          <ExplorerPage
+            scenarios={scenarios}
+            selected={selected}
+            filters={filters}
+            setFilters={setFilters}
+            concepts={concepts}
+            onSelectScenario={handleStartScenario}
+            analytics={analytics}
+            roadmap={roadmap}
+            sessions={sessions}
+          />
+        ) : view === 'workspace' ? (
+          <WorkspacePage
+            selected={selected}
+            form={form}
+            setForm={setForm}
+            submitting={submitting}
+            onSubmit={submitSession}
+            onComplete={handleCompleteSession}
+            onViewMentor={handleViewMentor}
+            activeResult={activeResult}
+          />
+        ) : view === 'summary' ? (
+          <SummaryPage
+            result={activeResult}
+            selected={selected}
+            onViewMentor={handleViewMentor}
+            onTakeQuiz={handleTakeQuiz}
+            onChangeScenario={() => setView('explorer')}
+          />
+        ) : view === 'mentor' ? (
+          <MentorPage
+            result={activeResult}
+            selected={selected}
+            onViewW3H={handleViewW3H}
+            onTakeQuiz={handleTakeQuiz}
+          />
+        ) : view === 'w3h' ? (
+          <W3HPage
+            result={activeResult}
+            onTakeQuiz={handleTakeQuiz}
+            onViewDashboard={handleViewDashboard}
+          />
+        ) : view === 'dashboard' ? (
+          <DashboardPage
+            analytics={analytics}
+            roadmap={roadmap}
+            sessions={sessions}
+            xp={xp}
+            streak={streak}
+            passport={passport}
+            onSelectScenario={(scenario) => {
+              setSelected(scenario || null);
+              setActiveResult(null);
+              setView('explorer');
+              setJourneyStep(0);
+            }}
+            onOpenPassport={() => setView('passport')}
+          />
+        ) : view === 'passport' ? (
+          <PassportPage
+            passport={passport}
+            xp={xp}
+            streak={streak}
+            sessions={sessions}
+            onClose={() => setView('dashboard')}
+            onDismissBadge={() => setShowBadgeCelebration(null)}
+            onDismissStamp={() => setShowStampCelebration(null)}
+            newlyUnlocked={newlyUnlocked}
+          />
+        ) : null}
       </section>
+
+      {showBadgeCelebration && (
+        <BadgeCelebration
+          badge={showBadgeCelebration}
+          onClose={() => setShowBadgeCelebration(null)}
+        />
+      )}
+      {showStampCelebration && (
+        <StampCelebration
+          concept={showStampCelebration}
+          onClose={() => setShowStampCelebration(null)}
+        />
+      )}
     </main>
   );
 }
 
-function EmptyResult() {
+function BadgeCelebration({ badge, onClose }) {
   return (
-    <div className="empty">
-      <Lightbulb size={38} />
-      <p>Submit reasoning to see abstraction mapping, Python code, prompt feedback, and misconception signals.</p>
-    </div>
-  );
-}
-
-function Result({ result }) {
-  return (
-    <div className="result-stack">
-      <div className="score"><span>{result.promptScore}</span><small>Prompt maturity</small></div>
-      <div>
-        {result.abstractionMap.map((item) => (
-          <article className="mapping" key={item.pattern}>
-            <strong>{item.pattern}</strong>
-            <span>{item.pythonConcept}</span>
-            <p>{item.explanation}</p>
-          </article>
-        ))}
-      </div>
-      <div className="code-block">
-        <div><Code2 size={18} /> Generated Python</div>
-        <pre>{result.generatedCode}</pre>
-        <p>{result.codeExplanation}</p>
-      </div>
-      <ul className="feedback">
-        {result.promptFeedback.map((item) => <li key={item}>{item}</li>)}
-      </ul>
-      {result.misconceptions.length > 0 && (
-        <div className="note">
-          <strong>Misconception watch</strong>
-          {result.misconceptions.map((item) => <p key={item}>{item}</p>)}
+    <div className="celebration-overlay" onClick={onClose}>
+      <div className="celebration-modal">
+        <div className="celebration-sparkles">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div key={i} className="sparkle" style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 1}s`,
+              backgroundColor: ['#d8f07c', '#4a9a20', '#f59e0b', '#3b82f6', '#ef4444', '#a855f7'][Math.floor(Math.random() * 6)]
+            }} />
+          ))}
         </div>
-      )}
-    </div>
-  );
-}
-
-function Analytics({ analytics }) {
-  const concepts = Object.entries(analytics?.conceptCounts || {});
-  return (
-    <div className="analytics-list">
-      {concepts.length ? concepts.map(([name, count]) => (
-        <div key={name}>
-          <span>{name}</span>
-          <meter min="0" max="10" value={count}></meter>
-          <strong>{count}</strong>
+        <div className="celebration-content">
+          <h2>Congratulations!</h2>
+          <p>You earned</p>
+          <div className="celebration-badge">{badge.icon}</div>
+          <h3>{badge.name} {badge.title}</h3>
+          <p className="celebration-subtitle">Keep learning to unlock more badges!</p>
+          <button className="primary" onClick={onClose}>Continue</button>
         </div>
-      )) : <p>No learning sessions yet.</p>}
+      </div>
     </div>
   );
 }
 
-function Roadmap({ roadmap }) {
+function StampCelebration({ concept, onClose }) {
   return (
-    <div className="roadmap">
-      {roadmap.map((phase) => (
-        <article key={phase.phase}>
-          <strong>{phase.phase}</strong>
-          <div>
-            <h3>{phase.title}</h3>
-            <p>{phase.summary}</p>
-            <small>{phase.items.join(' / ')}</small>
-          </div>
-        </article>
-      ))}
+    <div className="celebration-overlay stamp-celebration" onClick={onClose}>
+      <div className="celebration-modal small">
+        <div className="stamp-appear">
+          <div className="stamp-anim-icon">{concept.icon}</div>
+        </div>
+        <h3>New Stamp Unlocked!</h3>
+        <p><strong>{concept.name}</strong></p>
+        <small>{concept.description}</small>
+        <button className="primary" onClick={onClose}>Collect</button>
+      </div>
     </div>
   );
 }
 
-function SessionList({ sessions }) {
-  return (
-    <div className="sessions">
-      {sessions.length ? sessions.slice(0, 6).map((session) => (
-        <article key={session._id}>
-          <Play size={16} />
-          <div>
-            <strong>{session.scenario?.title}</strong>
-            <span>{session.masterySignals.join(' / ')}</span>
-          </div>
-        </article>
-      )) : <p>No sessions yet.</p>}
-    </div>
-  );
-}
-
-createRoot(document.getElementById('root')).render(<App />);
+createRoot(document.getElementById('root')).render(
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>
+);
