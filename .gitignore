@@ -3,3 +3,7 @@ client/dist/
 .env
 npm-debug.log*
 .DS_Store
+*.zip
+REVIEW.md
+PULL_REQUEST.md
+*.log
