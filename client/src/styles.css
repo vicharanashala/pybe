@@ -433,86 +433,306 @@ textarea {
 
 .empty {
   min-height: 360px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   color: #68736f;
-  padding: 30px;
+  padding: 36px 28px;
+  gap: 14px;
+}
+
+.empty-icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #f0ece2;
+  border: 1px solid #ddd7cc;
+  display: grid;
+  place-items: center;
+  color: #8a9590;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.empty:hover .empty-icon-wrap {
+  transform: translateY(-4px);
+  background: #e7f2cb;
+  color: #5a7a1a;
+}
+
+.empty-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #3a4540;
+  margin: 0;
+}
+
+.empty-sub {
+  font-size: 0.84rem;
+  line-height: 1.65;
+  max-width: 300px;
+  margin: 0;
+  color: #79857f;
 }
 
 .result-stack {
   display: grid;
-  gap: 14px;
+  gap: 10px;
+}
+
+/* ── Mentor section card ─────────────────────────── */
+.mentor-section {
+  background: #faf8f3;
+  border: 1px solid #e4ddd2;
+  border-radius: 10px;
+  padding: 16px 18px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.mentor-section:hover {
+  box-shadow: 0 6px 22px rgba(40, 34, 23, 0.10);
+  transform: translateY(-2px);
+  border-color: #cdc7ba;
+}
+
+/* ── Section header label ────────────────────────── */
+.mentor-section-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  padding: 4px 10px 4px 8px;
+  background: rgba(23, 35, 31, 0.06);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #3d504a;
+}
+
+.mentor-section-header--warn {
+  background: rgba(215, 140, 0, 0.10);
+  color: #7a4f00;
+}
+
+/* ── Prompt Score ────────────────────────────────── */
+.score-section {
+  background: linear-gradient(135deg, #17231f 0%, #223329 100%);
+  border-color: #2e4038;
+  color: #fff;
+}
+
+.score-section .mentor-section-header {
+  background: rgba(216, 240, 124, 0.14);
+  color: #d8f07c;
+}
+
+.score-section:hover {
+  border-color: #4a6050;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
 }
 
 .score {
-  background: #17231f;
-  color: #fff;
-  border-radius: 8px;
-  padding: 18px;
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
+  gap: 20px;
 }
 
-.score span {
-  font-size: 3rem;
+.score-ring {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.score-number {
+  font-size: 3.2rem;
   font-weight: 900;
+  line-height: 1;
+  color: #d8f07c;
+  letter-spacing: -0.04em;
+}
+
+.score-denom {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(216, 240, 124, 0.55);
+}
+
+.score-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── Python Mapping ──────────────────────────────── */
+.mapping-list {
+  display: grid;
+  gap: 8px;
 }
 
 .mapping {
-  border-left: 4px solid #7b9f27;
-  padding: 10px 0 10px 12px;
+  border-left: 3px solid #7b9f27;
+  padding: 10px 12px;
+  background: #fff;
+  border-radius: 0 8px 8px 0;
+  transition: border-left-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
 }
 
-.mapping strong,
-.mapping span {
-  display: block;
+.mapping:hover {
+  border-left-color: #5a7a1a;
+  background: #f3faeb;
+  transform: translateX(3px);
 }
 
-.mapping span {
+.mapping-top {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
+}
+
+.mapping-pattern {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a2620;
+}
+
+.mapping-concept {
+  font-size: 0.78rem;
+  font-weight: 700;
   color: #66730a;
-  font-weight: 800;
-  margin: 4px 0;
+  background: #eef4c8;
+  border: 1px solid #d0dc8a;
+  border-radius: 999px;
+  padding: 2px 9px;
+  white-space: nowrap;
 }
 
+.mapping-explanation {
+  font-size: 0.85rem;
+  color: #53615c;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── Code Block ──────────────────────────────────── */
 .code-block {
   background: #111916;
   color: #e6f2eb;
   border-radius: 8px;
   overflow: hidden;
-}
-
-.code-block div {
-  padding: 12px 14px;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  background: #1f2d28;
+  border: 1px solid #1f2d28;
 }
 
 pre {
   margin: 0;
   padding: 16px;
   white-space: pre-wrap;
+  line-height: 1.6;
+  font-size: 0.84rem;
+  font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+}
+
+.code-explanation {
+  padding: 10px 16px 14px;
+  color: #a8c8b4;
+  font-size: 0.84rem;
   line-height: 1.55;
+  margin: 0;
+  border-top: 1px solid #1f2d28;
 }
 
-.code-block p {
-  padding: 0 16px 16px;
-  color: #cddbd5;
-}
-
+/* ── Prompt Feedback ─────────────────────────────── */
 .feedback {
-  padding-left: 20px;
-  color: #43504b;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
 }
 
+.feedback-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.875rem;
+  color: #3d504a;
+  line-height: 1.55;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.feedback-item:hover {
+  background: #f0ece2;
+}
+
+.feedback-icon {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: #7b9f27;
+}
+
+/* ── Note / Misconception Watch ──────────────────── */
 .note {
-  background: #fff2d9;
-  border: 1px solid #ebcd8e;
+  background: #fff8eb;
+  border: 1px solid #e8cc80;
   border-radius: 8px;
-  padding: 14px;
+  padding: 12px 14px;
+}
+
+.note-item {
+  font-size: 0.875rem;
+  color: #6b4b00;
+  line-height: 1.6;
+  margin: 0 0 6px;
+}
+
+.note-item:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Skeleton loader ─────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton {
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    #e8e3da 25%,
+    #f2ede4 50%,
+    #e8e3da 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.skeleton-score {
+  height: 96px;
+  border-radius: 10px;
+}
+
+.skeleton-code {
+  height: 120px;
+  border-radius: 10px;
+}
+
+.skeleton-line {
+  height: 14px;
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+.skeleton-wrap .mentor-section {
+  pointer-events: none;
 }
 
 .dashboard {

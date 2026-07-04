@@ -1,17 +1,20 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
+  ArrowRight,
   Brain,
   ChartNoAxesCombined,
   Code2,
   Compass,
+  GitBranch,
   Lightbulb,
   MessageSquareText,
   Play,
   Route,
   Search,
   Send,
-  Sparkles
+  Sparkles,
+  TriangleAlert
 } from 'lucide-react';
 import './styles.css';
 
@@ -207,7 +210,7 @@ function App() {
               <Sparkles size={20} />
               <h2>AI Mentor Output</h2>
             </div>
-            {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
+            {submitting ? <ResultSkeleton /> : !activeResult ? <EmptyResult /> : <Result result={activeResult} />}
           </section>
         </div>
 
@@ -233,8 +236,30 @@ function App() {
 function EmptyResult() {
   return (
     <div className="empty">
-      <Lightbulb size={38} />
-      <p>Submit reasoning to see abstraction mapping, Python code, prompt feedback, and misconception signals.</p>
+      <div className="empty-icon-wrap">
+        <Lightbulb size={32} />
+      </div>
+      <p className="empty-title">Your AI Mentor is ready</p>
+      <p className="empty-sub">Submit your reasoning above to receive a full abstraction mapping, generated Python code, prompt feedback, and misconception signals.</p>
+    </div>
+  );
+}
+
+function ResultSkeleton() {
+  return (
+    <div className="result-stack skeleton-wrap">
+      <div className="skeleton skeleton-score" />
+      <div className="mentor-section">
+        <div className="skeleton skeleton-line" style={{ width: '40%', marginBottom: 10 }} />
+        <div className="skeleton skeleton-line" />
+        <div className="skeleton skeleton-line" style={{ width: '75%' }} />
+      </div>
+      <div className="skeleton skeleton-code" />
+      <div className="mentor-section">
+        <div className="skeleton skeleton-line" style={{ width: '35%', marginBottom: 10 }} />
+        <div className="skeleton skeleton-line" />
+        <div className="skeleton skeleton-line" style={{ width: '80%' }} />
+      </div>
     </div>
   );
 }
@@ -242,30 +267,84 @@ function EmptyResult() {
 function Result({ result }) {
   return (
     <div className="result-stack">
-      <div className="score"><span>{result.promptScore}</span><small>Prompt maturity</small></div>
-      <div>
-        {result.abstractionMap.map((item) => (
-          <article className="mapping" key={item.pattern}>
-            <strong>{item.pattern}</strong>
-            <span>{item.pythonConcept}</span>
-            <p>{item.explanation}</p>
-          </article>
-        ))}
+
+      {/* ── Prompt Score ───────────────────────── */}
+      <div className="mentor-section score-section">
+        <div className="mentor-section-header">
+          <Sparkles size={14} />
+          <span>Prompt Score</span>
+        </div>
+        <div className="score">
+          <div className="score-ring">
+            <span className="score-number">{(result.promptScore / 10).toFixed(1)}</span>
+            <small className="score-denom">/10</small>
+          </div>
+          <small className="score-label">Prompt maturity</small>
+        </div>
       </div>
-      <div className="code-block">
-        <div><Code2 size={18} /> Generated Python</div>
-        <pre>{result.generatedCode}</pre>
-        <p>{result.codeExplanation}</p>
+
+      {/* ── Python Mapping ─────────────────────── */}
+      <div className="mentor-section">
+        <div className="mentor-section-header">
+          <GitBranch size={14} />
+          <span>Python Mapping</span>
+        </div>
+        <div className="mapping-list">
+          {result.abstractionMap.map((item) => (
+            <article className="mapping" key={item.pattern}>
+              <div className="mapping-top">
+                <strong className="mapping-pattern">{item.pattern}</strong>
+                <span className="mapping-concept">{item.pythonConcept}</span>
+              </div>
+              <p className="mapping-explanation">{item.explanation}</p>
+            </article>
+          ))}
+        </div>
       </div>
-      <ul className="feedback">
-        {result.promptFeedback.map((item) => <li key={item}>{item}</li>)}
-      </ul>
+
+      {/* ── Generated Python ───────────────────── */}
+      <div className="mentor-section">
+        <div className="mentor-section-header">
+          <Code2 size={14} />
+          <span>Generated Python</span>
+        </div>
+        <div className="code-block">
+          <pre>{result.generatedCode}</pre>
+          <p className="code-explanation">{result.codeExplanation}</p>
+        </div>
+      </div>
+
+      {/* ── Prompt Feedback ────────────────────── */}
+      <div className="mentor-section">
+        <div className="mentor-section-header">
+          <MessageSquareText size={14} />
+          <span>Prompt Feedback</span>
+        </div>
+        <ul className="feedback">
+          {result.promptFeedback.map((item) => (
+            <li key={item} className="feedback-item">
+              <ArrowRight size={13} className="feedback-icon" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* ── Next Steps / Misconceptions ────────── */}
       {result.misconceptions.length > 0 && (
-        <div className="note">
-          <strong>Misconception watch</strong>
-          {result.misconceptions.map((item) => <p key={item}>{item}</p>)}
+        <div className="mentor-section">
+          <div className="mentor-section-header mentor-section-header--warn">
+            <TriangleAlert size={14} />
+            <span>Next Steps &amp; Misconception Watch</span>
+          </div>
+          <div className="note">
+            {result.misconceptions.map((item) => (
+              <p key={item} className="note-item">{item}</p>
+            ))}
+          </div>
         </div>
       )}
+
     </div>
   );
 }
