@@ -742,21 +742,280 @@ pre {
   align-items: start;
 }
 
-.analytics-list {
+/* ────────────────────────────────────────────────────────────
+   LEARNER ANALYTICS DASHBOARD
+──────────────────────────────────────────────────────────── */
+
+/* Root container */
+.analytics-root {
   display: grid;
-  gap: 10px;
+  gap: 18px;
 }
 
-.analytics-list div {
-  display: grid;
-  grid-template-columns: 1fr 110px 24px;
+/* ── Empty state ─────────────────────────────────────────── */
+.analytics-empty {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  padding: 32px 20px;
+  border: 1.5px dashed #cdc7ba;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #faf8f3 0%, #f5f1e8 100%);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.analytics-empty:hover {
+  border-color: #a8be68;
+  background: linear-gradient(135deg, #f4f9e8 0%, #edf5d0 100%);
+}
+
+.analytics-empty-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #f0ece2;
+  border: 1px solid #ddd7cc;
+  display: grid;
+  place-items: center;
+  color: #8a9590;
+  transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.analytics-empty:hover .analytics-empty-icon {
+  transform: translateY(-4px);
+  background: #e7f2cb;
+  color: #5a7a1a;
+}
+
+.analytics-empty-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #3a4540;
+  margin: 0;
+}
+
+.analytics-empty-sub {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  max-width: 280px;
+  margin: 0;
+  color: #79857f;
+}
+
+/* ── Stat summary cards ──────────────────────────────────── */
+.analytics-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 10px;
 }
 
-meter {
-  width: 100%;
+.analytics-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #faf8f3;
+  border: 1px solid #e4ddd2;
+  border-radius: 12px;
+  padding: 14px 14px;
+  transition:
+    transform 0.2s cubic-bezier(.22,1,.36,1),
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+  cursor: default;
 }
+
+.analytics-stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(40, 34, 23, 0.12);
+  border-color: #b8ca80;
+  background: #f5fae8;
+}
+
+.analytics-stat-card--score {
+  background: linear-gradient(135deg, #17231f 0%, #223329 100%);
+  border-color: #2e4038;
+  color: #fff;
+}
+
+.analytics-stat-card--score:hover {
+  border-color: #4a6050;
+  background: linear-gradient(135deg, #1c2c26 0%, #28403a 100%);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+}
+
+.analytics-stat-card--score strong {
+  color: #d8f07c;
+}
+
+.analytics-stat-card--score small {
+  color: rgba(255,255,255,0.5);
+}
+
+.analytics-stat-card strong {
+  display: block;
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #17231f;
+  letter-spacing: -0.03em;
+}
+
+.analytics-stat-card small {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #79857f;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-top: 3px;
+}
+
+.analytics-stat-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.analytics-stat-icon--green {
+  background: rgba(90,160,48,0.12);
+  color: #4a8a20;
+}
+
+.analytics-stat-icon--lime {
+  background: rgba(216,240,124,0.18);
+  color: #7a9c10;
+}
+
+/* ── Circular SVG progress ───────────────────────────────── */
+.circ-progress-wrap {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circ-progress-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.circ-value {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #d8f07c;
+  letter-spacing: -0.03em;
+}
+
+.circ-label {
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 1px;
+}
+
+/* ── Concept Mastery bars header ─────────────────────────── */
+.analytics-bars-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px 4px 8px;
+  background: rgba(23, 35, 31, 0.06);
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #3d504a;
+  width: fit-content;
+}
+
+/* ── Animated progress bars ──────────────────────────────── */
+@keyframes bar-grow {
+  from { width: 0; }
+  to   { width: var(--bar-width); }
+}
+
+.analytics-bars {
+  display: grid;
+  gap: 10px;
+}
+
+.analytics-bar-row {
+  display: grid;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s cubic-bezier(.22,1,.36,1);
+  cursor: default;
+}
+
+.analytics-bar-row:hover {
+  background: #f5fae8;
+  border-color: #cde080;
+  transform: translateX(3px);
+}
+
+.analytics-bar-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.analytics-bar-name {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #283028;
+  line-height: 1.3;
+}
+
+.analytics-bar-count {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #5a7a1a;
+  background: #eef4c8;
+  border: 1px solid #d0dc8a;
+  border-radius: 999px;
+  padding: 1px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.analytics-bar-track {
+  height: 7px;
+  background: rgba(23,35,31,0.07);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.analytics-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #5a9a30 0%, #9ad040 100%);
+  animation: bar-grow 0.9s cubic-bezier(.22,1,.36,1) both;
+  width: var(--bar-width);
+  box-shadow: 0 0 8px rgba(90,154,48,0.35);
+}
+
 
 .roadmap {
   display: grid;
@@ -866,7 +1125,7 @@ meter {
     min-width: 88px;
   }
 
-  .analytics-list div {
+  .analytics-stats {
     grid-template-columns: 1fr;
   }
 }

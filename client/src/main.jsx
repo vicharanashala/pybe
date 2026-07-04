@@ -14,7 +14,10 @@ import {
   Search,
   Send,
   Sparkles,
-  TriangleAlert
+  TriangleAlert,
+  TrendingUp,
+  Target,
+  BookOpen
 } from 'lucide-react';
 import './styles.css';
 
@@ -349,17 +352,110 @@ function Result({ result }) {
   );
 }
 
+function CircularProgress({ value, max = 10, size = 72, stroke = 6, label }) {
+  const radius = (size - stroke) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const pct = Math.min(Math.max(value / max, 0), 1);
+  const offset = circumference * (1 - pct);
+  return (
+    <div className="circ-progress-wrap">
+      <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
+        <circle
+          cx={size / 2} cy={size / 2} r={radius}
+          fill="none" stroke="rgba(23,35,31,0.08)" strokeWidth={stroke}
+        />
+        <circle
+          cx={size / 2} cy={size / 2} r={radius}
+          fill="none" stroke="#5a9a30" strokeWidth={stroke}
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+          strokeLinecap="round"
+          style={{ transition: 'stroke-dashoffset 1s cubic-bezier(.22,1,.36,1)' }}
+        />
+      </svg>
+      <div className="circ-progress-inner">
+        <span className="circ-value">{value}</span>
+        {label && <span className="circ-label">{label}</span>}
+      </div>
+    </div>
+  );
+}
+
 function Analytics({ analytics }) {
   const concepts = Object.entries(analytics?.conceptCounts || {});
-  return (
-    <div className="analytics-list">
-      {concepts.length ? concepts.map(([name, count]) => (
-        <div key={name}>
-          <span>{name}</span>
-          <meter min="0" max="10" value={count}></meter>
-          <strong>{count}</strong>
+  const maxCount = concepts.length ? Math.max(...concepts.map(([, c]) => c), 1) : 1;
+  const avgScore = analytics?.averagePromptScore ?? 0;
+  const sessionCount = analytics?.sessionCount ?? 0;
+  const scenarioCount = analytics?.scenarioCount ?? 0;
+
+  if (!concepts.length) {
+    return (
+      <div className="analytics-empty">
+        <div className="analytics-empty-icon">
+          <ChartNoAxesCombined size={28} />
         </div>
-      )) : <p>No learning sessions yet.</p>}
+        <p className="analytics-empty-title">No sessions yet</p>
+        <p className="analytics-empty-sub">Complete your first scenario to see concept mastery stats, progress bars, and score trends here.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="analytics-root">
+
+      {/* ── Summary stat cards ──────────────────── */}
+      <div className="analytics-stats">
+        <div className="analytics-stat-card">
+          <div className="analytics-stat-icon analytics-stat-icon--green">
+            <Target size={16} />
+          </div>
+          <div>
+            <strong>{sessionCount}</strong>
+            <small>Sessions</small>
+          </div>
+        </div>
+        <div className="analytics-stat-card">
+          <div className="analytics-stat-icon analytics-stat-icon--lime">
+            <BookOpen size={16} />
+          </div>
+          <div>
+            <strong>{scenarioCount}</strong>
+            <small>Scenarios</small>
+          </div>
+        </div>
+        <div className="analytics-stat-card analytics-stat-card--score">
+          <CircularProgress value={Number(avgScore)} max={10} size={56} stroke={5} />
+          <div>
+            <strong>{avgScore}</strong>
+            <small>Avg Score</small>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Concept mastery bars ─────────────────── */}
+      <div className="analytics-bars-header">
+        <TrendingUp size={13} />
+        <span>Concept Mastery</span>
+      </div>
+      <div className="analytics-bars">
+        {concepts.map(([name, count]) => {
+          const pct = Math.round((count / maxCount) * 100);
+          return (
+            <div key={name} className="analytics-bar-row">
+              <div className="analytics-bar-meta">
+                <span className="analytics-bar-name">{name}</span>
+                <span className="analytics-bar-count">{count}</span>
+              </div>
+              <div className="analytics-bar-track">
+                <div
+                  className="analytics-bar-fill"
+                  style={{ '--bar-width': `${pct}%` }}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
