@@ -1,18 +1,22 @@
 const conceptRules = [
   {
-    keywords: ['repeat', 'again', 'each', 'every', 'loop'],
+    keywords: ['repeat', 'repeatedly', 'for every item', 'while there are', 'loop'],
     pattern: 'Repetition',
     pythonConcept: 'for / while loops',
     explanation: 'Your reasoning repeats an action, which maps naturally to loop constructs.'
   },
   {
-    keywords: ['if', 'when', 'unless', 'decide', 'choose', 'condition'],
+    keywords: ['if', 'otherwise', 'unless', 'condition', 'greater than', 'less than'],
     pattern: 'Decision making',
     pythonConcept: 'if / elif / else',
     explanation: 'You are branching based on a condition, which is exactly what conditional statements express.'
   },
   {
-    keywords: ['list', 'items', 'collection', 'group', 'many'],
+    keywords: [
+  'dictionary', 'key', 'value', 'pair',
+  'map', 'mapping', 'store each',
+  'supply name', 'count'
+  ],
     pattern: 'Collection handling',
     pythonConcept: 'lists and dictionaries',
     explanation: 'You grouped multiple values, so Python collections help store and process them.'
@@ -30,10 +34,25 @@ const conceptRules = [
     explanation: 'You described a repeatable process, which maps to a Python function.'
   },
   {
-    keywords: ['compare', 'match', 'filter', 'find', 'search'],
-    pattern: 'Selection and filtering',
-    pythonConcept: 'comparisons and list comprehensions',
-    explanation: 'You are narrowing options using rules, which Python can express with comparisons and filters.'
+  keywords: [
+    'object', 'class', 'instance', 'attribute',
+    'method', 'properties and actions',
+    'data and behavior'
+  ],
+  pattern: 'Object-oriented modelling',
+  pythonConcept: 'classes and objects',
+  explanation:
+    'You described a real-world entity with properties and actions. In Python, a class can model that entity and objects can represent individual instances.'
+  },
+  {
+  keywords: [
+    'filter items', 'only show', 'select those',
+    'compare values', 'greater than', 'less than',
+    'matches the rule'
+  ],
+  pattern: 'Selection and filtering',
+  pythonConcept: 'comparisons and list comprehensions',
+  explanation: 'You are narrowing options using rules, which Python can express with comparisons and filters.'
   }
 ];
 
@@ -49,14 +68,69 @@ function mapReasoning(reasoning = '') {
 
 function generateCode(scenario, maps) {
   const concepts = maps.map((item) => item.pythonConcept).join(', ');
-  const hasLoop = concepts.includes('loop');
-  const hasCondition = concepts.includes('if');
-  const hasFunction = concepts.includes('function');
+  const hasLoop = concepts.includes('for / while loops');
+  const hasCondition = concepts.includes('if / elif / else');
+  const hasFunction = concepts.includes('functions');
+  const hasOOP = concepts.includes('classes and objects');
+  const hasCollection = concepts.includes('lists and dictionaries');
+  
+  if (hasCollection) {
+  const scenarioTitle = scenario.title.toLowerCase();
 
+  if (scenarioTitle.includes('supply')) {
+    return `supplies = {
+    "chalk": 20,
+    "markers": 8,
+    "notebooks": 15
+}
+
+supply_name = "chalk"
+
+if supply_name in supplies:
+    print(f"{supply_name}: {supplies[supply_name]} available")
+else:
+    print("Supply not found")`;
+  }
+
+  if (scenarioTitle.includes('color')) {
+    return `favorite_colors = ["blue", "green", "purple"]
+
+for color in favorite_colors:
+    print(color)`;
+  }
+
+  if (scenarioTitle.includes('attendance')) {
+    return `present_students = ["Aarav", "Meera", "Kabir", "Zoya"]
+
+print(f"Students present: {len(present_students)}")`;
+  }
+
+  if (scenarioTitle.includes('bag')) {
+    return `bag_items = ["pencil", "eraser", "ruler"]
+
+print(bag_items[0])`;
+  }
+
+  return `items = ["first item", "second item", "third item"]
+
+for item in items:
+    print(item)`;
+}
   if (hasLoop && hasCondition) {
     return 'items = [12, 7, 19, 4]\nthreshold = 10\n\nfor item in items:\n    if item >= threshold:\n        print(f"{item} needs attention")\n    else:\n        print(f"{item} is okay")';
   }
+  if (hasOOP) {
+  return `class ScenarioEntity:
+    def __init__(self, name, status="active"):
+        self.name = name
+        self.status = status
 
+    def describe(self):
+        return f"{self.name} is currently {self.status}"
+
+  entity = ScenarioEntity("Example entity")
+  print(entity.describe())`;
+  }
   if (hasFunction) {
     return 'def solve_scenario(inputs):\n    result = []\n    for value in inputs:\n        result.append(value * 2)\n    return result\n\nprint(solve_scenario([1, 2, 3]))';
   }

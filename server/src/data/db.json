@@ -716,6 +716,309 @@
       ],
       "createdAt": "2026-06-24T06:38:07.953Z",
       "updatedAt": "2026-06-24T06:38:07.953Z"
+    },
+    {
+      "_id": "fde562dc-cb8b-46fe-b68a-3248b840aef4",
+      "learnerName": "Guest learner",
+      "scenario": "a7f80935-da69-469d-b735-98e06cd996a6",
+      "reasoning": "I would store each supply name as a key and its available count as the value.\nFor example, chalk can have 20, markers can have 8, and notebooks can have 15.\nWhen someone asks for a supply, I can look up its name to find the count.",
+      "promptText": "Explain my approach step by step. Show how to use a Python dictionary to store classroom supply names and their counts. Include example input, output, and code.",
+      "abstractionMap": [
+        {
+          "keywords": [
+            "repeat",
+            "again",
+            "each",
+            "every",
+            "loop"
+          ],
+          "pattern": "Repetition",
+          "pythonConcept": "for / while loops",
+          "explanation": "Your reasoning repeats an action, which maps naturally to loop constructs."
+        },
+        {
+          "keywords": [
+            "if",
+            "when",
+            "unless",
+            "decide",
+            "choose",
+            "condition"
+          ],
+          "pattern": "Decision making",
+          "pythonConcept": "if / elif / else",
+          "explanation": "You are branching based on a condition, which is exactly what conditional statements express."
+        },
+        {
+          "keywords": [
+            "object",
+            "class",
+            "student",
+            "book",
+            "customer",
+            "account",
+            "product",
+            "vehicle",
+            "employee",
+            "has",
+            "owns",
+            "belongs"
+          ],
+          "pattern": "Object-oriented modelling",
+          "pythonConcept": "classes and objects",
+          "explanation": "You described a real-world entity with properties and actions. In Python, a class can model that entity and objects can represent individual instances."
+        },
+        {
+          "keywords": [
+            "compare",
+            "match",
+            "filter",
+            "find",
+            "search"
+          ],
+          "pattern": "Selection and filtering",
+          "pythonConcept": "comparisons and list comprehensions",
+          "explanation": "You are narrowing options using rules, which Python can express with comparisons and filters."
+        }
+      ],
+      "generatedCode": "items = [12, 7, 19, 4]\nthreshold = 10\n\nfor item in items:\n    if item >= threshold:\n        print(f\"{item} needs attention\")\n    else:\n        print(f\"{item} is okay\")",
+      "codeExplanation": "The code starts from your natural reasoning and turns it into Python structure: Repetition becomes for / while loops; Decision making becomes if / elif / else; Object-oriented modelling becomes classes and objects; Selection and filtering becomes comparisons and list comprehensions.",
+      "promptScore": 100,
+      "promptFeedback": [
+        "Strong prompt: it includes context, reasoning, examples, and a Python direction."
+      ],
+      "reflection": "I noticed that names and counts belong together, so I can map each name to one value.",
+      "misconceptions": [],
+      "masterySignals": [
+        "Recognized repetition",
+        "Recognized decision making",
+        "Recognized object-oriented modelling",
+        "Recognized selection and filtering",
+        "Prompt maturity is developing"
+      ],
+      "createdAt": "2026-07-08T11:10:39.727Z",
+      "updatedAt": "2026-07-08T11:10:39.727Z"
+    },
+    {
+      "_id": "310dfd05-3381-4231-a437-2b1a56628fe0",
+      "learnerName": "Guest learner",
+      "scenario": "a7f80935-da69-469d-b735-98e06cd996a6",
+      "reasoning": "I would store each supply name as a key and its available count as the value.\nFor example, chalk can have 20, markers can have 8, and notebooks can have 15.\nWhen someone asks for a supply, I can look up its name to find the count.",
+      "promptText": "Explain my approach step by step. Show how to use a Python dictionary to store classroom supply names and their counts. Include example input, output, and code.",
+      "abstractionMap": [
+        {
+          "keywords": [
+            "dictionary",
+            "key",
+            "value",
+            "pair",
+            "map",
+            "mapping",
+            "store each",
+            "supply name",
+            "count"
+          ],
+          "pattern": "Collection handling",
+          "pythonConcept": "lists and dictionaries",
+          "explanation": "You grouped multiple values, so Python collections help store and process them."
+        },
+        {
+          "keywords": [
+            "compare",
+            "match",
+            "filter",
+            "find",
+            "search"
+          ],
+          "pattern": "Selection and filtering",
+          "pythonConcept": "comparisons and list comprehensions",
+          "explanation": "You are narrowing options using rules, which Python can express with comparisons and filters."
+        }
+      ],
+      "generatedCode": "scenario = \"Classroom Supply Lookup\"\nreasoning = \"Break the situation into clear steps\"\nprint(scenario)\nprint(reasoning)",
+      "codeExplanation": "The code starts from your natural reasoning and turns it into Python structure: Collection handling becomes lists and dictionaries; Selection and filtering becomes comparisons and list comprehensions.",
+      "promptScore": 100,
+      "promptFeedback": [
+        "Strong prompt: it includes context, reasoning, examples, and a Python direction."
+      ],
+      "reflection": "I noticed that names and counts belong together, so I can map each name to one value.",
+      "misconceptions": [],
+      "masterySignals": [
+        "Recognized collection handling",
+        "Recognized selection and filtering",
+        "Prompt maturity is developing"
+      ],
+      "createdAt": "2026-07-08T11:17:27.749Z",
+      "updatedAt": "2026-07-08T11:17:27.749Z"
+    },
+    {
+      "_id": "84e9e1af-478e-4736-b08b-f48749f0dee7",
+      "learnerName": "Guest learner",
+      "scenario": "a7f80935-da69-469d-b735-98e06cd996a6",
+      "reasoning": "I would store each supply name as a key and its available count as the value.\nFor example, chalk can have 20, markers can have 8, and notebooks can have 15.\nWhen someone asks for a supply, I can look up its name to find the count.",
+      "promptText": "Explain my approach step by step. Show how to use a Python dictionary to store classroom supply names and their counts. Include example input, output, and code.",
+      "abstractionMap": [
+        {
+          "keywords": [
+            "dictionary",
+            "key",
+            "value",
+            "pair",
+            "map",
+            "mapping",
+            "store each",
+            "supply name",
+            "count"
+          ],
+          "pattern": "Collection handling",
+          "pythonConcept": "lists and dictionaries",
+          "explanation": "You grouped multiple values, so Python collections help store and process them."
+        },
+        {
+          "keywords": [
+            "compare",
+            "match",
+            "filter",
+            "find",
+            "search"
+          ],
+          "pattern": "Selection and filtering",
+          "pythonConcept": "comparisons and list comprehensions",
+          "explanation": "You are narrowing options using rules, which Python can express with comparisons and filters."
+        }
+      ],
+      "generatedCode": "supplies = {\n      \"chalk\": 20,\n      \"markers\": 8,\n      \"notebooks\": 15\n    }\n\n  supply_name = \"chalk\"\n\n  if supply_name in supplies:\n    print(f\"{supply_name}: {supplies[supply_name]} available\")\n  else:\n    print(\"Supply not found\")",
+      "codeExplanation": "The code starts from your natural reasoning and turns it into Python structure: Collection handling becomes lists and dictionaries; Selection and filtering becomes comparisons and list comprehensions.",
+      "promptScore": 100,
+      "promptFeedback": [
+        "Strong prompt: it includes context, reasoning, examples, and a Python direction."
+      ],
+      "reflection": "I noticed that names and counts belong together, so I can map each name to one value.",
+      "misconceptions": [],
+      "masterySignals": [
+        "Recognized collection handling",
+        "Recognized selection and filtering",
+        "Prompt maturity is developing"
+      ],
+      "createdAt": "2026-07-08T11:21:52.736Z",
+      "updatedAt": "2026-07-08T11:21:52.736Z"
+    },
+    {
+      "_id": "84326d2c-193d-4a9c-8e48-585d40425cc5",
+      "learnerName": "Guest learner",
+      "scenario": "72cb5600-e182-4a7b-8094-a0f85a583d4b",
+      "reasoning": "I would store each supply name as a key and its available count as the value.\nFor example, chalk can have 20, markers can have 8, and notebooks can have 15.\nWhen someone asks for a supply, I can look up its name to find the count.",
+      "promptText": "Explain my approach step by step. Show how to use a Python dictionary to store classroom supply names and their counts. Include example input, output, and code.",
+      "abstractionMap": [
+        {
+          "keywords": [
+            "dictionary",
+            "key",
+            "value",
+            "pair",
+            "map",
+            "mapping",
+            "store each",
+            "supply name",
+            "count"
+          ],
+          "pattern": "Collection handling",
+          "pythonConcept": "lists and dictionaries",
+          "explanation": "You grouped multiple values, so Python collections help store and process them."
+        }
+      ],
+      "generatedCode": "supplies = {\n      \"chalk\": 20,\n      \"markers\": 8,\n      \"notebooks\": 15\n    }\n\n  supply_name = \"chalk\"\n\n  if supply_name in supplies:\n    print(f\"{supply_name}: {supplies[supply_name]} available\")\n  else:\n    print(\"Supply not found\")",
+      "codeExplanation": "The code starts from your natural reasoning and turns it into Python structure: Collection handling becomes lists and dictionaries.",
+      "promptScore": 100,
+      "promptFeedback": [
+        "Strong prompt: it includes context, reasoning, examples, and a Python direction."
+      ],
+      "reflection": "I noticed that names and counts belong together, so I can map each name to one value.",
+      "misconceptions": [],
+      "masterySignals": [
+        "Recognized collection handling",
+        "Prompt maturity is developing"
+      ],
+      "createdAt": "2026-07-08T11:25:23.993Z",
+      "updatedAt": "2026-07-08T11:25:23.993Z"
+    },
+    {
+      "_id": "67fccdcf-421a-4fee-8680-46ca7f67f0d1",
+      "learnerName": "Guest learner",
+      "scenario": "a7f80935-da69-469d-b735-98e06cd996a6",
+      "reasoning": "I would store each supply name as a key and its available count as the value.\nFor example, chalk can have 20, markers can have 8, and notebooks can have 15.\nWhen someone asks for a supply, I can look up its name to find the count.",
+      "promptText": "Explain my approach step by step. Show how to use a Python dictionary to store classroom supply names and their counts. Include example input, output, and code.",
+      "abstractionMap": [
+        {
+          "keywords": [
+            "dictionary",
+            "key",
+            "value",
+            "pair",
+            "map",
+            "mapping",
+            "store each",
+            "supply name",
+            "count"
+          ],
+          "pattern": "Collection handling",
+          "pythonConcept": "lists and dictionaries",
+          "explanation": "You grouped multiple values, so Python collections help store and process them."
+        }
+      ],
+      "generatedCode": "supplies = {\n    \"chalk\": 20,\n    \"markers\": 8,\n    \"notebooks\": 15\n}\n\nsupply_name = \"chalk\"\n\nif supply_name in supplies:\n    print(f\"{supply_name}: {supplies[supply_name]} available\")\nelse:\n    print(\"Supply not found\")",
+      "codeExplanation": "The code starts from your natural reasoning and turns it into Python structure: Collection handling becomes lists and dictionaries.",
+      "promptScore": 100,
+      "promptFeedback": [
+        "Strong prompt: it includes context, reasoning, examples, and a Python direction."
+      ],
+      "reflection": "I noticed that names and counts belong together, so I can map each name to one value.",
+      "misconceptions": [],
+      "masterySignals": [
+        "Recognized collection handling",
+        "Prompt maturity is developing"
+      ],
+      "createdAt": "2026-07-08T11:28:36.758Z",
+      "updatedAt": "2026-07-08T11:28:36.758Z"
+    },
+    {
+      "_id": "b5b16050-4449-48fa-ae8e-8ae59816d533",
+      "learnerName": "Guest learner",
+      "scenario": "c0772fa2-7df9-4fdf-ad87-58ddb6fb17f3",
+      "reasoning": "I would keep all the colors together in one list because they are related values.",
+      "promptText": "Explain my approach step by step with the python code\n",
+      "abstractionMap": [
+        {
+          "keywords": [
+            "dictionary",
+            "key",
+            "value",
+            "pair",
+            "map",
+            "mapping",
+            "store each",
+            "supply name",
+            "count"
+          ],
+          "pattern": "Collection handling",
+          "pythonConcept": "lists and dictionaries",
+          "explanation": "You grouped multiple values, so Python collections help store and process them."
+        }
+      ],
+      "generatedCode": "favorite_colors = [\"blue\", \"green\", \"purple\"]\n\nfor color in favorite_colors:\n    print(color)",
+      "codeExplanation": "The code starts from your natural reasoning and turns it into Python structure: Collection handling becomes lists and dictionaries.",
+      "promptScore": 85,
+      "promptFeedback": [
+        "Include an example input or output to make the prompt testable."
+      ],
+      "reflection": "",
+      "misconceptions": [],
+      "masterySignals": [
+        "Recognized collection handling",
+        "Prompt maturity is developing"
+      ],
+      "createdAt": "2026-07-08T11:39:25.807Z",
+      "updatedAt": "2026-07-08T11:39:25.807Z"
     }
   ]
 }
