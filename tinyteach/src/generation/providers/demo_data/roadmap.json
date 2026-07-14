@@ -1,0 +1,12 @@
+{
+  "topic": "demo",
+  "estimated_hours": 1,
+  "milestones": [
+    {
+      "name": "Run the demo",
+      "description": "Click Generate with LLM_PROVIDER=demo to confirm the pipeline works end-to-end.",
+      "case_study_index": 0,
+      "success_criteria": ["You see a case-study card", "You see a roadmap milestone"]
+    }
+  ]
+}

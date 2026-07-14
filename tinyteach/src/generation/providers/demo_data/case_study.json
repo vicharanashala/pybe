@@ -1,0 +1,21 @@
+{
+  "topic": "demo",
+  "case_studies": [
+    {
+      "title": "Hello, Demo",
+      "concept": "The LLMProvider abstraction",
+      "difficulty": "novice",
+      "scenario": "TinyTeach ships with a 'demo' provider that returns a hardcoded response. This lets you explore the full flow -- upload, generate, download -- with zero API cost.",
+      "task": "Pick any topic and switch LLM provider to 'demo' in the sidebar. Hit Generate and confirm you see this case study.",
+      "starter_code": "print('Hello, demo!')",
+      "expected_output": "Hello, demo!\n",
+      "real_world_analogy": "Think of the demo provider as a flight simulator's practice mode -- you get the same cockpit, same controls, same checklist, but the airplane never leaves the ground.",
+      "fun_fact": "The LLMProvider interface (Phase 3) is borrowed from the Strategy pattern in the Gang-of-Four catalog -- the same pattern used in JDK's ResourceBundle and Python's logging.handlers.",
+      "hints": [
+        "Open the sidebar and switch Provider: hf_inference -> demo.",
+        "Click Generate with any topic."
+      ],
+      "learning_objective": "Understand that TinyTeach's LLM interface is decoupled from any single vendor."
+    }
+  ]
+}
