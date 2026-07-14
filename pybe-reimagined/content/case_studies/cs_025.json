@@ -1,0 +1,23 @@
+{
+    "id":  "cs_025",
+    "title":  "Date case study",
+    "scenario":  "A team is dealing with date, today, format. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "date",
+                      "today",
+                      "format"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "modules",
+                      "date",
+                      "today",
+                      "format"
+                  ],
+    "constructHint":  [
+                          "module",
+                          "import"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

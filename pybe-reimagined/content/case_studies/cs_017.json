@@ -1,0 +1,25 @@
+{
+    "id":  "cs_017",
+    "title":  "Designing for pages",
+    "scenario":  "A team is dealing with pages, web, crawl. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "pages",
+                      "web",
+                      "crawl"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "loops",
+                      "pages",
+                      "web",
+                      "crawl"
+                  ],
+    "constructHint":  [
+                          "for",
+                          "range",
+                          "sum",
+                          "len"
+                      ],
+    "jonassenType":  "design",
+    "level":  1
+}

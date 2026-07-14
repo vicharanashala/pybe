@@ -1,0 +1,23 @@
+{
+    "id":  "cs_023",
+    "title":  "Tip case study",
+    "scenario":  "A team is dealing with tip, bill, calculate. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "tip",
+                      "bill",
+                      "calculate"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "functions",
+                      "tip",
+                      "bill",
+                      "calculate"
+                  ],
+    "constructHint":  [
+                          "function",
+                          "return"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

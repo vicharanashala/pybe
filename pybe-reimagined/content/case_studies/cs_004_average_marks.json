@@ -1,0 +1,25 @@
+{
+    "id":  "cs_004",
+    "title":  "Average Marks: Different Framing",
+    "scenario":  "A class has thirty-two students. Each student\u0027s term mark is a number. The head-teacher asks for the class average — but you are not allowed to type all 32 numbers into a calculator. You have them written on a slip of paper. What Python construct lets you walk through the list of marks one by one and accumulate their total?",
+    "hookWords":  [
+                      "average",
+                      "marks",
+                      "class",
+                      "loop",
+                      "accumulate"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "loops",
+                      "lists"
+                  ],
+    "constructHint":  [
+                          "list",
+                          "for",
+                          "sum",
+                          "len"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

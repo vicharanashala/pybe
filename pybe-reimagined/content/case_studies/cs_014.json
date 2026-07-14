@@ -1,0 +1,24 @@
+{
+    "id":  "cs_014",
+    "title":  "Last case study",
+    "scenario":  "A team is dealing with last, N, digits. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "last",
+                      "N",
+                      "digits"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "slicing",
+                      "last",
+                      "N",
+                      "digits"
+                  ],
+    "constructHint":  [
+                          "slice",
+                          "for",
+                          "list"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

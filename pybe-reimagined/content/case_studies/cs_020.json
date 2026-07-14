@@ -1,0 +1,24 @@
+{
+    "id":  "cs_020",
+    "title":  "Greeting case study",
+    "scenario":  "A team is dealing with greeting, name, hello. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "greeting",
+                      "name",
+                      "hello"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "strings",
+                      "greeting",
+                      "name",
+                      "hello"
+                  ],
+    "constructHint":  [
+                          "str",
+                          "f-string",
+                          "slice"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

@@ -1,0 +1,28 @@
+{
+    "id":  "cs_034",
+    "title":  "The 36-Inch Saree Border Mystery",
+    "scenario":  "Tiruchirappalli Central Jail in Tamil Nadu runs a saree-weaving unit famous across South India. Inmates weave the border using a single repeating motif — mango, peacock, mango, peacock — over and over. Each motif occupies exactly 6 inches of fabric. A new order has come in for a 36-inch border that must end cleanly on a full motif (no half-mango, no half-peacock). You have the motif written out as the string \u0027MangoPeacock\u0027 — and Python gives you a remarkably concise way to repeat a string a fixed number of times. What one expression builds the full 36-inch border?",
+    "hookWords":  [
+                      "saree",
+                      "border",
+                      "weaving",
+                      "motif",
+                      "repeat",
+                      "prison",
+                      "tiruchirappalli"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "strings",
+                      "operators",
+                      "pattern",
+                      "repetition"
+                  ],
+    "constructHint":  [
+                          "str",
+                          "*",
+                          "len"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

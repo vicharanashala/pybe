@@ -1,0 +1,26 @@
+{
+    "id":  "cs_001",
+    "title":  "Average of Five Friends\u0027 Scores",
+    "scenario":  "Five friends showed their math scores: 78, 92, 65, 88, 71. Their teacher asks: what is the class average? You have the five numbers in front of you. What Python construct would you reach for to compute the average without writing the sum by hand?",
+    "hookWords":  [
+                      "scores",
+                      "average",
+                      "five",
+                      "class",
+                      "compute"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "lists",
+                      "loops",
+                      "arithmetic"
+                  ],
+    "constructHint":  [
+                          "list",
+                          "for",
+                          "sum",
+                          "len"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

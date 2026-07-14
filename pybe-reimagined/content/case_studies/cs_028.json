@@ -1,0 +1,23 @@
+{
+    "id":  "cs_028",
+    "title":  "Square case study",
+    "scenario":  "A team is dealing with square, list, compact. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "square",
+                      "list",
+                      "compact"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "comprehensions",
+                      "square",
+                      "list",
+                      "compact"
+                  ],
+    "constructHint":  [
+                          "list",
+                          "for"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}
