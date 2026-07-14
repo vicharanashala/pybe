@@ -1,5 +1,54 @@
+# Dependencies
 node_modules/
-client/dist/
+**/node_modules/
+
+# Environment variables (never commit real secrets/connection strings)
 .env
+.env.local
+backend/.env
+frontend/.env
+
+# Build output
+frontend/dist/
+frontend/build/
+
+# Logs
+*.log
 npm-debug.log*
+
+# OS files
 .DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment
+.env
+.env.local
+.env.development
+.env.production
+
+# Logs
+*.log
+logs/
+
+# Build
+dist/
+build/
+coverage/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Runtime
+*.pid
