@@ -1,0 +1,51 @@
+// Canonical, pedagogical ordering of topics (roughly beginner -> advanced).
+// Used to order the Topics page and to assign `order` within each topic.
+const TOPIC_ORDER = [
+  "Comments",
+  "Variables",
+  "Data Types",
+  "Numbers",
+  "Casting",
+  "Booleans",
+  "Operators",
+  "Strings",
+  "String Formatting",
+  "Lists",
+  "Tuples",
+  "Sets",
+  "Dictionaries",
+  "If...Else",
+  "While Loops",
+  "For Loops",
+  "Functions",
+  "Lambda",
+  "Classes/Objects",
+  "Inheritance",
+  "List Comprehension",
+];
+
+const TOPIC_DESCRIPTIONS = {
+  "Comments": "Annotate code without affecting execution.",
+  "Variables": "Store, name, and reuse values.",
+  "Data Types": "int, float, str, bool, and the built-in collections.",
+  "Numbers": "Arithmetic, rounding, and numeric built-ins.",
+  "Casting": "Convert values between types explicitly.",
+  "Booleans": "True/False logic and comparisons.",
+  "Operators": "Arithmetic, comparison, logical, and bitwise operators.",
+  "Strings": "Slicing, searching, and transforming text.",
+  "String Formatting": "f-strings, .format(), and number formatting.",
+  "Lists": "Ordered, mutable collections.",
+  "Tuples": "Ordered, immutable collections.",
+  "Sets": "Unordered collections of unique values.",
+  "Dictionaries": "Key-value mappings.",
+  "If...Else": "Branching logic and conditionals.",
+  "While Loops": "Repeat while a condition holds.",
+  "For Loops": "Iterate over sequences and ranges.",
+  "Functions": "Reusable blocks of logic, args, and closures.",
+  "Lambda": "Small anonymous functions.",
+  "Classes/Objects": "Object-oriented basics: attributes and methods.",
+  "Inheritance": "Extending and overriding behavior across classes.",
+  "List Comprehension": "Concise syntax for building lists, dicts, and sets.",
+};
+
+module.exports = { TOPIC_ORDER, TOPIC_DESCRIPTIONS };
