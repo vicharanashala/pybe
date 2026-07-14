@@ -1,0 +1,26 @@
+# TinyTeach — runtime dependencies (pinned).
+# Versions chosen to avoid known CVEs and to fit on the free 16 GB HF Space (see PROJECT_BLUEPRINT.md §16).
+# Do NOT upgrade without justification in the Phase N changelog.
+
+# --- runtime --------------------------------------------------------------
+pymupdf==1.24.10            # CVE patched; <1.24 has image-parsing RCE
+langchain-text-splitters==0.3.5
+sentence-transformers==3.2.1
+faiss-cpu==1.9.0            # do NOT install faiss-gpu on free Space
+streamlit==1.39.0
+pydantic==2.9.2
+pydantic-settings==2.6.1
+httpx==0.27.2
+tenacity==9.0.0
+python-dotenv==1.0.1
+openai==1.54.4              # OpenAI-compatible client for HF router + Groq
+groq==0.11.0                # free-tier SDK (used only if LLM_PROVIDER=groq)
+psutil==6.1.0               # for OOM guard in hf_local.is_available()
+typing_extensions==4.12.2     # Self on Python <3.11
+
+# --- dev ------------------------------------------------------------------
+pytest==8.3.3
+pytest-mock==3.14.0
+respx==0.21.1
+ruff==0.7.2
+black==24.10.0

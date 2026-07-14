@@ -1,0 +1,82 @@
+# --- build / project metadata ----------------------------------------------
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tinyteach"
+version = "0.1.0"
+description = "Free, customisable, web-based tiny LLM that teaches any computer language from a PDF book."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "TinyTeach" }]
+license = { text = "MIT" }
+
+# --- ruff (linter + formatter) ---------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+# E/W = pycodestyle/pycodestyle-warnings
+# F = pyflakes
+# I = isort (import sort)
+# B = flake8-bugbear
+# UP = pyupgrade
+# N = pep8-naming
+# C4 = flake8-comprehensions
+# SIM = flake8-simplify
+select = ["E", "W", "F", "I", "B", "UP", "N", "C4", "SIM"]
+ignore = [
+    "E501",   # line length is enforced by formatter
+    "B008",   # function-call-in-default-arg is allowed (we use it deliberately)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["B011"]  # asserts are OK in tests
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+# --- black (kept in sync with ruff) ----------------------------------------
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+# --- pytest ----------------------------------------------------------------
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-ra",
+    "--strict-markers",
+    "--strict-config",
+    "--showlocals",
+]
+# Markers used across phases (declared up-front so pytest --strict-markers is happy)
+markers = [
+    "slow: marks tests as slow (deselect with -m 'not slow')",
+    "perf: marks performance / SLA soft-assertions",
+    "integration: marks integration tests that may touch disk/network",
+]
+
+# --- coverage --------------------------------------------------------------
+[tool.coverage.run]
+branch = true
+source = ["src"]
+omit = ["*/tests/*", "*/__init__.py"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+skip_covered = false
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+]
