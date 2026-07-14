@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Default brand palette — PyBe Blue. This is what shows before a user is
+     known to have a theme (logged out, home page, login/register,
+     onboarding) and is overwritten at runtime by ThemeSync
+     (see context/ThemeSync.jsx) once a learner's theme is known, so the
+     ENTIRE UI — buttons, cards, inputs, focus rings, nav highlights —
+     re-colors to match Sports / Day-to-Day Life / Philosophy / Food /
+     Movies & Entertainment. Values are "R G B" triples (no commas) so
+     Tailwind's rgb(var(--x) / <alpha-value>) opacity modifiers work. */
+  :root {
+    --color-brand-50: 238 244 255;
+    --color-brand-100: 221 230 255;
+    --color-brand-200: 188 205 255;
+    --color-brand-300: 147 172 255;
+    --color-brand-400: 107 135 251;
+    --color-brand-500: 61 90 241;
+    --color-brand-600: 47 70 209;
+    --color-brand-700: 37 54 168;
+    --color-brand-800: 28 33 64;
+    --color-brand-900: 20 24 51;
+  }
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    @apply bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 font-sans;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-none bg-brand-500 text-white font-bold text-sm tracking-wide hover:bg-brand-600 active:bg-brand-700 transition-all duration-200 shadow-md disabled:opacity-50;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-none border-2 border-gray-100 text-gray-700 font-bold text-sm hover:bg-gray-50 hover:border-gray-200 transition-all duration-200;
+  }
+  .card {
+    @apply bg-white border border-gray-100 rounded-none shadow-sm hover:shadow-md transition-all duration-300;
+  }
+  .input {
+    @apply w-full px-4 py-3 rounded-none border-2 border-gray-100 focus:border-brand-500 focus:ring-0 outline-none transition-all bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 placeholder-gray-400 text-base;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 0;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Python Practice widget (ported from trial3_pytutor_v4) ──────────────
+   Invisible range input used as an interactive overlay on top of the
+   custom-drawn step scrubber progress bar in the code visualizer. */
+.pytutor-scrubber {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+.pytutor-scrubber::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: transparent;
+}
+.pytutor-scrubber::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: transparent;
+  border: none;
+}
+.pytutor-scrubber::-moz-range-track {
+  background: transparent;
+}
+
+input, textarea {
+  @apply rounded-none border-2 border-gray-100 focus:border-brand-500 focus:ring-0 outline-none transition-all;
+}
+
+
+
+/* ── TopicChatBot animations ─────────────────────────────────── */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+.animate-slide-up {
+  animation: slide-up 0.18s ease-out both;
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fade-in 0.2s ease both;
+}

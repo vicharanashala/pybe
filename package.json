@@ -1,15 +1,16 @@
 {
-  "name": "pybe-mern-app",
+  "name": "pybe",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "installAll": "npm install --prefix server && npm install --prefix client",
-    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
-    "seed": "npm run seed --prefix server",
-    "start": "npm run start --prefix server"
-  },
-  "dependencies": {
-    "concurrently": "^9.1.2"
-  },
-  "devDependencies": {}
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "seed": "cd backend && npm run seed",
+    "seed:concepts": "cd backend && npm run seed:concepts",
+    "seed:challenges": "cd backend && npm run seed:challenges",
+    "seed:admin": "cd backend && npm run seed:admin",
+    "seed:practice": "cd backend && npm run seed:practice",
+    "seed:all": "npm run seed:concepts && npm run seed:challenges"
+  }
 }
