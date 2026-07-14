@@ -1,19 +1,21 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   Brain,
   ChartNoAxesCombined,
-  Code2,
   Compass,
-  Lightbulb,
-  MessageSquareText,
-  Play,
   Route,
   Search,
   Send,
-  Sparkles
+  Sparkles,
+  ChevronLeft,
+  Menu,
+  MessageSquareText,
+  Play
 } from 'lucide-react';
 import './styles.css';
+import EmptyResult from './components/EmptyResult';
+import ChallengeWorkspace from './components/ChallengeWorkspace';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -37,6 +39,43 @@ function App() {
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  const [mainSplitWidth, setMainSplitWidth] = useState(48);
+  const mainGridRef = useRef(null);
+
+  const startMainResize = (e) => {
+    e.preventDefault();
+    document.addEventListener('mousemove', handleMainResizeMove);
+    document.addEventListener('mouseup', handleMainResizeEnd);
+    document.addEventListener('touchmove', handleMainTouchResizeMove);
+    document.addEventListener('touchend', handleMainResizeEnd);
+  };
+
+  const handleMainResizeMove = (e) => {
+    if (!mainGridRef.current) return;
+    const rect = mainGridRef.current.getBoundingClientRect();
+    let percentage = ((e.clientX - rect.left) / rect.width) * 100;
+    if (percentage < 20) percentage = 20;
+    if (percentage > 70) percentage = 70;
+    setMainSplitWidth(percentage);
+  };
+
+  const handleMainTouchResizeMove = (e) => {
+    if (!mainGridRef.current || !e.touches[0]) return;
+    const rect = mainGridRef.current.getBoundingClientRect();
+    let percentage = ((e.touches[0].clientX - rect.left) / rect.width) * 100;
+    if (percentage < 20) percentage = 20;
+    if (percentage > 70) percentage = 70;
+    setMainSplitWidth(percentage);
+  };
+
+  const handleMainResizeEnd = () => {
+    document.removeEventListener('mousemove', handleMainResizeMove);
+    document.removeEventListener('mouseup', handleMainResizeEnd);
+    document.removeEventListener('touchmove', handleMainTouchResizeMove);
+    document.removeEventListener('touchend', handleMainResizeEnd);
+  };
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
@@ -60,6 +99,19 @@ function App() {
     refresh().catch(console.error);
   }, [filters.q, filters.difficulty, filters.concept]);
 
+  useEffect(() => {
+    if (selected) {
+      setForm((prev) => ({
+        ...prev,
+        reasoning: '',
+        promptText: '',
+        reflection: ''
+      }));
+      setActiveResult(null);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [selected?._id]);
+
   async function submitSession(event) {
     event.preventDefault();
     if (!selected || !form.reasoning.trim()) return;
@@ -80,14 +132,24 @@ function App() {
   if (loading) return <main className="loading">Loading PyBe...</main>;
 
   return (
-    <main className="app-shell">
+    <main className={`app-shell ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
       <aside className="sidebar">
         <div className="brand">
-          <Brain size={30} />
-          <div>
-            <strong>PyBe</strong>
-            <span>Scenario-first Python</span>
+          <div className="brand-logo">
+            <Brain size={30} />
+            <div>
+              <strong>PyBe</strong>
+              <span>Scenario-first Python</span>
+            </div>
           </div>
+          <button
+            type="button"
+            className="btn-sidebar-toggle"
+            onClick={() => setSidebarCollapsed(true)}
+            title="Hide Scenarios Menu"
+          >
+            <ChevronLeft size={18} />
+          </button>
         </div>
 
         <label className="search">
@@ -118,7 +180,6 @@ function App() {
               className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
               onClick={() => {
                 setSelected(scenario);
-                setActiveResult(null);
               }}
             >
               <span>{scenario.difficulty}</span>
@@ -130,6 +191,16 @@ function App() {
       </aside>
 
       <section className="workspace">
+        {sidebarCollapsed && (
+          <button
+            type="button"
+            className="btn-sidebar-expand"
+            onClick={() => setSidebarCollapsed(false)}
+            title="Show Scenarios Menu"
+          >
+            <Menu size={18} /> View Scenarios
+          </button>
+        )}
         <header className="hero">
           <div>
             <p>AI-native learning journey</p>
@@ -142,8 +213,8 @@ function App() {
           </div>
         </header>
 
-        <div className="main-grid">
-          <section className="panel learning-panel">
+        <div className="main-grid" ref={mainGridRef}>
+          <section className="panel learning-panel" style={{ width: `calc(${mainSplitWidth}% - 4px)`, flexShrink: 0 }}>
             <div className="section-title">
               <Compass size={20} />
               <h2>{selected?.title}</h2>
@@ -184,12 +255,19 @@ function App() {
             </form>
           </section>
 
-          <section className="panel result-panel">
+          <div
+            className="main-resizer-bar"
+            onMouseDown={startMainResize}
+            onTouchStart={startMainResize}
+            title="Drag to resize layout"
+          />
+
+          <section className="panel result-panel" style={{ width: `calc(${100 - mainSplitWidth}% - 4px)`, flexShrink: 0 }}>
             <div className="section-title">
               <Sparkles size={20} />
               <h2>AI Mentor Output</h2>
             </div>
-            {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
+            {!activeResult ? <EmptyResult /> : <ChallengeWorkspace result={activeResult} scenario={selected} />}
           </section>
         </div>
 
@@ -209,46 +287,6 @@ function App() {
         </section>
       </section>
     </main>
-  );
-}
-
-function EmptyResult() {
-  return (
-    <div className="empty">
-      <Lightbulb size={38} />
-      <p>Submit reasoning to see abstraction mapping, Python code, prompt feedback, and misconception signals.</p>
-    </div>
-  );
-}
-
-function Result({ result }) {
-  return (
-    <div className="result-stack">
-      <div className="score"><span>{result.promptScore}</span><small>Prompt maturity</small></div>
-      <div>
-        {result.abstractionMap.map((item) => (
-          <article className="mapping" key={item.pattern}>
-            <strong>{item.pattern}</strong>
-            <span>{item.pythonConcept}</span>
-            <p>{item.explanation}</p>
-          </article>
-        ))}
-      </div>
-      <div className="code-block">
-        <div><Code2 size={18} /> Generated Python</div>
-        <pre>{result.generatedCode}</pre>
-        <p>{result.codeExplanation}</p>
-      </div>
-      <ul className="feedback">
-        {result.promptFeedback.map((item) => <li key={item}>{item}</li>)}
-      </ul>
-      {result.misconceptions.length > 0 && (
-        <div className="note">
-          <strong>Misconception watch</strong>
-          {result.misconceptions.map((item) => <p key={item}>{item}</p>)}
-        </div>
-      )}
-    </div>
   );
 }
 
