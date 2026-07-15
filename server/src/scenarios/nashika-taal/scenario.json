@@ -1,0 +1,16 @@
+{
+  "id": "nashika-taal",
+  "title": "Nashika Taal Engine",
+  "domain": "Music",
+  "domainCategory": "Music/Concurrency",
+  "philosophicalAnchor": "Three drummers playing at different intervals find synchronization at the LCM of their rhythms. In generators we trust the pattern, not the data—the drummer holds the rule and generates each beat from memory of form.",
+  "pythonConcept": "generators, yield, itertools, generator memory efficiency, LCM, threading, concurrency",
+  "difficultyLevel": 4,
+  "jonasanType": "Design Thinking Problem",
+  "targetConstructs": ["generators", "yield", "LCM", "lazy evaluation", "infinite sequences", "threading.Event"],
+  "briefDescription": "Simulate three Nashik Dhol players at Ganesh Chaturthi using generators for memory-efficient beat generation and threading for concurrent coordination.",
+  "theoryPillar": "Generators produce values lazily, one at a time, without storing entire sequences in memory. Yield suspends execution and maintains state between calls. This enables processing infinite sequences with bounded memory.",
+  "anchorPillar": "Player 1 strikes every 2nd beat, Player 2 every 3rd, Player 3 every 5th. The first synchronization is the LCM of 2, 3, 5 = 30. The drummer holds the pattern, not every beat.",
+  "triggerPillar": "A million-beat simulation with 64MB RAM constraint requires generators. Storing all beats would exceed memory. The drummer doesn't remember every beat—generates each from the rule.",
+  "realityPillar": "yield turns functions into generators. sys.getsizeof() compares memory footprints. threading.Event enables synchronization points. collections.deque with maxlen creates rolling windows. LCM computed from GCD."
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "level": 1,
+    "text": "A recursive function needs a base case. What is the complement of an empty DNA strand?"
+  },
+  {
+    "level": 2,
+    "text": "If the strand is not empty, process the first character, and recursively call the function on the rest of the string: strand[1:]."
+  },
+  {
+    "level": 3,
+    "text": "You might hit a RecursionError for very long strands. Use the `sys` module to inspect or change the recursion limit."
+  }
+]

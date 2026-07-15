@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of philosophical reasoning connecting the Buddhist monk's journey to reduce/fold operations. Does the learner articulate why reduce is called 'fold' that the journey (sequence) is folded into a single state (arrival)? Do they grasp the cumulative nature of state that each step's result depends on and contains all previous steps? Do they engage with the Buddhist concept of Pratityasamutpada (dependent origination)?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct implementation demonstrating: (1) functools.reduce with proper initial state, (2) accumulator functions that track state immutably, (3) multiple accumulators via tuple, (4) itertools.accumulate for lazy intermediate results, (5) map-reduce pattern. At least 4 different reduce applications: nucleotide counter, longest run, GC content, complementary strand, word frequency."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on the nature of fold operations and cumulative computation. Does the learner connect reduce to real-world problems (genomics, word count, statistics)? Do they engage with the philosophical question of journey vs destination? Do they understand map-reduce as a pattern, not just a library function?"
+  }
+}

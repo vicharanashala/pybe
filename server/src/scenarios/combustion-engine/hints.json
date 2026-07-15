@@ -1,0 +1,18 @@
+
+  {
+    "id": "hint-1",
+    "text": "Remember that an `async def` function is a coroutine. To run it, you cannot just call `run_cylinder(1)`. You need an event loop, usually started via `asyncio.run(main())`."
+  },
+  {
+    "id": "hint-2",
+    "text": "Never use the standard `time.sleep()` in an async function. It is a 'blocking' call and will freeze the entire event loop. Always use `await asyncio.sleep()`."
+  },
+  {
+    "id": "hint-3",
+    "text": "`asyncio.gather(coro1(), coro2(), ...)` takes multiple coroutines and schedules them to run concurrently on the event loop."
+  },
+  {
+    "id": "hint-4",
+    "text": "To offset the cylinders (firing order), you can await a small `asyncio.sleep()` at the very beginning of the `run_cylinder` function based on the cylinder's ID before starting the 4-stroke loop."
+  }
+]

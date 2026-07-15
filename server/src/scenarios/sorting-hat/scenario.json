@@ -1,0 +1,16 @@
+{
+  "id": "sorting-hat",
+  "title": "The Sorting Hat",
+  "domain": "Literature",
+  "domainCategory": "Literature/Harry Potter",
+  "philosophicalAnchor": "The Hat sees not where you come from but what you are—and what you might become. Binary search finds the nearest neighbor not by scanning all, but by halving the search space repeatedly.",
+  "pythonConcept": "binary search, bisect module, bisect_left, sorting, nearest neighbor, classification",
+  "difficultyLevel": 3,
+  "jonasanType": "Design Thinking Problem",
+  "targetConstructs": ["binary search", "bisect", "sorting", "search algorithm complexity", "classification"],
+  "briefDescription": "Rebuild the Sorting Hat using binary search to efficiently find the most similar past student for 3000 simultaneous enrolments.",
+  "theoryPillar": "Binary search repeatedly divides sorted data in half, achieving O(log n) search time instead of O(n) linear scan. Python's bisect module implements binary search on sorted lists.",
+  "anchorPillar": "Hogwarts has 200 past students with personality scores and house assignments. The Hat must quickly find the most similar past student for each new student. Checking all 200 is too slow for 3000 enrolments.",
+  "triggerPillar": "3000 students enrolling simultaneously. Each needs the most 'similar' past student for house assignment. Linear search O(n) is too slow. Binary search O(log n) solves the scalability problem.",
+  "realityPillar": "bisect_left finds insertion point for maintaining sorted order. House assignment based on highest personality score. Decision tree logic: bravery > 7 branches to Gryffindor/Slytherin. Similarity matching through score comparison."
+}

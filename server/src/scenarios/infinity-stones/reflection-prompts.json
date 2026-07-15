@@ -1,0 +1,4 @@
+[
+  "What is the advantage of hiding internal modules and only exposing specific functions in `__init__.py`?",
+  "How does organizing code into packages change the way multiple developers collaborate on a project?"
+]

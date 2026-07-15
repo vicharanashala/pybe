@@ -1,0 +1,6 @@
+
+  "What is 'Dependency Hell' and how exactly do virtual environments prevent it?",
+  "How does a virtual environment physically differ from a global Python installation on your hard drive?",
+  "Why is it a best practice to commit `requirements.txt` to version control, but strictly ignore the `.venv` directory?",
+  "How do modern tools like `poetry` or `uv` improve upon the standard `pip` + `venv` workflow?"
+]

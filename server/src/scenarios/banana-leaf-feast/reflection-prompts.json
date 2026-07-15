@@ -1,0 +1,5 @@
+
+  "How did you choose to keep track of the free and used blocks? Would your approach be fast enough if the leaf was 1 Gigabyte instead of 256 bytes?",
+  "What happens in your allocator if a guest asks for 10 bytes, but you only have two free blocks of 5 bytes each that are not adjacent? How does this map to real-world memory fragmentation?",
+  "Compare your 'First Fit' allocation (if you used it) with 'Best Fit' (finding the smallest free block that is large enough). What are the trade-offs of each approach?"
+]

@@ -1,0 +1,16 @@
+{
+  "id": "panchatantra-mirror",
+  "title": "The Panchatantra Mirror",
+  "domain": "Folklore",
+  "domainCategory": "Panchatantra",
+  "philosophicalAnchor": "The Panchatantra fables teach that true wisdom lies not in matching force with force, but in understanding the nature of your opponent. In coding, the metaclass is the mirror - it reflects the very nature of the class being defined, allowing you to enforce contracts not through runtime checks, but through the act of class creation itself.",
+  "pythonConcept": "Metaclasses, __new__, __init__, type(), ABC, abstractmethod",
+  "difficultyLevel": 4,
+  "jonasanType": "Concept",
+  "targetConstructs": ["dir()", "hasattr()", "getattr()", "__dict__", "inspect.getmembers()", "type()", "metaclass"],
+  "briefDescription": "Explore metaclasses and class creation in Python. Learn how to enforce contracts at class definition time using __new__, ABC, and custom metaclasses rather than runtime checks.",
+  "theoryPillar": "Python classes are themselves objects created by metaclasses. When you write `class MyClass: pass`, Python calls the metaclass's __new__ method to create the class object. This happens before any instances exist. The built-in `type` is the default metaclass for all regular classes. By overriding __new__ in a custom metaclass, you can inspect, validate, or modify class definitions at creation time.",
+  "anchorPillar": "The Panchatantra fable of the lion and the rabbit mirrors the relationship between classes and metaclasses. The rabbit didn't need to fight the lion directly - he used the lion's own reflection to defeat him. Similarly, metaclasses let you use the class's own structure against it, enforcing rules not through external checks but through the class's natural creation process.",
+  "triggerPillar": "A plugin crashes production because a developer subclassed PatientProcessor without implementing validate(). The error only appeared at runtime, two weeks after deployment. The challenge: design a base class that fails immediately at class definition time if a required method is missing, using either ABC or a custom metaclass.",
+  "realityPillar": "Metaclasses are used in production frameworks like Django (ModelBase), SQLAlchemy (DeclarativeMeta), and Pandas. They enable declarative APIs where class definition triggers automatic registration, validation, or transformation. Understanding metaclasses is essential for framework design and library development."
+}

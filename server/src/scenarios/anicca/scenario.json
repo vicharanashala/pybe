@@ -1,0 +1,16 @@
+{
+  "id": "anicca",
+  "title": "Anicca: The Trading System Crisis",
+  "domain": "Philosophy",
+  "domainCategory": "Philosophy/Buddhism",
+  "philosophicalAnchor": "The Buddhist concept of Anicca (impermanence) teaches that all conditioned phenomena arise and pass away. The with statement embodies this teaching by accepting transience and ensuring resources are automatically released when context ends, whether normally or via exception.",
+  "pythonConcept": "context managers, __enter__, __exit__, contextlib.contextmanager, contextlib.suppress, contextlib.closing",
+  "difficultyLevel": 2,
+  "jonasanType": "Structured Inquiry",
+  "targetConstructs": ["with statement", "context manager protocol", "__enter__", "__exit__", "contextlib"],
+  "briefDescription": "A high-frequency trading system crashes due to unclosed database connections. Using Buddhist philosophy as a guide, learn how Python's context managers ensure proper resource cleanup.",
+  "theoryPillar": "The Buddhist teaching of Anicca (impermanence) states that all conditioned phenomena arise and pass away. Nothing is permanent. The flame of a candle exists only as long as its conditions persist. When any condition fails, the flame extinguishes.",
+  "anchorPillar": "The with statement in Python embodies the teaching of impermanence: resources exist within a bounded context. When the context ends normally or via exception, the resource is automatically released. The with statement does not assume permanence; it accepts transience and ensures proper endings regardless of circumstances.",
+  "triggerPillar": "After 3 hours of running, the database crashes with 10,000 open, unclosed connections. The cleanup code was never reached because developers returned early on error conditions. The Buddhist teacher says: 'Clinging to the transient causes suffering.'",
+  "realityPillar": "Context managers implement the __enter__/__exit__ protocol. The @contextmanager decorator turns a generator into a context manager where code before yield runs in __enter__ and code after yield runs in __exit__. Nested context managers are cleaned up in LIFO order."
+}

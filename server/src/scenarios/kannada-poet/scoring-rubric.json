@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of philosophical reasoning connecting the LRU cache to the Kannada poet's assistant. Does the learner articulate why memory is finite and eviction policies are necessary not just in computing but in human cognition? Do they understand why O(1) lookup from a HashMap is fundamentally different from O(n) search, and why this matters for performance? Do they grasp the trade-off: cache hits are instant, but cache misses cost the full computation?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct implementation of an LRU cache using OrderedDict. The solution must demonstrate: (1) cache lookup using dict (O(1)), (2) move_to_end() on access to mark as most recently used, (3) popitem(last=False) to evict least recently used when capacity is exceeded, (4) cache miss handling that calls the expensive function, (5) correct capacity enforcement. Should produce timing evidence showing cache hits are faster than cache misses."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on caching as a universal optimization pattern. Does the learner identify real-world caches: Redis, Memcached, browser cache, CPU L1/L2/L3 caches? Do they engage with the philosophical dimension: what does it mean to 'remember' vs 'recompute'? Is a cached result the 'same' as a freshly computed result? How does the LRU policy compare to human memory do we too evict least recently used information? What are the ethics of cache eviction: who decides what gets forgotten?"
+  }
+}

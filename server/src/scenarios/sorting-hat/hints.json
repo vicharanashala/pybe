@@ -1,0 +1,22 @@
+
+  {
+    "level": 1,
+    "text": "How does the hat decide? If bravery is the highest score, what house should they be in?"
+  },
+  {
+    "level": 2,
+    "text": "Think of the hat's logic as a tree. First it asks: Is bravery > 7? If yes, branch left. If no, branch right."
+  },
+  {
+    "level": 3,
+    "text": "If you need to search 3000 students for a match, checking each one individually is slow (O(n)). How do you search a sorted list faster?"
+  },
+  {
+    "level": 4,
+    "text": "Look into the mathematical concept of Binary Search. It repeatedly divides the search interval in half."
+  },
+  {
+    "level": 5,
+    "text": "Python has a built-in module for binary search. Check out the `bisect` module, specifically `bisect_left`."
+  }
+]

@@ -1,0 +1,16 @@
+{
+  "id": "badminton-survivor",
+  "title": "The Badminton Survivor",
+  "domain": "Sports",
+  "domainCategory": "Sports/Data Science",
+  "philosophicalAnchor": "In the heat of competition, efficiency determines survival. The badminton survivor learns that storage optimization is not about keeping everything, but about keeping what matters and letting go of what doesn't.",
+  "pythonConcept": "numpy arrays, scipy.sparse, memory optimization, sparse matrices, CSR matrix",
+  "difficultyLevel": 2,
+  "jonasanType": "Design Thinking Problem",
+  "targetConstructs": ["numpy array", "scipy.sparse.csr_matrix", "memory optimization", "sparsity", "matrix pruning"],
+  "briefDescription": "Analyzing World Championship badminton data reveals the challenge of storing sparse data efficiently. Create a 10,000x10,000 grid for shuttlecock positions and optimize a neural network weight matrix.",
+  "theoryPillar": "Sparsity is a fundamental property of real-world data. Most entries in large matrices may be zero or near-zero. Storing dense matrices wastes memory when most values contribute nothing meaningful.",
+  "anchorPillar": "The badminton court divided into 10,000 sectors represents a sparse data problem: only 100 shuttlecock touches among 100,000,000 possible positions. Similarly, neural networks have many weights close to zero that can be pruned without affecting predictions.",
+  "triggerPillar": "A dense 10,000x10,000 matrix stores 100,000,000 values, almost all zero. The neural network has 25 million weights, many near zero. Memory exhaustion looms unless optimization is applied.",
+  "realityPillar": "scipy.sparse.csr_matrix stores only non-zero values with three arrays: data, indptr, and indices. Memory footprint comparison using .nbytes shows dramatic savings. Pruning weights below threshold and converting to sparse dramatically reduces storage."
+}

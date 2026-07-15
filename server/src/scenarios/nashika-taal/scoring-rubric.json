@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 35,
+    "description": "Quality of reasoning connecting the Nashik Dhol taal pattern to generator functions. Does the learner articulate why holding the formula (yield) is superior to holding the data (list) in memory-constrained contexts? Do they understand lazy evaluation as a design philosophy, not just a technique?"
+  },
+  "code": {
+    "weight": 40,
+    "description": "Correct implementation of generator functions with yield, memory comparison using sys.getsizeof(), threading with synchronisation via threading.Event, and ring buffer using collections.deque(maxlen=n). Code should demonstrate both the list approach and the generator approach for comparison."
+  },
+  "reflection": {
+    "weight": 25,
+    "description": "Depth of reflection on when lazy evaluation is appropriate, the trade-offs between memory and computation, and the parallels between musical rhythm patterns and computational patterns. Does the learner identify real-world applications of generators?"
+  }
+}

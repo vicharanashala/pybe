@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of reasoning about game theory concepts. Does the learner articulate why defection is rational in one-shot games but cooperation can emerge in iterated games? Do they understand the distinction between Nash equilibrium (stable) and Pareto optimal (best collective outcome)? Do they grasp the Folk Theorem: that any collectively irrational outcome can be sustained in repeated games via trigger strategies?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct implementation of: (1) payoff matrix as a proper data structure, (2) strategy functions using the Strategy pattern with history parameter, (3) simulation engine that runs multiple rounds, (4) at least 4 different strategies including Tit-for-Tat, (5) proper use of functions as first-class objects. Code should be clean, use type hints, and demonstrate understanding of data-driven design."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on the philosophical and practical implications of game theory. Does the learner connect the dilemma to real-world scenarios (markets, auctions, common-pool resources)? Do they engage meaningfully with the tension between individual and collective rationality? Do they consider how mechanism design can reshape incentives?"
+  }
+}

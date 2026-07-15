@@ -1,0 +1,7 @@
+
+  "typing.Protocol",
+  "def climb",
+  "steps: int",
+  "-> bool",
+  "def ascend"
+]

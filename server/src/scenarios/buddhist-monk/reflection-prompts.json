@@ -1,0 +1,7 @@
+
+  "The Buddhist monk's position at step n is not just the nth step it is the fold of all previous steps. How does this relate to reduce being called a 'fold' operation rather than a 'collect' or 'aggregate' operation?",
+  "In Pratityasamutpada (dependent origination), each moment arises from and contains all previous moments. How is this similar to or different from how reduce accumulates state?",
+  "If the monk teleported directly to the summit, would he have the same understanding as the monk who climbed? Does reduce capture the journey or just the destination?",
+  "Map-reduce splits computation into a map phase (independent transformations) and a reduce phase (folding results). What is the philosophical parallel to the monk's journey?",
+  "The monk's energy, position, and wisdom are all accumulated simultaneously. How does using a tuple as the accumulator state allow multiple accumulators in a single reduce?"
+]

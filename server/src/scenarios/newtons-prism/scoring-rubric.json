@@ -1,0 +1,14 @@
+{
+  "reasoning": {
+    "weight": 30,
+    "description": "Explains how bitmasks act as filters for extracting information."
+  },
+  "code": {
+    "weight": 40,
+    "description": "Correctly uses bitwise AND and right shift to extract the RGB components."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Understands the value of compact representation and bit-level manipulation."
+  }
+}

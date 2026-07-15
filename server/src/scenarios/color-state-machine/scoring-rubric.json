@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 30,
+    "description": "Understanding why state machines and enums provide safety over plain strings."
+  },
+  "code": {
+    "weight": 50,
+    "description": "Proper implementation of the Enum subclass and the state transition logic."
+  },
+  "reflection": {
+    "weight": 20,
+    "description": "Evaluation of code resilience when handling unknown states."
+  }
+}

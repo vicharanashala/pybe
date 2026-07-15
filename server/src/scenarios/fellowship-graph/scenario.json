@@ -1,0 +1,16 @@
+{
+  "id": "fellowship-graph",
+  "title": "The Fellowship's Graph",
+  "domain": "Literature",
+  "domainCategory": "Literature/LOTR",
+  "philosophicalAnchor": "Gandalf chose Moria—the shortest path—and it cost him dearly. Aragorn chose the longer road. Neither was wrong. Both were optimizing for different cost functions. The algorithm gives optimal paths; it cannot tell you which cost function is right.",
+  "pythonConcept": "graphs, adjacency dictionary, Dijkstra's algorithm, shortest path, priority queue, heapq",
+  "difficultyLevel": 4,
+  "jonasanType": "Dilemma",
+  "targetConstructs": ["graph representation", "adjacency dictionary", "Dijkstra's algorithm", "priority queue", "pathfinding"],
+  "briefDescription": "Navigate disaster relief logistics from Mumbai to Kolhapur using graph algorithms, confronting trade-offs between fastest and safest routes.",
+  "theoryPillar": "Graphs represent networks of connected nodes. Dijkstra's algorithm finds shortest paths by tracking best-known distances, always expanding the cheapest unexplored node first using a priority queue.",
+  "anchorPillar": "Seven cities connected by roads with travel times and risk probabilities. Mumbai to Kolhapur has multiple paths. The fastest route differs from the safest route. The algorithm cannot decide what cost function to optimize.",
+  "triggerPillar": "Disaster relief needs supplies delivered fast, but the fastest route has 60% bridge failure risk. The safest route takes much longer. People are running out of insulin. There is no route that is simultaneously fastest and safest.",
+  "realityPillar": "Adjacency dictionaries store network data. heapq provides priority queue operations heappush and heappop. Dijkstra's algorithm: start at source with cost 0, pop cheapest city, update neighbours, push updates. Dynamic updates handle road closures."
+}

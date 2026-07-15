@@ -1,0 +1,14 @@
+{
+  "reasoning": {
+    "weight": 35,
+    "description": "Clearly explains the difference between Python objects and C memory."
+  },
+  "code": {
+    "weight": 40,
+    "description": "Successfully uses ctypes to read memory from an object's id."
+  },
+  "reflection": {
+    "weight": 25,
+    "description": "Understands why abstraction is necessary, but also why breaking it is sometimes required."
+  }
+}

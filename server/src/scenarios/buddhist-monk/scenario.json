@@ -1,0 +1,16 @@
+{
+  "id": "buddhist-monk",
+  "title": "The Buddhist Monk",
+  "domain": "Philosophy",
+  "domainCategory": "Philosophy/Buddhism",
+  "philosophicalAnchor": "As the monk climbs the mountain, he carries the accumulated weight of every step. The journey is not just start and end—it is every intermediate state, folded into the next. Reduce teaches us that computation accumulates meaning through traversal.",
+  "pythonConcept": "functools.reduce, fold, accumulate, functional programming, iterator",
+  "difficultyLevel": 3,
+  "jonasanType": "Structured Inquiry",
+  "targetConstructs": ["reduce/fold pattern", "accumulator function", "initial state", "map-reduce", "functional programming"],
+  "briefDescription": "A Buddhist monk's mountain journey illustrates the fold pattern. Use reduce to count nucleotides, find longest DNA runs, and compute GC-content.",
+  "theoryPillar": "Reduce (also called fold) takes a sequence and a function, applying the function cumulatively: reduce(f, [a, b, c, d]) = f(f(f(a, b), c), d). The function takes accumulated state and next element, returning new accumulated state.",
+  "anchorPillar": "At step i, the monk's state is a fold of all previous steps: accumulated exhaustion, current altitude, understanding of terrain, intention to continue. His arrival does not erase the journey—the journey is contained within the arrival.",
+  "triggerPillar": "Genomic research requires computing statistics that fold over sequences: nucleotide frequency, longest homopolymer runs, GC-content, complementary strands. Each folds through the sequence accumulating results.",
+  "realityPillar": "functools.reduce takes a function, iterable, and optional initial value. The accumulator function updates state at each step. itertools.accumulate produces intermediate results. Initial state and state representation are key design decisions."
+}

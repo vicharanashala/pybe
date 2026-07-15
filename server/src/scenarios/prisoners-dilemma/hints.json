@@ -1,0 +1,34 @@
+
+  {
+    "level": 1,
+    "text": "How would you represent the payoff matrix as a Python data structure? A dictionary of dictionaries, or a list of lists? What are the keys and values?"
+  },
+  {
+    "level": 2,
+    "text": "Each strategy should be a function that takes a 'history' parameter (a list of previous rounds) and returns either 'C' or 'D'. Can you write a function that always returns 'C'?"
+  },
+  {
+    "level": 3,
+    "text": "For Tit-for-Tat: if history is empty, what should you return? If history has at least one round, what was the opponent's last choice?"
+  },
+  {
+    "level": 4,
+    "text": "To simulate 100 rounds, you need a loop. In each iteration, call both strategies with the accumulated history, then append the result to history."
+  },
+  {
+    "level": 5,
+    "text": "The Nash equilibrium: in a one-shot game, no matter what your opponent does, you get a better outcome by defecting. Try calculating your payoff for both choices against each opponent strategy."
+  },
+  {
+    "level": 6,
+    "text": "Against Always-Defector: if you cooperate, you get 0. If you defect, you get 1. Is 1 > 0? Is this the best response?"
+  },
+  {
+    "level": 7,
+    "text": "But if both cooperated against Always-Defector, you'd get 3 each round. Why is that outcome impossible to achieve?"
+  },
+  {
+    "level": 8,
+    "text": "The 'tragedy' is that (D, D) is stable -- neither player can improve by changing strategy alone -- but (C, C) gives both a better payoff. This is the Prisoner's Dilemma paradox."
+  }
+]

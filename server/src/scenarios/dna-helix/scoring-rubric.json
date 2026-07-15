@@ -1,0 +1,14 @@
+{
+  "reasoning": {
+    "weight": 30,
+    "description": "Clearly explains the role of the base case and the call stack."
+  },
+  "code": {
+    "weight": 40,
+    "description": "Correctly implements the recursive complementary function and handles RecursionError."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Reflects on the limitations of physical hardware in executing abstract infinite concepts."
+  }
+}

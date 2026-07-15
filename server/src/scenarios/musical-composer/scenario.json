@@ -1,0 +1,16 @@
+{
+  "id": "musical-composer",
+  "title": "The Musical Composer",
+  "domain": "Music",
+  "domainCategory": "Music/Functional Programming",
+  "philosophicalAnchor": "The composer thinks in transformations—map each note higher, filter out the inaudible, reduce to total duration. This is functional programming as musical composition: pipeline the data through pure transformations.",
+  "pythonConcept": "map, filter, functools.reduce, lambda functions, functional programming, pipeline",
+  "difficultyLevel": 2,
+  "jonasanType": "Structured Inquiry",
+  "targetConstructs": ["map", "filter", "reduce", "lambda", "functional pipeline", "first-class functions"],
+  "briefDescription": "Build a digital synthesizer backend using map, filter, and reduce to transform musical note sequences.",
+  "theoryPillar": "Map applies a function to each element, producing a transformed sequence. Filter removes elements based on a predicate. Reduce accumulates elements into a single result. Together they form a functional pipeline.",
+  "anchorPillar": "The composer wants to transpose melodies (double frequencies), remove inaudible notes (20-20000 Hz range), and calculate total duration. Each operation is a pure function transforming the data.",
+  "triggerPillar": "Note dictionaries contain frequency and duration. Transposing doubles frequency. Notes outside human hearing should be discarded. Total track duration requires summing all valid note durations.",
+  "realityPillar": "map(lambda note: {...}, notes) applies transformations. filter(lambda n: 20 <= n['frequency'] <= 20000, notes) removes invalid notes. reduce(lambda acc, n: acc + n['duration'], notes, 0) sums durations."
+}

@@ -1,0 +1,16 @@
+{
+  "id": "prisoners-dilemma",
+  "title": "The Prisoner's Dilemma",
+  "domain": "Philosophy",
+  "domainCategory": "Philosophy/Game Theory",
+  "philosophicalAnchor": "The dilemma has no right answer—that is what makes it a dilemma. But computation gives us tools to reason rigorously about it, to see why the paradox is hard and how it illuminates strategic interaction.",
+  "pythonConcept": "game theory, payoff matrix, Nash equilibrium, strategy pattern, simulation, nested dictionaries",
+  "difficultyLevel": 3,
+  "jonasanType": "Dilemma",
+  "targetConstructs": ["game theory", "payoff matrix", "Nash equilibrium", "strategy pattern", "simulation", "nested dictionaries"],
+  "briefDescription": "Explore the classic Prisoner's Dilemma through computational modeling, implementing multiple strategies and discovering Nash equilibria.",
+  "theoryPillar": "The Prisoner's Dilemma: both players defecting (D,D) is the Nash equilibrium—no player can improve by unilaterally changing strategy. Yet (C,C) gives both a better payoff, making it Pareto superior but unstable.",
+  "anchorPillar": "The trading floor: Cooperate (C) accepts modest fair profit, Defect (D) attempts larger profit at other's expense. Payoff matrix: (C,C)=3,3; (C,D)=0,5; (D,C)=5,0; (D,D)=1,1.",
+  "triggerPillar": "Four opponent types: Always-Cooperator, Always-Defector, Randomist, Tit-for-Tatter. Against Always-Defector, your best response is to defect even though both cooperating would be better—a paradox of individual vs collective rationality.",
+  "realityPillar": "Payoff matrix as nested dict: payoff_matrix[(C,D)][you]. Strategy functions take history and return C or D. Tit-for-Tat cooperates first, then mirrors opponent's last move. 100-round simulation loops accumulate payoffs."
+}

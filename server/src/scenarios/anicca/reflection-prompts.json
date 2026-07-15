@@ -1,0 +1,7 @@
+
+  "The Buddhist teaching of Anicca says clinging to the transient causes suffering. In Python, what does 'clinging' to resources (not closing files, not releasing locks) cause in terms of bugs and system behavior?",
+  "Why does the with statement guarantee cleanup while try-finally, even when theoretically correct, frequently fails in practice? What is the psychological or practical difference?",
+  "When __exit__ receives exception information, it can either propagate the exception (by returning False) or suppress it (by returning True). Why might you want to suppress certain exceptions in a context manager?",
+  "The Buddhist concept of dependent origination (Pratityasamutpada) says things arise dependent on conditions and pass when conditions change. How does the generator-based context manager (@contextmanager) mirror this where the 'yield' is the dependent arising and the cleanup after yield is the passing?",
+  "In what ways is the LIFO (Last In, First Out) cleanup order of nested context managers philosophically similar to how Buddhist practice works each layer of practice building on and depending on the previous layer?"
+]

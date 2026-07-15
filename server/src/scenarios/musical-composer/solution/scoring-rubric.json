@@ -1,0 +1,27 @@
+{
+  "weights": {
+    "reasoning": 0.40,
+    "code": 0.30,
+    "reflection": 0.30
+  },
+  "criteria": {
+    "reasoning": [
+      "Explains generators and lazy evaluation concept",
+      "Describes yield statement and generator state",
+      "Connects taal pattern to generator formula metaphor",
+      "Understands memory efficiency of generators vs lists"
+    ],
+    "code": [
+      "Implements generator function with yield",
+      "Uses next() to pull values from generator",
+      "Demonstrates infinite generator with while True",
+      "Shows sys.getsizeof() comparison between generator and list"
+    ],
+    "reflection": [
+      "Connects to range() being lazy in Python 3",
+      "Mentions file reading line-by-line with generators",
+      "Discusses deque for ring buffer pattern",
+      "Reflects on real-world generator use cases"
+    ]
+  }
+}

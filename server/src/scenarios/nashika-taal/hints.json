@@ -1,0 +1,22 @@
+
+  {
+    "level": 1,
+    "text": "When three events repeat at different intervals, the first time they all coincide is related to a concept from basic number theory. What operation on two numbers gives you the smallest number that both divide into evenly?"
+  },
+  {
+    "level": 2,
+    "text": "A regular function computes everything at once and returns a result. But what if a function could pause, hand you one value, and resume where it left off when you ask for the next one?"
+  },
+  {
+    "level": 3,
+    "text": "The keyword 'yield' turns a function into something different something that remembers its state between calls and produces values one at a time. What is this called?"
+  },
+  {
+    "level": 4,
+    "text": "To measure how much memory a data structure uses, Python has a function in the sys module. Compare the memory of a list with a million items to the memory of a generator that can produce a million items."
+  },
+  {
+    "level": 5,
+    "text": "To run three independent loops simultaneously, look at the threading module. To make threads wait for each other at specific points, look at threading.Event one thread signals, others wait."
+  }
+]

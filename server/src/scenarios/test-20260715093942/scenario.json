@@ -1,0 +1,16 @@
+{
+  "id": "test-20260715093942",
+  "title": "Test Scenario 093942",
+  "domain": "Science",
+  "domainCategory": "",
+  "philosophicalAnchor": "This is a test philosophical anchor that is long enough to pass validation with over 50 characters for deep explanation.",
+  "pythonConcept": "Variables and Data Types",
+  "difficultyLevel": 2,
+  "jonasanType": "Structured Inquiry",
+  "targetConstructs": [],
+  "briefDescription": "",
+  "theoryPillar": "Theory pillar content here - explaining why this matters deeply in a philosophical context.",
+  "anchorPillar": "Anchor pillar content here - showing interdisciplinary mapping to the domain.",
+  "triggerPillar": "Trigger pillar content here - explaining how the case study forces discovery of the concept.",
+  "realityPillar": "Reality pillar content here - connecting to real engineering practices and production patterns."
+}

@@ -1,0 +1,16 @@
+{
+  "id": "social-exchange-api",
+  "title": "The Social Exchange API",
+  "domain": "General",
+  "domainCategory": "General/REST API",
+  "philosophicalAnchor": "The village square gives way to digital registry. What was shouted now travels as JSON. The API is the ceremony of exchange—structured, predictable, and fair.",
+  "pythonConcept": "Flask, REST API, routes, HTTP methods, request.json, jsonify, status codes",
+  "difficultyLevel": 2,
+  "jonasanType": "Design Thinking Problem",
+  "targetConstructs": ["Flask routes", "REST API", "GET", "POST", "PUT", "DELETE", "jsonify", "request handling"],
+  "briefDescription": "Build a REST API for a village barter system using Flask, managing items with full CRUD operations.",
+  "theoryPillar": "REST APIs use HTTP methods as verbs: GET retrieve, POST create, PUT update, DELETE remove. Each returns appropriate status codes: 200 OK, 201 Created, 404 Not Found.",
+  "anchorPillar": "Village barter system replaces shouting in the square with digital registry. Items have id, name, quantity, owner. The API provides structured exchange through well-defined endpoints.",
+  "triggerPillar": "Villagers need to list items, add new items, update quantities, and remove traded items. The API must handle errors gracefully and return meaningful status codes.",
+  "realityPillar": "@app.route('/items', methods=['POST']) creates items. request.json accesses body. jsonify() serializes responses. Global registry dict with counter for unique IDs. 201 for creation, 404 for missing items."
+}

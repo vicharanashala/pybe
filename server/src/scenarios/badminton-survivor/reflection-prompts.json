@@ -1,0 +1,5 @@
+
+  "How much memory did you save on the badminton court by switching to a sparse matrix? What is the mathematical explanation for this saving?",
+  "If your neural network matrix was completely filled with values greater than your threshold (no zeroes), what would happen to the memory usage if you converted it to a CSR sparse matrix? Would it use less, the same, or more memory than the dense version?",
+  "How does pruning a neural network affect the accuracy of its predictions versus the speed of its calculations?"
+]

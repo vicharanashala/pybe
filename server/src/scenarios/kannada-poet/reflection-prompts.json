@@ -1,0 +1,5 @@
+
+  "Why is a HashMap (dictionary) used for caching instead of a List? Consider the time complexity of searching for a topic.",
+  "Why do we need an OrderedDict instead of a standard Python dictionary? Note: Since Python 3.7, standard dicts retain insertion order, but OrderedDict provides methods specifically useful for LRU caches.",
+  "How would you change your code to use Python's built-in `@functools.lru_cache` decorator? Try rewriting your `compose_poem` function using this decorator instead of your custom class."
+]

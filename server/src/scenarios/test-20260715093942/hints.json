@@ -1,0 +1,14 @@
+[
+  {
+    "level": 1,
+    "text": "Can you think about what the object knows about itself?"
+  },
+  {
+    "level": 2,
+    "text": "Is there a built-in way to list all attributes of an object?"
+  },
+  {
+    "level": 3,
+    "text": "What if you could ask the object to describe itself first?"
+  }
+]

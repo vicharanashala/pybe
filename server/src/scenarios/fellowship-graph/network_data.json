@@ -1,0 +1,15 @@
+
+  "nodes": ["Mumbai", "Pune", "Satara", "Sangli", "Solapur", "Karad", "Kolhapur"],
+  "edges": [
+    {"from": "Mumbai", "to": "Pune", "time": 3, "risk": 0.05},
+    {"from": "Mumbai", "to": "Solapur", "time": 7, "risk": 0.10},
+    {"from": "Pune", "to": "Satara", "time": 2, "risk": 0.15},
+    {"from": "Pune", "to": "Karad", "time": 4, "risk": 0.60},
+    {"from": "Satara", "to": "Kolhapur", "time": 3, "risk": 0.20},
+    {"from": "Satara", "to": "Sangli", "time": 2, "risk": 0.10},
+    {"from": "Sangli", "to": "Kolhapur", "time": 2, "risk": 0.05},
+    {"from": "Karad", "to": "Kolhapur", "time": 1, "risk": 0.50},
+    {"from": "Solapur", "to": "Sangli", "time": 3, "risk": 0.08},
+    {"from": "Solapur", "to": "Kolhapur", "time": 5, "risk": 0.03}
+  ]
+}

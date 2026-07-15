@@ -1,0 +1,14 @@
+{
+  "reasoning": {
+    "weight": 30,
+    "description": "Explains the purpose of packages in organizing large codebases."
+  },
+  "code": {
+    "weight": 50,
+    "description": "Correctly sets up a directory structure, modules, and a working __init__.py."
+  },
+  "reflection": {
+    "weight": 20,
+    "description": "Reflects on the concept of a 'public API' versus internal implementations."
+  }
+}

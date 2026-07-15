@@ -1,0 +1,18 @@
+
+  {
+    "id": "hint-1",
+    "text": "In Flask, you define routes using the `@app.route()` decorator. By default, routes only accept GET requests. To accept other methods, use `@app.route('/items', methods=['POST'])`."
+  },
+  {
+    "id": "hint-2",
+    "text": "To read JSON data sent in a POST or PUT request, use `request.json` from the `flask` module."
+  },
+  {
+    "id": "hint-3",
+    "text": "To return JSON responses, you can use Flask's `jsonify()` function. For example: `return jsonify({\"message\": \"Success\"}), 201`."
+  },
+  {
+    "id": "hint-4",
+    "text": "Use a global Python dictionary (e.g., `registry = {}`) to store the items in-memory. Use a counter variable to generate unique IDs for new items."
+  }
+]

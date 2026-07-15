@@ -1,0 +1,21 @@
+{
+  "id": "buddhist-garbage-collector",
+  "title": "The Buddhist Garbage Collector",
+  "domain": "Philosophy",
+  "domainCategory": "Buddhism",
+  "philosophicalAnchor": "In Buddhist philosophy, suffering arises from attachment. The tighter we cling to things, the heavier our burden becomes. In memory management, a memory leak occurs when a program clings to objects it no longer needs via strong references. The Python Garbage Collector is the mechanism of letting go. A weak reference is the ultimate Buddhist act in coding: acknowledging an object's existence without clinging to it.",
+  "pythonConcept": "Garbage Collection, Reference Counting, weakref",
+  "difficultyLevel": 4,
+  "jonasanType": "Concept",
+  "targetConstructs": [
+    "gc",
+    "sys.getrefcount",
+    "weakref",
+    "del"
+  ],
+  "briefDescription": "Understand Python's memory management by exploring reference counting and the garbage collector. Learn how to use weak references to avoid memory leaks caused by circular attachments.",
+  "theoryPillar": "Python uses reference counting as its primary memory management strategy. When an object's reference count drops to zero, it is destroyed. However, circular references (Object A points to B, and B points to A) prevent the count from reaching zero. The `gc` module periodically hunts down and breaks these cycles.",
+  "anchorPillar": "To prevent circular references from tying up memory indefinitely, we use the `weakref` module. A weak reference allows you to 'look' at an object without increasing its reference count. When the strong references disappear, the weak reference gracefully becomes None.",
+  "triggerPillar": "Create two objects that reference each other, forming a cycle. Observe how they survive a `del` statement. Then, refactor the code using `weakref` to allow the objects to pass on peacefully.",
+  "realityPillar": "Memory leaks in long-running Python applications (like web servers) often stem from unintended global references or caching layers creating circular dependencies. Caching mechanisms heavily utilize weak references to allow objects to be garbage collected when memory is tight."
+}

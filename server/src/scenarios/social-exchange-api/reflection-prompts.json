@@ -1,0 +1,5 @@
+
+  "Why is it a bad idea to use a GET request to create or delete an item? Think about web crawlers and browser caching.",
+  "In this scenario, data is stored in a Python dictionary. What happens to the barter registry if the Flask server restarts? How would you solve this in a real-world application?",
+  "What is the difference between PUT and PATCH in REST API design? Did your update endpoint replace the entire item or just modify specific fields?"
+]

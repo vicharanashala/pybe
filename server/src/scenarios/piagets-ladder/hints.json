@@ -1,0 +1,18 @@
+
+  {
+    "level": 1,
+    "text": "A Protocol is defined similarly to a regular class, but it inherits from `typing.Protocol`."
+  },
+  {
+    "level": 2,
+    "text": "Inside the `Climbable` Protocol, define the `climb` method, but you don't need to write the implementation. You can just use `...` (an ellipsis) or `pass` in the body."
+  },
+  {
+    "level": 3,
+    "text": "When writing `Ladder` and `Mountain`, do not add `(Climbable)` to their class definitions. Just implement the methods. Mypy will check the structure automatically."
+  },
+  {
+    "level": 4,
+    "text": "Make sure your type hints exactly match: `def climb(self, steps: int) -> bool:`"
+  }
+]

@@ -1,5 +1,92 @@
-node_modules/
-client/dist/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Environments
 .env
-npm-debug.log*
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# macOS
 .DS_Store
+
+# GitHub Actions
+.github/
+
+# Server
+instance/
+*.db
+*.sqlite
+*.sqlite3
+server.log
+server/__pycache__/
+server/src/__pycache__/
+server/src/routes/__pycache__/
+server/src/services/__pycache__/
+server/src/middleware/__pycache__/
+
+# Client
+client/node_modules/
+client/dist/
+client/.vite/
+client/.parcel-cache/
+client/client.log

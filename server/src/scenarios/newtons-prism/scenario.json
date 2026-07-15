@@ -1,0 +1,24 @@
+{
+  "id": "newtons-prism",
+  "title": "Newton's Prism",
+  "domain": "Physics",
+  "domainCategory": "Optics",
+  "philosophicalAnchor": "Isaac Newton showed that white light is not a fundamental color, but a combination of all colors. A prism separates them. In the digital world, an integer is not just a number, but a combination of bits. Bitwise operators are the computational prism, isolating, extracting, and manipulating the elemental truths hidden within a single integer.",
+  "pythonConcept": "Bitwise Operators, Masks, Shifts",
+  "difficultyLevel": 3,
+  "jonasanType": "Concept",
+  "targetConstructs": [
+    "&",
+    "|",
+    "^",
+    "~",
+    "<<",
+    ">>",
+    "bin()"
+  ],
+  "briefDescription": "Use bitwise operations to dissect integers just as a prism dissects light. Learn how to use bitmasks to read and modify specific bits.",
+  "theoryPillar": "Data in a computer is fundamentally binary. Bitwise operators act directly on these bits. The AND operator (&) acts as a filter, allowing us to check if specific bits are set. The OR operator (|) acts as an additive force, setting bits. XOR (^) acts as a toggle. Bit shifts (<<, >>) multiply or divide by powers of two.",
+  "anchorPillar": "Imagine a single 8-bit integer representing an RGBA color or a set of permission flags. By applying a bitmask, we can isolate the 'Red' bits, just as a red filter isolates red light.",
+  "triggerPillar": "You receive a compressed 16-bit integer where the first 5 bits represent red, the next 6 represent green, and the last 5 represent blue. Write code using bitwise operators to extract the individual R, G, and B components.",
+  "realityPillar": "Bitwise operations are crucial in low-level systems programming, cryptography, network routing (subnet masking), and graphics programming. They provide immense performance benefits and allow highly compact data storage."
+}

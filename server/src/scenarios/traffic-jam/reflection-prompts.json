@@ -1,0 +1,7 @@
+
+  "The traffic jam is an emergent phenomenon where individual optimization leads to collective suboptimal outcomes. How does this relate to race conditions in concurrent programs? What is the 'tragedy of the commons' in thread synchronization terms?",
+  "Four conditions must hold for deadlock: mutual exclusion, hold and wait, no preemption, and circular wait. If you could break only one condition to prevent deadlock, which would you choose and why?",
+  "The philosopher's question: if a thread acquires a lock and then calls a function that tries to acquire the same lock again, what happens with a regular Lock versus an RLock? Why does this matter for recursive algorithms?",
+  "Is it better to have coarse-grained locking (one big lock) or fine-grained locking (many small locks)? What are the tradeoffs between safety (coarse) and performance (fine)?",
+  "queue.Queue handles all synchronization internally. When you use it, you don't need explicit locks. What are the philosophical parallels between using a pre-built thread-safe queue and accepting social conventions to avoid traffic jams?"
+]

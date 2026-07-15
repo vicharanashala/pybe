@@ -1,0 +1,14 @@
+{
+  "reasoning": {
+    "weight": 35,
+    "description": "Clearly articulates how reference counting works and why circular references are problematic."
+  },
+  "code": {
+    "weight": 40,
+    "description": "Successfully implements a circular reference and fixes it using weakref."
+  },
+  "reflection": {
+    "weight": 25,
+    "description": "Draws meaningful parallels between software memory management and philosophical attachment."
+  }
+}

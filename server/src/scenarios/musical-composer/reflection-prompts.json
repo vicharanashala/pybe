@@ -1,0 +1,6 @@
+
+  "How does a functional pipeline (map -> filter -> reduce) differ in readability from a standard for-loop?",
+  "In Python, `map` and `filter` return iterators. Why is this more memory efficient than returning lists?",
+  "When might a list comprehension or generator expression be considered more 'Pythonic' than `map` and `filter`?",
+  "How does avoiding mutable state help when scaling this application to process millions of notes concurrently?"
+]

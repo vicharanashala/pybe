@@ -1,0 +1,27 @@
+{
+  "weights": {
+    "reasoning": 0.40,
+    "code": 0.30,
+    "reflection": 0.30
+  },
+  "criteria": {
+    "reasoning": [
+      "Explains why Python objects are C structs underneath",
+      "Describes the relationship between id() and memory addresses",
+      "Connects Maslow's hierarchy to software abstraction layers",
+      "Understands that high-level Python depends on low-level C"
+    ],
+    "code": [
+      "Uses ctypes.c_long.from_address to read memory",
+      "Correctly uses id() to get object memory addresses",
+      "Demonstrates reference counting with sys.getrefcount",
+      "Shows how to read raw C data types from Python"
+    ],
+    "reflection": [
+      "Connects to libraries like NumPy and TensorFlow that use C/C++",
+      "Reflects on why ctypes exists (Python-C bridging)",
+      "Discusses the philosophical layering of abstractions",
+      "Thinks about when dropping to C level is necessary"
+    ]
+  }
+}

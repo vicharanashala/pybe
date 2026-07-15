@@ -1,0 +1,16 @@
+{
+  "id": "traffic-jam",
+  "title": "The Traffic Jam",
+  "domain": "General",
+  "domainCategory": "General/Concurrency",
+  "philosophicalAnchor": "A narrow bridge needs a traffic light. Without coordination, cars crash or deadlock. With proper synchronization, order emerges from chaos. But too many locks bring gridlock; too few bring collision.",
+  "pythonConcept": "threading, Lock, RLock, deadlock, race condition, critical section, queue.Queue, Semaphore, synchronization",
+  "difficultyLevel": 3,
+  "jonasanType": "Design Thinking Problem",
+  "targetConstructs": ["threading.Lock", "race condition", "deadlock", "critical section", "mutex", "queue.Queue", "synchronization primitives"],
+  "briefDescription": "Build a thread-safe URL queue for a web crawler using Python's threading module, preventing race conditions and deadlocks.",
+  "theoryPillar": "Race conditions occur when threads access shared state simultaneously. Critical sections must be protected by locks. Deadlock occurs when threads hold locks while waiting for each other in circular dependency.",
+  "anchorPillar": "The one-lane bridge metaphor: without traffic light (lock), cars crash (data corruption), no one moves (deadlock), some push through (race conditions). With lock, one direction goes, others wait.",
+  "triggerPillar": "UnsafeURLQueue with 10 threads: two threads add same URL (duplicates), one reads while another modifies (IndexError), list grows without bound. Thread-safe synchronization is essential.",
+  "realityPillar": "threading.Lock provides mutual exclusion. with lock: ensures release on exit. Four conditions for deadlock: mutual exclusion, hold and wait, no preemption, circular wait. Break any to prevent. queue.Queue is thread-safe internally."
+}

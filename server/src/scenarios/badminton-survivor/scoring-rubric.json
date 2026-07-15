@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of philosophical reasoning connecting matrix sparsity to neural network pruning. Does the learner articulate why dense representations are wasteful when most values are zero, and why sparsity is not a loss of information but an optimization? Do they understand the parallel between the badminton observer recording only landing spots (sparse) vs marking the entire court (dense), and how neural pruning removes weights that contribute nothing? Do they grasp that pruning is not destroying the network but distilling it?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct implementation demonstrating: (1) dense numpy array creation for court representation, (2) scipy.sparse.csr_matrix conversion and memory comparison, (3) threshold-based neural pruning that zeroes weak weights, (4) verification that sparse matrix multiplication skips zeroes. Should show measurable memory savings and correctly identify which weights to prune based on threshold."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on the trade-offs between dense and sparse representations. Does the learner connect sparsity to real-world ML optimization (LLM pruning, mobile deployment)? Do they consider the philosophical question: is the pruned network the 'same' network, or a different one? How does this relate to compression and information theory when you remove zeroes, are you losing information or removing noise?"
+  }
+}

@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of philosophical reasoning connecting biological protein inheritance to Python OOP. Does the learner articulate why inheritance is a form of code reuse that mirrors nature's blueprints? Do they understand that a base class defines the universal properties (sequence, molecular weight) while subclasses define specialized behavior (structural support vs catalytic action)? Do they grasp that polymorphism allows different types to be treated uniformly iterating through mixed proteins and calling perform_function() on each, regardless of which subclass it is?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct implementation of protein class hierarchy with inheritance and polymorphism. The solution must demonstrate: (1) base Protein class with __init__, name, sequence, and perform_function(), (2) StructuralProtein subclass using super().__init__() and overriding perform_function(), (3) EnzymeProtein subclass similarly structured, (4) a list of mixed proteins iterated through, calling perform_function() on each demonstrating that different behaviors emerge from the same method call. Code should show proper method overriding and polymorphic behavior."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on OOP as a modeling tool for real-world complexity. Does the learner connect inheritance to biological taxonomy (Kingdom > Phylum > Class > Order > Family > Genus > Species)? Do they consider the dangers of inheritance misuse: deep hierarchies that are brittle, the diamond problem, favoring composition over inheritance? How does polymorphism enable open-closed principle extending behavior without modifying existing code? In biological terms, if every protein shares a common ancestor, what does this say about the unity of life?"
+  }
+}

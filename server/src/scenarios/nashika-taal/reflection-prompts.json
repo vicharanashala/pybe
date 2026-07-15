@@ -1,0 +1,6 @@
+
+  "A drummer does not memorise every beat of a three-hour performance the drummer internalises the rule. When does your code benefit from holding the rule instead of the result?",
+  "What is the cost of laziness? Generators save memory, but each value must be recomputed if needed again. When is this trade-off worth it, and when is it not?",
+  "Three drummers playing simultaneously must synchronise without a conductor. How does this relate to threads coordinating without a central controller?",
+  "Where in your daily digital life are you experiencing lazy evaluation without knowing it scrolling through social media, streaming music, loading a webpage?"
+]

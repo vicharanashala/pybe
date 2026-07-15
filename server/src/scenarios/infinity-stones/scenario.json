@@ -1,0 +1,21 @@
+{
+  "id": "infinity-stones",
+  "title": "The Infinity Stones",
+  "domain": "Pop Culture",
+  "domainCategory": "Marvel Cinematic Universe",
+  "philosophicalAnchor": "Individually, the Infinity Stones are incredibly powerful. But they are scattered, difficult to manage, and their true potential is unlocked only when housed together in the Infinity Gauntlet. In Python, individual `.py` files (modules) are powerful, but a large system needs organization. The `__init__.py` file acts as the Gauntlet, binding scattered modules into a unified, controllable Package.",
+  "pythonConcept": "Packages, Modules, __init__.py",
+  "difficultyLevel": 2,
+  "jonasanType": "Concept",
+  "targetConstructs": [
+    "import",
+    "from ... import",
+    "__init__.py",
+    "__all__"
+  ],
+  "briefDescription": "Learn how to organize multiple Python scripts into a cohesive package using `__init__.py`, just as the Infinity Gauntlet unites the Infinity Stones.",
+  "theoryPillar": "A Python module is just a file ending in `.py`. A Python package is a directory containing modules and a special file named `__init__.py`. This file tells Python that the directory should be treated as a package, allowing you to control what gets exposed when someone imports your package.",
+  "anchorPillar": "We create a directory called `gauntlet` with individual files for `space.py`, `time.py`, etc. The `__init__.py` file will import specific functions from these stones, presenting a clean, unified API to the outside world.",
+  "triggerPillar": "Create a package named `gauntlet`. Inside it, create several modules representing stones. Use the `__init__.py` file to define what functions are available when a user simply types `from gauntlet import *`.",
+  "realityPillar": "Every major Python library you use\u2014Pandas, Django, Requests\u2014is structured as a package. `__init__.py` is the architectural cornerstone of scalable Python codebases, allowing developers to refactor internal files without breaking the public API."
+}

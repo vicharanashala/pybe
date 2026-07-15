@@ -1,0 +1,14 @@
+[
+  {
+    "level": 1,
+    "text": "The `id()` function in CPython returns the actual memory address of the object."
+  },
+  {
+    "level": 2,
+    "text": "An integer in CPython is represented by a struct `PyLongObject`. The actual value is stored at an offset from the base address."
+  },
+  {
+    "level": 3,
+    "text": "Use `ctypes.cast()` along with `ctypes.c_int` and `ctypes.POINTER` to read the raw memory at a specific address."
+  }
+]

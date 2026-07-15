@@ -1,0 +1,27 @@
+{
+  "weights": {
+    "reasoning": 0.40,
+    "code": 0.30,
+    "reflection": 0.30
+  },
+  "criteria": {
+    "reasoning": [
+      "Explains functional programming paradigm vs imperative",
+      "Describes how map/filter/reduce transform data pipelines",
+      "Connects music composition metaphor to functional concepts",
+      "Understands lazy evaluation and why it matters for large data"
+    ],
+    "code": [
+      "Correctly uses map() to transform note data",
+      "Correctly uses filter() to remove out-of-range frequencies",
+      "Correctly uses reduce() to aggregate total duration",
+      "Uses lambda functions appropriately in the pipeline"
+    ],
+    "reflection": [
+      "Connects to PySpark and data processing pipelines",
+      "Mentions range() as lazy sequence in Python 3",
+      "Discusses when map/filter/reduce vs list comprehensions",
+      "Reflects on functional programming in modern Python"
+    ]
+  }
+}

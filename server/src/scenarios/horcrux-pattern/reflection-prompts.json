@@ -1,0 +1,4 @@
+[
+  "Why does the Python documentation explicitly warn never to unpickle data from an untrusted source?",
+  "If JSON cannot store complex objects natively, why is it the dominant format for APIs instead of Pickle?"
+]

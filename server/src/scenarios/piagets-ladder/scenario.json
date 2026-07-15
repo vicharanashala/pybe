@@ -1,0 +1,16 @@
+{
+  "id": "piagets-ladder",
+  "title": "Piaget's Ladder",
+  "domain": "Psychology",
+  "domainCategory": "Psychology/Cognitive Development",
+  "philosophicalAnchor": "Piaget observed that children categorize objects by structural properties—what things do, not what they are called. Python's Protocol allows the same insight: objects are defined by their behavior, not their inheritance.",
+  "pythonConcept": "Protocol, structural subtyping, typing.Protocol, duck typing, type hints, mypy",
+  "difficultyLevel": 2,
+  "jonasanType": "Structured Inquiry",
+  "targetConstructs": ["Protocol", "structural typing", "duck typing", "type hints", "mypy", "Protocol definition"],
+  "briefDescription": "Learn structural subtyping using Python's Protocol class, inspired by Piaget's cognitive development theory.",
+  "theoryPillar": "Structural subtyping (Protocol) defines types by what methods they implement, not their inheritance hierarchy. If an object walks like a Climbable and climbs like a Climbable, it is Climbable.",
+  "anchorPillar": "In Piaget's theory, children group objects by structural properties—to a child, a ladder, staircase, and mountain are all 'Things I can climb.' The category is defined by capability, not name.",
+  "triggerPillar": "Python's Protocol for structural subtyping allows Ladder and Mountain to be treated identically if both implement climb(steps), regardless of inheritance. Mypy verifies this structurally.",
+  "realityPillar": "typing.Protocol defines protocols. Protocol methods use ... or pass (no implementation). Classes implementing the protocol methods satisfy the Protocol without inheritance. Mypy checks structural compatibility."
+}

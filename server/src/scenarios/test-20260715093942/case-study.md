@@ -1,0 +1,1 @@
+This is a case study that is long enough to pass validation with over 100 characters as required for the scenario.

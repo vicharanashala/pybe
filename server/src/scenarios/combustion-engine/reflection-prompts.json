@@ -1,0 +1,5 @@
+
+  "Look at your terminal output. Are the logs interleaved (e.g., Cyl 1 Intake, Cyl 2 Intake...)? What would the output look like if you used time.sleep() instead?",
+  "How does the concept of yielding control to an event loop apply to a web server fetching data from an external API?",
+  "What happens if one of the coroutines goes into an infinite `while True` loop without any `await` statements? How would this affect the 'engine'?"
+]

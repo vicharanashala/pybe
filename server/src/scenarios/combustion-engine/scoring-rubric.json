@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of philosophical reasoning connecting the four-stroke combustion engine cycle to Python's asyncio event loop. Does the learner articulate why an event loop is architecturally analogous to a crankshaft a central coordinator that never blocks, continuously cycling through tasks? Do they understand that `await` is the moment a coroutine yields control back to the crankshaft, just as a piston completes a stroke and transfers energy? Do they grasp the non-blocking nature of async/await as a philosophical inversion of the blocking model the world does not stop while you wait, you suspend and the world continues?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct implementation of async/await coroutines simulating a multi-cylinder engine. The solution must demonstrate: (1) `async def` coroutines for each cylinder cycling through Intake, Compression, Power, and Exhaust strokes, (2) `asyncio.sleep()` used for each stroke (NOT `time.sleep()` which blocks the event loop), (3) `asyncio.gather()` to start all cylinders concurrently and demonstrate interleaved execution, (4) proper logging showing that cylinder strokes are running simultaneously the output should show Cylinder 1 in Power stroke while Cylinder 3 is in Intake, proving non-blocking concurrent execution. Code that uses `time.sleep()` instead of `asyncio.sleep()` should receive failing marks as it blocks the event loop and stalls the engine."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on concurrency vs parallelism, and the trade-offs of asynchronous design. Does the learner identify real-world analogies (食堂 kitchen brigade, web server request handling,ECU sensor polling)? Do they engage with the philosophical dimension: why is a non-blocking engine more efficient? What are the dangers of shared state in concurrent coroutines? How does this relate to real-world async frameworks like FastAPI, Node.js, or Go's goroutines? Do they consider what happens when one coroutine fails does the whole engine stall?"
+  }
+}

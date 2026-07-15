@@ -1,0 +1,22 @@
+
+  {
+    "level": 1,
+    "text": "What happens first when Python executes `x = 10`? Does it create the variable first and then put 10 in it, or does it create the integer 10 first and then attach the label 'x' to it?"
+  },
+  {
+    "level": 2,
+    "text": "If `a = [1, 2, 3]` and `b = a`, then `b.append(4)`, what does `a` print? Think about whether `a` and `b` are two separate boxes or two names for the same box."
+  },
+  {
+    "level": 3,
+    "text": "What does `id()` return? It returns a unique integer for each object in memory. Can two different variables have the same `id()`? Can one variable have the same `id()` as another at different times?"
+  },
+  {
+    "level": 4,
+    "text": "What is the difference between `a is b` and `a == b`? `is` asks 'are you the same object?' while `==` asks 'are your values equal?' For `x = [1,2,3]` and `y = [1,2,3]`, does `x is y`? Does `x == y`? Why?"
+  },
+  {
+    "level": 5,
+    "text": "What does `del x` actually do? Does it delete the object `x` refers to, or does it just remove the name 'x'? Can an object still exist after `del x` if another name still points to it?"
+  }
+]

@@ -1,0 +1,34 @@
+
+  {
+    "level": 1,
+    "text": "What is the signature of functools.reduce? It takes a function, an iterable, and an optional initial value. The function takes two arguments: the accumulated state and the next element."
+  },
+  {
+    "level": 2,
+    "text": "For counting nucleotides, what should the initial state be? A dictionary {'A': 0, 'C': 0, 'G': 0, 'T': 0}. What should the accumulator function do? Increment the count for the current base."
+  },
+  {
+    "level": 3,
+    "text": "How does reduce(f, [a, b, c, d]) actually compute? It calculates f(f(f(a, b), c), d). Each call to f produces the accumulated state for the next call."
+  },
+  {
+    "level": 4,
+    "text": "For the longest run, you need to track multiple things: current character, current run length, max character, max length. A tuple is a good state representation."
+  },
+  {
+    "level": 5,
+    "text": "GC content requires counting G+C bases and total valid bases. Track a tuple (gc_count, total) through the sequence. The final ratio is gc_count / total."
+  },
+  {
+    "level": 6,
+    "text": "What is the map-reduce pattern? MAP transforms each element independently (e.g., split sentence into words). REDUCE folds all mapped elements into a final result (e.g., sum of word counts)."
+  },
+  {
+    "level": 7,
+    "text": "The Buddhist monk carries his accumulated state at each step. What state does the monk carry? Position, energy, wisdom. Similarly, reduce carries its accumulated state through the sequence."
+  },
+  {
+    "level": 8,
+    "text": "If you can solve it with a for loop, why use reduce? Reduce makes the fold explicit, works with lazy evaluation, and composes well with other functional constructs."
+  }
+]

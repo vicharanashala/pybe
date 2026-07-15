@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of philosophical reasoning connecting the Panchatantra story to Python's metaclass system. Does the learner articulate why enforcing contracts at creation time (like the rabbit setting up conditions) is philosophically different from runtime checks (fighting the lion directly)? Do they grasp the self-referential nature of metaclasses?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct and idiomatic use of metaclasses, abc.ABC, and @abstractmethod. The solution should demonstrate: (1) understanding that type() is the default metaclass, (2) ability to create a custom metaclass that validates at class creation, (3) proper use of ABC as a base class with abstract methods. Code should reject incomplete subclasses at definition time, not at instantiation time."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on what it means for a system to enforce its own constraints. Does the learner connect metaclasses to real-world frameworks (Django ORM, SQLAlchemy)? Do they engage with the philosophical parallel between the Panchatantra's rabbit creating conditions versus direct confrontation? Do they consider the implications for plugin architectures and production systems?"
+  }
+}

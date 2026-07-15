@@ -1,0 +1,18 @@
+
+  {
+    "level": 1,
+    "text": "Import `Enum` and `auto` from the `enum` standard library module."
+  },
+  {
+    "level": 2,
+    "text": "Subclass `Enum` to create your colors: `class TrafficColor(Enum): RED = auto() ...`"
+  },
+  {
+    "level": 3,
+    "text": "In your `next_state` method, you can use Python 3.10+ `match self.current_color:` to cleanly map each color to its next state."
+  },
+  {
+    "level": 4,
+    "text": "Make sure you actually re-assign `self.current_color` to the new Enum value during the transition."
+  }
+]

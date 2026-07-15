@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of philosophical reasoning connecting the Namakarana (naming ceremony) to Python variables. Does the learner articulate why variables are labels, not containers? Do they understand the ontological independence of the object from the name — that the object exists before assignment and persists after rebinding? Do they grasp the parallel: just as a child's identity is not created by their name, an object's identity is not created by its variable name?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct demonstration of variable reference behavior. The solution must demonstrate: (1) creating variables and using id() to show memory addresses, (2) multiple variables referring to the same mutable object and showing that modifications through one name affect all names, (3) identity vs equality using 'is' and '==', (4) rebinding a variable and showing the old object still exists, (5) understanding None as a reference to nothing. Code must include comparisons showing 'is' vs '==' behavior for mutable vs immutable objects."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on reference as a fundamental concept. Does the learner connect variables as labels to real-world phenomena (street addresses, people's names, database foreign keys)? Do they engage with the philosophical tension: if an object has no name, does it exist? In Python, the object exists until garbage collected — existence precedes naming. Does this mirror Buddhism's insight that we exist before we are named, that identity is imposed rather than inherent? What are the practical dangers of shared mutable state — when one name modifies an object, all names see the change?"
+  }
+}

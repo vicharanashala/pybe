@@ -1,0 +1,14 @@
+{
+  "reasoning": {
+    "weight": 30,
+    "description": "Explains the difference between volatile memory and persistent storage."
+  },
+  "code": {
+    "weight": 40,
+    "description": "Properly serializes and deserializes an object using both pickle and json."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Understands the security implications of using pickle versus json."
+  }
+}

@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of reasoning connecting the Fellowship's routing dilemma at Caradhras to graph theory and multi-objective optimization. Does the learner articulate that the 'shortest path' is not a property of the graph alone but a property of the cost function applied to the graph? Do they grasp the fundamental insight: Dijkstra's algorithm is a tool, and tools do not make moral decisions they optimize for what you tell them to optimize for? Do they understand that Saruman's storm changed an edge weight, Aragorn cared about time, Boromir cared about political gain, and Gandalf cared about risk and that these are all legitimate but incompatible cost functions? The learner should recognize that there is no 'correct' path, only the path that is correct according to a chosen metric."
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct implementation of Dijkstra's shortest path algorithm using a priority queue. The solution must demonstrate: (1) graph representation as an adjacency dictionary with multiple edge weights (distance, time, risk), (2) proper use of heapq.heappush() and heapq.heappop() for the priority queue, (3) correct initialization with float('inf') for unvisited nodes, (4) edge relaxation logic that updates tentative distances, (5) path reconstruction via parent pointers or similar mechanism, (6) demonstration of how the same graph produces different optimal paths under different cost functions (show that optimizing for distance gives a different result than optimizing for risk). Code that implements a single-cost Dijkstra without demonstrating the multi-objective dilemma only partially satisfies the trigger."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on the relationship between algorithms and values. Does the learner engage with the central philosophical tension: the algorithm is neutral but the cost function is not? Do they identify real-world analogues GPS navigation optimizing for time vs distance vs traffic, supply chain logistics balancing speed vs cost vs carbon footprint, healthcare triage balancing urgency vs outcome vs resources? Do they consider the dark side: what happens when an algorithm is deployed to optimize a metric that does not capture what we actually care about? The Fellowship chose Moria shortest in distance and lost Gandalf. What does this teach us about the gap between what we measure and what we value?"
+  }
+}

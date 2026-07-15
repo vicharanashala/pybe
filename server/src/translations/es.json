@@ -1,0 +1,59 @@
+{
+  "common": {
+    "app_name": "pyBE",
+    "tagline": "Filosofía × Python × Código",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "submit": "Enviar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar"
+  },
+  "nav": {
+    "home": "Inicio",
+    "scenarios": "Escenarios",
+    "dashboard": "Panel",
+    "profile": "Perfil",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "logout": "Cerrar sesión"
+  },
+  "scenarios": {
+    "title": "Escenarios",
+    "domain": "Dominio",
+    "difficulty": "Dificultad",
+    "type": "Tipo",
+    "hint": "Pista",
+    "solution": "Solución",
+    "completed": "Completado",
+    "in_progress": "En Progreso",
+    "not_started": "No Iniciado"
+  },
+  "levels": {
+    "level_1": "Aprendiz",
+    "level_2": "Artesano",
+    "level_3": "Erudito",
+    "level_4": "Arquitecto",
+    "level_5": "Pythonista"
+  },
+  "auth": {
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "email": "Correo electrónico",
+    "username": "Usuario",
+    "password": "Contraseña",
+    "forgot_password": "¿Olvidaste tu contraseña?",
+    "no_account": "¿No tienes cuenta?"
+  },
+  "gamification": {
+    "xp": "XP",
+    "level": "Nivel",
+    "badges": "Insignias",
+    "leaderboard": "Tabla de clasificación",
+    "streak": "Racha",
+    "completed": "Completado"
+  }
+}

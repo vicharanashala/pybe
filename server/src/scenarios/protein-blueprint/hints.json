@@ -1,0 +1,18 @@
+
+  {
+    "id": "hint-1",
+    "text": "To inherit from a base class, pass the base class name in parentheses when defining the subclass: `class StructuralProtein(Protein):`"
+  },
+  {
+    "id": "hint-2",
+    "text": "In the subclass `__init__`, use `super().__init__(name, sequence)` to let the base class handle the shared attributes, rather than writing `self.name = name` again."
+  },
+  {
+    "id": "hint-3",
+    "text": "To 'override' a method, simply define a method in the subclass with the exact same name as the method in the base class (`def perform_function(self):`)."
+  },
+  {
+    "id": "hint-4",
+    "text": "Polymorphism happens automatically in Python. When you loop through your list `for p in biology_system:` and call `p.perform_function()`, Python checks the specific class of `p` and calls the correct version of the method."
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "id": "maslows-stack",
+  "title": "Maslow's Stack",
+  "domain": "Psychology",
+  "domainCategory": "Hierarchy of Needs",
+  "philosophicalAnchor": "Maslow posited that human needs rest on a foundation of basic survival; only when physiological needs are met can we reach for self-actualization. Software has a similar hierarchy. At the top, Python provides self-actualization: dynamic types, elegant syntax, and safety. But it rests entirely on the C language's raw management of memory and pointers\u2014the physiological needs of the machine.",
+  "pythonConcept": "ctypes, Software Layers, Memory Addresses",
+  "difficultyLevel": 5,
+  "jonasanType": "Concept",
+  "targetConstructs": [
+    "ctypes",
+    "id()",
+    "ctypes.c_int",
+    "sys.getsizeof"
+  ],
+  "briefDescription": "Explore the layers of software abstraction using the `ctypes` module to peek under Python's hood. Realize how high-level abstractions rely on low-level memory management.",
+  "theoryPillar": "Python is written in C (CPython). Every Python object is a C struct underneath. `id()` returns the actual memory address of this C struct. The `ctypes` library allows Python to interact with raw C data types and call functions in shared libraries, bridging the gap between high-level logic and low-level mechanics.",
+  "anchorPillar": "Just as human self-actualization cannot exist without physiological survival, Python's elegance cannot exist without C's memory management. Using `ctypes`, we will bypass Python's protections to read the raw memory value of an object.",
+  "triggerPillar": "Create a simple integer in Python. Use `id()` to get its memory address. Then, use `ctypes` to read the raw bytes at that exact memory location to prove that the integer is physically stored there.",
+  "realityPillar": "The ability to drop down to C via `ctypes` or `CFFI` is what makes Python a powerhouse in data science and machine learning. Libraries like NumPy and TensorFlow use Python for the high-level API but execute the heavy lifting in highly optimized C/C++ or CUDA code."
+}

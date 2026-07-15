@@ -1,0 +1,16 @@
+{
+  "id": "color-state-machine",
+  "title": "The Color State Machine",
+  "domain": "Physics",
+  "domainCategory": "Physics/State Machines",
+  "philosophicalAnchor": "The traffic light must never leap from green to red without the amber warning of transition. State machines teach us that systems have defined paths—jumping states leads to system failure.",
+  "pythonConcept": "enum, Enum, auto, match-case, state machine, deterministic transitions",
+  "difficultyLevel": 1,
+  "jonasanType": "Structured Inquiry",
+  "targetConstructs": ["Enum", "state machine", "match-case", "deterministic transitions", "value error handling"],
+  "briefDescription": "Write firmware for a Smart Traffic Light using Python's enum and match/case to ensure flawlessly deterministic state transitions.",
+  "theoryPillar": "State machines define a set of valid states and the transitions between them. A deterministic state machine will always produce the same output for a given input, critical for safety systems.",
+  "anchorPillar": "The traffic light system must be deterministic—never transitioning from Green straight to Red, never holding invalid states like 'Blue'. The standard cycle is RED -> GREEN -> YELLOW -> RED.",
+  "triggerPillar": "The city requires flawlessly deterministic behavior. Invalid transitions could cause accidents. The firmware must use Python's enum and match/case to enforce proper state transitions.",
+  "realityPillar": "Python's enum module defines enumerated constants. The auto() helper assigns sequential values. The match/case statement (Python 3.10+) cleanly maps each state to its next valid state, with ValueError for unrecognized states."
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "level": 1,
+    "text": "Create a folder named `gauntlet`. Inside it, create a file named `__init__.py`."
+  },
+  {
+    "level": 2,
+    "text": "Inside `gauntlet`, create `time_stone.py` with a function `reverse_time()`, and `space_stone.py` with `teleport()`."
+  },
+  {
+    "level": 3,
+    "text": "In `__init__.py`, write `from .time_stone import reverse_time` and `from .space_stone import teleport`. Now anyone importing `gauntlet` has access to both."
+  }
+]

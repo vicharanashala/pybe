@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of philosophical reasoning connecting the village marketplace to REST architecture. Does the learner articulate why standardization enables interoperability just as the village board's consistent format lets any villager participate, HTTP's standardized verbs let any client communicate with any server? Do they understand that REST is not a protocol but an architectural style a set of constraints that lead to desirable properties like scalability, simplicity, and reliability? Do they grasp why statelessness (each request contains all information) matters for distributed systems?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct implementation of a RESTful API with all CRUD operations. The solution must demonstrate: (1) Flask app with /api/items endpoint, (2) GET returns all items, (3) POST creates new item with JSON body, (4) GET /api/items/<id> returns specific item or 404, (5) PUT /api/items/<id> updates item, (6) DELETE /api/items/<id> removes item, (7) proper HTTP status codes (200, 201, 404, 400). Should use an in-memory list or dict for storage and exchange JSON."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on REST as a design philosophy. Does the learner engage with the question: why do we need standardized verbs? What happens when everyone uses different conventions (PATCH vs PUT, idempotency)? Do they consider the Trade-of: REST's statelessness means every request is self-contained, which can lead to over-fetching is this always efficient? How does REST compare to GraphQL (which sacrifices uniformity for flexibility) or gRPC (which sacrifices human-readability for performance)? What does the village board metaphor reveal about the tension between simplicity and expressiveness in API design?"
+  }
+}

@@ -1,0 +1,7 @@
+
+  "Why is catching errors at class-creation time better than catching them at runtime? How does this relate to the Panchatantra's rabbit creating conditions rather than fighting directly?",
+  "How does a metaclass's __new__ method parallel the way the rabbit used the well? Both set up conditions before something happens. How?",
+  "What is the relationship between a metaclass and a class? How does this mirror the relationship between a class and an instance?",
+  "If you were building a plugin system where third-party developers extend your base class, why would you want their mistakes caught before their code runs in production?",
+  "Python's abc.ABC is itself a class built with metaclasses. Why does this make sense philosophically?"
+]

@@ -1,0 +1,16 @@
+{
+  "id": "banana-leaf-feast",
+  "title": "The Banana Leaf Feast",
+  "domain": "Culinary",
+  "domainCategory": "Culinary/Memory Management",
+  "philosophicalAnchor": "At a South Indian wedding feast, the wise server knows that space itself is sacred. Like memory on a banana leaf, we must allocate carefully and defragment what remains, lest we run out of room for the sambar.",
+  "pythonConcept": "memory management, heap allocation, fragmentation, defragmentation, first-fit allocation, bytearray",
+  "difficultyLevel": 3,
+  "jonasanType": "Design Thinking Problem",
+  "targetConstructs": ["heap memory", "contiguous allocation", "fragmentation", "defragmentation", "first-fit algorithm"],
+  "briefDescription": "Manage a 256-byte banana leaf (heap) to serve dishes of varying sizes to wedding guests without running out of contiguous space.",
+  "theoryPillar": "Memory fragmentation occurs when free space exists but cannot be used because it is not contiguous. This is the fundamental challenge of memory allocation: keeping enough contiguous space available for new allocations.",
+  "anchorPillar": "The banana leaf represents the heap with 256 bytes of contiguous space. Different dishes (Rice: 64 bytes, Sambar: 32 bytes, Papadam: 16 bytes, Chutney: 8 bytes) represent varying allocation sizes. Guests consuming dishes frees specific blocks.",
+  "triggerPillar": "Even if total free space exceeds a request, memory fragmentation may prevent allocation. The feast fails when no single contiguous block is large enough, even though the sum of free blocks would suffice.",
+  "realityPillar": "First-fit allocation finds the first free block large enough. Splitting creates new blocks for allocated and remaining space. Defragmentation merges adjacent free blocks. The bytearray represents fixed-size contiguous memory."
+}

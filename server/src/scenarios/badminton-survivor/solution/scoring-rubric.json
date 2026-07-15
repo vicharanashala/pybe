@@ -1,0 +1,7 @@
+{
+  "weights": {
+    "reasoning": 0.40,
+    "code": 0.30,
+    "reflection": 0.30
+  }
+}

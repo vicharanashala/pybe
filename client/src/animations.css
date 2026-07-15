@@ -1,0 +1,880 @@
+/**
+ * pyBE Animation System
+ * ======================
+ * Minimal but impactful - strategic animations at key moments.
+ * Uses CSS custom properties for consistent timing.
+ */
+
+/* ===================================================================
+   ANIMATION TIMING TOKENS
+   =================================================================== */
+
+:root {
+  /* Easing curves */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Durations */
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 400ms;
+  --duration-reveal: 600ms;
+}
+
+/* ===================================================================
+   KEYFRAME ANIMATIONS
+   =================================================================== */
+
+/* Reveal Up - Main scroll reveal */
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reveal Scale - Pop in for emphasis */
+@keyframes revealScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Reveal Fade - Simple fade for quiet moments */
+@keyframes revealFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Reveal Left - Slide from left for sequential content */
+@keyframes revealLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Stagger cascade for child elements */
+@keyframes staggerIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Text reveal - word by word */
+@keyframes wordReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Page transitions */
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes pageExit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+    filter: blur(4px);
+  }
+}
+
+/* Skeleton shimmer - enhanced gradient wave */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Pulse glow for emphasis */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--color-primary-glow);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px var(--color-primary-glow-strong);
+  }
+}
+
+/* Float animation for ambient elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Spin for loaders */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Bounce for playful feedback */
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+/* Shake for errors */
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  20%, 60% {
+    transform: translateX(-4px);
+  }
+  40%, 80% {
+    transform: translateX(4px);
+  }
+}
+
+/* Badge earned celebration */
+@keyframes badgeEarned {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+/* Floating XP indicator */
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+}
+
+/* Draw underline from center */
+@keyframes drawLine {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Icon bounce - for notifications/alerts */
+@keyframes iconBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2) rotate(-5deg);
+  }
+  50% {
+    transform: scale(0.9) rotate(5deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(-3deg);
+  }
+}
+
+/* Accordion open */
+@keyframes accordionOpen {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Gradient border animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Toast enter/exit */
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes toastSlideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+}
+
+/* Tab slider spring */
+@keyframes tabSliderIn {
+  from {
+    transform: scaleX(0.8);
+    opacity: 0.5;
+  }
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* Ripple effect */
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Count up pop */
+@keyframes countPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Progress bar fill wave */
+@keyframes progressWave {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 40px 0%;
+  }
+}
+
+/* Confetti burst - minimal, tasteful */
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100px) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ===================================================================
+   SCROLL REVEAL SYSTEM
+   =================================================================== */
+
+/* Base reveal classes - hidden state */
+.reveal-up,
+.reveal-scale,
+.reveal-fade,
+.reveal-left {
+  opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: var(--duration-reveal);
+  transition-timing-function: var(--ease-out-expo);
+  will-change: opacity, transform;
+}
+
+/* Up variant (most common) */
+.reveal-up {
+  transform: translateY(40px);
+}
+
+.reveal-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scale variant - for emphasis */
+.reveal-scale {
+  transform: scale(0.9);
+}
+
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Fade variant - simple */
+.reveal-fade {
+  opacity: 0;
+}
+
+.reveal-fade.visible {
+  opacity: 1;
+}
+
+/* Left variant - for sequential content */
+.reveal-left {
+  transform: translateX(-40px);
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger delays via data attribute */
+[data-delay="100"] { transition-delay: 100ms; }
+[data-delay="200"] { transition-delay: 200ms; }
+[data-delay="300"] { transition-delay: 300ms; }
+[data-delay="400"] { transition-delay: 400ms; }
+[data-delay="500"] { transition-delay: 500ms; }
+[data-delay="600"] { transition-delay: 600ms; }
+
+/* ===================================================================
+   PAGE TRANSITIONS
+   =================================================================== */
+
+.page-transition-enter {
+  animation: pageEnter var(--duration-slow) var(--ease-out-expo) forwards;
+}
+
+.page-transition-exit {
+  animation: pageExit var(--duration-base) var(--ease-smooth) forwards;
+}
+
+/* ===================================================================
+   BUTTON MICRO-INTERACTIONS
+   =================================================================== */
+
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--duration-fast) var(--ease-out-expo),
+    box-shadow var(--duration-base) var(--ease-smooth),
+    background-color var(--duration-base) var(--ease-smooth),
+    border-color var(--duration-base) var(--ease-smooth);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.3);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 2px 8px -4px rgba(0, 0, 0, 0.3);
+}
+
+/* Ripple effect container */
+.btn .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+/* Magnetic button effect - subtle pull toward cursor */
+.btn-magnetic:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* ===================================================================
+   CARD 3D TILT EFFECT
+   =================================================================== */
+
+.card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform var(--duration-base) var(--ease-out-expo);
+}
+
+.card-3d:hover {
+  transform: rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg));
+}
+
+/* Card glow border on hover */
+.card-glow-border {
+  position: relative;
+}
+
+.card-glow-border::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary),
+    var(--color-primary)
+  );
+  background-size: 200% 200%;
+  border-radius: inherit;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--duration-base);
+  animation: gradientShift 3s ease infinite;
+}
+
+.card-glow-border:hover::before {
+  opacity: 0.6;
+}
+
+/* ===================================================================
+   NAV LINK UNDERLINE ANIMATION
+   =================================================================== */
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  right: 50%;
+  height: 2px;
+  background: var(--color-primary);
+  transition: all var(--duration-base) var(--ease-out-expo);
+  transform-origin: center;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  left: 16px;
+  right: 16px;
+  transform: scaleX(1);
+}
+
+/* Draw from center */
+.nav-link-center::after {
+  left: 50%;
+  right: 50%;
+}
+
+.nav-link-center:hover::after,
+.nav-link-center.active::after {
+  left: 16px;
+  right: 16px;
+}
+
+/* ===================================================================
+   FILTER PILL ANIMATIONS
+   =================================================================== */
+
+.pill {
+  transition:
+    transform var(--duration-fast) var(--ease-out-back),
+    background-color var(--duration-fast),
+    border-color var(--duration-fast),
+    color var(--duration-fast);
+}
+
+.pill:hover {
+  transform: translateY(-1px);
+}
+
+.pill.active {
+  animation: bounce 0.3s var(--ease-out-back);
+}
+
+/* Color spread effect on selection */
+.pill-select-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.pill-select-effect::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary);
+  opacity: 0;
+  transform: scale(0);
+  border-radius: inherit;
+  transition: transform var(--duration-base) var(--ease-out-expo);
+}
+
+.pill-select-effect:active::after {
+  transform: scale(2);
+  opacity: 0.2;
+}
+
+/* ===================================================================
+   INPUT FIELD ANIMATIONS
+   =================================================================== */
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  transition:
+    border-color var(--duration-fast),
+    background-color var(--duration-fast),
+    box-shadow var(--duration-fast);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-glow);
+}
+
+/* Animated border on focus */
+.input-border-wave {
+  position: relative;
+}
+
+.input-border-wave::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  right: 50%;
+  height: 2px;
+  background: var(--color-primary);
+  transition: all var(--duration-base) var(--ease-out-expo);
+}
+
+.input-border-wave:focus-within::after {
+  left: 0;
+  right: 0;
+}
+
+/* ===================================================================
+   TAB SLIDER ANIMATION
+   =================================================================== */
+
+.tab-slider {
+  transition:
+    transform var(--duration-slow) var(--ease-spring),
+    width var(--duration-slow) var(--ease-spring);
+  animation: tabSliderIn var(--duration-slow) var(--ease-out-expo);
+}
+
+.tab-btn {
+  transition: color var(--duration-fast);
+}
+
+/* Chevron rotation with spring */
+.chevron {
+  transition: transform var(--duration-base) var(--ease-spring);
+}
+
+.chevron.rotated {
+  transform: rotate(180deg);
+}
+
+/* ===================================================================
+   ACCORDION / COLLAPSIBLE SECTIONS
+   =================================================================== */
+
+.section-body {
+  overflow: hidden;
+  transition:
+    max-height var(--duration-slow) var(--ease-out-expo),
+    opacity var(--duration-base) var(--ease-smooth),
+    padding var(--duration-slow) var(--ease-out-expo);
+}
+
+.section-body.collapsed {
+  max-height: 0;
+  opacity: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.section-body.expanding {
+  animation: accordionOpen var(--duration-base) var(--ease-out-expo);
+}
+
+/* Hint items stagger on reveal */
+.hint-item {
+  animation: revealUp var(--duration-slow) var(--ease-out-expo) backwards;
+}
+
+.hint-item:nth-child(1) { animation-delay: 0ms; }
+.hint-item:nth-child(2) { animation-delay: 80ms; }
+.hint-item:nth-child(3) { animation-delay: 160ms; }
+.hint-item:nth-child(4) { animation-delay: 240ms; }
+.hint-item:nth-child(5) { animation-delay: 320ms; }
+
+/* ===================================================================
+   SKELETON LOADING ENHANCEMENT
+   =================================================================== */
+
+.skeleton-line {
+  background: linear-gradient(
+    90deg,
+    var(--bg-surface-elevated) 25%,
+    var(--bg-surface-hover) 50%,
+    var(--bg-surface-elevated) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Card skeleton */
+.scenario-card.skeleton {
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+.scenario-card.skeleton .skeleton-line {
+  animation-delay: 0.2s;
+}
+
+/* ===================================================================
+   BADGE & CELEBRATION ANIMATIONS
+   =================================================================== */
+
+.badge-earned-animation {
+  animation: badgeEarned 0.6s var(--ease-out-back);
+}
+
+.badge-pulse {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Notification badge bounce */
+.notification-badge {
+  animation: bounce 0.4s var(--ease-out-back);
+}
+
+/* Floating XP indicator */
+.xp-float {
+  position: absolute;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  animation: floatUp 1s var(--ease-out-expo) forwards;
+  pointer-events: none;
+}
+
+/* ===================================================================
+   TOAST NOTIFICATIONS
+   =================================================================== */
+
+#toast-container .toast {
+  animation: toastSlideIn 0.3s var(--ease-out-expo);
+}
+
+#toast-container .toast.toast-out {
+  animation: toastSlideOut 0.3s var(--ease-smooth) forwards;
+}
+
+/* ===================================================================
+   PROGRESS BAR ANIMATIONS
+   =================================================================== */
+
+.progress-bar-fill {
+  transition: width 1s var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  background-size: 40px 100%;
+  animation: progressWave 1s linear infinite;
+}
+
+/* Rubric bar animation */
+.rubric-bar-fill {
+  transition: width 1s var(--ease-out-expo);
+}
+
+/* Count up animation trigger */
+.count-up {
+  transition: transform var(--duration-fast) var(--ease-out-back);
+}
+
+.count-up.counted {
+  animation: countPop 0.3s var(--ease-out-back);
+}
+
+/* ===================================================================
+   AMBIENT FLOATING ELEMENTS
+   =================================================================== */
+
+.float-ambient {
+  animation: float 6s ease-in-out infinite;
+}
+
+.float-ambient.delay-1 { animation-delay: -1.5s; }
+.float-ambient.delay-2 { animation-delay: -3s; }
+.float-ambient.delay-3 { animation-delay: -4.5s; }
+
+/* ===================================================================
+   STAT COUNTER ANIMATION
+   =================================================================== */
+
+.stat-number {
+  transition: transform var(--duration-fast) var(--ease-out-back);
+}
+
+.stat-number.counting {
+  animation: countPop 0.15s var(--ease-out-back);
+}
+
+/* ===================================================================
+   LOADING SPINNER
+   =================================================================== */
+
+.loading-spinner {
+  border: 3px solid var(--border-subtle);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-spinner-gradient {
+  border: 3px solid var(--border-subtle);
+  border-top-color: var(--color-primary);
+  border-right-color: var(--color-secondary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ===================================================================
+   CONFETTI BURST (Minimal, Tasteful)
+   =================================================================== */
+
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10000;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  animation: confettiFall 1.5s var(--ease-out-expo) forwards;
+}
+
+/* ===================================================================
+   UTILITY CLASSES
+   =================================================================== */
+
+/* Prevent animation on reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Hardware acceleration hint */
+.hw-accelerate {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Focus visible for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Selection color */
+::selection {
+  background: var(--color-primary-glow-strong);
+  color: var(--text-primary);
+}

@@ -1,0 +1,9 @@
+
+  "sys.prefix",
+  "sys.base_prefix",
+  "==",
+  ">=",
+  "python -m venv",
+  "source",
+  "pip install -r"
+]

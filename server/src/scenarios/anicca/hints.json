@@ -1,0 +1,34 @@
+
+  {
+    "level": 1,
+    "text": "What two methods must an object implement to be used with the with statement? __enter__ is called when entering the block and should return the resource. __exit__ is called when exiting and should perform cleanup."
+  },
+  {
+    "level": 2,
+    "text": "What does __exit__ receive as arguments? It receives exc_type, exc_val, and exc_tb the exception type, value, and traceback if an exception was raised, or None if the block completed normally."
+  },
+  {
+    "level": 3,
+    "text": "What does @contextmanager do? It decorates a generator function. Code before 'yield' runs in __enter__, code after 'yield' runs in __exit__, and 'yield' specifies what gets bound to 'as variable'."
+  },
+  {
+    "level": 4,
+    "text": "When should you return True from __exit__? Only when you want to suppress the exception. Returning True prevents the exception from propagating. Usually you return False (or nothing) to let exceptions propagate."
+  },
+  {
+    "level": 5,
+    "text": "What is contextlib.suppress used for? It creates a context manager that silently ignores specified exceptions. Use when you don't care if a certain error occurs."
+  },
+  {
+    "level": 6,
+    "text": "What is contextlib.closing used for? It wraps any object with a close() method into a context manager. The close() method is called when the with block exits."
+  },
+  {
+    "level": 7,
+    "text": "In what order are nested context managers cleaned up? __exit__ is called in LIFO order the innermost context manager's __exit__ runs first. This is like a stack."
+  },
+  {
+    "level": 8,
+    "text": "The Buddhist concept of Anicca (impermanence) says all conditioned things must pass away. How does the with statement embody this? By guaranteeing that resources are released when the context ends even if an exception occurs, even if there's an early return. The transient nature is accepted and handled."
+  }
+]

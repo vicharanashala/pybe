@@ -1,0 +1,16 @@
+{
+  "id": "the-name-ceremony",
+  "title": "The Name Ceremony",
+  "domain": "General",
+  "domainCategory": "General/Python Fundamentals",
+  "philosophicalAnchor": "The Namakarana does not create the child. The name is not the child. The name is a relationship between the child and the world. Names are not objects; names refer to objects; an object can have many names; renaming does not change the object.",
+  "pythonConcept": "variables, references, id(), is vs ==, None, naming conventions, garbage collection, rebinding",
+  "difficultyLevel": 1,
+  "jonasanType": "Structured Inquiry",
+  "targetConstructs": ["variable binding", "object identity", "id()", "is vs ==", "None", "naming conventions", "del statement"],
+  "briefDescription": "Explore Python's object model through the Namakarana naming ceremony, understanding how names refer to objects.",
+  "theoryPillar": "Python creates objects before binding names. x = 10 creates integer 10 first, then binds x to it. Objects exist independently of names. Multiple names can refer to the same object. del removes a name, not necessarily the object.",
+  "anchorPillar": "Indian naming ceremonies follow rules, just as Python has naming conventions. The name given to a child is a label, not the child itself. Multiple relatives calling the same name all refer to the same child.",
+  "triggerPillar": "At the naming ceremony, the child exists before being named. x = 10 creates the object before binding the name. a = b = [] makes both names refer to same list. Modifying through one name affects what both see.",
+  "realityPillar": "type() reveals object class. id() returns memory address. is checks identity, == checks equality. Small integers are interned (reused). del removes name references. Garbage collector reclaims objects with no remaining references."
+}

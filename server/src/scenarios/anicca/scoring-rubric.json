@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of philosophical reasoning connecting Anicca (impermanence) to Python's context managers. Does the learner articulate why the guarantee of cleanup matters not just for resource management, but as a philosophical stance toward the transient? Do they grasp the parallel between accepting impermanence (Anicca) and properly releasing resources? Do they understand why context managers are better than try-finally in practice?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct implementation demonstrating: (1) __enter__ and __exit__ protocol in a class, (2) @contextmanager decorator for generator-based context managers, (3) contextlib.suppress for silent exception handling, (4) contextlib.closing for adapting non-context resources, (5) nested context managers. Should show at least 4 different context manager patterns."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on resource management, impermanence, and practical implications. Does the learner connect context managers to real-world resource leaks (database connections, file handles)? Do they engage with the Buddhist philosophical parallels? Do they understand when to suppress exceptions vs let them propagate?"
+  }
+}

@@ -1,0 +1,18 @@
+
+  {
+    "id": "hint-1",
+    "text": "Think of the leaf as an array of 256 bytes. You need a way to keep track of which parts of the array are free and which are occupied. A simple approach is to maintain a list of dictionaries representing 'blocks' of memory, each with a 'start_index', 'size', and 'is_free' boolean."
+  },
+  {
+    "id": "hint-2",
+    "text": "When `serve(size)` is called, iterate through your list of blocks. Find the first block where `is_free` is True and `block['size'] >= size`. This is known as the 'First Fit' allocation strategy."
+  },
+  {
+    "id": "hint-3",
+    "text": "If the chosen free block is larger than the requested size, split it! Create a new block for the allocated space, and a second block for the remaining free space. Update your block tracking list accordingly."
+  },
+  {
+    "id": "hint-4",
+    "text": "For `consume(index)`, find the block that starts at `index` and set its `is_free` flag to True. To prevent fragmentation, check the adjacent blocks. If the previous or next blocks are also free, merge them into a single larger free block."
+  }
+]

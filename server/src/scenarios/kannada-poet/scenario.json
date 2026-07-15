@@ -1,0 +1,16 @@
+{
+  "id": "kannada-poet",
+  "title": "The Kannada Poet",
+  "domain": "Literature",
+  "domainCategory": "Literature/Linguistics",
+  "philosophicalAnchor": "The wise courtier remembers only what matters most—the recent poems. When memory fills, the least recently used verse is forgotten. This is the elegant compromise of caching: trade completeness for speed.",
+  "pythonConcept": "LRU cache, OrderedDict, collections.OrderedDict, cache eviction, memoization",
+  "difficultyLevel": 2,
+  "jonasanType": "Design Thinking Problem",
+  "targetConstructs": ["LRU cache", "OrderedDict", "cache hit", "cache miss", "eviction policy"],
+  "briefDescription": "Implement an LRU cache for the Vijayanagara court poet using OrderedDict, remembering only the 3 most recently requested poems.",
+  "theoryPillar": "LRU (Least Recently Used) caching keeps frequently accessed items in memory while evicting the least recently accessed ones when capacity is reached. Cache hits return instantly; cache misses incur full computation.",
+  "anchorPillar": "The poet takes 2 seconds per verse. The courtier can only remember 3 poems. Cache hits return instantly. When memory is full and a new poem is needed, the one not recited for the longest time is forgotten.",
+  "triggerPillar": "Couriers ask for poems repeatedly. Remembering all poems is impossible. The system must balance memory constraints with the reality that recently requested poems are more likely to be requested again.",
+  "realityPillar": "collections.OrderedDict remembers insertion order. cache.move_to_end() marks an item as recently used. cache.popitem(last=False) removes the oldest item. Capacity checking and conditional adding implement the full LRU policy."
+}

@@ -1,0 +1,16 @@
+{
+  "id": "protein-blueprint",
+  "title": "The Protein Blueprint",
+  "domain": "Biology",
+  "domainCategory": "Biology/Protein Structure",
+  "philosophicalAnchor": "Keratin supports, Amylase catalyzes—both are proteins, both inherit common traits, yet their functions diverge through the magic of inheritance and method overriding.",
+  "pythonConcept": "object-oriented programming, inheritance, super(), method overriding, polymorphism, class hierarchy",
+  "difficultyLevel": 2,
+  "jonasanType": "Structured Inquiry",
+  "targetConstructs": ["class inheritance", "super()", "method overriding", "polymorphism", "base class", "subclass"],
+  "briefDescription": "Model protein types in a bio-informatics database using inheritance, demonstrating polymorphism across StructuralProtein and Enzyme subclasses.",
+  "theoryPillar": "Inheritance creates class hierarchies where subclasses inherit attributes and methods from base classes. super() calls parent constructors and methods. Method overriding redefines inherited behavior in subclasses.",
+  "anchorPillar": "All proteins have name, sequence, and get_length(). But StructuralProteins provide support while Enzymes catalyze reactions. Both share the Protein interface but implement perform_function() differently.",
+  "triggerPillar": "The database must catalog different protein types with common traits yet wildly different biological functions. Polymorphism allows treating all proteins uniformly while invoking type-specific behavior.",
+  "realityPillar": "class Protein: base class with __init__, get_length(), perform_function(). class StructuralProtein(Protein): inherits and overrides perform_function(). class Enzyme(Protein): adds target_molecule and overrides perform_function()."
+}

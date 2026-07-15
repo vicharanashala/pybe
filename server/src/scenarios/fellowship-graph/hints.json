@@ -1,0 +1,22 @@
+
+  {
+    "level": 1,
+    "text": "How would you store connections between cities so you can quickly look up all neighbours of any city?"
+  },
+  {
+    "level": 2,
+    "text": "A dictionary of dictionaries lets you write something like network['Mumbai']['Pune'] to get the edge data. This is called an adjacency dictionary."
+  },
+  {
+    "level": 3,
+    "text": "To find the shortest path, you need to track the best-known distance to every city and always expand the cheapest unexplored city next. How do you efficiently find the minimum?"
+  },
+  {
+    "level": 4,
+    "text": "A priority queue always gives you the smallest item first. Python's heapq module provides exactly this heappush adds, heappop removes the smallest."
+  },
+  {
+    "level": 5,
+    "text": "Dijkstra's algorithm: start at the source with cost 0, set all others to infinity. Pop the cheapest city, update its neighbours if you found a shorter path, push updated neighbours. Repeat until you reach the destination."
+  }
+]

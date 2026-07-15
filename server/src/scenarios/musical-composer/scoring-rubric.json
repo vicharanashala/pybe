@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 30,
+    "description": "Understanding how functional paradigms avoid mutating the original data."
+  },
+  "code": {
+    "weight": 50,
+    "description": "Correct usage of map, filter, reduce and lambdas without using traditional loops."
+  },
+  "reflection": {
+    "weight": 20,
+    "description": "Evaluating the readability and performance of map/filter/reduce vs list comprehensions."
+  }
+}

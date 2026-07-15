@@ -1,0 +1,34 @@
+
+  {
+    "level": 1,
+    "text": "What happens when two threads call queue.add() simultaneously on an unprotected queue? The list append might interleave, corrupting internal state. This is a race condition."
+  },
+  {
+    "level": 2,
+    "text": "What is threading.Lock? It provides mutual exclusion only one thread can hold it at a time. Any thread trying to acquire it while it's held will block until it's released."
+  },
+  {
+    "level": 3,
+    "text": "How do you use a lock safely? The 'with lock:' statement acquires the lock on entry and releases it on exit, even if an exception occurs. This is the critical section pattern."
+  },
+  {
+    "level": 4,
+    "text": "What are the four conditions for deadlock? (1) Mutual exclusion, (2) Hold and wait, (3) No preemption, (4) Circular wait. To prevent deadlock, break any one condition."
+  },
+  {
+    "level": 5,
+    "text": "If thread 1 acquires lock A then lock B, and thread 2 acquires lock B then lock A, you have circular wait. How do you prevent this? Always acquire locks in the same order across all threads."
+  },
+  {
+    "level": 6,
+    "text": "What is a Semaphore? It allows N threads to access a resource simultaneously. threading.Semaphore(N) is like N identical locks. Useful for connection pools."
+  },
+  {
+    "level": 7,
+    "text": "What is queue.Queue? A thread-safe queue that handles all synchronization internally. Unlike manually locking a list, Queue blocks on get() when empty and handles all edge cases."
+  },
+  {
+    "level": 8,
+    "text": "The traffic jam emerges when individual threads (cars) don't coordinate. The lock (traffic light) enforces order. With too many locks (gridlock) or no locks (collision), chaos ensues."
+  }
+]

@@ -1,0 +1,5 @@
+
+  "Why did we use `super().__init__()` in the Enzyme class instead of just setting `self.name` and `self.sequence` directly?",
+  "What would happen if the `StructuralProtein` class did NOT override `perform_function()`? What would be printed when you call it?",
+  "How does polymorphism make it easier to add a new type of protein (e.g., `TransportProtein` like Hemoglobin) to the system later without changing the main loop?"
+]

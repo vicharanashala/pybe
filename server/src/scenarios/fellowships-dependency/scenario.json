@@ -1,0 +1,16 @@
+{
+  "id": "fellowships-dependency",
+  "title": "The Fellowship's Dependency",
+  "domain": "Literature",
+  "domainCategory": "Literature/LOTR",
+  "philosophicalAnchor": "When the Rohan app requires horses==1.0 and Gondor needs horses==2.0, isolation becomes essential. Virtual environments create sacred spaces where each application can honor its own dependencies without conflict.",
+  "pythonConcept": "virtual environments, venv, sys.prefix, sys.base_prefix, requirements.txt, dependency management",
+  "difficultyLevel": 1,
+  "jonasanType": "Structured Inquiry",
+  "targetConstructs": ["venv", "sys.prefix", "virtual environment", "requirements.txt", "dependency isolation"],
+  "briefDescription": "Containerize conflicting applications in their own virtual environments to resolve dependency conflicts between the Rohan and Gondor apps.",
+  "theoryPillar": "Virtual environments provide isolated Python installations with their own site-packages. This prevents global package conflicts where different projects require different versions of the same dependency.",
+  "anchorPillar": "The Rohan app requires horses==1.0 but Gondor needs horses==2.0. Installing both globally causes one to overwrite the other, crashing the first app. Each needs its own sacred space.",
+  "triggerPillar": "The Fellowship's applications are crashing! Dependency conflicts arise when multiple projects need different versions of the same package. Global installation cannot resolve this.",
+  "realityPillar": "sys.prefix vs sys.base_prefix detects virtual environment. python -m venv creates environments. source .venv/bin/activate (Linux/Mac) or .venv\\Scripts\\activate (Windows) enters the environment. requirements.txt specifies exact (==) and minimum (>=) versions."
+}

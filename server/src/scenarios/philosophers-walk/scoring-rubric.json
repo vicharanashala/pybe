@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of philosophical reasoning connecting Zeno's paradox of motion to Python's iterator protocol. Does the learner articulate why lazy evaluation is philosophically significant that infinite sequences can be traversed without completion? Do they grasp the relationship between each step and the whole walk?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct implementation demonstrating: (1) __iter__ and __next__ protocol, (2) generator functions using yield, (3) generator expressions, (4) lazy evaluation pipeline (sensor readings -> rolling average -> anomaly detection), (5) use of itertools for infinite sequences. Code should use type hints and demonstrate memory efficiency."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on the nature of infinite processes, lazy vs eager evaluation, and practical applications. Does the learner connect generators to real-world streaming data, large file processing, or event systems? Do they engage with Zeno's paradox philosophically?"
+  }
+}

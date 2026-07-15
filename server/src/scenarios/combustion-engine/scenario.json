@@ -1,0 +1,16 @@
+{
+  "id": "combustion-engine",
+  "title": "The Combustion Engine",
+  "domain": "Physics",
+  "domainCategory": "Physics/Concurrency",
+  "philosophicalAnchor": "Four cylinders fire in harmony, each independent yet synchronized. True power comes not from blocking others but from concurrent execution where each process advances without halting the whole.",
+  "pythonConcept": "asyncio, async def, await, asyncio.gather, coroutines, concurrency",
+  "difficultyLevel": 3,
+  "jonasanType": "Design Thinking Problem",
+  "targetConstructs": ["async/await", "asyncio.gather", "coroutines", "event loop", "non-blocking execution"],
+  "briefDescription": "Simulate a V4 Engine Control Unit where four cylinders run concurrently using asyncio, without blocking the main thread.",
+  "theoryPillar": "asyncio enables concurrent execution without true parallelism through coroutines—functions that can pause and resume. await suspends the coroutine, allowing others to run on the same thread.",
+  "anchorPillar": "In a 4-cylinder engine, cylinders operate concurrently but out of phase for smooth power delivery. Using time.sleep() blocks the entire event loop; asyncio.gather schedules coroutines to run concurrently.",
+  "triggerPillar": "Using time.sleep() freezes the entire engine simulation. Cylinder 1 runs while cylinders 2, 3, and 4 are completely frozen. Real engines need concurrent non-blocking execution.",
+  "realityPillar": "async def defines a coroutine. asyncio.run() starts the event loop. await asyncio.sleep() pauses without blocking. asyncio.gather() schedules multiple coroutines concurrently. Firing order offsets create realistic multi-cylinder timing."
+}

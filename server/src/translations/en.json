@@ -1,0 +1,59 @@
+{
+  "common": {
+    "app_name": "pyBE",
+    "tagline": "Philosophy × Python × Code",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close"
+  },
+  "nav": {
+    "home": "Home",
+    "scenarios": "Scenarios",
+    "dashboard": "Dashboard",
+    "profile": "Profile",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "scenarios": {
+    "title": "Scenarios",
+    "domain": "Domain",
+    "difficulty": "Difficulty",
+    "type": "Type",
+    "hint": "Hint",
+    "solution": "Solution",
+    "completed": "Completed",
+    "in_progress": "In Progress",
+    "not_started": "Not Started"
+  },
+  "levels": {
+    "level_1": "Apprentice",
+    "level_2": "Craftsperson",
+    "level_3": "Scholar",
+    "level_4": "Architect",
+    "level_5": "Pythonista"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "username": "Username",
+    "password": "Password",
+    "forgot_password": "Forgot password?",
+    "no_account": "Don't have an account?"
+  },
+  "gamification": {
+    "xp": "XP",
+    "level": "Level",
+    "badges": "Badges",
+    "leaderboard": "Leaderboard",
+    "streak": "Streak",
+    "completed": "Completed"
+  }
+}

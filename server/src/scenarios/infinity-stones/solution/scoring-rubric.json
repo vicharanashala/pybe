@@ -1,0 +1,27 @@
+{
+  "weights": {
+    "reasoning": 0.40,
+    "code": 0.30,
+    "reflection": 0.30
+  },
+  "criteria": {
+    "reasoning": [
+      "Explains why LRU cache is needed (memory trade-off for speed)",
+      "Describes how OrderedDict provides O(1) lookup with ordering",
+      "Connects poet metaphor to actual caching behavior",
+      "Demonstrates understanding of cache hit vs cache miss"
+    ],
+    "code": [
+      "Implements custom LRU cache using OrderedDict",
+      "Correctly handles capacity-based eviction (LRU removal)",
+      "Moves accessed items to end (most recently used position)",
+      "Wraps slow function with cache successfully"
+    ],
+    "reflection": [
+      "Connects to real-world caching (Redis, Memcached)",
+      "Mentions functools.lru_cache as standard library solution",
+      "Discusses memory vs speed trade-off",
+      "Reflects on interview relevance of LRU cache implementation"
+    ]
+  }
+}

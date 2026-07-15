@@ -1,0 +1,14 @@
+[
+  {
+    "level": 1,
+    "text": "Use `sys.getrefcount()` to see how many references exist to an object. Note that passing it to the function temporarily increases the count."
+  },
+  {
+    "level": 2,
+    "text": "Create a `Node` class. Create `node_a` and `node_b`. Set `node_a.next = node_b` and `node_b.prev = node_a`. This is a circular reference."
+  },
+  {
+    "level": 3,
+    "text": "Import the `weakref` module. Instead of `node_b.prev = node_a`, use `node_b.prev = weakref.ref(node_a)`. Now, node_b knows about node_a without clinging to it."
+  }
+]

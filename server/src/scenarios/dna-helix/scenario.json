@@ -1,0 +1,21 @@
+{
+  "id": "dna-helix",
+  "title": "The DNA Helix",
+  "domain": "Biology",
+  "domainCategory": "Genetics",
+  "philosophicalAnchor": "Recursion is the universe's way of building infinite complexity from finite rules. The DNA helix twists and copies itself, much like a recursive function calling itself. But while nature can build indefinitely, a computer's call stack is finite. Recursion requires a base case, a boundary where the folding stops and the unravelling begins.",
+  "pythonConcept": "Recursion, Call Stack, Limits",
+  "difficultyLevel": 3,
+  "jonasanType": "Concept",
+  "targetConstructs": [
+    "def",
+    "return",
+    "sys.setrecursionlimit",
+    "RecursionError"
+  ],
+  "briefDescription": "Understand recursion and the call stack by modeling DNA sequence generation. Learn how functions call themselves, the danger of infinite recursion, and how memory limits impose physical boundaries on abstract concepts.",
+  "theoryPillar": "In biology, a DNA sequence can be viewed recursively: a base pair followed by the rest of the sequence. In computer science, a recursive function is one that calls itself to solve smaller instances of the same problem. Each call pushes a new frame onto the call stack. Without a base case, the stack grows until memory is exhausted, resulting in a stack overflow.",
+  "anchorPillar": "We model DNA transcription using recursion. The function processes one base pair, then recursively processes the remainder. The Python interpreter's call stack represents the physical constraints. We use `sys.setrecursionlimit()` to observe the boundaries of our computing environment.",
+  "triggerPillar": "You need to write a recursive function to compute the complementary DNA strand. If given 'ATCG', it should return 'TAGC'. Explore what happens when you process a massive DNA sequence that exceeds the recursion limit.",
+  "realityPillar": "Recursive algorithms are elegant for traversing trees (like the DOM or file systems) and implementing divide-and-conquer strategies (like Merge Sort). However, in languages without tail-call optimization like Python, deep recursion is perilous. Real-world systems often translate recursive logic into iterative loops to prevent stack overflows."
+}

@@ -1,0 +1,18 @@
+
+  {
+    "level": 1,
+    "text": "Remember that `map()` takes a function and an iterable. A `lambda` function is perfect for simple transformations like doubling a value."
+  },
+  {
+    "level": 2,
+    "text": "For `filter()`, your lambda should return `True` if the note's frequency is between 20 and 20000."
+  },
+  {
+    "level": 3,
+    "text": "Don't forget to import `reduce` from the `functools` module."
+  },
+  {
+    "level": 4,
+    "text": "`reduce` takes a function with two arguments (accumulator and current item). When reducing dictionaries to a sum, you might need to provide an initial value of 0."
+  }
+]

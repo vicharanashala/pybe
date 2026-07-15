@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of reasoning connecting the Sorting Hat's classification algorithm to the foundations of binary search and decision trees. Does the learner articulate that the Sorting Hat is not making a mystical choice but executing a learned classification function given a student's feature vector (bravery, cunning, loyalty, intelligence scores), it applies learned decision boundaries to produce a house label? Do they understand that binary search is the computational analogue: instead of asking 'which house?' the Hat asks a series of binary questions to narrow down to the correct leaf node? Do they grasp the philosophical implication: classification algorithms whether decision trees or neural networks are formalizations of what humans do naturally: categorizing based on features and learned boundaries. The Sorting Hat's thousand years of training data is no different from a modern ML model's training set."
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct implementation of classification logic and efficient search. The solution must demonstrate: (1) a decision-tree-like classification function that takes student personality scores and returns a house classification, (2) binary search using bisect module on a sorted list of student profiles for O(log n) lookup, (3) efficient insertion of new students maintaining sorted order, (4) handling of edge cases (student exactly matching a decision boundary, conflicting personality scores), (5) demonstration of O(log n) vs O(n) complexity difference through timing or counting comparisons. The learner should show that searching 3000 students takes ~12 comparisons (log₂ 3000 ≈ 12) not 3000."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on the ethics of classification and the nature of categorical thinking. Does the learner engage with the Sorting Hat's implicit assumptions that personality can be reduced to four numbers, that houses are fixed categories, that the classification is permanent? Do they consider real-world parallels: credit scoring, hiring algorithms, predictive policing all classify people into categories based on features, just like the Hat? Do they grapple with the consequences: a person classified as 'Gryffindor' might internalize those traits, just as a person denied a loan because of a credit score might be trapped in poverty? The algorithm produces a label. The label shapes the labeled. What are the ethical obligations of those who build classification systems?"
+  }
+}

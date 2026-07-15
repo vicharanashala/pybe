@@ -1,0 +1,16 @@
+{
+  "id": "philosophers-walk",
+  "title": "The Philosopher's Walk",
+  "domain": "Philosophy",
+  "domainCategory": "Philosophy/Greek",
+  "philosophicalAnchor": "Zeno asked how a walk with infinitely many steps could ever complete. Python answers: you don't need to complete the infinite to use it. Each step reveals something; the walk itself is the purpose.",
+  "pythonConcept": "generators, iterators, yield, __iter__, __next__, StopIteration, itertools, lazy evaluation",
+  "difficultyLevel": 3,
+  "jonasanType": "Structured Inquiry",
+  "targetConstructs": ["generators", "iterators", "iterator protocol", "__iter__", "__next__", "lazy evaluation", "infinite sequences"],
+  "briefDescription": "Build a climate monitoring system using generators to process infinite sensor data streams without memory growth.",
+  "theoryPillar": "Iterators maintain state and return one element at a time. The iterator protocol requires __iter__ and __next__. StopIteration signals exhaustion. Generators use yield to produce values lazily.",
+  "anchorPillar": "10,000 sensors produce readings every second—864 million per day. Loading all data is impossible. The system must process continuously for months. An infinite process does not require infinite memory to traverse.",
+  "triggerPillar": "Zeno's paradox: to walk across a room requires crossing infinitely many halfway points. But an infinite series can have a finite sum. Generators engage with exactly this idea—process without completing.",
+  "realityPillar": "__iter__ returns self. __next__ returns next element or raises StopIteration. generators: yield suspends state. itertools.count() counts forever. collections.deque with maxlen for rolling window. Anomaly detection through standard deviation."
+}

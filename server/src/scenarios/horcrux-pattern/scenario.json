@@ -1,0 +1,22 @@
+{
+  "id": "horcrux-pattern",
+  "title": "The Horcrux Pattern",
+  "domain": "Literature",
+  "domainCategory": "Harry Potter",
+  "philosophicalAnchor": "To cheat death, Voldemort split his soul and hid the fragments in physical objects. In computing, objects die when the program terminates. To cheat death, an object must be serialized\u2014converted into a stream of bytes and stored on a disk. When the program restarts, the object is resurrected from the file. Serialization is the horcrux of software.",
+  "pythonConcept": "Serialization, Pickle, JSON",
+  "difficultyLevel": 3,
+  "jonasanType": "Concept",
+  "targetConstructs": [
+    "pickle.dumps",
+    "pickle.loads",
+    "json.dumps",
+    "json.loads",
+    "with open()"
+  ],
+  "briefDescription": "Learn how to save complex Python objects to disk and load them back into memory using serialization (Pickle and JSON).",
+  "theoryPillar": "Memory (RAM) is volatile; when a process ends, everything in it is lost. To persist data, it must be written to non-volatile storage. Serialization is the process of translating data structures or object state into a format that can be stored and reconstructed later. `pickle` is Python-specific and handles complex objects. `json` is a universal text-based format.",
+  "anchorPillar": "We create a 'Wizard' object representing Voldemort. We then 'split' his state by using `pickle.dumps()` to serialize the object into a binary file. In a separate execution flow, we use `pickle.loads()` to resurrect him.",
+  "triggerPillar": "Create a custom Python class with various attributes. Serialize an instance of this class to a file using the `pickle` module. Then, write code to read the file and reconstruct the exact object.",
+  "realityPillar": "Serialization is everywhere. When you save a game, send data over a network via an API, or cache query results, you are serializing. JSON is the lingua franca of the web, while binary formats like Protocol Buffers or Pickle are used for high-performance internal systems."
+}

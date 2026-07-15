@@ -1,0 +1,18 @@
+
+  {
+    "id": "hint-1",
+    "text": "To get the memory footprint of a dense numpy array, use `matrix.nbytes`."
+  },
+  {
+    "id": "hint-2",
+    "text": "To convert a dense numpy array to a sparse CSR matrix, use `from scipy.sparse import csr_matrix` and then `sparse_mat = csr_matrix(dense_mat)`."
+  },
+  {
+    "id": "hint-3",
+    "text": "To get the memory footprint of a scipy sparse matrix, you must add the bytes of its underlying data structures: `sparse_mat.data.nbytes + sparse_mat.indptr.nbytes + sparse_mat.indices.nbytes`."
+  },
+  {
+    "id": "hint-4",
+    "text": "To prune a numpy array (set values below a threshold to zero), use boolean masking: `weights[weights < 0.9] = 0.0`."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "level": 1,
+    "text": "The `pickle` module allows you to serialize Python objects. `pickle.dump(obj, file)` writes to a file, `pickle.load(file)` reads from it."
+  },
+  {
+    "level": 2,
+    "text": "Remember that pickle files are binary. You must open the file in write-binary mode (`wb`) to save, and read-binary mode (`rb`) to load."
+  },
+  {
+    "level": 3,
+    "text": "Unlike pickle, `json` can only serialize basic data types (dicts, lists, strings, numbers). To JSON-serialize a custom class, you must convert it to a dictionary first, often using `obj.__dict__`."
+  }
+]

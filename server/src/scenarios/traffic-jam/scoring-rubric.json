@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of reasoning about concurrency and synchronization problems. Does the learner articulate why race conditions are dangerous that they produce non-deterministic, unreproducible bugs? Do they understand deadlock's four conditions and how lock ordering breaks circular wait? Do they grasp the safety vs liveness tradeoff that strict locking prevents corruption but can cause threads to wait forever?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct implementation demonstrating: (1) threading.Lock protecting critical sections, (2) proper use of 'with' statement for lock management, (3) Semaphore for bounded resource pools, (4) threading.Event for thread signaling, (5) queue.Queue for producer-consumer patterns, (6) RLock for recursive operations. At least 4 different synchronization patterns."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on emergent behavior, coordination, and the systems-theory perspective on concurrency. Does the learner connect traffic jams to race conditions and deadlocks? Do they engage with the philosophical questions of individual optimization vs collective good? Do they consider real-world parallels like database locking or OS process scheduling?"
+  }
+}

@@ -1,0 +1,34 @@
+
+  {
+    "level": 1,
+    "text": "What two methods must an object implement to be used in a for loop? __iter__ and __next__. What exception does __next__ raise when there are no more elements?"
+  },
+  {
+    "level": 2,
+    "text": "How does a generator function differ from a regular function? What keyword suspends execution and returns a value while maintaining state?"
+  },
+  {
+    "level": 3,
+    "text": "If you have a generator that yields values 'forever' (while True: yield ...), how do you get only the first 10 values? Think about the take() function pattern."
+  },
+  {
+    "level": 4,
+    "text": "How would you compute a rolling average without storing all readings? Hint: use a collections.deque with maxlen to maintain a fixed-size window."
+  },
+  {
+    "level": 5,
+    "text": "For anomaly detection: if a reading deviates from the rolling average by more than 2 standard deviations, is it anomalous? How would you calculate standard deviation incrementally?"
+  },
+  {
+    "level": 6,
+    "text": "What is lazy evaluation? Why does yield-ing values one at a time use less memory than building a list of all values?"
+  },
+  {
+    "level": 7,
+    "text": "If an iterator is 'exhausted' (no more values), what exception is raised? How does the for loop handle this automatically?"
+  },
+  {
+    "level": 8,
+    "text": "Zeno's paradox: to process an infinite stream, you don't need to complete it. Each next() call gives you the next value. The pipeline is the walk, not the destination."
+  }
+]

@@ -1,0 +1,34 @@
+
+  {
+    "level": 1,
+    "text": "What is the type of a class itself? If `Patient` is a class, what is `type(Patient)`?"
+  },
+  {
+    "level": 2,
+    "text": "When you write `class MyClass: pass`, what creates the class object? Is there a default mechanism?"
+  },
+  {
+    "level": 3,
+    "text": "If you could intercept the moment a class is being created, what method might you override in a metaclass?"
+  },
+  {
+    "level": 4,
+    "text": "In a metaclass, __new__ runs before __init__. What could you examine or validate at that moment?"
+  },
+  {
+    "level": 5,
+    "text": "Python's abc module provides a class whose metaclass automatically enforces method implementation. What do you think `ABC` stands for?"
+  },
+  {
+    "level": 6,
+    "text": "When you mark a method with @abstractmethod, what constraint does Python enforce at class-creation time?"
+  },
+  {
+    "level": 7,
+    "text": "Consider: if NotImplementedError only triggers when a method is CALLED, how do you make it trigger when the class is DEFINED?"
+  },
+  {
+    "level": 8,
+    "text": "A metaclass is to a class what a class is to an instance. If you wanted to track every subclass that gets created, where would you hook that logic?"
+  }
+]

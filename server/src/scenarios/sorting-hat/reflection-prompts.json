@@ -1,0 +1,6 @@
+
+  "How does O(log n) scaling compare to O(n) scaling when evaluating 10,000 students instead of 200?",
+  "What is the disadvantage of a decision tree when features are highly correlated?",
+  "Why is Python's `bisect` module implemented in C, and what does this tell you about its intended use cases?",
+  "How is sorting a prerequisite for binary search, and when is the cost of sorting not worth the benefit of binary search?"
+]

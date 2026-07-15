@@ -1,0 +1,18 @@
+
+  {
+    "id": "hint-1",
+    "text": "To simulate the slow composition, import the `time` module and use `time.sleep(2)` inside your `compose_poem` function."
+  },
+  {
+    "id": "hint-2",
+    "text": "`collections.OrderedDict` behaves like a normal dictionary but remembers the order in which keys were inserted. This is perfect for an LRU cache."
+  },
+  {
+    "id": "hint-3",
+    "text": "When you have a 'Cache Hit', you need to update the item's position to show it was recently used. With `OrderedDict`, you can do this by calling `self.cache.move_to_end(topic)`."
+  },
+  {
+    "id": "hint-4",
+    "text": "When you have a 'Cache Miss' and the cache is full, you need to remove the oldest item. You can do this by calling `self.cache.popitem(last=False)`. Setting `last=False` removes the first item inserted, which is the least recently used."
+  }
+]

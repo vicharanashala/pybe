@@ -1,0 +1,18 @@
+
+  {
+    "level": 1,
+    "text": "Import the `sys` module. When you are in a virtual environment, `sys.prefix` points to the venv directory, while `sys.base_prefix` points to the global Python installation."
+  },
+  {
+    "level": 2,
+    "text": "In a `requirements.txt` file, you specify exact versions with `==` and minimum versions with `>=`."
+  },
+  {
+    "level": 3,
+    "text": "The built-in module for creating virtual environments is called `venv`. You run it as a module using `python -m venv <name>`."
+  },
+  {
+    "level": 4,
+    "text": "To activate a venv on Linux/Mac, you use the `source` command on the `activate` script located inside the `bin` directory of the venv."
+  }
+]

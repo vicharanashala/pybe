@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of philosophical reasoning connecting the South Indian banana leaf feast to memory allocation. Does the learner articulate why fixed-size memory requires careful management? Do they understand the banana leaf as a heap contiguous space, allocated portions, fragmentation when free blocks become scattered? Do they grasp why the server acts as malloc tracking what is free, what is allocated, and when to consolidate?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct implementation of a custom memory allocator using bytearray or ctypes. The solution must demonstrate: (1) fixed-size buffer initialization (256 bytes), (2) serve(size) that finds a free contiguous block, marks it allocated, and returns an address/index, (3) consume(address) that frees a block, (4) handling of memory fragmentation adjacent free blocks should ideally be merged. Should handle edge cases: request larger than remaining space, no free blocks, exact-fit allocations."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on memory management as a universal problem. Does the learner connect the banana leaf allocator to real memory allocators (malloc, free, slab allocators)? Do they consider what happens when memory is never freed memory leaks, like a dirty banana leaf that never gets cleared? What about external fragmentation: even if total free space exists, no single block is large enough? How does Python's garbage collector avoid these issues and at what cost? Do they see the philosophical parallel: just as the leaf cleans itself between courses, automatic memory management cleans up after programs, but both require rules and discipline?"
+  }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "level": 1,
+    "text": "To extract a specific set of bits, you need a mask. For example, to get the last 5 bits, you need a mask with 5 ones: 0b11111 (which is 31)."
+  },
+  {
+    "level": 2,
+    "text": "Use the bitwise AND operator (`&`) with your mask to isolate the bits."
+  },
+  {
+    "level": 3,
+    "text": "To extract bits that are not at the very end, use the right shift operator (`>>`) to move them to the rightmost position before masking."
+  }
+]

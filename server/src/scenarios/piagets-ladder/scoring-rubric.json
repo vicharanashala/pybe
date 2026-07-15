@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of reasoning connecting Piaget's developmental schemas to Python's structural typing system. Does the learner articulate why Protocols represent a philosophical shift from 'if it inherits from it, it is valid' (nominal typing) to 'if it quacks like it, it is valid' (structural typing)? Do they grasp that the Protocol is a schema in the Piagetian sense a cognitive structure that categorizes objects based on their behavior rather than their lineage? Do they understand that Protocols solve the expression problem: they allow adding new implementing types without modifying existing code, just as schemas allow children to incorporate new experiences into existing cognitive structures?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct use of typing.Protocol for structural subtyping with mypy verification. The solution must demonstrate: (1) definition of a Protocol class with required method signatures including type annotations, (2) implementation of the Protocol by two unrelated classes (Ladder and Mountain) that are structurally compatible but share no inheritance relationship, (3) a function that accepts Protocol type and calls the required method, (4) correct use of @runtime_checkable if runtime verification is needed, (5) mypy type checking that verifies the structural compatibility, (6) demonstration that a class that does NOT implement the required method fails mypy validation. The learner should run mypy and show the output."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on duck typing vs static typing and the broader philosophy of type systems. Does the learner engage with the tension: duck typing is more flexible and Pythonic (EAFP Easier to Ask Forgiveness than Permission), but static typing catches errors before runtime? Do they consider the trade-offs between Protocol-based design and abstract base classes (abc.ABC)? Do they connect Protocols to real-world software architecture how do interfaces in Go, traits in Rust, and protocols in Elixir all address the same fundamental problem? Do they consider the Piagetian parallel: a child's schema is not rigid it adapts to new experiences through assimilation and accommodation. Is a Protocol similarly adaptive, allowing structural compatibility without rigid inheritance?"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "common": {
+    "app_name": "pyBE",
+    "tagline": "दर्शन × Python × कोड",
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "success": "सफलता",
+    "save": "सहेजें",
+    "cancel": "रद्द करें",
+    "submit": "जमा करें",
+    "delete": "हटाएं",
+    "edit": "संपादित करें",
+    "close": "बंद करें"
+  },
+  "nav": {
+    "home": "होम",
+    "scenarios": "परिदृश्य",
+    "dashboard": "डैशबोर्ड",
+    "profile": "प्रोफ़ाइल",
+    "login": "लॉगिन",
+    "register": "रजिस्टर",
+    "logout": "लॉग आउट"
+  },
+  "scenarios": {
+    "title": "परिदृश्य",
+    "domain": "डोमेन",
+    "difficulty": "कठिनाई",
+    "type": "प्रकार",
+    "hint": "संकेत",
+    "solution": "समाधान",
+    "completed": "पूर्ण",
+    "in_progress": "प्रगति में",
+    "not_started": "शुरू नहीं हुआ"
+  },
+  "levels": {
+    "level_1": "अप्रेंटिस",
+    "level_2": "कारीगर",
+    "level_3": "विद्वान",
+    "level_4": "आर्किटेक्ट",
+    "level_5": "पायथनिस्टा"
+  },
+  "auth": {
+    "login": "लॉगिन",
+    "register": "रजिस्टर",
+    "email": "ईमेल",
+    "username": "उपयोगकर्ता नाम",
+    "password": "पासवर्ड",
+    "forgot_password": "पासवर्ड भूल गए?",
+    "no_account": "खाता नहीं है?"
+  },
+  "gamification": {
+    "xp": "XP",
+    "level": "स्तर",
+    "badges": "बैज",
+    "leaderboard": "लीडरबोर्ड",
+    "streak": "स्ट्रीक",
+    "completed": "पूर्ण"
+  }
+}

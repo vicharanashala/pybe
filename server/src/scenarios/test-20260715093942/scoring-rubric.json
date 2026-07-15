@@ -1,0 +1,14 @@
+{
+  "reasoning": {
+    "weight": 40,
+    "description": "Understanding of the philosophical connection"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct use of target Python constructs"
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on the learning experience"
+  }
+}

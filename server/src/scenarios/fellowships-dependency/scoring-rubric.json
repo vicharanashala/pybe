@@ -1,0 +1,14 @@
+
+  "reasoning": {
+    "weight": 40,
+    "description": "Quality of reasoning connecting the Fellowship's dependency conflict (Rohan needs horses v1.0, Gondor needs horses v2.0) to the fundamental problem of dependency isolation. Does the learner articulate why 'Dependency Hell' is not a bug but a structural inevitability that in any sufficiently complex software system, components will have conflicting requirements, and virtualization is the solution rather than a workaround? Do they grasp that virtual environments are not about hiding packages but about creating reproducible, isolated bubbles of dependency space?"
+  },
+  "code": {
+    "weight": 30,
+    "description": "Correct demonstration of virtual environment creation and management. The solution must demonstrate: (1) detection of whether running inside a venv via sys.prefix vs sys.base_prefix comparison, (2) proper requirements.txt formatting with package names and version specifiers, (3) a script or instructions that create a new venv, activate it, and install dependencies from requirements.txt, (4) demonstration that the two isolated environments can have conflicting package versions simultaneously without conflict. The learner should produce a working script that could actually be run to create and populate a virtual environment."
+  },
+  "reflection": {
+    "weight": 30,
+    "description": "Depth of reflection on isolation as a principle in computing and beyond. Does the learner connect venvs to containers (Docker), process isolation, and even the philosophical concept of bounded contexts? Do they consider the trade-offs: isolation adds complexity and overhead, so when is it worth it and when is a global install acceptable? Do they engage with the irony that the Fellowship itself is a form of virtual environment a carefully composed group where each member's dependencies (Gandalf's staff, Legolas's bow, Gimli's axe) are isolated from the others? What does dependency isolation teach us about the broader challenge of managing complexity in large systems?"
+  }
+}

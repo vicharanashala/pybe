@@ -1,0 +1,6 @@
+
+  "How does a `Protocol` differ from an `Abstract Base Class (ABC)` in Python?",
+  "In what situations would 'structural subtyping' be preferred over 'nominal subtyping'?",
+  "How does Python's approach to Protocols compare to Interfaces in languages like Java or TypeScript?",
+  "Why might a development team choose to add `mypy` checks to their CI/CD pipeline?"
+]

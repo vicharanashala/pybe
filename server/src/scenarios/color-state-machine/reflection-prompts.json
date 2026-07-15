@@ -1,0 +1,6 @@
+
+  "How does using an Enum prevent bugs compared to using simple strings like `'red'` and `'green'`?",
+  "What is the advantage of using Python's `match` statement for state transitions over multiple `if/elif` statements?",
+  "If the state machine became more complex (e.g., adding a blinking yellow state), how would the Enum scale?",
+  "Why is it important to explicitly raise an error if an unknown state is encountered in an embedded system?"
+]
