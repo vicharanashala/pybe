@@ -1,61 +1,62 @@
-# PyBe MERN App
+# PyBe
 
-PyBe is a scenario-driven Python learning prototype built from the supplied PRD and breakdown document. It has no login flow for now.
+> Offline, scenario-driven Python learning prototype
 
-📚 View the project wiki: [WIKI.md](WIKI.md)
+PyBe is a prototype learning application for Python that uses scenario-driven sessions and interactive concepts to help learners practice reasoning, abstraction, and Python construct generation. It is built as a local-first prototype from the supplied PRD and breakdown document, and it is intended to run without a login flow for now.
 
-## Features
+## What makes this project different
 
 - Scenario browser with difficulty, concept, and search filters
-- Interactive learning session: learner reasoning, abstraction mapping, conversational prompts, Python construct generation, prompt scoring, and reflection capture
-- Dashboard with progress, prompt maturity, concept mastery, misconceptions, and recent sessions
-- Roadmap view covering V0 through V3 from the source documents
-- JSON-file backed API with seed data
+- Interactive learning sessions with guided prompts
+- Reasoning support, abstraction mapping, and reflection capture
+- Progress dashboard with lessons, quizzes, and milestones
+- Playground for practicing Python constructs
+- Roadmap view for staged learning goals
+- Offline-friendly experience with local data and no required authentication
 
-## Tech Stack
+## Current status
 
-- JSON file storage
-- Express + Node.js
-- React + Vite
-- Plain CSS, no auth
+- No login flow is implemented yet
+- The app is designed to work in offline mode
+- Progress and learning content are handled locally in the prototype
+- This is a learning prototype, not a production-ready platform
 
-## Prerequisites
+## Technology stack
 
-- Node.js 18+
+- Frontend: React + Vite + TypeScript
+- UI: React components and CSS
+- Backend: Lightweight Node.js/Express setup
+- Data: Local JSON-backed content and browser storage
 
-## Setup
+## Getting started
 
-1. Install dependencies:
-
-```bash
-npm run installAll
-```
-
-2. Configure the server environment:
-
-```bash
-cp server/.env.example server/.env
-```
-
-The default values work for local development.
-
-3. Seed sample data:
+Install dependencies:
 
 ```bash
-npm run seed
+npm install
 ```
 
-4. Run the app:
+Run the app locally:
 
 ```bash
 npm run dev
 ```
 
-- Frontend: http://localhost:5173
-- API: http://localhost:5000/api
+Open the local development URL shown in the terminal.
 
-## Notes
+## Offline mode
 
-The AI behavior in this prototype is deterministic and local. The abstraction mapper, prompt evaluator, and Python construct generator use rule-based logic so you can run everything without external AI keys. Later phases can replace those services with OpenAI, RAG, or TinyLLM components.
+PyBe is intended to be used as an offline-friendly prototype. The current experience does not depend on authentication, remote AI services, or a live database. It is meant to be simple, local, and easy to explore without setup friction.
 
-Learning data is stored in `server/src/data/db.json`. This keeps the prototype simple and fully local, without MongoDB, Docker, Atlas, or any external database.
+## Project scope
+
+This repository is focused on the prototype experience for:
+
+- scenario browsing
+- lesson progression
+- quiz practice
+- guided coding exploration
+- progress tracking
+
+Future versions may expand into richer personalization, deeper analytics, and more advanced learning pathways.
+

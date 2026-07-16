@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer utilities {
+  .bg-grid-pattern {
+    background-size: 30px 30px;
+    background-image: linear-gradient(to right, rgba(99, 102, 241, 0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(99, 102, 241, 0.05) 1px, transparent 1px);
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "users": [
+    {
+      "id": "user_ndqhsoyn5",
+      "name": "Ridha",
+      "email": "23uea037@avinuty.ac.in",
+      "password_hash": "$2b$10$55hnP.DEE/3AaCB8meaKAudi5MVU6ZLI0LoiAg/719m6bXeCOQjee",
+      "profile_picture": null,
+      "created_at": "2026-07-15T11:15:16.539Z",
+      "last_login": "2026-07-15T11:15:16.539Z"
+    }
+  ],
+  "userProgress": [
+    {
+      "id": "prog_o8falawd0",
+      "selected_world": "physics",
+      "level": "beginner",
+      "xp_points": 0,
+      "streak": 337,
+      "completed_lessons": [],
+      "completedQuizzes": [],
+      "completedChallenges": [],
+      "completedProjects": [],
+      "badges": [],
+      "pasteProtectionEnabled": true,
+      "pasteAttempts": [],
+      "completed_daily_problems": [],
+      "user_id": "user_2px44mofk",
+      "updated_at": "2026-07-11T13:58:35.468Z"
+    },
+    {
+      "id": "prog_dsmjh81fh",
+      "user_id": "user_ndqhsoyn5",
+      "selected_world": "story",
+      "current_lesson": "1",
+      "completed_lessons": [],
+      "test_scores": {},
+      "xp_points": 0,
+      "badges": [],
+      "streak": 1,
+      "weak_topics": [],
+      "strong_topics": [],
+      "completed_daily_problems": [],
+      "updated_at": "2026-07-15T11:19:59.058Z",
+      "level": "beginner",
+      "completedQuizzes": [],
+      "completedChallenges": [],
+      "completedProjects": [],
+      "pasteProtectionEnabled": true,
+      "pasteAttempts": []
+    }
+  ],
+  "lessons": [],
+  "tests": [],
+  "testResults": [],
+  "sandboxFiles": [],
+  "projects": [],
+  "bookmarks": [],
+  "peerPosts": [
+    {
+      "id": "thread_1",
+      "title": "IndentationError: expected an indented block in Minecraft zombie loop",
+      "content": "I'm trying to spawn 5 zombies in my custom Minecraft loop, but Python keeps throwing an IndentationError on my spawning line. Can anyone explain why it is complaining about indents when my code looks correct in my head?",
+      "category": "syntax",
+      "scenario": "gaming",
+      "created_at": "2026-07-11T13:58:35.462Z",
+      "user_id": "user_2px44mofk"
+    },
+    {
+      "id": "thread_2",
+      "title": "Visualizing nested dictionaries for Harry Potter houses?",
+      "content": "I am currently studying nested dictionaries in lists. Simple key-value pairs are easy to understand, but nested structures (dictionaries inside dictionaries) are giving me a massive headache. Does anyone have a simple, wizarding-world analogy to make this click?",
+      "category": "analogy",
+      "scenario": "books",
+      "created_at": "2026-07-11T13:58:35.462Z",
+      "user_id": "user_2px44mofk"
+    },
+    {
+      "id": "thread_3",
+      "title": "Why does my conditional check set my character score to 0 instead of checking it?",
+      "content": "I'm writing a mini game engine. I want to trigger a Game Over screen when my hero's health is zero. But instead of checking it, Python literally overwrites the health variable, sets it to zero, and triggers the Game Over every single time! What's going on here?",
+      "category": "logic",
+      "scenario": "gaming",
+      "created_at": "2026-07-11T13:58:35.462Z",
+      "user_id": "user_2px44mofk"
+    },
+    {
+      "id": "thread_4",
+      "title": "Rich Dad Poor Dad: Storing assets and liabilities inside lists",
+      "content": "How can I organize Robert's cash flow variables cleanly? Right now I have 20 individual string variables for asset_1, asset_2, liability_1, liability_2... It's becoming unmanageable. Is a List or a Dictionary better for appending assets?",
+      "category": "projects",
+      "scenario": "business",
+      "created_at": "2026-07-11T13:58:35.462Z",
+      "user_id": "user_2px44mofk"
+    }
+  ],
+  "peerReplies": [
+    {
+      "id": "reply_1_1",
+      "post_id": "thread_1",
+      "content": "In Python, blank space is not just for readability; it acts like the curly braces {} in languages like Java or C++!\n\nWhen you define a block structure like a `for` loop, an `if` statement, or a function, Python expects the block of code inside to be indented. Usually, we use **4 spaces** or press **Tab** once.\n\nTry indenting the spawning line like this:",
+      "code": "for i in range(5):\n    print(\"Spawning zombie #\" + str(i)) # Indented by 4 spaces",
+      "created_at": "2026-07-11T13:58:35.462Z",
+      "user_id": "user_2px44mofk"
+    },
+    {
+      "id": "reply_2_1",
+      "post_id": "thread_2",
+      "content": "Think of a nested dictionary like the Hogwarts Castle itself!\n\n1. The main dictionary is the **Castle**.\n2. The outer keys (\"Gryffindor\", \"Slytherin\") are the **Common Rooms**. When you unlock a Common Room door, you don't just find one item; you find an entire room filled with different items.\n3. Inside each Common Room, you have sub-keys (like \"points\" and \"founder\"). These are specific labeled chests inside that room!\n\nSo, to find Gryffindor's points, you walk into the castle, unlock Gryffindor common room, then open the \"points\" chest!\n`hogwarts_houses[\"Gryffindor\"][\"points\"]`",
+      "created_at": "2026-07-11T13:58:35.462Z",
+      "user_id": "user_2px44mofk"
+    },
+    {
+      "id": "reply_2_2",
+      "post_id": "thread_2",
+      "content": "Wow, Hermione's analogy is spot on. I used to think of it like nested sweet boxes from Honeydukes, but the castle room chest makes way more sense. Thanks!",
+      "created_at": "2026-07-11T13:58:35.462Z",
+      "user_id": "user_2px44mofk"
+    },
+    {
+      "id": "reply_3_1",
+      "post_id": "thread_3",
+      "content": "This is the single most common logical bug in all of computer programming!\n\nIn Python (and most other languages):\n- A single equals sign `=` is used for **Assignment** (placing a value inside a variable box).\n- A double equals sign `==` is used for **Comparison** (asking if two things are equal).\n\nYour code is attempting to assign `0` to `hero_health` within the conditional statement. Fix this by using `==`:",
+      "code": "if hero_health == 0:\n    print(\"Game Over!\")",
+      "created_at": "2026-07-11T13:58:35.462Z",
+      "user_id": "user_2px44mofk"
+    }
+  ],
+  "uploads": [],
+  "voiceMessages": [],
+  "aiTutorChats": [],
+  "settings": [
+    {
+      "id": "set_b4svjhwpj",
+      "user_id": "user_ndqhsoyn5",
+      "theme": "light",
+      "font_size": "medium",
+      "sound_preference": true,
+      "language": "english",
+      "updated_at": "2026-07-15T11:15:16.539Z"
+    }
+  ]
+}

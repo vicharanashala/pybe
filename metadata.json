@@ -1,0 +1,6 @@
+{
+  "name": "Pybe",
+  "description": "Learn Python programming through highly interactive real-life interest-based worlds like Storytelling, Gaming, History, Physics, Economics, Music, and Civics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
