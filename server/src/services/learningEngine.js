@@ -13,10 +13,10 @@ const conceptRules = [
   },
   {
     keywords: [
-  'dictionary', 'key', 'value', 'pair',
-  'map', 'mapping', 'store each',
-  'supply name', 'count'
-  ],
+      'dictionary', 'key', 'value', 'pair',
+      'map', 'mapping', 'store each',
+      'supply name', 'count'
+    ],
     pattern: 'Collection handling',
     pythonConcept: 'lists and dictionaries',
     explanation: 'You grouped multiple values, so Python collections help store and process them.'
@@ -34,25 +34,25 @@ const conceptRules = [
     explanation: 'You described a repeatable process, which maps to a Python function.'
   },
   {
-  keywords: [
-    'object', 'class', 'instance', 'attribute',
-    'method', 'properties and actions',
-    'data and behavior'
-  ],
-  pattern: 'Object-oriented modelling',
-  pythonConcept: 'classes and objects',
-  explanation:
-    'You described a real-world entity with properties and actions. In Python, a class can model that entity and objects can represent individual instances.'
+    keywords: [
+      'object', 'class', 'instance', 'attribute',
+      'method', 'properties and actions',
+      'data and behavior'
+    ],
+    pattern: 'Object-oriented modelling',
+    pythonConcept: 'classes and objects',
+    explanation:
+      'You described a real-world entity with properties and actions. In Python, a class can model that entity and objects can represent individual instances.'
   },
   {
-  keywords: [
-    'filter items', 'only show', 'select those',
-    'compare values', 'greater than', 'less than',
-    'matches the rule'
-  ],
-  pattern: 'Selection and filtering',
-  pythonConcept: 'comparisons and list comprehensions',
-  explanation: 'You are narrowing options using rules, which Python can express with comparisons and filters.'
+    keywords: [
+      'filter items', 'only show', 'select those',
+      'compare values', 'greater than', 'less than',
+      'matches the rule'
+    ],
+    pattern: 'Selection and filtering',
+    pythonConcept: 'comparisons and list comprehensions',
+    explanation: 'You are narrowing options using rules, which Python can express with comparisons and filters.'
   }
 ];
 
@@ -66,19 +66,28 @@ function mapReasoning(reasoning = '') {
   }];
 }
 
-function generateCode(scenario, maps) {
+/**
+ * Resolves a deterministic "code artifact" for a scenario + its abstraction map.
+ * Returns the generated Python source, the exact stdout it produces when run
+ * (each variant below is a fixed, hand-verified template, so the output is real,
+ * not guessed), and a short description of the hard-coded input values the
+ * program works from. Centralizing this avoids duplicating the branching logic
+ * that decides which template applies.
+ */
+function buildCodeArtifact(scenario, maps) {
   const concepts = maps.map((item) => item.pythonConcept).join(', ');
   const hasLoop = concepts.includes('for / while loops');
   const hasCondition = concepts.includes('if / elif / else');
   const hasFunction = concepts.includes('functions');
   const hasOOP = concepts.includes('classes and objects');
   const hasCollection = concepts.includes('lists and dictionaries');
-  
-  if (hasCollection) {
-  const scenarioTitle = scenario.title.toLowerCase();
+  const scenarioTitle = (scenario.title || '').toLowerCase();
 
-  if (scenarioTitle.includes('supply')) {
-    return `supplies = {
+  if (hasCollection) {
+    if (scenarioTitle.includes('supply')) {
+      return {
+        key: 'collection-supply',
+        code: `supplies = {
     "chalk": 20,
     "markers": 8,
     "notebooks": 15
@@ -89,38 +98,77 @@ supply_name = "chalk"
 if supply_name in supplies:
     print(f"{supply_name}: {supplies[supply_name]} available")
 else:
-    print("Supply not found")`;
-  }
+    print("Supply not found")`,
+        input: 'supplies = {"chalk": 20, "markers": 8, "notebooks": 15}\nsupply_name = "chalk"',
+        output: 'chalk: 20 available'
+      };
+    }
 
-  if (scenarioTitle.includes('color')) {
-    return `favorite_colors = ["blue", "green", "purple"]
+    if (scenarioTitle.includes('color')) {
+      return {
+        key: 'collection-color',
+        code: `favorite_colors = ["blue", "green", "purple"]
 
 for color in favorite_colors:
-    print(color)`;
-  }
+    print(color)`,
+        input: 'favorite_colors = ["blue", "green", "purple"]',
+        output: 'blue\ngreen\npurple'
+      };
+    }
 
-  if (scenarioTitle.includes('attendance')) {
-    return `present_students = ["Aarav", "Meera", "Kabir", "Zoya"]
+    if (scenarioTitle.includes('attendance')) {
+      return {
+        key: 'collection-attendance',
+        code: `present_students = ["Aarav", "Meera", "Kabir", "Zoya"]
 
-print(f"Students present: {len(present_students)}")`;
-  }
+print(f"Students present: {len(present_students)}")`,
+        input: 'present_students = ["Aarav", "Meera", "Kabir", "Zoya"]',
+        output: 'Students present: 4'
+      };
+    }
 
-  if (scenarioTitle.includes('bag')) {
-    return `bag_items = ["pencil", "eraser", "ruler"]
+    if (scenarioTitle.includes('bag')) {
+      return {
+        key: 'collection-bag',
+        code: `bag_items = ["pencil", "eraser", "ruler"]
 
-print(bag_items[0])`;
-  }
+print(bag_items[0])`,
+        input: 'bag_items = ["pencil", "eraser", "ruler"]',
+        output: 'pencil'
+      };
+    }
 
-  return `items = ["first item", "second item", "third item"]
+    return {
+      key: 'collection-default',
+      code: `items = ["first item", "second item", "third item"]
 
 for item in items:
-    print(item)`;
-}
-  if (hasLoop && hasCondition) {
-    return 'items = [12, 7, 19, 4]\nthreshold = 10\n\nfor item in items:\n    if item >= threshold:\n        print(f"{item} needs attention")\n    else:\n        print(f"{item} is okay")';
+    print(item)`,
+      input: 'items = ["first item", "second item", "third item"]',
+      output: 'first item\nsecond item\nthird item'
+    };
   }
+
+  if (hasLoop && hasCondition) {
+    return {
+      key: 'loop-condition',
+      code: `items = [12, 7, 19, 4]
+threshold = 10
+
+for item in items:
+    if item >= threshold:
+        print(f"{item} needs attention")
+    else:
+        print(f"{item} is okay")`,
+      input: 'items = [12, 7, 19, 4]\nthreshold = 10',
+      output: '12 needs attention\n7 is okay\n19 needs attention\n4 is okay'
+    };
+  }
+
   if (hasOOP) {
-  return `class ScenarioEntity:
+    return {
+      key: 'oop',
+      code: `class ScenarioEntity:
     def __init__(self, name, status="active"):
         self.name = name
         self.status = status
@@ -128,22 +176,68 @@ for item in items:
     def describe(self):
         return f"{self.name} is currently {self.status}"
 
-  entity = ScenarioEntity("Example entity")
-  print(entity.describe())`;
+entity = ScenarioEntity("Example entity")
+print(entity.describe())`,
+      input: 'entity = ScenarioEntity("Example entity")',
+      output: 'Example entity is currently active'
+    };
   }
+
   if (hasFunction) {
-    return 'def solve_scenario(inputs):\n    result = []\n    for value in inputs:\n        result.append(value * 2)\n    return result\n\nprint(solve_scenario([1, 2, 3]))';
+    return {
+      key: 'function',
+      code: `def solve_scenario(inputs):
+    result = []
+    for value in inputs:
+        result.append(value * 2)
+    return result
+
+print(solve_scenario([1, 2, 3]))`,
+      input: 'solve_scenario([1, 2, 3])',
+      output: '[2, 4, 6]'
+    };
   }
 
   if (hasLoop) {
-    return 'steps = ["notice the situation", "look for a pattern", "apply the rule"]\n\nfor step in steps:\n    print(step)';
+    return {
+      key: 'loop',
+      code: `steps = ["notice the situation", "look for a pattern", "apply the rule"]
+
+for step in steps:
+    print(step)`,
+      input: 'steps = ["notice the situation", "look for a pattern", "apply the rule"]',
+      output: 'notice the situation\nlook for a pattern\napply the rule'
+    };
   }
 
   if (hasCondition) {
-    return 'temperature = 32\n\nif temperature > 30:\n    print("Take action now")\nelse:\n    print("Keep observing")';
+    return {
+      key: 'condition',
+      code: `temperature = 32
+
+if temperature > 30:
+    print("Take action now")
+else:
+    print("Keep observing")`,
+      input: 'temperature = 32',
+      output: 'Take action now'
+    };
   }
 
-  return `scenario = "${scenario.title.replace(/"/g, '\\"')}"\nreasoning = "Break the situation into clear steps"\nprint(scenario)\nprint(reasoning)`;
+  const safeTitle = (scenario.title || 'Scenario').replace(/"/g, '\\"');
+  return {
+    key: 'fallback',
+    code: `scenario = "${safeTitle}"
+reasoning = "Break the situation into clear steps"
+print(scenario)
+print(reasoning)`,
+    input: `scenario = "${safeTitle}"`,
+    output: `${scenario.title || 'Scenario'}\nBreak the situation into clear steps`
+  };
+}
+
+function generateCode(scenario, maps) {
+  return buildCodeArtifact(scenario, maps).code;
 }
 
 function explainCode(maps) {
@@ -180,4 +274,12 @@ function masterySignals(maps, promptScore) {
   return signals;
 }
 
-module.exports = { mapReasoning, generateCode, explainCode, evaluatePrompt, detectMisconceptions, masterySignals };
+module.exports = {
+  mapReasoning,
+  buildCodeArtifact,
+  generateCode,
+  explainCode,
+  evaluatePrompt,
+  detectMisconceptions,
+  masterySignals
+};

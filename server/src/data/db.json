@@ -594,6 +594,50 @@
       "effectivenessScore": 87,
       "createdAt": "2026-06-23T06:49:04.450Z",
       "updatedAt": "2026-06-23T06:49:04.450Z"
+    },
+    {
+      "_id": "0a7d395b-05af-4d3c-b42a-68262833c945",
+      "title": "Travel: Boarding Pass",
+      "difficulty": "Beginner",
+      "concepts": [
+        "conditionals"
+      ],
+      "context": "In a travel setting, someone needs a simple way to keep track of the boarding pass. Let's turn that into a small, working Python program.",
+      "prompt": "What condition would decide what happens with boarding pass?",
+      "objectives": [
+        "Identify what matters about boarding pass",
+        "Decide what condition determines what happens with boarding pass",
+        "Connect that idea to Conditionals in Python"
+      ],
+      "sampleReasoning": "I would check a condition on boarding pass to decide what should happen next.",
+      "effectivenessScore": 80,
+      "source": "ai-generated",
+      "theme": "Travel",
+      "generatedFor": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "createdAt": "2026-07-16T05:44:04.969Z",
+      "updatedAt": "2026-07-16T05:44:04.969Z"
+    },
+    {
+      "_id": "075410e9-8dc4-4e5e-b3e2-6fa72ac0ecf6",
+      "title": "School: Library Book",
+      "difficulty": "Beginner",
+      "concepts": [
+        "variables"
+      ],
+      "context": "In a school setting, someone needs a simple way to keep track of the library book. Let's turn that into a small, working Python program.",
+      "prompt": "What single piece of information would you give a name to, to represent the library book?",
+      "objectives": [
+        "Identify what matters about the library book",
+        "Decide on one clear detail to remember about the library book",
+        "Connect that idea to Variables in Python"
+      ],
+      "sampleReasoning": "I would remember one clear piece of information about the library book and give it a name.",
+      "effectivenessScore": 80,
+      "source": "ai-generated",
+      "theme": "School",
+      "generatedFor": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "createdAt": "2026-07-16T06:08:12.282Z",
+      "updatedAt": "2026-07-16T06:08:12.282Z"
     }
   ],
   "sessions": [
@@ -1019,6 +1063,67 @@
       ],
       "createdAt": "2026-07-08T11:39:25.807Z",
       "updatedAt": "2026-07-08T11:39:25.807Z"
+    },
+    {
+      "_id": "be6323fb-5499-4f9a-958c-02a01b668649",
+      "learnerName": "Guest learner",
+      "scenario": "72cb5600-e182-4a7b-8094-a0f85a583d4b",
+      "reasoning": "The computer only needs to remember one piece of information: the bag's weight. Giving it a meaningful name makes the code easier to understand.",
+      "promptText": "Explain my approach step by step, then show the Python concept of variables and provide a simple code example for storing a school bag's weight.",
+      "abstractionMap": [
+        {
+          "pattern": "Sequential thinking",
+          "pythonConcept": "statements and variables",
+          "explanation": "You described a step-by-step solution. Python starts by representing those steps as statements."
+        }
+      ],
+      "generatedCode": "scenario = \"Bag Weight Label\"\nreasoning = \"Break the situation into clear steps\"\nprint(scenario)\nprint(reasoning)",
+      "codeExplanation": "The code starts from your natural reasoning and turns it into Python structure: Sequential thinking becomes statements and variables.",
+      "promptScore": 100,
+      "promptFeedback": [
+        "Strong prompt: it includes context, reasoning, examples, and a Python direction."
+      ],
+      "reflection": "I learned that a variable is a named storage location used to remember information. By storing the bag's weight in a variable, the computer can access and use that value whenever needed.",
+      "misconceptions": [],
+      "masterySignals": [
+        "Recognized sequential thinking",
+        "Prompt maturity is developing"
+      ],
+      "createdAt": "2026-07-09T04:55:12.642Z",
+      "updatedAt": "2026-07-09T04:55:12.642Z"
     }
-  ]
+  ],
+  "responses": [
+    {
+      "_id": "989f07cf-e5df-4f18-88fe-9f312d973c2f",
+      "learnerId": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "scenarioId": "0a7d395b-05af-4d3c-b42a-68262833c945",
+      "reasoning": "check th",
+      "computationalThinking": "",
+      "hintsUsed": 0,
+      "step": "workspace",
+      "createdAt": "2026-07-16T05:46:15.152Z",
+      "updatedAt": "2026-07-16T05:48:07.289Z"
+    }
+  ],
+  "reflections": [],
+  "progressMarkers": [
+    {
+      "_id": "0b8285d4-de07-4788-9d86-c7cfffaa682f",
+      "learnerId": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "scenarioId": "0a7d395b-05af-4d3c-b42a-68262833c945",
+      "step": "reading",
+      "createdAt": "2026-07-16T05:44:05.178Z",
+      "updatedAt": "2026-07-16T05:47:00.046Z"
+    },
+    {
+      "_id": "8ffd1b8c-ce56-4773-9de1-ea3c30638e9b",
+      "learnerId": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "scenarioId": "075410e9-8dc4-4e5e-b3e2-6fa72ac0ecf6",
+      "step": "reading",
+      "createdAt": "2026-07-16T06:08:12.517Z",
+      "updatedAt": "2026-07-16T06:08:12.517Z"
+    }
+  ],
+  "tutorConversations": []
 }

@@ -5,6 +5,11 @@ const scenarioRoutes = require('./routes/scenarios');
 const sessionRoutes = require('./routes/sessions');
 const analyticsRoutes = require('./routes/analytics');
 const roadmapRoutes = require('./routes/roadmap');
+const responseRoutes = require('./routes/responses');
+const reflectionRoutes = require('./routes/reflections');
+const progressRoutes = require('./routes/progress');
+const dashboardRoutes = require('./routes/dashboard');
+const aiRoutes = require('./routes/ai');
 require('dotenv').config();
 
 const app = express();
@@ -19,6 +24,11 @@ app.use('/api/scenarios', scenarioRoutes);
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/roadmap', roadmapRoutes);
+app.use('/api/responses', responseRoutes);
+app.use('/api/reflections', reflectionRoutes);
+app.use('/api/progress', progressRoutes);
+app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/ai', aiRoutes);
 
 app.use((error, _req, res, _next) => {
   console.error(error);
