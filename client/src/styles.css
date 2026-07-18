@@ -359,6 +359,346 @@ pre {
   padding: 14px;
 }
 
+.dashboard-tab {
+  display: grid;
+  gap: 20px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.profile-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.profile-stat {
+  background: #f4f1ea;
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+}
+
+.profile-stat strong {
+  display: block;
+  font-size: 1.6rem;
+}
+
+.profile-stat small {
+  color: #66736e;
+}
+
+.weakest-concept {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 10px;
+  background: #fff2d9;
+  border-radius: 8px;
+  font-size: .88rem;
+}
+
+.rec-card {
+  padding: 12px;
+  border: 1px solid #ded7cb;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: .9rem;
+}
+
+.mastery-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.mastery-card {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #f8f5ee;
+  border-radius: 8px;
+}
+
+.mastery-card strong { font-size: .9rem; }
+.mastery-card span { font-weight: 700; color: #43504b; }
+.mastery-card small { color: #7b867f; }
+
+.level-badge {
+  font-size: .7rem;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 99px;
+  font-weight: 700;
+}
+
+.level-badge.mastered { background: #d1fae5; color: #065f46; }
+.level-badge.developing { background: #fef9c3; color: #854d0e; }
+.level-badge.needs_work { background: #fee2e2; color: #991b1b; }
+
+.pace-row {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 140px;
+}
+
+.pace-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+.pace-bar {
+  width: 100%;
+  min-width: 12px;
+  max-width: 40px;
+  background: #7b9f27;
+  border-radius: 4px 4px 0 0;
+}
+
+.pace-item small { color: #7b867f; font-size: .7rem; }
+.pace-item span { font-weight: 700; font-size: .8rem; }
+
+.session-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  border-bottom: 1px solid #e7dfd2;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.session-item div { flex: 1; }
+.session-item span { display: block; color: #66716c; font-size: .82rem; margin-top: 2px; }
+.session-item > small { font-weight: 700; font-size: 1rem; color: #43504b; }
+
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #24342f;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.user-badge span { flex: 1; font-size: .9rem; }
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: #b9c7bf;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.auth-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #385149;
+  background: #24342f;
+  color: #f8f4ec;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-size: .9rem;
+}
+
+.profile-panel {
+  padding: 12px;
+  background: #20312c;
+  border-radius: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+.profile-panel input {
+  background: #16231f;
+  border: 1px solid #385149;
+  color: #f8f4ec;
+  padding: 8px 10px;
+  border-radius: 6px;
+  width: 100%;
+}
+
+.profile-panel hr { border: none; border-top: 1px solid #385149; }
+.profile-panel p { margin: 0; }
+.profile-panel small { color: #b9c7bf; }
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: #fffdf7;
+  border: 1px solid #ded7cb;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #53615c;
+}
+
+.tab.active {
+  background: #17231f;
+  color: #d8f07c;
+}
+
+.history-tab {
+  display: grid;
+  gap: 20px;
+}
+
+.session-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.session-table th {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 2px solid #ded7cb;
+  color: #53615c;
+  font-size: .85rem;
+  text-transform: uppercase;
+}
+
+.session-table td {
+  padding: 10px 8px;
+  border-bottom: 1px solid #e7dfd2;
+  font-size: .9rem;
+}
+
+.score-badge {
+  background: #17231f;
+  color: #d8f07c;
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-weight: 700;
+  font-size: .82rem;
+}
+
+.dim-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .85rem;
+}
+
+.dim-bar span { min-width: 110px; }
+.dim-bar meter { flex: 1; }
+.dim-bar strong { min-width: 50px; text-align: right; }
+
+.classification {
+  padding: 8px 12px;
+  background: #e7f2cb;
+  border-radius: 6px;
+  font-size: .85rem;
+}
+
+.auth-inline {
+  margin-bottom: 8px;
+}
+
+.auth-nudge {
+  font-size: .85rem;
+  color: #68736f;
+}
+
+.link {
+  background: none;
+  border: none;
+  color: #7b9f27;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-weight: 600;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  display: grid;
+  place-items: center;
+  z-index: 100;
+}
+
+.modal {
+  background: #fffdf7;
+  border-radius: 12px;
+  padding: 32px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #53615c;
+}
+
+.modal h2 { margin-bottom: 20px; }
+
+.modal form {
+  display: grid;
+  gap: 12px;
+}
+
+.modal input {
+  width: 100%;
+  border: 1px solid #d4cdc0;
+  border-radius: 8px;
+  padding: 12px;
+  background: #fffaf2;
+}
+
+.auth-error {
+  color: #dc2626;
+  font-size: .85rem;
+  margin: 0;
+}
+
+.auth-toggle {
+  text-align: center;
+  margin-top: 16px;
+  font-size: .9rem;
+  color: #53615c;
+}
+
+.primary.small {
+  padding: 8px 14px;
+  font-size: .85rem;
+}
+
 .dashboard {
   display: grid;
   grid-template-columns: 1fr 1.2fr 1fr;
@@ -457,7 +797,8 @@ meter {
   }
 
   .main-grid,
-  .dashboard {
+  .dashboard,
+  .dashboard-grid {
     grid-template-columns: 1fr;
   }
 
