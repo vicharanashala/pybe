@@ -1,5 +1,3 @@
 node_modules/
-client/dist/
+dist/
 .env
-npm-debug.log*
-.DS_Store
