@@ -5,6 +5,8 @@ const scenarioRoutes = require('./routes/scenarios');
 const sessionRoutes = require('./routes/sessions');
 const analyticsRoutes = require('./routes/analytics');
 const roadmapRoutes = require('./routes/roadmap');
+const doubtRoutes = require('./routes/doubts');
+const challengeRoutes = require('./routes/challenges');
 require('dotenv').config();
 
 const app = express();
@@ -19,6 +21,8 @@ app.use('/api/scenarios', scenarioRoutes);
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/roadmap', roadmapRoutes);
+app.use('/api/doubts', doubtRoutes);
+app.use('/api/challenges', challengeRoutes);
 
 app.use((error, _req, res, _next) => {
   console.error(error);
