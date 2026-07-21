@@ -15,7 +15,8 @@ The project is designed to demonstrate a proof-of-concept for a Python learning 
 - Scenario browser with difficulty, concept, and search filters
 - Interactive learning sessions with conversational prompts
 - Reasoning support, abstraction mapping, prompt scoring, and reflection capture
-- Dashboard with progress, prompt maturity, concept mastery, and misconceptions
+- Interactive story-learning experience for beginner Python concepts, including MCQ practice, feedback, and Python explanation mapping
+- Dashboard with progress, prompt maturity, concept mastery, misconceptions, story scores, and recently viewed stories
 - Roadmap visualization for staged product development
 - Local JSON file storage with seedable sample data
 
@@ -57,6 +58,12 @@ Visit:
 - The frontend loads scenarios, session data, and roadmap details from the backend API.
 - The backend serves static JSON-based data and handles session/analytics routes.
 - Learning interactions are powered by deterministic local logic rather than external AI calls.
+- The newer story-learning flow is a front-end experience that lets learners explore beginner Python concepts through a narrative, answer MCQs, and view immediate explanations before their results are surfaced in the dashboard.
+
+## Latest Feature Update
+- Added a story-based learning lab for beginner Python topics such as variables, conditionals, loops, lists, functions, dictionaries, strings, and classes.
+- Added dashboard tracking for completed story scores and the most recently viewed story.
+- Story progress is currently persisted in browser storage for a lightweight local experience.
 
 ## Project Structure
 - `client/` - React application source
