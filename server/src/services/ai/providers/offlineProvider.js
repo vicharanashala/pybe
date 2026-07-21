@@ -24,19 +24,73 @@ function pick(list, seedText = '') {
   return list[index];
 }
 
-const THEME_NOUNS = {
-  School: ['seating chart', 'library book', 'homework folder', 'lunch tray'],
-  Hospital: ['patient chart', 'medicine dose', 'appointment slot', 'ward bed'],
-  Sports: ['match tally', 'player roster', 'training lap', 'ticket booth'],
-  Shopping: ['shopping cart', 'markdown price', 'price tag', 'checkout line'],
-  Travel: ['boarding pass', 'suitcase', 'itinerary stop', 'hotel booking'],
-  Space: ['fuel tank', 'satellite signal', 'mission log', 'crew roster'],
-  Banking: ['bank balance', 'transaction log', 'loan application', 'interest rate'],
-  Gaming: ['player tally', 'inventory slot', 'level progress', 'leaderboard entry'],
-  Environment: ['recycling bin', 'water usage log', 'tree tally', 'air quality reading'],
-  Cooking: ['ingredient list', 'oven timer', 'order ticket', 'pantry stock'],
-  Business: ['invoice amount', 'client list', 'meeting schedule', 'sales report'],
-  Office: ['printer queue', 'meeting room booking', 'expense report', 'staff roster']
+/**
+ * Enhancement Proposal #1: every generated scenario needs a real character,
+ * a goal, and a concrete problem - never a bare "Theme: Object" label. Each
+ * theme has a handful of hand-seeded story ingredients; the concept
+ * templates below turn a seed into a full narrative scenario.
+ */
+const THEME_STORIES = {
+  School: [
+    { character: 'Ms. Rao, the school librarian', goal: 'keep the return desk running smoothly', noun: 'how many books come back each afternoon', title: "The Librarian's Daily Count" },
+    { character: 'Coach Diaz', goal: 'plan fair seating for the class trip', noun: 'which students are sitting where', title: 'Sorting Out the Class Trip Seats' },
+    { character: 'a new student named Arjun', goal: 'find his way around on his first day', noun: 'which room he needs to be in for each period', title: "Arjun's First Day Schedule" }
+  ],
+  Hospital: [
+    { character: 'Nurse Bello', goal: 'make sure no patient is forgotten during rounds', noun: "each patient's next check-up time", title: "Nurse Bello's Round" },
+    { character: 'Dr. Kim', goal: 'decide who needs urgent attention first', noun: "each patient's symptoms", title: 'Deciding Who Goes First' },
+    { character: 'the hospital pharmacist', goal: 'avoid running out of a critical medicine', noun: 'how much medicine is left in stock', title: 'Watching the Medicine Shelf' }
+  ],
+  Sports: [
+    { character: 'Coach Alvarez', goal: 'keep an accurate scoreboard during the tournament', noun: "each team's tally", title: "Coach Alvarez's Scoreboard" },
+    { character: 'a referee named Sam', goal: 'decide fairly when a player has fouled out', noun: 'how many fouls each player has', title: 'When Has a Player Fouled Out?' },
+    { character: 'the team captain', goal: 'pick the starting lineup fairly', noun: "each player's training attendance", title: 'Picking the Starting Lineup' }
+  ],
+  Shopping: [
+    { character: 'a cashier named Priya', goal: 'apply the right discount at checkout', noun: 'the price before and after markdown', title: "Priya's Checkout Line" },
+    { character: 'a shop owner', goal: 'know when to reorder stock before shelves go empty', noun: 'how many items are left of each product', title: 'Before the Shelf Goes Empty' },
+    { character: 'a shopper on a tight budget', goal: 'stay under budget while filling the cart', noun: 'the running amount spent in the cart', title: 'Staying Under Budget' }
+  ],
+  Travel: [
+    { character: 'a gate agent named Noah', goal: 'let the right passengers board at the right time', noun: 'each boarding pass group number', title: "Noah's Boarding Line" },
+    { character: 'a backpacker named Lena', goal: 'keep her trip on budget across many cities', noun: 'how much she has spent in each city', title: "Lena's Travel Budget" },
+    { character: 'a hotel receptionist', goal: 'know which rooms are actually free tonight', noun: 'which rooms are booked and which are open', title: 'Which Rooms Are Free Tonight?' }
+  ],
+  Space: [
+    { character: 'a mission controller', goal: 'make sure the crew has enough fuel to get home', noun: 'how much fuel remains in the tank', title: 'Enough Fuel to Get Home?' },
+    { character: 'an astronaut named Priya Shah', goal: 'catch a problem before it becomes serious', noun: 'the satellite signal strength readings', title: "Reading the Satellite's Signal" },
+    { character: 'a flight engineer', goal: 'keep the crew roster accurate before launch', noun: 'who is confirmed for the mission', title: 'Confirming the Crew Roster' }
+  ],
+  Banking: [
+    { character: 'a bank teller named Marcus', goal: 'flag balances that have gone below zero', noun: "each customer's balance", title: 'Flagging the Balances Below Zero' },
+    { character: 'a loan officer', goal: 'decide fairly who qualifies for a loan', noun: "each applicant's income and history", title: 'Who Qualifies for the Loan?' },
+    { character: 'a customer checking their statement', goal: 'find every transaction over a certain amount', noun: 'a list of transactions from this month', title: 'Finding the Big Transactions' }
+  ],
+  Gaming: [
+    { character: 'a game designer', goal: 'keep the leaderboard fair and up to date', noun: "each player's high tally", title: 'Keeping the Leaderboard Honest' },
+    { character: 'a player named Kofi', goal: 'know exactly what is left in his inventory', noun: 'which items are in his inventory', title: "Kofi's Inventory Check" },
+    { character: 'a level designer', goal: 'decide when a player has earned the next level', noun: "a player's current progress", title: 'Earning the Next Level' }
+  ],
+  Environment: [
+    { character: 'a park ranger', goal: 'track whether the local tree population is recovering', noun: 'how many trees were planted this season', title: "The Ranger's Tree Count" },
+    { character: 'a city planner', goal: 'decide which neighborhoods need better recycling bins', noun: 'how full each recycling bin gets each week', title: 'Which Bins Need Attention?' },
+    { character: 'a volunteer at a clean-up drive', goal: 'know if today\'s air quality is safe to work in', noun: "today's air quality reading", title: 'Is the Air Safe Today?' }
+  ],
+  Cooking: [
+    { character: 'a line cook named Theo', goal: 'get every order out before it gets cold', noun: 'which orders are still waiting', title: "Theo's Order Ticket Line" },
+    { character: 'a home baker', goal: 'scale a recipe up for a big order without ruining it', noun: 'the amount of each ingredient needed', title: 'Scaling Up the Recipe' },
+    { character: 'a restaurant manager', goal: 'know what to restock before the weekend rush', noun: "what's left in the pantry", title: 'Restocking Before the Rush' }
+  ],
+  Business: [
+    { character: 'a small business owner', goal: 'know which invoices are still unpaid', noun: 'each invoice amount and whether it was paid', title: 'Which Invoices Are Still Unpaid?' },
+    { character: 'a sales manager', goal: 'find out which client needs a follow-up call', noun: 'when each client was last contacted', title: 'Who Needs a Follow-Up Call?' },
+    { character: 'an office assistant', goal: 'avoid double-booking the big meeting room', noun: 'when the meeting room is already reserved', title: 'Avoiding the Double Booking' }
+  ],
+  Office: [
+    { character: 'an office manager', goal: 'keep the printer queue from backing up', noun: 'how many print jobs are waiting', title: "Clearing the Printer Queue" },
+    { character: 'an HR coordinator', goal: 'know who is still owed expense reimbursement', noun: 'which expense reports are unpaid', title: 'Who Still Needs Reimbursing?' },
+    { character: 'a receptionist', goal: 'know who has actually checked in for their meeting', noun: 'which visitors have signed in today', title: 'Who Has Checked In Today?' }
+  ]
 };
 
 function toTitleCase(text = '') {
@@ -72,8 +126,7 @@ function extractTopic(description = '') {
   ];
   leadIns.forEach((pattern) => { text = text.replace(pattern, ''); });
   text = text.replace(/[.!?]+$/, '').trim();
-  // Strip a leading article so articledPhrase() can add its own consistently,
-  // avoiding "the a pizza delivery queue".
+  // Strip a leading article so it reads naturally as a noun phrase.
   text = text.replace(/^(a|an|the)\s+/i, '');
 
   const TRAILING_STOP_WORDS = new Set(['of', 'on', 'in', 'to', 'by', 'and', 'or', 'with', 'for', 'a', 'an', 'the']);
@@ -116,77 +169,118 @@ function inferConceptFromText(text = '') {
 }
 
 /**
- * Per-category sentence templates. Each one is a complete, grammatically
- * correct sentence that also naturally contains the keyword(s)
- * services/learningEngine.js's conceptRules looks for, so the generated
- * scenario reliably produces the *matching* code template rather than
- * always falling back to the generic one. Verified against
- * conceptRules keywords to avoid accidentally tripping a different
- * category (see the offline-provider keyword collision check run during
- * development).
+ * Per-category narrative templates. Each one turns a story seed
+ * (character, goal, noun) into: a problem sentence (what's going wrong
+ * without a computer), a "why Python helps" transition, and three guided
+ * questions specific to that character and detail - never a generic
+ * template question with no story attached (Enhancement Proposal #1, #2).
+ * Every sentence still contains the keyword(s) services/learningEngine.js's
+ * conceptRules looks for, so the generated scenario reliably produces the
+ * matching code template (verified by the offline-provider test harness
+ * run during development - see PR notes).
  */
 const CONCEPT_TEMPLATES = {
   Variables: {
-    objective: (phrase) => `Decide on one clear detail to remember about ${phrase}`,
-    prompt: (phrase) => `What single piece of information would you give a name to, to represent ${phrase}?`,
-    reasoning: (phrase) => `I would remember one clear piece of information about ${phrase} and give it a name.`
+    problem: ({ character, noun }) => `Right now ${character} has to keep ${noun} in their head or rewrite it by hand every time, and it's easy to lose track.`,
+    transition: ({ character }) => `Python can remember it for ${character} instead - once it's stored, it's there whenever it's needed.`,
+    objective: ({ noun }) => `Decide the one detail about ${noun} worth remembering`,
+    prompt: ({ character, noun }) => `What single piece of information should ${character} store, based on ${noun}, so it can be used again later?`,
+    reasoning: ({ character, noun }) => `I would remember ${noun} by giving it a name, so ${character} doesn't have to redo the work.`,
+    guidedQuestions: ({ character, noun, goal }) => [
+      { question: `${character} is dealing with a lot today. Which single detail about ${noun} actually needs to be remembered to ${goal}?`, hint: 'Look for the one changing fact, not the background details.' },
+      { question: `Tomorrow, the computer won't remember today's information unless it's stored. What value should be saved so ${character} can use it later?`, hint: "Think about what changes each day versus what stays the same." },
+      { question: `If you had to give that value a name in Python, what would you call it?`, hint: 'Pick a name that describes what it holds, not just its type.' }
+    ]
   },
   Conditionals: {
-    objective: (phrase) => `Decide what condition determines what happens with ${phrase}`,
-    prompt: (phrase) => `What condition would decide what happens with ${phrase}?`,
-    reasoning: (phrase) => `I would check a condition on ${phrase} to decide what should happen next.`
+    problem: ({ character, noun }) => `${character} has to react differently depending on ${noun}, and deciding that by hand for every single case is slow and easy to get wrong.`,
+    transition: ({ character }) => `Python can make that decision automatically for ${character}, the same way every time.`,
+    objective: ({ noun }) => `Decide what condition determines what happens based on ${noun}`,
+    prompt: ({ character, noun }) => `What condition should ${character} check about ${noun} to decide what happens next?`,
+    reasoning: ({ character, noun }) => `I would check a condition on ${noun} to decide what ${character} should do next.`,
+    guidedQuestions: ({ character, noun, goal }) => [
+      { question: `${character} wants to ${goal}. What's the rule that decides one outcome from another, based on ${noun}?`, hint: 'Look for a threshold or a yes/no split.' },
+      { question: `What should happen when that condition is true - and what should happen when it isn't?`, hint: 'Both outcomes matter, not just the "yes" case.' },
+      { question: `How would you phrase that rule so a computer, not just a person, could check it?`, hint: 'Try starting with "if..."' }
+    ]
   },
   Loops: {
-    objective: (phrase) => `Decide what needs to repeat for every part of ${phrase}`,
-    prompt: (phrase) => `What would you repeat for every part of ${phrase}?`,
-    reasoning: (phrase) => `I would repeat the same check for every part of ${phrase}, since the same rule applies each time.`
+    problem: ({ character, noun }) => `${character} has to repeat the same check across ${noun}, one at a time, and doing it manually gets tedious and error-prone as the numbers grow.`,
+    transition: ({ character }) => `Python can repeat that same step automatically for ${character}, no matter how many there are.`,
+    objective: ({ noun }) => `Decide what needs to repeat across ${noun}`,
+    prompt: ({ character, noun }) => `What would ${character} need to repeat for every entry in ${noun}?`,
+    reasoning: ({ character, noun }) => `I would repeat the same check across ${noun}, since the same rule applies to each one.`,
+    guidedQuestions: ({ character, noun, goal }) => [
+      { question: `${character} needs to look at ${noun} one at a time to ${goal}. What's the one action that repeats for each one?`, hint: 'The action should be the same each time, just applied to a different item.' },
+      { question: `What changes each time through, and what stays exactly the same?`, hint: 'The thing that changes is usually what you loop over.' },
+      { question: `How would you know when to stop repeating?`, hint: 'Think about running out of items versus a specific condition being met.' }
+    ]
   },
   Lists: {
-    objective: (phrase) => `Decide how to store each item in ${phrase} together, in order`,
-    prompt: (phrase) => `How would you store each item in ${phrase} together so you can work through all of them?`,
-    reasoning: (phrase) => `I would store each item in ${phrase} together in order, so I can look at all of them as a group.`
+    problem: ({ character, noun }) => `${character} is juggling ${noun} without any organized way to keep them together, which makes it easy to lose one or mix them up.`,
+    transition: ({ character }) => `Python can hold all of them together in order for ${character}, so nothing gets lost.`,
+    objective: ({ noun }) => `Decide how to store ${noun} together, in order`,
+    prompt: ({ character, noun }) => `How should ${character} store each item in ${noun} together so they can work through all of them?`,
+    reasoning: ({ character, noun }) => `I would store each item in ${noun} together in order, so ${character} can look at all of them as a group.`,
+    guidedQuestions: ({ character, noun, goal }) => [
+      { question: `${character} needs to ${goal}. Why would keeping ${noun} together, in order, help more than handling them one at a time separately?`, hint: 'Think about what happens as the number of items grows.' },
+      { question: `Does the order of ${noun} matter here, or could they be in any order?`, hint: 'This affects how you\'d organize them.' },
+      { question: `How would ${character} add a new item without disturbing the ones already there?`, hint: 'Think about adding to the end versus a specific position.' }
+    ]
   },
   Dictionaries: {
-    objective: (phrase) => `Decide what key would look up each value in ${phrase}`,
-    prompt: (phrase) => `What key would you use to look up each value in ${phrase}?`,
-    reasoning: (phrase) => `I would pair each item in ${phrase} with its value, using a key so I can look it up quickly.`
+    problem: ({ character, noun }) => `${character} needs to look up specific information within ${noun} quickly, but searching through everything one by one every time wastes time.`,
+    transition: ({ character }) => `Python can pair each piece of information with a label for ${character}, so any value can be looked up instantly.`,
+    objective: ({ noun }) => `Decide what key would look up each value within ${noun}`,
+    prompt: ({ character, noun }) => `What key would ${character} use to look up each value within ${noun}?`,
+    reasoning: ({ character, noun }) => `I would pair each item in ${noun} with its value, using a key so ${character} can look it up quickly.`,
+    guidedQuestions: ({ character, noun, goal }) => [
+      { question: `${character} wants to ${goal}. What's the natural label they'd search by within ${noun}?`, hint: 'That label is usually a good candidate for a key.' },
+      { question: `For each label, what's the one value that needs to be paired with it?`, hint: 'A key always points to exactly one value.' },
+      { question: `What should happen if ${character} looks up a label that doesn't exist?`, hint: 'Real data is never perfectly complete.' }
+    ]
   },
   Functions: {
-    objective: (phrase) => `Turn the steps for handling ${phrase} into one reusable process`,
-    prompt: (phrase) => `What repeatable process would handle ${phrase}, so you could reuse it?`,
-    reasoning: (phrase) => `I would turn the steps for handling ${phrase} into one reusable process I can call again.`
+    problem: ({ character, noun }) => `${character} keeps redoing the same set of steps for ${noun} every time it comes up, retyping the same logic again and again.`,
+    transition: ({ character }) => `Python can turn those steps into one reusable block for ${character}, written once and called whenever it's needed.`,
+    objective: ({ noun }) => `Turn the steps for handling ${noun} into one reusable process`,
+    prompt: ({ character, noun }) => `What repeatable process would handle ${noun} for ${character}, so it could be reused?`,
+    reasoning: ({ character, noun }) => `I would turn the steps for handling ${noun} into one reusable process ${character} can call again.`,
+    guidedQuestions: ({ character, noun, goal }) => [
+      { question: `${character} does the same set of steps for ${noun} over and over to ${goal}. What are those steps, in order?`, hint: 'Write them out as a short numbered list first.' },
+      { question: `What information would those steps need each time to work on a new case?`, hint: 'That becomes the input the process needs.' },
+      { question: `What result should come out at the end, every time?`, hint: 'That becomes what the process gives back.' }
+    ]
   },
   OOP: {
-    objective: (phrase) => `Decide what properties and actions an object modelling ${phrase} should have`,
-    prompt: (phrase) => `If you modelled ${phrase} as an object, what properties and actions would it need?`,
-    reasoning: (phrase) => `I would model ${phrase} as an object with its own properties and actions.`
+    problem: ({ character, noun }) => `${character} is tracking several related pieces of information about ${noun} separately, and keeping them in sync by hand is getting messy.`,
+    transition: ({ character, noun }) => `Python can bundle the data and the actions for ${noun} together for ${character}, as one connected thing.`,
+    objective: ({ noun }) => `Decide what properties and actions something modelling ${noun} should have`,
+    prompt: ({ character, noun }) => `If ${character} modelled ${noun} as one connected thing, what properties and actions would it need?`,
+    reasoning: ({ character, noun }) => `I would model ${noun} as an object with its own properties and actions.`,
+    guidedQuestions: ({ character, noun, goal }) => [
+      { question: `${character} wants to ${goal}. What separate facts about ${noun} currently have to be kept in sync by hand?`, hint: 'List the facts as if they were fields on a form.' },
+      { question: `Besides facts, what actions does ${character} actually perform on ${noun}?`, hint: 'Actions are usually verbs: check, update, report...' },
+      { question: `Why might bundling those facts and actions together be more reliable than keeping them separate?`, hint: 'Think about what happens when only one of them gets updated by mistake.' }
+    ]
   }
 };
 
-/**
- * Custom topics like "managing cricket scores" already read naturally on
- * their own ("about managing cricket scores"); theme nouns like "match
- * tally" need an article ("about the match tally"). A noun/topic phrase
- * starting with a gerund (ends in -ing) is treated as already complete.
- */
-function articledPhrase(noun) {
-  const firstWord = noun.trim().split(' ')[0].toLowerCase();
-  return firstWord.endsWith('ing') ? noun : `the ${noun}`;
-}
-
-function buildScenarioFields({ concept, noun, title, contextSentence }) {
+function buildScenarioFields({ concept, seed, title }) {
   const template = CONCEPT_TEMPLATES[concept] || CONCEPT_TEMPLATES.Variables;
-  const phrase = articledPhrase(noun);
+  const { character, noun, goal } = seed;
+
   return {
     title,
-    context: `${contextSentence} Let's turn that into a small, working Python program.`,
+    context: `${character} wants to ${goal}. ${template.problem(seed)} ${template.transition(seed)}`,
     objectives: [
-      `Identify what matters about ${phrase}`,
-      template.objective(phrase),
+      `Identify what actually matters about ${noun}`,
+      template.objective(seed),
       `Connect that idea to ${concept} in Python`
     ],
-    prompt: template.prompt(phrase),
-    sampleReasoning: template.reasoning(phrase),
+    prompt: template.prompt(seed),
+    sampleReasoning: template.reasoning(seed),
+    guidedQuestions: template.guidedQuestions(seed).map((entry, index) => ({ id: `ai-${index + 1}`, ...entry })),
     concepts: [concept.toLowerCase()]
   };
 }
@@ -204,42 +298,44 @@ function dedupeTitle(title, existingTitles) {
 
 /**
  * Feature 1 path: learner picked concept + difficulty + theme explicitly.
+ * `excludeSeeds` lets the "three options" flow (see offlineScenarioOptions
+ * below) avoid picking the same character/story twice.
  */
-function offlineGuidedScenario({ concept, difficulty, theme, existingTitles = [] }) {
-  const nouns = THEME_NOUNS[theme] || THEME_NOUNS.School;
-  const noun = pick(nouns, `${concept}-${theme}`);
-  const title = dedupeTitle(`${theme}: ${toTitleCase(noun)}`, existingTitles);
+function offlineGuidedScenario({ concept, difficulty, theme, existingTitles = [] }, excludeSeeds = []) {
+  const stories = THEME_STORIES[theme] || THEME_STORIES.School;
+  const available = stories.filter((story) => !excludeSeeds.includes(story.title));
+  const seed = pick(available.length ? available : stories, `${concept}-${theme}-${excludeSeeds.length}`);
+  const title = dedupeTitle(seed.title, existingTitles);
 
   return {
-    ...buildScenarioFields({
-      concept,
-      noun,
-      title,
-      contextSentence: `In a ${theme.toLowerCase()} setting, someone needs a simple way to keep track of the ${noun}.`
-    }),
-    difficulty: difficulty || 'Beginner'
+    ...buildScenarioFields({ concept, seed, title }),
+    difficulty: difficulty || 'Beginner',
+    _seedTitle: seed.title
   };
 }
 
 /**
  * Feature 2 path: learner described their own idea in free text. The
  * concept is inferred from their wording, and the topic they actually
- * typed is used directly instead of a random theme, so "managing cricket
- * scores" produces a scenario titled around cricket scores, not an
- * unrelated theme.
+ * typed becomes the "noun" of the story - wrapped in a small narrative
+ * frame (a character and a goal) instead of being used as a bare label.
+ * `variantIndex` lets the "three options" flow give each option a
+ * different persona for the same topic.
  */
-function offlineCustomScenario({ description, existingTitles = [] }) {
+function offlineCustomScenario({ description, existingTitles = [] }, variantIndex = 0) {
   const topic = extractTopic(description);
   const concept = inferConceptFromText(description);
+  const CUSTOM_CHARACTERS = [
+    { character: 'a learner working through a real problem', goal: `get ${topic} under control` },
+    { character: 'someone who deals with this every day', goal: `stop doing ${topic} by hand` },
+    { character: 'a small team trying to stay organized', goal: `keep ${topic} from slipping through the cracks` }
+  ];
+  const persona = CUSTOM_CHARACTERS[variantIndex % CUSTOM_CHARACTERS.length];
+  const seed = { character: persona.character, goal: persona.goal, noun: topic };
   const title = dedupeTitle(toTitleCase(topic), existingTitles);
 
   return {
-    ...buildScenarioFields({
-      concept,
-      noun: topic,
-      title,
-      contextSentence: `You wanted a scenario about ${topic}.`
-    }),
+    ...buildScenarioFields({ concept, seed, title }),
     difficulty: 'Beginner'
   };
 }
@@ -248,6 +344,34 @@ function offlineScenario(context) {
   return context.description
     ? offlineCustomScenario(context)
     : offlineGuidedScenario(context);
+}
+
+/**
+ * Enhancement Proposal #11: generate three genuinely different scenario
+ * options instead of one, so the learner can pick whichever resonates.
+ * Reuses the exact same generation logic as the single-scenario path
+ * (buildScenarioFields / CONCEPT_TEMPLATES) - just draws three different
+ * story seeds instead of one, so there's no duplicated template logic to
+ * keep in sync.
+ */
+function offlineScenarioOptions(context) {
+  const usedSeedTitles = [];
+  const accumulatedTitles = [...(context.existingTitles || [])];
+  const options = [];
+  for (let i = 0; i < 3; i += 1) {
+    if (context.description) {
+      const option = offlineCustomScenario({ ...context, existingTitles: accumulatedTitles }, i);
+      accumulatedTitles.push(option.title);
+      options.push(option);
+    } else {
+      const option = offlineGuidedScenario({ ...context, existingTitles: accumulatedTitles }, usedSeedTitles);
+      if (option._seedTitle) usedSeedTitles.push(option._seedTitle);
+      delete option._seedTitle;
+      accumulatedTitles.push(option.title);
+      options.push(option);
+    }
+  }
+  return { options };
 }
 
 function offlineTutorReply(context) {
@@ -330,6 +454,8 @@ async function complete({ task, context = {} }) {
   switch (task) {
     case 'scenario-generate':
       return { text: JSON.stringify(offlineScenario(context)) };
+    case 'scenario-generate-options':
+      return { text: JSON.stringify(offlineScenarioOptions(context)) };
     case 'tutor-chat':
       return { text: offlineTutorReply(context) };
     case 'hint':

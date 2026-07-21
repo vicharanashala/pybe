@@ -25,6 +25,16 @@ function normalizeGeneratedScenario(raw, fallback) {
     ? raw.concepts.map((concept) => String(concept).toLowerCase())
     : [String(fallback.concept || 'variables').toLowerCase()];
 
+  // guidedQuestions is optional (older callers / providers that don't
+  // return it just fall back to scenarioEnrichment's generic templates -
+  // see buildGuidedQuestions there), so it's validated loosely rather than
+  // required.
+  const guidedQuestions = Array.isArray(raw.guidedQuestions)
+    ? raw.guidedQuestions
+      .filter((entry) => entry && entry.question)
+      .map((entry) => ({ question: String(entry.question), hint: entry.hint ? String(entry.hint) : '' }))
+    : undefined;
+
   return {
     title: String(raw.title).trim(),
     difficulty,
@@ -33,6 +43,7 @@ function normalizeGeneratedScenario(raw, fallback) {
     prompt: String(raw.prompt).trim(),
     objectives: Array.isArray(raw.objectives) ? raw.objectives.map(String) : [String(raw.objectives)],
     sampleReasoning: String(raw.sampleReasoning).trim(),
+    ...(guidedQuestions?.length ? { guidedQuestions } : {}),
     effectivenessScore: 80,
     source: 'ai-generated',
     theme: fallback.theme || null,
@@ -88,4 +99,80 @@ async function generateCustomScenario({ description, learnerId }) {
   return generateAndPersist(promptRequest, { description, learnerId });
 }
 
-module.exports = { generateScenario, generateCustomScenario };
+/**
+ * Enhancement Proposal #11: generate three distinct scenario drafts
+ * instead of persisting one immediately, so the learner can pick whichever
+ * resonates. Drafts are NOT written to the scenario store yet - nothing is
+ * persisted until selectGeneratedScenario() below is called - so calling
+ * this endpoint repeatedly never litters the scenario library with unused
+ * drafts. Each draft is enriched with a full preview (generated code, CT
+ * mapping, hints, example I/O) exactly like a persisted scenario would be,
+ * so the picker UI can show a genuine preview, not just a title.
+ */
+async function buildOptionDrafts(promptRequest, fallbackParams) {
+  const existingTitles = await store.listScenarioTitles();
+  const aiResponse = await aiProviderFactory.complete(promptRequest);
+  const raw = parseJsonResponse(aiResponse.text);
+  const rawOptions = Array.isArray(raw.options) ? raw.options : [raw];
+
+  const seenTitles = [...existingTitles];
+  const drafts = rawOptions.slice(0, 3).map((option) => {
+    const normalized = normalizeGeneratedScenario(option, fallbackParams);
+    normalized.title = dedupeTitle(normalized.title, seenTitles);
+    seenTitles.push(normalized.title);
+    // enrichScenarioDetail only needs scenario fields, not a persisted
+    // _id - this preview never touches the store.
+    return enrichScenarioDetail(normalized);
+  });
+
+  return { options: drafts, providerUsed: aiResponse.providerUsed };
+}
+
+async function generateScenarioOptions({ concept, difficulty, theme, learnerId }) {
+  if (!concept || !difficulty || !theme) {
+    throw Object.assign(new Error('concept, difficulty, and theme are required'), { status: 400 });
+  }
+  const existingTitles = await store.listScenarioTitles();
+  const promptRequest = promptTemplates.scenarioOptionsPrompt({ concept, difficulty, theme, existingTitles });
+  return buildOptionDrafts(promptRequest, { concept, difficulty, theme, learnerId });
+}
+
+async function generateCustomScenarioOptions({ description, learnerId }) {
+  if (!description?.trim()) {
+    throw Object.assign(new Error('description is required'), { status: 400 });
+  }
+  const existingTitles = await store.listScenarioTitles();
+  const promptRequest = promptTemplates.scenarioOptionsPrompt({ description, existingTitles });
+  return buildOptionDrafts(promptRequest, { description, learnerId });
+}
+
+/**
+ * Persists whichever draft the learner picked from the three options.
+ * Re-validates and re-dedupes the title against the *current* scenario
+ * list (in case something else was created in the meantime), so this
+ * stays safe even if the draft is a little stale.
+ */
+async function selectGeneratedScenario({ draft, learnerId }) {
+  if (!draft || typeof draft !== 'object') {
+    throw Object.assign(new Error('draft is required'), { status: 400 });
+  }
+  const existingTitles = await store.listScenarioTitles();
+  const normalized = normalizeGeneratedScenario(draft, {
+    concept: draft.concepts?.[0],
+    difficulty: draft.difficulty,
+    theme: draft.theme,
+    learnerId
+  });
+  normalized.title = dedupeTitle(normalized.title, existingTitles);
+
+  const scenario = await store.addScenario(normalized);
+  return { scenario: enrichScenarioDetail(scenario) };
+}
+
+module.exports = {
+  generateScenario,
+  generateCustomScenario,
+  generateScenarioOptions,
+  generateCustomScenarioOptions,
+  selectGeneratedScenario
+};

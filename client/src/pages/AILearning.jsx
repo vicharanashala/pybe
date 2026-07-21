@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Sparkles, Wand2 } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { getRecommendation, getAdaptiveDifficulty, getLearningPath, getMastery } from '../api/client';
 import ScenarioGenerator from '../components/ScenarioGenerator';
-import ScenarioPromptBox from '../components/ScenarioPromptBox';
 import RecommendationCard from '../components/RecommendationCard';
 import AdaptiveDifficultyIndicator from '../components/AdaptiveDifficultyIndicator';
 import LearningPath from '../components/LearningPath';
@@ -56,11 +55,6 @@ function AILearning({ onOpenScenario }) {
         <div className="panel">
           <div className="section-title"><Sparkles size={20} /><h2>Generate a scenario</h2></div>
           <ScenarioGenerator onGenerated={handleGenerated} />
-        </div>
-
-        <div className="panel">
-          <div className="section-title"><Wand2 size={20} /><h2>Describe your own idea</h2></div>
-          <ScenarioPromptBox onGenerated={handleGenerated} />
         </div>
 
         {loading && <p className="loading-inline">Loading your personalized insights...</p>}

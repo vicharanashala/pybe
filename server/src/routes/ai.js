@@ -14,6 +14,13 @@ const router = express.Router();
 router.post('/scenarios/generate', scenarioController.generateScenario);
 router.post('/scenarios/custom', scenarioController.generateCustomScenario);
 
+// Enhancement Proposal #11: generate three scenario options, then persist
+// only the one the learner picks. Additive - the two routes above are
+// unchanged and still generate+persist a single scenario immediately.
+router.post('/scenarios/generate-options', scenarioController.generateScenarioOptions);
+router.post('/scenarios/custom-options', scenarioController.generateCustomScenarioOptions);
+router.post('/scenarios/select', scenarioController.selectScenario);
+
 // Feature 4: tutor chat
 router.post('/tutor/chat', tutorController.chat);
 router.get('/tutor/history', tutorController.getHistory);

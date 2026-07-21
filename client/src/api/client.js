@@ -112,6 +112,29 @@ export function generateCustomScenario(description) {
   });
 }
 
+// Enhancement Proposal #11: generate three scenario options instead of
+// persisting one immediately, then persist only the one the learner picks.
+export function generateScenarioOptions({ concept, difficulty, theme }) {
+  return api('/ai/scenarios/generate-options', {
+    method: 'POST',
+    body: JSON.stringify({ concept, difficulty, theme, learnerId: getLearnerId() })
+  });
+}
+
+export function generateCustomScenarioOptions(description) {
+  return api('/ai/scenarios/custom-options', {
+    method: 'POST',
+    body: JSON.stringify({ description, learnerId: getLearnerId() })
+  });
+}
+
+export function selectGeneratedScenario(draft) {
+  return api('/ai/scenarios/select', {
+    method: 'POST',
+    body: JSON.stringify({ draft, learnerId: getLearnerId() })
+  });
+}
+
 export function tutorChat(message, scenarioId) {
   return api('/ai/tutor/chat', {
     method: 'POST',

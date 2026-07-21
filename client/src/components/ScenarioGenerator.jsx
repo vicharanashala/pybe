@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Sparkles } from 'lucide-react';
 import ThemeSelector from './ThemeSelector';
-import { generateScenario } from '../api/client';
+import ScenarioOptionPicker from './ScenarioOptionPicker';
+import { generateScenarioOptions } from '../api/client';
 
 const CONCEPTS = ['Variables', 'Conditionals', 'Loops', 'Lists', 'Dictionaries', 'Functions', 'OOP'];
 const DIFFICULTIES = ['Beginner', 'Explorer', 'Builder'];
 
 /**
  * Feature 1: AI Scenario Generator. Learner picks concept, difficulty, and
- * theme; a brand new scenario is generated and persisted, then flows
- * through the exact same Phase 1 pipeline (code generation, CT mapping,
- * hints, IO) as a hand-authored one.
+ * theme; three distinct scenario options are generated (Enhancement
+ * Proposal #11) and previewed - nothing is saved until the learner picks
+ * one, at which point it flows through the exact same Phase 1 pipeline
+ * (code generation, CT mapping, hints, IO) as a hand-authored scenario.
  */
 function ScenarioGenerator({ onGenerated }) {
   const [concept, setConcept] = useState(CONCEPTS[0]);
@@ -18,18 +20,30 @@ function ScenarioGenerator({ onGenerated }) {
   const [theme, setTheme] = useState('School');
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState(null);
+  const [options, setOptions] = useState(null);
 
   async function handleGenerate() {
     setGenerating(true);
     setError(null);
     try {
-      const result = await generateScenario({ concept, difficulty, theme });
-      onGenerated(result.scenario);
+      const result = await generateScenarioOptions({ concept, difficulty, theme });
+      setOptions(result.options);
     } catch (err) {
       setError(err.message);
     } finally {
       setGenerating(false);
     }
+  }
+
+  if (options) {
+    return (
+      <ScenarioOptionPicker
+        options={options}
+        onSelected={onGenerated}
+        onRegenerate={handleGenerate}
+        regenerating={generating}
+      />
+    );
   }
 
   return (
@@ -55,7 +69,7 @@ function ScenarioGenerator({ onGenerated }) {
       {error && <p className="error-inline">{error}</p>}
 
       <button type="button" className="primary" onClick={handleGenerate} disabled={generating}>
-        <Sparkles size={16} /> {generating ? 'Generating scenario...' : 'Generate a new scenario'}
+        <Sparkles size={16} /> {generating ? 'Generating options...' : 'Generate scenario options'}
       </button>
     </div>
   );

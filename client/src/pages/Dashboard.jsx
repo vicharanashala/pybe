@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BarChart3, BookOpenCheck, History } from 'lucide-react';
+import { BarChart3, BookOpenCheck, History, Sparkles } from 'lucide-react';
 import { getDashboard } from '../api/client';
 import XPCard from '../components/XPCard';
 import BadgeGrid from '../components/BadgeGrid';
@@ -13,8 +13,22 @@ import ContinueLearningCard from '../components/ContinueLearningCard';
  */
 function Dashboard({ onOpenScenario }) {
   const [dashboard, setDashboard] = useState(null);
+  const [storyProgress, setStoryProgress] = useState({ scores: {}, recentStory: null });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  function readStoryProgress() {
+    if (typeof window === 'undefined') {
+      return { scores: {}, recentStory: null };
+    }
+
+    try {
+      const stored = window.localStorage.getItem('pybe-story-learning-progress');
+      return stored ? JSON.parse(stored) : { scores: {}, recentStory: null };
+    } catch (error) {
+      return { scores: {}, recentStory: null };
+    }
+  }
 
   useEffect(() => {
     let cancelled = false;
@@ -22,7 +36,18 @@ function Dashboard({ onOpenScenario }) {
       .then((data) => { if (!cancelled) setDashboard(data); })
       .catch((err) => { if (!cancelled) setError(err.message); })
       .finally(() => { if (!cancelled) setLoading(false); });
-    return () => { cancelled = true; };
+
+    const syncStoryProgress = () => {
+      if (!cancelled) setStoryProgress(readStoryProgress());
+    };
+
+    syncStoryProgress();
+    window.addEventListener('story-progress-updated', syncStoryProgress);
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener('story-progress-updated', syncStoryProgress);
+    };
   }, []);
 
   if (loading) return <p className="loading-inline">Loading your dashboard...</p>;
@@ -32,6 +57,9 @@ function Dashboard({ onOpenScenario }) {
   const overallPercent = dashboard.totalScenarios
     ? Math.round((dashboard.completedScenarios.length / dashboard.totalScenarios) * 100)
     : 0;
+
+  const storyEntries = Object.values(storyProgress.scores || {}).sort((first, second) => new Date(second.completedAt || 0) - new Date(first.completedAt || 0));
+  const recentStory = storyProgress.recentStory;
 
   return (
     <div className="dashboard-page">
@@ -81,6 +109,37 @@ function Dashboard({ onOpenScenario }) {
               <ProgressBar key={concept} value={stats.completed} max={stats.total} label={`${concept} (${stats.completed}/${stats.total})`} />
             ))}
           </div>
+        </div>
+
+        <div className="panel dashboard-wide">
+          <div className="section-title"><Sparkles size={20} /><h2>Story scores</h2></div>
+          {storyEntries.length ? (
+            <div className="story-score-grid">
+              {storyEntries.map((item) => (
+                <div key={item.id} className="story-score-card">
+                  <strong>{item.title}</strong>
+                  <span>{item.concept}</span>
+                  <div className="story-score-value">{item.score}%</div>
+                  <small>{item.correctAnswers}/{item.totalQuestions} correct</small>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="empty-state">Complete a story to see your scores here.</p>
+          )}
+        </div>
+
+        <div className="panel">
+          <div className="section-title"><History size={20} /><h2>Recently viewed story</h2></div>
+          {recentStory ? (
+            <div className="recent-story-card">
+              <strong>{recentStory.title}</strong>
+              <span>{recentStory.concept}</span>
+              <small>{new Date(recentStory.viewedAt).toLocaleString()}</small>
+            </div>
+          ) : (
+            <p className="empty-state">Open a story to start tracking your recent view.</p>
+          )}
         </div>
 
         {dashboard.continueLearning.length > 0 && (

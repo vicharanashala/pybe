@@ -17,20 +17,34 @@ const MENTOR_STYLE = `You are PyBe's AI mentor for learners studying Python thro
   + 'give partial nudges, and encourage the learner to reason for themselves. Be warm, concise, and specific '
   + 'to the scenario in front of you.';
 
+const SCENARIO_QUALITY_RULES = `When you write a scenario, follow these rules strictly:\n`
+  + '- Tell a believable real-world STORY, never an object label like "School: Library Book" or "Hospital: Patient". '
+  + 'If you catch yourself writing "<Theme>: <Object>", stop and rewrite it as a situation instead.\n'
+  + '- Give it a real character (a name or a clear role, e.g. "the school librarian", "Priya, a shop owner") with a '
+  + 'genuine goal and a concrete problem standing in their way.\n'
+  + '- Explain WHY the information matters to that character before mentioning Python at all - the context should '
+  + 'read like a short story, not a spec sheet. Python is the solution the learner arrives at, not the subject of '
+  + 'the opening sentence.\n'
+  + '- The scenario must naturally lead to the target Python concept - a reader who knows nothing about Python '
+  + 'should still understand the situation and see why remembering/deciding/repeating/organizing something would help.\n'
+  + '- Guided questions must be specific to THIS story (mention the character, the actual pieces of information '
+  + 'involved, or the actual decision at hand) - never generic template questions like "What information is '
+  + 'important?" on their own with no story detail attached.';
+
 function scenarioGenerationPrompt({ concept, difficulty, theme, description, existingTitles }) {
   const keywords = CONCEPT_TRIGGER_KEYWORDS[concept] || [];
   const instructions = description
     ? `The learner described this idea in their own words: "${description}". Infer the most fitting Python `
       + `concept (one of Variables, Conditionals, Loops, Lists, Dictionaries, Functions, OOP) and an appropriate `
       + `difficulty (Beginner, Explorer, or Builder) yourself, and also include your choices as "concept" and `
-      + `"difficulty" fields.`
+      + `"difficulty" fields. Build the story around what they actually described, don't ignore it.`
     : `Generate a scenario about the theme "${theme}" that teaches the Python concept "${concept}" at `
       + `"${difficulty}" difficulty.`;
 
   return {
     task: 'scenario-generate',
     jsonMode: true,
-    system: `${MENTOR_STYLE}\n\nYou generate new scenario-based learning activities as strict JSON.`,
+    system: `${MENTOR_STYLE}\n\nYou generate new scenario-based learning activities as strict JSON.\n\n${SCENARIO_QUALITY_RULES}`,
     messages: [{
       role: 'user',
       content: `${instructions}\n\n`
@@ -39,16 +53,49 @@ function scenarioGenerationPrompt({ concept, difficulty, theme, description, exi
         + `Do not reuse any of these existing scenario titles: ${existingTitles.slice(0, 40).join(' | ')}.\n\n`
         + 'Respond with ONLY a JSON object with these exact fields:\n'
         + '{\n'
-        + '  "title": string,\n'
-        + '  "context": string (2-3 sentences describing the real-world situation),\n'
-        + '  "objectives": [string, string, string],\n'
-        + '  "prompt": string (a guiding reasoning question for the learner),\n'
-        + '  "sampleReasoning": string (a short example of good student reasoning),\n'
+        + '  "title": string (a short story-like title, NOT a "Theme: Object" label - e.g. "The Librarian\'s Daily Count", not "School: Library Book"),\n'
+        + '  "context": string (3-4 sentences telling the real-world story: character, goal, problem, why it matters - Python comes last, if at all),\n'
+        + '  "objectives": [string, string, string] (specific to this story, not generic),\n'
+        + '  "prompt": string (a guiding reasoning question specific to this story\'s details),\n'
+        + '  "sampleReasoning": string (a short example of good student reasoning about THIS story),\n'
+        + '  "guidedQuestions": [\n'
+        + '    {"question": string, "hint": string},\n'
+        + '    {"question": string, "hint": string},\n'
+        + '    {"question": string, "hint": string}\n'
+        + '  ] (3 reasoning questions specific to this story\'s characters/details, building toward the solution),\n'
         + '  "concepts": [string] (lowercase Python concept tags),\n'
         + '  "difficulty": "Beginner" | "Explorer" | "Builder"\n'
         + '}'
     }],
     context: { concept, difficulty, theme, description, existingTitles }
+  };
+}
+
+/**
+ * Enhancement Proposal #11: generate three distinct scenario options for
+ * the same concept/difficulty/theme (or the same free-text description) so
+ * the learner can pick the one that resonates, instead of only ever seeing
+ * one generated scenario. Additive: the original single-scenario prompt
+ * above is unchanged and still used by the existing generate/custom
+ * endpoints, so nothing that already calls them breaks (Refactoring
+ * Guidelines Rule 1/2).
+ */
+function scenarioOptionsPrompt({ concept, difficulty, theme, description, existingTitles }) {
+  const single = scenarioGenerationPrompt({ concept, difficulty, theme, description, existingTitles });
+  return {
+    ...single,
+    task: 'scenario-generate-options',
+    system: `${single.system}\n\nGenerate THREE clearly different story ideas for the same target concept - `
+      + 'different characters, different settings, different problems - so a learner can pick whichever one '
+      + 'resonates with them. They must not be minor variations of each other.',
+    messages: [{
+      role: 'user',
+      content: `${single.messages[0].content}\n\n`
+        + 'Respond with ONLY a JSON object of the exact shape: { "options": [ <scenario object as specified '
+        + 'above>, <scenario object>, <scenario object> ] } - exactly three entries in "options", each a complete '
+        + 'scenario object with all the fields listed above, each telling a genuinely different story.'
+    }],
+    context: { ...single.context, optionsCount: 3 }
   };
 }
 
@@ -158,6 +205,7 @@ function recommendationRationalePrompt({ concept, difficulty, weakConcepts }) {
 
 module.exports = {
   scenarioGenerationPrompt,
+  scenarioOptionsPrompt,
   tutorChatPrompt,
   hintPrompt,
   explanationPrompt,

@@ -596,48 +596,112 @@
       "updatedAt": "2026-06-23T06:49:04.450Z"
     },
     {
-      "_id": "0a7d395b-05af-4d3c-b42a-68262833c945",
-      "title": "Travel: Boarding Pass",
-      "difficulty": "Beginner",
-      "concepts": [
-        "conditionals"
-      ],
-      "context": "In a travel setting, someone needs a simple way to keep track of the boarding pass. Let's turn that into a small, working Python program.",
-      "prompt": "What condition would decide what happens with boarding pass?",
-      "objectives": [
-        "Identify what matters about boarding pass",
-        "Decide what condition determines what happens with boarding pass",
-        "Connect that idea to Conditionals in Python"
-      ],
-      "sampleReasoning": "I would check a condition on boarding pass to decide what should happen next.",
-      "effectivenessScore": 80,
-      "source": "ai-generated",
-      "theme": "Travel",
-      "generatedFor": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
-      "createdAt": "2026-07-16T05:44:04.969Z",
-      "updatedAt": "2026-07-16T05:44:04.969Z"
-    },
-    {
-      "_id": "075410e9-8dc4-4e5e-b3e2-6fa72ac0ecf6",
-      "title": "School: Library Book",
+      "_id": "c805f0ab-fc53-43c7-86fe-43774cf77da1",
+      "title": "Enough Fuel to Get Home?",
       "difficulty": "Beginner",
       "concepts": [
         "variables"
       ],
-      "context": "In a school setting, someone needs a simple way to keep track of the library book. Let's turn that into a small, working Python program.",
-      "prompt": "What single piece of information would you give a name to, to represent the library book?",
+      "context": "a mission controller wants to make sure the crew has enough fuel to get home. Right now a mission controller has to keep how much fuel remains in the tank in their head or rewrite it by hand every time, and it's easy to lose track. Python can remember it for a mission controller instead - once it's stored, it's there whenever it's needed.",
+      "prompt": "What single piece of information should a mission controller store, based on how much fuel remains in the tank, so it can be used again later?",
       "objectives": [
-        "Identify what matters about the library book",
-        "Decide on one clear detail to remember about the library book",
+        "Identify what actually matters about how much fuel remains in the tank",
+        "Decide the one detail about how much fuel remains in the tank worth remembering",
         "Connect that idea to Variables in Python"
       ],
-      "sampleReasoning": "I would remember one clear piece of information about the library book and give it a name.",
+      "sampleReasoning": "I would remember how much fuel remains in the tank by giving it a name, so a mission controller doesn't have to redo the work.",
+      "guidedQuestions": [
+        {
+          "question": "a mission controller is dealing with a lot today. Which single detail about how much fuel remains in the tank actually needs to be remembered to make sure the crew has enough fuel to get home?",
+          "hint": "Look for the one changing fact, not the background details."
+        },
+        {
+          "question": "Tomorrow, the computer won't remember today's information unless it's stored. What value should be saved so a mission controller can use it later?",
+          "hint": "Think about what changes each day versus what stays the same."
+        },
+        {
+          "question": "If you had to give that value a name in Python, what would you call it?",
+          "hint": "Pick a name that describes what it holds, not just its type."
+        }
+      ],
       "effectivenessScore": 80,
       "source": "ai-generated",
-      "theme": "School",
+      "theme": "Space",
       "generatedFor": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
-      "createdAt": "2026-07-16T06:08:12.282Z",
-      "updatedAt": "2026-07-16T06:08:12.282Z"
+      "createdAt": "2026-07-21T12:35:42.982Z",
+      "updatedAt": "2026-07-21T12:35:42.982Z"
+    },
+    {
+      "_id": "920a45f7-d1ec-46d5-9347-e6016a44972d",
+      "title": "Managing Customers",
+      "difficulty": "Beginner",
+      "concepts": [
+        "variables"
+      ],
+      "context": "a learner working through a real problem wants to get managing customers under control. Right now a learner working through a real problem has to keep managing customers in their head or rewrite it by hand every time, and it's easy to lose track. Python can remember it for a learner working through a real problem instead - once it's stored, it's there whenever it's needed.",
+      "prompt": "What single piece of information should a learner working through a real problem store, based on managing customers, so it can be used again later?",
+      "objectives": [
+        "Identify what actually matters about managing customers",
+        "Decide the one detail about managing customers worth remembering",
+        "Connect that idea to Variables in Python"
+      ],
+      "sampleReasoning": "I would remember managing customers by giving it a name, so a learner working through a real problem doesn't have to redo the work.",
+      "guidedQuestions": [
+        {
+          "question": "a learner working through a real problem is dealing with a lot today. Which single detail about managing customers actually needs to be remembered to get managing customers under control?",
+          "hint": "Look for the one changing fact, not the background details."
+        },
+        {
+          "question": "Tomorrow, the computer won't remember today's information unless it's stored. What value should be saved so a learner working through a real problem can use it later?",
+          "hint": "Think about what changes each day versus what stays the same."
+        },
+        {
+          "question": "If you had to give that value a name in Python, what would you call it?",
+          "hint": "Pick a name that describes what it holds, not just its type."
+        }
+      ],
+      "effectivenessScore": 80,
+      "source": "ai-generated",
+      "theme": null,
+      "generatedFor": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "createdAt": "2026-07-21T13:55:22.509Z",
+      "updatedAt": "2026-07-21T13:55:22.509Z"
+    },
+    {
+      "_id": "6bdf5239-ae58-4675-a77e-8f45ccbe0d8b",
+      "title": "Which Rooms Are Free Tonight?",
+      "difficulty": "Beginner",
+      "concepts": [
+        "variables"
+      ],
+      "context": "a hotel receptionist wants to know which rooms are actually free tonight. Right now a hotel receptionist has to keep which rooms are booked and which are open in their head or rewrite it by hand every time, and it's easy to lose track. Python can remember it for a hotel receptionist instead - once it's stored, it's there whenever it's needed.",
+      "prompt": "What single piece of information should a hotel receptionist store, based on which rooms are booked and which are open, so it can be used again later?",
+      "objectives": [
+        "Identify what actually matters about which rooms are booked and which are open",
+        "Decide the one detail about which rooms are booked and which are open worth remembering",
+        "Connect that idea to Variables in Python"
+      ],
+      "sampleReasoning": "I would remember which rooms are booked and which are open by giving it a name, so a hotel receptionist doesn't have to redo the work.",
+      "guidedQuestions": [
+        {
+          "question": "a hotel receptionist is dealing with a lot today. Which single detail about which rooms are booked and which are open actually needs to be remembered to know which rooms are actually free tonight?",
+          "hint": "Look for the one changing fact, not the background details."
+        },
+        {
+          "question": "Tomorrow, the computer won't remember today's information unless it's stored. What value should be saved so a hotel receptionist can use it later?",
+          "hint": "Think about what changes each day versus what stays the same."
+        },
+        {
+          "question": "If you had to give that value a name in Python, what would you call it?",
+          "hint": "Pick a name that describes what it holds, not just its type."
+        }
+      ],
+      "effectivenessScore": 80,
+      "source": "ai-generated",
+      "theme": "Travel",
+      "generatedFor": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "createdAt": "2026-07-21T14:12:28.277Z",
+      "updatedAt": "2026-07-21T14:12:28.277Z"
     }
   ],
   "sessions": [
@@ -1095,34 +1159,136 @@
   ],
   "responses": [
     {
-      "_id": "989f07cf-e5df-4f18-88fe-9f312d973c2f",
+      "_id": "6657f4ce-8ff3-4b9a-bea1-1afa4a97be57",
       "learnerId": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
-      "scenarioId": "0a7d395b-05af-4d3c-b42a-68262833c945",
-      "reasoning": "check th",
-      "computationalThinking": "",
+      "scenarioId": "c805f0ab-fc53-43c7-86fe-43774cf77da1",
+      "reasoning": "the fuel quantity should be stored ",
+      "computationalThinking": "i notice that the quantity of the fuel only matters for the mission controller. So the quantity of the fuel should be stored in this ",
       "hintsUsed": 0,
-      "step": "workspace",
-      "createdAt": "2026-07-16T05:46:15.152Z",
-      "updatedAt": "2026-07-16T05:48:07.289Z"
+      "step": "submitted",
+      "createdAt": "2026-07-21T12:38:27.643Z",
+      "updatedAt": "2026-07-21T12:39:33.734Z",
+      "attemptNumber": 1,
+      "feedback": {
+        "dimensions": [
+          {
+            "key": "problemUnderstanding",
+            "label": "Problem Understanding",
+            "score": 60,
+            "strengths": [
+              "You referenced specific details from the scenario, not just a generic idea."
+            ],
+            "missing": [
+              "The description of the situation is quite short."
+            ],
+            "suggestions": [
+              "Restate the scenario in a sentence or two before jumping to a solution.",
+              "Add a \"because...\" to explain why your approach solves the problem."
+            ]
+          },
+          {
+            "key": "decomposition",
+            "label": "Decomposition",
+            "score": 35,
+            "strengths": [],
+            "missing": [
+              "The reasoning reads as one single action rather than smaller steps."
+            ],
+            "suggestions": [
+              "Try listing the steps a computer would take, one at a time (first..., then..., finally...)."
+            ]
+          },
+          {
+            "key": "patternRecognition",
+            "label": "Pattern Recognition",
+            "score": 40,
+            "strengths": [],
+            "missing": [
+              "It is not clear whether you noticed anything that repeats or generalizes."
+            ],
+            "suggestions": [
+              "Ask yourself: does this rule apply to just one value, or every value like it?"
+            ]
+          },
+          {
+            "key": "abstraction",
+            "label": "Abstraction",
+            "score": 90,
+            "strengths": [
+              "You identified what matters and what can be set aside.",
+              "You gave a real explanation, not just a one-word answer."
+            ],
+            "missing": [],
+            "suggestions": []
+          },
+          {
+            "key": "algorithmDesign",
+            "label": "Algorithm Design",
+            "score": 35,
+            "strengths": [],
+            "missing": [
+              "Your plan does not yet describe order, decisions, or repetition."
+            ],
+            "suggestions": [
+              "Sketch your plan as numbered steps a computer could follow exactly."
+            ]
+          },
+          {
+            "key": "pythonReadiness",
+            "label": "Python Readiness",
+            "score": 55,
+            "strengths": [
+              "You gave enough detail to act on."
+            ],
+            "missing": [
+              "You haven't named a specific Python concept yet (variable, list, loop, function...)."
+            ],
+            "suggestions": [
+              "Try naming the Python building block (variable, list, loop, function...) you think this scenario needs."
+            ]
+          }
+        ],
+        "overallScore": 53,
+        "relatedConcepts": [
+          "statements and variables"
+        ],
+        "summary": "A solid start. A few of the dimensions below could use more detail before you compare against the official solution."
+      }
     }
   ],
   "reflections": [],
   "progressMarkers": [
     {
-      "_id": "0b8285d4-de07-4788-9d86-c7cfffaa682f",
+      "_id": "c6217c57-ba7c-4e35-8b15-79553806a650",
       "learnerId": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
-      "scenarioId": "0a7d395b-05af-4d3c-b42a-68262833c945",
+      "scenarioId": "72cb5600-e182-4a7b-8094-a0f85a583d4b",
       "step": "reading",
-      "createdAt": "2026-07-16T05:44:05.178Z",
-      "updatedAt": "2026-07-16T05:47:00.046Z"
+      "createdAt": "2026-07-21T12:34:51.603Z",
+      "updatedAt": "2026-07-21T12:34:51.603Z"
     },
     {
-      "_id": "8ffd1b8c-ce56-4773-9de1-ea3c30638e9b",
+      "_id": "dd202aaa-3dc6-43a2-b849-d1759e5c6641",
       "learnerId": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
-      "scenarioId": "075410e9-8dc4-4e5e-b3e2-6fa72ac0ecf6",
+      "scenarioId": "c805f0ab-fc53-43c7-86fe-43774cf77da1",
+      "step": "questions",
+      "createdAt": "2026-07-21T12:35:43.807Z",
+      "updatedAt": "2026-07-21T12:37:16.917Z"
+    },
+    {
+      "_id": "23921a02-0fd0-4bb8-ad61-aaebdc7730ce",
+      "learnerId": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "scenarioId": "920a45f7-d1ec-46d5-9347-e6016a44972d",
       "step": "reading",
-      "createdAt": "2026-07-16T06:08:12.517Z",
-      "updatedAt": "2026-07-16T06:08:12.517Z"
+      "createdAt": "2026-07-21T13:55:22.600Z",
+      "updatedAt": "2026-07-21T13:55:22.600Z"
+    },
+    {
+      "_id": "8e284137-5549-4770-885a-82f0e46750cf",
+      "learnerId": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "scenarioId": "6bdf5239-ae58-4675-a77e-8f45ccbe0d8b",
+      "step": "reading",
+      "createdAt": "2026-07-21T14:12:28.355Z",
+      "updatedAt": "2026-07-21T14:12:28.355Z"
     }
   ],
   "tutorConversations": []
