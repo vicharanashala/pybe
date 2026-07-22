@@ -702,6 +702,42 @@
       "generatedFor": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
       "createdAt": "2026-07-21T14:12:28.277Z",
       "updatedAt": "2026-07-21T14:12:28.277Z"
+    },
+    {
+      "_id": "75f2de66-1d7f-471b-aa1e-540adc29db99",
+      "title": "Keeping the Leaderboard Honest",
+      "difficulty": "Beginner",
+      "concepts": [
+        "variables"
+      ],
+      "context": "a game designer wants to keep the leaderboard fair and up to date. Right now a game designer has to keep each player's high tally in their head or rewrite it by hand every time, and it's easy to lose track. Python can remember it for a game designer instead - once it's stored, it's there whenever it's needed.",
+      "prompt": "What single piece of information should a game designer store, based on each player's high tally, so it can be used again later?",
+      "objectives": [
+        "Identify what actually matters about each player's high tally",
+        "Decide the one detail about each player's high tally worth remembering",
+        "Connect that idea to Variables in Python"
+      ],
+      "sampleReasoning": "I would remember each player's high tally by giving it a name, so a game designer doesn't have to redo the work.",
+      "guidedQuestions": [
+        {
+          "question": "a game designer is dealing with a lot today. Which single detail about each player's high tally actually needs to be remembered to keep the leaderboard fair and up to date?",
+          "hint": "Look for the one changing fact, not the background details."
+        },
+        {
+          "question": "Tomorrow, the computer won't remember today's information unless it's stored. What value should be saved so a game designer can use it later?",
+          "hint": "Think about what changes each day versus what stays the same."
+        },
+        {
+          "question": "If you had to give that value a name in Python, what would you call it?",
+          "hint": "Pick a name that describes what it holds, not just its type."
+        }
+      ],
+      "effectivenessScore": 80,
+      "source": "ai-generated",
+      "theme": "Gaming",
+      "generatedFor": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "createdAt": "2026-07-22T03:50:28.435Z",
+      "updatedAt": "2026-07-22T03:50:28.435Z"
     }
   ],
   "sessions": [
@@ -1254,6 +1290,17 @@
         ],
         "summary": "A solid start. A few of the dimensions below could use more detail before you compare against the official solution."
       }
+    },
+    {
+      "_id": "df80c463-199a-466f-ba24-1c6bf3b2fe7b",
+      "learnerId": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "scenarioId": "75f2de66-1d7f-471b-aa1e-540adc29db99",
+      "reasoning": "",
+      "computationalThinking": "",
+      "hintsUsed": 0,
+      "step": "workspace",
+      "createdAt": "2026-07-22T03:51:01.139Z",
+      "updatedAt": "2026-07-22T03:51:01.139Z"
     }
   ],
   "reflections": [],
@@ -1289,6 +1336,14 @@
       "step": "reading",
       "createdAt": "2026-07-21T14:12:28.355Z",
       "updatedAt": "2026-07-21T14:12:28.355Z"
+    },
+    {
+      "_id": "18c9afd2-6bd7-44b9-8298-1c4616d19ebf",
+      "learnerId": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "scenarioId": "75f2de66-1d7f-471b-aa1e-540adc29db99",
+      "step": "questions",
+      "createdAt": "2026-07-22T03:50:28.587Z",
+      "updatedAt": "2026-07-22T03:50:36.874Z"
     }
   ],
   "tutorConversations": []
