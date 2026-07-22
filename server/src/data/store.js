@@ -8,7 +8,7 @@ async function ensureDb() {
   try {
     await fs.access(dbPath);
   } catch {
-    await writeDb({ scenarios: [], sessions: [] });
+    await writeDb({ scenarios: [], sessions: [], doubts: [], challengeProgress: { completedDays: [], currentStreak: 0, lastCompletedDate: null } });
   }
 }
 
@@ -90,14 +90,81 @@ async function addSession(input) {
 async function resetData(scenarios) {
   await writeDb({
     scenarios: scenarios.map((scenario) => createRecord(scenario)),
-    sessions: []
+    sessions: [],
+    doubts: [],
+    challengeProgress: { completedDays: [], currentStreak: 0, lastCompletedDate: null }
   });
 }
 
+async function listDoubts() {
+  const db = await readDb();
+  return (db.doubts || []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+}
+
+async function addDoubt(input) {
+  const db = await readDb();
+  if (!db.doubts) db.doubts = [];
+  const doubt = createRecord(input);
+  db.doubts.push(doubt);
+  await writeDb(db);
+  return doubt;
+}
+
+async function deleteDoubt(id) {
+  const db = await readDb();
+  db.doubts = (db.doubts || []).filter((d) => d._id !== id);
+  await writeDb(db);
+}
+
+async function getChallengeProgress() {
+  const db = await readDb();
+  if (!db.challengeProgress) {
+    db.challengeProgress = { completedDays: [], currentStreak: 0, lastCompletedDate: null };
+    await writeDb(db);
+  }
+  return db.challengeProgress;
+}
+
+async function completeChallenge(day) {
+  const db = await readDb();
+  if (!db.challengeProgress) {
+    db.challengeProgress = { completedDays: [], currentStreak: 0, lastCompletedDate: null };
+  }
+  const progress = db.challengeProgress;
+  const today = new Date().toISOString().split('T')[0];
+
+  if (!progress.completedDays.includes(day)) {
+    progress.completedDays.push(day);
+  }
+
+  if (progress.lastCompletedDate) {
+    const last = new Date(progress.lastCompletedDate);
+    const now = new Date(today);
+    const diffDays = Math.floor((now - last) / (1000 * 60 * 60 * 24));
+    if (diffDays === 1) {
+      progress.currentStreak += 1;
+    } else if (diffDays > 1) {
+      progress.currentStreak = 1;
+    }
+  } else {
+    progress.currentStreak = 1;
+  }
+  progress.lastCompletedDate = today;
+  db.challengeProgress = progress;
+  await writeDb(db);
+  return progress;
+}
+
 module.exports = {
+  addChallengeProgress: completeChallenge,
+  addDoubt,
   addScenario,
   addSession,
+  completeChallenge,
+  deleteDoubt,
+  getChallengeProgress,
   getScenario,
+  listDoubts,
   listScenarios,
   listSessions,
   readDb,

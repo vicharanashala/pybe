@@ -1,18 +1,23 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
 import {
   Brain,
   ChartNoAxesCombined,
   Code2,
   Compass,
+  HelpCircle,
   Lightbulb,
   MessageSquareText,
   Play,
-  Route,
+  Route as RouteIcon,
   Search,
   Send,
-  Sparkles
+  Sparkles,
+  Target
 } from 'lucide-react';
+import DoubtSolver from './pages/DoubtSolver';
+import PythonChallenge from './pages/PythonChallenge';
 import './styles.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -24,6 +29,25 @@ async function api(path, options) {
   });
   if (!response.ok) throw new Error(await response.text());
   return response.json();
+}
+
+function Navbar() {
+  return (
+    <nav className="top-nav">
+      <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+        <Brain size={18} />
+        <span>Learn</span>
+      </NavLink>
+      <NavLink to="/doubts" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+        <HelpCircle size={18} />
+        <span>Doubt Solver</span>
+      </NavLink>
+      <NavLink to="/challenge" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
+        <Target size={18} />
+        <span>30-Day Challenge</span>
+      </NavLink>
+    </nav>
+  );
 }
 
 function App() {
@@ -199,7 +223,7 @@ function App() {
             <Analytics analytics={analytics} />
           </div>
           <div className="panel">
-            <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
+            <div className="section-title"><RouteIcon size={20} /><h2>Roadmap</h2></div>
             <Roadmap roadmap={roadmap} />
           </div>
           <div className="panel">
@@ -300,4 +324,17 @@ function SessionList({ sessions }) {
   );
 }
 
-createRoot(document.getElementById('root')).render(<App />);
+function Root() {
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/doubts" element={<DoubtSolver />} />
+        <Route path="/challenge" element={<PythonChallenge />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+createRoot(document.getElementById('root')).render(<Root />);
