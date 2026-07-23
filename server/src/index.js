@@ -6,7 +6,6 @@ const scenarioRoutes = require('./routes/scenarios');
 const sessionRoutes = require('./routes/sessions');
 const analyticsRoutes = require('./routes/analytics');
 const roadmapRoutes = require('./routes/roadmap');
-const { router: authRoutes, authenticate } = require('./routes/auth');
 const recommendationsRoutes = require('./routes/recommendations');
 require('dotenv').config();
 
@@ -21,7 +20,6 @@ app.use(morgan('dev'));
 app.use(limiter);
 
 app.get('/api/health', (_req, res) => res.json({ ok: true, product: 'PyBe' }));
-app.use('/api/auth', authRoutes);
 app.use('/api/scenarios', scenarioRoutes);
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/analytics', analyticsRoutes);

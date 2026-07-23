@@ -1,25 +1,42 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useCallback, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
-  Brain, ChartNoAxesCombined, Code2, Compass, Lightbulb, MessageSquareText,
-  Play, Route, Search, Send, Sparkles, User, LogIn, LogOut, Award,
-  TrendingUp, Target, Calendar, AlertTriangle, BarChart3, BookOpen, Layers, X
+  Brain, Code2, Compass, Lightbulb, MessageSquareText,
+  Play, Search, Send, Sparkles, Award,
+  TrendingUp, Target, Calendar, AlertTriangle, BarChart3, BookOpen, Layers,
+  Bookmark, BookmarkCheck, Trophy, Moon, Sun, Star, Zap, Crown, Globe, Clock
 } from 'lucide-react';
 import './styles.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
-function getToken() { return localStorage.getItem('pybe_token'); }
-function setToken(t) { if (t) localStorage.setItem('pybe_token', t); else localStorage.removeItem('pybe_token'); }
-
 async function api(path, options = {}) {
-  const token = getToken();
-  const headers = { 'Content-Type': 'application/json' };
-  if (token) headers['Authorization'] = 'Bearer ' + token;
-  if (options.headers) Object.assign(headers, options.headers);
+  const headers = { 'Content-Type': 'application/json', ...options.headers };
   const response = await fetch(API_URL + path, { ...options, headers });
   if (!response.ok) { const text = await response.text(); throw new Error(text); }
   return response.json();
+}
+
+function getAchievements(analytics) {
+  const count = analytics?.sessionCount || 0;
+  const avg = analytics?.averagePromptScore || 0;
+  const longest = analytics?.streak?.longest || 0;
+  const mastered = analytics?.conceptMastery
+    ? Object.entries(analytics.conceptMastery).filter(([, s]) => s.level === 'mastered').length
+    : 0;
+  const badges = [];
+  if (count >= 1) badges.push({ id: 'first', name: 'First Session', icon: Trophy });
+  if (count >= 5) badges.push({ id: 'five', name: 'Getting Started', icon: Star });
+  if (count >= 10) badges.push({ id: 'ten', name: 'Double Digits', icon: Award });
+  if (count >= 25) badges.push({ id: 'twentyfive', name: 'Quarter Century', icon: Globe });
+  if (avg >= 85) badges.push({ id: 'high_avg', name: 'High Performer', icon: Crown });
+  if (longest >= 3) badges.push({ id: 'streak_3', name: '3-Day Streak', icon: Zap });
+  if (longest >= 7) badges.push({ id: 'streak_7', name: 'Week Warrior', icon: Crown });
+  if (mastered >= 1) badges.push({ id: 'first_mastered', name: 'First Mastered', icon: Crown });
+  if (mastered >= 3) badges.push({ id: "mastery_3", name: 'Concept Explorer', icon: Trophy });
+  const anyImprovement = count >= 2 && avg > 0;
+  if (anyImprovement) badges.push({ id: 'improvement', name: 'Rising Star', icon: Star });
+  return badges;
 }
 
 function App() {
@@ -35,24 +52,48 @@ function App() {
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [user, setUser] = useState(null);
-  const [showAuth, setShowAuth] = useState(false);
-  const [authMode, setAuthMode] = useState('login');
-  const [authEmail, setAuthEmail] = useState('');
-  const [authPassword, setAuthPassword] = useState('');
-  const [authName, setAuthName] = useState('');
-  const [authError, setAuthError] = useState('');
   const [activeTab, setActiveTab] = useState('learn');
-  const [showProfile, setShowProfile] = useState(false);
-  const [profileName, setProfileName] = useState('');
-  const [profileMsg, setProfileMsg] = useState('');
-
-  useEffect(() => {
-    const token = getToken();
-    if (token) api('/auth/me').then(setUser).catch(() => setToken(null));
-  }, []);
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('pybe_dark') === 'true');
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [timerElapsed, setTimerElapsed] = useState(0);
+  const timerRef = useRef(null);
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((s) => s.concepts || []))].sort(), [scenarios]);
+
+  const [bookmarks, setBookmarksState] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('pybe_bookmarks') || '[]'); } catch { return []; }
+  });
+  const setBookmarks = useCallback(b => {
+    setBookmarksState(b);
+    localStorage.setItem('pybe_bookmarks', JSON.stringify(b));
+  }, []);
+
+  const badges = useMemo(() => getAchievements(analytics), [analytics]);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', darkMode);
+    localStorage.setItem('pybe_dark', darkMode);
+  }, [darkMode]);
+
+  useEffect(() => {
+    if (!timerRunning) return;
+    timerRef.current = setInterval(() => setTimerElapsed(t => t + 1), 1000);
+    return () => clearInterval(timerRef.current);
+  }, [timerRunning]);
+
+  function handleSelect(scenario) {
+    setSelected(scenario);
+    setActiveResult(null);
+    setActiveTab('learn');
+    setTimerRunning(true);
+    setTimerElapsed(0);
+  }
+
+  function formatTime(seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    return `${m}:${String(s).padStart(2, '0')}`;
+  }
 
   async function refresh() {
     const params = new URLSearchParams(Object.entries(filters).filter(([, v]) => v));
@@ -73,64 +114,28 @@ function App() {
   async function submitSession(e) {
     e.preventDefault();
     if (!selected || !form.reasoning.trim()) return;
+    setTimerRunning(false);
+    if (timerRef.current) clearInterval(timerRef.current);
+    const timeSpent = timerElapsed;
     setSubmitting(true);
     try {
-      const result = await api('/sessions', { method: 'POST', body: JSON.stringify({ ...form, scenarioId: selected._id }) });
+      const result = await api('/sessions', { method: 'POST', body: JSON.stringify({ ...form, scenarioId: selected._id, timeSpent }) });
       setActiveResult(result);
       setForm({ ...form, reasoning: '', promptText: '', reflection: '' });
       await refresh();
     } finally { setSubmitting(false); }
   }
 
-  async function handleAuth(e) {
-    e.preventDefault();
-    setAuthError('');
-    try {
-      const ep = authMode === 'login' ? '/auth/login' : '/auth/signup';
-      const body = authMode === 'login' ? { email: authEmail, password: authPassword } : { email: authEmail, password: authPassword, name: authName };
-      const data = await api(ep, { method: 'POST', body: JSON.stringify(body) });
-      setToken(data.token); setUser(data.user); setShowAuth(false);
-      setForm(f => ({ ...f, learnerName: data.user.name || 'Guest learner' }));
-    } catch (err) { setAuthError(err.message || 'Auth failed'); }
-  }
-
-  function handleLogout() { setToken(null); setUser(null); setForm(f => ({ ...f, learnerName: 'Guest learner' })); }
-
-  async function handleUpdateProfile(e) {
-    e.preventDefault();
-    try {
-      const data = await api('/auth/profile', { method: 'PUT', body: JSON.stringify({ name: profileName }) });
-      setUser(data); setProfileMsg('Profile updated!');
-      setTimeout(() => setProfileMsg(''), 2000);
-    } catch { setProfileMsg('Failed'); }
-  }
-
   if (loading) return <main className="loading">Loading PyBe...</main>;
 
   return (
-    <main className="app-shell">
+    <main className={`app-shell${darkMode ? ' dark' : ''}`}>
       <aside className="sidebar">
         <div className="brand"><Brain size={30} /><div><strong>PyBe</strong><span>Scenario-first Python</span></div></div>
 
-        {user ? (
-          <div className="user-badge" onClick={() => setShowProfile(!showProfile)}>
-            <User size={16} /><span>{user.name}</span>
-            <button className="icon-btn" onClick={(e) => { e.stopPropagation(); handleLogout(); }} title="Logout"><LogOut size={14} /></button>
-          </div>
-        ) : (
-          <button className="auth-btn" onClick={() => setShowAuth(true)}><LogIn size={16} /> Sign in</button>
-        )}
-
-        {showProfile && user && (
-          <div className="profile-panel">
-            <form onSubmit={handleUpdateProfile}>
-              <input value={profileName || user.name} onChange={e => setProfileName(e.target.value)} placeholder="Your name" />
-              <button className="primary small" type="submit">Save</button>
-            </form>
-            {profileMsg && <small>{profileMsg}</small>}
-            <hr /><p><small>Role: {user.role}</small></p><p><small>{user.email}</small></p>
-          </div>
-        )}
+        <button className="icon-btn dark-toggle" onClick={() => setDarkMode(d => !d)} title="Toggle dark mode">
+          {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+        </button>
 
         <label className="search"><Search size={18} />
           <input value={filters.q} onChange={e => setFilters(f => ({ ...f, q: e.target.value }))} placeholder="Search scenarios" />
@@ -147,18 +152,31 @@ function App() {
         </select>
 
         <div className="scenario-list">
-          {scenarios.map(sc => (
-            <button key={sc._id} className={selected?._id === sc._id ? 'scenario active' : 'scenario'}
-              onClick={() => { setSelected(sc); setActiveResult(null); setActiveTab('learn'); }}>
-              <span>{sc.difficulty}</span><strong>{sc.title}</strong><small>{sc.concepts.join(' / ')}</small>
-            </button>
-          ))}
+          {scenarios.map(sc => {
+            const isBookmarked = bookmarks.includes(sc._id);
+            return (
+              <button key={sc._id} className={selected?._id === sc._id ? 'scenario active' : 'scenario'}
+                onClick={() => handleSelect(sc)}>
+                <span>
+                  {sc.difficulty}
+                  <span className="bookmark-icon" onClick={e => { e.stopPropagation(); toggleBookmark(sc._id); }}>
+                    {isBookmarked ? <BookmarkCheck size={14} /> : <Bookmark size={14} />}
+                  </span>
+                </span>
+                <strong>{sc.title}</strong>
+                <small>{sc.concepts.join(' / ')}</small>
+              </button>
+            );
+          })}
         </div>
       </aside>
 
       <section className="workspace">
         <header className="hero">
-          <div><p>AI-native learning journey</p><h1>Learn Python by reasoning through real situations first.</h1></div>
+          <div>
+            <p>AI-native learning journey</p>
+            <h1>Learn Python by reasoning through real situations first.</h1>
+          </div>
           <div className="hero-stats">
             <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
             <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
@@ -174,79 +192,78 @@ function App() {
         </nav>
 
         {activeTab === 'learn' && (
-          <div className="main-grid">
-            <section className="panel learning-panel">
-              <div className="section-title"><Compass size={20} /><h2>{selected?.title || 'Select a scenario'}</h2></div>
-              <div className="auth-inline">
-                {!user && <p className="auth-nudge">Sign in to save your progress — <button className="link" onClick={() => setShowAuth(true)}>Sign in / Register</button></p>}
-              </div>
-              {selected?.context && <p className="context">{selected.context}</p>}
-              {selected?.objectives && <div className="objective-row">{selected.objectives.map(o => <span key={o}>{o}</span>)}</div>}
-              <form onSubmit={submitSession} className="learning-form">
-                <label>Your reasoning<textarea required value={form.reasoning} onChange={e => setForm(f => ({ ...f, reasoning: e.target.value }))} placeholder={selected?.prompt} /></label>
-                <label>Prompt you would give an AI mentor<textarea value={form.promptText} onChange={e => setForm(f => ({ ...f, promptText: e.target.value }))} placeholder="Explain my approach step by step..." /></label>
-                <label>Reflection<textarea value={form.reflection} onChange={e => setForm(f => ({ ...f, reflection: e.target.value }))} placeholder="What did you notice?" /></label>
-                <button className="primary" disabled={submitting}><Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}</button>
-              </form>
-            </section>
-
-            <section className="panel result-panel">
-              <div className="section-title"><Sparkles size={20} /><h2>AI Mentor Output</h2></div>
-              {!activeResult ? (
-                <div className="empty"><Lightbulb size={38} /><p>Submit reasoning to see abstraction mapping, Python code, prompt feedback, and misconception signals.</p></div>
-              ) : (
-                <div className="result-stack">
-                  <div className="score"><span>{activeResult.promptScore}</span><small>Prompt maturity</small></div>
-                  {activeResult.promptClassification && <div className="classification"><strong>Interaction: {activeResult.promptClassification}</strong></div>}
-                  {activeResult.promptDimensions && activeResult.promptDimensions.map(d => (
-                    <div className="dim-bar" key={d.name}><span>{d.name}</span><meter min="0" max={d.max} value={d.score} /><strong>{d.score}/{d.max}</strong></div>
-                  ))}
-                  {activeResult.abstractionMap?.map(item => (
-                    <article className="mapping" key={item.pattern}><strong>{item.pattern}</strong><span>{item.pythonConcept}</span><p>{item.explanation}</p></article>
-                  ))}
-                  <div className="code-block"><div><Code2 size={18} /> Generated Python</div><pre>{activeResult.generatedCode}</pre><p>{activeResult.codeExplanation}</p></div>
-                  <ul className="feedback">{activeResult.promptFeedback?.map(i => <li key={i}>{i}</li>)}</ul>
-                  {activeResult.misconceptions?.length > 0 && (
-                    <div className="note"><strong>Misconception watch</strong>{activeResult.misconceptions.map(i => <p key={i}>{i}</p>)}</div>
-                  )}
+          <>
+            <div className="main-grid">
+              <section className="panel learning-panel">
+                <div className="section-title">
+                  <Compass size={20} /><h2>{selected?.title || 'Select a scenario'}</h2>
+                  {timerRunning && <span className="timer"><Clock size={14} /> {formatTime(timerElapsed)}</span>}
                 </div>
-              )}
-            </section>
-          </div>
+                {selected?.context && <p className="context">{selected.context}</p>}
+                {selected?.objectives && <div className="objective-row">{selected.objectives.map(o => <span key={o}>{o}</span>)}</div>}
+                <form onSubmit={submitSession} className="learning-form">
+                  <label>Your reasoning<textarea required value={form.reasoning} onChange={e => setForm(f => ({ ...f, reasoning: e.target.value }))} placeholder={selected?.prompt} /></label>
+                  <label>Prompt you would give an AI mentor<textarea value={form.promptText} onChange={e => setForm(f => ({ ...f, promptText: e.target.value }))} placeholder="Explain my approach step by step..." /></label>
+                  <label>Reflection<textarea value={form.reflection} onChange={e => setForm(f => ({ ...f, reflection: e.target.value }))} placeholder="What did you notice?" /></label>
+                  <button className="primary" disabled={submitting}><Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}</button>
+                </form>
+              </section>
+
+              <section className="panel result-panel">
+                <div className="section-title"><Sparkles size={20} /><h2>AI Mentor Output</h2></div>
+                {!activeResult ? (
+                  <div className="empty"><Lightbulb size={38} /><p>Submit reasoning to see abstraction mapping, Python code, prompt feedback, and misconception signals.</p></div>
+                ) : (
+                  <div className="result-stack">
+                    <div className="score"><span>{activeResult.promptScore}</span><small>Prompt maturity</small></div>
+                    {activeResult.promptClassification && <div className="classification"><strong>Interaction: {activeResult.promptClassification}</strong></div>}
+                    {activeResult.promptDimensions && activeResult.promptDimensions.map(d => (
+                      <div className="dim-bar" key={d.name}><span>{d.name}</span><meter min="0" max={d.max} value={d.score} /><strong>{d.score}/{d.max}</strong></div>
+                    ))}
+                    {activeResult.abstractionMap?.map(item => (
+                      <article className="mapping" key={item.pattern}><strong>{item.pattern}</strong><span>{item.pythonConcept}</span><p>{item.explanation}</p></article>
+                    ))}
+                    <div className="code-block"><div><Code2 size={18} /> Generated Python</div><pre>{activeResult.generatedCode}</pre><p>{activeResult.codeExplanation}</p></div>
+                    <ul className="feedback">{activeResult.promptFeedback?.map(i => <li key={i}>{i}</li>)}</ul>
+                    {activeResult.misconceptions?.length > 0 && (
+                      <div className="note"><strong>Misconception watch</strong>{activeResult.misconceptions.map(i => <p key={i}>{i}</p>)}</div>
+                    )}
+                  </div>
+                )}
+              </section>
+            </div>
+            {badges.length > 0 && (
+              <div className="badge-bar">
+                {badges.map(b => {
+                  const Icon = b.icon;
+                  return <span key={b.id} className="badge" title={b.desc}><Icon size={14} /> {b.name}</span>;
+                })}
+              </div>
+            )}
+          </>
         )}
 
-        {activeTab === 'dashboard' && <Dashboard analytics={analytics} recommendations={recommendations} sessions={sessions} />}
-        {activeTab === 'history' && <HistoryTab sessions={sessions} />}
+        {activeTab === 'dashboard' && <Dashboard analytics={analytics} recommendations={recommendations} sessions={sessions} bookmarks={bookmarks} setBookmarks={setBookmarks} />}
+        {activeTab === 'history' && <HistoryTab sessions={sessions} bookmarks={bookmarks} />}
       </section>
-
-      {showAuth && (
-        <div className="modal-overlay" onClick={e => { if (e.target === e.currentTarget) setShowAuth(false); }}>
-          <div className="modal" onClick={e => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowAuth(false)}><X size={20} /></button>
-            <h2>{authMode === 'login' ? 'Sign In' : 'Create Account'}</h2>
-            <form onSubmit={handleAuth}>
-              {authMode === 'signup' && <input value={authName} onChange={e => setAuthName(e.target.value)} placeholder="Name" required />}
-              <input type="email" value={authEmail} onChange={e => setAuthEmail(e.target.value)} placeholder="Email" required />
-              <input type="password" value={authPassword} onChange={e => setAuthPassword(e.target.value)} placeholder="Password" required minLength={6} />
-              {authError && <p className="auth-error">{authError}</p>}
-              <button className="primary" type="submit">{authMode === 'login' ? 'Sign In' : 'Create Account'}</button>
-            </form>
-            <p className="auth-toggle">
-              {authMode === 'login' ? "Don't have an account? " : 'Already have an account? '}
-              <button className="link" onClick={() => setAuthMode(m => m === 'login' ? 'signup' : 'login')}>{authMode === 'login' ? 'Sign up' : 'Sign in'}</button>
-            </p>
-          </div>
-        </div>
-      )}
     </main>
   );
+
+  function toggleBookmark(scenarioId) {
+    const next = bookmarks.includes(scenarioId)
+      ? bookmarks.filter(id => id !== scenarioId)
+      : [...bookmarks, scenarioId];
+    setBookmarks(next);
+  }
 }
 
-function Dashboard({ analytics, recommendations, sessions }) {
+function Dashboard({ analytics, recommendations, sessions, bookmarks }) {
   const conceptMastery = analytics?.conceptMastery ? Object.entries(analytics.conceptMastery) : [];
   const weakest = analytics?.weakestConcept || null;
   const dailyCounts = analytics?.dailySessionCounts ? Object.entries(analytics.dailySessionCounts).slice(-7) : [];
   const colors = { mastered: '#4ade80', developing: '#facc15', needs_work: '#f87171' };
+  const bookmarkedSessions = sessions.filter(s => bookmarks.includes(s._id) || (s.scenario?._id && bookmarks.includes(s.scenario._id)));
+  const badges = getAchievements(analytics);
 
   return (
     <div className="dashboard-tab">
@@ -269,6 +286,18 @@ function Dashboard({ analytics, recommendations, sessions }) {
           )) : <p>Complete sessions to get recommendations.</p>}
         </div>
 
+        {badges.length > 0 && (
+          <div className="panel">
+            <div className="section-title"><Trophy size={18} /><h3>Achievements</h3></div>
+            <div className="badge-grid">
+              {badges.map(b => {
+                const Icon = b.icon;
+                return <div key={b.id} className="badge-card"><Icon size={20} /><span>{b.name}</span></div>;
+              })}
+            </div>
+          </div>
+        )}
+
         {conceptMastery.length > 0 && (
           <div className="panel">
             <div className="section-title"><Layers size={18} /><h3>Concept Mastery</h3></div>
@@ -289,9 +318,23 @@ function Dashboard({ analytics, recommendations, sessions }) {
             <div className="pace-row">
               {dailyCounts.map(([day, count]) => (
                 <div className="pace-item" key={day}>
-                  <div className="pace-bar" style={{ height: Math.max(count * 20, 4) + 'px' }}></div>
+                  <div className="pace-bar" mark-key={day} style={{ height: Math.max(count * 20, 4) + 'px' }}></div>
                   <small>{day.slice(5)}</small><span>{count}</span>
                 </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {bookmarkedSessions.length > 0 && (
+          <div className="panel">
+            <div className="section-title"><BookmarkCheck size={18} /><h3>Favorites</h3></div>
+            <div className="fav-list">
+              {bookmarkedSessions.slice(0, 5).map(s => (
+                <article className="session-item" key={s._id}>
+                  <Play size={14} />
+                  <div><strong>{s.scenario?.title || 'Unknown'}</strong><span>{s.promptScore} score</span></div>
+                </article>
               ))}
             </div>
           </div>
@@ -312,18 +355,19 @@ function Dashboard({ analytics, recommendations, sessions }) {
   );
 }
 
-function HistoryTab({ sessions }) {
+function HistoryTab({ sessions, bookmarks }) {
   return (
     <div className="history-tab">
       <div className="panel">
         <div className="section-title"><MessageSquareText size={20} /><h2>Session History</h2></div>
         {sessions.length > 0 ? (
           <table className="session-table">
-            <thead><tr><th>Scenario</th><th>Score</th><th>Concepts</th><th>Misconceptions</th><th>Date</th></tr></thead>
+            <thead><tr><th>Scenario</th><th>Score</th><th>Time</th><th>Concepts</th><th>Misconceptions</th><th>Date</th></tr></thead>
             <tbody>{sessions.slice(0, 30).map(s => (
-              <tr key={s._id}>
+              <tr key={s._id} className={s._id && bookmarks?.includes(s._id) ? 'bookmarked-row' : ''}>
                 <td>{s.scenario?.title || 'Unknown'}</td>
                 <td><span className="score-badge">{s.promptScore}</span></td>
+                <td>{s.timeSpent ? `${Math.floor(s.timeSpent / 60)}:${String(s.timeSpent % 60).padStart(2, '0')}` : '-'}</td>
                 <td>{(s.abstractionMap || []).map(m => m.pythonConcept).join(', ')}</td>
                 <td>{(s.misconceptions || []).length}</td>
                 <td>{s.createdAt?.slice(0, 10)}</td>

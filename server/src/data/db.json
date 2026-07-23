@@ -699,25 +699,5 @@
       "createdAt": "2026-07-18T09:36:57.042Z",
       "updatedAt": "2026-07-18T09:36:57.042Z"
     }
-  ],
-  "users": [
-    {
-      "_id": "8edd14e4-0ee8-47ba-9e78-556976abd9c8",
-      "email": "learner@pybe.dev",
-      "password": "$2b$10$4HI.LgM3gNRXNRnAGNYZ3e.a8Gj6vsJWPDnOpmuQNY.a.Gm6uvzM2",
-      "name": "Test Learner",
-      "role": "learner",
-      "createdAt": "2026-07-18T09:36:32.458Z",
-      "updatedAt": "2026-07-18T09:36:32.458Z"
-    },
-    {
-      "_id": "69aff7a6-c01b-4293-b9eb-8fd66a7972b6",
-      "email": "abcd@gmail.com",
-      "password": "$2b$10$ySheVWOdetP.HNS4VDyul.aAf1xpghg582dHdnT4L5Ss7Zej4XlDC",
-      "name": "abcd",
-      "role": "learner",
-      "createdAt": "2026-07-18T09:39:23.835Z",
-      "updatedAt": "2026-07-18T09:39:23.835Z"
-    }
   ]
 }
