@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import './styles.css';
 import VoiceStudio from './components/voice/VoiceStudio';
+import PairCompanionDrawer from './components/pair/PairCompanionDrawer';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -198,6 +199,9 @@ function App() {
             </div>
             {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
           </section>
+
+          {/* AI Pair Programmer Live Companion Widget */}
+          <PairCompanionDrawer liveCode={form.reasoning} scenarioTitle={selected?.title} />
         </div>
 
         <section className="dashboard">
