@@ -7,6 +7,7 @@ import {
   Compass,
   Lightbulb,
   MessageSquareText,
+  Mic,
   Play,
   Route,
   Search,
@@ -14,6 +15,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import './styles.css';
+import VoiceStudio from './components/voice/VoiceStudio';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -37,6 +39,8 @@ function App() {
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [showVoiceStudio, setShowVoiceStudio] = useState(false);
+  const [dyslexicFont, setDyslexicFont] = useState(false);
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
@@ -134,6 +138,9 @@ function App() {
           <div>
             <p>AI-native learning journey</p>
             <h1>Learn Python by reasoning through real situations first.</h1>
+            <button className="hero-voice-cta" onClick={() => setShowVoiceStudio(true)}>
+              <Mic size={18} /> Launch Voice-Based Learning Studio
+            </button>
           </div>
           <div className="hero-stats">
             <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
@@ -208,6 +215,26 @@ function App() {
           </div>
         </section>
       </section>
+
+      {/* Floating Action Button for Voice Learning */}
+      <button
+        className="floating-voice-fab"
+        onClick={() => setShowVoiceStudio(true)}
+        title="Open Voice Learning Studio"
+      >
+        <Mic size={24} />
+        <span>Voice Tutor</span>
+      </button>
+
+      {/* Voice Learning Studio Overlay */}
+      {showVoiceStudio && (
+        <VoiceStudio
+          activeScenario={selected}
+          onClose={() => setShowVoiceStudio(false)}
+          dyslexicFont={dyslexicFont}
+          setDyslexicFont={setDyslexicFont}
+        />
+      )}
     </main>
   );
 }
