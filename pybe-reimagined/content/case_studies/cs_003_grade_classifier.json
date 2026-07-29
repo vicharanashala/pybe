@@ -1,0 +1,21 @@
+{
+    "id":  "cs_003",
+    "title":  "Grade Classifier",
+    "scenario":  "A teacher has a student\u0027s final score between 0 and 100. She wants the grade in one of five buckets: 90 or above is A, 80 to 89 is B, 70 to 79 is C, 60 to 69 is D, and below 60 is F. What Python construct walks a single value through these checks and stops at the first match?",
+    "hookWords":  [
+                      "grade",
+                      "score",
+                      "classifier",
+                      "branches"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "conditionals"
+                  ],
+    "constructHint":  [
+                          "if",
+                          "arithmetic"
+                      ],
+    "jonassenType":  "rule-using",
+    "level":  1
+}

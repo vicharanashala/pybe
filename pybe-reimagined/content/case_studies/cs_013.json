@@ -1,0 +1,24 @@
+{
+    "id":  "cs_013",
+    "title":  "Designing for contacts",
+    "scenario":  "A team is dealing with contacts, phonebook, lookup. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "contacts",
+                      "phonebook",
+                      "lookup"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "dicts",
+                      "contacts",
+                      "phonebook",
+                      "lookup"
+                  ],
+    "constructHint":  [
+                          "dict",
+                          "for",
+                          "get"
+                      ],
+    "jonassenType":  "design",
+    "level":  1
+}

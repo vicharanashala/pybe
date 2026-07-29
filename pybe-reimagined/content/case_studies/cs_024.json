@@ -1,0 +1,23 @@
+{
+    "id":  "cs_024",
+    "title":  "Roll case study",
+    "scenario":  "A team is dealing with roll, dice, random. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "roll",
+                      "dice",
+                      "random"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "functions",
+                      "roll",
+                      "dice",
+                      "random"
+                  ],
+    "constructHint":  [
+                          "function",
+                          "return"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

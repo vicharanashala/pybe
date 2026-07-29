@@ -1,0 +1,24 @@
+{
+    "id":  "cs_015",
+    "title":  "Designing for reverse",
+    "scenario":  "A team is dealing with reverse, string, palindrome. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "reverse",
+                      "string",
+                      "palindrome"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "slicing",
+                      "reverse",
+                      "string",
+                      "palindrome"
+                  ],
+    "constructHint":  [
+                          "slice",
+                          "for",
+                          "list"
+                      ],
+    "jonassenType":  "design",
+    "level":  1
+}

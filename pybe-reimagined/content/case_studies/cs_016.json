@@ -1,0 +1,25 @@
+{
+    "id":  "cs_016",
+    "title":  "Inventory case study",
+    "scenario":  "A team is dealing with inventory, count, stock. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "inventory",
+                      "count",
+                      "stock"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "loops",
+                      "inventory",
+                      "count",
+                      "stock"
+                  ],
+    "constructHint":  [
+                          "for",
+                          "range",
+                          "sum",
+                          "len"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

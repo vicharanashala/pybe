@@ -1,0 +1,24 @@
+{
+    "id":  "cs_002",
+    "title":  "Gym Tracker: Height, Weight, BMI",
+    "scenario":  "A gym tracker takes a person\u0027s height in centimetres and weight in kilograms. The trainer wants to look up a single member\u0027s record quickly, and pull out whichever field is needed (name, height, weight). Which Python construct stores named fields so you can ask for one by its name instead of by position?",
+    "hookWords":  [
+                      "gym",
+                      "tracker",
+                      "name",
+                      "height",
+                      "weight",
+                      "lookup"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "dicts"
+                  ],
+    "constructHint":  [
+                          "dict",
+                          "float",
+                          "arithmetic"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

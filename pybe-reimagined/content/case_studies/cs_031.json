@@ -1,0 +1,23 @@
+{
+    "id":  "cs_031",
+    "title":  "Designing for fetch",
+    "scenario":  "A team is dealing with fetch, three, urls. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "fetch",
+                      "three",
+                      "urls"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "async",
+                      "fetch",
+                      "three",
+                      "urls"
+                  ],
+    "constructHint":  [
+                          "function",
+                          "async"
+                      ],
+    "jonassenType":  "design",
+    "level":  1
+}

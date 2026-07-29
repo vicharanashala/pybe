@@ -1,0 +1,23 @@
+{
+    "id":  "cs_029",
+    "title":  "Designing for rectangle",
+    "scenario":  "A team is dealing with rectangle, area, method. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "rectangle",
+                      "area",
+                      "method"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "oop",
+                      "rectangle",
+                      "area",
+                      "method"
+                  ],
+    "constructHint":  [
+                          "class",
+                          "function"
+                      ],
+    "jonassenType":  "design",
+    "level":  1
+}
