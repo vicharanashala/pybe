@@ -4,7 +4,9 @@ import {
   Brain, Code2, Compass, Lightbulb, MessageSquareText,
   Play, Search, Send, Sparkles, Award,
   TrendingUp, Target, Calendar, AlertTriangle, BarChart3, BookOpen, Layers,
-  Bookmark, BookmarkCheck, Trophy, Moon, Sun, Star, Zap, Crown, Globe, Clock
+  Bookmark, BookmarkCheck, Trophy, Moon, Sun, Star, Zap, Crown, Globe, Clock,
+  MessageCircle, ClipboardCheck, HelpCircle, CalendarDays, Network, BarChart2,
+  ChevronRight, CheckCircle, XCircle, AlertCircle, Info
 } from 'lucide-react';
 import './styles.css';
 
@@ -33,9 +35,8 @@ function getAchievements(analytics) {
   if (longest >= 3) badges.push({ id: 'streak_3', name: '3-Day Streak', icon: Zap });
   if (longest >= 7) badges.push({ id: 'streak_7', name: 'Week Warrior', icon: Crown });
   if (mastered >= 1) badges.push({ id: 'first_mastered', name: 'First Mastered', icon: Crown });
-  if (mastered >= 3) badges.push({ id: "mastery_3", name: 'Concept Explorer', icon: Trophy });
-  const anyImprovement = count >= 2 && avg > 0;
-  if (anyImprovement) badges.push({ id: 'improvement', name: 'Rising Star', icon: Star });
+  if (mastered >= 3) badges.push({ id: 'mastery_3', name: 'Concept Explorer', icon: Trophy });
+  if (count >= 2 && avg > 0) badges.push({ id: 'improvement', name: 'Rising Star', icon: Star });
   return badges;
 }
 
@@ -189,6 +190,7 @@ function App() {
           <button className={activeTab === 'learn' ? 'tab active' : 'tab'} onClick={() => setActiveTab('learn')}><BookOpen size={16} /> Learn</button>
           <button className={activeTab === 'dashboard' ? 'tab active' : 'tab'} onClick={() => setActiveTab('dashboard')}><BarChart3 size={16} /> Dashboard</button>
           <button className={activeTab === 'history' ? 'tab active' : 'tab'} onClick={() => setActiveTab('history')}><MessageSquareText size={16} /> History</button>
+          <button className={activeTab === 'ai' ? 'tab active' : 'tab'} onClick={() => setActiveTab('ai')}><Sparkles size={16} /> AI Tools</button>
         </nav>
 
         {activeTab === 'learn' && (
@@ -243,8 +245,9 @@ function App() {
           </>
         )}
 
-        {activeTab === 'dashboard' && <Dashboard analytics={analytics} recommendations={recommendations} sessions={sessions} bookmarks={bookmarks} setBookmarks={setBookmarks} />}
+        {activeTab === 'dashboard' && <Dashboard analytics={analytics} recommendations={recommendations} sessions={sessions} bookmarks={bookmarks} />}
         {activeTab === 'history' && <HistoryTab sessions={sessions} bookmarks={bookmarks} />}
+        {activeTab === 'ai' && <AITools activeResult={activeResult} sessions={sessions} analytics={analytics} />}
       </section>
     </main>
   );
@@ -255,6 +258,428 @@ function App() {
       : [...bookmarks, scenarioId];
     setBookmarks(next);
   }
+}
+
+function AITools({ activeResult, sessions, analytics }) {
+  const [aiTab, setAiTab] = useState('chat');
+  return (
+    <div className="panel">
+      <div className="ai-tabs">
+        <button className={`ai-tab ${aiTab === 'chat' ? 'active' : ''}`} onClick={() => setAiTab('chat')}><MessageCircle size={16} /> Chat Mentor</button>
+        <button className={`ai-tab ${aiTab === 'review' ? 'active' : ''}`} onClick={() => setAiTab('review')}><ClipboardCheck size={16} /> Code Review</button>
+        <button className={`ai-tab ${aiTab === 'quiz' ? 'active' : ''}`} onClick={() => setAiTab('quiz')}><HelpCircle size={16} /> Quiz</button>
+        <button className={`ai-tab ${aiTab === 'planner' ? 'active' : ''}`} onClick={() => setAiTab('planner')}><CalendarDays size={16} /> Study Plan</button>
+        <button className={`ai-tab ${aiTab === 'graph' ? 'active' : ''}`} onClick={() => setAiTab('graph')}><Network size={16} /> Concepts</button>
+        <button className={`ai-tab ${aiTab === 'insights' ? 'active' : ''}`} onClick={() => setAiTab('insights')}><BarChart2 size={16} /> Insights</button>
+      </div>
+      <div style={{ marginTop: 16 }}>
+        {aiTab === 'chat' && <ChatMentor />}
+        {aiTab === 'review' && <CodeReview activeResult={activeResult} />}
+        {aiTab === 'quiz' && <QuizGenerator />}
+        {aiTab === 'planner' && <StudyPlanner />}
+        {aiTab === 'graph' && <ConceptGraph />}
+        {aiTab === 'insights' && <ProgressInsights />}
+      </div>
+    </div>
+  );
+}
+
+function ChatMentor() {
+  const [messages, setMessages] = useState([]);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const bottomRef = useRef(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  async function send(text) {
+    const msg = text || input;
+    if (!msg.trim()) return;
+    setInput('');
+    setMessages(prev => [...prev, { role: 'user', text: msg }]);
+    setLoading(true);
+    try {
+      const res = await api('/ai/chat', { method: 'POST', body: JSON.stringify({ message: msg }) });
+      setMessages(prev => [...prev, { role: 'mentor', text: res.reply, suggestions: res.suggestions }]);
+    } catch {
+      setMessages(prev => [...prev, { role: 'mentor', text: 'Sorry, something went wrong. Please try again.' }]);
+    }
+    setLoading(false);
+  }
+
+  return (
+    <div className="chat-panel">
+      <div className="chat-messages">
+        {messages.length === 0 && (
+          <div className="chat-msg mentor">
+            <strong>PyBe AI Mentor</strong>
+            <p>Hi! I can help you understand Python concepts, explain your reasoning patterns, or give practice tips.</p>
+            <div className="chat-suggestions">
+              <button onClick={() => send('Explain loops')}>Explain loops</button>
+              <button onClick={() => send('How do functions work?')}>How do functions work?</button>
+              <button onClick={() => send('Show my progress')}>Show my progress</button>
+            </div>
+          </div>
+        )}
+        {messages.map((m, i) => (
+          <div key={i} className={`chat-msg ${m.role}`}>
+            {m.role === 'mentor' && <strong>AI Mentor</strong>}
+            <p style={{ whiteSpace: 'pre-wrap', margin: 0 }}>{m.text}</p>
+            {m.suggestions && m.suggestions.length > 0 && (
+              <div className="chat-suggestions">
+                {m.suggestions.map((s, j) => (
+                  <button key={j} onClick={() => send(s)}>{s}</button>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+        {loading && <div className="chat-msg mentor"><strong>AI Mentor</strong><p>Thinking...</p></div>}
+        <div ref={bottomRef} />
+      </div>
+      <div className="chat-input">
+        <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && send()} placeholder="Ask about Python concepts..." />
+        <button onClick={() => send()}><Send size={16} /></button>
+      </div>
+    </div>
+  );
+}
+
+function CodeReview({ activeResult }) {
+  const [review, setReview] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (activeResult?.generatedCode) {
+      setLoading(true);
+      api('/ai/review', { method: 'POST', body: JSON.stringify({ generatedCode: activeResult.generatedCode, reasoning: activeResult.reasoning, promptText: activeResult.promptText }) })
+        .then(r => { setReview(r); setLoading(false); })
+        .catch(() => setLoading(false));
+    }
+  }, [activeResult]);
+
+  if (!activeResult?.generatedCode) {
+    return <div className="empty"><ClipboardCheck size={38} /><p>Submit a reasoning response in the Learn tab to see a code review.</p></div>;
+  }
+
+  if (loading) return <div className="empty"><p>Analyzing code quality...</p></div>;
+  if (!review) return null;
+
+  return (
+    <div style={{ display: 'grid', gap: 16 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+        <div className={`review-grade ${review.grade}`}>{review.grade}</div>
+        <div><strong>Code Quality Score</strong><br /><span>{review.score}/100</span></div>
+      </div>
+
+      {review.strengths.length > 0 && (
+        <div><h4 style={{ margin: '0 0 8px' }}>Strengths</h4>
+          {review.strengths.map((s, i) => (
+            <div className="review-item" key={i}><div className="review-dot success" /><span>{s}</span></div>
+          ))}
+        </div>
+      )}
+
+      {review.issues.length > 0 && (
+        <div><h4 style={{ margin: '0 0 8px' }}>Issues</h4>
+          {review.issues.map((issue, i) => (
+            <div className="review-item" key={i}><div className={`review-dot ${issue.severity}`} /><span>{issue.message}</span></div>
+          ))}
+        </div>
+      )}
+
+      {review.suggestions.length > 0 && (
+        <div><h4 style={{ margin: '0 0 8px' }}>Suggestions</h4>
+          {review.suggestions.map((s, i) => (
+            <div className="review-item" key={i}><div className="review-dot info" /><span>{s}</span></div>
+          ))}
+        </div>
+      )}
+
+      <div className="code-block"><div><Code2 size={18} /> Reviewed Code</div><pre>{activeResult.generatedCode}</pre></div>
+    </div>
+  );
+}
+
+function QuizGenerator() {
+  const [quiz, setQuiz] = useState(null);
+  const [answers, setAnswers] = useState({});
+  const [results, setResults] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    api('/ai/quiz').then(q => { setQuiz(q); setLoading(false); }).catch(() => setLoading(false));
+  }, []);
+
+  async function submitQuiz() {
+    if (!quiz) return;
+    const answerArray = quiz.questions.map((q, i) => ({ questionId: i, selected: answers[i] ?? -1 }));
+    try {
+      const r = await api('/ai/quiz/check', { method: 'POST', body: JSON.stringify({ answers: answerArray }) });
+      setResults(r);
+    } catch {}
+  }
+
+  function restart() {
+    setQuiz(null); setAnswers({}); setResults(null);
+    setLoading(true);
+    api('/ai/quiz').then(q => { setQuiz(q); setLoading(false); });
+  }
+
+  if (loading) return <div className="empty"><p>Loading quiz...</p></div>;
+  if (!quiz) return <div className="empty"><HelpCircle size={38} /><p>Could not load quiz.</p></div>;
+
+  if (results) {
+    return (
+      <div className="quiz-results">
+        <div className="score-display">{results.percentage}%</div>
+        <p>{results.correct} of {results.total} correct</p>
+        <div style={{ display: 'grid', gap: 12, marginTop: 16, textAlign: 'left' }}>
+          {quiz.questions.map((q, i) => (
+            <div className="quiz-question" key={i} style={{ borderColor: results.results[i]?.correct ? '#4ade80' : '#f87171' }}>
+              <div className="concept-tag">{q.concept}</div>
+              <h4>{q.question}</h4>
+              <p style={{ fontSize: '.85rem', color: 'var(--text-muted)' }}>
+                {results.results[i]?.correct ? <CheckCircle size={14} style={{ verticalAlign: 'middle', color: '#4ade80' }} /> : <XCircle size={14} style={{ verticalAlign: 'middle', color: '#f87171' }} />}
+                {' '}{results.results[i]?.explanation}
+              </p>
+            </div>
+          ))}
+        </div>
+        <button className="primary" style={{ marginTop: 16 }} onClick={restart}>Try Again</button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="quiz-container">
+      <p style={{ color: 'var(--text-muted)' }}>{quiz.totalQuestions} questions personalized to your learning progress</p>
+      {quiz.questions.map((q, i) => (
+        <div className="quiz-question" key={i}>
+          <div className="concept-tag">{q.concept} · {q.difficulty}</div>
+          <h4>{q.question}</h4>
+          <div className="quiz-options">
+            {q.options.map((opt, j) => (
+              <button key={j} className={`quiz-option ${answers[i] === j ? 'selected' : ''}`}
+                onClick={() => setAnswers(a => ({ ...a, [i]: j }))}>{opt}</button>
+            ))}
+          </div>
+        </div>
+      ))}
+      <button className="primary" onClick={submitQuiz} disabled={Object.keys(answers).length < quiz.questions.length}>
+        Check Answers ({Object.keys(answers).length}/{quiz.questions.length})
+      </button>
+    </div>
+  );
+}
+
+function StudyPlanner() {
+  const [plan, setPlan] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    api('/ai/planner').then(p => { setPlan(p); setLoading(false); }).catch(() => setLoading(false));
+  }, []);
+
+  if (loading) return <div className="empty"><p>Loading study plan...</p></div>;
+  if (!plan) return <div className="empty"><CalendarDays size={38} /><p>Could not load study plan.</p></div>;
+
+  return (
+    <div style={{ display: 'grid', gap: 20 }}>
+      <div className="overview-grid">
+        <div className="overview-stat"><strong>{plan.summary.totalSessions}</strong><small>Sessions done</small></div>
+        <div className="overview-stat"><strong>{plan.summary.averageScore}%</strong><small>Avg score</small></div>
+        <div className="overview-stat"><strong>{plan.summary.targetDifficulty}</strong><small>Target level</small></div>
+        <div className="overview-stat"><strong>{plan.summary.weakConceptCount}</strong><small>Weak concepts</small></div>
+      </div>
+
+      <div>
+        <h4 style={{ margin: '0 0 8px' }}>Weekly Plan</h4>
+        <div className="planner-grid">
+          {plan.weeklyPlan.map((day, i) => (
+            <div className="planner-day" key={i}>
+              <h4>{day.day} <small>~{day.estimatedMinutes} min</small></h4>
+              {day.tasks.map((task, j) => (
+                <div className="planner-task" key={j}>
+                  <span className={`task-type ${task.type}`}>{task.type}</span>
+                  <div><strong>{task.title}</strong><br /><small style={{ color: 'var(--text-muted)' }}>{task.reason}</small></div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h4 style={{ margin: '0 0 8px' }}>Tips</h4>
+        {plan.tips.map((tip, i) => (
+          <div className="insight-card" key={i}><Info size={14} style={{ verticalAlign: 'middle', marginRight: 6 }} />{tip}</div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ConceptGraph() {
+  const [graph, setGraph] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedNode, setSelectedNode] = useState(null);
+
+  useEffect(() => {
+    api('/ai/graph').then(g => { setGraph(g); setLoading(false); }).catch(() => setLoading(false));
+  }, []);
+
+  if (loading) return <div className="empty"><p>Loading concept graph...</p></div>;
+  if (!graph) return <div className="empty"><Network size={38} /><p>Could not load concept graph.</p></div>;
+
+  const nodeMap = {};
+  graph.nodes.forEach((n, i) => { nodeMap[n.id] = { ...n, x: 80 + (i % 4) * 200, y: 60 + Math.floor(i / 4) * 120 }; });
+
+  const levelColors = { not_started: '#9ca3af', needs_work: '#f87171', developing: '#facc15', mastered: '#4ade80' };
+
+  return (
+    <div className="graph-container">
+      <h4 style={{ margin: '0 0 12px' }}>Concept Dependency Graph</h4>
+      <svg className="graph-svg" viewBox="0 0 900 450">
+        {graph.edges.map((e, i) => {
+          const from = nodeMap[e.from];
+          const to = nodeMap[e.to];
+          if (!from || !to) return null;
+          return <line key={i} x1={from.x + 60} y1={from.y + 20} x2={to.x + 60} y2={to.y + 20} stroke="var(--border-color)" strokeWidth="2" markerEnd="url(#arrow)" />;
+        })}
+        <defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="var(--border-color)" /></marker></defs>
+        {graph.nodes.map(n => {
+          const pos = nodeMap[n.id];
+          const mastery = n.mastery?.level || 'not_started';
+          const isSelected = selectedNode?.id === n.id;
+          return (
+            <g key={n.id} className="graph-node" onClick={() => setSelectedNode(isSelected ? null : n)}>
+              <rect x={pos.x} y={pos.y} width={120} height={40} rx={8}
+                fill={isSelected ? 'var(--accent-bg)' : 'var(--bg-panel)'}
+                stroke={levelColors[mastery]} strokeWidth={mastery === 'mastered' ? 3 : 2} />
+              <text x={pos.x + 60} y={pos.y + 16} textAnchor="middle" fill="var(--text-primary)" fontSize="9" fontWeight="600">
+                {n.label.length > 18 ? n.label.slice(0, 16) + '...' : n.label}
+              </text>
+              <text x={pos.x + 60} y={pos.y + 30} textAnchor="middle" fill="var(--text-muted)" fontSize="8">
+                {mastery === 'not_started' ? 'Not started' : mastery === 'needs_work' ? 'Needs work' : mastery === 'developing' ? 'Developing' : 'Mastered'}
+              </text>
+              {n.locked && <text x={pos.x + 110} y={pos.y + 10} fontSize="10">🔒</text>}
+              {n.recommended && <text x={pos.x + 110} y={pos.y + 10} fontSize="10">⭐</text>}
+            </g>
+          );
+        })}
+      </svg>
+
+      <div className="graph-legend">
+        {Object.entries(graph.categories).map(([cat, color]) => (
+          <div className="graph-legend-item" key={cat}><div className="graph-legend-dot" style={{ background: color }} /><span>{cat}</span></div>
+        ))}
+      </div>
+
+      {selectedNode && (
+        <div className="insight-card" style={{ marginTop: 12 }}>
+          <strong>{selectedNode.label}</strong><br />
+          <small>Category: {selectedNode.category} · Mastery: {selectedNode.mastery?.level || 'not_started'} · Sessions: {selectedNode.mastery?.sessions || 0} · Avg: {selectedNode.mastery?.avgPromptScore || 0}%</small><br />
+          {selectedNode.prerequisites.length > 0 && <small>Prerequisites: {selectedNode.prerequisites.join(', ')}</small>}
+          {selectedNode.dependents.length > 0 && <><br /><small>Unlocks: {selectedNode.dependents.join(', ')}</small></>}
+          {selectedNode.recommended && <><br /><span style={{ color: 'var(--accent-color)', fontWeight: 700 }}>Recommended next</span></>}
+          {selectedNode.locked && <><br /><span style={{ color: '#f87171', fontWeight: 700 }}>Locked — master prerequisites first</span></>}
+        </div>
+      )}
+
+      {graph.nextSteps.length > 0 && (
+        <div style={{ marginTop: 12 }}><strong>Recommended next:</strong> {graph.nextSteps.join(', ')}</div>
+      )}
+    </div>
+  );
+}
+
+function ProgressInsights() {
+  const [insights, setInsights] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    api('/ai/insights').then(r => { setInsights(r); setLoading(false); }).catch(() => setLoading(false));
+  }, []);
+
+  if (loading) return <div className="empty"><p>Loading insights...</p></div>;
+  if (!insights) return <div className="empty"><BarChart2 size={38} /><p>Could not load insights.</p></div>;
+
+  const trendIcons = { improving: '↑', declining: '↓', stable: '→', none: '—', active: '↑', low: '→' };
+
+  return (
+    <div style={{ display: 'grid', gap: 20 }}>
+      <div className="overview-grid">
+        <div className="overview-stat"><strong>{insights.overview.totalSessions}</strong><small>Total sessions</small></div>
+        <div className="overview-stat"><strong>{insights.overview.averageScore}%</strong><small>Average score</small></div>
+        <div className="overview-stat"><strong>{insights.overview.overallLevel}</strong><small>Level</small></div>
+        <div className="overview-stat"><strong>{insights.predictions.projectedScore}%</strong><small>Projected score</small></div>
+      </div>
+
+      <div>
+        <h4 style={{ margin: '0 0 8px' }}>Trends</h4>
+        <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          <div className="insight-card"><strong>Score: </strong><span className={`trend-badge ${insights.trends.scoreTrend}`}>{trendIcons[insights.trends.scoreTrend]} {insights.trends.scoreTrend}</span></div>
+          <div className="insight-card"><strong>Pace: </strong><span className={`trend-badge ${insights.trends.paceTrend === 'active' ? 'improving' : 'stable'}`}>{trendIcons[insights.trends.paceTrend]} {insights.trends.paceTrend}</span></div>
+        </div>
+      </div>
+
+      <div>
+        <h4 style={{ margin: '0 0 8px' }}>AI Insights</h4>
+        {insights.insights.map((insight, i) => (
+          <div className="insight-card" key={i}><Lightbulb size={14} style={{ verticalAlign: 'middle', marginRight: 6, color: 'var(--accent-color)' }} />{insight}</div>
+        ))}
+      </div>
+
+      <div>
+        <h4 style={{ margin: '0 0 8px' }}>Concept Breakdown</h4>
+        {insights.conceptBreakdown.length > 0 ? insights.conceptBreakdown.map((c, i) => (
+          <div className="insight-card" key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div><strong>{c.name}</strong><br /><small>{c.sessions} sessions · {c.level}</small></div>
+            <span className={`level-badge ${c.level}`}>{c.avgPromptScore}%</span>
+          </div>
+        )) : <p style={{ color: 'var(--text-muted)' }}>Complete sessions to see concept breakdown.</p>}
+      </div>
+
+      {insights.difficultyProgression && (
+        <div>
+          <h4 style={{ margin: '0 0 8px' }}>Difficulty Progression</h4>
+          <div className="overview-grid">
+            <div className="overview-stat"><strong>{insights.difficultyProgression.beginner}</strong><small>Beginner</small></div>
+            <div className="overview-stat"><strong>{insights.difficultyProgression.explorer}</strong><small>Explorer</small></div>
+            <div className="overview-stat"><strong>{insights.difficultyProgression.builder}</strong><small>Builder</small></div>
+          </div>
+        </div>
+      )}
+
+      {insights.misconceptionTrends.length > 0 && (
+        <div>
+          <h4 style={{ margin: '0 0 8px' }}>Common Misconceptions</h4>
+          {insights.misconceptionTrends.map((m, i) => (
+            <div className="insight-card" key={i}><AlertCircle size={14} style={{ verticalAlign: 'middle', marginRight: 6, color: '#f87171' }} />{m.text} <small>({m.count}x)</small></div>
+          ))}
+        </div>
+      )}
+
+      {insights.timeAnalysis.totalTime > 0 && (
+        <div>
+          <h4 style={{ margin: '0 0 8px' }}>Time Analysis</h4>
+          <div className="overview-grid">
+            <div className="overview-stat"><strong>{Math.floor(insights.timeAnalysis.totalTime / 60)}m</strong><small>Total time</small></div>
+            <div className="overview-stat"><strong>{Math.floor(insights.timeAnalysis.averageTime / 60)}m</strong><small>Avg per session</small></div>
+          </div>
+        </div>
+      )}
+
+      <div>
+        <h4 style={{ margin: '0 0 8px' }}>Prediction</h4>
+        <div className="insight-card"><strong>Estimated mastery: </strong>{insights.predictions.estimatedMastery}</div>
+      </div>
+    </div>
+  );
 }
 
 function Dashboard({ analytics, recommendations, sessions, bookmarks }) {
@@ -318,7 +743,7 @@ function Dashboard({ analytics, recommendations, sessions, bookmarks }) {
             <div className="pace-row">
               {dailyCounts.map(([day, count]) => (
                 <div className="pace-item" key={day}>
-                  <div className="pace-bar" mark-key={day} style={{ height: Math.max(count * 20, 4) + 'px' }}></div>
+                  <div className="pace-bar" style={{ height: Math.max(count * 20, 4) + 'px' }}></div>
                   <small>{day.slice(5)}</small><span>{count}</span>
                 </div>
               ))}
