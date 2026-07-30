@@ -738,6 +738,42 @@
       "generatedFor": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
       "createdAt": "2026-07-22T03:50:28.435Z",
       "updatedAt": "2026-07-22T03:50:28.435Z"
+    },
+    {
+      "_id": "2b52916d-88aa-460f-a0f2-290859bf1096",
+      "title": "Keeping the Leaderboard Honest (2)",
+      "difficulty": "Beginner",
+      "concepts": [
+        "variables"
+      ],
+      "context": "a game designer wants to keep the leaderboard fair and up to date. Right now a game designer has to keep each player's high tally in their head or rewrite it by hand every time, and it's easy to lose track. Python can remember it for a game designer instead - once it's stored, it's there whenever it's needed.",
+      "prompt": "What single piece of information should a game designer store, based on each player's high tally, so it can be used again later?",
+      "objectives": [
+        "Identify what actually matters about each player's high tally",
+        "Decide the one detail about each player's high tally worth remembering",
+        "Connect that idea to Variables in Python"
+      ],
+      "sampleReasoning": "I would remember each player's high tally by giving it a name, so a game designer doesn't have to redo the work.",
+      "guidedQuestions": [
+        {
+          "question": "a game designer is dealing with a lot today. Which single detail about each player's high tally actually needs to be remembered to keep the leaderboard fair and up to date?",
+          "hint": "Look for the one changing fact, not the background details."
+        },
+        {
+          "question": "Tomorrow, the computer won't remember today's information unless it's stored. What value should be saved so a game designer can use it later?",
+          "hint": "Think about what changes each day versus what stays the same."
+        },
+        {
+          "question": "If you had to give that value a name in Python, what would you call it?",
+          "hint": "Pick a name that describes what it holds, not just its type."
+        }
+      ],
+      "effectivenessScore": 80,
+      "source": "ai-generated",
+      "theme": "Gaming",
+      "generatedFor": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "createdAt": "2026-07-22T10:08:19.854Z",
+      "updatedAt": "2026-07-22T10:08:19.854Z"
     }
   ],
   "sessions": [
@@ -1301,6 +1337,17 @@
       "step": "workspace",
       "createdAt": "2026-07-22T03:51:01.139Z",
       "updatedAt": "2026-07-22T03:51:01.139Z"
+    },
+    {
+      "_id": "bfea6204-5f8c-42d2-9114-5a776d92f9f6",
+      "learnerId": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "scenarioId": "2b52916d-88aa-460f-a0f2-290859bf1096",
+      "reasoning": "",
+      "computationalThinking": "",
+      "hintsUsed": 0,
+      "step": "workspace",
+      "createdAt": "2026-07-22T10:08:40.207Z",
+      "updatedAt": "2026-07-22T10:08:44.611Z"
     }
   ],
   "reflections": [],
@@ -1344,6 +1391,14 @@
       "step": "questions",
       "createdAt": "2026-07-22T03:50:28.587Z",
       "updatedAt": "2026-07-22T03:50:36.874Z"
+    },
+    {
+      "_id": "7530caeb-a288-4f53-9c00-5d5af482757c",
+      "learnerId": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "scenarioId": "2b52916d-88aa-460f-a0f2-290859bf1096",
+      "step": "questions",
+      "createdAt": "2026-07-22T10:08:20.032Z",
+      "updatedAt": "2026-07-22T10:08:32.887Z"
     }
   ],
   "tutorConversations": []
