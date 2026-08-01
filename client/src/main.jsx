@@ -13,6 +13,7 @@ import {
   Send,
   Sparkles
 } from 'lucide-react';
+import { DictationButton } from './DictationButton';
 import './styles.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -37,6 +38,7 @@ function App() {
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [movingNext, setMovingNext] = useState(false);
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
@@ -77,6 +79,22 @@ function App() {
     }
   }
 
+  async function goToNextCaseFile() {
+    if (!selected?.nextScenarioId) return;
+    setMovingNext(true);
+    try {
+      const nextScenario = await api(`/scenarios/${selected.nextScenarioId}`);
+      setSelected(nextScenario);
+      setActiveResult(null);
+      setForm((current) => ({ ...current, reasoning: '', promptText: '', reflection: '' }));
+    } catch (error) {
+      console.error('Could not open the next case file', error);
+      alert('Could not open the next case file. Please try again.');
+    } finally {
+      setMovingNext(false);
+    }
+  }
+
   if (loading) return <main className="loading">Loading PyBe...</main>;
 
   return (
@@ -104,6 +122,7 @@ function App() {
           <option>Beginner</option>
           <option>Explorer</option>
           <option>Builder</option>
+          <option>Advanced</option>
         </select>
 
         <select value={filters.concept} onChange={(event) => setFilters({ ...filters, concept: event.target.value })}>
@@ -152,9 +171,16 @@ function App() {
             <div className="objective-row">
               {selected?.objectives.map((item) => <span key={item}>{item}</span>)}
             </div>
+            <ScenarioEvidence scenario={selected} />
             <form onSubmit={submitSession} className="learning-form">
               <label>
-                Your reasoning
+                <span className="field-label">
+                  Your reasoning
+                  <DictationButton
+                    value={form.reasoning}
+                    onChange={(text) => setForm((current) => ({ ...current, reasoning: text }))}
+                  />
+                </span>
                 <textarea
                   required
                   value={form.reasoning}
@@ -163,7 +189,13 @@ function App() {
                 />
               </label>
               <label>
-                Prompt you would give an AI mentor
+                <span className="field-label">
+                  Prompt you would give an AI mentor
+                  <DictationButton
+                    value={form.promptText}
+                    onChange={(text) => setForm((current) => ({ ...current, promptText: text }))}
+                  />
+                </span>
                 <textarea
                   value={form.promptText}
                   onChange={(event) => setForm({ ...form, promptText: event.target.value })}
@@ -171,7 +203,13 @@ function App() {
                 />
               </label>
               <label>
-                Reflection
+                <span className="field-label">
+                  Reflection
+                  <DictationButton
+                    value={form.reflection}
+                    onChange={(text) => setForm((current) => ({ ...current, reflection: text }))}
+                  />
+                </span>
                 <textarea
                   value={form.reflection}
                   onChange={(event) => setForm({ ...form, reflection: event.target.value })}
@@ -190,6 +228,8 @@ function App() {
               <h2>AI Mentor Output</h2>
             </div>
             {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
+            {activeResult && <ModelAnswer key={selected?._id} scenario={selected} />}
+            {activeResult && <CaseFlow scenario={selected} movingNext={movingNext} onNext={goToNextCaseFile} />}
           </section>
         </div>
 
@@ -247,6 +287,122 @@ function Result({ result }) {
           <strong>Misconception watch</strong>
           {result.misconceptions.map((item) => <p key={item}>{item}</p>)}
         </div>
+      )}
+    </div>
+  );
+}
+
+function ModelAnswer({ scenario }) {
+  const [revealed, setRevealed] = useState(false);
+  if (!scenario?.idealSolution) return null;
+
+  return (
+    <div className="model-answer">
+      <button type="button" className="ghost" onClick={() => setRevealed((current) => !current)}>
+        {revealed ? 'Hide model answer' : 'Show model answer'}
+      </button>
+      {revealed && (
+        <div className="code-block">
+          <div><Code2 size={18} /> Model answer (Python)</div>
+          <pre>{scenario.idealSolution}</pre>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CaseFlow({ scenario, movingNext, onNext }) {
+  if (!scenario) return null;
+
+  if (scenario.nextScenarioId) {
+    return (
+      <div className="case-flow">
+        <button type="button" className="primary" onClick={onNext} disabled={movingNext}>
+          {movingNext ? 'Opening next file...' : 'Next Case File →'}
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="case-flow case-solved">
+      <strong>Case Solved</strong>
+      <p>{scenario.reveal || 'The answer is locked in. Review the final clue and reflect on how you ruled out the wrong paths.'}</p>
+    </div>
+  );
+}
+
+function ScenarioEvidence({ scenario }) {
+  if (!scenario?.caseData) return null;
+
+  const { caseData } = scenario;
+
+  return (
+    <div className="case-file">
+      {caseData.witnessStatements && (
+        <section>
+          <h3>Witness Statements</h3>
+          <ul>
+            {caseData.witnessStatements.map((statement) => <li key={statement}>{statement}</li>)}
+          </ul>
+        </section>
+      )}
+
+      {caseData.suspectClaims && (
+        <section>
+          <h3>Suspect Claims</h3>
+          <ul>
+            {caseData.suspectClaims.map((claim) => (
+              <li key={claim.suspect}>
+                <strong>{claim.suspect}:</strong> {claim.claim}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {caseData.comparisonSets && (
+        <section>
+          <h3>Set Comparison Notes</h3>
+          <p><strong>Witnessed rooms:</strong> {(caseData.comparisonSets.witnessedRooms || []).join(', ')}</p>
+          <p><strong>Claimed rooms:</strong> {(caseData.comparisonSets.claimedRooms || []).join(', ')}</p>
+        </section>
+      )}
+
+      {caseData.grid && (
+        <section>
+          <h3>Case Grid</h3>
+          <div className="case-grid">
+            <div>
+              <strong>Suspects</strong>
+              <span>{(caseData.grid.suspects || []).join(' / ')}</span>
+            </div>
+            <div>
+              <strong>Rooms</strong>
+              <span>{(caseData.grid.rooms || []).join(' / ')}</span>
+            </div>
+            <div>
+              <strong>Weapons</strong>
+              <span>{(caseData.grid.weapons || []).join(' / ')}</span>
+            </div>
+            <div>
+              <strong>Times</strong>
+              <span>{(caseData.grid.times || []).join(' / ')}</span>
+            </div>
+          </div>
+          {Array.isArray(caseData.clues) && (
+            <ul>
+              {caseData.clues.map((clue) => <li key={clue}>{clue}</li>)}
+            </ul>
+          )}
+        </section>
+      )}
+
+      {scenario.starterCode && (
+        <section className="starter-code">
+          <div><Code2 size={18} /> Recursive starter code</div>
+          <pre>{scenario.starterCode}</pre>
+        </section>
       )}
     </div>
   );

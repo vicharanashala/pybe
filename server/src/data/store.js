@@ -40,17 +40,40 @@ function createRecord(input) {
 async function listScenarios(filters = {}) {
   const db = await readDb();
   let scenarios = [...db.scenarios];
+  if (filters.storyId) scenarios = scenarios.filter((item) => item.storyId === filters.storyId);
   if (filters.difficulty) scenarios = scenarios.filter((item) => item.difficulty === filters.difficulty);
-  if (filters.concept) scenarios = scenarios.filter((item) => item.concepts.includes(filters.concept));
+  if (filters.concept) scenarios = scenarios.filter((item) => Array.isArray(item.concepts) && item.concepts.includes(filters.concept));
   if (filters.q) {
     const query = filters.q.toLowerCase();
     scenarios = scenarios.filter((item) => (
-      item.title.toLowerCase().includes(query) ||
-      item.context.toLowerCase().includes(query) ||
-      item.concepts.some((concept) => concept.toLowerCase().includes(query))
+      (item.title || '').toLowerCase().includes(query) ||
+      (item.context || '').toLowerCase().includes(query) ||
+      (Array.isArray(item.concepts) && item.concepts.some((concept) => concept.toLowerCase().includes(query)))
     ));
   }
-  return scenarios.sort((a, b) => (b.effectivenessScore || 0) - (a.effectivenessScore || 0));
+  if (filters.storyId) {
+    return scenarios.sort((a, b) => (a.order || 0) - (b.order || 0));
+  }
+  // Default (unfiltered) list is ranked by effectivenessScore. A chained story,
+  // though, must read as one ordered block — otherwise its parts scatter across
+  // the list wherever their individual scores land (e.g. part 3 sinks below other
+  // scenarios that happen to share its score), and the "step by step" flow breaks.
+  // Anchor every part of a story at the story's best score, then order parts by
+  // `order` so the whole chain stays contiguous and in sequence.
+  const storyAnchor = {};
+  scenarios.forEach((item) => {
+    if (item.storyId) {
+      const score = item.effectivenessScore || 0;
+      storyAnchor[item.storyId] = Math.max(storyAnchor[item.storyId] ?? -Infinity, score);
+    }
+  });
+  const rank = (item) => (item.storyId ? storyAnchor[item.storyId] : (item.effectivenessScore || 0));
+  return scenarios.sort((a, b) => {
+    const diff = rank(b) - rank(a);
+    if (diff !== 0) return diff;
+    if (a.storyId && a.storyId === b.storyId) return (a.order || 0) - (b.order || 0);
+    return 0;
+  });
 }
 
 async function getScenario(id) {
@@ -60,7 +83,11 @@ async function getScenario(id) {
 
 async function addScenario(input) {
   const db = await readDb();
-  const scenario = createRecord(input);
+  // Never let a client-supplied _id / timestamp overwrite the server-generated
+  // ones — otherwise a POST could clobber a story node (e.g. rosewood-part-3)
+  // or create a duplicate id. Seeding uses resetData, which keeps stable ids.
+  const { _id, createdAt, updatedAt, ...safe } = input || {};
+  const scenario = createRecord(safe);
   db.scenarios.push(scenario);
   await writeDb(db);
   return scenario;

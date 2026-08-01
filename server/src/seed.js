@@ -1,4 +1,5 @@
 const { resetData } = require('./data/store');
+const rosewoodManorCase = require('../rosewoodManorCase');
 require('dotenv').config();
 
 const scenarios = [
@@ -10,7 +11,8 @@ const scenarios = [
     prompt: 'What single piece of information would you store so the computer can remember the bag weight?',
     objectives: ['Identify one value', 'Give the value a name', 'Connect naming to a variable'],
     sampleReasoning: 'I only need to remember the bag weight, so I would store it with a clear name.',
-    effectivenessScore: 96
+    effectivenessScore: 96,
+    idealSolution: `bag_weight = 4.5\nprint(f"The bag weighs {bag_weight} kg")`
   },
   {
     title: 'Rainy Day Choice',
@@ -20,7 +22,8 @@ const scenarios = [
     prompt: 'What small decision rule would help the learner decide whether to carry an umbrella?',
     objectives: ['Notice one condition', 'Choose one action', 'Map the rule to if/else'],
     sampleReasoning: 'If it is raining, carry an umbrella. Otherwise, leave it at home.',
-    effectivenessScore: 95
+    effectivenessScore: 95,
+    idealSolution: `is_raining = True\nif is_raining:\n    print("Carry an umbrella")\nelse:\n    print("Leave it at home")`
   },
   {
     title: 'Two Snack Prices',
@@ -30,7 +33,8 @@ const scenarios = [
     prompt: 'How would you figure out the total cost using just the two prices?',
     objectives: ['Store two values', 'Add values', 'Name the result'],
     sampleReasoning: 'I would keep the two prices separately and add them to get the total.',
-    effectivenessScore: 94
+    effectivenessScore: 94,
+    idealSolution: `samosa = 15\njuice = 20\ntotal = samosa + juice\nprint(f"Total cost: {total}")`
   },
   {
     title: 'Greeting by Name',
@@ -40,7 +44,8 @@ const scenarios = [
     prompt: 'What text should the computer remember, and how should it combine that text into a greeting?',
     objectives: ['Store text', 'Combine text', 'Recognize strings'],
     sampleReasoning: 'The computer should store the learner name and place it inside a greeting sentence.',
-    effectivenessScore: 93
+    effectivenessScore: 93,
+    idealSolution: `name = "Asha"\nprint(f"Hello, {name}!")`
   },
   {
     title: 'Pass Mark Check',
@@ -50,7 +55,8 @@ const scenarios = [
     prompt: 'What comparison would decide if the learner passed?',
     objectives: ['Compare two numbers', 'Create a yes/no result', 'Map comparison to condition'],
     sampleReasoning: 'I would compare the score with the pass mark and decide pass if it is high enough.',
-    effectivenessScore: 92
+    effectivenessScore: 92,
+    idealSolution: `score = 72\npass_mark = 40\nprint("Passed" if score >= pass_mark else "Not yet")`
   },
   {
     title: 'Pocket Money Left',
@@ -60,7 +66,8 @@ const scenarios = [
     prompt: 'What two values matter, and how would you find the money left?',
     objectives: ['Name starting amount', 'Name spent amount', 'Subtract to find remaining value'],
     sampleReasoning: 'Start with the original money, subtract the spent amount, and store what remains.',
-    effectivenessScore: 91
+    effectivenessScore: 91,
+    idealSolution: `pocket_money = 100\nspent = 35\nremaining = pocket_money - spent\nprint(f"Money left: {remaining}")`
   },
   {
     title: 'Favorite Color List',
@@ -70,7 +77,8 @@ const scenarios = [
     prompt: 'How would you keep all three colors together instead of making separate notes?',
     objectives: ['Group related values', 'Recognize a collection', 'Map grouping to a list'],
     sampleReasoning: 'Since all values are colors, I would keep them together in one list.',
-    effectivenessScore: 90
+    effectivenessScore: 90,
+    idealSolution: `colors = ["red", "green", "blue"]\nprint(colors)`
   },
   {
     title: 'First Item in a Bag',
@@ -80,7 +88,8 @@ const scenarios = [
     prompt: 'How would you ask for only the first item?',
     objectives: ['Notice order', 'Pick one position', 'Connect position to indexing'],
     sampleReasoning: 'The first item is based on its position in the ordered group.',
-    effectivenessScore: 89
+    effectivenessScore: 89,
+    idealSolution: `bag = ["pencil", "eraser", "ruler"]\nprint(bag[0])`
   },
   {
     title: 'Attendance Count',
@@ -90,7 +99,8 @@ const scenarios = [
     prompt: 'What question would help you find how many students are present?',
     objectives: ['Recognize a group', 'Ask for its size', 'Connect size to length'],
     sampleReasoning: 'I would count how many names are in the present-students list.',
-    effectivenessScore: 88
+    effectivenessScore: 88,
+    idealSolution: `present = ["Asha", "Ravi", "Meera"]\nprint(len(present))`
   },
   {
     title: 'Temperature Message',
@@ -100,7 +110,8 @@ const scenarios = [
     prompt: 'What simple rule would decide whether to show Hot or Comfortable?',
     objectives: ['Set a threshold', 'Compare one value', 'Choose one message'],
     sampleReasoning: 'If the temperature is above the threshold, show Hot; otherwise show Comfortable.',
-    effectivenessScore: 87
+    effectivenessScore: 87,
+    idealSolution: `temperature = 33\nprint("Hot" if temperature > 30 else "Comfortable")`
   },
   {
     title: 'Water Bottle Reminder',
@@ -110,7 +121,8 @@ const scenarios = [
     prompt: 'How would you avoid writing the same reminder separately for every break?',
     objectives: ['Recognize repeated action', 'Identify each break', 'Map repetition to a loop'],
     sampleReasoning: 'For every break, show the same water reminder.',
-    effectivenessScore: 96
+    effectivenessScore: 96,
+    idealSolution: `breaks = ["morning", "lunch", "evening"]\nfor moment in breaks:\n    print(f"Drink water at {moment}")`
   },
   {
     title: 'Find the Longest Pencil',
@@ -120,7 +132,8 @@ const scenarios = [
     prompt: 'What small comparison would you repeat as you look through the lengths?',
     objectives: ['Keep current best', 'Compare one item at a time', 'Update when larger'],
     sampleReasoning: 'Start with one pencil as the longest, then compare each next pencil against it.',
-    effectivenessScore: 95
+    effectivenessScore: 95,
+    idealSolution: `lengths = [12, 9, 15, 7]\nlongest = lengths[0]\nfor length in lengths:\n    if length > longest:\n        longest = length\nprint(f"Longest: {longest}")`
   },
   {
     title: 'Clean Chore Checklist',
@@ -130,7 +143,8 @@ const scenarios = [
     prompt: 'How would you go through each chore and mark it as done?',
     objectives: ['Store chores in a list', 'Process one chore at a time', 'Repeat a simple action'],
     sampleReasoning: 'Put chores in a list and handle each chore one by one.',
-    effectivenessScore: 94
+    effectivenessScore: 94,
+    idealSolution: `chores = ["make bed", "wash dishes", "sweep"]\nfor chore in chores:\n    print(f"{chore}: done")`
   },
   {
     title: 'Movie Age Filter',
@@ -140,7 +154,8 @@ const scenarios = [
     prompt: 'What rule would decide which movies a 12-year-old can see?',
     objectives: ['Check one item rule', 'Keep allowed items', 'Map rule to filtering'],
     sampleReasoning: 'For each movie, keep it only if the learner age is at least the minimum age.',
-    effectivenessScore: 93
+    effectivenessScore: 93,
+    idealSolution: `movies = [("Sky", 7), ("Night Rider", 15), ("Puppy Tales", 3)]\nage = 12\nallowed = [title for title, min_age in movies if age >= min_age]\nprint(allowed)`
   },
   {
     title: 'Classroom Supply Lookup',
@@ -150,7 +165,8 @@ const scenarios = [
     prompt: 'How would you store each supply name with its count?',
     objectives: ['Pair names with values', 'Look up by name', 'Map pairs to a dictionary'],
     sampleReasoning: 'Each supply has a count, so I would store supply names as keys with counts as values.',
-    effectivenessScore: 92
+    effectivenessScore: 92,
+    idealSolution: `supplies = {"chalk": 12, "markers": 5, "notebooks": 20}\nprint(supplies["markers"])`
   },
   {
     title: 'Bus Stop Search',
@@ -160,7 +176,8 @@ const scenarios = [
     prompt: 'How would you check the stops one at a time until you find the target?',
     objectives: ['Identify target', 'Scan a list', 'Stop when found'],
     sampleReasoning: 'Look at each stop and compare it with the stop I want.',
-    effectivenessScore: 91
+    effectivenessScore: 91,
+    idealSolution: `stops = ["Market", "School", "Library Stop", "Park"]\ntarget = "Library Stop"\nfor stop in stops:\n    if stop == target:\n        print("Found it")\n        break`
   },
   {
     title: 'Average Practice Score',
@@ -170,7 +187,8 @@ const scenarios = [
     prompt: 'What two small steps are needed before dividing?',
     objectives: ['Add all scores', 'Count scores', 'Divide total by count'],
     sampleReasoning: 'Find the total of all scores, count how many scores there are, then divide.',
-    effectivenessScore: 90
+    effectivenessScore: 90,
+    idealSolution: `scores = [72, 68, 90, 85, 60]\naverage = sum(scores) / len(scores)\nprint(f"Average: {average:.1f}")`
   },
   {
     title: 'Separate Even Roll Numbers',
@@ -180,7 +198,8 @@ const scenarios = [
     prompt: 'What small test tells you whether a roll number is even?',
     objectives: ['Test divisibility by two', 'Keep matching numbers', 'Connect remainder to modulo'],
     sampleReasoning: 'A roll number is even if dividing by two leaves no remainder.',
-    effectivenessScore: 89
+    effectivenessScore: 89,
+    idealSolution: `rolls = [1, 2, 3, 4, 5, 6]\nteam_a = [roll for roll in rolls if roll % 2 == 0]\nprint(team_a)`
   },
   {
     title: 'Capitalize Name Tags',
@@ -190,7 +209,8 @@ const scenarios = [
     prompt: 'What same text-cleaning action should happen to every name?',
     objectives: ['Recognize repeated string change', 'Apply to each name', 'Create cleaned names'],
     sampleReasoning: 'For each name, convert it to title case before printing the tag.',
-    effectivenessScore: 88
+    effectivenessScore: 88,
+    idealSolution: `names = ["asha", "ravi", "meera"]\ntags = [name.title() for name in names]\nprint(tags)`
   },
   {
     title: 'Find Missing Homework',
@@ -200,7 +220,8 @@ const scenarios = [
     prompt: 'How would you reason about who is missing from the submitted list?',
     objectives: ['Compare two groups', 'Find difference', 'Map group difference to sets'],
     sampleReasoning: 'Take everyone in the class and remove the students who submitted.',
-    effectivenessScore: 87
+    effectivenessScore: 87,
+    idealSolution: `everyone = {"Asha", "Ravi", "Meera", "Dev"}\nsubmitted = {"Asha", "Dev"}\nprint(sorted(everyone - submitted))`
   },
   {
     title: 'Reusable Discount Rule',
@@ -210,7 +231,8 @@ const scenarios = [
     prompt: 'What inputs should a reusable discount helper receive?',
     objectives: ['Identify reusable rule', 'Choose inputs', 'Return discounted price'],
     sampleReasoning: 'The helper needs the bill amount and should return the final price after applying the rule.',
-    effectivenessScore: 96
+    effectivenessScore: 96,
+    idealSolution: `def final_price(bill):\n    discount = 0.1 if bill >= 500 else 0\n    return bill - bill * discount\n\nprint(final_price(600))`
   },
   {
     title: 'Mini Quiz Checker',
@@ -220,7 +242,8 @@ const scenarios = [
     prompt: 'How would you design a tiny reusable checker for one question?',
     objectives: ['Accept learner answer', 'Accept correct answer', 'Return right or wrong'],
     sampleReasoning: 'Compare the learner answer with the correct answer and return whether they match.',
-    effectivenessScore: 95
+    effectivenessScore: 95,
+    idealSolution: `def check(answer, correct):\n    return answer == correct\n\nprint(check("Paris", "Paris"))`
   },
   {
     title: 'Step Counter Function',
@@ -230,7 +253,8 @@ const scenarios = [
     prompt: 'How would you make a reusable helper that returns the total steps?',
     objectives: ['Accept a list', 'Add all values', 'Return total'],
     sampleReasoning: 'The function should take step counts, add them, and give back the total.',
-    effectivenessScore: 94
+    effectivenessScore: 94,
+    idealSolution: `def total_steps(step_counts):\n    return sum(step_counts)\n\nprint(total_steps([1200, 3400, 900]))`
   },
   {
     title: 'Safe Username Maker',
@@ -240,7 +264,8 @@ const scenarios = [
     prompt: 'What small text transformations should a username function perform?',
     objectives: ['Accept a name', 'Normalize text', 'Return username'],
     sampleReasoning: 'Make the name lowercase and remove spaces so it can be used as a username.',
-    effectivenessScore: 93
+    effectivenessScore: 93,
+    idealSolution: `def make_username(name):\n    return name.lower().replace(" ", "")\n\nprint(make_username("Asha Rao"))`
   },
   {
     title: 'Retry Until Valid',
@@ -250,7 +275,8 @@ const scenarios = [
     prompt: 'What condition tells the program to keep asking?',
     objectives: ['Define valid input', 'Repeat while invalid', 'Stop after valid value'],
     sampleReasoning: 'Keep asking while the number is not positive, then stop once it is valid.',
-    effectivenessScore: 92
+    effectivenessScore: 92,
+    idealSolution: `attempts = [-2, 0, 5]\nnumber = -1\nwhile number <= 0:\n    number = attempts.pop(0)\nprint(f"Valid number: {number}")`
   },
   {
     title: 'Simple Score Report',
@@ -260,7 +286,8 @@ const scenarios = [
     prompt: 'How would you package two related pieces of information in one result?',
     objectives: ['Create key-value structure', 'Return structured result', 'Connect structure to dictionary'],
     sampleReasoning: 'Return a dictionary with the learner name and score as labeled values.',
-    effectivenessScore: 91
+    effectivenessScore: 91,
+    idealSolution: `def report(name, score):\n    return {"name": name, "score": score}\n\nprint(report("Asha", 88))`
   },
   {
     title: 'Task Status Updater',
@@ -270,7 +297,8 @@ const scenarios = [
     prompt: 'What exact value changes when a task is completed?',
     objectives: ['Find one task', 'Change one status', 'Understand updating data'],
     sampleReasoning: 'Find the task by name and change its status from pending to done.',
-    effectivenessScore: 90
+    effectivenessScore: 90,
+    idealSolution: `tasks = {"homework": "pending", "reading": "pending"}\ntasks["homework"] = "done"\nprint(tasks)`
   },
   {
     title: 'Small Receipt Builder',
@@ -280,7 +308,8 @@ const scenarios = [
     prompt: 'What pieces should a receipt function combine into a readable line?',
     objectives: ['Accept item and price', 'Format text', 'Return one receipt line'],
     sampleReasoning: 'Combine the item name and price into one clear sentence.',
-    effectivenessScore: 89
+    effectivenessScore: 89,
+    idealSolution: `def receipt(item, price):\n    return f"{item} - Rs {price}"\n\nprint(receipt("Coffee", 120))`
   },
   {
     title: 'Choose Next Scenario',
@@ -290,7 +319,8 @@ const scenarios = [
     prompt: 'What simple score rule could decide the next difficulty?',
     objectives: ['Set score thresholds', 'Branch by score', 'Return next level'],
     sampleReasoning: 'If the score is high choose harder, if low choose easier, otherwise stay similar.',
-    effectivenessScore: 88
+    effectivenessScore: 88,
+    idealSolution: `def next_level(score):\n    if score >= 80:\n        return "harder"\n    if score < 50:\n        return "easier"\n    return "similar"\n\nprint(next_level(85))`
   },
   {
     title: 'Reflection Keyword Finder',
@@ -300,13 +330,14 @@ const scenarios = [
     prompt: 'What tiny search would detect that the reflection may need extra support?',
     objectives: ['Choose keywords', 'Search text', 'Return support signal'],
     sampleReasoning: 'Look for words like confused or stuck and flag the reflection if they appear.',
-    effectivenessScore: 87
+    effectivenessScore: 87,
+    idealSolution: `def needs_support(reflection):\n    keywords = ["confused", "stuck", "lost"]\n    text = reflection.lower()\n    return any(word in text for word in keywords)\n\nprint(needs_support("I felt a bit stuck today"))`
   }
-];
+].concat(rosewoodManorCase);
 
 async function run() {
   await resetData(scenarios);
-  console.log(`Seeded ${scenarios.length} PyBe scenarios`);
+  console.log(`Seeded ${scenarios.length} PyBe scenarios, including Rosewood Manor`);
 }
 
 run().catch((error) => {

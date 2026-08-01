@@ -9,7 +9,6 @@
     "start": "npm run start --prefix server"
   },
   "dependencies": {
-    "concurrently": "^9.1.2"
-  },
-  "devDependencies": {}
+    "concurrently": "^9.2.4"
+  }
 }

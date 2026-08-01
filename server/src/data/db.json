@@ -1,7 +1,7 @@
 {
   "scenarios": [
     {
-      "_id": "8cf644f0-1402-4763-9542-02bd2ca0d1dc",
+      "_id": "0bd55d71-37c6-4580-8f14-281c24f6d863",
       "title": "Bag Weight Label",
       "difficulty": "Beginner",
       "concepts": [
@@ -16,11 +16,12 @@
       ],
       "sampleReasoning": "I only need to remember the bag weight, so I would store it with a clear name.",
       "effectivenessScore": 96,
-      "createdAt": "2026-06-19T11:54:44.732Z",
-      "updatedAt": "2026-06-19T11:54:44.732Z"
+      "idealSolution": "bag_weight = 4.5\nprint(f\"The bag weighs {bag_weight} kg\")",
+      "createdAt": "2026-07-22T16:49:12.204Z",
+      "updatedAt": "2026-07-22T16:49:12.204Z"
     },
     {
-      "_id": "8f065c3d-36c5-48c5-948a-b7bc1a768bc9",
+      "_id": "a4a4baf7-5544-482f-a79f-e84771c1d883",
       "title": "Rainy Day Choice",
       "difficulty": "Beginner",
       "concepts": [
@@ -35,11 +36,12 @@
       ],
       "sampleReasoning": "If it is raining, carry an umbrella. Otherwise, leave it at home.",
       "effectivenessScore": 95,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "is_raining = True\nif is_raining:\n    print(\"Carry an umbrella\")\nelse:\n    print(\"Leave it at home\")",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "c4dfb27a-c96b-4ff1-80ff-3bd5b5b12e74",
+      "_id": "10402eb4-25d6-4341-b583-c11bbc256f6e",
       "title": "Two Snack Prices",
       "difficulty": "Beginner",
       "concepts": [
@@ -55,11 +57,12 @@
       ],
       "sampleReasoning": "I would keep the two prices separately and add them to get the total.",
       "effectivenessScore": 94,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "samosa = 15\njuice = 20\ntotal = samosa + juice\nprint(f\"Total cost: {total}\")",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "3657a91d-1f2b-42d7-bfec-4fbfb80dd648",
+      "_id": "0f78b9cb-7f41-4d79-83b3-fa9e8e747178",
       "title": "Greeting by Name",
       "difficulty": "Beginner",
       "concepts": [
@@ -75,11 +78,12 @@
       ],
       "sampleReasoning": "The computer should store the learner name and place it inside a greeting sentence.",
       "effectivenessScore": 93,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "name = \"Asha\"\nprint(f\"Hello, {name}!\")",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "a29775e3-1744-4b5e-b213-ecbb9bf8ec39",
+      "_id": "823b4c9d-cd23-4431-8070-d2b775dce1de",
       "title": "Pass Mark Check",
       "difficulty": "Beginner",
       "concepts": [
@@ -95,11 +99,12 @@
       ],
       "sampleReasoning": "I would compare the score with the pass mark and decide pass if it is high enough.",
       "effectivenessScore": 92,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "score = 72\npass_mark = 40\nprint(\"Passed\" if score >= pass_mark else \"Not yet\")",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "734c083f-b08c-4524-ae1a-f2924cd6851a",
+      "_id": "4db185fb-0ce7-4df1-b085-9b9170646599",
       "title": "Pocket Money Left",
       "difficulty": "Beginner",
       "concepts": [
@@ -115,11 +120,12 @@
       ],
       "sampleReasoning": "Start with the original money, subtract the spent amount, and store what remains.",
       "effectivenessScore": 91,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "pocket_money = 100\nspent = 35\nremaining = pocket_money - spent\nprint(f\"Money left: {remaining}\")",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "1324fea6-96d2-408c-8f58-cd92877f9dbd",
+      "_id": "f2a8eedd-609f-4e16-b396-12c3b9d85854",
       "title": "Favorite Color List",
       "difficulty": "Beginner",
       "concepts": [
@@ -134,11 +140,12 @@
       ],
       "sampleReasoning": "Since all values are colors, I would keep them together in one list.",
       "effectivenessScore": 90,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "colors = [\"red\", \"green\", \"blue\"]\nprint(colors)",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "8bb64eb9-5710-433b-bce9-95b4a5b995a1",
+      "_id": "1ea8ef8f-eb15-47ff-9772-2e116ebe67c9",
       "title": "First Item in a Bag",
       "difficulty": "Beginner",
       "concepts": [
@@ -154,11 +161,12 @@
       ],
       "sampleReasoning": "The first item is based on its position in the ordered group.",
       "effectivenessScore": 89,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "bag = [\"pencil\", \"eraser\", \"ruler\"]\nprint(bag[0])",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "73803faa-165f-4aee-b60f-3e08d470ce84",
+      "_id": "ad909734-866e-4556-b28b-218295e80bf5",
       "title": "Attendance Count",
       "difficulty": "Beginner",
       "concepts": [
@@ -174,11 +182,12 @@
       ],
       "sampleReasoning": "I would count how many names are in the present-students list.",
       "effectivenessScore": 88,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "present = [\"Asha\", \"Ravi\", \"Meera\"]\nprint(len(present))",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "e510ab5f-1f11-46c9-b857-22a50e144e75",
+      "_id": "2909ef08-d0ed-49d8-871f-6cda20a2bc11",
       "title": "Temperature Message",
       "difficulty": "Beginner",
       "concepts": [
@@ -194,11 +203,12 @@
       ],
       "sampleReasoning": "If the temperature is above the threshold, show Hot; otherwise show Comfortable.",
       "effectivenessScore": 87,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "temperature = 33\nprint(\"Hot\" if temperature > 30 else \"Comfortable\")",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "2a3496ef-bb71-4dde-83f5-37844063678d",
+      "_id": "e0bbad52-68b1-417e-b991-9b72ba62e3ce",
       "title": "Water Bottle Reminder",
       "difficulty": "Explorer",
       "concepts": [
@@ -213,11 +223,12 @@
       ],
       "sampleReasoning": "For every break, show the same water reminder.",
       "effectivenessScore": 96,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "breaks = [\"morning\", \"lunch\", \"evening\"]\nfor moment in breaks:\n    print(f\"Drink water at {moment}\")",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "71b887ca-fd3d-4c1a-83a9-f464f7c2a06d",
+      "_id": "fdbcafcd-2c13-4a93-a81f-5ffa2f130048",
       "title": "Find the Longest Pencil",
       "difficulty": "Explorer",
       "concepts": [
@@ -233,11 +244,12 @@
       ],
       "sampleReasoning": "Start with one pencil as the longest, then compare each next pencil against it.",
       "effectivenessScore": 95,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "lengths = [12, 9, 15, 7]\nlongest = lengths[0]\nfor length in lengths:\n    if length > longest:\n        longest = length\nprint(f\"Longest: {longest}\")",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "bf9c0f8c-308d-4e1f-9e37-9997c7e042b9",
+      "_id": "583cb541-a18d-4adf-b598-0cf9b8106315",
       "title": "Clean Chore Checklist",
       "difficulty": "Explorer",
       "concepts": [
@@ -253,11 +265,12 @@
       ],
       "sampleReasoning": "Put chores in a list and handle each chore one by one.",
       "effectivenessScore": 94,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "chores = [\"make bed\", \"wash dishes\", \"sweep\"]\nfor chore in chores:\n    print(f\"{chore}: done\")",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "ce225ef0-1111-4ed4-9318-7373018385e6",
+      "_id": "99fed338-3fc6-4af0-bf5a-c33285d35240",
       "title": "Movie Age Filter",
       "difficulty": "Explorer",
       "concepts": [
@@ -273,11 +286,12 @@
       ],
       "sampleReasoning": "For each movie, keep it only if the learner age is at least the minimum age.",
       "effectivenessScore": 93,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "movies = [(\"Sky\", 7), (\"Night Rider\", 15), (\"Puppy Tales\", 3)]\nage = 12\nallowed = [title for title, min_age in movies if age >= min_age]\nprint(allowed)",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "cc62f477-44c8-403b-82cf-0b2638ff501b",
+      "_id": "89b9827e-7ac0-4e7b-ac7e-c955196efa10",
       "title": "Classroom Supply Lookup",
       "difficulty": "Explorer",
       "concepts": [
@@ -292,11 +306,12 @@
       ],
       "sampleReasoning": "Each supply has a count, so I would store supply names as keys with counts as values.",
       "effectivenessScore": 92,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "supplies = {\"chalk\": 12, \"markers\": 5, \"notebooks\": 20}\nprint(supplies[\"markers\"])",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "26b0c080-124d-4ff8-92ad-4f2380e3e89f",
+      "_id": "64c6e209-c7d2-48b7-9736-add8fe50447b",
       "title": "Bus Stop Search",
       "difficulty": "Explorer",
       "concepts": [
@@ -312,11 +327,12 @@
       ],
       "sampleReasoning": "Look at each stop and compare it with the stop I want.",
       "effectivenessScore": 91,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "stops = [\"Market\", \"School\", \"Library Stop\", \"Park\"]\ntarget = \"Library Stop\"\nfor stop in stops:\n    if stop == target:\n        print(\"Found it\")\n        break",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "169fc6d5-7b9b-483d-87ee-325e2d497c90",
+      "_id": "b65c7350-2fc1-4121-9f1a-fd8180e82f64",
       "title": "Average Practice Score",
       "difficulty": "Explorer",
       "concepts": [
@@ -332,11 +348,12 @@
       ],
       "sampleReasoning": "Find the total of all scores, count how many scores there are, then divide.",
       "effectivenessScore": 90,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "scores = [72, 68, 90, 85, 60]\naverage = sum(scores) / len(scores)\nprint(f\"Average: {average:.1f}\")",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "e0bdac7d-2033-408f-833c-3f2734690398",
+      "_id": "452fd2c8-d52f-490d-ad78-6a9b0bda1c6a",
       "title": "Separate Even Roll Numbers",
       "difficulty": "Explorer",
       "concepts": [
@@ -352,11 +369,12 @@
       ],
       "sampleReasoning": "A roll number is even if dividing by two leaves no remainder.",
       "effectivenessScore": 89,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "rolls = [1, 2, 3, 4, 5, 6]\nteam_a = [roll for roll in rolls if roll % 2 == 0]\nprint(team_a)",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "decf41d5-8529-4685-b354-d02090bbb639",
+      "_id": "537d283a-12ef-4d15-9377-6e59e49412b2",
       "title": "Capitalize Name Tags",
       "difficulty": "Explorer",
       "concepts": [
@@ -372,11 +390,12 @@
       ],
       "sampleReasoning": "For each name, convert it to title case before printing the tag.",
       "effectivenessScore": 88,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "names = [\"asha\", \"ravi\", \"meera\"]\ntags = [name.title() for name in names]\nprint(tags)",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "418bec64-f75a-40fa-b849-42edba0d3939",
+      "_id": "8bbd5693-9f1e-41ba-a1f7-891f5fa7e032",
       "title": "Find Missing Homework",
       "difficulty": "Explorer",
       "concepts": [
@@ -392,11 +411,12 @@
       ],
       "sampleReasoning": "Take everyone in the class and remove the students who submitted.",
       "effectivenessScore": 87,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "everyone = {\"Asha\", \"Ravi\", \"Meera\", \"Dev\"}\nsubmitted = {\"Asha\", \"Dev\"}\nprint(sorted(everyone - submitted))",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "07295b48-1037-4654-995f-df57d6fd7a7b",
+      "_id": "b7bf5bf0-f65f-49a2-93cd-9d2f03e4583f",
       "title": "Reusable Discount Rule",
       "difficulty": "Builder",
       "concepts": [
@@ -412,11 +432,12 @@
       ],
       "sampleReasoning": "The helper needs the bill amount and should return the final price after applying the rule.",
       "effectivenessScore": 96,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "def final_price(bill):\n    discount = 0.1 if bill >= 500 else 0\n    return bill - bill * discount\n\nprint(final_price(600))",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "88a35898-eba5-47ca-adf2-0805d633ea3d",
+      "_id": "3c8344bd-ecb1-4dc5-9ca1-3d5f993456f3",
       "title": "Mini Quiz Checker",
       "difficulty": "Builder",
       "concepts": [
@@ -432,11 +453,12 @@
       ],
       "sampleReasoning": "Compare the learner answer with the correct answer and return whether they match.",
       "effectivenessScore": 95,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "def check(answer, correct):\n    return answer == correct\n\nprint(check(\"Paris\", \"Paris\"))",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "9a8e5318-6fad-44ed-8e60-03da14d3f4db",
+      "_id": "5d14112e-6f9b-4217-9bc7-6cfe9b748571",
       "title": "Step Counter Function",
       "difficulty": "Builder",
       "concepts": [
@@ -452,11 +474,12 @@
       ],
       "sampleReasoning": "The function should take step counts, add them, and give back the total.",
       "effectivenessScore": 94,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "def total_steps(step_counts):\n    return sum(step_counts)\n\nprint(total_steps([1200, 3400, 900]))",
+      "createdAt": "2026-07-22T16:49:12.205Z",
+      "updatedAt": "2026-07-22T16:49:12.205Z"
     },
     {
-      "_id": "34c237f5-a9c8-478c-8980-8505ba0d2b94",
+      "_id": "fa4dc319-375b-48b9-9d67-6d38760acbab",
       "title": "Safe Username Maker",
       "difficulty": "Builder",
       "concepts": [
@@ -472,11 +495,12 @@
       ],
       "sampleReasoning": "Make the name lowercase and remove spaces so it can be used as a username.",
       "effectivenessScore": 93,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "def make_username(name):\n    return name.lower().replace(\" \", \"\")\n\nprint(make_username(\"Asha Rao\"))",
+      "createdAt": "2026-07-22T16:49:12.206Z",
+      "updatedAt": "2026-07-22T16:49:12.206Z"
     },
     {
-      "_id": "9bcdd1e0-2f8a-416e-a0e2-60e188e33dcd",
+      "_id": "aa55ec37-b2e6-4ded-861c-3469748a65ad",
       "title": "Retry Until Valid",
       "difficulty": "Builder",
       "concepts": [
@@ -492,11 +516,12 @@
       ],
       "sampleReasoning": "Keep asking while the number is not positive, then stop once it is valid.",
       "effectivenessScore": 92,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "attempts = [-2, 0, 5]\nnumber = -1\nwhile number <= 0:\n    number = attempts.pop(0)\nprint(f\"Valid number: {number}\")",
+      "createdAt": "2026-07-22T16:49:12.206Z",
+      "updatedAt": "2026-07-22T16:49:12.206Z"
     },
     {
-      "_id": "54de8788-6a15-4377-a15f-e4cb73632c42",
+      "_id": "cbc610b5-a6cc-4d4a-a52d-c2333b033d8e",
       "title": "Simple Score Report",
       "difficulty": "Builder",
       "concepts": [
@@ -512,11 +537,12 @@
       ],
       "sampleReasoning": "Return a dictionary with the learner name and score as labeled values.",
       "effectivenessScore": 91,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "def report(name, score):\n    return {\"name\": name, \"score\": score}\n\nprint(report(\"Asha\", 88))",
+      "createdAt": "2026-07-22T16:49:12.206Z",
+      "updatedAt": "2026-07-22T16:49:12.206Z"
     },
     {
-      "_id": "d98ea7cd-5792-41b6-9a66-03267e936bc1",
+      "_id": "f364e5ba-702a-4507-af8a-5856f9f17586",
       "title": "Task Status Updater",
       "difficulty": "Builder",
       "concepts": [
@@ -532,11 +558,12 @@
       ],
       "sampleReasoning": "Find the task by name and change its status from pending to done.",
       "effectivenessScore": 90,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "tasks = {\"homework\": \"pending\", \"reading\": \"pending\"}\ntasks[\"homework\"] = \"done\"\nprint(tasks)",
+      "createdAt": "2026-07-22T16:49:12.206Z",
+      "updatedAt": "2026-07-22T16:49:12.206Z"
     },
     {
-      "_id": "e5b52a26-a324-40eb-84f7-fb757eecdceb",
+      "_id": "81256480-153a-4138-b0c6-25304f0ee359",
       "title": "Small Receipt Builder",
       "difficulty": "Builder",
       "concepts": [
@@ -552,11 +579,12 @@
       ],
       "sampleReasoning": "Combine the item name and price into one clear sentence.",
       "effectivenessScore": 89,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "def receipt(item, price):\n    return f\"{item} - Rs {price}\"\n\nprint(receipt(\"Coffee\", 120))",
+      "createdAt": "2026-07-22T16:49:12.206Z",
+      "updatedAt": "2026-07-22T16:49:12.206Z"
     },
     {
-      "_id": "f57b40d9-7510-43dc-ae04-230a9d8331b3",
+      "_id": "9cd2ba05-2296-47ff-8a4c-8e3d2ea267fc",
       "title": "Choose Next Scenario",
       "difficulty": "Builder",
       "concepts": [
@@ -572,11 +600,12 @@
       ],
       "sampleReasoning": "If the score is high choose harder, if low choose easier, otherwise stay similar.",
       "effectivenessScore": 88,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "def next_level(score):\n    if score >= 80:\n        return \"harder\"\n    if score < 50:\n        return \"easier\"\n    return \"similar\"\n\nprint(next_level(85))",
+      "createdAt": "2026-07-22T16:49:12.206Z",
+      "updatedAt": "2026-07-22T16:49:12.206Z"
     },
     {
-      "_id": "5cf0ecd0-c690-45d4-a9b4-12e36403b125",
+      "_id": "ea3aebc1-771f-44ee-8963-428b66be7b20",
       "title": "Reflection Keyword Finder",
       "difficulty": "Builder",
       "concepts": [
@@ -592,8 +621,241 @@
       ],
       "sampleReasoning": "Look for words like confused or stuck and flag the reflection if they appear.",
       "effectivenessScore": 87,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "idealSolution": "def needs_support(reflection):\n    keywords = [\"confused\", \"stuck\", \"lost\"]\n    text = reflection.lower()\n    return any(word in text for word in keywords)\n\nprint(needs_support(\"I felt a bit stuck today\"))",
+      "createdAt": "2026-07-22T16:49:12.206Z",
+      "updatedAt": "2026-07-22T16:49:12.206Z"
+    },
+    {
+      "_id": "rosewood-part-0",
+      "storyId": "rosewood-manor",
+      "order": 0,
+      "nextScenarioId": "rosewood-part-1",
+      "title": "Rosewood Manor: The Case Opens",
+      "difficulty": "Advanced",
+      "concepts": [
+        "reading",
+        "logic"
+      ],
+      "context": "Rosewood Manor stood dark against the storm on the night Alden Rosewood died. Alden, sixty-eight, was the manor's owner — a self-made and famously ruthless collector of art, debts, and secrets, who had called the household to dinner to announce changes to his will. At five past eight a sound of breaking glass came from the study; when the door was forced, Alden lay dead beside his overturned desk, and the room had been locked from the inside. Before weighing a single clue, the detective asks you, the assistant, to meet the people beneath this roof. Mina Rosewood, his niece and ward, whose allowance Alden had threatened to cut off only that week. Dev Ashcombe, his business partner, ruined by a deal Alden blamed on him. Iris Vale, his quiet private secretary, who kept the house's every secret — including one Alden held over her. Ronan Rosewood, his estranged son, struck from the will years ago and returned uninvited. And Pia Rosewood, his much-younger wife, whom he had lately spoken of divorcing. Below stairs wait the witnesses: Mrs. Vale, the longtime housekeeper and Iris's mother; Tom, the gardener; and Adeline, the live-in nurse. Five suspects, one locked room, and a single night to set in order. Begin, as any careful mind must, by gathering the facts.",
+      "prompt": "Before any code is written, what should the assistant collect first so the investigation can proceed in proper order?",
+      "objectives": [
+        "Notice the suspects and setting",
+        "Treat the case as a sequence of clues",
+        "Prepare to work step by logical step"
+      ],
+      "sampleReasoning": "I would start by listing the suspects, the rooms, and the important clues so the detective can examine the facts in order.",
+      "effectivenessScore": 99,
+      "idealSolution": "def gather_case():\n    \"\"\"Collect the suspects, rooms, and clues before any deduction begins.\"\"\"\n    suspects = [\"Mina\", \"Dev\", \"Iris\", \"Ronan\", \"Pia\"]\n    rooms = [\"study\", \"library\", \"conservatory\", \"music room\", \"gallery\"]\n    clues = []\n    return {\"suspects\": suspects, \"rooms\": rooms, \"clues\": clues}\n\nprint(gather_case())",
+      "createdAt": "2026-07-22T16:49:12.206Z",
+      "updatedAt": "2026-07-22T16:49:12.206Z"
+    },
+    {
+      "_id": "rosewood-part-1",
+      "storyId": "rosewood-manor",
+      "order": 1,
+      "nextScenarioId": "rosewood-part-2",
+      "title": "Rosewood Manor: The First Statements",
+      "difficulty": "Advanced",
+      "concepts": [
+        "strings",
+        "parsing"
+      ],
+      "context": "With the household known to you, the detective lays three witness notes on the table — a word from Mrs. Vale the housekeeper, another from Tom the gardener, and a third from Adeline, the nurse who sat with Alden each evening. None can be trusted until it is set in order, for the notes are messy: full of nicknames, stray punctuation, and uneven spacing. Nothing is judged, the detective reminds you, until it is placed in proper form.",
+      "prompt": "How would you turn the messy witness strings into clean records before you compare the clues?",
+      "objectives": [
+        "Split one statement into fields",
+        "Trim extra punctuation and spaces",
+        "Store each clue in a structured record"
+      ],
+      "sampleReasoning": "I would split each line into speaker, time, and clue so the statements are easy to compare later.",
+      "effectivenessScore": 98,
+      "idealSolution": "def parse_statement(line):\n    \"\"\"Turn one messy witness line into a clean speaker/clue record.\"\"\"\n    normalized = line.replace(\" - \", \": \", 1)\n    speaker, _, quote = normalized.partition(\":\")\n    return {\"speaker\": speaker.strip(), \"clue\": quote.strip().strip(\"'\\\"\")}\n\nstatements = [\n    \"Mrs. Vale: 'At 8:05 pm I heard glass break by the study door.'\",\n    \"Tom the gardener - 'Someone in a blue coat moved past the rose arch around 8.10 PM.'\",\n]\nfor line in statements:\n    print(parse_statement(line))",
+      "caseData": {
+        "witnessStatements": [
+          "Mrs. Vale: 'At 8:05 pm I heard glass break by the study door.'",
+          "Tom the gardener - 'Someone in a blue coat moved past the rose arch around 8.10 PM.'",
+          "Nurse Adeline says:   'The hall clock read 8:12 when the lights flickered.'"
+        ]
+      },
+      "createdAt": "2026-07-22T16:49:12.206Z",
+      "updatedAt": "2026-07-22T16:49:12.206Z"
+    },
+    {
+      "_id": "rosewood-part-2",
+      "storyId": "rosewood-manor",
+      "order": 2,
+      "nextScenarioId": "rosewood-part-3",
+      "title": "Rosewood Manor: Sorting the Timeline",
+      "difficulty": "Advanced",
+      "concepts": [
+        "datetime",
+        "sorting"
+      ],
+      "context": "The three statements now read plainly, yet each carries a time in its own careless format — one written with a colon, one with a full stop, one bare of any mark at all. The detective taps the hall clock and observes that time itself does not lie; only the records of it do. Until every moment is written the same way and set in sequence, the true order of that evening — Mrs. Vale's breaking glass, the blue coat by the rose arch, Adeline's flickering lights — stays hidden.",
+      "prompt": "How would you normalize those times and sort the events from earliest to latest?",
+      "objectives": [
+        "Normalize time text",
+        "Convert each value to the same comparable format",
+        "Sort the timeline in order"
+      ],
+      "sampleReasoning": "I would turn every time into one standard datetime value first, then sort the events by time.",
+      "effectivenessScore": 97,
+      "idealSolution": "from datetime import datetime\n\ndef sort_timeline(raw_times):\n    \"\"\"Normalize mixed time formats to datetimes and return them in order.\"\"\"\n    def normalize(text):\n        text = text.replace(\".\", \":\").upper().replace(\" \", \"\")\n        return datetime.strptime(text, \"%I:%M%p\")\n    return sorted(raw_times, key=normalize)\n\nprint(sort_timeline([\"8:12 pm\", \"8:05 pm\", \"8.10 PM\"]))",
+      "createdAt": "2026-07-22T16:49:12.206Z",
+      "updatedAt": "2026-07-22T16:49:12.206Z"
+    },
+    {
+      "_id": "rosewood-part-3",
+      "storyId": "rosewood-manor",
+      "order": 3,
+      "nextScenarioId": "rosewood-part-4",
+      "title": "Rosewood Manor: Alibi Gaps",
+      "difficulty": "Advanced",
+      "concepts": [
+        "sets",
+        "comparison"
+      ],
+      "context": "One by one the detective questions the five who had reason to wish Alden gone. Mina speaks of the conservatory and the kitchen; Dev swears he never left the library; Iris allows that she crossed the front hall and looked into the study; Ronan insists he stayed among the instruments in the music room; and Pia says she lingered in the gallery until the alarm. Set against the rooms a witness could actually vouch for, it is the gaps — the rooms no one saw them in — that speak louder than any suspect's confident tone.",
+      "prompt": "How can you compare the suspect claims against the witnessed rooms to find contradictions?",
+      "objectives": [
+        "Build two sets of evidence",
+        "Find overlap and difference",
+        "Spot which claim cannot be true"
+      ],
+      "sampleReasoning": "I would compare the claimed rooms with the witnessed rooms and flag any room that appears in one set but not the other.",
+      "effectivenessScore": 96,
+      "idealSolution": "def unverified_rooms(witnessed, claimed):\n    \"\"\"Return claimed rooms that no witness ever placed anyone in.\"\"\"\n    return sorted(set(claimed) - set(witnessed))\n\nwitnessed = [\"study\", \"front hall\", \"library\"]\nclaimed = [\"conservatory\", \"kitchen\", \"library\", \"front hall\", \"study\", \"music room\", \"gallery\"]\nprint(unverified_rooms(witnessed, claimed))",
+      "caseData": {
+        "suspectClaims": [
+          {
+            "suspect": "Mina",
+            "claim": "I was in the conservatory and kitchen after 8:00."
+          },
+          {
+            "suspect": "Dev",
+            "claim": "I stayed in the library the whole time."
+          },
+          {
+            "suspect": "Iris",
+            "claim": "I checked the front hall, then the study."
+          },
+          {
+            "suspect": "Ronan",
+            "claim": "I never left the music room."
+          },
+          {
+            "suspect": "Pia",
+            "claim": "I was in the gallery until the alarm rang."
+          }
+        ],
+        "comparisonSets": {
+          "witnessedRooms": [
+            "study",
+            "front hall",
+            "library"
+          ],
+          "claimedRooms": [
+            "conservatory",
+            "kitchen",
+            "library",
+            "front hall",
+            "study",
+            "music room",
+            "gallery"
+          ]
+        }
+      },
+      "createdAt": "2026-07-22T16:49:12.206Z",
+      "updatedAt": "2026-07-22T16:49:12.206Z"
+    },
+    {
+      "_id": "rosewood-part-4",
+      "storyId": "rosewood-manor",
+      "order": 4,
+      "nextScenarioId": "rosewood-part-5",
+      "title": "Rosewood Manor: The Constraint Solver",
+      "difficulty": "Advanced",
+      "concepts": [
+        "recursion",
+        "backtracking"
+      ],
+      "context": "Now the detective spreads the whole affair out as a grid: the five suspects — Mina, Dev, Iris, Ronan, and Pia — set against five rooms, five possible weapons, and five recorded times, with a short list of clues that any true answer must satisfy. There is nothing for it but patience: try one arrangement, test it against every clue, and the instant a single fact refuses to fit, set that theory aside without drama and try the next.",
+      "prompt": "How would you write a recursive solve() function that tries one assignment at a time and backtracks when a clue fails?",
+      "objectives": [
+        "Model the constraints",
+        "Try one option at a time",
+        "Undo bad choices when a path fails"
+      ],
+      "sampleReasoning": "I would choose one suspect-room-weapon-time combination, check every clue, and backtrack as soon as a choice breaks a rule.",
+      "effectivenessScore": 95,
+      "idealSolution": "def respects_clues(candidate, assignments):\n    \"\"\"Reject a candidate assignment the moment it breaks a known clue.\"\"\"\n    # The rope was left in the conservatory, so it is never the study weapon.\n    if candidate[\"room\"] == \"study\" and candidate.get(\"weapon\") == \"rope\":\n        return False\n    return True\n\ndef solve(assignments, suspects, rooms):\n    \"\"\"Assign each suspect a unique room, backtracking whenever a clue fails.\"\"\"\n    if not suspects:\n        return assignments\n    suspect = suspects[0]\n    for room in rooms:\n        candidate = {\"suspect\": suspect, \"room\": room}\n        if not respects_clues(candidate, assignments):\n            continue\n        assignments.append(candidate)\n        result = solve(assignments, suspects[1:], rooms - {room})\n        if result:\n            return result\n        assignments.pop()\n    return None\n\nprint(solve([], [\"Mina\", \"Dev\", \"Iris\"], {\"study\", \"library\", \"conservatory\"}))",
+      "starterCode": "def solve(assignments, remaining_suspects, remaining_rooms, remaining_weapons, remaining_times):\n    if len(assignments) == 5:\n        return assignments\n\n    for suspect in list(remaining_suspects):\n        for room in list(remaining_rooms):\n            for weapon in list(remaining_weapons):\n                for time in list(remaining_times):\n                    candidate = {\n                        'suspect': suspect,\n                        'room': room,\n                        'weapon': weapon,\n                        'time': time,\n                    }\n\n                    if not respects_clues(candidate, assignments):\n                        continue\n\n                    assignments.append(candidate)\n                    result = solve(\n                        assignments,\n                        remaining_suspects - {suspect},\n                        remaining_rooms - {room},\n                        remaining_weapons - {weapon},\n                        remaining_times - {time},\n                    )\n                    if result:\n                        return result\n                    assignments.pop()\n\n    return None",
+      "caseData": {
+        "grid": {
+          "suspects": [
+            "Mina",
+            "Dev",
+            "Iris",
+            "Ronan",
+            "Pia"
+          ],
+          "rooms": [
+            "study",
+            "library",
+            "conservatory",
+            "music room",
+            "gallery"
+          ],
+          "weapons": [
+            "letter opener",
+            "candlestick",
+            "rope",
+            "statue fragment",
+            "silver knife"
+          ],
+          "times": [
+            "8:05 pm",
+            "8:10 pm",
+            "8:12 pm",
+            "8:14 pm",
+            "8:18 pm"
+          ]
+        },
+        "clues": [
+          "The fatal blow happened in the study just after the first glass break.",
+          "The blue coat was seen near the rose arch at 8:10 pm.",
+          "The rope was left in the conservatory, not in the study.",
+          "The suspect in the library did not wear the blue coat.",
+          "The final witness saw only one person leave the gallery after the alarm."
+        ]
+      },
+      "createdAt": "2026-07-22T16:49:12.206Z",
+      "updatedAt": "2026-07-22T16:49:12.206Z"
+    },
+    {
+      "_id": "rosewood-part-5",
+      "storyId": "rosewood-manor",
+      "order": 5,
+      "nextScenarioId": null,
+      "title": "Rosewood Manor: Case Solved",
+      "difficulty": "Advanced",
+      "concepts": [
+        "reflection",
+        "recursion"
+      ],
+      "context": "The storm has passed, and the household is gathered once more in the drawing room — Mina and Ronan, Dev and Pia, and Iris quietest of all. Calmly, and in order, the detective retraces the single thread that held: the breaking glass at five past eight, the study locked from within, the figure in the blue coat by the rose arch, and the one alibi that could not survive them all. Every wrong turn had been discarded along the way, and what remained could only be the truth.",
+      "prompt": "In one or two sentences, what clue proved the case and how did the step-by-step search keep the answer honest?",
+      "objectives": [
+        "Restate the decisive clue",
+        "Connect the clue to the final solution",
+        "Reflect on the value of orderly reasoning"
+      ],
+      "sampleReasoning": "The case turned on the blue coat witness and the study timing. The recursive search worked because it rejected any assignment that broke a clue and kept only the path that fit all of them.",
+      "effectivenessScore": 94,
+      "idealSolution": "def summarize_case(decisive_clue, solution):\n    \"\"\"Restate the clue that proved the case and why orderly search stayed honest.\"\"\"\n    return (\n        f\"The case turned on {decisive_clue}. \"\n        f\"The recursive search rejected every assignment that broke a clue, \"\n        f\"leaving only {solution}.\"\n    )\n\nprint(summarize_case(\n    \"the blue coat seen at 8:10 pm\",\n    {\"suspect\": \"Iris\", \"room\": \"study\", \"time\": \"8:05 pm\"},\n))",
+      "reveal": "Laid side by side, the clues leave only one arrangement standing: Iris Vale, alone in the study at five past eight, the secret her employer had held over her dying with him. The blue coat by the rose arch at ten past marked her leaving, and no other suspect's alibi could bear the weight of every clue at once. That is the value of logical order — each wrong turn is discarded, and only the truth remains.",
+      "createdAt": "2026-07-22T16:49:12.206Z",
+      "updatedAt": "2026-07-22T16:49:12.206Z"
     }
   ],
   "sessions": []
