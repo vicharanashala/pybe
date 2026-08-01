@@ -101,5 +101,8 @@ module.exports = {
   listScenarios,
   listSessions,
   readDb,
-  resetData
+  writeDb,
+  resetData,
+  createRecord,
+  now
 };
