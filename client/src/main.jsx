@@ -285,17 +285,90 @@ function Roadmap({ roadmap }) {
 }
 
 function SessionList({ sessions }) {
+  const [expanded, setExpanded] = useState(null);
+
   return (
     <div className="sessions">
-      {sessions.length ? sessions.slice(0, 6).map((session) => (
-        <article key={session._id}>
-          <Play size={16} />
-          <div>
-            <strong>{session.scenario?.title}</strong>
-            <span>{session.masterySignals.join(' / ')}</span>
-          </div>
-        </article>
-      )) : <p>No sessions yet.</p>}
+      {sessions.length ? (
+        sessions.slice(0, 6).map((session) => (
+          <article key={session._id}>
+            <Play size={16} />
+
+            <div>
+              <strong>{session.scenario?.title}</strong>
+
+              <small>
+                📅 {new Date(session.createdAt).toLocaleDateString()}
+              </small>
+
+              <p className="journal-score">
+                ⭐ Prompt Score: {session.promptScore ?? 0}/100
+              </p>
+
+              <div className="journal-mastery">
+                {session.masterySignals?.map((signal) => (
+                  <span key={signal}>
+                    ✅ {signal}
+                  </span>
+                ))}
+              </div>
+
+
+              {session.reflection && (
+                <div className="journal-reflection">
+                  <strong>💭 Reflection</strong>
+                  <p>{session.reflection}</p>
+                </div>
+              )}
+
+
+              <button
+                onClick={() =>
+                  setExpanded(
+                    expanded === session._id ? null : session._id
+                  )
+                }
+              >
+                {expanded === session._id ? "Show Less" : "View More"}
+              </button>
+
+
+              {expanded === session._id && (
+                <div className="journal-details">
+
+                  {session.misconceptions?.length > 0 && (
+                    <div>
+                      <strong>⚠️ Misconceptions</strong>
+
+                      {session.misconceptions.map((item) => (
+                        <p key={item}>
+                          {item}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+
+
+                  <strong>🧠 Code Explanation</strong>
+                  <p>
+                    {session.codeExplanation}
+                  </p>
+
+
+                  <strong>🐍 Generated Code</strong>
+                  <pre>
+                    {session.generatedCode}
+                  </pre>
+
+                </div>
+              )}
+
+            </div>
+          </article>
+        ))
+      ) : (
+        <p>No sessions yet.</p>
+      )}
     </div>
   );
 }
