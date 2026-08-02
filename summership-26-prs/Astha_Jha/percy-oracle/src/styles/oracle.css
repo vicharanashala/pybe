@@ -1,0 +1,225 @@
+.oracle-page{
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:40px;
+
+background:
+linear-gradient(180deg,#5b1f1f 0%,#7b2e2e 45%,#9b6b3f 100%);
+
+}
+
+.oracle-card{
+
+width:850px;
+max-width:95%;
+
+background:#fbf5ea;
+
+padding:50px;
+
+border-radius:28px;
+
+border:4px solid #c8a25d;
+
+box-shadow:
+0 25px 60px rgba(0,0,0,.35),
+inset 0 0 0 2px #f4e5bf;
+
+text-align:center;
+
+animation:fade .8s ease;
+
+}
+
+.oracle-card h1{
+
+font-size:50px;
+
+color:#6b2a2a;
+
+margin-bottom:15px;
+
+}
+
+.oracle-card h2{
+
+font-size:40px;
+
+color:#8b5a2b;
+
+margin:30px 0 20px;
+
+}
+
+.oracle-card p{
+
+font-size:19px;
+
+line-height:1.9;
+
+color:#4d4036;
+
+margin-bottom:18px;
+
+}
+
+.oracle-card hr{
+
+margin:35px 0;
+
+border:none;
+
+height:2px;
+
+background:#d8b66c;
+
+}
+
+.highlight{
+
+margin:25px 0;
+
+padding:18px;
+
+background:#f5ecd8;
+
+border-left:6px solid #c8a25d;
+
+border-radius:12px;
+
+font-style:italic;
+
+font-weight:600;
+
+color:#7b2e2e;
+
+}
+
+/* Oracle Console */
+
+.code,
+.console{
+
+background:#2d2d2d;
+
+color:#ffffff;
+
+padding:22px;
+
+border-radius:15px;
+
+margin:25px 0;
+
+font-family:Consolas, monospace;
+
+text-align:left;
+
+box-shadow:0 8px 20px rgba(0,0,0,.25);
+
+}
+
+.code pre,
+.console pre{
+
+white-space:pre-wrap;
+
+font-size:16px;
+
+line-height:1.7;
+
+}
+
+/* Ancient Scroll */
+
+.scroll{
+
+background:#f8f2df;
+
+border:3px solid #d8b66c;
+
+border-radius:18px;
+
+padding:25px;
+
+margin:25px 0;
+
+text-align:left;
+
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+}
+
+.scroll pre{
+
+font-size:17px;
+
+line-height:1.8;
+
+white-space:pre-wrap;
+
+color:#493d34;
+
+}
+
+/* Button */
+
+.oracle-card button{
+
+margin-top:35px;
+
+padding:16px 34px;
+
+border:none;
+
+border-radius:14px;
+
+background:#7b2e2e;
+
+color:white;
+
+font-size:18px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+box-shadow:0 8px 20px rgba(0,0,0,.2);
+
+}
+
+.oracle-card button:hover{
+
+background:#5d1f1f;
+
+transform:translateY(-3px);
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
