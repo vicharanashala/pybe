@@ -1,17 +1,23 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
+  ArrowRight,
   Brain,
   ChartNoAxesCombined,
   Code2,
   Compass,
+  GitBranch,
   Lightbulb,
   MessageSquareText,
   Play,
   Route,
   Search,
   Send,
-  Sparkles
+  Sparkles,
+  TriangleAlert,
+  TrendingUp,
+  Target,
+  BookOpen
 } from 'lucide-react';
 import './styles.css';
 
@@ -115,15 +121,23 @@ function App() {
           {scenarios.map((scenario) => (
             <button
               key={scenario._id}
-              className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
+              className={[
+                'scenario',
+                selected?._id === scenario._id ? 'active' : '',
+                `difficulty-${scenario.difficulty.toLowerCase()}`
+              ].filter(Boolean).join(' ')}
               onClick={() => {
                 setSelected(scenario);
                 setActiveResult(null);
               }}
             >
-              <span>{scenario.difficulty}</span>
-              <strong>{scenario.title}</strong>
-              <small>{scenario.concepts.join(' / ')}</small>
+              <span className="scenario-difficulty">{scenario.difficulty}</span>
+              <strong className="scenario-title">{scenario.title}</strong>
+              <div className="scenario-concepts">
+                {scenario.concepts.map((concept) => (
+                  <span key={concept} className="scenario-pill">{concept}</span>
+                ))}
+              </div>
             </button>
           ))}
         </div>
@@ -131,14 +145,24 @@ function App() {
 
       <section className="workspace">
         <header className="hero">
-          <div>
-            <p>AI-native learning journey</p>
+          <div className="hero-text">
+            <p className="hero-eyebrow"><Sparkles size={13} /><span>AI-native learning journey</span></p>
             <h1>Learn Python by reasoning through real situations first.</h1>
+            <p className="hero-sub">Pick a scenario, explain your thinking, and let PyBe map it to Python concepts.</p>
           </div>
           <div className="hero-stats">
-            <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
-            <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
-            <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
+            <div className="hero-stat">
+              <strong>{analytics?.scenarioCount || 0}</strong>
+              <small>Scenarios</small>
+            </div>
+            <div className="hero-stat">
+              <strong>{analytics?.sessionCount || 0}</strong>
+              <small>Sessions</small>
+            </div>
+            <div className="hero-stat">
+              <strong>{analytics?.averagePromptScore || 0}</strong>
+              <small>Avg&nbsp;prompt score</small>
+            </div>
           </div>
         </header>
 
@@ -189,7 +213,7 @@ function App() {
               <Sparkles size={20} />
               <h2>AI Mentor Output</h2>
             </div>
-            {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
+            {submitting ? <ResultSkeleton /> : !activeResult ? <EmptyResult /> : <Result result={activeResult} />}
           </section>
         </div>
 
@@ -215,8 +239,30 @@ function App() {
 function EmptyResult() {
   return (
     <div className="empty">
-      <Lightbulb size={38} />
-      <p>Submit reasoning to see abstraction mapping, Python code, prompt feedback, and misconception signals.</p>
+      <div className="empty-icon-wrap">
+        <Lightbulb size={32} />
+      </div>
+      <p className="empty-title">Your AI Mentor is ready</p>
+      <p className="empty-sub">Submit your reasoning above to receive a full abstraction mapping, generated Python code, prompt feedback, and misconception signals.</p>
+    </div>
+  );
+}
+
+function ResultSkeleton() {
+  return (
+    <div className="result-stack skeleton-wrap">
+      <div className="skeleton skeleton-score" />
+      <div className="mentor-section">
+        <div className="skeleton skeleton-line" style={{ width: '40%', marginBottom: 10 }} />
+        <div className="skeleton skeleton-line" />
+        <div className="skeleton skeleton-line" style={{ width: '75%' }} />
+      </div>
+      <div className="skeleton skeleton-code" />
+      <div className="mentor-section">
+        <div className="skeleton skeleton-line" style={{ width: '35%', marginBottom: 10 }} />
+        <div className="skeleton skeleton-line" />
+        <div className="skeleton skeleton-line" style={{ width: '80%' }} />
+      </div>
     </div>
   );
 }
@@ -224,45 +270,192 @@ function EmptyResult() {
 function Result({ result }) {
   return (
     <div className="result-stack">
-      <div className="score"><span>{result.promptScore}</span><small>Prompt maturity</small></div>
-      <div>
-        {result.abstractionMap.map((item) => (
-          <article className="mapping" key={item.pattern}>
-            <strong>{item.pattern}</strong>
-            <span>{item.pythonConcept}</span>
-            <p>{item.explanation}</p>
-          </article>
-        ))}
+
+      {/* ── Prompt Score ───────────────────────── */}
+      <div className="mentor-section score-section">
+        <div className="mentor-section-header">
+          <Sparkles size={14} />
+          <span>Prompt Score</span>
+        </div>
+        <div className="score">
+          <div className="score-ring">
+            <span className="score-number">{(result.promptScore / 10).toFixed(1)}</span>
+            <small className="score-denom">/10</small>
+          </div>
+          <small className="score-label">Prompt maturity</small>
+        </div>
       </div>
-      <div className="code-block">
-        <div><Code2 size={18} /> Generated Python</div>
-        <pre>{result.generatedCode}</pre>
-        <p>{result.codeExplanation}</p>
+
+      {/* ── Python Mapping ─────────────────────── */}
+      <div className="mentor-section">
+        <div className="mentor-section-header">
+          <GitBranch size={14} />
+          <span>Python Mapping</span>
+        </div>
+        <div className="mapping-list">
+          {result.abstractionMap.map((item) => (
+            <article className="mapping" key={item.pattern}>
+              <div className="mapping-top">
+                <strong className="mapping-pattern">{item.pattern}</strong>
+                <span className="mapping-concept">{item.pythonConcept}</span>
+              </div>
+              <p className="mapping-explanation">{item.explanation}</p>
+            </article>
+          ))}
+        </div>
       </div>
-      <ul className="feedback">
-        {result.promptFeedback.map((item) => <li key={item}>{item}</li>)}
-      </ul>
+
+      {/* ── Generated Python ───────────────────── */}
+      <div className="mentor-section">
+        <div className="mentor-section-header">
+          <Code2 size={14} />
+          <span>Generated Python</span>
+        </div>
+        <div className="code-block">
+          <pre>{result.generatedCode}</pre>
+          <p className="code-explanation">{result.codeExplanation}</p>
+        </div>
+      </div>
+
+      {/* ── Prompt Feedback ────────────────────── */}
+      <div className="mentor-section">
+        <div className="mentor-section-header">
+          <MessageSquareText size={14} />
+          <span>Prompt Feedback</span>
+        </div>
+        <ul className="feedback">
+          {result.promptFeedback.map((item) => (
+            <li key={item} className="feedback-item">
+              <ArrowRight size={13} className="feedback-icon" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* ── Next Steps / Misconceptions ────────── */}
       {result.misconceptions.length > 0 && (
-        <div className="note">
-          <strong>Misconception watch</strong>
-          {result.misconceptions.map((item) => <p key={item}>{item}</p>)}
+        <div className="mentor-section">
+          <div className="mentor-section-header mentor-section-header--warn">
+            <TriangleAlert size={14} />
+            <span>Next Steps &amp; Misconception Watch</span>
+          </div>
+          <div className="note">
+            {result.misconceptions.map((item) => (
+              <p key={item} className="note-item">{item}</p>
+            ))}
+          </div>
         </div>
       )}
+
+    </div>
+  );
+}
+
+function CircularProgress({ value, max = 10, size = 72, stroke = 6, label }) {
+  const radius = (size - stroke) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const pct = Math.min(Math.max(value / max, 0), 1);
+  const offset = circumference * (1 - pct);
+  return (
+    <div className="circ-progress-wrap">
+      <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
+        <circle
+          cx={size / 2} cy={size / 2} r={radius}
+          fill="none" stroke="rgba(23,35,31,0.08)" strokeWidth={stroke}
+        />
+        <circle
+          cx={size / 2} cy={size / 2} r={radius}
+          fill="none" stroke="#5a9a30" strokeWidth={stroke}
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+          strokeLinecap="round"
+          style={{ transition: 'stroke-dashoffset 1s cubic-bezier(.22,1,.36,1)' }}
+        />
+      </svg>
+      <div className="circ-progress-inner">
+        <span className="circ-value">{value}</span>
+        {label && <span className="circ-label">{label}</span>}
+      </div>
     </div>
   );
 }
 
 function Analytics({ analytics }) {
   const concepts = Object.entries(analytics?.conceptCounts || {});
-  return (
-    <div className="analytics-list">
-      {concepts.length ? concepts.map(([name, count]) => (
-        <div key={name}>
-          <span>{name}</span>
-          <meter min="0" max="10" value={count}></meter>
-          <strong>{count}</strong>
+  const maxCount = concepts.length ? Math.max(...concepts.map(([, c]) => c), 1) : 1;
+  const avgScore = analytics?.averagePromptScore ?? 0;
+  const sessionCount = analytics?.sessionCount ?? 0;
+  const scenarioCount = analytics?.scenarioCount ?? 0;
+
+  if (!concepts.length) {
+    return (
+      <div className="analytics-empty">
+        <div className="analytics-empty-icon">
+          <ChartNoAxesCombined size={28} />
         </div>
-      )) : <p>No learning sessions yet.</p>}
+        <p className="analytics-empty-title">No sessions yet</p>
+        <p className="analytics-empty-sub">Complete your first scenario to see concept mastery stats, progress bars, and score trends here.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="analytics-root">
+
+      {/* ── Summary stat cards ──────────────────── */}
+      <div className="analytics-stats">
+        <div className="analytics-stat-card">
+          <div className="analytics-stat-icon analytics-stat-icon--green">
+            <Target size={16} />
+          </div>
+          <div>
+            <strong>{sessionCount}</strong>
+            <small>Sessions</small>
+          </div>
+        </div>
+        <div className="analytics-stat-card">
+          <div className="analytics-stat-icon analytics-stat-icon--lime">
+            <BookOpen size={16} />
+          </div>
+          <div>
+            <strong>{scenarioCount}</strong>
+            <small>Scenarios</small>
+          </div>
+        </div>
+        <div className="analytics-stat-card analytics-stat-card--score">
+          <CircularProgress value={Number(avgScore)} max={10} size={56} stroke={5} />
+          <div>
+            <strong>{avgScore}</strong>
+            <small>Avg Score</small>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Concept mastery bars ─────────────────── */}
+      <div className="analytics-bars-header">
+        <TrendingUp size={13} />
+        <span>Concept Mastery</span>
+      </div>
+      <div className="analytics-bars">
+        {concepts.map(([name, count]) => {
+          const pct = Math.round((count / maxCount) * 100);
+          return (
+            <div key={name} className="analytics-bar-row">
+              <div className="analytics-bar-meta">
+                <span className="analytics-bar-name">{name}</span>
+                <span className="analytics-bar-count">{count}</span>
+              </div>
+              <div className="analytics-bar-track">
+                <div
+                  className="analytics-bar-fill"
+                  style={{ '--bar-width': `${pct}%` }}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
