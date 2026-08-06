@@ -1,7 +1,7 @@
 {
   "scenarios": [
     {
-      "_id": "8cf644f0-1402-4763-9542-02bd2ca0d1dc",
+      "_id": "111c52a1-a1eb-430a-b8d1-9288fceb3d55",
       "title": "Bag Weight Label",
       "difficulty": "Beginner",
       "concepts": [
@@ -10,17 +10,35 @@
       "context": "A student has one school bag with a weight written on a scale.",
       "prompt": "What single piece of information would you store so the computer can remember the bag weight?",
       "objectives": [
-        "Identify one value",
-        "Give the value a name",
-        "Connect naming to a variable"
+        {
+          "text": "Identify one value",
+          "keywords": [
+            "weight",
+            "value"
+          ]
+        },
+        {
+          "text": "Give the value a name",
+          "keywords": [
+            "name",
+            "label"
+          ]
+        },
+        {
+          "text": "Connect naming to a variable",
+          "keywords": [
+            "variable",
+            "store"
+          ]
+        }
       ],
       "sampleReasoning": "I only need to remember the bag weight, so I would store it with a clear name.",
       "effectivenessScore": 96,
-      "createdAt": "2026-06-19T11:54:44.732Z",
-      "updatedAt": "2026-06-19T11:54:44.732Z"
+      "createdAt": "2026-06-21T21:02:29.324Z",
+      "updatedAt": "2026-06-21T21:02:29.324Z"
     },
     {
-      "_id": "8f065c3d-36c5-48c5-948a-b7bc1a768bc9",
+      "_id": "a926bd9f-d2fe-4858-8b5d-7372b8eefc60",
       "title": "Rainy Day Choice",
       "difficulty": "Beginner",
       "concepts": [
@@ -29,17 +47,35 @@
       "context": "Before leaving home, a learner checks whether it is raining.",
       "prompt": "What small decision rule would help the learner decide whether to carry an umbrella?",
       "objectives": [
-        "Notice one condition",
-        "Choose one action",
-        "Map the rule to if/else"
+        {
+          "text": "Notice one condition",
+          "keywords": [
+            "rain",
+            "condition"
+          ]
+        },
+        {
+          "text": "Choose one action",
+          "keywords": [
+            "umbrella",
+            "decide"
+          ]
+        },
+        {
+          "text": "Map the rule to if/else",
+          "keywords": [
+            "if",
+            "else"
+          ]
+        }
       ],
       "sampleReasoning": "If it is raining, carry an umbrella. Otherwise, leave it at home.",
       "effectivenessScore": 95,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "c4dfb27a-c96b-4ff1-80ff-3bd5b5b12e74",
+      "_id": "c01a50af-6588-411d-9b8b-bf175d75a2f6",
       "title": "Two Snack Prices",
       "difficulty": "Beginner",
       "concepts": [
@@ -49,17 +85,35 @@
       "context": "A learner buys one samosa and one juice from the canteen.",
       "prompt": "How would you figure out the total cost using just the two prices?",
       "objectives": [
-        "Store two values",
-        "Add values",
-        "Name the result"
+        {
+          "text": "Store two values",
+          "keywords": [
+            "price",
+            "store"
+          ]
+        },
+        {
+          "text": "Add values",
+          "keywords": [
+            "add",
+            "total"
+          ]
+        },
+        {
+          "text": "Name the result",
+          "keywords": [
+            "total",
+            "result"
+          ]
+        }
       ],
       "sampleReasoning": "I would keep the two prices separately and add them to get the total.",
       "effectivenessScore": 94,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "3657a91d-1f2b-42d7-bfec-4fbfb80dd648",
+      "_id": "5a9d3d4a-ab32-4303-a58e-5660910477a0",
       "title": "Greeting by Name",
       "difficulty": "Beginner",
       "concepts": [
@@ -69,17 +123,35 @@
       "context": "A classroom screen should greet one learner by name.",
       "prompt": "What text should the computer remember, and how should it combine that text into a greeting?",
       "objectives": [
-        "Store text",
-        "Combine text",
-        "Recognize strings"
+        {
+          "text": "Store text",
+          "keywords": [
+            "name",
+            "store"
+          ]
+        },
+        {
+          "text": "Combine text",
+          "keywords": [
+            "combine",
+            "greeting"
+          ]
+        },
+        {
+          "text": "Recognize strings",
+          "keywords": [
+            "string",
+            "text"
+          ]
+        }
       ],
       "sampleReasoning": "The computer should store the learner name and place it inside a greeting sentence.",
       "effectivenessScore": 93,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "a29775e3-1744-4b5e-b213-ecbb9bf8ec39",
+      "_id": "1412be37-49ea-48df-8a27-07b9fc83a22a",
       "title": "Pass Mark Check",
       "difficulty": "Beginner",
       "concepts": [
@@ -89,17 +161,35 @@
       "context": "A learner receives one test score and wants to know whether it is at least the pass mark.",
       "prompt": "What comparison would decide if the learner passed?",
       "objectives": [
-        "Compare two numbers",
-        "Create a yes/no result",
-        "Map comparison to condition"
+        {
+          "text": "Compare two numbers",
+          "keywords": [
+            "score",
+            "compare"
+          ]
+        },
+        {
+          "text": "Create a yes/no result",
+          "keywords": [
+            "pass",
+            "fail"
+          ]
+        },
+        {
+          "text": "Map comparison to condition",
+          "keywords": [
+            "if",
+            "condition"
+          ]
+        }
       ],
       "sampleReasoning": "I would compare the score with the pass mark and decide pass if it is high enough.",
       "effectivenessScore": 92,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "734c083f-b08c-4524-ae1a-f2924cd6851a",
+      "_id": "74777f3a-90c3-4980-866b-8747a6c8773d",
       "title": "Pocket Money Left",
       "difficulty": "Beginner",
       "concepts": [
@@ -109,17 +199,35 @@
       "context": "A learner starts with pocket money and spends a small amount on stationery.",
       "prompt": "What two values matter, and how would you find the money left?",
       "objectives": [
-        "Name starting amount",
-        "Name spent amount",
-        "Subtract to find remaining value"
+        {
+          "text": "Name starting amount",
+          "keywords": [
+            "starting",
+            "amount"
+          ]
+        },
+        {
+          "text": "Name spent amount",
+          "keywords": [
+            "spent",
+            "cost"
+          ]
+        },
+        {
+          "text": "Subtract to find remaining value",
+          "keywords": [
+            "subtract",
+            "remaining"
+          ]
+        }
       ],
       "sampleReasoning": "Start with the original money, subtract the spent amount, and store what remains.",
       "effectivenessScore": 91,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "1324fea6-96d2-408c-8f58-cd92877f9dbd",
+      "_id": "6cc72929-0caa-426a-899d-498d9fc7ba94",
       "title": "Favorite Color List",
       "difficulty": "Beginner",
       "concepts": [
@@ -128,17 +236,35 @@
       "context": "Three friends each say their favorite color.",
       "prompt": "How would you keep all three colors together instead of making separate notes?",
       "objectives": [
-        "Group related values",
-        "Recognize a collection",
-        "Map grouping to a list"
+        {
+          "text": "Group related values",
+          "keywords": [
+            "group",
+            "together"
+          ]
+        },
+        {
+          "text": "Recognize a collection",
+          "keywords": [
+            "collection",
+            "group"
+          ]
+        },
+        {
+          "text": "Map grouping to a list",
+          "keywords": [
+            "list",
+            "items"
+          ]
+        }
       ],
       "sampleReasoning": "Since all values are colors, I would keep them together in one list.",
       "effectivenessScore": 90,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "8bb64eb9-5710-433b-bce9-95b4a5b995a1",
+      "_id": "b7a92a31-5e2a-4524-b2ee-108fef92ed2f",
       "title": "First Item in a Bag",
       "difficulty": "Beginner",
       "concepts": [
@@ -148,17 +274,35 @@
       "context": "A bag contains a pencil, eraser, and ruler in that order.",
       "prompt": "How would you ask for only the first item?",
       "objectives": [
-        "Notice order",
-        "Pick one position",
-        "Connect position to indexing"
+        {
+          "text": "Notice order",
+          "keywords": [
+            "order",
+            "first"
+          ]
+        },
+        {
+          "text": "Pick one position",
+          "keywords": [
+            "position",
+            "pick"
+          ]
+        },
+        {
+          "text": "Connect position to indexing",
+          "keywords": [
+            "index",
+            "position"
+          ]
+        }
       ],
       "sampleReasoning": "The first item is based on its position in the ordered group.",
       "effectivenessScore": 89,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "73803faa-165f-4aee-b60f-3e08d470ce84",
+      "_id": "4252d266-2254-4e4d-b457-f4006daa31b0",
       "title": "Attendance Count",
       "difficulty": "Beginner",
       "concepts": [
@@ -168,17 +312,35 @@
       "context": "A teacher has a short list of students present today.",
       "prompt": "What question would help you find how many students are present?",
       "objectives": [
-        "Recognize a group",
-        "Ask for its size",
-        "Connect size to length"
+        {
+          "text": "Recognize a group",
+          "keywords": [
+            "students",
+            "group"
+          ]
+        },
+        {
+          "text": "Ask for its size",
+          "keywords": [
+            "how many",
+            "count"
+          ]
+        },
+        {
+          "text": "Connect size to length",
+          "keywords": [
+            "length",
+            "count"
+          ]
+        }
       ],
       "sampleReasoning": "I would count how many names are in the present-students list.",
       "effectivenessScore": 88,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "e510ab5f-1f11-46c9-b857-22a50e144e75",
+      "_id": "5d8cd81f-ebeb-46bd-ab1d-b38c20320a22",
       "title": "Temperature Message",
       "difficulty": "Beginner",
       "concepts": [
@@ -188,17 +350,35 @@
       "context": "A weather display has one temperature reading.",
       "prompt": "What simple rule would decide whether to show Hot or Comfortable?",
       "objectives": [
-        "Set a threshold",
-        "Compare one value",
-        "Choose one message"
+        {
+          "text": "Set a threshold",
+          "keywords": [
+            "threshold",
+            "temperature"
+          ]
+        },
+        {
+          "text": "Compare one value",
+          "keywords": [
+            "compare",
+            "above"
+          ]
+        },
+        {
+          "text": "Choose one message",
+          "keywords": [
+            "hot",
+            "message"
+          ]
+        }
       ],
       "sampleReasoning": "If the temperature is above the threshold, show Hot; otherwise show Comfortable.",
       "effectivenessScore": 87,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "2a3496ef-bb71-4dde-83f5-37844063678d",
+      "_id": "df9ef448-9e2b-4f22-9c16-d5d1332dc080",
       "title": "Water Bottle Reminder",
       "difficulty": "Explorer",
       "concepts": [
@@ -207,17 +387,35 @@
       "context": "A learner wants a reminder for each break in the school day.",
       "prompt": "How would you avoid writing the same reminder separately for every break?",
       "objectives": [
-        "Recognize repeated action",
-        "Identify each break",
-        "Map repetition to a loop"
+        {
+          "text": "Recognize repeated action",
+          "keywords": [
+            "repeat",
+            "every"
+          ]
+        },
+        {
+          "text": "Identify each break",
+          "keywords": [
+            "each break",
+            "breaks"
+          ]
+        },
+        {
+          "text": "Map repetition to a loop",
+          "keywords": [
+            "loop",
+            "for"
+          ]
+        }
       ],
       "sampleReasoning": "For every break, show the same water reminder.",
       "effectivenessScore": 96,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "71b887ca-fd3d-4c1a-83a9-f464f7c2a06d",
+      "_id": "13445a4e-38a3-420c-bc81-0adbbc6be323",
       "title": "Find the Longest Pencil",
       "difficulty": "Explorer",
       "concepts": [
@@ -227,17 +425,35 @@
       "context": "A learner has several pencil lengths and wants to know which one is longest.",
       "prompt": "What small comparison would you repeat as you look through the lengths?",
       "objectives": [
-        "Keep current best",
-        "Compare one item at a time",
-        "Update when larger"
+        {
+          "text": "Keep current best",
+          "keywords": [
+            "longest",
+            "best"
+          ]
+        },
+        {
+          "text": "Compare one item at a time",
+          "keywords": [
+            "compare",
+            "each"
+          ]
+        },
+        {
+          "text": "Update when larger",
+          "keywords": [
+            "update",
+            "larger"
+          ]
+        }
       ],
       "sampleReasoning": "Start with one pencil as the longest, then compare each next pencil against it.",
       "effectivenessScore": 95,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "bf9c0f8c-308d-4e1f-9e37-9997c7e042b9",
+      "_id": "fd65a2bf-73c6-4abf-9f84-75b4691d7f92",
       "title": "Clean Chore Checklist",
       "difficulty": "Explorer",
       "concepts": [
@@ -247,17 +463,35 @@
       "context": "A family has a checklist of small chores for Saturday morning.",
       "prompt": "How would you go through each chore and mark it as done?",
       "objectives": [
-        "Store chores in a list",
-        "Process one chore at a time",
-        "Repeat a simple action"
+        {
+          "text": "Store chores in a list",
+          "keywords": [
+            "list",
+            "chores"
+          ]
+        },
+        {
+          "text": "Process one chore at a time",
+          "keywords": [
+            "each",
+            "one at a time"
+          ]
+        },
+        {
+          "text": "Repeat a simple action",
+          "keywords": [
+            "repeat",
+            "mark"
+          ]
+        }
       ],
       "sampleReasoning": "Put chores in a list and handle each chore one by one.",
       "effectivenessScore": 94,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "ce225ef0-1111-4ed4-9318-7373018385e6",
+      "_id": "ba208a37-1fda-49f1-911c-3268dcd83e53",
       "title": "Movie Age Filter",
       "difficulty": "Explorer",
       "concepts": [
@@ -267,17 +501,35 @@
       "context": "A movie app has a list of films, each with a minimum age.",
       "prompt": "What rule would decide which movies a 12-year-old can see?",
       "objectives": [
-        "Check one item rule",
-        "Keep allowed items",
-        "Map rule to filtering"
+        {
+          "text": "Check one item rule",
+          "keywords": [
+            "minimum age",
+            "check"
+          ]
+        },
+        {
+          "text": "Keep allowed items",
+          "keywords": [
+            "keep",
+            "allowed"
+          ]
+        },
+        {
+          "text": "Map rule to filtering",
+          "keywords": [
+            "filter",
+            "only"
+          ]
+        }
       ],
       "sampleReasoning": "For each movie, keep it only if the learner age is at least the minimum age.",
       "effectivenessScore": 93,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "cc62f477-44c8-403b-82cf-0b2638ff501b",
+      "_id": "2f07e06b-2c0e-410b-bf32-bf337d63ae6d",
       "title": "Classroom Supply Lookup",
       "difficulty": "Explorer",
       "concepts": [
@@ -286,17 +538,35 @@
       "context": "A class monitor tracks how many chalk pieces, markers, and notebooks are available.",
       "prompt": "How would you store each supply name with its count?",
       "objectives": [
-        "Pair names with values",
-        "Look up by name",
-        "Map pairs to a dictionary"
+        {
+          "text": "Pair names with values",
+          "keywords": [
+            "pair",
+            "supply"
+          ]
+        },
+        {
+          "text": "Look up by name",
+          "keywords": [
+            "look up",
+            "find by name"
+          ]
+        },
+        {
+          "text": "Map pairs to a dictionary",
+          "keywords": [
+            "dictionary",
+            "key"
+          ]
+        }
       ],
       "sampleReasoning": "Each supply has a count, so I would store supply names as keys with counts as values.",
       "effectivenessScore": 92,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "26b0c080-124d-4ff8-92ad-4f2380e3e89f",
+      "_id": "0b19a782-ce88-44fd-a41e-91fefd2b3b86",
       "title": "Bus Stop Search",
       "difficulty": "Explorer",
       "concepts": [
@@ -306,17 +576,35 @@
       "context": "A route list contains several bus stops, and a learner wants to know if Library Stop is included.",
       "prompt": "How would you check the stops one at a time until you find the target?",
       "objectives": [
-        "Identify target",
-        "Scan a list",
-        "Stop when found"
+        {
+          "text": "Identify target",
+          "keywords": [
+            "library stop",
+            "target"
+          ]
+        },
+        {
+          "text": "Scan a list",
+          "keywords": [
+            "scan",
+            "each stop"
+          ]
+        },
+        {
+          "text": "Stop when found",
+          "keywords": [
+            "stop",
+            "found"
+          ]
+        }
       ],
       "sampleReasoning": "Look at each stop and compare it with the stop I want.",
       "effectivenessScore": 91,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "169fc6d5-7b9b-483d-87ee-325e2d497c90",
+      "_id": "c4bb9fe9-bf3e-48b3-af9e-39373e26050d",
       "title": "Average Practice Score",
       "difficulty": "Explorer",
       "concepts": [
@@ -326,17 +614,35 @@
       "context": "A learner has five practice scores and wants one average score.",
       "prompt": "What two small steps are needed before dividing?",
       "objectives": [
-        "Add all scores",
-        "Count scores",
-        "Divide total by count"
+        {
+          "text": "Add all scores",
+          "keywords": [
+            "add",
+            "total"
+          ]
+        },
+        {
+          "text": "Count scores",
+          "keywords": [
+            "count",
+            "how many"
+          ]
+        },
+        {
+          "text": "Divide total by count",
+          "keywords": [
+            "divide",
+            "average"
+          ]
+        }
       ],
       "sampleReasoning": "Find the total of all scores, count how many scores there are, then divide.",
       "effectivenessScore": 90,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "e0bdac7d-2033-408f-833c-3f2734690398",
+      "_id": "cd144890-fb64-496b-8ab8-fad06e762fca",
       "title": "Separate Even Roll Numbers",
       "difficulty": "Explorer",
       "concepts": [
@@ -346,17 +652,35 @@
       "context": "A class list has roll numbers, and the teacher wants only even-numbered students for Team A.",
       "prompt": "What small test tells you whether a roll number is even?",
       "objectives": [
-        "Test divisibility by two",
-        "Keep matching numbers",
-        "Connect remainder to modulo"
+        {
+          "text": "Test divisibility by two",
+          "keywords": [
+            "divisible",
+            "even"
+          ]
+        },
+        {
+          "text": "Keep matching numbers",
+          "keywords": [
+            "keep",
+            "even"
+          ]
+        },
+        {
+          "text": "Connect remainder to modulo",
+          "keywords": [
+            "remainder",
+            "modulo"
+          ]
+        }
       ],
       "sampleReasoning": "A roll number is even if dividing by two leaves no remainder.",
       "effectivenessScore": 89,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "decf41d5-8529-4685-b354-d02090bbb639",
+      "_id": "744f9c5b-af86-4af4-add4-f0fb845f1385",
       "title": "Capitalize Name Tags",
       "difficulty": "Explorer",
       "concepts": [
@@ -366,17 +690,35 @@
       "context": "A club has names typed in lowercase and wants neat name tags.",
       "prompt": "What same text-cleaning action should happen to every name?",
       "objectives": [
-        "Recognize repeated string change",
-        "Apply to each name",
-        "Create cleaned names"
+        {
+          "text": "Recognize repeated string change",
+          "keywords": [
+            "every name",
+            "lowercase"
+          ]
+        },
+        {
+          "text": "Apply to each name",
+          "keywords": [
+            "each",
+            "apply"
+          ]
+        },
+        {
+          "text": "Create cleaned names",
+          "keywords": [
+            "capitalize",
+            "clean"
+          ]
+        }
       ],
       "sampleReasoning": "For each name, convert it to title case before printing the tag.",
       "effectivenessScore": 88,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "418bec64-f75a-40fa-b849-42edba0d3939",
+      "_id": "3b68c3a4-691d-457d-8bb6-3883159e0bec",
       "title": "Find Missing Homework",
       "difficulty": "Explorer",
       "concepts": [
@@ -386,17 +728,35 @@
       "context": "A teacher has one list of all students and another list of students who submitted homework.",
       "prompt": "How would you reason about who is missing from the submitted list?",
       "objectives": [
-        "Compare two groups",
-        "Find difference",
-        "Map group difference to sets"
+        {
+          "text": "Compare two groups",
+          "keywords": [
+            "two lists",
+            "compare"
+          ]
+        },
+        {
+          "text": "Find difference",
+          "keywords": [
+            "difference",
+            "missing"
+          ]
+        },
+        {
+          "text": "Map group difference to sets",
+          "keywords": [
+            "set",
+            "sets"
+          ]
+        }
       ],
       "sampleReasoning": "Take everyone in the class and remove the students who submitted.",
       "effectivenessScore": 87,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "07295b48-1037-4654-995f-df57d6fd7a7b",
+      "_id": "241581a2-7701-445d-8b83-bf10809e524a",
       "title": "Reusable Discount Rule",
       "difficulty": "Builder",
       "concepts": [
@@ -406,17 +766,35 @@
       "context": "A shop gives the same discount rule to many different bills.",
       "prompt": "What inputs should a reusable discount helper receive?",
       "objectives": [
-        "Identify reusable rule",
-        "Choose inputs",
-        "Return discounted price"
+        {
+          "text": "Identify reusable rule",
+          "keywords": [
+            "reusable",
+            "rule"
+          ]
+        },
+        {
+          "text": "Choose inputs",
+          "keywords": [
+            "input",
+            "bill amount"
+          ]
+        },
+        {
+          "text": "Return discounted price",
+          "keywords": [
+            "return",
+            "discount"
+          ]
+        }
       ],
       "sampleReasoning": "The helper needs the bill amount and should return the final price after applying the rule.",
       "effectivenessScore": 96,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "88a35898-eba5-47ca-adf2-0805d633ea3d",
+      "_id": "a39c398e-3cbe-4308-845a-fcdb62a7ad5a",
       "title": "Mini Quiz Checker",
       "difficulty": "Builder",
       "concepts": [
@@ -426,17 +804,35 @@
       "context": "A quiz app needs to check one answer against one correct answer.",
       "prompt": "How would you design a tiny reusable checker for one question?",
       "objectives": [
-        "Accept learner answer",
-        "Accept correct answer",
-        "Return right or wrong"
+        {
+          "text": "Accept learner answer",
+          "keywords": [
+            "learner answer",
+            "accept"
+          ]
+        },
+        {
+          "text": "Accept correct answer",
+          "keywords": [
+            "correct answer",
+            "accept"
+          ]
+        },
+        {
+          "text": "Return right or wrong",
+          "keywords": [
+            "return",
+            "match"
+          ]
+        }
       ],
       "sampleReasoning": "Compare the learner answer with the correct answer and return whether they match.",
       "effectivenessScore": 95,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "9a8e5318-6fad-44ed-8e60-03da14d3f4db",
+      "_id": "6b4fc3df-0834-4063-8a1b-0d691f156cf2",
       "title": "Step Counter Function",
       "difficulty": "Builder",
       "concepts": [
@@ -446,17 +842,35 @@
       "context": "A fitness note has a list of step counts from different walks.",
       "prompt": "How would you make a reusable helper that returns the total steps?",
       "objectives": [
-        "Accept a list",
-        "Add all values",
-        "Return total"
+        {
+          "text": "Accept a list",
+          "keywords": [
+            "list",
+            "accept"
+          ]
+        },
+        {
+          "text": "Add all values",
+          "keywords": [
+            "add",
+            "total"
+          ]
+        },
+        {
+          "text": "Return total",
+          "keywords": [
+            "return",
+            "total"
+          ]
+        }
       ],
       "sampleReasoning": "The function should take step counts, add them, and give back the total.",
       "effectivenessScore": 94,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "34c237f5-a9c8-478c-8980-8505ba0d2b94",
+      "_id": "5c9e9250-9f26-40a5-bf38-ee6ee0448e6e",
       "title": "Safe Username Maker",
       "difficulty": "Builder",
       "concepts": [
@@ -466,17 +880,35 @@
       "context": "A classroom app needs to turn a full name into a simple username.",
       "prompt": "What small text transformations should a username function perform?",
       "objectives": [
-        "Accept a name",
-        "Normalize text",
-        "Return username"
+        {
+          "text": "Accept a name",
+          "keywords": [
+            "name",
+            "accept"
+          ]
+        },
+        {
+          "text": "Normalize text",
+          "keywords": [
+            "lowercase",
+            "clean"
+          ]
+        },
+        {
+          "text": "Return username",
+          "keywords": [
+            "return",
+            "username"
+          ]
+        }
       ],
       "sampleReasoning": "Make the name lowercase and remove spaces so it can be used as a username.",
       "effectivenessScore": 93,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "9bcdd1e0-2f8a-416e-a0e2-60e188e33dcd",
+      "_id": "073b2f71-82ab-4972-8501-eda99b04220c",
       "title": "Retry Until Valid",
       "difficulty": "Builder",
       "concepts": [
@@ -486,17 +918,35 @@
       "context": "A form should keep asking until the learner enters a positive number.",
       "prompt": "What condition tells the program to keep asking?",
       "objectives": [
-        "Define valid input",
-        "Repeat while invalid",
-        "Stop after valid value"
+        {
+          "text": "Define valid input",
+          "keywords": [
+            "valid",
+            "positive"
+          ]
+        },
+        {
+          "text": "Repeat while invalid",
+          "keywords": [
+            "repeat",
+            "invalid"
+          ]
+        },
+        {
+          "text": "Stop after valid value",
+          "keywords": [
+            "stop",
+            "valid"
+          ]
+        }
       ],
       "sampleReasoning": "Keep asking while the number is not positive, then stop once it is valid.",
       "effectivenessScore": 92,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "54de8788-6a15-4377-a15f-e4cb73632c42",
+      "_id": "a61451d3-1124-490a-905b-606cdc331bf6",
       "title": "Simple Score Report",
       "difficulty": "Builder",
       "concepts": [
@@ -506,17 +956,35 @@
       "context": "A tutor wants a small report showing a learner name and score together.",
       "prompt": "How would you package two related pieces of information in one result?",
       "objectives": [
-        "Create key-value structure",
-        "Return structured result",
-        "Connect structure to dictionary"
+        {
+          "text": "Create key-value structure",
+          "keywords": [
+            "key",
+            "value"
+          ]
+        },
+        {
+          "text": "Return structured result",
+          "keywords": [
+            "return",
+            "result"
+          ]
+        },
+        {
+          "text": "Connect structure to dictionary",
+          "keywords": [
+            "dictionary",
+            "dict"
+          ]
+        }
       ],
       "sampleReasoning": "Return a dictionary with the learner name and score as labeled values.",
       "effectivenessScore": 91,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "d98ea7cd-5792-41b6-9a66-03267e936bc1",
+      "_id": "dd13f06e-6206-4d6e-b9fa-b791450371de",
       "title": "Task Status Updater",
       "difficulty": "Builder",
       "concepts": [
@@ -526,17 +994,35 @@
       "context": "A to-do app has tasks with statuses and needs to mark one task as done.",
       "prompt": "What exact value changes when a task is completed?",
       "objectives": [
-        "Find one task",
-        "Change one status",
-        "Understand updating data"
+        {
+          "text": "Find one task",
+          "keywords": [
+            "find",
+            "task"
+          ]
+        },
+        {
+          "text": "Change one status",
+          "keywords": [
+            "status",
+            "change"
+          ]
+        },
+        {
+          "text": "Understand updating data",
+          "keywords": [
+            "update",
+            "modify"
+          ]
+        }
       ],
       "sampleReasoning": "Find the task by name and change its status from pending to done.",
       "effectivenessScore": 90,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "e5b52a26-a324-40eb-84f7-fb757eecdceb",
+      "_id": "7d104d64-7437-4a42-8713-099fa2858b8d",
       "title": "Small Receipt Builder",
       "difficulty": "Builder",
       "concepts": [
@@ -546,17 +1032,35 @@
       "context": "A cafe wants a short text receipt for one item and its price.",
       "prompt": "What pieces should a receipt function combine into a readable line?",
       "objectives": [
-        "Accept item and price",
-        "Format text",
-        "Return one receipt line"
+        {
+          "text": "Accept item and price",
+          "keywords": [
+            "item",
+            "price"
+          ]
+        },
+        {
+          "text": "Format text",
+          "keywords": [
+            "format",
+            "readable"
+          ]
+        },
+        {
+          "text": "Return one receipt line",
+          "keywords": [
+            "return",
+            "receipt"
+          ]
+        }
       ],
       "sampleReasoning": "Combine the item name and price into one clear sentence.",
       "effectivenessScore": 89,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "f57b40d9-7510-43dc-ae04-230a9d8331b3",
+      "_id": "3271e646-cd2c-4629-8e34-ccb5e91c6f8f",
       "title": "Choose Next Scenario",
       "difficulty": "Builder",
       "concepts": [
@@ -566,17 +1070,35 @@
       "context": "PyBe wants to choose an easier or harder next scenario based on one score.",
       "prompt": "What simple score rule could decide the next difficulty?",
       "objectives": [
-        "Set score thresholds",
-        "Branch by score",
-        "Return next level"
+        {
+          "text": "Set score thresholds",
+          "keywords": [
+            "threshold",
+            "score"
+          ]
+        },
+        {
+          "text": "Branch by score",
+          "keywords": [
+            "branch",
+            "depends on score"
+          ]
+        },
+        {
+          "text": "Return next level",
+          "keywords": [
+            "return",
+            "next level"
+          ]
+        }
       ],
       "sampleReasoning": "If the score is high choose harder, if low choose easier, otherwise stay similar.",
       "effectivenessScore": 88,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     },
     {
-      "_id": "5cf0ecd0-c690-45d4-a9b4-12e36403b125",
+      "_id": "41ae74c2-d607-498f-9224-0f6c46186ec6",
       "title": "Reflection Keyword Finder",
       "difficulty": "Builder",
       "concepts": [
@@ -586,15 +1108,198 @@
       "context": "PyBe reads a short reflection and checks whether the learner mentioned confusion.",
       "prompt": "What tiny search would detect that the reflection may need extra support?",
       "objectives": [
-        "Choose keywords",
-        "Search text",
-        "Return support signal"
+        {
+          "text": "Choose keywords",
+          "keywords": [
+            "keyword",
+            "confused"
+          ]
+        },
+        {
+          "text": "Search text",
+          "keywords": [
+            "search",
+            "reflection"
+          ]
+        },
+        {
+          "text": "Return support signal",
+          "keywords": [
+            "return",
+            "flag"
+          ]
+        }
       ],
       "sampleReasoning": "Look for words like confused or stuck and flag the reflection if they appear.",
       "effectivenessScore": 87,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-06-21T21:02:29.325Z",
+      "updatedAt": "2026-06-21T21:02:29.325Z"
     }
   ],
-  "sessions": []
+  "sessions": [
+    {
+      "_id": "a29db8e9-2732-4a3d-9069-ea5e879333f6",
+      "learnerName": "Guest learner",
+      "scenario": "111c52a1-a1eb-430a-b8d1-9288fceb3d55",
+      "reasoning": "numerical value as bag weight | it is a label | I would store it in a variable so the computer can remember the weight",
+      "promptText": "",
+      "abstractionMap": [
+        {
+          "pattern": "variables",
+          "pythonConcept": "variables",
+          "explanation": "You named and stored a value, which is exactly what a Python variable does.",
+          "matchedKeywords": [
+            "store",
+            "remember",
+            "value",
+            "variable",
+            "label"
+          ]
+        }
+      ],
+      "generatedCode": "bag_weight = 4.2\n\nprint(bag_weight)",
+      "codeExplanation": "Your guided answers map to Python like this: variables becomes variables.",
+      "promptScore": 85,
+      "promptFeedback": [
+        "Try naming a concrete example value or variable name."
+      ],
+      "reflection": "",
+      "misconceptions": [],
+      "masterySignals": [
+        "Recognized variables",
+        "Guided reasoning maturity is developing"
+      ],
+      "conversationId": "2a249dcf-69e2-4afb-b579-d21e7b019b57",
+      "createdAt": "2026-06-21T21:05:31.038Z",
+      "updatedAt": "2026-06-21T21:05:31.038Z"
+    }
+  ],
+  "conversations": [
+    {
+      "_id": "2a249dcf-69e2-4afb-b579-d21e7b019b57",
+      "scenarioId": "111c52a1-a1eb-430a-b8d1-9288fceb3d55",
+      "learnerName": "Guest learner",
+      "status": "completed",
+      "objectiveIndex": 2,
+      "attemptsOnObjective": 0,
+      "turns": [
+        {
+          "_id": "dbeae414-14aa-43c3-a5ad-eb1f83ac0574",
+          "role": "system",
+          "objectiveIndex": 0,
+          "moveType": "probe",
+          "text": "What single piece of information would you store so the computer can remember the bag weight?",
+          "classification": null,
+          "matchedConcepts": [],
+          "createdAt": "2026-06-21T21:03:15.779Z"
+        },
+        {
+          "_id": "a7fce681-d88f-4c4e-b902-31c6447533e7",
+          "role": "learner",
+          "objectiveIndex": 0,
+          "moveType": "answer",
+          "text": "numerical value as bag weight",
+          "classification": "solid",
+          "matchedConcepts": [
+            "weight",
+            "value"
+          ],
+          "score": 2,
+          "createdAt": "2026-06-21T21:04:01.883Z"
+        },
+        {
+          "_id": "de94151c-9daf-42fc-bc36-609db58c279c",
+          "role": "system",
+          "objectiveIndex": 1,
+          "moveType": "transition",
+          "text": "Next: Give the value a name. Building on that, what would you do here?",
+          "classification": null,
+          "matchedConcepts": [],
+          "createdAt": "2026-06-21T21:04:01.883Z"
+        },
+        {
+          "_id": "e1f26b4c-fef2-46b8-a7ad-cd34a97168e8",
+          "role": "learner",
+          "objectiveIndex": 1,
+          "moveType": "answer",
+          "text": "i will name the variable as bag_weight.",
+          "classification": "partial",
+          "matchedConcepts": [
+            "name"
+          ],
+          "score": 1,
+          "createdAt": "2026-06-21T21:04:52.091Z"
+        },
+        {
+          "_id": "7e5d9ee2-bcdf-4484-8e0e-04126dd385ba",
+          "role": "system",
+          "objectiveIndex": 1,
+          "moveType": "hint",
+          "text": "You're close — you mentioned name. Now connect that directly to \"Give the value a name\".",
+          "classification": null,
+          "matchedConcepts": [],
+          "createdAt": "2026-06-21T21:04:52.091Z"
+        },
+        {
+          "_id": "3c5d05a9-9729-426e-9360-06f63884ef94",
+          "role": "learner",
+          "objectiveIndex": 1,
+          "moveType": "answer",
+          "text": "it is a label",
+          "classification": "partial",
+          "matchedConcepts": [
+            "label"
+          ],
+          "score": 1,
+          "createdAt": "2026-06-21T21:05:02.725Z"
+        },
+        {
+          "_id": "4162cfca-6189-4478-9266-a39a3b1f6f8e",
+          "role": "system",
+          "objectiveIndex": 1,
+          "moveType": "hint",
+          "text": "Let's move forward with what you have for \"Give the value a name\" and continue.",
+          "classification": null,
+          "matchedConcepts": [],
+          "createdAt": "2026-06-21T21:05:02.725Z"
+        },
+        {
+          "_id": "749131e6-9f9a-4376-8c4a-8cafd00b8358",
+          "role": "system",
+          "objectiveIndex": 2,
+          "moveType": "transition",
+          "text": "Next: Connect naming to a variable. Building on that, what would you do here?",
+          "classification": null,
+          "matchedConcepts": [],
+          "createdAt": "2026-06-21T21:05:02.725Z"
+        },
+        {
+          "_id": "8a1dbc44-0c2f-44a0-859e-e703ac0df47f",
+          "role": "learner",
+          "objectiveIndex": 2,
+          "moveType": "answer",
+          "text": "I would store it in a variable so the computer can remember the weight",
+          "classification": "solid",
+          "matchedConcepts": [
+            "variable",
+            "store"
+          ],
+          "score": 2,
+          "createdAt": "2026-06-21T21:05:31.033Z"
+        },
+        {
+          "_id": "06fbf7dc-d96a-4f06-aba1-e33980681494",
+          "role": "system",
+          "objectiveIndex": 2,
+          "moveType": "recap",
+          "text": "Nice work — you walked through all 3 steps for \"Bag Weight Label\" (2/4 answered solidly on the first or second try). Here is what your reasoning maps to in Python.",
+          "classification": null,
+          "matchedConcepts": [],
+          "createdAt": "2026-06-21T21:05:31.033Z"
+        }
+      ],
+      "createdAt": "2026-06-21T21:03:15.780Z",
+      "updatedAt": "2026-06-21T21:05:31.034Z"
+    }
+  ]
 }
