@@ -37,21 +37,25 @@ function App() {
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [streakData, setStreakData] = useState({ streak: 1, totalXP: 0 });
+  const [xpToast, setXpToast] = useState(null);
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
   async function refresh() {
     const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
-    const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
+    const [scenarioData, sessionData, analyticsData, roadmapData, streakResponse] = await Promise.all([
       api(`/scenarios?${params}`),
       api('/sessions'),
       api('/analytics'),
-      api('/roadmap')
+      api('/roadmap'),
+      api('/analytics/streak?learnerName=' + encodeURIComponent(form.learnerName || 'Guest learner'))
     ]);
     setScenarios(scenarioData);
     setSessions(sessionData);
     setAnalytics(analyticsData);
     setRoadmap(roadmapData);
+    setStreakData(streakResponse);
     setSelected((current) => current || scenarioData[0] || null);
     setLoading(false);
   }
@@ -59,6 +63,12 @@ function App() {
   useEffect(() => {
     refresh().catch(console.error);
   }, [filters.q, filters.difficulty, filters.concept]);
+
+  useEffect(() => {
+    if (!xpToast) return;
+    const timer = window.setTimeout(() => setXpToast(null), 2200);
+    return () => window.clearTimeout(timer);
+  }, [xpToast]);
 
   async function submitSession(event) {
     event.preventDefault();
@@ -71,6 +81,10 @@ function App() {
       });
       setActiveResult(result);
       setForm({ ...form, reasoning: '', promptText: '', reflection: '' });
+      const xpGain = result.xp || 0;
+      if (xpGain > 0) {
+        setXpToast(`+${xpGain} XP • ${result.streak || 1} day streak`);
+      }
       await refresh();
     } finally {
       setSubmitting(false);
@@ -139,8 +153,12 @@ function App() {
             <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
             <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
             <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
+            <span className="streak-badge">🔥 {streakData.streak || 1}<small>Streak</small></span>
+            <span className="streak-badge">⭐ {streakData.totalXP || 0}<small>XP</small></span>
           </div>
         </header>
+
+        {xpToast && <div className="xp-toast">{xpToast}</div>}
 
         <div className="main-grid">
           <section className="panel learning-panel">
