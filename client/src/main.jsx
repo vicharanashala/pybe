@@ -8,15 +8,26 @@ import {
   Lightbulb,
   MessageSquareText,
   Play,
-  Route,
+  Route as RouteIcon,
   Search,
   Send,
   Sparkles
 } from 'lucide-react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import MinecraftList from './pages/MinecraftList/MinecraftList';
+
 import './styles.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
+/**
+ * Helper function to perform API requests to the backend.
+ * 
+ * @param {string} path - The API endpoint path (e.g., '/scenarios').
+ * @param {Object} [options] - Optional fetch configuration options (e.g., method, body).
+ * @returns {Promise<any>} - A promise that resolves to the JSON response data.
+ * @throws {Error} - Throws an error if the response is not OK, with the response text as the message.
+ */
 async function api(path, options) {
   const response = await fetch(`${API_URL}${path}`, {
     headers: { 'Content-Type': 'application/json' },
@@ -26,6 +37,12 @@ async function api(path, options) {
   return response.json();
 }
 
+/**
+ * Main application component representing the AI-native learning journey dashboard.
+ * Handles state for scenarios, sessions, analytics, and user interactions.
+ * 
+ * @returns {JSX.Element} The rendered PyBe Dashboard UI.
+ */
 function App() {
   const [scenarios, setScenarios] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -40,26 +57,44 @@ function App() {
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
+  /**
+   * Fetches the latest data from the backend to refresh the dashboard state.
+   * Loads scenarios, sessions, analytics, and the roadmap concurrently.
+   * Includes error handling to prevent infinite loading if the backend is unreachable.
+   * 
+   * @returns {Promise<void>} Resolves when the dashboard state has been updated.
+   */
   async function refresh() {
-    const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
-    const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
-      api(`/scenarios?${params}`),
-      api('/sessions'),
-      api('/analytics'),
-      api('/roadmap')
-    ]);
-    setScenarios(scenarioData);
-    setSessions(sessionData);
-    setAnalytics(analyticsData);
-    setRoadmap(roadmapData);
-    setSelected((current) => current || scenarioData[0] || null);
-    setLoading(false);
+    try {
+      const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
+      const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
+        api(`/scenarios?${params}`),
+        api('/sessions'),
+        api('/analytics'),
+        api('/roadmap')
+      ]);
+      setScenarios(scenarioData);
+      setSessions(sessionData);
+      setAnalytics(analyticsData);
+      setRoadmap(roadmapData);
+      setSelected((current) => current || scenarioData[0] || null);
+    } catch (error) {
+      console.error("Failed to load dashboard data. Is the backend running?", error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
     refresh().catch(console.error);
   }, [filters.q, filters.difficulty, filters.concept]);
 
+  /**
+   * Submits a new learning session to the backend for AI evaluation.
+   * 
+   * @param {React.FormEvent<HTMLFormElement>} event - The form submission event.
+   * @returns {Promise<void>} Resolves when the submission is complete and the dashboard is refreshed.
+   */
   async function submitSession(event) {
     event.preventDefault();
     if (!selected || !form.reasoning.trim()) return;
@@ -89,6 +124,28 @@ function App() {
             <span>Scenario-first Python</span>
           </div>
         </div>
+
+        <Link to="/minecraft-list" style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '8px',
+          padding: '12px',
+          backgroundColor: '#8b8b8b',
+          color: '#ffffff',
+          textDecoration: 'none',
+          fontWeight: 'bold',
+          fontSize: '16px',
+          fontFamily: '"VT323", "Courier New", Courier, monospace',
+          textShadow: '2px 2px 0px #3a3a3a',
+          border: '4px solid #1e1e1e',
+          boxShadow: 'inset -4px -4px 0px 0px #5a5a5a, inset 4px 4px 0px 0px #b6b6b6, 0 6px 0px rgba(0,0,0,0.2)',
+          transition: 'transform 0.1s ease, box-shadow 0.1s ease',
+          marginBottom: '16px',
+          cursor: 'pointer'
+        }}>
+          <Play size={18} fill="white" /> PLAY MINECRAFT LISTS
+        </Link>
 
         <label className="search">
           <Search size={18} />
@@ -199,7 +256,7 @@ function App() {
             <Analytics analytics={analytics} />
           </div>
           <div className="panel">
-            <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
+            <div className="section-title"><RouteIcon size={20} /><h2>Roadmap</h2></div>
             <Roadmap roadmap={roadmap} />
           </div>
           <div className="panel">
@@ -212,6 +269,11 @@ function App() {
   );
 }
 
+/**
+ * Component to display a placeholder when no AI Mentor output is available.
+ * 
+ * @returns {JSX.Element} The empty state UI.
+ */
 function EmptyResult() {
   return (
     <div className="empty">
@@ -221,6 +283,13 @@ function EmptyResult() {
   );
 }
 
+/**
+ * Component to render the detailed results from an AI Mentor evaluation.
+ * 
+ * @param {Object} props - The component props.
+ * @param {Object} props.result - The AI evaluation result object containing scores, mappings, and feedback.
+ * @returns {JSX.Element} The rendered mentor output UI.
+ */
 function Result({ result }) {
   return (
     <div className="result-stack">
@@ -252,6 +321,13 @@ function Result({ result }) {
   );
 }
 
+/**
+ * Component to visualize the learner's analytics and concept mastery.
+ * 
+ * @param {Object} props - The component props.
+ * @param {Object} props.analytics - The analytics data object containing concept counts.
+ * @returns {JSX.Element} The rendered analytics UI.
+ */
 function Analytics({ analytics }) {
   const concepts = Object.entries(analytics?.conceptCounts || {});
   return (
@@ -267,6 +343,13 @@ function Analytics({ analytics }) {
   );
 }
 
+/**
+ * Component to display the learner's recommended learning roadmap.
+ * 
+ * @param {Object} props - The component props.
+ * @param {Array<Object>} props.roadmap - An array of roadmap phase objects.
+ * @returns {JSX.Element} The rendered roadmap UI.
+ */
 function Roadmap({ roadmap }) {
   return (
     <div className="roadmap">
@@ -284,6 +367,13 @@ function Roadmap({ roadmap }) {
   );
 }
 
+/**
+ * Component to display a list of the user's recent learning sessions.
+ * 
+ * @param {Object} props - The component props.
+ * @param {Array<Object>} props.sessions - An array of session objects.
+ * @returns {JSX.Element} The rendered session list UI.
+ */
 function SessionList({ sessions }) {
   return (
     <div className="sessions">
@@ -300,4 +390,21 @@ function SessionList({ sessions }) {
   );
 }
 
-createRoot(document.getElementById('root')).render(<App />);
+/**
+ * Root component responsible for providing client-side routing.
+ * Manages navigation between the main AI dashboard and the DataVille modules.
+ * 
+ * @returns {JSX.Element} The BrowserRouter wrapping the application routes.
+ */
+function Root() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/minecraft-list" element={<MinecraftList />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+createRoot(document.getElementById('root')).render(<Root />);
