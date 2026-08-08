@@ -1,0 +1,237 @@
+/* Learner "Build Your Own Case Study" theme — shares PyBe's dark-green
+   palette from ../styles.css (loaded first: .panel, .primary, .learning-form,
+   .code-block, .nav-link, .scenario) and extends it with playtest-specific
+   pieces: progress dots, options, fill-in-the-blank tokens. */
+
+.learner-shell {
+  min-height: 100vh;
+  padding-bottom: 48px;
+  display: grid;
+  align-content: start;
+  gap: 24px;
+}
+
+.learner-body {
+  padding: 0 28px;
+  display: grid;
+  gap: 22px;
+  max-width: 720px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.playtest {
+  display: grid;
+  gap: 18px;
+}
+
+.stage {
+  display: grid;
+  gap: 14px;
+}
+
+.cs-progress {
+  display: flex;
+  gap: 6px;
+}
+
+.cs-progress .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e4ddcb;
+}
+
+.cs-progress .dot.active { background: #17231f; }
+.cs-progress .dot.done { background: #d8f07c; border: 1px solid #7b9f27; }
+
+.options {
+  display: grid;
+  gap: 10px;
+}
+
+.option {
+  text-align: left;
+  padding: 13px 16px;
+  border-radius: 8px;
+  border: 1px solid #ded7cb;
+  background: #fffaf2;
+  cursor: pointer;
+  font-weight: 600;
+  color: #17201d;
+}
+
+.option:hover:not(:disabled) {
+  border-color: #385149;
+}
+
+.option.correct {
+  border-color: #7b9f27;
+  background: #e7f2cb;
+}
+
+.tokens {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.token {
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: 1px solid #ded7cb;
+  background: #fffaf2;
+  cursor: pointer;
+  font-weight: 700;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+.token:hover:not(.used) {
+  border-color: #385149;
+}
+
+.token.used {
+  border-color: #7b9f27;
+  background: #e7f2cb;
+  opacity: .6;
+  cursor: default;
+}
+
+.blank-progress {
+  font-size: .82rem;
+  color: #68736f;
+}
+
+.hint {
+  color: #a3441f;
+  font-weight: 600;
+  font-size: .9rem;
+}
+
+.primary.secondary {
+  background: #53615c;
+}
+
+.observe-prompt {
+  font-style: italic;
+  color: #33413c;
+  font-size: 1.02rem;
+}
+
+.guiding-question {
+  font-weight: 700;
+}
+
+.reveal {
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
+.scale-reflection {
+  border-left: 3px solid #d8f07c;
+  padding: 10px 12px 10px 14px;
+  font-weight: 700;
+  background: #f4f8e8;
+  border-radius: 0 8px 8px 0;
+}
+
+.practice-prompt {
+  font-weight: 600;
+}
+
+/* Rule 17's execution-order diagram (stage4.flowSteps) — a wrapping chain of
+   numbered boxes connected by arrows, built with plain flex/CSS rather than
+   a diagram library so it stays consistent with everything else here. */
+.flow-diagram {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.flow-step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.flow-step-box {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 10px;
+  align-items: start;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid #ded7cb;
+  background: #fffaf2;
+  max-width: 220px;
+}
+
+.flow-step-num {
+  grid-row: 1 / 3;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #17231f;
+  color: #d8f07c;
+  font-size: .78rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flow-step-label {
+  font-weight: 600;
+  font-size: .92rem;
+  color: #17201d;
+}
+
+.flow-step-note {
+  grid-column: 2;
+  font-size: .8rem;
+  color: #68736f;
+}
+
+.flow-arrow {
+  color: #7b9f27;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* Look-back navigation (PlaytestEngine.jsx) — lets a learner re-check an
+   earlier completed stage without losing progress on the current one. */
+.look-back-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: .84rem;
+  color: #68736f;
+}
+
+.look-back-bar button {
+  padding: 6px 12px;
+  font-size: .82rem;
+}
+
+.stage-peek {
+  border: 1px solid #7b9f27;
+  border-radius: 8px;
+  background: #f4f8e8;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.stage-peek-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stage-peek .option {
+  cursor: default;
+}
