@@ -1,0 +1,27 @@
+/* Minimal base reset, extracted from the original PyBe client/src/styles.css.
+   Only the generic, feature-agnostic rules are kept here (font stack, box-sizing,
+   body margin). The Story Learning Hub and each of its story modules ship their
+   own scoped CSS (hub.css, recursion.css, loops.css, functions.css, theme.css)
+   with their own :root variables, so no other rules from the original
+   styles.css are required for this module to function or look correct. */
+
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #17201d;
+  background: #f4f1ea;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
