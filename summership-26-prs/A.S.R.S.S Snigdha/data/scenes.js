@@ -1,0 +1,426 @@
+const scenesData = [
+  {
+    "id": 1,
+    "title": "Welcome to Takshashila",
+    "background": "assets/bg-takshashila.png",
+    "character": "assets/chanakya-neutral.png",
+    "characterName": "Chanakya",
+    "scrollVisible": false,
+    "dialogue": [
+      "Welcome, my young apprentice.",
+      "Today, I won't teach you about war...",
+      "I will teach you how kingdoms survive.",
+      "A kingdom rarely falls because of its enemies...",
+      "It falls because of poor organization."
+    ],
+    "interactive": false,
+    "buttons": [
+      {
+        "text": "Begin Challenge",
+        "action": "next"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "The Problem",
+    "background": "assets/bg-warehouse.png",
+    "character": "assets/accountant-worried.png",
+    "characterName": "Worried Accountant",
+    "scrollVisible": false,
+    "dialogue": [
+      "Acharya... every morning new supplies arrive.",
+      "Rice... Oil... Shields... Medicines...",
+      "I write each item on separate parchments...",
+      "But I lose them...",
+      "Sometimes I write the same thing twice.",
+      "The soldiers wait while I search."
+    ],
+    "interactive": false,
+    "buttons": [
+      {
+        "text": "Next",
+        "action": "next"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Think Like Chanakya",
+    "background": "assets/bg-warehouse.png",
+    "character": "assets/chanakya-thinking.png",
+    "characterName": "Chanakya",
+    "scrollVisible": false,
+    "dialogue": [],
+    "interactive": true,
+    "interactionType": "choice",
+    "question": "If you were the Royal Accountant, what would you do?",
+    "options": [
+      {
+        "id": "parchments",
+        "text": "📄 Keep separate parchments",
+        "feedback": "That would only create more confusion. Try thinking about keeping everything together.",
+        "action": "feedback",
+        "nextCharacter": "assets/chanakya-thinking.png"
+      },
+      {
+        "id": "scroll",
+        "text": "📜 Keep everything on one scroll",
+        "feedback": "Excellent.",
+        "action": "next",
+        "nextCharacter": "assets/chanakya-smile.png",
+        "extraDialogue": [
+          "Order begins when related things stay together."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "The Scroll",
+    "background": "assets/bg-warehouse.png",
+    "character": "assets/chanakya-smile.png",
+    "characterName": "Chanakya",
+    "scrollVisible": true,
+    "scrollItems": ["Rice", "Oil", "Shield", "Medicine"],
+    "dialogue": [
+      "One scroll.",
+      "Many supplies.",
+      "Easy to read.",
+      "Easy to update."
+    ],
+    "interactive": false,
+    "buttons": [
+      {
+        "text": "Next",
+        "action": "next"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Python Connection",
+    "background": "assets/bg-study.png",
+    "character": "assets/chanakya-neutral.png",
+    "characterName": "Chanakya",
+    "scrollVisible": true,
+    "scrollItems": ["Rice", "Oil", "Shield", "Medicine"],
+    "dialogue": [
+      "Programmers face the same problem.",
+      "Instead of supplies...",
+      "They organize data.",
+      "Python calls this a List."
+    ],
+    "interactive": false,
+    "codeDisplay": "Python List",
+    "buttons": [
+      {
+        "text": "Next",
+        "action": "next"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Create Your First List",
+    "background": "assets/bg-study.png",
+    "character": "assets/chanakya-neutral.png",
+    "characterName": "Chanakya",
+    "scrollVisible": true,
+    "scrollItems": [],
+    "dialogue": [
+      "A List stores multiple related items inside square brackets."
+    ],
+    "interactive": true,
+    "interactionType": "code-input-steps",
+    "substeps": [
+      {
+        "step": 1,
+        "type": "teach",
+        "instruction": "Learn: Create the supplies list containing 'Rice', 'Oil', 'Shield', and 'Medicine'. Click Run to execute:",
+        "codeTemplate": "supplies = [\"Rice\", \"Oil\", \"Shield\", \"Medicine\"]",
+        "expectedPattern": "a list assignment to `supplies` containing exactly [\"Rice\",\"Oil\",\"Shield\",\"Medicine\"] in that order, double or single quotes accepted, whitespace-insensitive.",
+        "scrollAction": {
+          "type": "set",
+          "items": ["Rice", "Oil", "Shield", "Medicine"]
+        }
+      },
+      {
+        "step": 2,
+        "type": "practice",
+        "instruction": "Practice: Complete the supplies list by adding the remaining items 'Shield' and 'Medicine' to the partial template:",
+        "codeTemplate": "supplies = [\"Rice\", \"Oil\", ",
+        "expectedPattern": "a list assignment to `supplies` containing exactly [\"Rice\",\"Oil\",\"Shield\",\"Medicine\"] in that order, double or single quotes accepted, whitespace-insensitive.",
+        "scrollAction": {
+          "type": "set",
+          "items": ["Rice", "Oil", "Shield", "Medicine"]
+        }
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "append()",
+    "background": "assets/bg-warehouse.png",
+    "character": "assets/chanakya-neutral.png",
+    "characterName": "Chanakya",
+    "scrollVisible": true,
+    "scrollItems": ["Rice", "Oil", "Shield", "Medicine"],
+    "dialogue": [
+      "A new shipment has arrived.",
+      "How shall we update our scroll?"
+    ],
+    "interactive": true,
+    "interactionType": "code-input-steps",
+    "substeps": [
+      {
+        "step": 1,
+        "type": "teach",
+        "instruction": "Learn: Append 'Horse' to the supplies list.",
+        "codeTemplate": "supplies.append(\"Horse\")",
+        "expectedPattern": "supplies.append(\"Horse\") with quotes and matching casing.",
+        "scrollAction": {
+          "type": "add",
+          "item": "Horse"
+        }
+      },
+      {
+        "step": 2,
+        "type": "practice",
+        "instruction": "Tiny Practice: Add 'Bow' to the list.",
+        "expectedPattern": "supplies.append(\"Bow\") with quotes and matching casing.",
+        "scrollAction": {
+          "type": "add",
+          "item": "Bow"
+        }
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "remove()",
+    "background": "assets/bg-warehouse.png",
+    "character": "assets/chanakya-neutral.png",
+    "characterName": "Chanakya",
+    "scrollVisible": true,
+    "scrollItems": ["Rice", "Oil", "Shield", "Medicine", "Horse", "Bow"],
+    "dialogue": [
+      "The scroll must reflect reality."
+    ],
+    "interactive": true,
+    "interactionType": "code-input-steps",
+    "substeps": [
+      {
+        "step": 1,
+        "type": "teach",
+        "instruction": "Learn: The army has used all the Oil. Remove 'Oil' from the scroll.",
+        "codeTemplate": "supplies.remove(\"Oil\")",
+        "expectedPattern": "supplies.remove(\"Oil\") with quotes and matching casing.",
+        "scrollAction": {
+          "type": "remove",
+          "item": "Oil"
+        }
+      },
+      {
+        "step": 2,
+        "type": "practice",
+        "instruction": "Tiny Practice: Remove 'Bow' from the scroll.",
+        "expectedPattern": "supplies.remove(\"Bow\") with quotes and matching casing.",
+        "scrollAction": {
+          "type": "remove",
+          "item": "Bow"
+        }
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "len()",
+    "background": "assets/bg-study.png",
+    "character": "assets/chanakya-neutral.png",
+    "characterName": "Chanakya",
+    "scrollVisible": true,
+    "scrollItems": ["Rice", "Shield", "Medicine", "Horse"],
+    "dialogue": [
+      "Before tomorrow's march... how many supplies remain?"
+    ],
+    "interactive": true,
+    "interactionType": "code-input",
+    "instruction": "Find the count of supplies on the list using len():",
+    "codeTemplate": "len(supplies)",
+    "expectedPattern": "len(supplies) - whitespace-insensitive, no other variable names accepted."
+  },
+  {
+    "id": 10,
+    "title": "Indexing",
+    "background": "assets/bg-study.png",
+    "character": "assets/chanakya-neutral.png",
+    "characterName": "Chanakya",
+    "scrollVisible": true,
+    "scrollItems": ["Rice", "Shield", "Medicine", "Horse"],
+    "dialogue": [
+      "Bring me the third item."
+    ],
+    "interactive": true,
+    "interactionType": "code-input",
+    "instruction": "Access the third item (remember indexing starts at 0):",
+    "codeTemplate": "supplies[2]",
+    "expectedPattern": "supplies[2] exactly (zero-indexed, third item)."
+  },
+  {
+    "id": 11,
+    "title": "Reverse Engineering",
+    "background": "assets/bg-study.png",
+    "character": "assets/chanakya-thinking.png",
+    "characterName": "Chanakya",
+    "scrollVisible": true,
+    "dialogue": [
+      "Let's see if you can work backwards.",
+      "Solve these three scroll puzzles."
+    ],
+    "interactive": true,
+    "interactionType": "reverse-engineering",
+    "substeps": [
+      {
+        "step": 1,
+        "question": "Which single command transformed the scroll?",
+        "initialScroll": ["Rice", "Oil", "Shield"],
+        "finalScroll": ["Rice", "Oil", "Shield", "Horse"],
+        "expectedPattern": "supplies.append(\"Horse\")",
+        "options": [
+          "supplies.append(\"Horse\")",
+          "supplies.push(\"Horse\")",
+          "supplies.remove(\"Horse\")",
+          "len(supplies)"
+        ]
+      },
+      {
+        "step": 2,
+        "question": "Which single command transformed the scroll?",
+        "initialScroll": ["Rice", "Oil", "Shield"],
+        "finalScroll": ["Rice", "Shield"],
+        "expectedPattern": "supplies.remove(\"Oil\")",
+        "options": [
+          "supplies.remove(\"Oil\")",
+          "supplies.pop(\"Oil\")",
+          "supplies = [\"Rice\", \"Shield\"]",
+          "supplies.append(\"Oil\")"
+        ]
+      },
+      {
+        "step": 3,
+        "question": "How many supplies remain?",
+        "initialScroll": ["Rice", "Shield", "Medicine"],
+        "finalScroll": ["Rice", "Shield", "Medicine"],
+        "expectedPattern": "len(supplies)",
+        "options": [
+          "len(supplies)",
+          "supplies.length",
+          "supplies[3]",
+          "count(supplies)"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Final Mission",
+    "background": "assets/bg-warehouse.png",
+    "character": "assets/chanakya-neutral.png",
+    "characterName": "Chanakya",
+    "scrollVisible": true,
+    "scrollItems": [],
+    "dialogue": [
+      "Tomorrow, the Mauryan army marches.",
+      "Organize the royal supply scroll."
+    ],
+    "interactive": true,
+    "interactionType": "final-mission",
+    "substeps": [
+      {
+        "step": 1,
+        "taskName": "Create a list with \"Rice\", \"Oil\", \"Shield\"",
+        "expectedPattern": "supplies = [\"Rice\", \"Oil\", \"Shield\"]",
+        "scrollAction": {
+          "type": "set",
+          "items": ["Rice", "Oil", "Shield"]
+        }
+      },
+      {
+        "step": 2,
+        "taskName": "Add \"Medicine\"",
+        "expectedPattern": "supplies.append(\"Medicine\")",
+        "scrollAction": {
+          "type": "add",
+          "item": "Medicine"
+        }
+      },
+      {
+        "step": 3,
+        "taskName": "Remove \"Oil\"",
+        "expectedPattern": "supplies.remove(\"Oil\")",
+        "scrollAction": {
+          "type": "remove",
+          "item": "Oil"
+        }
+      },
+      {
+        "step": 4,
+        "taskName": "Find the number of remaining supplies",
+        "expectedPattern": "len(supplies)",
+        "scrollAction": {
+          "type": "len"
+        }
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Wisdom Scroll",
+    "background": "assets/bg-takshashila.png",
+    "character": "assets/chanakya-smile.png",
+    "characterName": "Chanakya",
+    "scrollVisible": false,
+    "dialogue": [
+      "You have learned that when many related things need to stay together and change over time, a List is the right choice."
+    ],
+    "summaryList": [
+      "Created a List",
+      "Added items",
+      "Removed items",
+      "Counted items",
+      "Accessed items by position"
+    ],
+    "interactive": false,
+    "buttons": [
+      {
+        "text": "Next",
+        "action": "next"
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Completion",
+    "background": "assets/bg-takshashila.png",
+    "character": "assets/chanakya-smile.png",
+    "characterName": "Chanakya",
+    "scrollVisible": false,
+    "dialogue": [
+      "Every great strategist begins by bringing order to chaos."
+    ],
+    "interactive": true,
+    "interactionType": "completion",
+    "badge": "assets/badge-scroll-keeper.png",
+    "buttons": [
+      {
+        "text": "🔄 Replay Lesson",
+        "action": "replay"
+      },
+      {
+        "text": "➡ Continue to the Next Concept",
+        "action": "continue"
+      }
+    ]
+  }
+];

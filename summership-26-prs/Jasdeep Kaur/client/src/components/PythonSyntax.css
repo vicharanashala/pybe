@@ -1,0 +1,221 @@
+/* ==========================================================
+   POKO'S FOREST NOTEBOOK (PYTHON SYNTAX STYLING)
+   Studio Ghibli & Disney Storybook Warm Brown Aesthetics
+   ========================================================== */
+
+.syntax-notebook-wrapper {
+  width: 100%;
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+/* Outer Wooden Frame Card */
+.wooden-frame-card {
+  background: linear-gradient(135deg, #4A2E2B, #331F1C);
+  border: 5px solid #8D5B4C;
+  border-radius: 28px;
+  padding: 20px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+}
+
+/* Rich Warm Brown Lined Notebook Panel */
+.notebook-lined-paper {
+  background: linear-gradient(145deg, #3A231C, #251612);
+  border: 3px solid #D4A359;
+  border-radius: 20px;
+  padding: 24px 28px;
+  color: #FFFDD0;
+  box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.8), 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+/* Copper Binder Spiral Rings */
+.copper-spiral-rings {
+  position: absolute;
+  top: -15px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.copper-spiral-rings .ring {
+  width: 14px;
+  height: 28px;
+  background: linear-gradient(135deg, #B76E79, #8C404B);
+  border: 1px solid #FFE082;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.notebook-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  margin-top: 10px;
+}
+
+.handwritten-badge {
+  font-family: "Georgia", serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: #FFE082;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
+}
+
+.notebook-file-tag {
+  background: rgba(0, 0, 0, 0.4);
+  color: #FFE082;
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1.5px solid #D4A359;
+}
+
+.notebook-title-heading {
+  font-family: "Georgia", serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: #FFE082 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
+  margin-bottom: 4px;
+}
+
+.notebook-subtitle-text {
+  font-size: 14px;
+  color: #C5E1A5 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* Dark Mahogany Code Board */
+.lined-code-board {
+  background: rgba(20, 12, 10, 0.75);
+  border: 2px solid #8D5B4C;
+  border-radius: 16px;
+  padding: 18px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
+}
+
+.lined-code-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px dashed rgba(212, 163, 89, 0.3);
+  padding-bottom: 8px;
+}
+
+.margin-line-num {
+  font-family: monospace;
+  font-size: 13px;
+  color: #D4A359;
+  font-weight: 800;
+  width: 24px;
+}
+
+.interactive-tokens-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.notebook-code-token {
+  padding: 5px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tok-name {
+  color: #7EF3FF;
+  background: rgba(126, 243, 255, 0.12);
+  border: 1.5px solid rgba(126, 243, 255, 0.4);
+  font-weight: 800;
+}
+
+.tok-operator {
+  color: #FFE082;
+  background: rgba(255, 224, 130, 0.15);
+  border: 1.5px solid rgba(255, 224, 130, 0.5);
+  font-weight: 900;
+}
+
+.tok-value_str {
+  color: #A5D6A7;
+  background: rgba(165, 214, 167, 0.12);
+  border: 1.5px solid rgba(165, 214, 167, 0.4);
+  font-weight: 800;
+}
+
+.notebook-code-token:hover, .token-glowing-active {
+  background: #FFE082 !important;
+  color: #1A0E0A !important;
+  border-color: #F57F17 !important;
+  box-shadow: 0 0 16px rgba(255, 224, 130, 0.9);
+  transform: scale(1.06);
+}
+
+.token-inspector-scroll {
+  background: rgba(30, 18, 15, 0.9);
+  border: 2px solid #D4A359;
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.inspector-tag code {
+  background: #3E2723;
+  color: #FFE082;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: 800;
+  border: 1px solid #D4A359;
+}
+
+.inspector-desc {
+  font-size: 14px;
+  color: #FFFDD0;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.inspector-hint {
+  font-size: 13px;
+  color: #C5E1A5;
+  margin-top: 6px;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.inspector-placeholder-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 2px dashed #D4A359;
+  border-radius: 14px;
+  padding: 14px;
+  text-align: center;
+  font-size: 13px;
+  color: #FFE082;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.notebook-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+  padding-top: 8px;
+}

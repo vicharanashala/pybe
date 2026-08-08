@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Fira+Code:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', 'Outfit', system-ui, sans-serif;
+  scroll-behavior: smooth;
+  --bg-color: #FCFBF7;
+  --text-color: #2D3748;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Focus-visible for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid #8C1A2E;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.dark *:focus-visible {
+  outline-color: #D4AF37;
+}
+
+/* Skip to main content link for accessibility */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 16px;
+  z-index: 100;
+  padding: 8px 16px;
+  background: #8C1A2E;
+  color: white;
+  font-weight: 600;
+  border-radius: 0 0 8px 8px;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #E6DFD3;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #2C2D3F;
+}
+
+/* Indian manuscript scroll styling and borders */
+.manuscript-card {
+  position: relative;
+  border: 1px solid #E6DFD3;
+  background-color: #F6F3EB;
+}
+
+.dark .manuscript-card {
+  border-color: #2C2D3F;
+  background-color: #1C1D29;
+}
+
+.manuscript-border-double {
+  border: 6px double #D4AF37;
+}
+
+/* Micro-animations */
+@keyframes pulse-gold {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+  }
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2s infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Staggered fade-in for child elements */
+.animate-stagger > * {
+  opacity: 0;
+  animation: fadeIn 0.4s ease-out forwards;
+}
+.animate-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.animate-stagger > *:nth-child(2) { animation-delay: 0.1s; }
+.animate-stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.animate-stagger > *:nth-child(4) { animation-delay: 0.2s; }
+.animate-stagger > *:nth-child(5) { animation-delay: 0.25s; }
+.animate-stagger > *:nth-child(6) { animation-delay: 0.3s; }
+.animate-stagger > *:nth-child(7) { animation-delay: 0.35s; }
+.animate-stagger > *:nth-child(8) { animation-delay: 0.4s; }
+
+/* Gold shimmer effect */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Manuscript opening effect */
+@keyframes manuscriptOpen {
+  from { opacity: 0; transform: scale(0.96) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animate-manuscript-open {
+  animation: manuscriptOpen 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ===== Visual Novel Animations ===== */
+
+/* Idle breathing — gentle float for non-speaking characters */
+@keyframes vn-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scale(1.01); }
+}
+.vn-idle {
+  animation: vn-breathe 3.5s ease-in-out infinite;
+}
+
+/* Speaking glow pulse — the active character */
+@keyframes vn-speak-glow {
+  0%, 100% { box-shadow: 0 0 20px 4px rgba(212,175,55,0.3), 0 0 40px 8px rgba(212,175,55,0.1); }
+  50% { box-shadow: 0 0 30px 8px rgba(212,175,55,0.5), 0 0 60px 12px rgba(212,175,55,0.2); }
+}
+.vn-speaking {
+  animation: vn-speak-glow 1.5s ease-in-out infinite;
+  transform: scale(1.04);
+  z-index: 10;
+}
+
+/* Blur idle characters when someone is speaking */
+.vn-idle-blur {
+  filter: blur(1.5px) brightness(0.85);
+  transition: filter 0.4s ease;
+}
+
+/* Lip bounce for speaking character */
+@keyframes vn-lip-bounce {
+  0%, 100% { transform: scaleY(1); }
+  25% { transform: scaleY(1.08); }
+  50% { transform: scaleY(0.95); }
+  75% { transform: scaleY(1.04); }
+}
+.vn-lip-bounce {
+  animation: vn-lip-bounce 0.4s ease-in-out infinite;
+}
+
+/* Blink for idle characters */
+@keyframes vn-blink {
+  0%, 42%, 44%, 100% { opacity: 1; }
+  43% { opacity: 0.1; }
+}
+.vn-blink {
+  animation: vn-blink 4s ease-in-out infinite;
+}
+
+/* Typing cursor */
+@keyframes vn-cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.vn-typing-cursor::after {
+  content: '|';
+  animation: vn-cursor-blink 0.8s step-end infinite;
+  color: #D4AF37;
+  font-weight: 700;
+  margin-left: 1px;
+}
+
+/* Dialogue box slide up */
+@keyframes vn-dialogue-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.vn-dialogue-enter {
+  animation: vn-dialogue-in 0.3s ease-out forwards;
+}
+
+/* Character portrait card entrance */
+@keyframes vn-portrait-in {
+  from { opacity: 0; transform: scale(0.85) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.vn-portrait-enter {
+  animation: vn-portrait-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Scene background fade */
+@keyframes vn-scene-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.vn-scene-enter {
+  animation: vn-scene-fade 0.6s ease-out forwards;
+}
+
+/* Click-to-advance indicator */
+@keyframes vn-advance-pulse {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(4px); opacity: 1; }
+}
+.vn-advance-hint {
+  animation: vn-advance-pulse 1.2s ease-in-out infinite;
+}

@@ -1,0 +1,242 @@
+/* ==========================================================
+   STORYINTRO VINTAGE STORYBOOK 65/35 SPLIT STYLING
+   Studio Ghibli & Disney Inspired Sunlit Forest Theme
+   ========================================================== */
+
+.storybook-65-35-container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0.5rem auto;
+  display: grid;
+  grid-template-columns: 65fr 35fr;
+  gap: 20px;
+  align-items: stretch;
+  min-height: 560px;
+}
+
+/* LEFT PANEL (65%): Full-Height Illustrated Stage */
+.storybook-left-illustration-panel {
+  position: relative;
+  width: 100%;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 4px solid #D4A373;
+  box-shadow: 0 20px 45px rgba(141, 91, 76, 0.25), inset 0 0 30px rgba(229, 169, 59, 0.15);
+  background: #FFFDF5;
+  display: flex;
+}
+
+.illustration-stage-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.camera-zoom-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.full-height-story-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.storybook-particles-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.particle {
+  position: absolute;
+  opacity: 0.85;
+  animation: particleFloatAnim 6s ease-in-out infinite alternate;
+}
+
+.firefly { font-size: 20px; filter: drop-shadow(0 0 8px #e5a93b); }
+.leaf { font-size: 22px; }
+.butterfly { font-size: 24px; }
+
+.f1 { top: 20%; left: 15%; animation-delay: 0s; }
+.f2 { top: 35%; right: 25%; animation-delay: 1.8s; }
+.l1 { top: 15%; right: 15%; animation-delay: 0.5s; }
+.l2 { bottom: 25%; left: 20%; animation-delay: 3s; }
+.b1 { top: 50%; left: 10%; animation-delay: 2.2s; }
+
+@keyframes particleFloatAnim {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.9; }
+  100% { transform: translateY(-28px) rotate(180deg); opacity: 0.35; }
+}
+
+/* RIGHT PANEL (35%): Cream Paper Texture Card with Vintage Wooden Frame */
+.storybook-right-card-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.wooden-vintage-frame {
+  flex: 1;
+  background: linear-gradient(135deg, #FAEDCD, #F5EBE0);
+  border: 4px solid #D4A373;
+  border-radius: 26px;
+  padding: 10px;
+  box-shadow: 0 20px 45px rgba(141, 91, 76, 0.2), inset 0 0 20px rgba(229, 169, 59, 0.1);
+  display: flex;
+}
+
+.cream-paper-texture-card {
+  flex: 1;
+  background: linear-gradient(135deg, #FFFDF5, #FAEDCD);
+  border-radius: 18px;
+  padding: 22px 20px;
+  color: #3E2723;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: inset 0 0 20px rgba(212, 163, 115, 0.15);
+}
+
+.card-top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-tags {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.chapter-tag, .scene-step-tag {
+  font-size: 11px;
+  font-weight: 800;
+  color: #2D5A27;
+  background: rgba(135, 169, 107, 0.2);
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid #87A96B;
+  letter-spacing: 0.5px;
+}
+
+.skip-btn {
+  background: transparent;
+  border: none;
+  color: #5D4037;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.skip-btn:hover {
+  color: #2C1B18;
+  text-decoration: underline;
+}
+
+.card-progress-bar-track {
+  height: 6px;
+  width: 100%;
+  background: rgba(212, 163, 115, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #708238, #87A96B);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+.story-title {
+  font-family: serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #3E2723;
+  line-height: 1.25;
+}
+
+.speaker-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #5D4037;
+  letter-spacing: 0.5px;
+}
+
+.narration-paper-box {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(212, 163, 115, 0.4);
+  padding: 16px;
+  border-radius: 14px;
+  overflow-y: auto;
+  min-height: 140px;
+}
+
+.typed-narration-text {
+  font-family: "Georgia", serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #2C1B18;
+  white-space: pre-wrap;
+}
+
+.story-controls-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.large-next-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #87A96B, #556B2F);
+  border: 2px solid #A7F3D0;
+  box-shadow: 0 8px 25px rgba(135, 169, 107, 0.4);
+  border-radius: 14px;
+}
+
+.large-next-btn:hover {
+  background: linear-gradient(135deg, #708238, #3E4E1C);
+  color: #FFFFFF;
+}
+
+.secondary-controls-row {
+  display: flex;
+  gap: 8px;
+}
+
+.prev-scene-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 13px;
+  background: rgba(250, 237, 205, 0.8);
+  border: 1px solid #D4A373;
+  color: #5D4037;
+}
+
+.prev-scene-btn:hover:not(:disabled) {
+  background: #F5EBE0;
+}
+
+@media (max-width: 900px) {
+  .storybook-65-35-container {
+    grid-template-columns: 1fr;
+  }
+  .storybook-left-illustration-panel {
+    min-height: 380px;
+  }
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PyBe</title>
+    <!-- Official Pyodide Script -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+    <!-- Tailwind CSS for robust modern flexbox layouts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-[#FDFAF6] text-[#2D2A26] font-sans antialiased selection:bg-amber-200" style="background-color:#FDFAF6;">
+    <div id="root"></div>
+    <svg width="0" height="0" style="position: absolute;">
+      <filter id="liquid-glass">
+        <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+        <feSpecularLighting in="noise" specularConstant="1.2" specularExponent="20" lighting-color="#66FCF1" result="light">
+          <fePointLight x="150" y="150" z="50" />
+        </feSpecularLighting>
+        <feComposite in="light" in2="displaced" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
+      </filter>
+    </svg>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

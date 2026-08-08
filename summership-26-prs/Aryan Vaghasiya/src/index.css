@@ -1,0 +1,248 @@
+:root {
+  --bg-color: #fdfbf7;
+  --text-primary: #2d3436;
+  --text-secondary: #636e72;
+  --primary-accent: #ff7675;
+  --secondary-accent: #74b9ff;
+  --success-color: #55efc4;
+  --warning-color: #ffeaa7;
+  --surface-color: #ffffff;
+  --border-radius: 16px;
+  --transition-speed: 0.3s;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+#root {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 20px 0;
+}
+
+.app-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-accent);
+  letter-spacing: -0.5px;
+}
+
+.app-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+/* Grid for Case Studies */
+.case-studies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.case-card {
+  background-color: var(--surface-color);
+  padding: 24px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.case-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.case-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.case-desc {
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+/* Scenario Card */
+.scenario-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.card {
+  background-color: var(--surface-color);
+  padding: 32px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Scenario Header (Navigation) */
+.scenario-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  color: var(--secondary-accent);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.nav-btn:hover:not(:disabled) {
+  background-color: #f1f2f6;
+}
+
+.nav-btn:disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.home-btn {
+  color: var(--primary-accent);
+}
+
+.scenario-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* Text & Story */
+.story-text {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 32px;
+  white-space: pre-wrap;
+}
+
+/* Buttons */
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-btn {
+  background-color: transparent;
+  border: 2px solid var(--secondary-accent);
+  color: var(--text-primary);
+  padding: 16px 24px;
+  font-size: 1.1rem;
+  font-family: inherit;
+  font-weight: 600;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  text-align: left;
+}
+
+.option-btn:hover {
+  background-color: var(--secondary-accent);
+  color: white;
+  transform: translateX(4px);
+}
+
+.option-btn.start-btn {
+  background-color: var(--primary-accent);
+  border-color: var(--primary-accent);
+  color: white;
+  text-align: center;
+}
+
+.option-btn.start-btn:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+/* Feedback Box */
+.feedback-box {
+  margin-top: 24px;
+  padding: 16px;
+  background-color: var(--warning-color);
+  border-radius: 12px;
+  font-weight: 500;
+  color: #8c731e;
+  animation: slideIn 0.4s ease-out;
+}
+
+/* Snippets & Aha Moment */
+.pseudo-code {
+  background-color: #f1f2f6;
+  padding: 16px;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 1.1rem;
+  margin: 16px 0;
+  color: #2f3542;
+  white-space: pre-wrap;
+}
+
+.python-snippet {
+  background-color: #2f3542;
+  color: #f1f2f6;
+  padding: 16px;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 1.1rem;
+  margin: 16px 0;
+  white-space: pre-wrap;
+}
+
+.teaser-text {
+  font-style: italic;
+  color: var(--text-secondary);
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: slideIn 0.5s ease-out forwards;
+}

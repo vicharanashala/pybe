@@ -1,0 +1,98 @@
+/* ==========================================================
+   FOREST STAGE ENVIRONMENT (ORIGINAL CRISP GHIBLI BAMBOO FOREST)
+   No Blur • Clean Transparent Backdrop • Storybook Aesthetics
+   ========================================================== */
+
+.forest-stage-environment {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  padding: 24px 16px 60px;
+  overflow: hidden;
+  background: transparent !important;
+}
+
+/* Atmospheric Lighting Beams & Fog Mist */
+.forest-sunlight-beam {
+  position: absolute;
+  top: -10%;
+  left: 15%;
+  width: 70%;
+  height: 90%;
+  background: linear-gradient(135deg, rgba(255, 236, 179, 0.15) 0%, transparent 65%);
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+
+.forest-canopy-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 120px rgba(10, 20, 15, 0.5);
+  pointer-events: none;
+}
+
+/* Location Badge Signboard */
+.location-sign-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 860px;
+  margin: 0 auto 14px auto;
+}
+
+.forest-location-sign {
+  position: relative;
+  background: linear-gradient(135deg, #2D1A17, #3D221D);
+  border: 2.5px solid #F59E0B;
+  border-radius: 20px;
+  padding: 8px 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  z-index: 5;
+}
+
+.loc-icon {
+  font-size: 18px;
+}
+
+.loc-text {
+  font-family: "Georgia", serif;
+  font-size: 14px;
+  font-weight: 800;
+  color: #FDE68A;
+  letter-spacing: 0.5px;
+}
+
+/* Environmental Particle FX Layer */
+.forest-particles-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.leaf, .firefly, .butterfly, .bird {
+  position: absolute;
+  pointer-events: none;
+  font-size: 20px;
+}
+
+.bf-1 { top: 30%; left: 15%; }
+.bf-2 { top: 50%; right: 20%; }
+
+.bd-1 { top: 8%; left: -50px; font-size: 18px; }
+.bd-2 { top: 14%; left: -80px; font-size: 16px; }
+
+.leaf-1 { top: -20px; left: 20%; }
+.leaf-2 { top: -20px; left: 70%; }
+
+.ff-1 { top: 40%; left: 35%; }
+.ff-2 { top: 60%; left: 75%; }
+
+.forest-stage-content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+}

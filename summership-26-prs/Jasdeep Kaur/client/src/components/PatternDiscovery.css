@@ -1,0 +1,194 @@
+/* ==========================================================
+   PATTERN DISCOVERY MATCHING ACTIVITY (STORYBOOK STYLING)
+   Studio Ghibli & Disney Inspired Warm Forest Theme
+   ========================================================== */
+
+.pattern-discovery-wrapper {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.pattern-card {
+  padding: 26px 30px;
+  width: 100%;
+}
+
+.pattern-badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 5px 14px;
+  background: rgba(112, 130, 56, 0.3);
+  border: 1.5px solid #708238;
+  color: #FFE082;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.pattern-title {
+  font-family: "Georgia", serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: #FFE082;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.pattern-subtitle {
+  font-size: 16px;
+  color: #F5EBE0;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.pattern-desc {
+  font-size: 14px;
+  color: #C5E1A5;
+  line-height: 1.5;
+  margin-bottom: 22px;
+}
+
+/* Grid Layout */
+.pattern-grid-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.pattern-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pattern-column h3 {
+  font-size: 13px;
+  color: #FFE082;
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.pattern-node {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #4A2E2B, #331F1C);
+  border: 2.5px solid #8D5B4C;
+  border-radius: 16px;
+  color: #F5EBE0;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.pattern-node:hover {
+  background: linear-gradient(135deg, #5C3A36, #402824);
+  border-color: #FFE082;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.key-node.selected {
+  border-color: #FFE082 !important;
+  box-shadow: 0 0 20px rgba(255, 224, 130, 0.8) !important;
+  background: linear-gradient(135deg, #6E443F, #4A2E2B) !important;
+}
+
+.pattern-node.connected {
+  border-color: #81C784 !important;
+  background: linear-gradient(135deg, #2E7D32, #1B5E20) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.5) !important;
+}
+
+.conn-status {
+  margin-left: auto;
+  font-size: 12px;
+  color: #81C784;
+  font-weight: bold;
+}
+
+/* Connector Beams */
+.connector-lines-column {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  width: 70px;
+  align-items: center;
+}
+
+.connector-beam {
+  width: 100%;
+  height: 3px;
+  background: rgba(141, 91, 76, 0.4);
+  border-radius: 2px;
+  position: relative;
+}
+
+.active-beam {
+  background: linear-gradient(90deg, #708238, #87A96B);
+  box-shadow: 0 0 10px #87A96B;
+}
+
+.pulse-energy-dot {
+  width: 9px;
+  height: 9px;
+  background: #FFE082;
+  border-radius: 50%;
+  position: absolute;
+  top: -3px;
+  box-shadow: 0 0 8px #FFE082;
+}
+
+/* Shake Animation on Wrong Click */
+.shake-anim {
+  animation: nodeShake 0.4s ease;
+}
+
+@keyframes nodeShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+/* Success Box */
+.discovery-success-box {
+  background: linear-gradient(135deg, rgba(46, 125, 50, 0.35), rgba(27, 94, 32, 0.25));
+  border: 2px solid #81C784;
+  padding: 18px 22px;
+  border-radius: 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 22px;
+  color: #E8F5E9;
+}
+
+.discovery-success-box h3 {
+  color: #81C784;
+  font-family: "Georgia", serif;
+  font-size: 18px;
+}
+
+.highlight-insight {
+  font-size: 14px;
+  color: #FFE082;
+  font-weight: 700;
+}
+
+.pattern-footer {
+  display: flex;
+  justify-content: flex-end;
+}

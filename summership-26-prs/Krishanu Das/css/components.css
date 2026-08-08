@@ -1,0 +1,717 @@
+/* =========================================================
+   components.css
+   Reusable UI atoms: buttons, progress bar, quiz, badges
+   ========================================================= */
+
+/* ---------- Navigation Buttons ---------- */
+.nav-btn {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    background var(--transition-fast);
+  box-shadow: var(--shadow-soft);
+}
+
+.nav-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.nav-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.nav-btn-back {
+  background: var(--color-surface);
+  color: var(--color-maroon);
+  border: 1px solid var(--color-border);
+}
+
+.nav-btn-back:hover:not(:disabled) {
+  background: var(--color-parchment);
+}
+
+.nav-btn-next {
+  background: var(--color-maroon);
+  color: var(--color-gold-light);
+}
+
+.nav-btn-next:hover:not(:disabled) {
+  background: var(--color-maroon-dark);
+}
+
+/* ---------- Progress Bar ---------- */
+.progress-track {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  max-width: var(--max-content-width);
+}
+
+.progress-segment {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(245, 236, 217, 0.35);
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition-fast);
+}
+
+.progress-segment.completed {
+  background: var(--color-gold);
+}
+
+.progress-segment.active {
+  background: rgba(201, 147, 44, 0.5);
+}
+
+.progress-segment.active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-gold);
+  animation: pulseWidth 1.4s ease-in-out infinite;
+}
+
+@keyframes pulseWidth {
+  0% { transform: scaleX(0.2); transform-origin: left; }
+  50% { transform: scaleX(1); transform-origin: left; }
+  100% { transform: scaleX(0.2); transform-origin: left; }
+}
+
+/* CT sub-step ticks (labels now driven by CT_SUBSTEP_LABELS in lessonData.js) */
+.ct-subticks {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.ct-subtick {
+  flex: 1;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-dim);
+  border: 1px solid var(--color-border);
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  transition: all var(--transition-fast);
+}
+
+.ct-subtick.active {
+  background: var(--color-maroon);
+  color: var(--color-gold-light);
+  border-color: var(--color-maroon);
+}
+
+.ct-subtick.done {
+  background: var(--color-gold-light);
+  color: var(--color-maroon-dark);
+  border-color: var(--color-gold);
+}
+
+/* ---------- Generic Content Card (used inside steps) ---------- */
+.mini-card {
+  background: var(--color-surface-dim);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+}
+
+/* ---------- Quiz / Question Options ---------- */
+.question-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.option-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.option-btn {
+  text-align: left;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  transition: all var(--transition-fast);
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--color-gold);
+  background: var(--color-parchment);
+}
+
+.option-btn.selected {
+  border-color: var(--color-maroon);
+  background: var(--color-parchment-dark);
+  font-weight: 600;
+}
+
+.option-btn.correct {
+  border-color: var(--color-success);
+  background: var(--color-success-bg);
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+.option-btn.incorrect {
+  border-color: var(--color-error);
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  font-weight: 700;
+}
+
+/* ---------- Feedback Badges ---------- */
+.feedback-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  width: fit-content;
+}
+
+.feedback-badge.success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.feedback-badge.error {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+/* ---------- Reflection Textarea (non-code, free response) ---------- */
+.reflection-input {
+  width: 100%;
+  min-height: 120px;
+  padding: var(--space-md);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  resize: vertical;
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.reflection-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+/* =========================================================
+   NEW: ASSOCIATIVE MAPPING PEDAGOGY COMPONENTS
+   ========================================================= */
+
+/* ---------- Mapping Visual (animated province -> tax rows) ---------- */
+.mapping-visual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.mapping-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  opacity: 0;
+  transform: translateX(-12px);
+  animation: mappingRowIn 0.5s ease forwards;
+}
+
+@keyframes mappingRowIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mapping-key {
+  font-family: var(--font-story);
+  font-weight: 700;
+  color: var(--color-maroon);
+  min-width: 90px;
+}
+
+.mapping-arrow {
+  color: var(--color-gold);
+  font-size: 1.2rem;
+  font-weight: 700;
+  animation: arrowPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%, 100% { transform: translateX(0); opacity: 0.75; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+
+.mapping-value {
+  font-family: var(--font-code);
+  color: var(--color-ink-soft);
+  background: var(--color-surface-dim);
+  padding: 2px 10px;
+  border-radius: 6px;
+}
+
+/* ---------- Matching Activity Board ---------- */
+.matching-board {
+  display: flex;
+  gap: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+.matching-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.match-chip {
+  text-align: center;
+  font-weight: 600;
+}
+
+.match-chip.selected {
+  border-color: var(--color-gold);
+  background: var(--color-gold-light);
+  transform: scale(1.02);
+}
+
+/* ---------- Discovery Questions ---------- */
+.discovery-block {
+  margin-bottom: var(--space-md);
+}
+
+.discovery-followup {
+  margin-top: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-parchment);
+  border-left: 3px solid var(--color-gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-style: italic;
+  color: var(--color-ink-soft);
+}
+
+/* ---------- Retrieval Activity ---------- */
+.retrieval-prompt h3 {
+  color: var(--color-maroon-dark);
+}
+
+.retrieval-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.retrieval-btn {
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ---------- Reveal Legend (Story -> Python) ---------- */
+.reveal-legend {
+  margin-top: var(--space-md);
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.legend-row:last-child {
+  border-bottom: none;
+}
+
+.legend-story {
+  flex: 1;
+  font-family: var(--font-story);
+  color: var(--color-maroon);
+  font-weight: 600;
+}
+
+.legend-arrow {
+  color: var(--color-gold);
+  font-weight: 700;
+}
+
+.legend-python {
+  flex: 1;
+  font-family: var(--font-code);
+  color: var(--color-ink-soft);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .ct-subticks {
+    flex-wrap: wrap;
+  }
+
+  .ct-subtick {
+    flex: 1 1 45%;
+  }
+
+  .nav-btn {
+    padding: 8px 16px;
+    font-size: 0.88rem;
+  }
+
+  .matching-board {
+    flex-direction: column;
+  }
+
+  .mapping-row {
+    flex-wrap: wrap;
+  }
+
+  .legend-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+/* =========================================================
+   NEW: PYTHON SYNTAX SPLIT-SCREEN COMPONENTS
+   (code panel <-> Royal Tax Registry ledger book)
+   ========================================================= */
+
+/* ---------- Split Layout ---------- */
+.syntax-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+/* ---------- Left Panel: The Program ---------- */
+.syntax-code-panel {
+  background: #1e1710;
+  border: 1px solid #2b2118;
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.syntax-panel-label {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-gold-light);
+  letter-spacing: 0.5px;
+}
+
+.syntax-panel-sublabel {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: #b8a67d;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+.syntax-code-block {
+  font-family: var(--font-code);
+  font-size: 0.88rem;
+  color: #f3e9d2;
+  background: #14100a;
+  border-radius: 8px;
+  padding: 10px 14px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.syntax-code-line-active {
+  border-left: 3px solid var(--color-gold);
+  background: #241b13;
+}
+
+.syntax-code-output {
+  color: #8fd88f;
+}
+
+/* ---------- Right Panel: The Ledger Book ---------- */
+.syntax-ledger-panel {
+  background: var(--color-parchment);
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-image: repeating-linear-gradient(
+    var(--color-parchment) 0px,
+    var(--color-parchment) 27px,
+    var(--color-border) 28px
+  );
+}
+
+.ledger-book-title {
+  font-family: var(--font-story);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-maroon-dark);
+  margin-bottom: 4px;
+}
+
+.ledger-empty-note {
+  font-family: var(--font-story);
+  font-style: italic;
+  color: var(--color-ink-soft);
+}
+
+.ledger-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-story);
+  color: var(--color-ink);
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: background var(--transition-fast);
+}
+
+.ledger-key {
+  font-weight: 700;
+  color: var(--color-maroon);
+  min-width: 80px;
+}
+
+.ledger-dots {
+  color: var(--color-border);
+  flex-shrink: 0;
+}
+
+.ledger-value {
+  font-family: var(--font-story);
+  color: var(--color-ink-soft);
+}
+
+.ledger-entry-new {
+  animation: ledgerEntryAppear 0.6s ease;
+}
+
+@keyframes ledgerEntryAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ledger-entry-updated {
+  animation: ledgerEntryPulse 0.7s ease;
+}
+
+@keyframes ledgerEntryPulse {
+  0% { background: var(--color-gold-light); }
+  100% { background: transparent; }
+}
+
+.ledger-entry-highlight {
+  background: rgba(201, 147, 44, 0.25);
+}
+
+.ledger-entry-removed {
+  color: var(--color-error);
+  text-decoration: line-through;
+  opacity: 0.7;
+  animation: ledgerEntryFadeOut 0.8s ease;
+}
+
+@keyframes ledgerEntryFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0.7; }
+}
+
+/* ---------- Step Controls ---------- */
+.syntax-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-md);
+}
+
+.syntax-step-indicator {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  font-weight: 600;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .syntax-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   NEW: PYTHON SYNTAX SYNCHRONIZED DEMO COMPONENTS
+   (Royal Tax Registry ledger <-> Python dictionary, in sync)
+   ========================================================= */
+
+/* ---------- Announcement banner ---------- */
+.syntax-announcement-holder {
+  min-height: 1px;
+}
+
+.syntax-announcement {
+  background: var(--color-parchment-dark);
+  border-left: 4px solid var(--color-maroon);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-story);
+  font-style: italic;
+  color: var(--color-maroon-dark);
+  margin-bottom: var(--space-md);
+  animation: announcementFadeIn 0.5s ease;
+}
+
+@keyframes announcementFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Python code block, line by line ---------- */
+.syntax-code-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.code-line {
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+  color: #f3e9d2;
+  white-space: pre;
+}
+
+.code-entry-line {
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background var(--transition-fast);
+}
+
+.code-entry-value {
+  color: #e6c874;
+  transition: color var(--transition-fast);
+}
+
+.code-entry-line-highlight {
+  background: rgba(201, 147, 44, 0.28);
+}
+
+.code-entry-value-changed {
+  animation: codeValuePulse 0.8s ease;
+}
+
+@keyframes codeValuePulse {
+  0% { color: #ffffff; }
+  100% { color: #e6c874; }
+}
+
+/* ---------- Ledger value: strike-through then rewrite ---------- */
+.ledger-value-strike {
+  text-decoration: line-through;
+  color: var(--color-error);
+  opacity: 0.8;
+}
+
+.ledger-value-rewritten {
+  animation: ledgerRewrittenPulse 0.8s ease;
+}
+
+@keyframes ledgerRewrittenPulse {
+  0% {
+    color: var(--color-maroon);
+    transform: translateX(-2px);
+  }
+  100% {
+    color: var(--color-ink-soft);
+    transform: translateX(0);
+  }
+}
+/* =========================================================
+   NEW: PYTHON SYNTAX OPERATIONS-SEQUENCE ADDITIONS
+   ========================================================= */
+
+/* ---------- Typed line (character-by-character reveal) ---------- */
+.syntax-typed-holder {
+  margin-top: 8px;
+}
+
+.syntax-typed-line {
+  border-left: 3px solid var(--color-gold);
+  background: #241b13;
+  color: #f3e9d2;
+  position: relative;
+}
+
+.syntax-typed-line::after {
+  content: "▌";
+  color: var(--color-gold);
+  animation: typingCursorBlink 0.9s steps(1) infinite;
+}
+
+@keyframes typingCursorBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ---------- New / removed code lines ---------- */
+.code-entry-line-new {
+  animation: codeLineAppear 0.5s ease;
+}
+
+@keyframes codeLineAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.code-entry-line-removed {
+  animation: codeLineFadeOut 0.7s ease forwards;
+}
+
+@keyframes codeLineFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.15;
+    text-decoration: line-through;
+  }
+}

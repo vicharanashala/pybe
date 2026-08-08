@@ -1,0 +1,149 @@
+/* ==========================================================
+   SUCCESS / CHAPTER VICTORY SCREEN (DISNEY/PIXAR WOODEN THEME)
+   ========================================================== */
+
+.success-card {
+  max-width: 780px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 3rem 2.2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #5C3A21, #4A2E1A);
+  border: 4px solid #B9772B;
+  border-radius: 28px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.7), inset 0 0 35px rgba(224, 164, 58, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  color: #FFF5E8;
+}
+
+.success-confetti-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.confetti {
+  position: absolute;
+  font-size: 26px;
+  animation: confettiFloat 6s ease-in-out infinite alternate;
+}
+
+.c1 { top: 10%; left: 10%; animation-delay: 0s; }
+.c2 { top: 15%; right: 12%; animation-delay: 1s; }
+.c3 { top: 75%; left: 8%; animation-delay: 2s; }
+.c4 { top: 80%; right: 10%; animation-delay: 3s; }
+.c5 { top: 40%; left: 5%; animation-delay: 1.5s; }
+
+@keyframes confettiFloat {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(-20px) rotate(360deg); }
+}
+
+.eva-thank-avatar {
+  font-size: 64px;
+  filter: drop-shadow(0 0 20px rgba(224, 164, 58, 0.8));
+}
+
+.success-title {
+  font-family: "Georgia", serif;
+  font-size: clamp(30px, 5vw, 42px);
+  font-weight: 900;
+  color: #E0A43A;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.9);
+}
+
+.success-subtitle {
+  font-size: 18px;
+  color: #FFF5E8;
+  font-weight: 800;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  max-width: 650px;
+  line-height: 1.5;
+}
+
+.eva-dialogue-card {
+  background: rgba(112, 130, 56, 0.25);
+  border: 2px solid #87A96B;
+  padding: 18px 24px;
+  border-radius: 18px;
+  font-size: 16px;
+  color: #A5D6A7;
+  line-height: 1.6;
+  font-style: italic;
+  max-width: 620px;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.badge-unlocked-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: linear-gradient(145deg, #6B3E26, #4A2E1A);
+  border: 3px solid #E0A43A;
+  padding: 20px 28px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  color: #FFF5E8;
+}
+
+.badge-glow-ring {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: rgba(224, 164, 58, 0.2);
+  border: 2px solid #E0A43A;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(224, 164, 58, 0.6);
+}
+
+.badge-icon-large { font-size: 34px; }
+.badge-header-tag { font-size: 10px; font-weight: 900; color: #E0A43A; letter-spacing: 1px; }
+.badge-title-text { font-size: 22px; font-weight: 900; color: #FFFFFF; }
+.badge-desc-text { font-size: 13px; color: #FFF5E8; font-weight: 600; }
+
+.rewards-summary-bar {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  background: rgba(30, 18, 14, 0.85);
+  border: 2px solid #B9772B;
+  padding: 18px;
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.reward-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #E0A43A;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.stat-val { font-size: 20px; font-weight: 900; }
+.xp-color { color: #A5D6A7; }
+.coin-color { color: #FECA57; }
+.rank-color { color: #7EF3FF; }
+
+.success-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}

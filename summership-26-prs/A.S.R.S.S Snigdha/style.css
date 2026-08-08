@@ -1,0 +1,1198 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* CSS Reset & Variables */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg-color: #0b0d10;
+    --gold: #d4af37;
+    --gold-light: #f3e5ab;
+    --gold-dark: #aa7c11;
+    --text-light: #e2e8f0;
+    --text-muted: #8a99ad;
+    --panel-bg: rgba(18, 22, 28, 0.88);
+    --border-gold: rgba(212, 175, 55, 0.35);
+    --accent-red: #ef4444;
+    --accent-green: #10b981;
+    --font-royal: 'Cinzel', Georgia, serif;
+    --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    color: var(--text-light);
+    font-family: var(--font-sans);
+    overflow: hidden;
+}
+
+#app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* Background Layers */
+.bg-layer-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.bg-layer.active {
+    opacity: 1;
+}
+
+.bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(11, 13, 16, 0.15) 0%, rgba(11, 13, 16, 0.4) 50%, rgba(11, 13, 16, 0.92) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Title Header */
+.game-header {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    background: rgba(245, 237, 214, 0.92); /* Cream/parchment background */
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    padding: 8px 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.game-title {
+    font-family: var(--font-royal);
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #000000; /* Bold Black */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.game-subtitle {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #4a2e1b; /* Dark brown */
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.badge-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+/* Prologue Cinematic Text Overlay */
+.prologue-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 600px;
+    text-align: center;
+    color: var(--gold-light);
+    font-family: var(--font-royal);
+    font-size: 1.45rem;
+    font-style: italic;
+    z-index: 1010;
+    line-height: 2;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.prologue-line {
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.prologue-line.visible {
+    opacity: 1;
+}
+
+/* Responsive adjustment for small viewports */
+@media (max-width: 480px) {
+    .prologue-container {
+        font-size: 1.15rem;
+        gap: 10px;
+        width: 90%;
+    }
+}
+
+/* Character Portrait */
+.character-container {
+    position: absolute;
+    bottom: 210px;
+    left: 10%;
+    height: 52%;
+    width: 32%;
+    min-width: 250px;
+    max-width: 400px;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.char-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+    transform: translateY(15px);
+}
+
+.char-layer.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Scroll Panel */
+.scroll-panel {
+    position: absolute;
+    bottom: 30px;
+    right: 5%;
+    width: 450px;
+    height: 72%;
+    min-height: 480px;
+    max-height: 660px;
+    z-index: 4;
+    background-image: url('assets/scroll.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 82px 62px 92px 62px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15), opacity 0.4s ease;
+    transform: scale(0.85) translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.scroll-panel.visible {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.scroll-header {
+    font-family: var(--font-royal);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #4a2e1b;
+    margin-bottom: 24px;
+    border-bottom: 1.5px dashed rgba(74, 46, 27, 0.35);
+    width: 100%;
+    text-align: center;
+    padding-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.scroll-items-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    flex: 1 1 0%;
+    min-height: 0;
+    padding: 0 5px;
+    transition: gap 0.3s ease;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(74, 46, 27, 0.3) rgba(74, 46, 27, 0.05);
+}
+
+/* Compact layout for scroll items when list is long (5+ elements) */
+.scroll-items-container.compact {
+    gap: 8px;
+}
+
+.scroll-items-container.compact .scroll-item {
+    font-size: 1.08rem;
+    padding: 5px 12px;
+}
+
+/* Scroll Custom Scrollbar */
+.scroll-items-container::-webkit-scrollbar {
+    width: 5px;
+}
+.scroll-items-container::-webkit-scrollbar-track {
+    background: rgba(74, 46, 27, 0.05);
+}
+.scroll-items-container::-webkit-scrollbar-thumb {
+    background: rgba(74, 46, 27, 0.3);
+    border-radius: 3px;
+}
+
+.scroll-item {
+    font-family: monospace;
+    font-size: 1.22rem;
+    font-weight: 700;
+    color: #3b2314;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 8px 14px;
+    background: rgba(74, 46, 27, 0.06);
+    border-radius: 4px;
+    border-left: 3px solid rgba(74, 46, 27, 0.4);
+    animation: slideInItem 0.35s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+.scroll-item.highlighted {
+    background: rgba(16, 185, 129, 0.25); /* High-contrast emerald green background */
+    border-left-color: #10b981; /* High-contrast green edge */
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+    transform: scale(1.03);
+}
+
+@keyframes slideInItem {
+    from {
+        opacity: 0;
+        transform: translateX(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.scroll-empty-text {
+    font-family: var(--font-sans);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: rgba(74, 46, 27, 0.6);
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* UI Panel Container */
+.ui-container {
+    width: 100%;
+    z-index: 5;
+    padding: 0 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    pointer-events: none; /* Let clicks/scrolls pass through empty margins */
+}
+
+.dialogue-panel {
+    width: 100%;
+    max-width: 960px;
+    background: var(--panel-bg);
+    border: 1px solid var(--border-gold);
+    border-radius: 12px;
+    padding: 24px 28px 45px 28px; /* Reserved bottom spacing to clear continue indicator */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 10px;
+    pointer-events: auto; /* Capture clicks inside dialogue */
+    transition: max-width 0.4s cubic-bezier(0.19, 1, 0.22, 1), 
+                min-height 0.4s cubic-bezier(0.19, 1, 0.22, 1), 
+                align-self 0.4s ease;
+}
+
+/* Adjust dialogue box width on the left when scroll is visible to avoid overlapping (desktops) */
+@media (min-width: 769px) {
+    .scroll-active .dialogue-panel {
+        max-width: 680px;
+        align-self: flex-start;
+        margin-left: 5%;
+        min-height: 120px;
+        padding: 20px 28px;
+    }
+}
+
+.character-name {
+    font-family: var(--font-royal);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dialogue-text-box {
+    flex-grow: 1;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    cursor: pointer;
+    font-weight: 400;
+    padding-bottom: 15px;
+}
+
+.continue-indicator {
+    position: absolute;
+    bottom: 15px;
+    right: 28px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gold);
+    opacity: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.continue-indicator.visible {
+    opacity: 1;
+    animation: pulseIndicator 1.6s infinite ease-in-out;
+}
+
+.back-btn-floating,
+.forward-btn-floating {
+    position: absolute;
+    top: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(245, 237, 214, 0.92); /* Match header parchment */
+    border: 2px solid var(--gold);
+    color: #4a2e1b; /* Match brown text */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.2s, background-color 0.2s, color 0.2s, opacity 0.3s;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.back-btn-floating {
+    left: 20px;
+}
+
+.forward-btn-floating {
+    right: 20px;
+}
+
+.back-btn-floating.visible,
+.forward-btn-floating.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.back-btn-floating:hover,
+.forward-btn-floating:hover {
+    background: #4a2e1b;
+    color: var(--gold-light);
+    transform: scale(1.08);
+}
+
+@keyframes pulseIndicator {
+    0%, 100% { opacity: 0.3; transform: translateX(0); }
+    50% { opacity: 1; transform: translateX(3px); }
+}
+
+/* Wood Button */
+.wood-button {
+    background-image: url('assets/button-wood.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border: none;
+    color: #42220f;
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 1.05rem;
+    padding: 14px 34px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s ease, filter 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    user-select: none;
+}
+
+.wood-button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.wood-button:active {
+    transform: translateY(1px);
+    filter: brightness(0.9);
+}
+
+.action-btn-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 4px; /* Pull button slightly higher towards the terminal */
+    margin-bottom: 25px; /* Push button up to clear the continue indicator text */
+}
+
+/* Choices Panel */
+.choice-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.choice-button {
+    background: rgba(22, 28, 36, 0.75);
+    border: 1.5px solid rgba(212, 175, 55, 0.3);
+    color: var(--text-light);
+    border-radius: 8px;
+    padding: 16px 24px;
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.choice-button:hover {
+    background: rgba(212, 175, 55, 0.12);
+    border-color: var(--gold);
+    transform: translateX(6px);
+}
+
+.choice-button:active {
+    background: rgba(212, 175, 55, 0.2);
+}
+
+/* Interactive Input Code Panel */
+.interactive-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 14px;
+    animation: fadeInUp 0.4s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.instruction-text {
+    font-size: 0.95rem;
+    color: var(--gold-light);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.terminal-container {
+    background: #06080b;
+    border: 1px solid #1a2333;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.8);
+}
+
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    color: #475569;
+    font-size: 0.75rem;
+    border-bottom: 1px solid #111827;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.terminal-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 1.1rem;
+    line-height: 1.4;
+}
+
+.terminal-prompt {
+    color: #38bdf8;
+    font-weight: 700;
+    user-select: none;
+}
+
+.terminal-input-wrapper {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.code-input-textarea {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #38bdf8;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 100%;
+    resize: none;
+    height: 26px;
+    line-height: 26px;
+    white-space: pre;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.code-input-textarea::-webkit-scrollbar {
+    display: none;
+}
+
+.code-input-placeholder {
+    color: #334155;
+}
+
+.terminal-feedback {
+    margin-top: 12px;
+    padding: 12px 16px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    display: none;
+    font-family: monospace;
+}
+
+.terminal-feedback.success {
+    display: block;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: #34d399;
+}
+
+.terminal-feedback.error {
+    display: block;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: #f87171;
+}
+
+/* Reverse Engineering Panel */
+.quiz-display {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid #1e293b;
+    border-radius: 6px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    justify-content: space-around;
+}
+
+.quiz-step-title {
+    color: var(--gold-light);
+    font-family: var(--font-royal);
+    font-weight: 700;
+}
+
+.quiz-scroll-preview {
+    font-family: monospace;
+    font-weight: bold;
+    background: #4a2e1b;
+    color: #f5edd6;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.arrow-divider {
+    color: var(--gold);
+    font-size: 1.2rem;
+}
+
+/* Checklist for Final Mission */
+.checklist-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+.checklist-item.active {
+    color: var(--gold-light);
+    font-weight: 600;
+}
+
+.checklist-item.completed {
+    color: var(--accent-green);
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.checklist-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #334155;
+}
+
+.checklist-item.active .checklist-dot {
+    background: var(--gold);
+    box-shadow: 0 0 8px var(--gold);
+    animation: pulseDot 1.5s infinite;
+}
+
+.checklist-item.completed .checklist-dot {
+    background: var(--accent-green);
+}
+
+@keyframes pulseDot {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.3); opacity: 1; }
+}
+
+/* Wisdom Scroll Summary List */
+.summary-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 10px 0;
+    width: 100%;
+    padding-left: 22px; /* Shift checklist slightly right to center on parchment */
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.12rem;
+    font-weight: 700;
+    color: #3b2314; /* Dark brown ink matching scroll items */
+    animation: slideInItem 0.4s ease forwards;
+    opacity: 0;
+}
+
+.summary-checkmark {
+    color: #1b4332; /* High-contrast dark forest green */
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Completion Badge Panel */
+.badge-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+    animation: scaleInBadge 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.badge-img {
+    height: 120px;
+    width: auto;
+    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5));
+}
+
+.badge-title {
+    font-family: var(--font-royal);
+    color: var(--gold);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+@keyframes scaleInBadge {
+    from {
+        opacity: 0;
+        transform: scale(0.6) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Screen Transitions overlays */
+.transition-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0b0d10;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.transition-overlay.active {
+    opacity: 1;
+}
+
+/* Scattered papers animation on screen 2 */
+.scattered-papers-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.parchment-paper {
+    position: absolute;
+    width: 70px;
+    height: 90px;
+    background: #e9dbb5;
+    border: 1px solid #cbb88a;
+    border-radius: 2px;
+    opacity: 0;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+    animation: dropPaper 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes dropPaper {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px) rotate(0deg);
+    }
+    10% {
+        opacity: 0.85;
+    }
+    100% {
+        opacity: 0.85;
+        transform: translateY(var(--target-y)) translateX(var(--target-x)) rotate(var(--target-angle));
+    }
+}
+
+.restart-link {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #4a2e1b; /* Match parchment brown */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    margin-top: 6px;
+    transition: color 0.25s ease;
+    pointer-events: auto;
+    cursor: pointer;
+    border-bottom: 1px dashed rgba(74, 46, 27, 0.25);
+    padding-bottom: 1px;
+}
+
+.restart-link:hover {
+    color: var(--accent-red);
+    border-bottom-color: var(--accent-red);
+}
+
+/* Accessibility Helpers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Keyboard Focus Ring Customizations */
+.wood-button:focus-visible, 
+.choice-button:focus-visible, 
+.code-input-textarea:focus,
+.dialogue-panel:focus-visible,
+.restart-link:focus-visible,
+.back-btn-floating:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+    box-shadow: 0 0 12px var(--gold);
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+    .game-header {
+        width: 85%;
+        padding: 6px 16px;
+    }
+    
+    .game-title {
+        font-size: 1.25rem;
+    }
+    
+    .game-subtitle {
+        font-size: 0.7rem;
+    }
+    
+    .character-container {
+        left: 5%;
+        height: 45%;
+        width: 35%;
+        min-width: 180px;
+        bottom: 190px;
+    }
+    
+    .scroll-panel {
+        top: 14%;
+        right: 5%;
+        width: 300px;
+        height: 52%;
+        min-height: 320px;
+        padding: 50px 30px 40px 30px;
+    }
+    
+    .scroll-header {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-header {
+        top: 10px;
+        left: 56px;
+        right: 56px; /* Leave space on the right for forward button */
+        width: auto;
+        transform: none;
+        padding: 4px 12px;
+    }
+    
+    .back-btn-floating,
+    .forward-btn-floating {
+        top: 10px;
+        width: 36px;
+        height: 36px;
+        font-size: 1.10rem;
+    }
+    
+    .back-btn-floating {
+        left: 10px;
+    }
+    
+    .forward-btn-floating {
+        right: 10px;
+    }
+    
+    .game-title {
+        font-size: 1.05rem;
+        letter-spacing: 1px;
+    }
+    
+    .game-subtitle {
+        display: none; /* Hide subtitle on very small viewports */
+    }
+    
+    .restart-link {
+        font-size: 0.65rem;
+        margin-top: 2px;
+    }
+    
+    /* Layout stacking on mobile to avoid portrait/scroll overlap */
+    .character-container {
+        left: 50%;
+        transform: translateX(-50%);
+        height: 32%;
+        width: auto;
+        min-width: 140px;
+        bottom: 175px;
+        z-index: 2;
+        opacity: 0.25; /* Dim character to read scroll on small screen */
+    }
+    
+    .scroll-panel {
+        top: 75px;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%) scale(0.85);
+        width: 92%;
+        max-width: 320px;
+        height: 45%;
+        min-height: 260px;
+        z-index: 4;
+    }
+    
+    .scroll-panel.visible {
+        transform: translateX(-50%) scale(1);
+    }
+    
+    .ui-container {
+        padding: 0 10px 10px 10px;
+    }
+    
+    .dialogue-panel {
+        min-height: 160px;
+        padding: 16px 20px;
+    }
+    
+    .character-name {
+        font-size: 0.95rem;
+    }
+    
+    .dialogue-text-box {
+        font-size: 0.95rem;
+        line-height: 1.45;
+        padding-bottom: 25px;
+    }
+    
+    .terminal-container {
+        padding: 10px 12px;
+    }
+    
+    .terminal-row {
+        font-size: 0.95rem;
+    }
+    
+    .code-input-textarea {
+        font-size: 0.95rem;
+        height: 22px;
+        line-height: 22px;
+    }
+    
+    .wood-button {
+        font-size: 0.9rem;
+        padding: 10px 24px;
+    }
+}
+
+/* Cinematic Curtain Overlays */
+.curtain-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    pointer-events: auto;
+    display: flex;
+    overflow: hidden;
+}
+
+/* When open, clicks pass through and panels slide away */
+.curtain-overlay.open {
+    pointer-events: none;
+}
+
+.curtain-left,
+.curtain-right {
+    width: 50%;
+    height: 100%;
+    background-color: #580d0d; /* Royal Crimson/Maroon */
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 80%),
+        repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.15) 0px, rgba(0, 0, 0, 0.15) 2px, transparent 2px, transparent 40px);
+    box-shadow: inset -5px 0 25px rgba(0,0,0,0.6), inset 5px 0 25px rgba(0,0,0,0.6);
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+    position: relative;
+}
+
+.curtain-left {
+    transform: translateX(0);
+    border-right: 4px solid var(--gold);
+}
+
+.curtain-right {
+    transform: translateX(0);
+    border-left: 4px solid var(--gold);
+}
+
+/* Panels pull apart when open */
+.curtain-overlay.open .curtain-left {
+    transform: translateX(-100%);
+}
+
+.curtain-overlay.open .curtain-right {
+    transform: translateX(100%);
+}
+
+/* Double-bordered double gold curtain trim at bottom */
+.curtain-left::after,
+.curtain-right::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 15px;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.3));
+    border-bottom: 6px double var(--gold);
+}
+
+/* Badge Overlay Panel (Renders centered over closed curtains) */
+.badge-overlay-panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 480px;
+    background: rgba(18, 22, 28, 0.94);
+    border: 2px solid var(--gold);
+    border-radius: 16px;
+    padding: 35px 30px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+    text-align: center;
+    z-index: 1005;
+    animation: fadeInBadgePanel 0.8s 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInBadgePanel {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.badge-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+/* Prologue Cinematic Text Overlay */
+.prologue-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 520px;
+    background: rgba(25, 27, 30, 0.96); /* Dark slate chalk board background */
+    border: 8px solid #3d2314; /* Dark rustic wooden frame */
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.8),
+        inset 0 0 15px rgba(0, 0, 0, 0.6); /* Inner blackboard chalkboard shadow */
+    border-radius: 6px;
+    text-align: center;
+    color: var(--gold-light);
+    font-family: var(--font-royal);
+    font-size: 1.35rem;
+    font-style: italic;
+    z-index: 1010;
+    line-height: 2;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 35px 30px;
+}
+
+.prologue-line {
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    margin: 0;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.prologue-line.visible {
+    opacity: 1;
+}
+
+/* Responsive adjustment for small viewports */
+@media (max-width: 480px) {
+    .prologue-container {
+        font-size: 1.10rem;
+        gap: 10px;
+        width: 90%;
+        padding: 20px;
+        border-width: 6px;
+    }
+}

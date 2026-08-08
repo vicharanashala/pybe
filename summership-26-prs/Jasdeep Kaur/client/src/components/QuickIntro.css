@@ -1,0 +1,312 @@
+.memory-garden-stage {
+  /* Warm Polished Honey Oak & Mahogany Wooden Wall Environment */
+  background:
+    /* Top Soft Golden Sunlight Beam Glow */
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255, 236, 179, 0.35) 0%, rgba(255, 224, 130, 0.15) 50%, rgba(0, 0, 0, 0) 100%),
+    /* Subtle Vertical Wooden Planks lines texture */
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 2px, transparent 2px, transparent 120px),
+    /* Subtle Horizontal Wooden Planks lines texture */
+    repeating-linear-gradient(0deg, rgba(45, 25, 12, 0.25) 0px, rgba(45, 25, 12, 0.25) 3px, transparent 3px, transparent 72px),
+    /* Rich Warm Polished Honey-Oak & Mahogany Wood Gradient */
+    linear-gradient(165deg, #4A2E1B 0%, #3B2212 40%, #2A170B 85%, #1F1007 100%);
+  border: 5px solid #8D5B4C;
+  border-radius: 28px;
+  padding: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8),
+              inset 0 0 40px rgba(255, 224, 130, 0.12),
+              inset 0 0 15px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  min-height: 520px;
+  overflow: hidden;
+}
+
+/* Sunlight beam top overlay */
+.sunlight-top-beam {
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 140px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255, 236, 179, 0.28) 0%, rgba(255, 213, 79, 0.1) 60%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hanging vines, corner moss, fireflies, plank flowers overlay */
+.vines-hanging-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hanging-vine {
+  position: absolute;
+  top: 8px;
+  font-size: 24px;
+  opacity: 0.85;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+}
+.vine-left { left: 16px; transform: rotate(-15deg); }
+.vine-right { right: 16px; transform: rotate(15deg); }
+
+.corner-moss {
+  position: absolute;
+  font-size: 18px;
+  opacity: 0.75;
+}
+.moss-tl { bottom: 16px; left: 16px; }
+.moss-tr { bottom: 16px; right: 16px; }
+
+.plank-flower {
+  position: absolute;
+  font-size: 15px;
+  opacity: 0.7;
+}
+.pf-1 { top: 45%; left: 8px; }
+.pf-2 { top: 55%; right: 8px; }
+
+.floating-firefly {
+  position: absolute;
+  font-size: 16px;
+  animation: fireflyGlow 4s ease-in-out infinite alternate;
+}
+.ff-1 { top: 20%; right: 25%; }
+.ff-2 { bottom: 30%; left: 20%; animation-delay: 2s; }
+
+@keyframes fireflyGlow {
+  0% { opacity: 0.3; transform: translateY(0) scale(0.8); }
+  100% { opacity: 1; transform: translateY(-8px) scale(1.2); }
+}
+
+.visual-stage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.garden-badge {
+  background: linear-gradient(135deg, #2E7D32, #1B5E20);
+  border: 1.5px solid #A5D6A7;
+  color: #FFFDD0;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.garden-subtitle-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #FFE082;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 224, 130, 0.4);
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+/* 3 x 4 Grid of Interactive Floating Butterflies */
+.memory-garden-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 900px) {
+  .memory-garden-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.butterfly-card {
+  background: linear-gradient(135deg, rgba(30, 45, 35, 0.9), rgba(18, 28, 20, 0.95));
+  border: 2px solid rgba(141, 91, 76, 0.6);
+  border-radius: 16px;
+  padding: 10px 12px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.butterfly-card:hover, .butterfly-card.active-butterfly {
+  border-color: var(--butterfly-color, #FFE082);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6), 0 0 16px var(--butterfly-color, #FFE082);
+  background: linear-gradient(135deg, rgba(45, 65, 50, 0.95), rgba(25, 40, 30, 0.98));
+}
+
+.butterfly-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.butterfly-icon {
+  font-size: 22px;
+  transition: transform 0.3s ease;
+}
+
+.butterfly-card:hover .butterfly-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.wooden-special-tag {
+  background: linear-gradient(135deg, #3E2723, #211512);
+  border: 1px solid #FFE082;
+  color: #FFE082;
+  font-family: "Georgia", serif;
+  font-weight: 800;
+  font-size: 13px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 130px;
+}
+
+.flower-landing-bed {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 10px;
+  padding: 4px 8px;
+  border: 1px stroke rgba(255, 255, 255, 0.1);
+}
+
+.flower-emoji {
+  font-size: 16px;
+}
+
+.carried-info-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: #F5EBE0;
+  font-family: monospace;
+}
+
+.sparkle-ring {
+  position: absolute;
+  inset: -4px;
+  border: 2px solid var(--butterfly-color, #FFE082);
+  border-radius: 20px;
+  pointer-events: none;
+}
+
+/* Active Inspection Plaque at bottom of garden */
+.active-inspection-plaque {
+  background: linear-gradient(135deg, #2D1A18, #1F1210);
+  border: 2.5px solid #D4A373;
+  border-radius: 18px;
+  padding: 12px 18px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.inspection-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  gap: 16px;
+}
+
+.inspection-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.big-butterfly-emoji {
+  font-size: 32px;
+}
+
+.tag-label-small {
+  font-size: 11px;
+  font-weight: 700;
+  color: #A5D6A7;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tag-name-large {
+  font-family: "Georgia", serif;
+  font-weight: 800;
+  font-size: 16px;
+  color: #FFE082;
+}
+
+.inspection-divider {
+  font-size: 20px;
+  color: #D4A373;
+  font-weight: 900;
+}
+
+.inspection-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.carried-value-large {
+  font-family: monospace;
+  font-size: 17px;
+  font-weight: 800;
+  color: #7EF3FF;
+}
+
+.inspection-placeholder {
+  font-size: 13px;
+  color: #FFE082;
+  text-align: center;
+  font-style: italic;
+}
+
+.stage-caption {
+  font-size: 13px;
+  color: #F5EBE0;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(141, 91, 76, 0.5);
+  padding: 10px 16px;
+  border-radius: 14px;
+  line-height: 1.5;
+}
+
+/* Concept Info Panel */
+.concept-info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.subtitle-text {
+  font-size: 13px;
+  color: #C5E1A5;
+  margin-top: 6px;
+}
+
+.scroll-body-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #3E2723;
+}
+
+.full-width-btn {
+  width: 100%;
+}
+

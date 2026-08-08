@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime  @default(now())
+  sessions     Session[]
+}
+
+model Scenario {
+  id         String    @id @default(cuid())
+  title      String
+  difficulty String
+  concepts   String    // JSON array stored as string
+  context    String
+  prompt     String
+  objectives String    // JSON array stored as string
+  createdAt  DateTime  @default(now())
+  deletedAt  DateTime?
+  sessions   Session[]
+}
+
+model Session {
+  id              String    @id @default(cuid())
+  scenarioId      String
+  scenario        Scenario  @relation(fields: [scenarioId], references: [id])
+  userId          String?
+  user            User?     @relation(fields: [userId], references: [id])
+  learnerName     String    @default("Guest learner")
+  reasoning       String
+  promptText      String    @default("")
+  reflection      String    @default("")
+  abstractionMap  String    // JSON object stored as string
+  generatedCode   String
+  codeExplanation String
+  promptScore     Float
+  promptFeedback  String    // JSON array stored as string
+  misconceptions  String    // JSON array stored as string
+  masterySignals  String    // JSON array stored as string
+  createdAt       DateTime  @default(now())
+  deletedAt       DateTime?
+
+  @@index([scenarioId])
+}
+
+model RoadmapPhase {
+  id        String @id @default(cuid())
+  phase     String
+  title     String
+  summary   String
+  items     String // JSON array stored as string
+  sortOrder Int
+}
+
+model AnalyticsTotal {
+  id                 String   @id @default("global")
+  scenarioCount      Int      @default(0)
+  sessionCount       Int      @default(0)
+  averagePromptScore Float    @default(0.0)
+  conceptCounts      String   @default("{}") // JSON object stored as string
+  updatedAt          DateTime @updatedAt
+}
