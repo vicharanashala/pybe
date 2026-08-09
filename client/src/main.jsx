@@ -285,19 +285,71 @@ function Roadmap({ roadmap }) {
 }
 
 function SessionList({ sessions }) {
+  const [search, setSearch] = useState("");
+
+  const filteredSessions = sessions.filter((session) => {
+    if (!search) return true;
+
+    const text = search.toLowerCase();
+
+    return (
+      session.scenario?.title?.toLowerCase().includes(text) ||
+      session.scenario?.concepts?.some((concept) =>
+        concept.toLowerCase().includes(text)
+      )
+    );
+  });
   return (
-    <div className="sessions">
-      {sessions.length ? sessions.slice(0, 6).map((session) => (
+  <div className="sessions">
+
+    <div className="search-container">
+
+      <input
+        type="text"
+        placeholder="🔍 Search sessions..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="session-search"
+      />
+
+      {search && (
+        <button
+          className="clear-search"
+          onClick={() => setSearch("")}
+        >
+          ✖ Clear
+        </button>
+      )}
+
+    </div>
+
+
+    {filteredSessions.length ? (
+      filteredSessions.slice(0, 6).map((session) => (
         <article key={session._id}>
           <Play size={16} />
+
           <div>
             <strong>{session.scenario?.title}</strong>
-            <span>{session.masterySignals.join(' / ')}</span>
-          </div>
-        </article>
-      )) : <p>No sessions yet.</p>}
-    </div>
-  );
-}
 
+            <span>
+              {session.masterySignals?.join(" / ")}
+            </span>
+          </div>
+
+        </article>
+      ))
+    ) : (
+      <p>
+        {search
+          ? "No matching sessions found."
+          : "No sessions yet."
+        }
+      </p>
+    )}
+
+  </div>
+)};
+
+    
 createRoot(document.getElementById('root')).render(<App />);
