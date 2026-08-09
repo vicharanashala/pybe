@@ -491,3 +491,26 @@ meter {
     grid-template-columns: 1fr;
   }
 }
+.session-search {
+  width: 100%;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 15px;
+}
+.search-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.session-search {
+  flex: 1;
+}
+
+.clear-search {
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
