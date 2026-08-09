@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Python Keyword Explorer + Quiz</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="header-content">
+
+            <div class="python-logo">
+                🐍
+            </div>
+
+            <h1>
+                Python Keyword Explorer
+            </h1>
+
+            <p>
+                Learn Python keywords through examples
+                and test your knowledge with an interactive quiz.
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <!-- TABS -->
+
+        <div class="tabs">
+
+            <button
+                id="explorerTab"
+                class="tab active"
+            >
+                📚 Keyword Explorer
+            </button>
+
+
+            <button
+                id="quizTab"
+                class="tab"
+            >
+                🧠 Quiz
+            </button>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- KEYWORD EXPLORER -->
+        <!-- ========================= -->
+
+        <section id="explorerSection">
+
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="search"
+                    placeholder="🔍 Search a Python keyword..."
+                >
+
+
+                <select id="category">
+
+                    <option value="All">
+                        All Categories
+                    </option>
+
+                    <option value="Conditions">
+                        Conditions
+                    </option>
+
+                    <option value="Loops">
+                        Loops
+                    </option>
+
+                    <option value="Functions">
+                        Functions
+                    </option>
+
+                    <option value="Exceptions">
+                        Exceptions
+                    </option>
+
+                    <option value="Modules">
+                        Modules
+                    </option>
+
+                    <option value="OOP">
+                        OOP
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                id="keywordCount"
+                class="keyword-count"
+            ></div>
+
+
+            <div
+                id="keywordContainer"
+                class="keyword-container"
+            ></div>
+
+
+        </section>
+
+
+
+        <!-- ========================= -->
+        <!-- QUIZ -->
+        <!-- ========================= -->
+
+        <section
+            id="quizSection"
+            class="hidden"
+        >
+
+
+            <div class="quiz-card">
+
+
+                <!-- QUIZ START -->
+
+                <div id="quizStart">
+
+                    <div class="quiz-icon">
+                        🧠
+                    </div>
+
+
+                    <h2>
+                        Python Keyword Quiz
+                    </h2>
+
+
+                    <p>
+                        Test your knowledge of Python keywords.
+                    </p>
+
+
+                    <div class="quiz-info">
+
+                        <div>
+                            <strong>5</strong>
+                            <span>Questions</span>
+                        </div>
+
+                        <div>
+                            <strong>4</strong>
+                            <span>Options</span>
+                        </div>
+
+                        <div>
+                            <strong>1</strong>
+                            <span>Point</span>
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        id="startQuiz"
+                        class="primary-button"
+                    >
+                        Start Quiz 🚀
+                    </button>
+
+                </div>
+
+
+
+                <!-- QUIZ QUESTIONS -->
+
+                <div
+                    id="quizContent"
+                    class="hidden"
+                >
+
+
+                    <div class="quiz-top">
+
+                        <span id="questionNumber">
+                            Question 1/5
+                        </span>
+
+
+                        <span id="score">
+                            Score: 0
+                        </span>
+
+                    </div>
+
+
+                    <div class="progress-container">
+
+                        <div
+                            id="progressBar"
+                            class="progress-bar"
+                        ></div>
+
+                    </div>
+
+
+                    <h2 id="question"></h2>
+
+
+                    <div
+                        id="options"
+                        class="options"
+                    ></div>
+
+
+                    <p
+                        id="answerMessage"
+                        class="answer-message"
+                    ></p>
+
+
+                    <button
+                        id="nextQuestion"
+                        class="primary-button hidden"
+                    >
+                        Next Question →
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- QUIZ RESULT -->
+
+                <div
+                    id="quizResult"
+                    class="hidden"
+                >
+
+                    <div class="result-icon">
+                        🎉
+                    </div>
+
+
+                    <h2>
+                        Quiz Completed!
+                    </h2>
+
+
+                    <div
+                        id="finalScore"
+                        class="final-score"
+                    ></div>
+
+
+                    <p id="resultMessage"></p>
+
+
+                    <button
+                        id="restartQuiz"
+                        class="primary-button"
+                    >
+                        🔄 Try Again
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            Python Keyword Explorer + Quiz
+        </p>
+
+        <p>
+            Built for Python Learners 🐍
+        </p>
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="keywords.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
