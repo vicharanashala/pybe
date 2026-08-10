@@ -45,9 +45,12 @@ The project is designed to make learning engaging without compromising on techni
 
 ---
 
-## Getting Started
+## Getting Started 
+
+cd astha/percy-oracle
 
 ### Install dependencies
+
 
 ```bash
 npm install
@@ -80,7 +83,7 @@ The application follows a structured learning path:
 7. Oracle Secret Scroll
 8. Debug Like an Oracle
 9. Final Challenge
-10. Guardian Certificate
+10. Guardian Certificate 
 
 Each stage builds upon the previous one, allowing learners to understand both the concept and its practical application.
 

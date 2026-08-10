@@ -1,180 +1,295 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500&display=swap');
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html,body{
-width:100%;
-height:100%;
-overflow-x:hidden;
-font-family:Inter,sans-serif;
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: Inter, sans-serif;
 }
 
-.home{
+/* ================= HOME PAGE ================= */
 
-position:relative;
+.home {
+  position: relative;
 
-height:100vh;
+  width: 100%;
+  height: 100vh;
 
-display:flex;
-justify-content:center;
-align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-overflow:hidden;
+  overflow: hidden;
 
-background:
-linear-gradient(180deg,#5b1f1f 0%,#7b2e2e 45%,#9b6b3f 100%);
-
+  background:
+    linear-gradient(
+      180deg,
+      #5b1f1f 0%,
+      #7b2e2e 45%,
+      #9b6b3f 100%
+    );
 }
 
-/* Temple Background */
+/* ================= TEMPLE BACKGROUND ================= */
 
-.temple{
+.temple {
+  position: absolute;
 
-position:absolute;
+  bottom: -150px;
+  left: 50%;
 
-bottom:-150px;
+  transform: translateX(-50%);
 
-left:50%;
+  width: 1800px;
 
-transform:translateX(-50%);
+  opacity: 0.18;
 
-width:1800px;
+  pointer-events: none;
 
-opacity:.18;
-
-pointer-events:none;
-
-z-index:1;
-
+  z-index: 1;
 }
 
 /* ================= BOOK FRAME ================= */
 
-.book-frame{
+.book-frame {
+  position: absolute;
 
-position:absolute;
+  right: 8%;
+  top: 50%;
 
-right:8%;
+  transform: translateY(-50%);
 
-top:50%;
+  /*
+    Landscape frame matching the book image.
+    The book will fill almost the entire frame.
+  */
+  width: 430px;
+  aspect-ratio: 4 / 3;
+  height: auto;
 
-transform:translateY(-50%);
+  /*
+    Only a tiny amount of space is left
+    so the golden rim remains visible.
+  */
+  padding: 4px;
 
-width:430px;
+  background: #c8a25d;
 
-height:500px;
+  border: 2px solid #e5c77d;
 
-padding:15px;
+  border-radius: 18px;
 
-background:#fbf5ea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-border:3px solid #c8a25d;
+  overflow: hidden;
 
-border-radius:22px;
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.30),
+    inset 0 0 0 1px #f4e5bf;
 
-display:flex;
-
-justify-content:center;
-
-align-items:flex-end;
-
-box-shadow:
-0 18px 45px rgba(0,0,0,.28),
-inset 0 0 0 2px #f4e5bf;
-
-z-index:5;
-
+  z-index: 5;
 }
 
-/* Click Area */
+/* ================= BOOK CLICK AREA ================= */
 
-.book{
+.book {
+  width: 100%;
+  height: 100%;
 
-cursor:pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-transition:.35s;
+  overflow: hidden;
 
-display:flex;
+  cursor: pointer;
 
-justify-content:center;
+  border-radius: 12px;
 
-align-items:center;
-
-width:100%;
-
-height:100%;
-
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
 }
 
-/* Book */
+/* ================= BOOK IMAGE ================= */
 
-.book-image{
+.book-image {
+  width: 100%;
+  height: 100%;
 
-width:390px;
+  /*
+    Completely fills the frame.
+    This removes the cream-colored gap around
+    the image created by the previous sizing.
+  */
+  object-fit: cover;
 
-height:auto;
+  object-position: center;
 
-transition:.35s;
+  display: block;
 
-filter:
-drop-shadow(0 18px 28px rgba(0,0,0,.28));
+  filter:
+    drop-shadow(0 10px 18px rgba(0, 0, 0, 0.25));
 
+  transition:
+    transform 0.35s ease,
+    filter 0.35s ease;
 }
 
-/* Hover */
+/* ================= BOOK HOVER ================= */
 
-.book:hover{
-
-transform:rotate(-8deg) scale(1.05);
-
+.book:hover {
+  transform: scale(1.02);
 }
 
-/* ================= TEXT ================= */
-
-.home-text{
-
-position:absolute;
-
-left:8%;
-
-top:50%;
-
-transform:translateY(-50%);
-
-max-width:520px;
-
-z-index:5;
-
+.book:hover .book-image {
+  filter:
+    drop-shadow(0 14px 22px rgba(0, 0, 0, 0.32));
 }
 
-.home-text h1{
+/* ================= HOME TEXT ================= */
 
-font-family:"Cormorant Garamond",serif;
+.home-text {
+  position: absolute;
 
-font-size:76px;
+  left: 8%;
+  top: 50%;
 
-line-height:1;
+  transform: translateY(-50%);
 
-color:#fff5dc;
+  max-width: 520px;
 
-margin-bottom:20px;
-
-text-shadow:0 3px 12px rgba(0,0,0,.35);
-
+  z-index: 5;
 }
 
-.home-text p{
+.home-text h1 {
+  font-family: "Cormorant Garamond", serif;
 
-font-size:20px;
+  font-size: 76px;
 
-line-height:1.9;
+  line-height: 1;
 
-color:#f7ead5;
+  color: #fff5dc;
 
-max-width:430px;
+  margin-bottom: 20px;
 
+  text-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.35);
+}
+
+.home-text p {
+  font-size: 20px;
+
+  line-height: 1.9;
+
+  color: #f7ead5;
+
+  max-width: 430px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1000px) {
+  .book-frame {
+    right: 5%;
+    width: 380px;
+  }
+
+  .home-text {
+    left: 5%;
+  }
+
+  .home-text h1 {
+    font-size: 64px;
+  }
+}
+
+@media (max-width: 750px) {
+  .home {
+    height: auto;
+    min-height: 100vh;
+
+    padding: 60px 25px;
+
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .home-text {
+    position: relative;
+
+    left: auto;
+    top: auto;
+
+    transform: none;
+
+    width: 100%;
+    max-width: 500px;
+
+    margin-bottom: 40px;
+
+    text-align: center;
+  }
+
+  .home-text h1 {
+    font-size: 58px;
+  }
+
+  .home-text p {
+    margin: auto;
+    font-size: 18px;
+  }
+
+  .book-frame {
+    position: relative;
+
+    right: auto;
+    top: auto;
+
+    transform: none;
+
+    width: min(90vw, 430px);
+
+    margin: 0 auto;
+  }
+
+  .temple {
+    width: 1200px;
+    bottom: -80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: 45px 18px;
+  }
+
+  .home-text h1 {
+    font-size: 48px;
+  }
+
+  .home-text p {
+    font-size: 16px;
+  }
+
+  .book-frame {
+    width: 92vw;
+
+    padding: 3px;
+
+    border-radius: 14px;
+  }
+
+  .book {
+    border-radius: 9px;
+  }
 }

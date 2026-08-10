@@ -45,7 +45,7 @@ export default function Home() {
         <h1>The Lost Prophecy</h1>
 
         <p>
-          Camp Half-Blood awaits its next hero.
+          Camp Half-Blood awaits its next hero.Tap the book and discover what awaits.
           
         </p>
 
