@@ -1,0 +1,332 @@
+.moral {
+  --ink: #2b2b2b;
+  --paper: #f8f4ec;
+  --primary: #c66a2b;
+  --green: #3f5b41;
+  --gold: #d8a84c;
+  --accent: #e8dcc8;
+
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 14% 10%, rgba(216, 168, 76, 0.16), transparent 42%),
+    radial-gradient(circle at 88% 26%, rgba(198, 106, 43, 0.1), transparent 38%),
+    var(--paper);
+  color: var(--ink);
+  font-family: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.moral__frame {
+  position: fixed;
+  inset: 14px;
+  z-index: 50;
+  border: 1px solid rgba(198, 106, 43, 0.26);
+  border-radius: 24px;
+  pointer-events: none;
+}
+
+.moral__top {
+  position: relative;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  padding: 22px clamp(18px, 3vw, 30px);
+}
+
+.moral__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #7c6f5d;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.moral__back:hover {
+  color: var(--primary);
+}
+
+.moral__back svg {
+  width: 18px;
+  height: 18px;
+}
+
+.moral__stage {
+  position: relative;
+  z-index: 60;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 16px clamp(18px, 3.5vw, 32px) clamp(40px, 8vh, 84px);
+}
+
+.moral__card {
+  width: 100%;
+  padding: clamp(36px, 6vw, 56px) clamp(24px, 5vw, 48px);
+  text-align: center;
+  background: rgba(255, 253, 246, 0.78);
+  border: 1px solid rgba(216, 168, 76, 0.24);
+  border-radius: 26px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.7),
+    0 24px 60px -38px rgba(43, 43, 43, 0.42);
+  outline: none;
+}
+
+.moral__eyebrow {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8a6b3d;
+  animation: moral-enter 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+}
+
+.moral__title {
+  margin: 14px 0 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(32px, 5vw, 44px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  color: var(--green);
+  animation: moral-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+}
+
+.moral__concept {
+  margin: 44px 0 0;
+  padding: 34px 24px 38px;
+  border-top: 1px solid rgba(216, 168, 76, 0.3);
+  border-bottom: 1px solid rgba(216, 168, 76, 0.3);
+  animation: moral-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+.moral__concept-name {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(56px, 9vw, 80px);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  color: var(--primary);
+}
+
+.moral__concept-line {
+  margin: 16px 0 0;
+  font-family: "Lora", Georgia, serif;
+  font-size: clamp(17px, 2.2vw, 20px);
+  font-style: italic;
+  line-height: 1.55;
+  color: #5c5342;
+}
+
+.moral__section {
+  margin: 38px 0 0;
+  animation: moral-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.45s both;
+}
+
+.moral__section--real {
+  animation-delay: 0.6s;
+}
+
+.moral__section-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8a6b3d;
+}
+
+.moral__section-text {
+  margin: 12px 0 0;
+  font-family: "Lora", Georgia, serif;
+  font-size: clamp(17px, 2.2vw, 19px);
+  line-height: 1.7;
+  color: #4a4236;
+}
+
+.moral__closing {
+  margin: 48px 0 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(24px, 3.6vw, 32px);
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--green);
+  animation: moral-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.75s both;
+}
+
+.moral__actions {
+  margin-top: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  animation: moral-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.95s both;
+}
+
+.moral__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 30px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+}
+
+.moral__cta:hover {
+  transform: translateY(-2px);
+}
+
+.moral__cta--primary {
+  background: linear-gradient(135deg, #c66a2b, #d88a3d);
+  color: #fffdf6;
+  box-shadow: 0 16px 32px -18px rgba(198, 106, 43, 0.75);
+}
+
+.moral__cta--primary:hover {
+  box-shadow: 0 20px 38px -16px rgba(198, 106, 43, 0.85);
+}
+
+.moral__cta--secondary {
+  background: transparent;
+  color: var(--green);
+  border: 1px solid rgba(63, 91, 65, 0.35);
+}
+
+.moral__cta--secondary:hover {
+  background: rgba(63, 91, 65, 0.06);
+}
+
+.moral__cta svg {
+  width: 16px;
+  height: 16px;
+}
+
+.moral__loading,
+.moral__missing {
+  position: relative;
+  z-index: 60;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(24px, 4vw, 40px);
+  text-align: center;
+}
+
+.moral__loading-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: #7c6f5d;
+  font-family: "Lora", Georgia, serif;
+  font-size: 18px;
+  font-style: italic;
+}
+
+.moral__loading-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  color: var(--gold);
+  background: rgba(216, 168, 76, 0.14);
+  border: 1px solid rgba(216, 168, 76, 0.35);
+  border-radius: 50%;
+  animation: moral-breathe 2.4s ease-in-out infinite;
+}
+
+.moral__loading-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.moral__missing h1 {
+  margin: 0;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  color: var(--green);
+}
+
+.moral__missing p {
+  margin: 12px 0 0;
+  font-family: "Lora", Georgia, serif;
+  font-size: 18px;
+  color: #5c5342;
+}
+
+.moral__missing-link {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #fffdf6;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@keyframes moral-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes moral-breathe {
+  from {
+    transform: scale(0.94);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .moral__frame {
+    inset: 8px;
+    border-radius: 18px;
+  }
+
+  .moral__stage {
+    align-items: start;
+    padding-top: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moral *,
+  .moral *::before,
+  .moral *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
