@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyBe — The Mango Harvest (For Loops)</title>
+
+  <!-- Stylesheets: order matters, base first, then thematic, then components, then editor -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/storybook.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/editor.css" />
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="pybe-header">
+    <div class="header-top">
+      <div class="pybe-brand">
+        <span class="pybe-logo">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 118 118" width="24" height="24">
+            <path fill="#387EB8" d="M58.3 1.9c-27.2 0-31.5 11.8-31.5 11.8l-.1 12.1h32.2v4.6H27.5C12.7 30.3 9.4 43.1 9.4 56.4c0 13.5 2.7 26.8 19 26.8h7.9v-11.4c0-14.7 12.3-27.1 27.1-27.1h21.1V26.4c0-17.7-12-24.5-26.2-24.5zm-15.4 9.1c2.4 0 4.4 1.9 4.4 4.3 0 2.4-2 4.4-4.4 4.4-2.4 0-4.3-2-4.3-4.4 0-2.4 1.9-4.3 4.3-4.3z"/>
+            <path fill="#FFE052" d="M59.9 116.1c27.2 0 31.5-11.8 31.5-11.8l.1-12.1H59.2v-4.6h31.4c14.7 0 18.1-12.8 18.1-26.1 0-13.5-2.7-26.8-19-26.8h-7.9v11.4c0 14.7-12.3 27.1-27.1 27.1H33.7v18.3c0 17.7 12 24.5 26.2 24.5zm15.4-9.1c-2.4 0-4.4-1.9-4.4-4.3 0-2.4 2-4.4 4.4-4.4 2.4 0 4.3 2 4.3 4.4 0 2.4-1.9 4.3-4.3 4.3z"/>
+          </svg>
+        </span>
+        <span class="pybe-title">PyBe</span>
+        <span class="pybe-subtitle">The Mango Harvest (For Loops)</span>
+      </div>
+      <button id="theme-toggle" aria-label="Toggle dark mode">
+        <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+        </svg>
+        <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Progress bar: macro segments for the 9 stages -->
+    <div class="progress-track" id="progress-track" aria-label="Lesson progress">
+      <!-- Segments are generated dynamically by navigation.js -->
+    </div>
+  </header>
+
+  <!-- ===================== MAIN STORYBOOK AREA ===================== -->
+  <main class="storybook-stage">
+    <section class="storybook-card" id="storybook-card">
+      <!-- Dynamic step content is injected here by renderer.js -->
+      <div class="card-loading">
+        <p>Unrolling the royal scroll...</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER NAVIGATION ===================== -->
+  <footer class="pybe-footer">
+    <button id="btn-back" class="nav-btn nav-btn-back" type="button">
+      ← Back
+    </button>
+
+    <div class="step-indicator" id="step-indicator">
+      <!-- e.g. "Step 3 of 9" filled in by navigation.js -->
+    </div>
+
+    <button id="btn-next" class="nav-btn nav-btn-next" type="button" disabled>
+      Next →
+    </button>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <!-- Order matters: data first, then engine, then renderer/feature modules, then navigation (which boots the app) -->
+  <script src="js/lessonData.js"></script>
+  <script src="js/lessonEngine.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/codeEditor.js"></script>
+  <script src="js/assessment.js"></script>
+  <script src="js/navigation.js"></script>
+
+  <!-- Theme Toggle Logic -->
+  <script>
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme) {
+      document.documentElement.setAttribute('data-theme', currentTheme);
+    }
+
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const theme = document.documentElement.getAttribute('data-theme');
+      if (theme === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  </script>
+
+</body>
+</html>
