@@ -6,6 +6,7 @@ import {
   Code2,
   Compass,
   Lightbulb,
+  MessageCircle,
   MessageSquareText,
   Play,
   Route,
@@ -37,6 +38,7 @@ function App() {
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [learningMode, setLearningMode] = useState('freeform');
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
@@ -144,44 +146,80 @@ function App() {
 
         <div className="main-grid">
           <section className="panel learning-panel">
-            <div className="section-title">
-              <Compass size={20} />
-              <h2>{selected?.title}</h2>
+            <div className="section-title mode-row">
+              <div className="section-title-left">
+                <Compass size={20} />
+                <h2>{selected?.title}</h2>
+              </div>
+              <div className="mode-toggle">
+                <button
+                  type="button"
+                  className={learningMode === 'freeform' ? 'mode-btn active' : 'mode-btn'}
+                  onClick={() => {
+                    setLearningMode('freeform');
+                    setActiveResult(null);
+                  }}
+                >
+                  Free-form
+                </button>
+                <button
+                  type="button"
+                  className={learningMode === 'guided' ? 'mode-btn active' : 'mode-btn'}
+                  onClick={() => {
+                    setLearningMode('guided');
+                    setActiveResult(null);
+                  }}
+                >
+                  <MessageCircle size={14} /> Guided mode
+                </button>
+              </div>
             </div>
             <p className="context">{selected?.context}</p>
             <div className="objective-row">
-              {selected?.objectives.map((item) => <span key={item}>{item}</span>)}
+              {selected?.objectives.map((item) => <span key={item.text}>{item.text}</span>)}
             </div>
-            <form onSubmit={submitSession} className="learning-form">
-              <label>
-                Your reasoning
-                <textarea
-                  required
-                  value={form.reasoning}
-                  onChange={(event) => setForm({ ...form, reasoning: event.target.value })}
-                  placeholder={selected?.prompt}
-                />
-              </label>
-              <label>
-                Prompt you would give an AI mentor
-                <textarea
-                  value={form.promptText}
-                  onChange={(event) => setForm({ ...form, promptText: event.target.value })}
-                  placeholder="Explain my approach step by step, then show the Python concept and code..."
-                />
-              </label>
-              <label>
-                Reflection
-                <textarea
-                  value={form.reflection}
-                  onChange={(event) => setForm({ ...form, reflection: event.target.value })}
-                  placeholder="What did you notice about your thinking?"
-                />
-              </label>
-              <button className="primary" disabled={submitting}>
-                <Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}
-              </button>
-            </form>
+
+            {learningMode === 'freeform' ? (
+              <form onSubmit={submitSession} className="learning-form">
+                <label>
+                  Your reasoning
+                  <textarea
+                    required
+                    value={form.reasoning}
+                    onChange={(event) => setForm({ ...form, reasoning: event.target.value })}
+                    placeholder={selected?.prompt}
+                  />
+                </label>
+                <label>
+                  Prompt you would give an AI mentor
+                  <textarea
+                    value={form.promptText}
+                    onChange={(event) => setForm({ ...form, promptText: event.target.value })}
+                    placeholder="Explain my approach step by step, then show the Python concept and code..."
+                  />
+                </label>
+                <label>
+                  Reflection
+                  <textarea
+                    value={form.reflection}
+                    onChange={(event) => setForm({ ...form, reflection: event.target.value })}
+                    placeholder="What did you notice about your thinking?"
+                  />
+                </label>
+                <button className="primary" disabled={submitting}>
+                  <Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}
+                </button>
+              </form>
+            ) : (
+              <GuidedConversation
+                key={selected?._id}
+                scenario={selected}
+                onCompleted={async (session) => {
+                  setActiveResult(session);
+                  await refresh();
+                }}
+              />
+            )}
           </section>
 
           <section className="panel result-panel">
@@ -217,6 +255,94 @@ function EmptyResult() {
     <div className="empty">
       <Lightbulb size={38} />
       <p>Submit reasoning to see abstraction mapping, Python code, prompt feedback, and misconception signals.</p>
+    </div>
+  );
+}
+
+function GuidedConversation({ scenario, onCompleted }) {
+  const [conversation, setConversation] = useState(null);
+  const [answer, setAnswer] = useState('');
+  const [starting, setStarting] = useState(true);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!scenario) return;
+    let cancelled = false;
+    setStarting(true);
+    setError(null);
+    api('/conversations', {
+      method: 'POST',
+      body: JSON.stringify({ scenarioId: scenario._id, learnerName: 'Guest learner' })
+    })
+      .then((created) => {
+        if (!cancelled) setConversation(created);
+      })
+      .catch((err) => !cancelled && setError(err.message))
+      .finally(() => !cancelled && setStarting(false));
+    return () => {
+      cancelled = true;
+    };
+  }, [scenario?._id]);
+
+  async function sendAnswer(event) {
+    event.preventDefault();
+    if (!conversation || !answer.trim() || conversation.status === 'completed') return;
+    setSending(true);
+    setError(null);
+    try {
+      const result = await api(`/conversations/${conversation._id}/turns`, {
+        method: 'POST',
+        body: JSON.stringify({ text: answer })
+      });
+      setConversation(result.conversation);
+      setAnswer('');
+      if (result.session) {
+        await onCompleted(result.session);
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSending(false);
+    }
+  }
+
+  if (starting) {
+    return <p className="context">Starting guided conversation...</p>;
+  }
+  if (error && !conversation) {
+    return <p className="context">Could not start the conversation: {error}</p>;
+  }
+  if (!conversation) return null;
+
+  const isCompleted = conversation.status === 'completed';
+
+  return (
+    <div className="conversation">
+      <div className="conversation-thread">
+        {conversation.turns.map((turn) => (
+          <div key={turn._id} className={turn.role === 'learner' ? 'bubble learner' : 'bubble system'}>
+            <p>{turn.text}</p>
+            {turn.classification && <span className={`tag tag-${turn.classification}`}>{turn.classification.replace('_', ' ')}</span>}
+          </div>
+        ))}
+      </div>
+
+      {!isCompleted && (
+        <form onSubmit={sendAnswer} className="conversation-input">
+          <textarea
+            value={answer}
+            onChange={(event) => setAnswer(event.target.value)}
+            placeholder="Type your answer..."
+            disabled={sending}
+          />
+          <button className="primary" disabled={sending || !answer.trim()}>
+            <Send size={16} />{sending ? 'Sending...' : 'Reply'}
+          </button>
+        </form>
+      )}
+      {isCompleted && <p className="conversation-done">Conversation complete — see your mapped result on the right.</p>}
+      {error && <p className="conversation-error">{error}</p>}
     </div>
   );
 }
