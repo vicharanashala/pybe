@@ -1,0 +1,180 @@
+[
+  {
+    "id": "the-smart-shortcut",
+    "title": "The Smart Shortcut",
+    "description": "Discover how avoiding unnecessary checks saves time.",
+    "steps": {
+      "start": {
+        "image": "/assets/wallet_sofa.webp",
+        "text": "You are at home. Papa asks you to find his wallet. He says: \"Beta, look for it on the sofa OR on the dining table.\"\n\nYou walk into the living room and look at the sofa. The wallet is sitting right there!",
+        "options": [
+          {
+            "label": "Go and check the dining table too.",
+            "next": "start",
+            "feedback": "Why do extra work? Papa said sofa OR table. You already found it! The job is done."
+          },
+          {
+            "label": "Stop searching and give it to him.",
+            "next": "and_scenario"
+          }
+        ]
+      },
+      "and_scenario": {
+        "image": "/assets/dead_phone_outdoors.webp",
+        "text": "Exactly! Finding one True condition for OR means you can stop immediately.\n\nLater, you are outdoors standing on a road with your friend. You pull out your phone, but it is completely dead.\n\nTo charge your phone, you need a charging socket AND your charger. You look around, and obviously, there are no power sockets on the street.",
+        "options": [
+          {
+            "label": "Open your bag and search for the charger.",
+            "next": "and_scenario",
+            "feedback": "Why bother? You need BOTH a socket and a charger. Since there is no socket around, finding the charger won't help you anyway. Save your energy."
+          },
+          {
+            "label": "Don't bother looking for a charger. Say you'll charge it at home.",
+            "next": "aha"
+          }
+        ]
+      },
+      "aha": {
+        "text": "Perfect! You naturally stopped checking the moment you knew the final answer.\n\nFor OR (Wallet): If you find one True, you stop.\nFor AND (Phone): If you find one False (no socket), you stop checking for the other requirement.\n\nPython does the exact same thing to save calculation time. It's called Short-Circuit Evaluation.",
+        "snippet": "if wallet_on_sofa or wallet_on_table:\n    print('Found it!')\n\nif has_socket and has_charger:\n    print('Can charge phone')",
+        "teaser": "But... what if you wanted to keep a permanent record of something that can never be changed?",
+        "options": [
+          {
+            "label": "Finish",
+            "next": "end"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "upi-mistake",
+    "title": "The UPI Mistake",
+    "description": "Discover why some records can never be changed.",
+    "steps": {
+      "start": {
+        "image": "/assets/raju_tea_stall.webp",
+        "text": "You are standing at Raju Tea Stall. You just had a fantastic cup of chai worth ₹50.\n\nYou pull out your phone, scan the QR code, and type fast. The green checkmark appears... but wait, you accidentally sent ₹500!",
+        "options": [
+          {
+            "label": "Try to edit the transaction",
+            "next": "try_edit"
+          }
+        ]
+      },
+      "try_edit": {
+        "text": "You open the UPI app history. You tap on the ₹500 transaction. \n\nIs there an 'Edit' button to change 500 to 50?",
+        "options": [
+          {
+            "label": "Yes, just change the amount.",
+            "next": "try_edit",
+            "feedback": "Have you ever seen an 'Edit' button on a past bank payment? If anyone could change past transaction amounts, the entire banking system would collapse!"
+          },
+          {
+            "label": "No, I can't change it.",
+            "next": "no_edit"
+          }
+        ]
+      },
+      "no_edit": {
+        "text": "Exactly. The transaction is a historical fact. It already happened. The bank's servers recorded it permanently.",
+        "options": [
+          {
+            "label": "So how do I fix this?",
+            "next": "fix_it"
+          }
+        ]
+      },
+      "fix_it": {
+        "text": "You tell Raju bhaiya about the mistake. He laughs, opens his app, and sends you ₹450 back.",
+        "options": [
+          {
+            "label": "Check history again",
+            "next": "check_history"
+          }
+        ]
+      },
+      "check_history": {
+        "text": "You look at your history. \nThere are now TWO records:\n1. Sent ₹500 to Raju Tea Stall (Permanent)\n2. Received ₹450 from Raju Tea Stall (Permanent)",
+        "options": [
+          {
+            "label": "What does this mean?",
+            "next": "aha"
+          }
+        ]
+      },
+      "aha": {
+        "text": "You can't change the past. A transaction is a permanent, unchangeable record.\n\nIn Python, when we want to protect a collection of data from ever being accidentally changed or modified by anyone, we put it in a Tuple instead of a normal List.\n\nTuples are immutable.",
+        "snippet": "payment = ('TXN98765', 500, 'Raju Tea Stall')\n\n# payment[1] = 50 -> This will crash! You can't edit it.",
+        "teaser": "But... what if you wanted to quickly look up something instead of calculating it every time?",
+        "options": [
+          {
+            "label": "Finish",
+            "next": "end"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "sharma-ji-address",
+    "title": "Sharma Ji's Address",
+    "description": "Discover how avoiding repeated hard work makes you faster.",
+    "steps": {
+      "start": {
+        "image": "/assets/shopkeeper_talking.webp",
+        "text": "Sharma Ji owes money to a lot of people in the neighborhood. Multiple times a day, different people walk up to the local grocery shop and asks the shopkeeper:\n\n\"Bhaiya, Sharma Ji kahan rehte hain?\" (Where does Sharma Ji live?)",
+        "options": [
+          {
+            "label": "Watch what the shopkeeper does",
+            "next": "shopkeeper_explains"
+          }
+        ]
+      },
+      "shopkeeper_explains": {
+        "text": "The shopkeeper sighs, stops what he is doing, points his finger down the street, and explains:\n\n\"Go straight, then take the first right, then the 3rd house on the left hand side...\"\n\nIt takes him a couple of minutes of mental effort and talking.",
+        "options": [
+          {
+            "label": "Wait a few hours",
+            "next": "next_person"
+          }
+        ]
+      },
+      "next_person": {
+        "text": "A few hours later, another person arrives and asks the exact same question. The shopkeeper repeats the exact same long explanation.\n\nAfter a couple of days of this, the shopkeeper is exhausted and tired.",
+        "options": [
+          {
+            "label": "Keep explaining it every time.",
+            "next": "next_person",
+            "feedback": "He can do that, but he's losing customers at his shop! Doing the exact same hard mental work again and again is a waste of time."
+          },
+          {
+            "label": "Find a smarter solution.",
+            "next": "smart_solution"
+          }
+        ]
+      },
+      "smart_solution": {
+        "image": "/assets/shopkeeper_writing.webp",
+        "text": "The shopkeeper grabs a small blackboard and a piece of chalk. He places it outside the shop.\n\nHe writes: \"Sharma Ji -> Go straight, first right, 3rd house on left.\"",
+        "options": [
+          {
+            "label": "Watch what happens next",
+            "next": "aha"
+          }
+        ]
+      },
+      "aha": {
+        "text": "When the next person comes, the shopkeeper doesn't even speak. He just points to the blackboard. The answer is instant!\n\nHe did the hard work (calculating the confusing route) exactly once, and saved (cached) the result on a board.\n\nPython can do this for heavy calculations too. We call it Memoization.",
+        "snippet": "address_cache = {}\n\ndef get_address(name):\n    if name not in address_cache:\n        address_cache[name] = calculation(name)\n    return address_cache[name]",
+        "teaser": "What else could we store on that blackboard? See you next time.",
+        "options": [
+          {
+            "label": "Finish",
+            "next": "end"
+          }
+        ]
+      }
+    }
+  }
+]

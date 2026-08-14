@@ -1,0 +1,157 @@
+/* ==========================================================
+   OBSERVATION CHECKPOINT STYLING (WARM BROWN WOODEN THEME)
+   Studio Ghibli & Disney Storybook Aesthetics
+   ========================================================== */
+
+.observation-wrapper {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.observation-card {
+  padding: 24px;
+}
+
+.obs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.obs-badge {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  border: 1.5px solid #FDE68A;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 5px 14px;
+  border-radius: 14px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.obs-counter {
+  font-size: 14px;
+  color: #FFFFFF;
+  font-weight: 900;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.obs-title {
+  font-family: "Georgia", serif;
+  font-size: 25px;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+  font-weight: 900;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
+}
+
+.obs-subtitle {
+  font-size: 14px;
+  color: #FFE082;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.obs-prompt-box {
+  margin-bottom: 22px;
+  background: #FFFDF7;
+  border: 2px solid #C49A6C;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.obs-prompt-text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1A0E0A;
+  white-space: pre-wrap;
+  font-weight: 800;
+}
+
+.obs-options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.obs-option-card {
+  background: linear-gradient(145deg, #3A231C, #251612);
+  border: 2.5px solid #D4A359;
+  border-radius: 18px;
+  padding: 16px 20px;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+.obs-option-card:hover {
+  border-color: #FFE082;
+  background: linear-gradient(145deg, #4F2E26, #331A16);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 224, 130, 0.4);
+}
+
+.correct-card {
+  background: linear-gradient(135deg, #2E5A27, #1E3D19) !important;
+  border-color: #87A96B !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 20px rgba(135, 169, 107, 0.5) !important;
+}
+
+.correct-card .obs-opt-text, .correct-card .opt-number {
+  color: #FFFFFF !important;
+}
+
+.wrong-card {
+  background: linear-gradient(135deg, #7F2424, #541717) !important;
+  border-color: #FF6B6B !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.4) !important;
+}
+
+.wrong-card .obs-opt-text, .wrong-card .opt-number {
+  color: #FFFFFF !important;
+}
+
+.opt-number {
+  background: linear-gradient(135deg, #251612, #1A0E0A);
+  border: 2px solid #FFE082;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: #FFE082;
+  flex-shrink: 0;
+  font-size: 14px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.6);
+}
+
+.obs-opt-text {
+  font-size: 15px;
+  line-height: 1.4;
+  flex: 1;
+  color: #FFFFFF !important;
+  font-weight: 800 !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.feedback-icon {
+  font-weight: 900;
+  font-size: 14px;
+  color: #FFE082;
+}

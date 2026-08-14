@@ -1,0 +1,6 @@
+{
+  "name": "Code Katha Learning Intelligence System",
+  "description": "Educational reasoning framework and backend orchestrator running a 7-step LLM pipeline for CS education.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

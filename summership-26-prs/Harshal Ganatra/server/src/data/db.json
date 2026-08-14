@@ -1,0 +1,172 @@
+{
+  "modules": [
+    {
+      "id": "thieves-at-the-well",
+      "title": "The Thieves at the Well",
+      "prologue": "One warm summer evening, Tenali Rama noticed a group of notorious thieves hiding in the bushes outside his home. Knowing they planned to rob him, Tenali devised a brilliant plan. He called out loudly to his wife, 'My dear! The town is full of thieves right now. We must protect our wealth. Let us put all our gold and jewels into a heavy iron trunk and drop it into the deep well in our garden!' Hearing this, the thieves rejoiced and waited for Tenali to go to sleep, completely unaware that they were walking into a trap.",
+      "pages": [
+        {
+          "page_number": 1,
+          "title": "The Night's Work Begins",
+          "story": "Once the house went dark, the thieves rushed to the well. They saw the well was nearly full of water. To reach the heavy trunk at the bottom, they had to empty the well. Instead of everyone chaoticly running around, the thief leader established a strict routine: he would stand at the edge, pull up a single bucket of water, and pass that bucket down the line to be poured into the garden.",
+          "mcq": {
+            "question": "Why did the thief leader establish a strict bucket-passing routine instead of letting everyone figure it out themselves?",
+            "options": [
+              "A) To create a single, reusable set of instructions that could be executed smoothly every time the bucket came up.",
+              "B) To ensure that everyone had an equal chance to rest between the heavy lifting and pouring tasks.",
+              "C) To prevent the thieves from making too much noise and waking up Tenali Rama and his neighbors.",
+              "D) To easily identify who was the strongest worker in the group for future robbery attempts."
+            ],
+            "correct": "A",
+            "hint": "Think about efficiency. Why do factories use assembly lines?",
+            "explanation": "Establishing a set routine allows a complex task to be repeated easily, simply by providing the required input (the bucket) each time."
+          },
+          "image": "/act1.jpg"
+        },
+        {
+          "page_number": 2,
+          "title": "The Hand-Off",
+          "story": "The leader pulled up the first heavy bucket. Exhausted, he thought about just dumping the water right next to the well. But he realized that if he just splashed it on the ground there, the mud would slide back in, and his crew wouldn't know the bucket was ready. He had to physically hand the full bucket over to the next thief in line so the water could be carried away.",
+          "mcq": {
+            "question": "Why was it useless for the leader to just dump the water next to the well?",
+            "options": [
+              "A) The water would make the ground too muddy, causing the other thieves to slip in the dark.",
+              "B) The splashing noise would immediately alert the guards patrolling the nearby village streets.",
+              "C) The action wouldn't help the crew; the actual result had to be physically handed to the next step.",
+              "D) The muddy water would ruin the bucket, making it impossible to carry the heavy treasure later."
+            ],
+            "correct": "C",
+            "hint": "If you ask someone to fetch you a tool, does it help if they just drop it on the floor in the other room?",
+            "explanation": "Just making noise or splashing water doesn't help the rest of the team. The final result must be physically delivered to the next step of the process."
+          },
+          "image": "/act2.jpg"
+        },
+        {
+          "page_number": 3,
+          "title": "Watering the Garden",
+          "story": "The thief at the end of the line was in charge of pouring the water into the garden. In the dark, it was hard to see the plants. However, he knew that 90% of Tenali's garden consisted of large mango trees. To save time, he assumed every bucket should be poured at the base of a mango tree, unless his foot bumped into a prickly rose bush—then he would change his aim.",
+          "mcq": {
+            "question": "Why did the pouring thief assume the water was for a mango tree by default?",
+            "options": [
+              "A) Because Tenali Rama had specifically ordered the thieves to water the mango trees the previous day.",
+              "B) Because mango trees require significantly more water than the smaller rose bushes in the garden.",
+              "C) It prevented the water from pooling near the house and damaging the stone foundation.",
+              "D) It provided a standard backup plan, saving him from inspecting every plant while still allowing him to adapt."
+            ],
+            "correct": "D",
+            "hint": "If almost every answer is going to be 'mango', why ask the question every single time?",
+            "explanation": "A standard assumption acts as a backup plan. It saves time and effort, but can still be changed if a specific, new situation arises."
+          },
+          "image": "/act3.jpg"
+        },
+        {
+          "page_number": 4,
+          "title": "A Minor Discovery",
+          "story": "Hours passed, and the water level dropped. One of the thieves in the middle of the line slipped in the mud and found a single, small copper coin lost in the grass. He quietly slipped it into his private pocket. This tiny personal discovery had absolutely no impact on the massive, heavy iron trunk they were trying to reach at the bottom of the well.",
+          "mcq": {
+            "question": "Why didn't the thief's discovery of the small coin affect the main treasure trunk?",
+            "options": [
+              "A) The coin was a temporary, private find completely isolated from the main, shared goal at the bottom of the well.",
+              "B) The leader explicitly forbade anyone from adding personal findings to the main treasure pool.",
+              "C) The small copper coin was significantly less valuable than the gold they expected to find inside the trunk.",
+              "D) The mud on the coin made it too dirty to mix with the pristine jewels expected in the royal chest."
+            ],
+            "correct": "A",
+            "hint": "Does finding a coin on the street change the amount of money in the town's main bank vault?",
+            "explanation": "Private, isolated spaces keep small, everyday actions completely separate from the crucial, main resources everyone relies on."
+          },
+          "image": "/act4.jpg"
+        },
+        {
+          "page_number": 5,
+          "title": "The Bottom of the Well",
+          "story": "The thieves were exhausted, but they couldn't stop yet. The leader reminded them of their single repeating rule: 'Lower the bucket, pull up the water. Repeat this exact action over and over again until the bucket scrapes dry dirt, then we stop and grab the trunk.'",
+          "mcq": {
+            "question": "What would happen if the leader forgot to include the rule 'until the bucket scrapes dry dirt'?",
+            "options": [
+              "A) The bucket would eventually break from hitting the rocks at the bottom too many times.",
+              "B) The thieves would start fighting over who gets to pull the treasure trunk up to the surface.",
+              "C) The thieves would mindlessly keep lowering and pulling an empty bucket in a loop until they collapsed.",
+              "D) The water in the well would eventually refill from the underground spring, ruining their progress."
+            ],
+            "correct": "C",
+            "hint": "If a repeating chore doesn't have a strict stopping condition, when does it end?",
+            "explanation": "Without a strict stopping point, a repeating rule will run endlessly in a loop until the workers completely exhaust themselves."
+          },
+          "image": "/act5.jpg"
+        },
+        {
+          "page_number": 6,
+          "title": "Epilogue",
+          "story": "Morning arrived. The exhausted thieves finally pulled up the heavy iron trunk, only to find it filled with large rocks! Tenali Rama stepped out onto his balcony, stretching. 'Thank you, kind friends!' he called out. 'My garden needed watering badly, and you did all the heavy lifting for me!' The thieves fled in embarrassment.\n\nWithout realizing it, the thieves spent the entire night executing pure programming logic. Let's look back at how their actions perfectly map to Python concepts:\n\n1. Functions & Parameters (Page 1): Establishing the bucket-passing routine created a reusable set of instructions that accepted external input (the bucket).\n2. Return Values (Page 2): Handing the bucket to the next thief showed that an action is only useful if it physically delivers its data back to the system.\n3. Default Arguments (Page 3): Assuming the water was for the mango trees acted as a standard backup plan to save time.\n4. Variable Scope (Page 4): The thief's private pocket isolated his local discovery from the global treasure trunk.\n5. Recursion (Page 5): Repeating the bucket drop until they hit dry dirt was a recursive loop with a strict stopping point (base case)."
+        }
+      ],
+      "coding_trials": {
+        "title": "The Royal Coding Trials",
+        "description": "You have mastered the logic of the thieves. Now, it is time to learn the language of the builders: Python. Translate the logic of the night's events into real code.",
+        "challenges": [
+          {
+            "page_reference": 1,
+            "concept": "Functions & Parameters",
+            "starter_code": "def pass_bucket(water_amount):\n    print(\"Passing a bucket with \" + water_amount)\n\n# The leader pulls up a full bucket\npass_bucket(________)",
+            "options": [
+              "water_amount",
+              "\"full bucket\"",
+              "pass_bucket",
+              "def"
+            ],
+            "correct": "\"full bucket\""
+          },
+          {
+            "page_reference": 2,
+            "concept": "Return Values",
+            "starter_code": "def pull_water():\n    bucket = \"water\"\n    # Hand the water over to the next thief\n    ________ bucket\n\nnext_thief = pull_water()",
+            "options": [
+              "print",
+              "return",
+              "def",
+              "output"
+            ],
+            "correct": "return"
+          },
+          {
+            "page_reference": 3,
+            "concept": "Default Arguments",
+            "starter_code": "# Assume mango tree as the standard backup plan\ndef water_plants(plant=________):\n    print(\"Watering the \" + plant)\n\nwater_plants()",
+            "options": [
+              "plant",
+              "tree",
+              "\"mango tree\"",
+              "default"
+            ],
+            "correct": "\"mango tree\""
+          },
+          {
+            "page_reference": 4,
+            "concept": "Variable Scope",
+            "starter_code": "iron_trunk = \"rocks\"\n\ndef search_mud():\n    # Use a private local pocket\n    ________ = \"copper coin\"\n\nsearch_mud()",
+            "options": [
+              "global iron_trunk",
+              "pocket",
+              "return",
+              "iron_trunk"
+            ],
+            "correct": "pocket"
+          },
+          {
+            "page_reference": 5,
+            "concept": "Recursion",
+            "starter_code": "def empty_well(water_level):\n    if water_level == 0:\n        return \"Dry dirt!\"\n    # Repeat the exact same action\n    ________(water_level - 1)",
+            "options": [
+              "return",
+              "def",
+              "water_level",
+              "empty_well"
+            ],
+            "correct": "empty_well"
+          }
+        ]
+      }
+    }
+  ]
+}

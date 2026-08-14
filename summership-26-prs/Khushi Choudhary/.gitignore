@@ -1,0 +1,20 @@
+node_modules/
+client/dist/
+.env
+npm-debug.log*
+.DS_Store
+
+# Runtime AI-provider config — mentor Settings panel writes real API keys
+# here (server/src/services/aiConfigStore.js). Same category as .env: local
+# secrets, never committed. aiConfigStore.ensureConfig() auto-creates this
+# file with empty keys on first run if it's missing, so nothing breaks
+# without it.
+server/src/data/aiConfig.json
+
+# Personal dev log kept for my own reference while building this — not
+# meant for reviewers, not part of the PR.
+change.md
+
+# Personal build notes kept for my own reference while building this — not
+# meant for reviewers, not part of the PR.
+context.md

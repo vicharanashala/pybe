@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyBe — Akbar and Birbal's Royal Tax Registry</title>
+
+  <!-- Stylesheets: order matters, base first, then thematic, then components, then editor -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/storybook.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/editor.css" />
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="pybe-header">
+    <div class="pybe-brand">
+      <span class="pybe-logo">📜</span>
+      <span class="pybe-title">PyBe</span>
+      <span class="pybe-subtitle">Akbar &amp; Birbal's Royal Tax Registry</span>
+    </div>
+
+    <!-- Progress bar: macro segments for the 9 stages -->
+    <div class="progress-track" id="progress-track" aria-label="Lesson progress">
+      <!-- Segments are generated dynamically by navigation.js -->
+    </div>
+  </header>
+
+  <!-- ===================== MAIN STORYBOOK AREA ===================== -->
+  <main class="storybook-stage">
+    <section class="storybook-card" id="storybook-card">
+      <!-- Dynamic step content is injected here by renderer.js -->
+      <div class="card-loading">
+        <p>Unrolling the royal scroll...</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER NAVIGATION ===================== -->
+  <footer class="pybe-footer">
+    <button id="btn-back" class="nav-btn nav-btn-back" type="button">
+      ← Back
+    </button>
+
+    <div class="step-indicator" id="step-indicator">
+      <!-- e.g. "Step 3 of 9" filled in by navigation.js -->
+    </div>
+
+    <button id="btn-next" class="nav-btn nav-btn-next" type="button" disabled>
+      Next →
+    </button>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <!-- Order matters: data first, then engine, then renderer/feature modules, then navigation (which boots the app) -->
+  <script src="js/lessonData.js"></script>
+  <script src="js/lessonEngine.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/codeEditor.js"></script>
+  <script src="js/assessment.js"></script>
+  <script src="js/navigation.js"></script>
+
+</body>
+</html>

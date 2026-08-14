@@ -1,0 +1,102 @@
+/* ==========================================================
+   FINAL MISSION CODING CHALLENGE STYLING
+   Studio Ghibli & Disney Storybook Aesthetics
+   ========================================================== */
+
+.challenge-wrapper {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.challenge-notebook-card {
+  padding: 24px;
+}
+
+.mission-directives-scroll {
+  padding: 16px 20px;
+  margin-bottom: 18px;
+}
+
+.mission-directives-scroll h4 {
+  font-size: 14px;
+  color: #3E2723;
+  margin-bottom: 6px;
+  font-weight: 800;
+}
+
+.mission-directives-scroll pre {
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #2C1B18;
+  white-space: pre-wrap;
+  font-weight: 600;
+}
+
+.ch-editor-container {
+  margin-bottom: 16px;
+}
+
+.ch-textarea {
+  height: 200px;
+}
+
+.validation-checks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.check-pill {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1.5px solid rgba(141, 91, 76, 0.6);
+  border-radius: 12px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #C5E1A5;
+}
+
+.check-passed {
+  background: rgba(46, 125, 50, 0.35);
+  border-color: #81C784;
+  color: #E8F5E9;
+  font-weight: bold;
+}
+
+.ch-action-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 18px;
+}
+
+.run-mission-btn {
+  width: 100%;
+  max-width: 320px;
+}
+
+.mission-success-banner {
+  background: linear-gradient(135deg, rgba(46, 125, 50, 0.35), rgba(27, 94, 32, 0.25));
+  border: 2px solid #81C784;
+  border-radius: 18px;
+  padding: 16px 20px;
+  text-align: center;
+  margin: 18px 0;
+  color: #E8F5E9;
+}
+
+.mission-success-banner h3 {
+  color: #81C784;
+  font-family: "Georgia", serif;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.ch-footer {
+  display: flex;
+  justify-content: flex-end;
+}

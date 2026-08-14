@@ -1,0 +1,1354 @@
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #17201d;
+  background: #f4f1ea;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+}
+
+.sidebar {
+  background: #16231f;
+  color: #f8f4ec;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.brand strong {
+  display: block;
+  font-size: 1.5rem;
+}
+
+.brand span {
+  color: #b9c7bf;
+  font-size: .9rem;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #24342f;
+  border: 1px solid #385149;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  color: #fff;
+  border: 0;
+  outline: 0;
+}
+
+select {
+  border: 1px solid #d7d0c3;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fffaf2;
+  color: #18221f;
+}
+
+.sidebar select {
+  background: #24342f;
+  border-color: #385149;
+  color: #f8f4ec;
+}
+
+.scenario-list {
+  overflow: auto;
+  display: grid;
+  gap: 10px;
+  padding-right: 4px;
+}
+
+.scenario {
+  text-align: left;
+  border: 1px solid #385149;
+  background: #20312c;
+  color: #f8f4ec;
+  border-radius: 8px;
+  padding: 14px;
+  display: grid;
+  gap: 7px;
+  cursor: pointer;
+}
+
+.scenario.active {
+  background: #d8f07c;
+  color: #14201c;
+  border-color: #d8f07c;
+}
+
+.scenario span {
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.scenario small {
+  color: inherit;
+  opacity: .75;
+}
+
+.workspace {
+  padding: 28px;
+  display: grid;
+  gap: 24px;
+}
+
+.hero {
+  min-height: 230px;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(18,34,30,.92), rgba(36,77,67,.78)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  padding: 32px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.hero p {
+  margin: 0 0 10px;
+  color: #d8f07c;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: .78rem;
+}
+
+.hero h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 4.7rem);
+  line-height: .98;
+  letter-spacing: 0;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 12px;
+}
+
+.hero-stats span {
+  min-width: 88px;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.hero-stats small {
+  display: block;
+  font-size: .75rem;
+  font-weight: 500;
+  color: #d9e2dc;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(360px, .9fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.panel {
+  background: #fffdf7;
+  border: 1px solid #ded7cb;
+  border-radius: 8px;
+  padding: 22px;
+  box-shadow: 0 16px 42px rgba(40, 34, 23, .08);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0;
+}
+
+.context {
+  color: #53615c;
+  line-height: 1.6;
+}
+
+.objective-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 16px 0;
+}
+
+.objective-row span {
+  background: #e7f2cb;
+  border: 1px solid #c9dc94;
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-size: .86rem;
+}
+
+.learning-form {
+  display: grid;
+  gap: 14px;
+}
+
+.learning-form label {
+  display: grid;
+  gap: 7px;
+  font-weight: 700;
+}
+
+textarea {
+  width: 100%;
+  min-height: 105px;
+  border: 1px solid #d4cdc0;
+  border-radius: 8px;
+  padding: 12px;
+  resize: vertical;
+  background: #fffaf2;
+  color: #17201d;
+}
+
+.primary {
+  border: 0;
+  border-radius: 8px;
+  background: #17231f;
+  color: #fff;
+  padding: 13px 16px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.primary:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
+.empty {
+  min-height: 360px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: #68736f;
+  padding: 30px;
+}
+
+.result-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.score {
+  background: #17231f;
+  color: #fff;
+  border-radius: 8px;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.score span {
+  font-size: 3rem;
+  font-weight: 900;
+}
+
+.mapping {
+  border-left: 4px solid #7b9f27;
+  padding: 10px 0 10px 12px;
+}
+
+.mapping strong,
+.mapping span {
+  display: block;
+}
+
+.mapping span {
+  color: #66730a;
+  font-weight: 800;
+  margin: 4px 0;
+}
+
+.code-block {
+  background: #111916;
+  color: #e6f2eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.code-block div {
+  padding: 12px 14px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: #1f2d28;
+}
+
+pre {
+  margin: 0;
+  padding: 16px;
+  white-space: pre-wrap;
+  line-height: 1.55;
+}
+
+.code-block p {
+  padding: 0 16px 16px;
+  color: #cddbd5;
+}
+
+.feedback {
+  padding-left: 20px;
+  color: #43504b;
+}
+
+.note {
+  background: #fff2d9;
+  border: 1px solid #ebcd8e;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.analytics-list {
+  display: grid;
+  gap: 10px;
+}
+
+.analytics-list div {
+  display: grid;
+  grid-template-columns: 1fr 110px 24px;
+  align-items: center;
+  gap: 10px;
+}
+
+meter {
+  width: 100%;
+}
+
+.roadmap {
+  display: grid;
+  gap: 14px;
+}
+
+.roadmap article {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 12px;
+}
+
+.roadmap article > strong {
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+  background: #17231f;
+  color: #d8f07c;
+  display: grid;
+  place-items: center;
+}
+
+.roadmap h3 {
+  margin-bottom: 5px;
+}
+
+.roadmap p {
+  color: #52605b;
+  margin-bottom: 5px;
+  line-height: 1.45;
+}
+
+.roadmap small {
+  color: #7b867f;
+}
+
+.sessions {
+  display: grid;
+  gap: 12px;
+}
+
+.sessions article {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  border-bottom: 1px solid #e7dfd2;
+  padding-bottom: 12px;
+}
+
+.sessions span {
+  display: block;
+  color: #66716c;
+  font-size: .88rem;
+  margin-top: 4px;
+}
+
+.loading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #17231f;
+  color: #d8f07c;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 1050px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    height: auto;
+  }
+
+  .main-grid,
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .workspace,
+  .sidebar {
+    padding: 16px;
+  }
+
+  .hero {
+    padding: 22px;
+  }
+
+  .hero-stats {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .hero-stats span {
+    flex: 1;
+    min-width: 96px;
+  }
+
+  .analytics-list div {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ============================================================
+   Story-based lesson module (Adder)
+   UI Refinement — Phase 3 (shared LessonUI.jsx components +
+   shared styles only; no screen file's markup or logic changed
+   as part of this pass — screens automatically inherit these
+   rules through the class names they already reference).
+
+   This block replaces the earlier Version 0.2 and Version 0.3
+   lesson CSS in place, at the same location in the file, using
+   the exact same class names those screens already render —
+   only the visual treatment changed, not what triggers it.
+   Namespaced under `.lesson-` so nothing here can collide with
+   the existing `.primary` / `.code-block` classes above, which
+   belong to the AI Mentor scenario UI and remain untouched.
+   ============================================================ */
+
+/* ---- Palette + type + spacing tokens ----
+   New custom properties, additive to :root — nothing above this
+   point is modified. Colors chosen to stay within the existing
+   app's own warm/cream family (compare :root's `background:
+   #f4f1ea` above) while giving the lesson its own slightly
+   warmer, storybook-appropriate variant of it. */
+:root {
+  --lesson-cream: #fbf6ea;
+  --lesson-cream-deep: #f3ecda;
+  --lesson-white: #ffffff;
+  --lesson-green: #2f6b4f;
+  --lesson-green-deep: #234f3b;
+  --lesson-green-soft: #e7f1ea;
+  --lesson-brown: #4a3f35;
+  --lesson-brown-muted: #7a6f60;
+  --lesson-border: #e4ded2;
+  --lesson-red: #b24a3e;
+  --lesson-red-soft: #fbeaea;
+  --lesson-shadow: rgba(43, 32, 20, 0.10);
+  --lesson-shadow-soft: rgba(43, 32, 20, 0.06);
+
+  --lesson-font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --lesson-space-1: 4px;
+  --lesson-space-2: 8px;
+  --lesson-space-3: 12px;
+  --lesson-space-4: 16px;
+  --lesson-space-5: 24px;
+  --lesson-space-6: 32px;
+  --lesson-space-7: 48px;
+
+  --lesson-radius: 16px;
+  --lesson-radius-lg: 24px;
+}
+
+/* ---- Motion ----
+   Three small, reusable keyframes. Nothing here is JS-driven —
+   plain CSS, applied as entrance transitions, not decoration. */
+@keyframes lesson-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lesson-slide-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lesson-screen,
+  .lesson-primary-button,
+  .lesson-option-button,
+  .lesson-illustration,
+  .lesson-summary-badge,
+  .lesson-summary-card {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---- Shared focus treatment ----
+   One visible, warm-toned focus ring for every interactive
+   element in the lesson, replacing the browser default outline
+   (which was previously undefined for these elements). */
+.lesson-primary-button:focus-visible,
+.lesson-option-button:focus-visible,
+.lesson-reflection-input:focus-visible {
+  outline: 3px solid var(--lesson-green);
+  outline-offset: 2px;
+}
+
+/* ---- Screen shell ----
+   Shared by every screen via the one class name they already
+   render (`lesson-screen`). Gains the fade/slide entrance here;
+   no screen file needed to change to pick this up. */
+.lesson-screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lesson-space-5);
+  max-width: 640px;
+  font-family: var(--lesson-font-body);
+  color: var(--lesson-brown);
+  animation: lesson-fade-in 0.4s ease-out, lesson-slide-up 0.4s ease-out;
+}
+
+.lesson-screen h1,
+.lesson-screen h2,
+.lesson-screen h3 {
+  font-family: var(--lesson-font-body);
+  color: var(--lesson-brown);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.lesson-screen h1 {
+  font-size: 1.75rem;
+}
+
+.lesson-screen h2 {
+  font-size: 1.4rem;
+}
+
+.lesson-screen h3 {
+  font-size: 1.15rem;
+}
+
+.lesson-screen p {
+  max-width: 65ch;
+  line-height: 1.6;
+}
+
+/* ---- Primary button ----
+   Rounded, soft shadow, gentle hover lift. Same element/props as
+   before (`label`, `onClick`, `disabled`) — only the two inner
+   `<span>`s (label text + decorative arrow) are new, both purely
+   presentational. */
+.lesson-primary-button {
+  border: 0;
+  border-radius: 999px;
+  background: var(--lesson-green);
+  color: var(--lesson-white);
+  padding: 14px 24px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--lesson-space-2);
+  cursor: pointer;
+  font-family: var(--lesson-font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  width: fit-content;
+  box-shadow: 0 4px 14px var(--lesson-shadow);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, background 0.15s ease-out;
+}
+
+.lesson-primary-button:hover:not(:disabled) {
+  background: var(--lesson-green-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--lesson-shadow);
+}
+
+.lesson-primary-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.lesson-primary-button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ---- Option list + option button ----
+   `lesson-option-list` unchanged structurally (still a simple
+   stacked list); option buttons gain rounded corners, a lift on
+   hover, and — new in this pass — a ✓/✕ icon rendered by
+   LessonUI.jsx alongside color, so state is never color-only. */
+.lesson-option-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lesson-space-3);
+}
+
+.lesson-option-button {
+  text-align: left;
+  border: 1.5px solid var(--lesson-border);
+  background: var(--lesson-white);
+  color: var(--lesson-brown);
+  border-radius: var(--lesson-radius);
+  padding: var(--lesson-space-4) var(--lesson-space-5);
+  cursor: pointer;
+  font: inherit;
+  font-family: var(--lesson-font-body);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lesson-space-3);
+  box-shadow: 0 2px 8px var(--lesson-shadow-soft);
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out,
+    border-color 0.15s ease-out, background 0.15s ease-out;
+}
+
+.lesson-option-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--lesson-shadow);
+  border-color: var(--lesson-green);
+}
+
+.lesson-option-button--selected {
+  border-color: var(--lesson-green);
+  background: var(--lesson-green-soft);
+}
+
+.lesson-option-button--correct {
+  border-color: var(--lesson-green);
+  background: var(--lesson-green-soft);
+  color: var(--lesson-green-deep);
+}
+
+.lesson-option-button--incorrect {
+  border-color: var(--lesson-red);
+  background: var(--lesson-red-soft);
+  color: var(--lesson-red);
+}
+
+.lesson-option-button:disabled {
+  cursor: default;
+  transform: none;
+}
+
+.lesson-option-button:disabled:not(.lesson-option-button--correct):not(.lesson-option-button--incorrect) {
+  opacity: 0.7;
+}
+
+.lesson-option-button__icon {
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* ---- Code block ----
+   Redesigned light and warm, not a dark editor theme — kept
+   simple and readable per direction: a soft card, a colored left
+   accent (evokes "code" without a full syntax highlighter), and a
+   clear monospace face. Same markup shape as before (`<pre>` +
+   optional `<p>` caption). */
+.lesson-code-block {
+  background: var(--lesson-cream-deep);
+  border-left: 4px solid var(--lesson-green);
+  border-radius: 0 var(--lesson-radius) var(--lesson-radius) 0;
+  overflow: hidden;
+}
+
+.lesson-code-block pre {
+  margin: 0;
+  padding: var(--lesson-space-5);
+  white-space: pre-wrap;
+  line-height: 1.6;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 1.05rem;
+  color: var(--lesson-green-deep);
+}
+
+.lesson-code-block p {
+  padding: 0 var(--lesson-space-5) var(--lesson-space-5);
+  color: var(--lesson-brown-muted);
+  font-family: var(--lesson-font-body);
+}
+
+/* ---- Illustration frame ----
+   New in this pass. Not yet rendered by any screen — see
+   components/LessonUI.jsx's `LessonIllustration` doc comment. */
+.lesson-illustration {
+  background: var(--lesson-white);
+  border-radius: var(--lesson-radius-lg);
+  box-shadow: 0 10px 30px var(--lesson-shadow);
+  padding: var(--lesson-space-2);
+  animation: lesson-fade-in 0.5s ease-out;
+}
+
+.lesson-illustration img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: calc(var(--lesson-radius-lg) - 6px);
+}
+
+/* ---- Remaining shared elements ----
+   Reflection input, feedback text, discovery answer, explainer
+   list, story result — all used across more than one screen via
+   the shared stylesheet, refined to the new palette/spacing.
+   Structurally unchanged from before this pass. */
+.lesson-reflection-input {
+  min-height: 90px;
+  border: 1.5px solid var(--lesson-border);
+  border-radius: var(--lesson-radius);
+  padding: var(--lesson-space-3) var(--lesson-space-4);
+  font: inherit;
+  font-family: var(--lesson-font-body);
+  background: var(--lesson-white);
+  resize: vertical;
+  transition: border-color 0.15s ease-out;
+}
+
+.lesson-reflection-input:focus-visible {
+  border-color: var(--lesson-green);
+}
+
+.lesson-feedback {
+  color: var(--lesson-brown-muted);
+  line-height: 1.6;
+}
+
+.lesson-discovery-answer {
+  font-family: var(--lesson-font-body);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--lesson-green-deep);
+}
+
+.lesson-explainer-list {
+  margin: 0;
+  padding-left: var(--lesson-space-5);
+  color: var(--lesson-brown-muted);
+  line-height: 1.7;
+}
+
+.lesson-story-result {
+  font-family: var(--lesson-font-body);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--lesson-green-deep);
+}
+
+/* ---- Responsive ----
+   Mobile: full-width primary button, larger touch targets on
+   options; tablet/desktop retain the desktop sizing above. */
+@media (max-width: 640px) {
+  .lesson-screen {
+    gap: var(--lesson-space-4);
+  }
+
+  .lesson-primary-button {
+    width: 100%;
+    padding: var(--lesson-space-4) var(--lesson-space-5);
+  }
+
+  .lesson-option-button {
+    padding: var(--lesson-space-4);
+  }
+}
+
+/* ============================================================
+   Story-based lesson module (Adder)
+   UI Refinement — Phase 4 (StoryScreen only).
+   Scoped entirely to `.lesson-story-screen` / `.lesson-story-
+   layout*` — nothing here affects any other screen's classes.
+   ============================================================ */
+
+/* Wider cap than the generic 640px screen shell, specifically for
+   the Story screen's image+text layout, which needs more room.
+   Combined-class selector so this applies only when both classes
+   are present (i.e. only on StoryScreen), not to `.lesson-screen`
+   generally. */
+.lesson-screen.lesson-story-screen {
+  max-width: 900px;
+}
+
+.lesson-story-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--lesson-space-7);
+  width: 100%;
+}
+
+.lesson-story-layout__image {
+  flex: 0 0 auto;
+  width: 40%;
+  max-width: 380px;
+}
+
+.lesson-story-layout__content {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--lesson-space-4);
+  min-width: 0;
+}
+
+/* Tablet: keep side-by-side, tighten proportions/spacing. */
+@media (max-width: 900px) {
+  .lesson-story-layout {
+    gap: var(--lesson-space-5);
+  }
+
+  .lesson-story-layout__image {
+    width: 36%;
+  }
+}
+
+/* Mobile: stack — image above text, full width, generous touch
+   targets already handled by the shared button/option rules above. */
+@media (max-width: 640px) {
+  .lesson-story-layout {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--lesson-space-5);
+  }
+
+  .lesson-story-layout__image {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* ============================================================
+   Story-based lesson module (Adder)
+   UI Refinement — Phase 5 (QuestionsScreen only), refined for
+   more breathing room per direct feedback after initial review.
+   `.lesson-question-card` / `.lesson-feedback-card*` /
+   `.lesson-question-footer` are new, screen-specific classes.
+   `.lesson-option-list` / `.lesson-option-button` are shared
+   (Phase 3, used by both Questions and Python) — rather than
+   edit those shared rules (which would also affect PythonScreen,
+   not yet redesigned), the extra padding/spacing requested for
+   Questions specifically is applied via a scoped descendant
+   selector (`.lesson-questions-screen .lesson-option-button`),
+   so PythonScreen's use of the same component is untouched.
+   ============================================================ */
+
+.lesson-question-card {
+  background: var(--lesson-white);
+  border: 1.5px solid var(--lesson-border);
+  border-radius: 28px;
+  padding: var(--lesson-space-7);
+  box-shadow: 0 16px 40px rgba(43, 32, 20, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lesson-space-6);
+}
+
+.lesson-question-card h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--lesson-brown);
+  line-height: 1.4;
+}
+
+/* Questions-only spacing/padding increase for the shared option
+   list/button — scoped so PythonScreen's use of the same shared
+   component is unaffected. */
+.lesson-questions-screen .lesson-option-list {
+  gap: var(--lesson-space-4);
+}
+
+.lesson-questions-screen .lesson-option-button {
+  padding: var(--lesson-space-5) var(--lesson-space-6);
+}
+
+/* Reserves the vertical space feedback + the continue button will
+   occupy, so the page doesn't jump as they appear — present from
+   the first render regardless of whether either has content yet. */
+.lesson-question-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lesson-space-5);
+  min-height: 132px;
+}
+
+.lesson-feedback-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--lesson-space-3);
+  border-radius: var(--lesson-radius);
+  padding: var(--lesson-space-4) var(--lesson-space-5);
+  animation: lesson-fade-in 0.22s ease-out, lesson-slide-up 0.22s ease-out;
+}
+
+.lesson-feedback-card p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.lesson-feedback-card__icon {
+  font-weight: 700;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  line-height: 1.6;
+}
+
+.lesson-feedback-card--correct {
+  background: var(--lesson-green-soft);
+  color: var(--lesson-green-deep);
+}
+
+.lesson-feedback-card--incorrect {
+  background: var(--lesson-red-soft);
+  color: var(--lesson-red);
+}
+
+@media (max-width: 640px) {
+  .lesson-question-card {
+    padding: var(--lesson-space-6);
+    gap: var(--lesson-space-5);
+  }
+
+  .lesson-question-card h2 {
+    font-size: 1.35rem;
+  }
+
+  .lesson-questions-screen .lesson-option-button {
+    padding: var(--lesson-space-4) var(--lesson-space-5);
+  }
+
+  .lesson-question-footer {
+    min-height: 0;
+  }
+}
+
+/* ============================================================
+   Story-based lesson module (Adder)
+   UI Refinement — Phase 6 (DiscoveryScreen only).
+   Deliberately distinct from `.lesson-question-card` — this is a
+   reflection page (thinking + writing), not a quiz (selecting),
+   and the UI is meant to communicate that difference. Scoped to
+   `.lesson-reflection-card*` / `.lesson-reflection-reveal` /
+   `.lesson-discovery-screen .lesson-reflection-input` — nothing
+   here affects any other screen.
+   ============================================================ */
+
+.lesson-reflection-card {
+  background: var(--lesson-white);
+  border: 1.5px solid var(--lesson-border);
+  border-radius: 28px;
+  padding: var(--lesson-space-7);
+  box-shadow: 0 16px 40px rgba(43, 32, 20, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lesson-space-5);
+}
+
+.lesson-reflection-card__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--lesson-green);
+}
+
+.lesson-reflection-card h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--lesson-brown);
+  line-height: 1.4;
+}
+
+.lesson-reflection-card__lead {
+  margin: 0;
+  color: var(--lesson-brown-muted);
+  line-height: 1.6;
+}
+
+/* Discovery-only sizing for the reflection textarea — larger than
+   the shared default, since this screen's whole purpose is giving
+   the learner room to think and write, not a quick one-line answer. */
+.lesson-discovery-screen .lesson-reflection-input {
+  min-height: 200px;
+  padding: var(--lesson-space-5);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.lesson-reflection-reveal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lesson-space-4);
+  animation: lesson-fade-in 0.22s ease-out, lesson-slide-up 0.22s ease-out;
+}
+
+@media (max-width: 640px) {
+  .lesson-reflection-card {
+    padding: var(--lesson-space-6);
+    gap: var(--lesson-space-4);
+  }
+
+  .lesson-reflection-card h2 {
+    font-size: 1.35rem;
+  }
+
+  .lesson-discovery-screen .lesson-reflection-input {
+    min-height: 160px;
+  }
+}
+
+/* ============================================================
+   Story-based lesson module (Adder)
+   UI Refinement — Phase 7 (PythonScreen only).
+   Deliberately not another quiz card: the code block is the
+   visual centerpiece, present (as an empty placeholder) before
+   an answer and revealed with a one-shot highlight, not a large
+   "Correct!" message. Scoped to `.lesson-python-*` — nothing
+   here affects any other screen. `.lesson-option-list` /
+   `.lesson-option-button` are the shared Phase 3 rule, used here
+   unscoped/unmodified (this screen didn't ask for the Questions-
+   style size increase, so the shared default applies as-is).
+   ============================================================ */
+
+.lesson-python-explainer-card,
+.lesson-python-card {
+  background: var(--lesson-white);
+  border: 1.5px solid var(--lesson-border);
+  border-radius: 28px;
+  padding: var(--lesson-space-7);
+  box-shadow: 0 16px 40px rgba(43, 32, 20, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lesson-space-5);
+}
+
+.lesson-python-card__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--lesson-green);
+}
+
+.lesson-python-card__intro {
+  margin: 0;
+  color: var(--lesson-brown-muted);
+  line-height: 1.6;
+}
+
+/* The centerpiece: fixed-ish height so the placeholder and the
+   real LessonCodeBlock occupy roughly the same space, minimizing
+   any layout shift at the moment of reveal. */
+.lesson-python-codeblock {
+  min-height: 120px;
+  display: flex;
+  align-items: stretch;
+}
+
+.lesson-python-codeblock .lesson-code-block {
+  width: 100%;
+}
+
+.lesson-python-codeblock__placeholder {
+  width: 100%;
+  min-height: 120px;
+  border: 2px dashed var(--lesson-border);
+  border-radius: var(--lesson-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--lesson-brown-muted);
+  font-style: italic;
+}
+
+/* One-shot reveal: fade/slide in (same restrained motion used
+   elsewhere) plus a brief green glow that settles — the "aha"
+   moment, standing in for a "Correct!" message. */
+@keyframes lesson-code-reveal-glow {
+  0% { box-shadow: 0 0 0 0 rgba(47, 107, 79, 0); }
+  35% { box-shadow: 0 0 0 8px rgba(47, 107, 79, 0.14); }
+  100% { box-shadow: 0 0 0 0 rgba(47, 107, 79, 0); }
+}
+
+.lesson-python-codeblock--revealed .lesson-code-block {
+  border-radius: var(--lesson-radius);
+  animation: lesson-fade-in 0.22s ease-out, lesson-slide-up 0.22s ease-out,
+    lesson-code-reveal-glow 0.9s ease-out;
+}
+
+.lesson-python-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lesson-space-3);
+}
+
+.lesson-python-options__label {
+  margin: 0;
+  color: var(--lesson-brown-muted);
+  line-height: 1.6;
+}
+
+/* Reserves the vertical space feedback + Continue will occupy —
+   same technique as Questions, for the same reason: no page jump
+   as the learner answers. */
+.lesson-python-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lesson-space-4);
+  min-height: 76px;
+}
+
+@media (max-width: 640px) {
+  .lesson-python-explainer-card,
+  .lesson-python-card {
+    padding: var(--lesson-space-6);
+  }
+}
+
+/* ============================================================
+   Story-based lesson module (Adder)
+   UI Refinement — Phase 8 (SummaryScreen only).
+   Completion/celebration moment — center-aligned, unlike every
+   prior screen's reading layout, on purpose. Entirely new,
+   Summary-only classes (`.lesson-summary-*`); no shared class
+   from any earlier phase is modified. The one shared element
+   reused is `.lesson-code-block` (via a scoped descendant
+   selector, same technique as Questions/Discovery/Python), and
+   `.lesson-primary-button` (used completely unmodified).
+   ============================================================ */
+
+.lesson-summary-screen {
+  align-items: center;
+  text-align: center;
+}
+
+.lesson-summary-card {
+  background: var(--lesson-white);
+  border: 1.5px solid var(--lesson-border);
+  border-radius: 28px;
+  padding: var(--lesson-space-7);
+  box-shadow: 0 20px 50px rgba(43, 32, 20, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--lesson-space-4);
+  width: 100%;
+  animation: lesson-fade-in 0.4s ease-out, lesson-slide-up 0.4s ease-out;
+}
+
+/* CSS-only decorative badge — no image asset. Reuses the same ✓
+   glyph already used elsewhere (LessonOptionButton, feedback
+   cards) rather than inventing new iconography. */
+.lesson-summary-badge {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--lesson-green);
+  color: var(--lesson-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  font-weight: 800;
+  box-shadow: 0 0 0 10px var(--lesson-green-soft);
+  animation: lesson-summary-badge-pop 0.5s ease-out;
+}
+
+@keyframes lesson-summary-badge-pop {
+  0% { opacity: 0; transform: scale(0.7); }
+  60% { opacity: 1; transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.lesson-summary-card__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--lesson-green);
+}
+
+.lesson-summary-card h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--lesson-brown);
+  line-height: 1.25;
+}
+
+.lesson-summary-card__connector {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--lesson-brown-muted);
+  line-height: 1.6;
+}
+
+.lesson-summary-card__concept {
+  display: inline-block;
+  background: var(--lesson-green-soft);
+  color: var(--lesson-green-deep);
+  font-weight: 700;
+  border-radius: 999px;
+  padding: var(--lesson-space-2) var(--lesson-space-5);
+}
+
+/* The code is the payoff — given more room and a slightly larger
+   face than the shared default, scoped so PythonScreen's code
+   block (and any other screen's) is unaffected. */
+.lesson-summary-codeblock {
+  width: 100%;
+  max-width: 420px;
+  margin-top: var(--lesson-space-2);
+}
+
+.lesson-summary-codeblock .lesson-code-block pre {
+  font-size: 1.15rem;
+  text-align: left;
+}
+
+/* Restart is visible but deliberately quieter than the
+   celebration above it — a thin divider and extra top space
+   separate it from the payoff, rather than sitting at the same
+   visual weight. */
+.lesson-summary-card__restart {
+  width: 100%;
+  margin-top: var(--lesson-space-4);
+  padding-top: var(--lesson-space-5);
+  border-top: 1px solid var(--lesson-border);
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .lesson-summary-card {
+    padding: var(--lesson-space-6);
+  }
+
+  .lesson-summary-card h1 {
+    font-size: 1.6rem;
+  }
+}
+
+/* ============================================================
+   Story-based lesson module (Adder)
+   Page-level layout fix.
+   The `showLesson` branch in main.jsx previously rendered a bare
+   fragment with no wrapping container, so none of the `.lesson-*`
+   classes' max-width values had anything to center against —
+   the lesson rendered pinned to the top-left of the viewport.
+   This is the one rule responsible for fixing that: it centers
+   whatever `.lesson-page` contains and gives it page-level
+   padding, without changing any `.lesson-*` class inside it.
+   ============================================================ */
+
+.lesson-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--lesson-space-6);
+  padding: var(--lesson-space-6) var(--lesson-space-5);
+  background: var(--lesson-cream);
+}
+
+.lesson-page > .primary {
+  align-self: flex-start;
+}
+
+@media (max-width: 640px) {
+  .lesson-page {
+    padding: var(--lesson-space-5) var(--lesson-space-4);
+    gap: var(--lesson-space-4);
+  }
+}

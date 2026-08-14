@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyBe — The Sealed Record</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Nunito+Sans:wght@400;600;700;800&family=IBM+Plex+Mono:wght@500&display=swap');
+
+    :root {
+      --stone: #E9DDC0;
+      --stone-raised: #F3EAD3;
+      --ink: #2E2417;
+      --ink-soft: #7A6C50;
+      --line: #D9C89E;
+      --seal: #8B3A2F;
+      --seal-bg: #F1DAD3;
+      --gold: #B8862F;
+      --gold-bg: #F3E5C4;
+      --good: #2C6B33;
+      --good-bg: #DCEEDD;
+      --bad: #A3402E;
+      --bad-bg: #F5DEDA;
+      --clue: #4A5C7A;
+      --clue-bg: #DEE5EF;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--stone);
+      color: var(--ink);
+      font-family: 'Nunito Sans', sans-serif;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 40px 22px 90px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Fraunces', serif;
+      margin: 0;
+    }
+
+    .top-badge {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .top-badge-title {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .top-badge-sub {
+      color: var(--ink-soft);
+      font-size: 12.5px;
+      margin-top: 2px;
+    }
+
+    .clue-tracker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      margin: 10px 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .clue-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--line);
+      transition: background .2s ease;
+    }
+
+    .clue-dot.collected {
+      background: var(--clue);
+    }
+
+    .clue-tracker-label {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--clue);
+      margin-left: 6px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .progress-track {
+      height: 6px;
+      background: var(--line);
+      border-radius: 100px;
+      margin: 0 0 26px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--seal);
+      transition: width .3s ease;
+    }
+
+    .panel {
+      background: var(--stone-raised);
+      border: 2px solid var(--line);
+      border-radius: 18px;
+      padding: 30px 26px;
+      box-shadow: 0 3px 0 var(--line);
+    }
+
+    .panel-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--seal);
+      display: flex;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .panel-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--seal);
+      color: #fff;
+      font-family: 'Fraunces', serif;
+      font-weight: 800;
+      font-size: 13px;
+      margin-right: 8px;
+    }
+
+    .panel-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .body-text {
+      line-height: 1.7;
+      font-size: 15.5px;
+      white-space: pre-line;
+    }
+
+    .btn {
+      font-family: 'Nunito Sans', sans-serif;
+      font-weight: 800;
+      font-size: 14.5px;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 22px;
+      cursor: pointer;
+      color: #fff;
+      transition: filter .15s ease, transform .1s ease;
+    }
+
+    .btn:hover {
+      filter: brightness(1.08);
+    }
+
+    .btn:active {
+      transform: scale(.98);
+    }
+
+    .btn:disabled {
+      opacity: .3;
+      cursor: not-allowed;
+      filter: none;
+    }
+
+    .btn-seal {
+      background: var(--seal);
+    }
+
+    .btn-gold {
+      background: var(--gold);
+    }
+
+    .btn-clue {
+      background: var(--clue);
+    }
+
+    .btn-ghost {
+      background: none;
+      border: 1.5px solid var(--line);
+      color: var(--ink-soft);
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .tablet-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 18px 0;
+    }
+
+    .tablet-tile {
+      background: linear-gradient(180deg, #DCCFA9, #C9B989);
+      border: 2px solid #A6935F;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: 'Fraunces', serif;
+      font-weight: 700;
+      font-size: 14px;
+      color: #4A3B1F;
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .25), 0 3px 0 #A6935F;
+    }
+
+    .tablet-tile.new {
+      border-color: var(--gold);
+      background: linear-gradient(180deg, #F0DFAE, #E4CA8C);
+    }
+
+    .tablet-tile.struck {
+      opacity: .4;
+      text-decoration: line-through;
+    }
+
+    .code-box {
+      background: #2E2417;
+      color: #EFE6D0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13.5px;
+      border-radius: 10px;
+      padding: 14px 16px;
+      line-height: 1.8;
+      overflow-x: auto;
+      margin: 14px 0;
+    }
+
+    .code-box .cmt {
+      color: #9C8F70;
+    }
+
+    .error-box {
+      background: var(--bad-bg);
+      border: 1px solid #E3B7AB;
+      color: #7A2E20;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      border-radius: 9px;
+      padding: 12px 14px;
+      margin: 12px 0;
+    }
+
+    .explain-box {
+      background: var(--bad-bg);
+      border: 1px solid #E3B7AB;
+      color: #7A2E20;
+      border-radius: 9px;
+      padding: 12px 14px;
+      font-size: 13.5px;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .success-box {
+      background: var(--good-bg);
+      border: 1px solid #A9CFAE;
+      color: #1F4E24;
+      border-radius: 9px;
+      padding: 12px 14px;
+      font-size: 13.5px;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .clue-box {
+      background: var(--clue-bg);
+      border: 1px solid #B7C4D9;
+      color: #33445C;
+      border-radius: 9px;
+      padding: 14px 16px;
+      font-size: 14px;
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    .clue-box b {
+      color: var(--clue);
+    }
+
+    .opt-grid {
+      display: grid;
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .opt {
+      text-align: left;
+      padding: 12px 14px;
+      border-radius: 9px;
+      border: 1.5px solid var(--line);
+      background: var(--stone);
+      font-size: 14.5px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: border-color .15s ease, background .15s ease;
+    }
+
+    .opt:hover {
+      border-color: var(--ink-soft);
+    }
+
+    .opt.correct {
+      border-color: var(--good);
+      background: var(--good-bg);
+      color: var(--good);
+    }
+
+    .opt.wrong {
+      border-color: var(--bad);
+      background: var(--bad-bg);
+      color: var(--bad);
+    }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 4px;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+    }
+
+    .check-row:last-child {
+      border-bottom: none;
+    }
+
+    .check-box {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      border: 2px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .check-box.checked {
+      background: var(--good);
+      border-color: var(--good);
+    }
+
+    .check-text {
+      font-size: 14.5px;
+      font-weight: 600;
+    }
+
+    .check-text.done {
+      color: var(--ink-soft);
+      text-decoration: line-through;
+    }
+
+    .summary-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .summary-list li {
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .summary-list li:last-child {
+      border-bottom: none;
+    }
+
+    .footer-strip {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .footer-chip {
+      background: var(--gold-bg);
+      border-radius: 10px;
+      padding: 10px 12px;
+      text-align: center;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: .02em;
+    }
+
+    .panel-layout {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+      align-items: center;
+    }
+    @media (max-width: 600px) {
+      .panel-layout {
+        flex-direction: column;
+      }
+    }
+    .panel-content {
+      flex: 1;
+      min-width: 0;
+    }
+    .img-slot {
+      flex: 0 0 220px;
+      height: 220px;
+      border-radius: 12px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .img-slot.empty {
+      border: 2px dashed var(--line);
+      background: repeating-linear-gradient(45deg, var(--stone), var(--stone) 10px, #E2D5B2 10px, #E2D5B2 20px);
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+      color: var(--ink-soft);
+    }
+
+    .img-slot.empty .img-slot-icon {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .img-slot.empty .img-slot-hint {
+      font-size: 12.5px;
+      font-weight: 700;
+      max-width: 320px;
+      line-height: 1.5;
+    }
+
+    .img-slot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap" id="app"></div>
+
+  <script>
+    // ============================================================
+    // IMAGE SLOTS — set any of these to a real path/URL to swap in
+    // your own illustration. Leave as null to keep the placeholder.
+    // ============================================================
+    const IMAGES = {
+      welcome: "messenger.png",     // e.g. "/images/scribe-welcome.jpg"   — a royal messenger/scribe greeting the reader
+      carving: "laws_carved.png",      // e.g. "/images/slab-carving.jpg"   — three laws being carved into a stone slab
+      tampering: "dark.png",    // e.g. "/images/night-tampering.jpg"  — a shadowy official trying to alter the slab at night
+      steps: "steps.png",        // e.g. "/images/steps-path.jpg"       — a stone path with numbered footsteps from a starting gate
+      sage: "ch11.png",         // e.g. "/images/sage-notebook.jpg"    — a traveling sage examining a notebook of six clues
+      naming: "chapter 12.png",       // e.g. "/images/slab-to-code.jpg"   — the stone slab glowing/transforming into code
+      achievement: "final.png",  // e.g. "/images/royal-seal.jpg"       — a wax seal / royal emblem for the finished badge
+    };
+
+    let currentImageHTML = null;
+    function imgSlot(key, hint) {
+      const src = IMAGES[key];
+      if (src) currentImageHTML = `<div class="img-slot"><img src="${src}" alt="${hint}" /></div>`;
+      else currentImageHTML = `<div class="img-slot empty"><div class="img-slot-icon">\ud83d\uddbc\ufe0f</div><div class="img-slot-hint">Illustration goes here \u2014 ${hint}<br><span style="opacity:.7">(set IMAGES.${key} in the script)</span></div></div>`;
+      return "";
+    }
+
+    // ============================================================
+    // CHAPTERS — "tuple" is never named until Chapter 12 (The Naming).
+    // Everything before that is discovered as a numbered clue.
+    // The three laws stay in Sanskrit throughout: Ahimsa, Dharma, Nyaya.
+    // The fourth law added later is also Sanskrit: Dana.
+    // ============================================================
+    const CHAPTERS = [
+      { id: 1, label: "Welcome" },
+      { id: 2, label: "The Problem" },
+      { id: 3, label: "A Decision" },
+      { id: 4, label: "The Carving" },
+      { id: 5, label: "Clue One" },
+      { id: 6, label: "Clue Two" },
+      { id: 7, label: "Clue Three" },
+      { id: 8, label: "Clue Four" },
+      { id: 9, label: "Clue Five" },
+      { id: 10, label: "Clue Six" },
+      { id: 11, label: "The Sage's Notebook" },
+      { id: 12, label: "The Naming" },
+      { id: 13, label: "Test The Seal" },
+      { id: 14, label: "Reverse Engineering" },
+      { id: 15, label: "Final Mission" },
+      { id: 16, label: "Lesson Summary" },
+      { id: 17, label: "Achievement Unlocked" },
+    ];
+
+    let state = {
+      step: 1,
+      thinkChoice: null,
+      reorderTried: false,
+      tamperTried: false,
+      positionAnswer: null,
+      zeroAnswer: null,
+      countAnswer: null,
+      decreeIssued: false,
+      realTamperTried: false,
+      reverseAnswer: null,
+      missionChecks: [false, false, false, false],
+    };
+
+    function nextStep() { if (state.step < 17) { state.step++; render(); } }
+    function prevStep() { if (state.step > 1) { state.step--; render(); } }
+
+    function restart() {
+      state = {
+        step: 1, thinkChoice: null, reorderTried: false, tamperTried: false, positionAnswer: null,
+        zeroAnswer: null, countAnswer: null, decreeIssued: false, realTamperTried: false,
+        reverseAnswer: null, missionChecks: [false, false, false, false],
+      };
+      render();
+    }
+
+    // six clues now — steps 5 through 10
+    function cluesCollected() {
+      let n = 0;
+      if (state.reorderTried) n++;
+      if (state.tamperTried) n++;
+      if (state.positionAnswer === "Dharma") n++;
+      if (state.zeroAnswer === "0") n++;
+      if (state.countAnswer === "3") n++;
+      if (state.decreeIssued) n++;
+      return n;
+    }
+
+    function canContinue() {
+      switch (state.step) {
+        case 3: return state.thinkChoice === "stone";
+        case 5: return state.reorderTried;
+        case 6: return state.tamperTried;
+        case 7: return state.positionAnswer === "Dharma";
+        case 8: return state.zeroAnswer === "0";
+        case 9: return state.countAnswer === "3";
+        case 10: return state.decreeIssued;
+        case 13: return state.realTamperTried;
+        case 14: return state.reverseAnswer === "correct";
+        case 15: return state.missionChecks.every(Boolean);
+        default: return true;
+      }
+    }
+
+    function chooseThink(c) { state.thinkChoice = c; render(); }
+    function tryReorder() { state.reorderTried = true; render(); }
+    function tryTamper() { state.tamperTried = true; render(); }
+    function selectPosition(v) { state.positionAnswer = v; render(); }
+    function selectZero(v) { state.zeroAnswer = v; render(); }
+    function selectCount(v) { state.countAnswer = v; render(); }
+    function issueDecree() { state.decreeIssued = true; render(); }
+    function tryRealTamper() { state.realTamperTried = true; render(); }
+    function selectReverse(v) { state.reverseAnswer = v; render(); }
+    function toggleMission(i) { state.missionChecks[i] = !state.missionChecks[i]; render(); }
+
+    function render() {
+      currentImageHTML = null;
+      const app = document.getElementById("app");
+      const ch = CHAPTERS[state.step - 1];
+      const pct = (state.step / 17) * 100;
+      const showClueTracker = state.step >= 5 && state.step <= 11;
+      let panel = "";
+
+      if (state.step === 1) {
+        panel = `
+      ${imgSlot('welcome', 'a royal messenger arriving with a sealed letter')}
+      <div class="panel-title" style="text-align:center;">A message arrives...</div>
+      <div class="body-text" style="text-align:center;">A kingdom far from here has a problem. A messenger named <b>Doota</b> arrives at your door and says only: "Come. Something must be recorded so it can never be quietly changed again."</div>
+      <div class="footer-row" style="justify-content:center;"><button class="btn btn-seal" onclick="nextStep()">Follow Doota \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 2) {
+        panel = `
+      <div class="panel-title">The Problem</div>
+      <div class="body-text">Every season, the royal laws are rewritten. Scribes copy them by hand, and each copy drifts a little further from the last \u2014 a word changed here, an order swapped there.
+
+By the time a dispute reaches court, no two scrolls agree on what the law actually says. <b>King Pratap</b> is furious.</div>
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" onclick="nextStep()">Continue \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 3) {
+        panel = `
+      <div class="panel-title">A Decision</div>
+      <div class="body-text" style="margin-bottom:6px;">If you wanted a record that could never be quietly changed, what would you do?</div>
+      <div class="opt-grid">
+        <div class="opt ${state.thinkChoice === 'scroll' ? 'wrong' : ''}" onclick="chooseThink('scroll')">Write it on a fresh scroll each time</div>
+        <div class="opt ${state.thinkChoice === 'stone' ? 'correct' : ''}" onclick="chooseThink('stone')">Carve it into stone</div>
+      </div>
+      ${state.thinkChoice === 'scroll' ? `<div class="explain-box"><b>Not quite.</b> A fresh scroll can still be rewritten tomorrow \u2014 that's exactly the problem already happening.</div>` : ''}
+      ${state.thinkChoice === 'stone' ? `<div class="success-box">Exactly. Once it's carved, it cannot be quietly altered by anyone.</div>` : ''}
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" ${canContinue() ? '' : 'disabled'} onclick="nextStep()">Continue \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 4) {
+        panel = `
+      <div class="panel-title">The Carving</div>
+      <div class="body-text" style="margin-bottom:4px;">Three laws are carved into rock, in this exact order, for all to see and none to alter.</div>
+      ${imgSlot('carving', 'a stonemason carving three Sanskrit words into a slab, in a clear top-to-bottom order')}
+      <div class="tablet-row"><div class="tablet-tile">Ahimsa</div><div class="tablet-tile">Dharma</div><div class="tablet-tile">Nyaya</div></div>
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" onclick="nextStep()">Continue \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 5) {
+        panel = `
+      <div class="panel-title">Clue One \u2014 A Strange Rule</div>
+      <div class="body-text" style="margin-bottom:8px;">A young clerk named <b>Kiran</b> suggests swapping the first and second laws \u2014 "Dharma reads better first," he says. Try it.</div>
+      <button class="btn btn-gold" onclick="tryReorder()">Attempt: swap the order</button>
+      ${state.reorderTried ? `
+        <div class="tablet-row"><div class="tablet-tile struck">Ahimsa</div><div class="tablet-tile struck">Dharma</div><div class="tablet-tile">Nyaya</div></div>
+        <div class="error-box"><b>Guru Vasant</b>, the old master, shakes his head. "You cannot simply swap them. To change the order, you would need to carve an entirely new slab."</div>
+        <div class="clue-box">\ud83d\udd0d <b>Clue One collected:</b> Position matters. The first law is always the first \u2014 moving it means starting over completely.</div>
+      ` : ''}
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" ${canContinue() ? '' : 'disabled'} onclick="nextStep()">Continue \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 6) {
+        panel = `
+      <div class="panel-title">Clue Two \u2014 A Visitor at Night</div>
+      <div class="body-text" style="margin-bottom:8px;">A corrupt official named <b>Minister Krodh</b> sneaks in after dark, chisel in hand, hoping to quietly change the first law to something more convenient for him.</div>
+      ${imgSlot('tampering', 'a shadowy figure with a chisel, failing to alter the stone slab at night')}
+      <button class="btn btn-gold" onclick="tryTamper()">Watch what happens</button>
+      ${state.tamperTried ? `
+        <div class="error-box">The chisel slips uselessly against the stone. No matter how hard he tries, the carving will not yield.</div>
+        <div class="clue-box">\ud83d\udd0d <b>Clue Two collected:</b> Once made, this record cannot be changed at all \u2014 not reordered, not edited, not erased.</div>
+      ` : ''}
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" ${canContinue() ? '' : 'disabled'} onclick="nextStep()">Continue \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 7) {
+        const sel = state.positionAnswer;
+        panel = `
+      <div class="panel-title">Clue Three \u2014 A Traveler's Question</div>
+      <div class="body-text" style="margin-bottom:8px;">A traveler named <b>Devika</b> asks the scroll-keeper, <b>Ishaan</b>: "What does the SECOND law say?" Ishaan doesn't search \u2014 he simply points.</div>
+      <div class="body-text" style="margin-bottom:6px;">What does he point to?</div>
+      <div class="opt-grid">
+        ${["Ahimsa", "Dharma", "Nyaya"].map(opt => {
+          let cls = "opt"; if (sel === opt) cls += opt === "Dharma" ? " correct" : " wrong";
+          return `<div class="${cls}" onclick="selectPosition('${opt}')">${opt}</div>`;
+        }).join("")}
+      </div>
+      ${sel && sel !== "Dharma" ? `<div class="explain-box"><b>Not quite.</b> The FIRST law is Ahimsa, so the SECOND one is Dharma.</div>` : ''}
+      ${sel === "Dharma" ? `<div class="clue-box">\ud83d\udd0d <b>Clue Three collected:</b> Anyone can find any law instantly, just by knowing its position.</div>` : ''}
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" ${canContinue() ? '' : 'disabled'} onclick="nextStep()">Continue \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 8) {
+        const sel = state.zeroAnswer;
+        panel = `
+      <div class="panel-title">Clue Four \u2014 The Apprentice's Question</div>
+      <div class="body-text" style="margin-bottom:8px;">A young apprentice named <b>Arjun</b> asks Ishaan, the old scroll-keeper: "How do you find a law so fast, without counting 'first, second, third' on your fingers?"</div>
+      <div class="body-text" style="margin-bottom:10px;">Ishaan smiles. "I don't count laws I've passed. I count <b>steps taken from the very beginning.</b> To stand AT the first law, right at the start \u2014 how many steps have you taken?"</div>
+      ${imgSlot('steps', 'a stone path with numbered footprints leading away from a starting gate, the gate itself unmarked')}
+      <div class="opt-grid">
+        ${["0", "1", "2", "3"].map(opt => {
+          let cls = "opt"; if (sel === opt) cls += opt === "0" ? " correct" : " wrong";
+          return `<div class="${cls}" onclick="selectZero('${opt}')">${opt}</div>`;
+        }).join("")}
+      </div>
+      ${sel && sel !== "0" ? `<div class="explain-box"><b>Not quite.</b> If you've already arrived at the very first law, you haven't taken any steps yet \u2014 that's zero, not one.</div>` : ''}
+      ${sel === "0" ? `<div class="clue-box">\ud83d\udd0d <b>Clue Four collected:</b> Position is counted as distance from the start, not as "which number law is this." Standing at the very first one means zero steps taken \u2014 the second law is reached after exactly one step.</div>` : ''}
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" ${canContinue() ? '' : 'disabled'} onclick="nextStep()">Continue \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 9) {
+        const sel = state.countAnswer;
+        panel = `
+      <div class="panel-title">Clue Five \u2014 The Ruler's Question</div>
+      <div class="body-text" style="margin-bottom:8px;"><b>King Pratap</b> asks: "How many laws have we carved so far?" No one needs to walk to the slab and count on their fingers.</div>
+      <div class="opt-grid">
+        ${["1", "2", "3", "4"].map(opt => {
+          let cls = "opt"; if (sel === opt) cls += opt === "3" ? " correct" : " wrong";
+          return `<div class="${cls}" onclick="selectCount('${opt}')">${opt}</div>`;
+        }).join("")}
+      </div>
+      ${sel && sel !== "3" ? `<div class="explain-box"><b>Not quite.</b> Ahimsa, Dharma, Nyaya \u2014 three laws are carved.</div>` : ''}
+      ${sel === "3" ? `<div class="clue-box">\ud83d\udd0d <b>Clue Five collected:</b> The exact number of items can always be known at a glance. And since steps start at 0 (remember Clue Four), 3 laws means the steps only ever go 0, 1, 2 \u2014 the last step number is always one less than the count.</div>` : ''}
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" ${canContinue() ? '' : 'disabled'} onclick="nextStep()">Continue \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 10) {
+        panel = `
+      <div class="panel-title">Clue Six \u2014 One More Law</div>
+      <div class="body-text" style="margin-bottom:8px;"><b>King Pratap</b> wants to add a fourth law \u2014 Dana \u2014 without touching the original slab at all.</div>
+      <button class="btn btn-gold" onclick="issueDecree()">Watch the stonemasons work</button>
+      ${state.decreeIssued ? `
+        <div style="margin-top:14px;"><div style="font-size:11px; font-weight:800; color:var(--ink-soft); margin-bottom:6px;">ORIGINAL SLAB (untouched)</div>
+        <div class="tablet-row" style="justify-content:flex-start;"><div class="tablet-tile">Ahimsa</div><div class="tablet-tile">Dharma</div><div class="tablet-tile">Nyaya</div></div></div>
+        <div style="margin-top:10px;"><div style="font-size:11px; font-weight:800; color:var(--gold); margin-bottom:6px;">NEW SLAB (freshly carved)</div>
+        <div class="tablet-row" style="justify-content:flex-start;"><div class="tablet-tile new">Ahimsa</div><div class="tablet-tile new">Dharma</div><div class="tablet-tile new">Nyaya</div><div class="tablet-tile new">Dana</div></div></div>
+        <div class="clue-box" style="margin-top:12px;">\ud83d\udd0d <b>Clue Six collected:</b> The old slab was never edited. An entirely new one was carved instead.</div>
+      ` : ''}
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" ${canContinue() ? '' : 'disabled'} onclick="nextStep()">Continue \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 11) {
+        panel = `
+      <div class="panel-title">The Sage's Notebook</div>
+      ${imgSlot('sage', 'a traveling sage reading a notebook filled with six numbered clues')}
+      <div class="body-text" style="margin-bottom:12px;">A traveling sage named <b>Meera</b> has been watching quietly. She opens a small notebook and reads back everything you've discovered:</div>
+      <ul class="summary-list">
+        <li>1\ufe0f\u20e3 <span>Position matters \u2014 the first is always first.</span></li>
+        <li>2\ufe0f\u20e3 <span>Once made, it cannot be changed at all.</span></li>
+        <li>3\ufe0f\u20e3 <span>Any item can be found instantly by its position.</span></li>
+        <li>4\ufe0f\u20e3 <span>Position is counted as steps from the start \u2014 the first one is zero steps away.</span></li>
+        <li>5\ufe0f\u20e3 <span>The exact count is always knowable.</span></li>
+        <li>6\ufe0f\u20e3 <span>To add something new, a fresh one is made \u2014 the old one stays untouched.</span></li>
+      </ul>
+      <div class="body-text" style="margin-top:12px;">"I have seen this pattern before," she says. "It has a name \u2014 though not one used in this kingdom."</div>
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-clue" onclick="nextStep()">What does she call it? \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 12) {
+        panel = `
+      <div class="panel-title">The Naming</div>
+      ${imgSlot('naming', 'the stone slab glowing and dissolving into lines of Python code')}
+      <div class="body-text">"In the language that speaks to machines," Meera says, "this is called a <b>tuple</b>."</div>
+      <div class="body-text" style="margin-top:10px; margin-bottom:6px;">She waves her hand, and the slab becomes something you can read differently:</div>
+      <div class="code-box"><span class="cmt"># The Edict</span><br>edict = ("Ahimsa", "Dharma", "Nyaya")</div>
+      <div class="body-text" style="margin-bottom:6px;">Your six clues, all at once:</div>
+      <div class="code-box">edict[0]              <span class="cmt"># "Ahimsa" \u2014 zero steps from the start (clue four)</span><br>edict[1]              <span class="cmt"># "Dharma" \u2014 one step in (clue three)</span><br>len(edict)             <span class="cmt"># 3 \u2014 clue five</span><br>edict + ("Dana",)      <span class="cmt"># a NEW tuple \u2014 clue six</span><br>edict[0] = "Kshama"    <span class="cmt"># fails \u2014 clues one & two</span></div>
+      <div class="body-text">A <b>tuple</b> is an ordered collection of values that, once created, can never be changed \u2014 this is called <b>immutability</b>. And indexing starts at <b>0</b> because a position is counted as distance from the start, not as "which item number this is."</div>
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" onclick="nextStep()">See it fail for real \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 13) {
+        panel = `
+      <div class="panel-title">Test The Seal</div>
+      <div class="body-text" style="margin-bottom:8px;">Now try it yourself, in real code this time.</div>
+      <div class="code-box">edict[0] = "Kshama"</div>
+      <button class="btn btn-gold" onclick="tryRealTamper()">Run it</button>
+      ${state.realTamperTried ? `
+        <div class="error-box">TypeError: 'tuple' object does not support item assignment</div>
+        <div class="success-box">Exactly what you saw in the story, now written the way Python actually says it.</div>
+      ` : ''}
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" ${canContinue() ? '' : 'disabled'} onclick="nextStep()">Continue \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 14) {
+        const sel = state.reverseAnswer;
+        panel = `
+      <div class="panel-title">Reverse Engineering</div>
+      <div class="body-text" style="margin-bottom:8px;">A neighboring kingdom's slab reads exactly this once printed:</div>
+      <div class="code-box">("Nyaya", "Kshama")</div>
+      <div class="body-text" style="margin-bottom:6px;">Which line of code carved it?</div>
+      <div class="opt-grid">
+        ${[
+            { text: 'edict2 = ["Nyaya", "Kshama"]', key: 'wrong1' },
+            { text: 'edict2 = ("Nyaya", "Kshama")', key: 'correct' },
+            { text: 'edict2 = ("Kshama", "Nyaya")', key: 'wrong2' },
+          ].map(o => { let cls = "opt"; if (sel === o.key) cls += o.key === "correct" ? " correct" : " wrong"; return `<div class="${cls}" onclick="selectReverse('${o.key}')">${o.text}</div>`; }).join("")}
+      </div>
+      ${sel === 'wrong1' ? `<div class="explain-box"><b>Not quite.</b> Square brackets [ ] make a list, not a tuple \u2014 a list could still be changed later.</div>` : ''}
+      ${sel === 'wrong2' ? `<div class="explain-box"><b>Not quite.</b> The order is wrong \u2014 position matters, remember?</div>` : ''}
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" ${canContinue() ? '' : 'disabled'} onclick="nextStep()">Continue \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 15) {
+        const tasks = ["Discover all six clues", "See the real TypeError for yourself", "Correctly identify a real tuple vs. a list", "Explain why indexing starts at 0"];
+        panel = `
+      <div class="panel-title">Final Mission</div>
+      <div class="body-text" style="margin-bottom:10px;">Confirm your journey is complete:</div>
+      ${tasks.map((t, i) => `<div class="check-row" onclick="toggleMission(${i})"><div class="check-box ${state.missionChecks[i] ? 'checked' : ''}">${state.missionChecks[i] ? '\u2713' : ''}</div><div class="check-text ${state.missionChecks[i] ? 'done' : ''}">${t}</div></div>`).join("")}
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" ${canContinue() ? '' : 'disabled'} onclick="nextStep()">Continue \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 16) {
+        panel = `
+      <div class="panel-title">Today You Learned</div>
+      <ul class="summary-list">
+        <li>\ud83e\ude96 <span>A <b>tuple</b> holds values in a fixed order, like a carved slab.</span></li>
+        <li>\ud83d\udd12 <span>Once created, a tuple cannot be changed \u2014 this is <b>immutability</b>.</span></li>
+        <li>\ud83d\udcdc <span>To "change" one, a brand new tuple is made \u2014 the original is never touched.</span></li>
+        <li>0\ufe0f\u20e3 <span>Indexing starts at 0 because a position counts steps FROM the start, not item number.</span></li>
+        <li>\ud83d\udcd0 <span>Indexing and len() work exactly like they do on lists.</span></li>
+      </ul>
+      <div class="footer-row"><button class="btn btn-ghost" onclick="prevStep()">\u2190 Back</button><button class="btn btn-seal" onclick="nextStep()">Continue \u2192</button></div>
+    `;
+      }
+
+      else if (state.step === 17) {
+        panel = `
+      ${imgSlot('achievement', 'a royal wax seal or emblem for the completed achievement')}
+      <div class="panel-title" style="text-align:center;">Royal Scroll Keeper</div>
+      <div class="body-text" style="text-align:center; margin-bottom:20px;">You gathered six clues, met the sage, and learned their true name: the tuple.</div>
+      <div class="footer-row" style="justify-content:center;"><button class="btn btn-ghost" onclick="restart()">\u21bb Replay Lesson</button></div>
+    `;
+      }
+
+      app.innerHTML = `
+    <div class="top-badge">
+      <div class="top-badge-title">The Sealed Record</div>
+      <div class="top-badge-sub">Chapter ${state.step} of 17${state.step <= 11 ? " \u00b7 the concept has not been named yet..." : ""}</div>
+    </div>
+    ${showClueTracker ? `
+      <div class="clue-tracker">
+        ${[0, 1, 2, 3, 4, 5].map(i => `<div class="clue-dot ${i < cluesCollected() ? 'collected' : ''}"></div>`).join("")}
+        <span class="clue-tracker-label">${cluesCollected()}/6 clues</span>
+      </div>
+    ` : ''}
+    <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+    <div class="panel">
+      ${state.step <= 16 ? `<div class="panel-label"><span class="panel-num">${state.step}</span>${ch.label.toUpperCase()}</div>` : ''}
+      ${currentImageHTML ? `
+        <div class="panel-layout">
+          ${currentImageHTML}
+          <div class="panel-content">
+            ${panel}
+          </div>
+        </div>
+      ` : panel}
+    </div>
+  `;
+    }
+
+    render();
+  </script>
+</body>
+
+</html>

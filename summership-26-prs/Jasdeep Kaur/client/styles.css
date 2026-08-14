@@ -1,0 +1,406 @@
+/* ==========================================================
+   PYBE - ORIGINAL CRISP GHIBLI BAMBOO FOREST THEME
+   No Blur • Non-Blurry Sharp Background Image • Storybook UI
+   ========================================================== */
+
+:root {
+  --color-sage-green: #87A96B;
+  --color-olive-green: #556B2F;
+  --color-warm-beige: #FAEDCD;
+  --color-cream: #FFFDD0;
+  --color-light-brown: #D4A373;
+  --color-deep-wood: #4A2E2B;
+  --color-carved-bark: #8D5B4C;
+  --color-soft-gold: #FFE082;
+  --color-muted-forest: #2E4A3E;
+  --color-paper-white: #FBF8F3;
+  --color-bamboo-green: #708238;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Georgia", serif;
+  min-height: 100vh;
+  color: #F5EBE0;
+  overflow-x: hidden;
+  background: #14211A url('/assets/jungle_stage_bamboo_bg.png') center/cover fixed no-repeat !important;
+}
+
+/* ---------- LANDING HERO SECTION ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 40px 24px;
+  background: rgba(20, 33, 26, 0.45);
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 35%, rgba(255, 224, 130, 0.2), transparent 70%);
+  pointer-events: none;
+}
+
+.hero__main_box {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+  max-width: 1100px;
+  width: 100%;
+  padding: 2.5rem;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #2D1A17 0%, #3D221D 50%, #2A1714 100%);
+  border: 4px solid #F59E0B;
+  border-radius: 36px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(245, 158, 11, 0.3);
+  transition: all 0.5s ease;
+}
+
+.hero__left_image_container {
+  flex: 0 0 460px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__image_frame {
+  position: relative;
+  width: 440px;
+  height: 480px;
+  border-radius: 32px;
+  overflow: hidden;
+  border: 4px solid #F59E0B;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.75);
+}
+
+.hero__image_frame.wide_vintage_theme {
+  border: 4px solid #F59E0B;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.75);
+}
+
+.hero__ghibli_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__vintage_glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 224, 130, 0.2), transparent 75%);
+  pointer-events: none;
+}
+
+.hero__right_content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .hero__main_box {
+    flex-direction: column;
+    padding: 1.8rem;
+  }
+  .hero__left_image_container {
+    flex: 0 0 auto;
+  }
+}
+
+.hero__title {
+  font-family: "Georgia", serif;
+  font-size: clamp(54px, 8vw, 86px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+  color: #FDE68A;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8), 0 0 25px rgba(245, 158, 11, 0.4);
+}
+
+.hero__title .en { display: block; }
+.hero__title .hi {
+  display: block;
+  font-size: 0.45em;
+  margin-top: 6px;
+  opacity: 0.95;
+  letter-spacing: 2px;
+  color: #87A96B;
+  font-weight: 700;
+}
+
+.hero__tagline {
+  max-width: 660px;
+  margin: 0 auto;
+  font-size: 22px;
+  line-height: 1.6;
+  color: #FEF3C7;
+  font-weight: 600;
+  font-family: serif;
+}
+
+.hero__buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  width: 100%;
+}
+
+/* ---------- GLOBAL APP CONTAINER & PERSISTENT STAGE ---------- */
+.app-container {
+  min-height: 100vh;
+  background: transparent !important;
+  color: #F5EBE0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.step-container {
+  width: 100%;
+  max-width: 1240px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ---------- AAA STORYBOOK CONCEPT SPLIT SCREEN ---------- */
+.concept-split-grid {
+  display: grid;
+  grid-template-columns: 67fr 33fr;
+  gap: 28px;
+  width: 100%;
+  align-items: stretch;
+}
+
+@media (max-width: 992px) {
+  .concept-split-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- 🪵 GOLDEN OAK MAIN OUTER CARD CONTAINER ---------- */
+.wooden-frame-card {
+  background: linear-gradient(135deg, #2D1A17 0%, #3D221D 50%, #2A1714 100%) !important;
+  border: 4px solid #F59E0B !important;
+  border-radius: 28px !important;
+  padding: 24px !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), 0 0 30px rgba(245, 158, 11, 0.25) !important;
+  color: #FDE68A !important;
+}
+
+.carved-wooden-board {
+  background: linear-gradient(135deg, #2D1A17 0%, #3D221D 50%, #2A1714 100%);
+  border: 4px solid #F59E0B;
+  border-radius: 24px;
+  padding: 20px 24px;
+  color: #FDE68A;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+  font-family: "Georgia", serif;
+  position: relative;
+}
+
+/* ---------- AGED IVORY PARCHMENT PAPER SCROLLS (INNER PROMPT BOX) ---------- */
+.paper-scroll-panel {
+  background: linear-gradient(145deg, #FFFBEB 0%, #FEF3C7 100%);
+  border: 3px solid #D97706;
+  border-radius: 20px;
+  padding: 22px;
+  color: #451A03;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), inset 0 0 15px rgba(217, 119, 6, 0.12);
+  position: relative;
+  font-family: "Georgia", serif;
+}
+
+/* ---------- 🎯 FOREST MISSION CARD ---------- */
+.forest-mission-card {
+  background: linear-gradient(135deg, #2D1A17 0%, #3D221D 100%);
+  border: 3px solid #F59E0B;
+  border-radius: 20px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  margin-bottom: 18px;
+  color: #FDE68A;
+}
+
+.mission-badge-tag {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: #FFFFFF;
+  font-weight: 900;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  border: 1.5px solid #FDE68A;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.mission-title-text {
+  font-family: "Georgia", serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: #FDE68A;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- 📖 POKO'S FOREST NOTEBOOK (CODE EDITOR) ---------- */
+.forest-notebook-card {
+  background: linear-gradient(145deg, #FFFBEB, #FEF3C7);
+  border: 4px solid #D97706;
+  border-radius: 24px;
+  padding: 24px;
+  color: #451A03;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.notebook-header-ring {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px dashed #D97706;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.notebook-title {
+  font-family: "Georgia", serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: #451A03;
+}
+
+/* ---------- HAND-CARVED BUTTONS ---------- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border-radius: 18px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 700;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  border: 2px solid #F59E0B;
+  font-family: "Georgia", serif;
+}
+
+.btn-primary {
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  border-color: #FDE68A;
+  box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #D97706, #B45309);
+  box-shadow: 0 12px 30px rgba(217, 119, 6, 0.5);
+  color: #FFFFFF;
+}
+
+.btn-secondary {
+  color: #FDE68A;
+  background: linear-gradient(135deg, #2D1A17, #3D221D);
+  border: 2px solid #F59E0B;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #3D221D, #4A2822);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+}
+
+.button-glow {
+  box-shadow: 0 0 22px rgba(245, 158, 11, 0.5);
+}
+
+/* ---------- SELECTION & SCROLLBAR ---------- */
+::selection {
+  background: #F59E0B;
+  color: #FFFFFF;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #14211A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8D5B4C;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #F59E0B;
+}
+
+/* ---------- LIVE PYTHON MEMORY VIEW FLEX LAYOUT ---------- */
+.main-content-layout {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+.step-content-area {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 992px) {
+  .main-content-layout {
+    flex-direction: column;
+  }
+}

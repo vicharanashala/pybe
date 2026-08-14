@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyBe â€“ Architecture &amp; Theoretical Foundation</title>
+  <meta name="description" content="PyBe system architecture flow diagram and theoretical foundation diagram, demonstrating the pedagogical pipeline from misconception resolution to quality governance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+
+  <style>
+    :root {
+      --bg-base:       hsl(228, 20%, 7%);
+      --bg-card:       hsl(228, 18%, 11%);
+      --bg-card-hover: hsl(228, 18%, 14%);
+      --border:        hsl(228, 20%, 20%);
+      --border-glow:   hsl(265, 80%, 55%);
+      --accent-violet: hsl(265, 80%, 62%);
+      --accent-blue:   hsl(215, 85%, 60%);
+      --accent-cyan:   hsl(188, 90%, 55%);
+      --accent-green:  hsl(155, 75%, 52%);
+      --accent-amber:  hsl(38,  95%, 58%);
+      --accent-rose:   hsl(345, 80%, 62%);
+      --accent-indigo: hsl(240, 70%, 65%);
+      --text-primary:   hsl(220, 20%, 95%);
+      --text-secondary: hsl(220, 15%, 65%);
+      --text-muted:     hsl(220, 12%, 45%);
+      --radius-sm:  8px;
+      --radius-md:  14px;
+      --radius-lg:  22px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 900px 600px at 10% 15%, hsl(265,80%,18%) 0%, transparent 60%),
+        radial-gradient(ellipse 700px 500px at 90% 80%, hsl(215,85%,14%) 0%, transparent 55%),
+        radial-gradient(ellipse 500px 400px at 50% 50%, hsl(188,90%,10%) 0%, transparent 60%);
+      pointer-events: none; z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(hsl(228,20%,15%) 1px, transparent 1px),
+        linear-gradient(90deg, hsl(228,20%,15%) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.18; pointer-events: none; z-index: 0;
+    }
+    .wrapper {
+      position: relative; z-index: 1;
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 28px 80px;
+    }
+    header { text-align: center; padding: 72px 0 48px; }
+    .logo-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, hsl(265,80%,20%), hsl(215,85%,18%));
+      border: 1px solid var(--border-glow); border-radius: 100px;
+      padding: 8px 22px; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent-violet); margin-bottom: 28px;
+      box-shadow: 0 0 30px hsl(265,80%,30%,0.25);
+    }
+    .logo-badge .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--accent-violet);
+      box-shadow: 0 0 10px var(--accent-violet);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(.8)}
+    }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 800; line-height: 1.1;
+      background: linear-gradient(135deg, #fff 30%, hsl(265,80%,75%), hsl(215,85%,70%));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 20px;
+    }
+    .header-sub {
+      font-size: 1.05rem; color: var(--text-secondary);
+      max-width: 640px; margin: 0 auto; line-height: 1.7;
+    }
+    .tab-nav {
+      display: flex; justify-content: center; gap: 12px;
+      margin-bottom: 52px; flex-wrap: wrap;
+    }
+    .tab-btn {
+      display: flex; align-items: center; gap: 9px;
+      padding: 13px 28px; border-radius: 100px;
+      border: 1px solid var(--border); background: var(--bg-card);
+      color: var(--text-secondary); font-family: 'Inter', sans-serif;
+      font-size: 0.88rem; font-weight: 600; cursor: pointer;
+      transition: all .25s ease; letter-spacing: .02em;
+    }
+    .tab-btn:hover {
+      border-color: var(--accent-violet); color: var(--text-primary);
+      background: var(--bg-card-hover);
+      box-shadow: 0 0 20px hsl(265,80%,35%,.2);
+    }
+    .tab-btn.active {
+      border-color: var(--accent-violet);
+      background: linear-gradient(135deg, hsl(265,80%,18%), hsl(215,85%,15%));
+      color: #fff; box-shadow: 0 0 30px hsl(265,80%,35%,.35), inset 0 1px 0 hsl(265,80%,50%,.3);
+    }
+    .tab-btn .tab-icon { font-size: 1.1rem; }
+    .section { display: none; animation: fadeIn .4s ease; }
+    .section.active { display: block; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    .section-header { margin-bottom: 36px; }
+    .section-tag {
+      display: inline-block; font-size: .7rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--accent-cyan); margin-bottom: 10px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700;
+      color: var(--text-primary); margin-bottom: 10px;
+    }
+    .section-desc {
+      color: var(--text-secondary); font-size: .95rem;
+      line-height: 1.7; max-width: 760px;
+    }
+    .diagram-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 36px; margin-bottom: 36px;
+      overflow: auto;
+      box-shadow: 0 0 0 1px hsl(265,80%,30%,.08), 0 8px 60px hsl(228,20%,0%,.5);
+      transition: box-shadow .3s ease;
+    }
+    .diagram-card:hover {
+      box-shadow: 0 0 0 1px hsl(265,80%,30%,.2), 0 12px 80px hsl(228,20%,0%,.6);
+    }
+    .diagram-card .mermaid { display:flex; justify-content:center; }
+    .diagram-card .mermaid svg { max-width:100%; height:auto!important; }
+    .stages-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 20px; margin-top: 36px;
+    }
+    .stage-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 26px;
+      transition: all .25s ease; position: relative; overflow: hidden;
+    }
+    .stage-card::before {
+      content:''; position:absolute; top:0; left:0;
+      width:4px; height:100%;
+      background: var(--card-accent, var(--accent-violet));
+      border-radius: 4px 0 0 4px;
+    }
+    .stage-card:hover {
+      border-color: var(--card-accent, var(--accent-violet));
+      background: var(--bg-card-hover); transform: translateY(-2px);
+      box-shadow: 0 8px 40px hsl(228,20%,0%,.4);
+    }
+    .stage-num { font-family:'JetBrains Mono',monospace; font-size:.7rem; font-weight:500; color:var(--card-accent,var(--accent-violet)); letter-spacing:.1em; margin-bottom:8px; }
+    .stage-name { font-family:'Space Grotesk',sans-serif; font-size:1.05rem; font-weight:700; color:var(--text-primary); margin-bottom:4px; }
+    .stage-engine { font-size:.78rem; color:var(--text-muted); margin-bottom:16px; font-style:italic; }
+    .meta-row { display:flex; flex-direction:column; gap:8px; }
+    .meta-item { display:flex; gap:10px; align-items:flex-start; }
+    .meta-label { font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted); min-width:72px; padding-top:2px; }
+    .meta-value { font-size:.82rem; color:var(--text-secondary); line-height:1.5; }
+    .tag-list { display:flex; flex-wrap:wrap; gap:5px; }
+    .tag { display:inline-block; font-size:.68rem; font-weight:600; padding:2px 9px; border-radius:100px; border:1px solid; font-family:'JetBrains Mono',monospace; }
+    .tag-theory { border-color:var(--accent-violet); color:var(--accent-violet); background:hsl(265,80%,62%,.08); }
+    .tag-input  { border-color:var(--accent-cyan);   color:var(--accent-cyan);   background:hsl(188,90%,55%,.08); }
+    .tag-output { border-color:var(--accent-green);  color:var(--accent-green);  background:hsl(155,75%,52%,.08); }
+    .tag-law    { border-color:var(--accent-amber);  color:var(--accent-amber);  background:hsl(38,95%,58%,.08);  }
+    .tag-conf   { border-color:var(--accent-rose);   color:var(--accent-rose);   background:hsl(345,80%,62%,.08); }
+    .conf-bar { display:flex; align-items:center; gap:8px; margin-top:10px; }
+    .conf-label { font-size:.68rem; font-weight:600; color:var(--text-muted); min-width:80px; }
+    .conf-track { flex:1; height:4px; background:hsl(228,20%,18%); border-radius:100px; overflow:hidden; }
+    .conf-fill { height:100%; border-radius:100px; background:linear-gradient(90deg,var(--accent-violet),var(--accent-cyan)); }
+    .theory-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+      gap:20px; margin-top:28px;
+    }
+    .theory-card {
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:var(--radius-md); padding:26px;
+      position:relative; overflow:hidden; transition:all .25s ease;
+    }
+    .theory-card:hover {
+      border-color:var(--card-accent,var(--accent-violet));
+      transform:translateY(-3px); box-shadow:0 12px 50px hsl(228,20%,0%,.5);
+    }
+    .theory-num {
+      display:inline-flex; align-items:center; justify-content:center;
+      width:36px; height:36px; border-radius:10px;
+      background:linear-gradient(135deg,var(--ca1),var(--ca2));
+      font-family:'Space Grotesk',sans-serif; font-weight:800; font-size:.9rem;
+      color:#fff; margin-bottom:14px;
+    }
+    .theory-name { font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; color:var(--text-primary); margin-bottom:4px; }
+    .theory-authors { font-size:.76rem; color:var(--text-muted); margin-bottom:12px; font-style:italic; }
+    .theory-desc { font-size:.82rem; color:var(--text-secondary); line-height:1.6; margin-bottom:14px; }
+    .theory-proof { background:hsl(228,20%,8%); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px 14px; font-size:.78rem; color:var(--text-secondary); line-height:1.5; }
+    .theory-proof-label { font-weight:700; font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; color:var(--accent-amber); margin-bottom:5px; }
+    .layer-justify {
+      background:var(--bg-card); border:1px solid var(--border);
+      border-radius:var(--radius-lg); padding:36px; margin:36px 0;
+      position:relative; overflow:hidden;
+    }
+    .layer-justify-title { font-family:'Space Grotesk',sans-serif; font-size:1.3rem; font-weight:700; color:var(--text-primary); margin-bottom:8px; }
+    .layer-justify-desc { color:var(--text-secondary); font-size:.9rem; margin-bottom:28px; max-width:700px; line-height:1.6; }
+    .layer-row { display:grid; grid-template-columns:42px 1fr auto; gap:20px; align-items:center; padding:16px 0; border-bottom:1px solid var(--border); }
+    .layer-row:last-child { border-bottom:none; }
+    .layer-idx { font-family:'JetBrains Mono',monospace; font-size:.75rem; font-weight:600; color:var(--accent-violet); text-align:center; }
+    .layer-info-name { font-weight:600; font-size:.9rem; color:var(--text-primary); margin-bottom:2px; }
+    .layer-info-why { font-size:.78rem; color:var(--text-secondary); line-height:1.5; }
+    .layer-necessity { font-size:.7rem; font-weight:700; padding:4px 10px; border-radius:100px; white-space:nowrap; }
+    .necessity-critical  { background:hsl(345,80%,20%); color:hsl(345,80%,72%); border:1px solid hsl(345,80%,35%); }
+    .necessity-essential { background:hsl(38,95%,15%);  color:hsl(38,95%,68%);  border:1px solid hsl(38,95%,35%);  }
+    .necessity-integral  { background:hsl(188,90%,12%); color:hsl(188,90%,60%); border:1px solid hsl(188,90%,30%); }
+    .single-theory-box {
+      background:linear-gradient(135deg,hsl(265,80%,12%),hsl(215,85%,10%));
+      border:1px solid hsl(265,80%,30%); border-radius:var(--radius-lg);
+      padding:40px; margin-bottom:36px; text-align:center;
+      position:relative; overflow:hidden;
+      box-shadow:0 0 80px hsl(265,80%,20%,.3);
+    }
+    .single-theory-box::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse 60% 50% at 50% 0%,hsl(265,80%,25%,.2),transparent);
+    }
+    .single-theory-verdict {
+      position:relative; font-family:'Space Grotesk',sans-serif;
+      font-size:clamp(1.2rem,2.5vw,1.7rem); font-weight:800;
+      color:#fff; margin-bottom:16px; line-height:1.3;
+    }
+    .verdict-highlight {
+      background:linear-gradient(135deg,var(--accent-violet),var(--accent-cyan));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .single-theory-quote {
+      position:relative; font-size:.88rem; color:var(--text-secondary);
+      max-width:680px; margin:0 auto; line-height:1.7; font-style:italic;
+    }
+    footer {
+      text-align:center; padding:40px 0 20px;
+      color:var(--text-muted); font-size:.78rem;
+      border-top:1px solid var(--border); margin-top:60px;
+    }
+    footer strong { color:var(--accent-violet); }
+    ::-webkit-scrollbar { width:8px; height:8px; }
+    ::-webkit-scrollbar-track { background:var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background:hsl(228,20%,22%); border-radius:100px; }
+    @media(max-width:700px){
+      .stages-grid,.theory-grid{grid-template-columns:1fr;}
+      .layer-row{grid-template-columns:36px 1fr;}
+      .layer-necessity{display:none;}
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <div class="logo-badge" style="display:inline-flex;align-items:center;gap:12px;padding:6px 20px;"><div style="background:#ffffff;padding:4px 8px;border-radius:12px;display:flex;align-items:center;justify-content:center;"><img src="/pybe-logo.png" alt="PyBe Logo" style="height:28px;width:auto;object-fit:contain;" /></div> PyBe &middot; Learning Intelligence System</div>
+    <h1>Architecture &amp; Theoretical Foundation</h1>
+    <p class="header-sub">A complete visual explanation of the PyBe pipeline &mdash; every stage, its educational theory, inputs, outputs, and constitutional laws &mdash; plus the scientific proof for its layer architecture.</p>
+  </header>
+
+  <nav class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('matrix',this)"><span class="tab-icon">&#128221;</span> Master Matrix &amp; Theory Table</button>
+    <button class="tab-btn" onclick="switchTab('flow',this)"><span class="tab-icon">&#9889;</span> Diagram 1 &middot; Pipeline Flow</button>
+    <button class="tab-btn" onclick="switchTab('theory',this)"><span class="tab-icon">&#129504;</span> Diagram 2 &middot; Theoretical Foundation</button>
+  </nav>
+
+  <!-- ===== SECTION 0: MASTER MATRIX TABLE ===== -->
+  <section id="sec-matrix" class="section active">
+    <div class="section-header">
+      <span class="section-tag">Comprehensive Specification</span>
+      <h2 class="section-title">Master Pedagogical, Theoretical &amp; Technical Architecture Matrix</h2>
+      <p class="section-desc">The complete 8-layer CKLIS architectural breakdown mapping every layer to its core question, educational theory &amp; author, brief theoretical concept, pedagogical alignment rationale, and exact technical engine mechanics.</p>
+    </div>
+
+    <div class="diagram-card" style="padding: 24px;">
+      <table style="width:100%; border-collapse:collapse; font-size:0.85rem; text-align:left;">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border-glow); background:hsl(228,18%,15%); color:var(--text-primary);">
+            <th style="padding:14px 10px; width:12%;">Layer # &amp; Name</th>
+            <th style="padding:14px 10px; width:13%;">Core Question Answered</th>
+            <th style="padding:14px 10px; width:14%;">Theory &amp; Author(s)</th>
+            <th style="padding:14px 10px; width:18%;">Brief Theory Concept</th>
+            <th style="padding:14px 10px; width:21%;">How Layer Follows Theory</th>
+            <th style="padding:14px 10px; width:22%;">How Layer Works Technically</th>
+          </tr>
+        </thead>
+        <tbody style="color:var(--text-secondary);">
+          <tr style="border-bottom:1px solid var(--border); background:rgba(255,255,255,0.02);">
+            <td style="padding:12px 10px; font-weight:700; color:var(--accent-cyan);"><span class="tag tag-input">Pre-Step</span><br>Objective Engine</td>
+            <td style="padding:12px 10px; font-style:italic; color:var(--text-primary);">What exact mechanism must the student master?</td>
+            <td style="padding:12px 10px; font-weight:600; color:var(--accent-violet);">Taxonomy of Educational Objectives<br><span style="font-size:0.75rem; color:var(--text-muted);">(Benjamin Bloom)</span></td>
+            <td style="padding:12px 10px;">Educational goals must be classified into cognitive depth levels, prioritizing mechanical comprehension over syntax recall.</td>
+            <td style="padding:12px 10px;">Formulates a single measurable goal targeting underlying system execution, preventing surface-level memorization before lesson generation.</td>
+            <td style="padding:12px 10px; font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:#a5f3fc;">Executes PRE-STEP prompt with topic &amp; audience; generates a 1-sentence Bloom's taxonomy objective that anchors downstream steps.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:12px 10px; font-weight:700; color:var(--accent-violet);"><span class="tag tag-theory">Layer 1</span><br>Misconception Engine (MIS-01)</td>
+            <td style="padding:12px 10px; font-style:italic; color:var(--text-primary);">What false assumptions will confuse the student?</td>
+            <td style="padding:12px 10px; font-weight:600; color:var(--accent-violet);">Conceptual Change Theory<br><span style="font-size:0.75rem; color:var(--text-muted);">(David Ausubel &amp; Posner et al.)</span></td>
+            <td style="padding:12px 10px;">Learners hold prior beliefs. If false priors are not confronted, learners distort new info to fit bad mental models.</td>
+            <td style="padding:12px 10px;">Identifies and dismantles misconception traps before presenting code (CL-06, LP-02), creating necessary cognitive conflict.</td>
+            <td style="padding:12px 10px; font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:#a5f3fc;">Calls LLM prompt MIS-01 to output JSON misconceptions[] array with probability, severity, and correctionStrategy.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border); background:rgba(255,255,255,0.02);">
+            <td style="padding:12px 10px; font-weight:700; color:var(--accent-blue);"><span class="tag tag-theory">Layer 2</span><br>Mental Model Engine (MM-01)</td>
+            <td style="padding:12px 10px; font-style:italic; color:var(--text-primary);">What physical analogy re-wires their intuition?</td>
+            <td style="padding:12px 10px; font-weight:600; color:var(--accent-violet);">Mental Model Theory<br><span style="font-size:0.75rem; color:var(--text-muted);">(Donald Norman, Kenneth Craik, P. Johnson-Laird)</span></td>
+            <td style="padding:12px 10px;">Experts reason by running internal mental simulations of cause-and-effect systems rather than recalling text syntax rules.</td>
+            <td style="padding:12px 10px;">Constructs a dominant physical model &amp; visual strategy to transform false assumptions into strong intuition (CL-07, LP-03).</td>
+            <td style="padding:12px 10px; font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:#a5f3fc;">Calls MM-01 prompt using Layer 1 output; returns JSON with modelName, description, coreAnalogy, and visualizationStrategy.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:12px 10px; font-weight:700; color:var(--accent-cyan);"><span class="tag tag-theory">Layer 3</span><br>Scenario Intelligence Engine (SCN-01)</td>
+            <td style="padding:12px 10px; font-style:italic; color:var(--text-primary);">What authentic real-world story naturally models this?</td>
+            <td style="padding:12px 10px; font-weight:600; color:var(--accent-violet);">Situated Cognition &amp; Constructivism<br><span style="font-size:0.75rem; color:var(--text-muted);">(Jean Piaget, Lev Vygotsky, John Bransford)</span></td>
+            <td style="padding:12px 10px;">Knowledge is rooted in authentic physical contexts. Abstract rules cannot be assimilated without prior physical observation.</td>
+            <td style="padding:12px 10px;">Grounds CS concepts in real historical/natural stories with 100% physical fidelity before any code is introduced (CL-03, CL-13, LP-04).</td>
+            <td style="padding:12px 10px; font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:#a5f3fc;">Mode 1 discovers real domain stories; Mode 2 locks user observation anchor (0% fake mechanics); outputs character &amp; env seeds.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border); background:rgba(255,255,255,0.02);">
+            <td style="padding:12px 10px; font-weight:700; color:var(--accent-green);"><span class="tag tag-theory">Layer 4</span><br>Pattern Mapping Engine (PAT-01)</td>
+            <td style="padding:12px 10px; font-style:italic; color:var(--text-primary);">How does physical story behavior map to code rules?</td>
+            <td style="padding:12px 10px; font-weight:600; color:var(--accent-violet);">Inductive Reasoning &amp; Transfer of Learning<br><span style="font-size:0.75rem; color:var(--text-muted);">(John Bransford &amp; Piaget Schema Abstraction)</span></td>
+            <td style="padding:12px 10px;">Far transfer occurs when learners extract schema invariants across multiple representations (concrete instance &#8594; abstract rule).</td>
+            <td style="padding:12px 10px;">Bridges story events directly to programming invariants using story-evoking pattern names to enable transfer (CL-08, LP-05, LP-09).</td>
+            <td style="padding:12px 10px; font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:#a5f3fc;">Executes PAT-01 prompt taking story context; extracts 3 tiers: Observable Event &#8594; Abstract Invariant &#8594; Code Syntax.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:12px 10px; font-weight:700; color:var(--accent-amber);"><span class="tag tag-theory">Layer 5</span><br>Cognitive Load Manager</td>
+            <td style="padding:12px 10px; font-style:italic; color:var(--text-primary);">How do we keep working memory from overflowing?</td>
+            <td style="padding:12px 10px; font-weight:600; color:var(--accent-violet);">Cognitive Load Theory &amp; Multimedia Learning<br><span style="font-size:0.75rem; color:var(--text-muted);">(John Sweller &amp; Richard Mayer)</span></td>
+            <td style="padding:12px 10px;">Working memory capacity is strictly limited (~4 elements). Extraneous info degrades learning, while germane processing builds schemas.</td>
+            <td style="padding:12px 10px;">Caps lesson to 1 core learning objective and strips non-essential content to prevent cognitive overload (CL-05, CL-14, LP-06).</td>
+            <td style="padding:12px 10px; font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:#a5f3fc;">Intercepts intermediate representations; filters extraneous domain clutter and enforces single objective brief before episode generation.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border); background:rgba(255,255,255,0.02);">
+            <td style="padding:12px 10px; font-weight:700; color:var(--accent-rose);"><span class="tag tag-theory">Layer 6</span><br>Episode Generation Engine (EPI-01)</td>
+            <td style="padding:12px 10px; font-style:italic; color:var(--text-primary);">What sequence of story chapters creates the 'aha!' moment?</td>
+            <td style="padding:12px 10px; font-weight:600; color:var(--accent-violet);">Gagn&eacute;'s 9 Events of Instruction &amp; Deliberate Practice<br><span style="font-size:0.75rem; color:var(--text-muted);">(Robert Gagn&eacute;, Richard Mayer, Anders Ericsson)</span></td>
+            <td style="padding:12px 10px;">Effective instruction follows an ordered sequence (Gain Attention &#8594; Present Stimulus &#8594; Guide Learning &#8594; Elicit Performance).</td>
+            <td style="padding:12px 10px;">Sequences 4 canonical chapters (Observation Hook &#8594; Pattern Discovery &#8594; Code Bridge &#8594; Transfer Reflection) (CL-04).</td>
+            <td style="padding:12px 10px; font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:#a5f3fc;">Runs 2-Pass pipeline: Pass 1 generates Production Blueprint (Character/Env Bibles); Pass 2 outputs scenes + 200+ word AI image prompts.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border);">
+            <td style="padding:12px 10px; font-weight:700; color:var(--accent-indigo);"><span class="tag tag-theory">Layer 7</span><br>Active Retrieval &amp; Reflection Engine</td>
+            <td style="padding:12px 10px; font-style:italic; color:var(--text-primary);">How do we solidify long-term memory retention?</td>
+            <td style="padding:12px 10px; font-weight:600; color:var(--accent-violet);">Retrieval Practice &amp; Desirable Difficulties<br><span style="font-size:0.75rem; color:var(--text-muted);">(Robert Bjork &amp; Anders Ericsson)</span></td>
+            <td style="padding:12px 10px;">Memory is consolidated not by passive re-reading, but by forced active recall and self-explanation (The Testing Effect).</td>
+            <td style="padding:12px 10px;">Embeds interactive prediction checkpoints and reflection questions post-generation (CL-17, CL-18, LP-07, LP-08).</td>
+            <td style="padding:12px 10px; font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:#a5f3fc;">Post-processes generated episodes to insert prediction gates (predict before reveal), comprehension checkpoints, and transfer prompts.</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--border); background:rgba(255,255,255,0.02);">
+            <td style="padding:12px 10px; font-weight:700; color:var(--accent-rose);"><span class="tag tag-conf">Layer 8</span><br>Quality Governance Engine (QUA-01)</td>
+            <td style="padding:12px 10px; font-style:italic; color:var(--text-primary);">Does this strictly follow all educational laws without shortcuts?</td>
+            <td style="padding:12px 10px; font-weight:600; color:var(--accent-violet);">Cybernetic Systems &amp; Formative Evaluation<br><span style="font-size:0.75rem; color:var(--text-muted);">(Michael Scriven)</span></td>
+            <td style="padding:12px 10px;">Quality assurance requires an independent audit feedback loop separated from the production system to eliminate confirmation bias.</td>
+            <td style="padding:12px 10px;">Audits completed output against Constitutional Directives (CL-01 to CL-16) to guarantee 0% fake analogies (QP-01).</td>
+            <td style="padding:12px 10px; font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:#a5f3fc;">Runs QUA-01 prompt evaluating 9 quality dimensions QD-01 to QD-09. If score &lt;85, identifies failing engine &amp; triggers up to 3 retries.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 1: PIPELINE FLOW ===== -->
+  <section id="sec-flow" class="section">
+    <div class="section-header">
+      <span class="section-tag">Diagram 1</span>
+      <h2 class="section-title">PyBe Pipeline &mdash; End-to-End Flow</h2>
+      <p class="section-desc">Eight specialised engines arranged in a strict constitutional sequence, transforming a raw topic into a pedagogically verified learning episode. Each node shows the engine, its canonical law references, theory, and data contracts.</p>
+    </div>
+
+    <div class="diagram-card">
+      <div class="mermaid" id="mermaid-flow">
+flowchart TD
+    classDef engineBox fill:#1a1730,stroke:#7c4dff,stroke-width:2px,color:#e8e4ff
+    classDef dataNode  fill:#0d1f2d,stroke:#00bcd4,stroke-width:1.5px,color:#b2ebf2
+    classDef qualNode  fill:#1a0d17,stroke:#e91e63,stroke-width:2px,color:#fce4ec
+    classDef outputNode fill:#0d1f15,stroke:#4caf50,stroke-width:2px,color:#c8e6c9
+
+    INPUT(["`USER PROMPT
+    Topic + Learner Profile
+    Skill Level Â· Goals Â· Context`"]):::dataNode
+
+    subgraph STAGE1["â‘  MISCONCEPTION ENGINE"]
+        ME_PROC["`Process: Scans learner profile for probable false beliefs
+        Theory: Conceptual Change Theory â€” Ausubel Â· Posner et al.
+        Laws: CL-06 Â· LP-02 | Codes: MC-01 to MC-05 Â· IS-01 to IS-07`"]:::engineBox
+    end
+
+    subgraph STAGE2["â‘¡ MENTAL MODEL ENGINE"]
+        MM_PROC["`Process: Constructs formal internal conceptual model of the topic
+        Theory: Mental Model Theory â€” Donald Norman Â· Johnson-Laird Â· Craik
+        Laws: CL-07 Â· LP-03 | Codes: MT-01 to MT-05 Â· MM-01 to MM-05`"]:::engineBox
+    end
+
+    subgraph STAGE3["â‘¢ SCENARIO INTELLIGENCE ENGINE"]
+        SI_PROC["`Process: Selects real-world scenario to anchor the mental model
+        Theory: Situated Cognition + Constructivism â€” Piaget Â· Vygotsky Â· Bransford
+        Laws: CL-03 Â· CL-13 Â· LP-04 | Codes: SC-01 to SC-08`"]:::engineBox
+    end
+
+    subgraph STAGE4["â‘£ PATTERN MAPPING ENGINE"]
+        PM_PROC["`Process: Extracts abstract computational patterns from the scenario
+        Theory: Inductive Reasoning + Transfer of Learning â€” Bransford Â· Piaget
+        Laws: CL-08 Â· LP-05 Â· LP-09 | Tiers: PM-01 Observable to PM-02 Abstract to PM-03 Programming`"]:::engineBox
+    end
+
+    subgraph STAGE5["â‘¤ COGNITIVE LOAD MANAGER"]
+        CL_PROC["`Process: Enforces one core objective, strips extraneous content
+        Theory: Cognitive Load Theory + Multimedia Learning â€” Sweller Â· Mayer
+        Laws: CL-05 Â· CL-14 Â· CL-21 Â· LP-06 | Audit: QD-06 Educational Clarity`"]:::engineBox
+    end
+
+    subgraph STAGE6["â‘¥ EPISODE GENERATION ENGINE"]
+        EG_PROC["`Process: Assembles canonical 9-stage instructional episode
+        Theory: Gagne's 9 Events + Deliberate Practice â€” Mayer Â· Ericsson
+        Laws: CL-04 Â· AI-01 Runtime | Flow: Problem to Scenario to Observation to Pattern to Model to Concept to Code to Practice to Reflection`"]:::engineBox
+    end
+
+    subgraph STAGE7["â‘¦ ACTIVE RETRIEVAL and REFLECTION ENGINE"]
+        AR_PROC["`Process: Embeds prediction prompts, self-explanation, and reflection checkpoints
+        Theory: Retrieval Practice + Desirable Difficulties â€” Robert Bjork Â· Anders Ericsson
+        Laws: CL-17 Â· CL-18 Â· CL-25 Â· LP-07 Â· LP-08`"]:::engineBox
+    end
+
+    subgraph STAGE8["â‘§ QUALITY GOVERNANCE ENGINE"]
+        QG_PROC["`Process: Independent audit across 9 quality dimensions â€” Retry loop up to 3 times
+        Theory: Cybernetic Systems + Formative Evaluation â€” Michael Scriven
+        Laws: QP-01 Â· AG-01 to AG-05 Â· Rules 20 and 21 | Dimensions: QD-01 to QD-09`"]:::qualNode
+    end
+
+    EPISODE(["`VERIFIED LEARNING EPISODE
+    Constitutionally compliant
+    Ready for learner delivery`"]):::outputNode
+
+    INPUT    --> STAGE1
+    STAGE1   --> STAGE2
+    STAGE2   --> STAGE3
+    STAGE3   --> STAGE4
+    STAGE4   --> STAGE5
+    STAGE5   --> STAGE6
+    STAGE6   --> STAGE7
+    STAGE7   --> STAGE8
+    STAGE8   -->|"PASS"| EPISODE
+    STAGE8   -->|"FAIL - Retry"| STAGE6
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top:48px;">
+      <span class="section-tag">Stage Reference</span>
+      <h2 class="section-title">Per-Stage Deep Dive</h2>
+      <p class="section-desc">Every engine's role, theory mapping, constitutional laws, and data contracts at a glance.</p>
+    </div>
+
+    <div class="stages-grid">
+
+      <div class="stage-card" style="--card-accent:hsl(265,80%,62%);">
+        <div class="stage-num">STAGE 01 &middot; MISCONCEPTION ENGINE</div>
+        <div class="stage-name">Prior Model Resolution</div>
+        <div class="stage-engine">Misconception Engine</div>
+        <div class="meta-row">
+          <div class="meta-item"><span class="meta-label">Purpose</span><span class="meta-value">Identifies and resolves the learner's probable false beliefs before new knowledge is introduced.</span></div>
+          <div class="meta-item"><span class="meta-label">Theory</span><div class="tag-list"><span class="tag tag-theory">Conceptual Change Theory</span><span class="tag tag-theory">Ausubel Meaningful Learning</span></div></div>
+          <div class="meta-item"><span class="meta-label">Input</span><div class="tag-list"><span class="tag tag-input">Topic Name</span><span class="tag tag-input">Learner Profile</span></div></div>
+          <div class="meta-item"><span class="meta-label">Output</span><div class="tag-list"><span class="tag tag-output">MC-01 to MC-05 Map</span><span class="tag tag-output">IS Strategy Set</span></div></div>
+          <div class="meta-item"><span class="meta-label">Laws</span><div class="tag-list"><span class="tag tag-law">CL-06</span><span class="tag tag-law">LP-02</span></div></div>
+          <div class="meta-item"><span class="meta-label">Confidence</span><div class="tag-list"><span class="tag tag-conf">High</span></div></div>
+        </div>
+        <div class="conf-bar"><span class="conf-label">Confidence</span><div class="conf-track"><div class="conf-fill" style="width:85%"></div></div></div>
+      </div>
+
+      <div class="stage-card" style="--card-accent:hsl(215,85%,60%);">
+        <div class="stage-num">STAGE 02 &middot; MENTAL MODEL ENGINE</div>
+        <div class="stage-name">Structural Abstraction</div>
+        <div class="stage-engine">Mental Model Engine</div>
+        <div class="meta-row">
+          <div class="meta-item"><span class="meta-label">Purpose</span><span class="meta-value">Constructs a formal internal conceptual model (entities, rules, behaviors) before any explanation is written.</span></div>
+          <div class="meta-item"><span class="meta-label">Theory</span><div class="tag-list"><span class="tag tag-theory">Mental Model Theory</span><span class="tag tag-theory">Schema Formation</span></div></div>
+          <div class="meta-item"><span class="meta-label">Input</span><div class="tag-list"><span class="tag tag-input">Misconception Map</span><span class="tag tag-input">Corrective Strategies</span></div></div>
+          <div class="meta-item"><span class="meta-label">Output</span><div class="tag-list"><span class="tag tag-output">Mental Model Spec</span><span class="tag tag-output">MT-01 to MT-05 Type</span></div></div>
+          <div class="meta-item"><span class="meta-label">Laws</span><div class="tag-list"><span class="tag tag-law">CL-07</span><span class="tag tag-law">LP-03</span></div></div>
+        </div>
+        <div class="conf-bar"><span class="conf-label">Confidence</span><div class="conf-track"><div class="conf-fill" style="width:85%"></div></div></div>
+      </div>
+
+      <div class="stage-card" style="--card-accent:hsl(188,90%,55%);">
+        <div class="stage-num">STAGE 03 &middot; SCENARIO INTELLIGENCE ENGINE</div>
+        <div class="stage-name">Contextual Grounding</div>
+        <div class="stage-engine">Scenario Intelligence Engine</div>
+        <div class="meta-row">
+          <div class="meta-item"><span class="meta-label">Purpose</span><span class="meta-value">Selects a purposeful real-world scenario to anchor abstract programming concepts in observable cause-and-effect.</span></div>
+          <div class="meta-item"><span class="meta-label">Theory</span><div class="tag-list"><span class="tag tag-theory">Situated Cognition</span><span class="tag tag-theory">Constructivism</span></div></div>
+          <div class="meta-item"><span class="meta-label">Input</span><div class="tag-list"><span class="tag tag-input">Mental Model Spec</span><span class="tag tag-input">Learner Context</span></div></div>
+          <div class="meta-item"><span class="meta-label">Output</span><div class="tag-list"><span class="tag tag-output">Validated Scenario</span><span class="tag tag-output">SC-01 to SC-08 Code</span></div></div>
+          <div class="meta-item"><span class="meta-label">Laws</span><div class="tag-list"><span class="tag tag-law">CL-03</span><span class="tag tag-law">CL-13</span><span class="tag tag-law">LP-04</span></div></div>
+        </div>
+        <div class="conf-bar"><span class="conf-label">Confidence</span><div class="conf-track"><div class="conf-fill" style="width:85%"></div></div></div>
+      </div>
+
+      <div class="stage-card" style="--card-accent:hsl(155,75%,52%);">
+        <div class="stage-num">STAGE 04 &middot; PATTERN MAPPING ENGINE</div>
+        <div class="stage-name">Structural Bridge</div>
+        <div class="stage-engine">Pattern Mapping Engine</div>
+        <div class="meta-row">
+          <div class="meta-item"><span class="meta-label">Purpose</span><span class="meta-value">Extracts domain-agnostic computational patterns from the scenario to enable far transfer to new problems.</span></div>
+          <div class="meta-item"><span class="meta-label">Theory</span><div class="tag-list"><span class="tag tag-theory">Inductive Reasoning</span><span class="tag tag-theory">Transfer of Learning</span></div></div>
+          <div class="meta-item"><span class="meta-label">Input</span><div class="tag-list"><span class="tag tag-input">Validated Scenario</span><span class="tag tag-input">Mental Model Spec</span></div></div>
+          <div class="meta-item"><span class="meta-label">Output</span><div class="tag-list"><span class="tag tag-output">PM-01 Observable</span><span class="tag tag-output">PM-02 Abstract</span><span class="tag tag-output">PM-03 Programming</span></div></div>
+          <div class="meta-item"><span class="meta-label">Laws</span><div class="tag-list"><span class="tag tag-law">CL-08</span><span class="tag tag-law">LP-05</span><span class="tag tag-law">LP-09</span></div></div>
+        </div>
+        <div class="conf-bar"><span class="conf-label">Confidence</span><div class="conf-track"><div class="conf-fill" style="width:85%"></div></div></div>
+      </div>
+
+      <div class="stage-card" style="--card-accent:hsl(38,95%,58%);">
+        <div class="stage-num">STAGE 05 &middot; COGNITIVE LOAD MANAGER</div>
+        <div class="stage-name">Simplicity Enforcement</div>
+        <div class="stage-engine">Cognitive Load Management</div>
+        <div class="meta-row">
+          <div class="meta-item"><span class="meta-label">Purpose</span><span class="meta-value">Caps every lesson to one core objective; strips extraneous content to preserve working memory capacity.</span></div>
+          <div class="meta-item"><span class="meta-label">Theory</span><div class="tag-list"><span class="tag tag-theory">Cognitive Load Theory</span><span class="tag tag-theory">Multimedia Learning</span></div></div>
+          <div class="meta-item"><span class="meta-label">Input</span><div class="tag-list"><span class="tag tag-input">Pattern Tiers</span><span class="tag tag-input">Raw Content Draft</span></div></div>
+          <div class="meta-item"><span class="meta-label">Output</span><div class="tag-list"><span class="tag tag-output">CLT-filtered Brief</span><span class="tag tag-output">1 Core Objective</span></div></div>
+          <div class="meta-item"><span class="meta-label">Laws</span><div class="tag-list"><span class="tag tag-law">CL-05</span><span class="tag tag-law">CL-14</span><span class="tag tag-law">CL-21</span><span class="tag tag-law">LP-06</span></div></div>
+        </div>
+        <div class="conf-bar"><span class="conf-label">Confidence</span><div class="conf-track"><div class="conf-fill" style="width:95%"></div></div></div>
+      </div>
+
+      <div class="stage-card" style="--card-accent:hsl(345,80%,62%);">
+        <div class="stage-num">STAGE 06 &middot; EPISODE GENERATION ENGINE</div>
+        <div class="stage-name">Canonical Instructional Flow</div>
+        <div class="stage-engine">Episode Generation Engine</div>
+        <div class="meta-row">
+          <div class="meta-item"><span class="meta-label">Purpose</span><span class="meta-value">Assembles the immutable 9-stage canonical flow that mirrors human cognitive architecture.</span></div>
+          <div class="meta-item"><span class="meta-label">Theory</span><div class="tag-list"><span class="tag tag-theory">Gagne's 9 Events</span><span class="tag tag-theory">Deliberate Practice</span></div></div>
+          <div class="meta-item"><span class="meta-label">Input</span><div class="tag-list"><span class="tag tag-input">CLT-filtered Brief</span><span class="tag tag-input">All Prior Outputs</span></div></div>
+          <div class="meta-item"><span class="meta-label">Output</span><div class="tag-list"><span class="tag tag-output">Raw 9-Stage Episode</span><span class="tag tag-output">ES-01 to ES-09</span></div></div>
+          <div class="meta-item"><span class="meta-label">Laws</span><div class="tag-list"><span class="tag tag-law">CL-04</span><span class="tag tag-law">AI-01 Runtime</span><span class="tag tag-law">Appendix A</span></div></div>
+        </div>
+        <div class="conf-bar"><span class="conf-label">Confidence</span><div class="conf-track"><div class="conf-fill" style="width:85%"></div></div></div>
+      </div>
+
+      <div class="stage-card" style="--card-accent:hsl(240,70%,65%);">
+        <div class="stage-num">STAGE 07 &middot; ACTIVE RETRIEVAL ENGINE</div>
+        <div class="stage-name">Practice &amp; Reflection</div>
+        <div class="stage-engine">Active Retrieval &amp; Reflection Engine</div>
+        <div class="meta-row">
+          <div class="meta-item"><span class="meta-label">Purpose</span><span class="meta-value">Embeds prediction prompts, self-explanation tasks, and reflection checkpoints to consolidate long-term memory.</span></div>
+          <div class="meta-item"><span class="meta-label">Theory</span><div class="tag-list"><span class="tag tag-theory">Retrieval Practice</span><span class="tag tag-theory">Desirable Difficulties</span></div></div>
+          <div class="meta-item"><span class="meta-label">Input</span><div class="tag-list"><span class="tag tag-input">Raw 9-Stage Episode</span></div></div>
+          <div class="meta-item"><span class="meta-label">Output</span><div class="tag-list"><span class="tag tag-output">Episode + Retrieval Hooks</span><span class="tag tag-output">Reflection Checkpoints</span></div></div>
+          <div class="meta-item"><span class="meta-label">Laws</span><div class="tag-list"><span class="tag tag-law">CL-17</span><span class="tag tag-law">CL-18</span><span class="tag tag-law">CL-25</span><span class="tag tag-law">LP-07</span><span class="tag tag-law">LP-08</span></div></div>
+        </div>
+        <div class="conf-bar"><span class="conf-label">Confidence</span><div class="conf-track"><div class="conf-fill" style="width:85%"></div></div></div>
+      </div>
+
+      <div class="stage-card" style="--card-accent:hsl(345,80%,62%);">
+        <div class="stage-num">STAGE 08 &middot; QUALITY GOVERNANCE ENGINE</div>
+        <div class="stage-name">Independent Constitutional Audit</div>
+        <div class="stage-engine">Quality Governance Engine</div>
+        <div class="meta-row">
+          <div class="meta-item"><span class="meta-label">Purpose</span><span class="meta-value">Independently audits the generated episode across 9 quality dimensions. Triggers a retry loop (max 3x) on failure.</span></div>
+          <div class="meta-item"><span class="meta-label">Theory</span><div class="tag-list"><span class="tag tag-theory">Cybernetic Systems</span><span class="tag tag-theory">Formative Evaluation</span></div></div>
+          <div class="meta-item"><span class="meta-label">Input</span><div class="tag-list"><span class="tag tag-input">Episode + Retrieval Hooks</span></div></div>
+          <div class="meta-item"><span class="meta-label">Output</span><div class="tag-list"><span class="tag tag-output">Verified Episode</span><span class="tag tag-output">Audit Report QD-01 to QD-09</span></div></div>
+          <div class="meta-item"><span class="meta-label">Laws</span><div class="tag-list"><span class="tag tag-law">QP-01</span><span class="tag tag-law">AG-01 to AG-05</span><span class="tag tag-law">Rule 20/21</span></div></div>
+        </div>
+        <div class="conf-bar"><span class="conf-label">Confidence</span><div class="conf-track"><div class="conf-fill" style="width:85%"></div></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2: THEORETICAL FOUNDATION ===== -->
+  <section id="sec-theory" class="section">
+    <div class="section-header">
+      <span class="section-tag">Diagram 2</span>
+      <h2 class="section-title">Theoretical Foundation &mdash; Why This Many Layers?</h2>
+      <p class="section-desc">PyBe does not follow one single educational theory. It synthesises six complementary scientific theories into a unified pedagogical pipeline &mdash; each layer exists because one theory demands it.</p>
+    </div>
+
+    <div class="single-theory-box">
+      <div class="single-theory-verdict">PyBe follows <span class="verdict-highlight">Six Integrated Theories</span>,<br/>not one &mdash; by constitutional design.</div>
+      <p class="single-theory-quote">"PyBe does not require adherence to any single educational theory. Instead, it integrates complementary ideas where they align with the project's educational objectives."<br/><br/>Each of the 8 engines maps to at least one distinct scientific theory. Collapsing to fewer theories would eliminate at least one engine, breaking the constitutional guarantee of pedagogical fidelity.</p>
+    </div>
+
+    <div class="diagram-card">
+      <div class="mermaid" id="mermaid-theory">
+flowchart LR
+    classDef theoryNode fill:#1a1730,stroke:#7c4dff,stroke-width:2px,color:#e8e4ff
+    classDef centralNode fill:#1a0d0a,stroke:#ff7043,stroke-width:3px,color:#ffccbc
+
+    PyBe(["`PyBe
+    Integrated
+    Pedagogical
+    Pipeline`"]):::centralNode
+
+    T1["`CONSTRUCTIVIST THEORY
+    Piaget and Vygotsky
+    LP-01 Knowledge Is Constructed
+    CL-16 Progressive Abstraction
+    Grounds Stage 3 and 6`"]:::theoryNode
+
+    T2["`CONCEPTUAL CHANGE THEORY
+    Ausubel and Posner
+    CL-06 Address Misconceptions First
+    LP-02 Misconceptions Compete
+    Grounds Stage 1`"]:::theoryNode
+
+    T3["`MENTAL MODEL THEORY
+    Norman and Johnson-Laird and Craik
+    CL-07 Mental Models Mandatory
+    LP-03 Mental Models Drive Expertise
+    Grounds Stage 2`"]:::theoryNode
+
+    T4["`COGNITIVE LOAD THEORY
+    Sweller and Mayer
+    CL-05 One Core Objective
+    CL-14 Simplicity Over Cleverness
+    Grounds Stage 5`"]:::theoryNode
+
+    T5["`TRANSFER OF LEARNING
+    Bransford and Piaget Schema
+    CL-08 Scenario to Pattern to Code
+    LP-05 Pattern Recognition First
+    Grounds Stage 4`"]:::theoryNode
+
+    T6["`RETRIEVAL PRACTICE
+    Bjork and Ericsson
+    CL-17 Active Curiosity
+    CL-18 Reflection Completes Learning
+    Grounds Stage 7`"]:::theoryNode
+
+    T1 --> PyBe
+    T2 --> PyBe
+    T3 --> PyBe
+    T4 --> PyBe
+    T5 --> PyBe
+    T6 --> PyBe
+      </div>
+    </div>
+
+    <div class="layer-justify">
+      <div class="layer-justify-title">Why 8 Engines &mdash; Not 7, Not 9?</div>
+      <div class="layer-justify-desc">Each layer is necessary because the theory it operationalises cannot be merged with an adjacent stage without violating constitutional law. Removing any engine collapses at least one of the six scientific guarantees.</div>
+
+      <div class="layer-row">
+        <div class="layer-idx">01</div>
+        <div class="layer-info"><div class="layer-info-name">Misconception Engine</div><div class="layer-info-why">Must precede mental model construction &mdash; Conceptual Change Theory (Ausubel) proves that incorrect priors block assimilation of new knowledge if not addressed first (CL-06).</div></div>
+        <div class="layer-necessity necessity-critical">Critical</div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-idx">02</div>
+        <div class="layer-info"><div class="layer-info-name">Mental Model Engine</div><div class="layer-info-why">Must precede scenario selection &mdash; Norman proved that learners need an internal causal simulation before a concrete example will anchor meaningfully (CL-07).</div></div>
+        <div class="layer-necessity necessity-critical">Critical</div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-idx">03</div>
+        <div class="layer-info"><div class="layer-info-name">Scenario Intelligence Engine</div><div class="layer-info-why">Must precede pattern mapping &mdash; Piaget's concrete-operational stage proves learners cannot induce abstract rules without first observing them in familiar physical contexts (CL-03).</div></div>
+        <div class="layer-necessity necessity-critical">Critical</div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-idx">04</div>
+        <div class="layer-info"><div class="layer-info-name">Pattern Mapping Engine</div><div class="layer-info-why">Cannot be merged with Scenario Engine &mdash; Bransford's Transfer of Learning research proves the bridging step (Observable to Abstract to Programming) is a cognitively distinct operation (CL-08, LP-09).</div></div>
+        <div class="layer-necessity necessity-critical">Critical</div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-idx">05</div>
+        <div class="layer-info"><div class="layer-info-name">Cognitive Load Manager</div><div class="layer-info-why">Must be a gate between pattern extraction and episode generation &mdash; Sweller proved working memory collapse degrades retention if extraneous material is allowed into the final episode (LP-06, CL-05).</div></div>
+        <div class="layer-necessity necessity-essential">Essential</div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-idx">06</div>
+        <div class="layer-info"><div class="layer-info-name">Episode Generation Engine</div><div class="layer-info-why">Enforces Gagne's immutable 9-event sequence &mdash; collapsing this into any other stage breaks the constitutional guarantee that mechanism always precedes implementation (CL-04).</div></div>
+        <div class="layer-necessity necessity-critical">Critical</div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-idx">07</div>
+        <div class="layer-info"><div class="layer-info-name">Active Retrieval Engine</div><div class="layer-info-why">Bjork's Desirable Difficulties research proves retrieval must be a post-generation pass &mdash; embedding prediction prompts during generation would violate the sequencing required by CL-17 and CL-18.</div></div>
+        <div class="layer-necessity necessity-essential">Essential</div>
+      </div>
+      <div class="layer-row">
+        <div class="layer-idx">08</div>
+        <div class="layer-info"><div class="layer-info-name">Quality Governance Engine</div><div class="layer-info-why">QP-01 mandates independence from generation &mdash; Scriven's Formative Evaluation theory proves that self-evaluation by the generating unit creates systematic bias; an independent audit is structurally necessary.</div></div>
+        <div class="layer-necessity necessity-integral">Integral</div>
+      </div>
+    </div>
+
+    <div class="section-header" style="margin-top:48px;">
+      <span class="section-tag">Evidence</span>
+      <h2 class="section-title">6 Theories &mdash; With Proof of Integration</h2>
+      <p class="section-desc">Each theory is mapped to its exact PyBe constitutional law, learning principle, and operational mechanism.</p>
+    </div>
+
+    <div class="theory-grid">
+
+      <div class="theory-card" style="--card-accent:hsl(265,80%,62%);">
+        <div class="theory-num" style="--ca1:hsl(265,80%,62%);--ca2:hsl(215,85%,60%);background:linear-gradient(135deg,hsl(265,80%,62%),hsl(215,85%,60%));">1</div>
+        <div class="theory-name">Constructivist Learning Theory</div>
+        <div class="theory-authors">Jean Piaget &middot; Lev Vygotsky</div>
+        <div class="theory-desc">Learners actively construct understanding by connecting new information to existing knowledge structures, progressing from concrete experience to abstract rules.</div>
+        <div class="theory-proof"><div class="theory-proof-label">PyBe Proof of Integration</div>LP-01 "Knowledge Is Constructed" &middot; CL-16 "Progressive Abstraction" &middot; The canonical 9-stage pathway (Experience to Observation to Pattern to Mental Model to Concept to Code to Practice to Reflection) operationalises Piaget's concrete-to-formal progression in every lesson.</div>
+      </div>
+
+      <div class="theory-card" style="--card-accent:hsl(215,85%,60%);">
+        <div class="theory-num" style="background:linear-gradient(135deg,hsl(215,85%,60%),hsl(188,90%,55%));">2</div>
+        <div class="theory-name">Conceptual Change Theory</div>
+        <div class="theory-authors">David Ausubel &middot; Posner et al.</div>
+        <div class="theory-desc">True learning requires creating cognitive conflict to replace incorrect mental models. Learners do not begin with empty minds &mdash; bad priors must be disrupted before new schemas can form.</div>
+        <div class="theory-proof"><div class="theory-proof-label">PyBe Proof of Integration</div>CL-06 mandates misconception resolution before code &middot; LP-02 "Misconceptions Compete With Correct Models" &middot; MC-01 to MC-05 classify exact misconception types &middot; IS-01 to IS-07 prescribe corrective interventions (prediction, counterexample, reflection).</div>
+      </div>
+
+      <div class="theory-card" style="--card-accent:hsl(188,90%,55%);">
+        <div class="theory-num" style="background:linear-gradient(135deg,hsl(188,90%,55%),hsl(155,75%,52%));">3</div>
+        <div class="theory-name">Mental Model Theory</div>
+        <div class="theory-authors">Donald Norman &middot; Kenneth Craik &middot; Philip Johnson-Laird</div>
+        <div class="theory-desc">Experts reason about systems by running internal conceptual simulations &mdash; mental models &mdash; of cause-and-effect, not by recalling memorized syntax.</div>
+        <div class="theory-proof"><div class="theory-proof-label">PyBe Proof of Integration</div>CL-07 "Mental Models Are Mandatory &mdash; Code Alone Is Never Sufficient" &middot; LP-03 "Mental Models Drive Expertise" &middot; MT-01 to MT-05 type taxonomy (State, Flow, Relationship, Transformation, System) &middot; MM-01 to MM-05 structural specification.</div>
+      </div>
+
+      <div class="theory-card" style="--card-accent:hsl(38,95%,58%);">
+        <div class="theory-num" style="background:linear-gradient(135deg,hsl(38,95%,58%),hsl(345,80%,62%));">4</div>
+        <div class="theory-name">Cognitive Load Theory &amp; Multimedia Learning</div>
+        <div class="theory-authors">John Sweller &middot; Richard Mayer</div>
+        <div class="theory-desc">Human working memory has strict limits. Instructional efficiency degrades rapidly when lessons introduce unnecessary complexity or extraneous distractions beyond ~4 novel elements.</div>
+        <div class="theory-proof"><div class="theory-proof-label">PyBe Proof of Integration (Very High Confidence)</div>LP-06 "Working Memory Has Limited Capacity" &middot; CL-05 "One Core Learning Objective Per Lesson" &middot; CL-14 "Simplicity Over Cleverness" &middot; CL-21 "Clarity Over Complexity" &middot; QD-06 Educational Clarity audit before every publication. Rated Very High confidence &mdash; the only theory with that rating.</div>
+      </div>
+
+      <div class="theory-card" style="--card-accent:hsl(155,75%,52%);">
+        <div class="theory-num" style="background:linear-gradient(135deg,hsl(155,75%,52%),hsl(188,90%,55%));">5</div>
+        <div class="theory-name">Transfer of Learning &amp; Inductive Pattern Recognition</div>
+        <div class="theory-authors">John Bransford &middot; Jean Piaget Schema Abstraction</div>
+        <div class="theory-desc">Far transfer occurs when a learner extracts an abstract rule from a specific instance and maps it to a new domain. Humans recognise patterns before forming abstract generalisations.</div>
+        <div class="theory-proof"><div class="theory-proof-label">PyBe Proof of Integration</div>CL-08 "Scenarios Are Not the Destination &mdash; Scenario to Observation to Pattern to Concept" &middot; LP-05 "Pattern Recognition Precedes Abstraction" &middot; LP-09 "Abstraction Enables Transfer" &middot; Three explicit tiers: PM-01 Observable to PM-02 Abstract to PM-03 Programming Pattern.</div>
+      </div>
+
+      <div class="theory-card" style="--card-accent:hsl(240,70%,65%);">
+        <div class="theory-num" style="background:linear-gradient(135deg,hsl(240,70%,65%),hsl(265,80%,62%));">6</div>
+        <div class="theory-name">Active Learning &amp; Retrieval Practice</div>
+        <div class="theory-authors">Robert Bjork &middot; Anders Ericsson</div>
+        <div class="theory-desc">Passive consumption produces weak retention. Long-term memory is consolidated when learners actively predict, recall, self-explain, and reflect &mdash; the Testing Effect.</div>
+        <div class="theory-proof"><div class="theory-proof-label">PyBe Proof of Integration</div>LP-07 "Active Thinking Produces Stronger Learning" &middot; LP-08 "Retrieval Strengthens Memory" &middot; CL-17 "Active Curiosity &mdash; Predict Before Reveal" &middot; CL-18 "Reflection Completes Learning" &middot; CL-25 "Practice Reinforces Understanding" &middot; Stage 7 is a dedicated retrieval pass post-generation.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer><strong>PyBe</strong> &middot; Cognitive Knowledge Learning Intelligence System &middot; Architecture &amp; Theoretical Foundation &middot; IIT Ropar &mdash; PyBe Research Group</footer>
+</div>
+
+<script>
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    themeVariables: {
+      background:          '#0d0e17',
+      primaryColor:        '#1a1730',
+      primaryTextColor:    '#e8e4ff',
+      primaryBorderColor:  '#7c4dff',
+      lineColor:           '#7c4dff',
+      secondaryColor:      '#0d1f2d',
+      tertiaryColor:       '#0d1a10',
+      edgeLabelBackground: '#161b2e',
+      fontFamily:          'Inter, sans-serif',
+      fontSize:            '13px',
+      clusterBkg:          '#10121e',
+      clusterBorder:       '#2a2a4a',
+      titleColor:          '#c5bfff',
+      nodeBorder:          '#7c4dff',
+    },
+    flowchart: { curve: 'basis', padding: 20, htmlLabels: true, useMaxWidth: true }
+  });
+
+  async function renderDiagrams() {
+    const els = document.querySelectorAll('.mermaid');
+    for (const el of els) {
+      const code = el.textContent.trim();
+      const id   = el.id || ('m-' + Math.random().toString(36).slice(2,7));
+      el.id = id;
+      try {
+        const { svg } = await mermaid.render('r-' + id, code);
+        el.innerHTML = svg;
+      } catch(e) {
+        el.innerHTML = '<pre style="color:#ff6b6b;font-size:12px;white-space:pre-wrap;">Diagram error:\n' + e.message + '</pre>';
+      }
+    }
+  }
+
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('sec-' + tab).classList.add('active');
+  }
+
+  window.addEventListener('DOMContentLoaded', renderDiagrams);
+</script>
+</body>
+</html>
+

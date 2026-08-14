@@ -1,0 +1,206 @@
+/* =========================================================
+   storybook.css
+   The storybook "chrome": header, card, footer, transitions
+   ========================================================= */
+
+/* ---------- Header ---------- */
+.pybe-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-maroon);
+  border-bottom: 4px solid var(--color-gold);
+  box-shadow: var(--shadow-soft);
+}
+
+.pybe-brand {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  color: var(--color-parchment);
+}
+
+.pybe-logo {
+  font-size: 1.4rem;
+}
+
+.pybe-title {
+  font-family: var(--font-story);
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--color-gold-light);
+  letter-spacing: 0.5px;
+}
+
+.pybe-subtitle {
+  font-family: var(--font-story);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-parchment);
+  opacity: 0.85;
+}
+
+/* ---------- Storybook Card ---------- */
+.storybook-stage {
+  perspective: 1200px;
+}
+
+.storybook-card {
+  width: 100%;
+  max-width: var(--max-content-width);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-xl);
+  position: relative;
+  min-height: 420px;
+  animation: pageIn var(--transition-medium);
+}
+
+/* Decorative "scroll" border flourish at top and bottom of the card */
+.storybook-card::before,
+.storybook-card::after {
+  content: "";
+  position: absolute;
+  left: var(--space-lg);
+  right: var(--space-lg);
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-gold) 20%,
+    var(--color-gold) 80%,
+    transparent
+  );
+}
+
+.storybook-card::before {
+  top: 14px;
+}
+
+.storybook-card::after {
+  bottom: 14px;
+}
+
+.card-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 300px;
+  font-family: var(--font-story);
+  font-style: italic;
+  color: var(--color-ink-soft);
+}
+
+/* ---------- Step Content Layout Helpers ---------- */
+.step-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  animation: fadeSlideIn var(--transition-medium);
+}
+
+.step-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  background: var(--color-maroon);
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.step-media {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  align-items: center;
+  margin: var(--space-sm) 0;
+}
+
+.step-media img {
+  max-height: 130px;
+  border-radius: var(--radius-md);
+  border: 2px solid var(--color-gold);
+  box-shadow: var(--shadow-soft);
+}
+
+.story-text {
+  font-family: var(--font-story);
+  font-size: 1.05rem;
+  color: var(--color-ink);
+  background: var(--color-surface-dim);
+  border-left: 4px solid var(--color-gold);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.section-divider {
+  border: none;
+  border-top: 1px dashed var(--color-border);
+  margin: var(--space-sm) 0;
+}
+
+/* ---------- Footer ---------- */
+.pybe-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-parchment-dark);
+  border-top: 1px solid var(--color-border);
+}
+
+.step-indicator {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  font-weight: 600;
+}
+
+/* ---------- Animations ---------- */
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .storybook-card {
+    padding: var(--space-lg);
+    min-height: 360px;
+  }
+
+  .pybe-subtitle {
+    display: none;
+  }
+
+  .step-media {
+    flex-direction: column;
+  }
+}

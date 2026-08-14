@@ -1,0 +1,18 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+.env*
+!.env.example
+
+# Benchmark test outputs
+matrix_full_results.json
+matrix_enriched.json
+sample_full_bodies.json
+production_grade_verdicts.txt
+
+
+public/videos/*.mp4
+

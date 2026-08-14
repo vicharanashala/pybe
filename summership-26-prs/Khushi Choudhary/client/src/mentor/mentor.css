@@ -1,0 +1,314 @@
+/* Mentor tools theme — shares PyBe's dark-green palette from ../styles.css
+   (loaded first: .panel, .primary, .learning-form, .code-block, .nav-link)
+   and extends it with mentor-specific chrome: a dark topbar, pill tabs,
+   provider cards, and draft review cards. */
+
+.mentor-shell {
+  min-height: 100vh;
+  padding-bottom: 48px;
+  display: grid;
+  align-content: start;
+  gap: 24px;
+}
+
+.mentor-lock {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #17231f;
+}
+
+.mentor-lock form {
+  display: grid;
+  gap: 12px;
+  width: 340px;
+  background: #fffdf7;
+  border: 1px solid #ded7cb;
+  border-radius: 8px;
+  padding: 28px;
+  box-shadow: 0 16px 42px rgba(40, 34, 23, .25);
+}
+
+.mentor-lock form p {
+  margin: -4px 0 4px;
+  color: #53615c;
+  font-size: .9rem;
+  line-height: 1.5;
+}
+
+.mentor-lock form input {
+  border: 1px solid #d4cdc0;
+  border-radius: 8px;
+  padding: 10px 12px;
+  background: #fffaf2;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  color: #53615c;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: .86rem;
+  margin-top: 4px;
+}
+
+.back-link:hover {
+  color: #17231f;
+}
+
+/* Shared dark topbar for both mentor + learner-generate tool pages */
+.tool-topbar {
+  background: #16231f;
+  color: #f8f4ec;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.tool-topbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.tool-topbar-brand strong {
+  display: block;
+  font-size: 1.15rem;
+}
+
+.tool-topbar-brand span {
+  color: #b9c7bf;
+  font-size: .85rem;
+}
+
+.tool-topbar .nav-link {
+  padding: 8px 12px;
+  font-size: .85rem;
+  white-space: nowrap;
+}
+
+.mentor-body {
+  padding: 0 28px;
+  display: grid;
+  gap: 22px;
+}
+
+.mentor-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.mentor-tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #385149;
+  background: #24342f;
+  color: #f8f4ec;
+  border-radius: 8px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.mentor-tabs button:hover {
+  background: #2f453d;
+  border-color: #4a6b5e;
+}
+
+.mentor-tabs button.active {
+  background: #d8f07c;
+  color: #14201c;
+  border-color: #d8f07c;
+}
+
+.provider-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.provider-card {
+  border: 1px solid #ded7cb;
+  border-radius: 8px;
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+  background: #fffdf7;
+}
+
+.provider-card.active {
+  border-color: #7b9f27;
+  box-shadow: 0 0 0 2px rgba(123, 159, 39, .18);
+}
+
+.provider-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.provider-card input {
+  border: 1px solid #d4cdc0;
+  border-radius: 6px;
+  padding: 8px 10px;
+  background: #fffaf2;
+}
+
+.pill {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* Namespaced as .pill-ok / .pill-empty (not the bare .ok / .empty modifier
+   names) because ../styles.css already defines an unrelated top-level
+   .empty class (the homepage's "no results yet" placeholder, complete with
+   min-height: 360px) — a bare class="pill empty" would pick that up too,
+   since CSS matches each space-separated class independently. That's what
+   was ballooning the "NO KEY" / "NEEDS_REVIEW" pills into giant capsules. */
+.pill.pill-ok { background: #e7f2cb; color: #3d5410; }
+.pill.pill-empty { background: #f2e3cb; color: #6b4a1f; }
+
+.issue-list {
+  background: #fff2d9;
+  border: 1px solid #ebcd8e;
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #6b4a1f;
+  line-height: 1.5;
+}
+
+.draft-card {
+  border: 1px solid #ded7cb;
+  border-radius: 8px;
+  padding: 18px;
+  display: grid;
+  gap: 12px;
+  background: #fffdf7;
+}
+
+.draft-card .stage-block {
+  border-left: 3px solid #c9dc94;
+  padding-left: 12px;
+}
+
+.draft-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.draft-actions button.reject {
+  background: #7a2b2b;
+}
+
+.draft-actions button.secondary,
+.primary.secondary {
+  background: #53615c;
+}
+
+.status-filter {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-weight: 700;
+}
+
+.status-filter select {
+  font-weight: 500;
+}
+
+.submitter-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: .88rem;
+  color: #53615c;
+}
+
+.submitter-line a {
+  color: #3d5410;
+}
+
+.feedback-composer {
+  display: grid;
+  gap: 10px;
+  border: 1px solid #c9dc94;
+  background: #f4f8e8;
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.feedback-composer label {
+  display: grid;
+  gap: 6px;
+  font-weight: 700;
+  font-size: .88rem;
+}
+
+/* Full-schema case study editor (client/src/shared/CaseStudyEditor.jsx),
+   shared by ReviewPanel's pre-publish edit and PublishedPanel's post-publish
+   edit — and also by the learner app's own edit step. Each stage is grouped
+   in its own fieldset so a long form with every field in the five-stage arc
+   still reads as five distinct sections rather
+   than one undifferentiated wall of textareas. */
+.case-study-editor {
+  display: grid;
+  gap: 16px;
+}
+
+.case-study-editor > label {
+  display: grid;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.editor-stage {
+  border: 1px solid #ded7cb;
+  border-radius: 8px;
+  padding: 14px 16px 16px;
+  display: grid;
+  gap: 12px;
+  background: #fffdf7;
+}
+
+.editor-stage legend {
+  padding: 0 6px;
+  font-weight: 700;
+  color: #3d5410;
+  font-size: .9rem;
+}
+
+.editor-stage label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+  font-size: .88rem;
+}
+
+/* JSON and code fields get the monospace treatment and a bit more room —
+   these hold structured data (tokens, options, templates) a mentor needs
+   to actually read line by line, not prose. */
+.editor-json,
+.editor-code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .84rem;
+  min-height: 90px;
+}
+
+.editor-code {
+  min-height: 70px;
+}

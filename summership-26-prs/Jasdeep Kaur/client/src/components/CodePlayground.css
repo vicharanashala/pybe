@@ -1,0 +1,210 @@
+/* ==========================================================
+   POKO'S FOREST NOTEBOOK CODE PLAYGROUND STYLING
+   Studio Ghibli & Disney Vintage Storybook Styling
+   ========================================================== */
+
+.playground-wrapper {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.playground-notebook-card {
+  padding: 24px;
+}
+
+.notebook-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.handwritten-badge {
+  font-family: "Georgia", serif;
+  font-weight: 800;
+  font-size: 14px;
+  color: #FFE082 !important;
+}
+
+.notebook-file-tag {
+  background: rgba(255, 224, 130, 0.15);
+  color: #FFE082;
+  font-family: monospace;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 224, 130, 0.3);
+}
+
+.notebook-title-heading {
+  font-family: "Georgia", serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: #FFE082 !important;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  margin-bottom: 6px;
+}
+
+.notebook-subtitle-text {
+  font-size: 14px;
+  color: #C5E1A5 !important;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.pg-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.left-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.right-snippets {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.snippet-chip {
+  background: rgba(74, 46, 43, 0.6);
+  border: 1.5px solid #8D5B4C;
+  color: #FFE082;
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.snippet-chip:hover {
+  background: linear-gradient(135deg, #708238, #4E6023);
+  border-color: #87A96B;
+  color: #FFFDD0;
+}
+
+/* Split Editor & Console */
+.editor-console-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 768px) {
+  .editor-console-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Lined Notebook Paper Editor Box */
+.notebook-paper-box {
+  background: linear-gradient(145deg, #FBF4E2, #F4E8CE);
+  border: 3px solid #8D5B4C;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: inset 0 0 15px rgba(139, 94, 60, 0.15);
+}
+
+.panel-header {
+  background: rgba(141, 91, 76, 0.25);
+  padding: 8px 14px;
+  font-family: serif;
+  font-size: 12px;
+  color: #3E2723;
+  font-weight: bold;
+  border-bottom: 1.5px solid #8D5B4C;
+}
+
+.code-input-textarea {
+  width: 100%;
+  height: 220px;
+  background: transparent;
+  border: none;
+  padding: 14px;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #2C1B18;
+  resize: none;
+  outline: none;
+  font-weight: 600;
+}
+
+/* ✨ Storybook Notebook Page Console Output */
+.magic-moss-console {
+  background: linear-gradient(145deg, #F5EBE0, #E8DCCB);
+  border: 3px solid #708238;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(112, 130, 56, 0.15);
+}
+
+.magic-moss-console .panel-header {
+  background: rgba(112, 130, 56, 0.25);
+  color: #354714;
+  border-bottom-color: #708238;
+}
+
+.terminal-output {
+  padding: 14px;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  color: #1B5E20;
+  white-space: pre-wrap;
+  height: 220px;
+  overflow-y: auto;
+  font-weight: 700;
+}
+
+/* Hints Bar */
+.hints-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.hints-label {
+  font-size: 12px;
+  color: #C5E1A5;
+  font-weight: 700;
+}
+
+.hint-pill {
+  background: rgba(74, 46, 43, 0.6);
+  border: 1px solid #8D5B4C;
+  color: #F5EBE0;
+  padding: 4px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.hint-pill-active {
+  background: #FFE082;
+  color: #1A0E0A;
+  font-weight: bold;
+}
+
+.active-hint-callout {
+  background: rgba(255, 224, 130, 0.15);
+  border: 1px solid #FFE082;
+  color: #FFE082;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+
+.pg-footer {
+  display: flex;
+  justify-content: flex-end;
+}

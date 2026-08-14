@@ -1,0 +1,273 @@
+/* ==========================================================
+   FOREST JOURNEY MAP TRAIL (DISNEY/PIXAR WOODEN THEME)
+   ========================================================== */
+
+.forest-journey-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: linear-gradient(180deg, #5C3A21 0%, #4A2E1A 100%);
+  border-bottom: 3.5px solid #E0A43A;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+  gap: 16px;
+  backdrop-filter: blur(8px);
+}
+
+/* Polished Wooden Signpost Navigation Buttons */
+.wooden-signpost-btn {
+  background: linear-gradient(145deg, #7A4A2A, #5C3A21);
+  border: 2px solid #E0A43A;
+  border-radius: 18px;
+  color: #FFF5E8;
+  padding: 8px 18px;
+  font-family: "Georgia", serif;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wooden-signpost-btn:hover:not(:disabled) {
+  background: linear-gradient(145deg, #B9772B, #7A4A2A);
+  border-color: #FFF5E8;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(224, 164, 58, 0.5);
+}
+
+.wooden-signpost-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Center Journey Map Trail */
+.header-nav-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 750px;
+}
+
+.journey-map-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.map-badge {
+  color: #E0A43A;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.current-location-name {
+  color: #FFF5E8;
+  font-family: "Georgia", serif;
+  font-weight: 800;
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.chapter-complete-badge {
+  background: linear-gradient(145deg, #708238, #4E6023);
+  border: 1px solid #87A96B;
+  color: #FFF5E8;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* Trail Track & Clean Node Icons */
+.journey-trail-track {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.trail-connector-line {
+  height: 3px;
+  flex: 1;
+  max-width: 20px;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+}
+
+.line-active {
+  background: linear-gradient(90deg, #E0A43A, #B9772B);
+  box-shadow: 0 0 6px rgba(224, 164, 58, 0.6);
+}
+
+.line-locked {
+  background: rgba(122, 74, 42, 0.4);
+}
+
+.milestone-node-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.milestone-node {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+  background: linear-gradient(145deg, #6B3E26, #4A2E1A);
+  border: 2px solid #B9772B;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.node-completed {
+  background: linear-gradient(145deg, #708238, #4E6023) !important;
+  border-color: #87A96B !important;
+  box-shadow: 0 0 10px rgba(135, 169, 107, 0.6) !important;
+}
+
+.node-current {
+  background: linear-gradient(145deg, #E0A43A, #B9772B) !important;
+  border-color: #FFF5E8 !important;
+  box-shadow: 0 0 16px rgba(224, 164, 58, 0.8) !important;
+}
+
+.node-locked {
+  background: linear-gradient(145deg, #4A2E1A, #341D10) !important;
+  border-color: #7A4A2A !important;
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.milestone-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.check-sparkle-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #E0A43A;
+  color: #1A0E0A;
+  font-size: 10px;
+  font-weight: 900;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.current-glowing-ring {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border-radius: 50%;
+  border: 2px solid #E0A43A;
+  pointer-events: none;
+}
+
+/* Floating Storybook Tooltip on Hover */
+.milestone-tooltip-box {
+  position: absolute;
+  top: 42px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: #382112;
+  border: 2px solid #E0A43A;
+  border-radius: 12px;
+  padding: 8px 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 250;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.milestone-node-wrapper:hover .milestone-tooltip-box {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.tooltip-node-title {
+  font-family: "Georgia", serif;
+  font-size: 12px;
+  font-weight: 900;
+  color: #E0A43A;
+}
+
+.tooltip-node-desc {
+  font-size: 11px;
+  color: #FFF5E8;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.tooltip-lock-tag {
+  font-size: 10px;
+  color: #FF8A8A;
+  font-weight: 800;
+  margin-top: 4px;
+}
+
+/* XP / Coins Badges Header Right */
+.header-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.forest-reward-badge, .stat-pill-badge {
+  background: linear-gradient(145deg, #6B3E26, #4A2E1A);
+  border: 1.5px solid #E0A43A;
+  border-radius: 14px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 800;
+  color: #FFF5E8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.xp-badge {
+  border-color: #E0A43A;
+  color: #FFF5E8;
+}
+
+.coins-badge {
+  border-color: #B9772B;
+  color: #FFF5E8;
+}

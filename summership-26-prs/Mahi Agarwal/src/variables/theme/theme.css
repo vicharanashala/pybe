@@ -1,0 +1,305 @@
+/* =========================================================================
+   Variables module theme — "Doraemon's Magical Memory Pockets"
+   A bright, playful, daylight gadget-lab look: sky blues, warm cream paper,
+   a red accent, a gold bell-yellow highlight, big soft rounded shapes.
+   Deliberately NOT the Loops module's dark glassmorphism/cyan-violet night
+   palette — this world should feel like a completely different place.
+   ========================================================================= */
+
+:root {
+  --dm-sky: #eaf6ff;
+  --dm-sky-deep: #d4ecff;
+  --dm-blue: #1e88e5;
+  --dm-blue-deep: #0d47a1;
+  --dm-blue-soft: #6ec6ff;
+  --dm-red: #ef4056;
+  --dm-red-soft: #ffd7dc;
+  --dm-gold: #ffcb3d;
+  --dm-gold-soft: #fff1c2;
+  --dm-cream: #fffaf0;
+  --dm-panel: rgba(255, 255, 255, .86);
+  --dm-panel-alt: rgba(255, 255, 255, .55);
+  --dm-border: rgba(30, 136, 229, .22);
+  --dm-ink: #16324a;
+  --dm-muted: #5d7186;
+  --dm-danger: #e0435c;
+  --dm-danger-bg: #ffe6ea;
+  --dm-success: #2bb37a;
+  --dm-radius: 24px;
+  --dm-radius-sm: 14px;
+  --dm-shadow: 0 22px 48px rgba(20, 60, 110, .16);
+  --dm-ease: cubic-bezier(.24, 1, .4, 1);
+  --dm-font: 'Baloo 2', 'Quicksand', ui-rounded, 'Segoe UI Rounded', system-ui, -apple-system, sans-serif;
+  --dm-font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dm-shell, .dm-shell * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}
+
+.dm-shell {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(1000px 480px at 12% -8%, rgba(110, 198, 255, .35), transparent),
+    radial-gradient(900px 420px at 92% 6%, rgba(255, 203, 61, .22), transparent),
+    linear-gradient(180deg, var(--dm-sky) 0%, var(--dm-sky-deep) 60%, var(--dm-sky) 100%);
+  color: var(--dm-ink);
+  font-family: var(--dm-font);
+  padding: 28px;
+  display: grid;
+  gap: 20px;
+}
+
+/* Drifting daylight clouds/sparkles instead of Loops' rising night dust */
+.dm-clouds { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+.dm-cloud {
+  position: absolute; top: -60px; font-size: 2.4rem; opacity: .55; filter: drop-shadow(0 6px 10px rgba(20,60,110,.08));
+  animation: dm-drift 26s linear infinite;
+}
+@keyframes dm-drift { from { transform: translate(-10vw, 0); } to { transform: translate(110vw, 40px); } }
+
+.dm-topbar { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; }
+.dm-topbar .dm-back { justify-self: start; }
+.dm-topbar .dm-title { justify-self: center; text-align: center; }
+.dm-topbar .dm-gem-counter { justify-self: end; }
+@media (max-width: 720px) {
+  .dm-topbar { grid-template-columns: 1fr; justify-items: center; gap: 10px; }
+  .dm-topbar .dm-back, .dm-topbar .dm-title, .dm-topbar .dm-gem-counter { justify-self: center; }
+  .dm-topbar .dm-title { order: -1; }
+}
+
+.dm-back {
+  display: inline-flex; align-items: center; gap: 8px; border: 2px solid var(--dm-border); background: var(--dm-panel);
+  color: var(--dm-blue-deep); border-radius: 999px; padding: 10px 16px; cursor: pointer; font-weight: 800; font-family: var(--dm-font);
+  transition: transform .15s var(--dm-ease), box-shadow .15s var(--dm-ease);
+}
+.dm-back:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(30,136,229,.22); }
+button:focus-visible, [tabindex]:focus-visible, input:focus-visible { outline: 3px solid var(--dm-blue-soft); outline-offset: 2px; }
+
+.dm-title { font-family: var(--dm-font); font-weight: 800; font-size: 1.4rem; color: var(--dm-blue-deep); }
+
+.dm-gem-counter {
+  display: inline-flex; align-items: center; gap: 6px; background: var(--dm-gold-soft); border: 2px solid rgba(255,203,61,.6);
+  color: #8a5a00; border-radius: 999px; padding: 8px 14px; font-weight: 800; font-size: .9rem;
+}
+
+.dm-scene-dots { position: relative; z-index: 1; display: flex; gap: 6px; flex-wrap: wrap; }
+.dm-scene-dot {
+  display: flex; align-items: center; gap: 7px; border: 2px solid var(--dm-border); background: var(--dm-panel-alt);
+  color: var(--dm-muted); border-radius: 999px; padding: 6px 13px 6px 6px; cursor: not-allowed; font-size: .76rem; font-weight: 700;
+  font-family: var(--dm-font);
+  transition: background .15s var(--dm-ease), color .15s var(--dm-ease), box-shadow .15s var(--dm-ease);
+}
+.dm-scene-dot.visited, .dm-scene-dot.active { cursor: pointer; }
+.dm-scene-dot.visited { color: var(--dm-blue-deep); border-color: rgba(30,136,229,.4); }
+.dm-scene-dot.active { background: linear-gradient(135deg, var(--dm-blue), var(--dm-blue-soft)); color: #fff; box-shadow: 0 6px 18px rgba(30,136,229,.35); }
+.dm-dot-index { width: 19px; height: 19px; border-radius: 999px; background: rgba(30,136,229,.12); display: grid; place-items: center; font-size: .66rem; }
+.dm-scene-dot.active .dm-dot-index { background: rgba(255,255,255,.25); }
+
+.dm-panel {
+  position: relative; z-index: 1; background: var(--dm-panel); backdrop-filter: blur(10px); border: 2px solid var(--dm-border);
+  border-radius: var(--dm-radius); padding: 32px; box-shadow: var(--dm-shadow); animation: dm-panel-in .45s var(--dm-ease);
+}
+@keyframes dm-panel-in { from { opacity: 0; transform: translateY(16px) scale(.985); } to { opacity: 1; transform: none; } }
+
+.dm-scene { display: grid; gap: 18px; }
+.dm-scene h2 { margin: 0; font-family: var(--dm-font); font-weight: 800; font-size: 1.55rem; color: var(--dm-blue-deep); }
+.dm-scene-intro { color: var(--dm-muted); margin: 0; max-width: 660px; line-height: 1.65; font-size: .98rem; }
+.dm-caption-static { color: var(--dm-muted); font-size: .9rem; line-height: 1.6; margin: 0; }
+.dm-chapter-tag {
+  display: inline-flex; align-items: center; gap: 6px; width: fit-content; font-weight: 800; font-size: .72rem;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--dm-blue-deep); background: rgba(30,136,229,.1);
+  border: 1px solid rgba(30,136,229,.25); border-radius: 999px; padding: 5px 12px;
+}
+
+/* ---------- Buttons ---------- */
+.dm-btn {
+  border: 2px solid var(--dm-blue); background: rgba(30,136,229,.08); color: var(--dm-blue-deep); border-radius: 999px; padding: 11px 20px;
+  font-size: .92rem; font-weight: 800; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; width: fit-content;
+  font-family: var(--dm-font); transition: transform .12s var(--dm-ease), box-shadow .12s var(--dm-ease), background .12s var(--dm-ease);
+}
+.dm-btn:hover:not(:disabled) { background: rgba(30,136,229,.16); transform: translateY(-2px); box-shadow: 0 10px 22px rgba(30,136,229,.22); }
+.dm-btn:disabled { opacity: .4; cursor: not-allowed; }
+.dm-btn.dm-cta { background: linear-gradient(135deg, var(--dm-blue), #4fb1ff); color: #fff; border-color: transparent; }
+.dm-btn.dm-cta:hover:not(:disabled) { box-shadow: 0 12px 26px rgba(30,136,229,.36); }
+.dm-btn.dm-warm { background: linear-gradient(135deg, var(--dm-red), #ff7a8a); color: #fff; border-color: transparent; }
+.dm-chip {
+  border: 2px solid var(--dm-border); background: var(--dm-panel-alt); color: var(--dm-ink); border-radius: 999px; padding: 8px 15px;
+  font-size: .85rem; font-weight: 700; cursor: pointer; font-family: var(--dm-font); transition: background .15s var(--dm-ease), transform .12s var(--dm-ease);
+}
+.dm-chip:hover:not(:disabled) { background: rgba(30,136,229,.1); transform: translateY(-1px); }
+.dm-chip:disabled { opacity: .4; cursor: not-allowed; }
+.dm-chip.active { background: var(--dm-blue); color: #fff; border-color: var(--dm-blue); }
+
+/* ---------- Speech bubble / characters ---------- */
+.dm-dialogue-row { display: flex; align-items: flex-end; gap: 14px; flex-wrap: wrap; }
+.dm-avatar {
+  width: 58px; height: 58px; border-radius: 999px; display: grid; place-items: center; font-size: 1.9rem; flex-shrink: 0;
+  background: var(--dm-panel); border: 2px solid var(--dm-border); box-shadow: var(--dm-shadow); animation: dm-bob 2.6s ease-in-out infinite;
+}
+.dm-avatar.dm-avatar-doraemon { background: linear-gradient(160deg, #eaf6ff, #cfeaff); border-color: rgba(30,136,229,.35); }
+.dm-avatar.dm-avatar-nobita { background: linear-gradient(160deg, #fff7e0, #ffe9b8); border-color: rgba(255,203,61,.5); }
+@keyframes dm-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+.dm-speech-bubble {
+  position: relative; background: var(--dm-panel); border: 2px solid var(--dm-border); border-radius: var(--dm-radius-sm);
+  padding: 14px 18px; max-width: 520px; box-shadow: var(--dm-shadow); animation: dm-fade-up .35s var(--dm-ease);
+}
+.dm-speech-bubble::before {
+  content: ''; position: absolute; left: -9px; bottom: 18px; width: 16px; height: 16px; background: var(--dm-panel);
+  border-left: 2px solid var(--dm-border); border-bottom: 2px solid var(--dm-border); transform: rotate(45deg); border-radius: 0 0 0 3px;
+}
+.dm-speech-name { display: block; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+.dm-speech-name.doraemon { color: var(--dm-blue-deep); }
+.dm-speech-name.nobita { color: #a86c00; }
+.dm-speech-bubble p { margin: 0; line-height: 1.6; color: var(--dm-ink); font-size: .98rem; }
+.dm-cursor { display: inline-block; animation: dm-blink 1s step-end infinite; color: var(--dm-blue); }
+@keyframes dm-blink { 50% { opacity: 0; } }
+@keyframes dm-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Gadget chips ---------- */
+.dm-gadget-chip {
+  display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: var(--dm-panel);
+  border: 2px solid var(--dm-border); font-weight: 700; font-size: .85rem; cursor: pointer; user-select: none;
+  transition: transform .15s var(--dm-ease), box-shadow .15s var(--dm-ease), border-color .15s var(--dm-ease);
+  animation: dm-fade-up .3s var(--dm-ease);
+}
+.dm-gadget-chip:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(30,136,229,.18); }
+.dm-gadget-chip.selected { border-color: var(--dm-blue); box-shadow: 0 0 0 3px rgba(30,136,229,.18); }
+.dm-gadget-chip.static { cursor: default; }
+.dm-gadget-chip-emoji { font-size: 1.25rem; }
+
+/* ---------- Memory pockets ---------- */
+.dm-pocket {
+  display: grid; justify-items: center; gap: 8px; width: 160px; padding: 20px 14px; border-radius: var(--dm-radius);
+  background: var(--dm-panel-alt); border: 2.5px dashed var(--dm-border); text-align: center; transition: border-color .18s var(--dm-ease), background .18s var(--dm-ease), transform .18s var(--dm-ease);
+}
+.dm-pocket:hover { transform: translateY(-3px); }
+.dm-pocket.dm-pocket-glow { border-style: solid; border-color: var(--dm-blue); background: rgba(30,136,229,.08); box-shadow: 0 0 0 6px rgba(30,136,229,.08); }
+.dm-pocket-orb {
+  width: 66px; height: 66px; border-radius: 999px; display: grid; place-items: center; font-size: 1.8rem;
+  background: radial-gradient(circle at 35% 30%, #fff, var(--dm-sky-deep)); border: 2px solid var(--dm-border); box-shadow: inset 0 0 14px rgba(255,255,255,.6);
+}
+.dm-pocket-orb.filled { background: radial-gradient(circle at 35% 30%, #fff, var(--dm-blue-soft)); box-shadow: 0 0 22px rgba(30,136,229,.45), inset 0 0 14px rgba(255,255,255,.7); animation: dm-pocket-pop .5s var(--dm-ease); }
+@keyframes dm-pocket-pop { 0% { transform: scale(.7); } 60% { transform: scale(1.12); } 100% { transform: scale(1); } }
+.dm-pocket-label { font-weight: 800; font-size: .82rem; color: var(--dm-blue-deep); }
+.dm-pocket-varname { font-family: var(--dm-font-mono); font-size: .72rem; color: var(--dm-muted); }
+.dm-pocket-empty { font-size: .72rem; color: var(--dm-muted); font-style: italic; }
+
+/* ---------- Reward toast ---------- */
+.dm-reward-toast {
+  display: inline-flex; align-items: center; gap: 9px; background: var(--dm-gold-soft); border: 2px solid rgba(255,203,61,.65);
+  color: #8a5a00; border-radius: 999px; padding: 9px 16px; font-weight: 800; font-size: .85rem; animation: dm-reward-in .5s var(--dm-ease);
+}
+@keyframes dm-reward-in { from { opacity: 0; transform: translateY(8px) scale(.9); } to { opacity: 1; transform: none; } }
+
+/* ---------- Code block ---------- */
+.dm-code-block {
+  background: #0f2440; color: #d7ecff; border-radius: var(--dm-radius-sm); padding: 14px 18px; font-family: var(--dm-font-mono);
+  font-size: .88rem; line-height: 1.7; overflow-x: auto; box-shadow: var(--dm-shadow); border: 2px solid rgba(30,136,229,.35);
+}
+.dm-console {
+  background: #06131f; color: #7fe0a8; border-radius: var(--dm-radius-sm); padding: 12px 16px; font-family: var(--dm-font-mono);
+  font-size: .86rem; border: 2px solid rgba(43,179,122,.4);
+}
+.dm-console-prompt { color: #5d8cad; margin-right: 6px; }
+
+@media (max-width: 640px) {
+  .dm-shell { padding: 16px; }
+  .dm-panel { padding: 20px; }
+  .dm-scene h2 { font-size: 1.25rem; }
+  .dm-pocket { width: 130px; padding: 14px 10px; }
+}
+
+/* ---------- Code -> Memory flow animation (Scenes 6, 8) ---------- */
+.dm-flow-wrap { display: grid; justify-items: center; gap: 6px; max-width: 380px; }
+.dm-flow-track { position: relative; height: 34px; width: 4px; display: flex; flex-direction: column; align-items: center; }
+.dm-flow-particle {
+  position: absolute; top: 0; color: var(--dm-blue); font-size: .9rem; opacity: 0;
+  animation: dm-flow-fall .55s var(--dm-ease) forwards;
+}
+@keyframes dm-flow-fall { 0% { opacity: 0; transform: translateY(-6px) scale(.6); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(30px) scale(1.1); } }
+
+/* ---------- Memory Room (Scene 9) ---------- */
+.dm-memory-room {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px; width: 100%; justify-items: center;
+}
+.dm-memory-room-item { opacity: 0; animation: dm-panel-in .5s var(--dm-ease) forwards; }
+.dm-battery-demo { display: grid; justify-items: center; gap: 10px; }
+.dm-battery-pulse { animation: dm-pocket-pop .42s var(--dm-ease); }
+.dm-battery-value { font-size: .95rem; font-weight: 800; color: var(--dm-blue-deep); transition: opacity .2s var(--dm-ease); }
+.dm-battery-value.dissolving { opacity: 0; }
+
+/* ---------- Scene 1: pocket explosion ---------- */
+.dm-explosion-stage { position: relative; width: 100%; height: 220px; display: grid; place-items: center; }
+.dm-explosion-origin { font-size: 3rem; z-index: 2; animation: dm-bob 2.2s ease-in-out infinite; }
+.dm-explosion-piece {
+  position: absolute; top: 50%; left: 50%; font-size: 1.6rem; opacity: 0;
+  animation: dm-explode .9s var(--dm-ease) forwards;
+}
+@keyframes dm-explode {
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.4) rotate(0deg); }
+  25% { opacity: 1; }
+  100% { opacity: .95; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1) rotate(var(--rot)); }
+}
+
+/* ---------- Scene 2: search grid ---------- */
+.dm-search-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); gap: 10px; max-width: 560px; }
+.dm-search-item {
+  aspect-ratio: 1; display: grid; place-items: center; font-size: 1.5rem; border-radius: var(--dm-radius-sm);
+  background: var(--dm-panel-alt); border: 2px solid var(--dm-border); cursor: pointer; transition: transform .12s var(--dm-ease), box-shadow .12s var(--dm-ease);
+}
+.dm-search-item:hover { transform: translateY(-2px) scale(1.04); box-shadow: 0 8px 16px rgba(30,136,229,.18); }
+.dm-search-item.wrong { animation: dm-shake .35s var(--dm-ease); }
+.dm-search-item.correct { animation: dm-pocket-pop .4s var(--dm-ease); border-color: var(--dm-success); background: rgba(43,179,122,.14); }
+@keyframes dm-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+.dm-frustration-meter { display: flex; gap: 5px; align-items: center; }
+.dm-frustration-dot { width: 10px; height: 10px; border-radius: 999px; background: rgba(30,136,229,.18); transition: background .2s var(--dm-ease); }
+.dm-frustration-dot.filled { background: var(--dm-red); }
+
+/* ---------- Scene 3: pocket-split discovery ---------- */
+.dm-discovery-stage { display: grid; justify-items: center; gap: 14px; padding: 10px 0; }
+.dm-discovery-single { font-size: 3.4rem; transition: opacity .5s var(--dm-ease), transform .5s var(--dm-ease); }
+.dm-discovery-single.hidden { opacity: 0; transform: scale(.5); position: absolute; }
+.dm-discovery-fan { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.dm-discovery-fan .dm-pocket { opacity: 0; transform: translateY(14px) scale(.85); animation: dm-fan-in .5s var(--dm-ease) forwards; }
+@keyframes dm-fan-in { to { opacity: 1; transform: none; } }
+
+/* ---------- Scene 4/10: drop columns ---------- */
+.dm-pocket-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; width: 100%; }
+.dm-tray { display: flex; gap: 12px; flex-wrap: wrap; width: 100%; }
+
+/* ---------- Scene 5: naming ---------- */
+.dm-naming-row {
+  display: grid; gap: 10px; padding: 14px 16px; border-radius: var(--dm-radius-sm); background: var(--dm-panel-alt);
+  border: 2px solid var(--dm-border); animation: dm-fade-up .35s var(--dm-ease);
+}
+.dm-naming-row-head { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--dm-blue-deep); }
+.dm-naming-options { display: flex; gap: 10px; flex-wrap: wrap; }
+.dm-naming-opt {
+  border: 2px solid var(--dm-border); background: #fff; border-radius: 999px; padding: 8px 16px; font-family: var(--dm-font-mono);
+  font-size: .84rem; font-weight: 700; cursor: pointer; transition: transform .12s var(--dm-ease), border-color .12s var(--dm-ease);
+}
+.dm-naming-opt:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--dm-blue); }
+.dm-naming-opt.correct { border-color: var(--dm-success); background: rgba(43,179,122,.12); color: #16714b; }
+.dm-naming-opt.wrong { border-color: var(--dm-danger); background: var(--dm-danger-bg); color: var(--dm-danger); animation: dm-shake .35s var(--dm-ease); }
+.dm-naming-opt:disabled { cursor: not-allowed; }
+
+/* ---------- Scene 8: swap animation ---------- */
+.dm-swap-stage { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.dm-swap-old { animation: dm-fade-out-shrink .6s var(--dm-ease) forwards; }
+@keyframes dm-fade-out-shrink { to { opacity: 0; transform: scale(.5) translateY(10px); } }
+.dm-swap-arrow { font-size: 1.4rem; color: var(--dm-blue); }
+
+/* ---------- Console output ---------- */
+.dm-console-line { display: flex; gap: 4px; }
+
+@media (max-width: 640px) {
+  .dm-pocket-grid, .dm-memory-room { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+  .dm-search-grid { grid-template-columns: repeat(auto-fill, minmax(46px, 1fr)); }
+}
+
+/* Generic shake utility (used for "wrong pocket" feedback in Scene 10) */
+.dm-shake { animation: dm-shake .35s var(--dm-ease); border-radius: var(--dm-radius); }

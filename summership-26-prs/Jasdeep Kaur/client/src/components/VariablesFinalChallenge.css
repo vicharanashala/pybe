@@ -1,0 +1,329 @@
+/* ==========================================
+   VARIABLES MASTER CHALLENGE (LEVEL 1 & LEVEL 2)
+   Disney/Pixar Transparent Forest Integration & Warm Glass Theme
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fira+Code:wght@500;700&display=swap');
+
+.variables-master-container {
+  min-height: 100vh;
+  background: transparent !important;
+  color: #FFF5E8;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  padding: 24px;
+  position: relative;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+/* Floating Starlight & Magic Glow */
+.magic-sparkle {
+  position: absolute;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(251, 113, 133, 0.9) 0%, rgba(253, 230, 138, 0) 70%);
+  border-radius: 50%;
+  animation: magicPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes magicPulse {
+  0% { transform: scale(0.7); opacity: 0.3; }
+  100% { transform: scale(1.3); opacity: 0.95; }
+}
+
+/* Header Banner */
+.level1-header-card {
+  max-width: 1050px;
+  margin: 0 auto 20px auto;
+  background: rgba(65, 25, 45, 0.88);
+  backdrop-filter: blur(16px);
+  border: 2.5px solid #FDE68A;
+  border-radius: 24px;
+  padding: 20px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 14px 45px rgba(0, 0, 0, 0.6);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.level1-title-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.level1-brain-icon {
+  font-size: 42px;
+  filter: drop-shadow(0 0 15px rgba(251, 113, 133, 0.8));
+}
+
+.level1-main-title {
+  font-family: 'Cinzel', serif;
+  font-size: 26px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #FFE082 0%, #FDE68A 50%, #FB7185 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.level1-subtitle {
+  font-size: 14px;
+  color: #FCE7F3;
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* Stats HUD Dashboard Bar (Glassmorphic Red, Orange, Blue, Pink Tiles) */
+.level1-hud-grid {
+  max-width: 1050px;
+  margin: 0 auto 20px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px;
+}
+
+.hud-tile {
+  border-radius: 18px;
+  padding: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  border: 2px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.hud-tile:nth-child(1) {
+  background: rgba(124, 45, 18, 0.85);
+  border-color: #FDBA74;
+}
+
+.hud-tile:nth-child(2) {
+  background: rgba(30, 64, 175, 0.85);
+  border-color: #93C5FD;
+}
+
+.hud-tile:nth-child(3) {
+  background: rgba(159, 18, 57, 0.85);
+  border-color: #FBCFE8;
+}
+
+.hud-tile:nth-child(4) {
+  background: rgba(185, 28, 28, 0.85);
+  border-color: #FCA5A5;
+}
+
+.hud-tile-label {
+  font-size: 11px;
+  color: #FFF5E8;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 800;
+}
+
+.hud-tile-value {
+  font-size: 18px;
+  font-weight: 900;
+  color: #FFFFFF;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* Main Assessment Card Frame */
+.assessment-card {
+  max-width: 1050px;
+  margin: 0 auto;
+  background: rgba(55, 20, 38, 0.90);
+  backdrop-filter: blur(18px);
+  border: 3px solid #FDBA74;
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+  min-height: 520px;
+  position: relative;
+}
+
+/* Progress Glow Bar */
+.assessment-progress-outer {
+  width: 100%;
+  height: 14px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  border: 1.5px solid #FDBA74;
+}
+
+.assessment-progress-inner {
+  height: 100%;
+  background: linear-gradient(90deg, #FB7185 0%, #FDBA74 40%, #60A5FA 80%, #34D399 100%);
+  border-radius: 12px;
+  box-shadow: 0 0 18px rgba(251, 113, 133, 0.8);
+  transition: width 0.4s ease;
+}
+
+/* Scenario & Concept Tag Header */
+.question-tags-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-badge {
+  padding: 8px 16px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.tag-scenario {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  border: 1.5px solid #FCA5A5;
+  color: #FFFFFF;
+}
+
+.tag-concept {
+  background: linear-gradient(135deg, #3B82F6, #2563EB);
+  border: 1.5px solid #BFDBFE;
+  color: #FFFFFF;
+}
+
+/* Question Statement Prompt */
+.question-prompt-text {
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.6;
+  color: #FFFFFF;
+  margin-bottom: 28px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Option Buttons Grid */
+.options-2x2-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.assessment-opt-btn {
+  background: rgba(75, 28, 52, 0.90);
+  border: 2.5px solid #FDE68A;
+  border-radius: 20px;
+  padding: 18px 24px;
+  color: #FFF5E8;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+}
+
+.assessment-opt-btn:hover {
+  background: linear-gradient(145deg, #FB7185, #E11D48);
+  border-color: #FFFFFF;
+  color: #FFFFFF;
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(251, 113, 133, 0.8);
+}
+
+.assessment-opt-btn.selected {
+  border-color: #FFFFFF;
+  background: linear-gradient(145deg, #F59E0B, #D97706);
+  color: #FFFFFF;
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.8);
+}
+
+.assessment-opt-btn.correct-opt {
+  border-color: #A7F3D0;
+  background: linear-gradient(145deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.8) !important;
+}
+
+.assessment-opt-btn.wrong-opt {
+  border-color: #FCA5A5;
+  background: linear-gradient(145deg, #EF4444, #C2410C) !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 25px rgba(239, 68, 68, 0.8) !important;
+}
+
+/* Feedback Explanation Banner */
+.feedback-banner {
+  padding: 16px 22px;
+  border-radius: 16px;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-top: 20px;
+  font-weight: 800;
+  border: 2px solid transparent;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.feedback-banner.success {
+  background: linear-gradient(145deg, #10B981, #059669);
+  border-color: #A7F3D0;
+  color: #FFFFFF;
+}
+
+.feedback-banner.error {
+  background: linear-gradient(145deg, #EF4444, #C2410C);
+  border-color: #FCA5A5;
+  color: #FFFFFF;
+}
+
+/* Checkpoint Overlay Banner */
+.checkpoint-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(35, 12, 25, 0.92);
+  backdrop-filter: blur(15px);
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  text-align: center;
+  z-index: 50;
+}
+
+/* Magical Action Button */
+.magical-action-btn {
+  background: linear-gradient(135deg, #FB7185 0%, #E11D48 100%);
+  color: #ffffff;
+  border: 2.5px solid #FDE68A;
+  border-radius: 18px;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 25px rgba(251, 113, 133, 0.8);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.magical-action-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 35px rgba(251, 113, 133, 0.9);
+}

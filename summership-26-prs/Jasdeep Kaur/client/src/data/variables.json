@@ -1,0 +1,896 @@
+{
+  "title": "🐼 Variables Learning World",
+  "steps": [
+    {
+      "id": 1,
+      "type": "story_intro",
+      "title": "🐼 Poko's Magical Winter Preparation",
+      "scenes": [
+        {
+          "sceneNumber": 1,
+          "title": "Snowfall in Whispering Forest",
+          "text": "One chilly morning, soft snowflakes began falling across the Whispering Forest. Winter was just around the corner, and Poko the Panda knew he had to prepare before everything was covered in snow.",
+          "speaker": "STORYBOOK NARRATOR",
+          "mood": "bamboo_walk",
+          "imagePath": "/assets/poko_bamboo_forest.png"
+        },
+        {
+          "sceneNumber": 2,
+          "title": "Honey Cave & The Organizer Board",
+          "text": "Poko walked into his cozy little home, \"Honey Cave,\" and opened his magical Forest Organizer Board. This magical board helped him remember everything he owned, so he would never lose anything during winter.",
+          "speaker": "STORYBOOK NARRATOR",
+          "mood": "bamboo_walk",
+          "imagePath": "/assets/poko_bamboo_forest.png"
+        },
+        {
+          "sceneNumber": 3,
+          "title": "Poko's Information",
+          "text": "The first thing Poko wrote was his own information.\n\n\"My name is Poko. I am 8 years old, my weight is 98.8 kg, and my height is 1.42 meters. Luckily, I am healthy, so today I feel ready for adventure!\"",
+          "speaker": "POKO THE PANDA",
+          "mood": "food_jump",
+          "imagePath": "/assets/poko_food_harvest.png"
+        },
+        {
+          "sceneNumber": 4,
+          "title": "Counting Winter Supplies",
+          "text": "Next, Poko checked his winter food supplies. He counted 18 fresh apples, 42 bamboo sticks, 5 honey jars, 12 carrots, and 86 crunchy nuts.\n\nSmiling, he said,\n\n\"Now I have enough food for many snowy days!\"",
+          "speaker": "POKO THE PANDA",
+          "mood": "food_jump",
+          "imagePath": "/assets/poko_food_harvest.png"
+        },
+        {
+          "sceneNumber": 5,
+          "title": "Outside the Cabin",
+          "text": "After counting his food, Poko looked at the big water barrel outside his cabin. It still had 2.5 liters of clean water, while the cabin stayed warm at a comfortable 18.5°C.",
+          "speaker": "STORYBOOK NARRATOR",
+          "mood": "bamboo_walk",
+          "imagePath": "/assets/poko_bamboo_forest.png"
+        },
+        {
+          "sceneNumber": 6,
+          "title": "The Treasure Chest",
+          "text": "Poko then opened his treasure chest. Inside, he happily counted 250 Golden Forest Coins. Looking at his adventure meter, he noticed his energy level was 95, and because everything was going so well, his mood was \"Happy.\"",
+          "speaker": "STORYBOOK NARRATOR",
+          "mood": "food_jump",
+          "imagePath": "/assets/poko_food_harvest.png"
+        },
+        {
+          "sceneNumber": 7,
+          "title": "Packing the Travel Bag",
+          "text": "Before leaving, he packed his favorite meal, \"Fresh Bamboo,\" into his travel bag. His backpack could carry up to 25 kg, so he carefully packed only what he needed.",
+          "speaker": "STORYBOOK NARRATOR",
+          "mood": "food_jump",
+          "imagePath": "/assets/poko_food_harvest.png"
+        },
+        {
+          "sceneNumber": 8,
+          "title": "Around the Cabin",
+          "text": "As he walked around the cabin one last time, he checked that there were 6 storage boxes neatly arranged in the corner and 35 firewood logs stacked beside the fireplace.\n\nSince tomorrow would be another busy day, Poko planned to sleep for 10 hours that night to stay strong.",
+          "speaker": "STORYBOOK NARRATOR",
+          "mood": "bamboo_walk",
+          "imagePath": "/assets/poko_bamboo_forest.png"
+        },
+        {
+          "sceneNumber": 9,
+          "title": "Bobo's Visit",
+          "text": "Just then, his best friend Bobo arrived and asked,\n\n\"Wow, Poko! How do you remember so many different things?\"\n\nPoko smiled and pointed toward his magical Forest Organizer Board.\n\n\"Everything has its own special name, and every name stores something important. Whenever something changes, I simply update it. That's how I never forget anything.\"",
+          "speaker": "BOBO & POKO",
+          "mood": "bamboo_walk",
+          "imagePath": "/assets/poko_bamboo_forest.png"
+        },
+        {
+          "sceneNumber": 10,
+          "title": "Everything Has Its Place",
+          "isMissionCard": true,
+          "text": "As the snow gently covered the forest, Poko looked proudly at his organized board.\n\nEverything had its own place.\nEverything had its own name.\nEverything had its own information.\n\nNow it was your turn to help Poko organize, identify, update, and manage everything inside his magical organizer.",
+          "speaker": "STORYBOOK NARRATOR",
+          "mood": "poko_plea",
+          "imagePath": "/assets/poko_worried_snow.png"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "quick_intro",
+      "title": "🐼 Butterfly Memory Garden",
+      "subtitle": "Before winter begins, Poko visits the magical Butterfly Memory Garden to keep track of everything important.",
+      "description": "Every colorful butterfly carries one important piece of information. To help Poko remember everything easily, each butterfly wears its own special name.\n\nNow explore the Butterfly Memory Garden and discover how every butterfly safely remembers something important for Poko.",
+      "caption": "✨ Hover or click any butterfly to watch it land on a flower and open its special wooden name tag!",
+      "missionTitle": "Explore the Butterfly Memory Garden",
+      "butterflies": [
+        { "id": "b1", "specialName": "poko_name", "carries": "🐼 \"Poko\"", "icon": "🦋", "color": "#7EF3FF", "flower": "🌺 Pink Lotus" },
+        { "id": "b2", "specialName": "poko_age", "carries": "🎂 8 years old", "icon": "🦋", "color": "#FFD8B0", "flower": "🌼 Golden Lily" },
+        { "id": "b3", "specialName": "weight", "carries": "⚖️ 98.8 kg", "icon": "🦋", "color": "#FFB7B2", "flower": "🌸 Cherry Blossom" },
+        { "id": "b4", "specialName": "height", "carries": "📏 1.42 meters", "icon": "🦋", "color": "#E2F0CB", "flower": "🌿 Sun Rose" },
+        { "id": "b5", "specialName": "apples", "carries": "🍎 18 apples", "icon": "🦋", "color": "#FF6B6B", "flower": "🌺 Red Dahlia" },
+        { "id": "b6", "specialName": "bamboo", "carries": "🎋 42 sticks", "icon": "🦋", "color": "#2ED573", "flower": "🌱 Bamboo Blossom" },
+        { "id": "b7", "specialName": "honey_jars", "carries": "🍯 5 jars", "icon": "🦋", "color": "#FFA502", "flower": "🌻 Sunflower" },
+        { "id": "b8", "specialName": "water", "carries": "💧 2.5 Liters", "icon": "🦋", "color": "#1E90FF", "flower": "🪷 Blue Water Lily" },
+        { "id": "b9", "specialName": "energy", "carries": "⭐ 95 energy", "icon": "🦋", "color": "#FFD700", "flower": "✨ Starlight Orchid" },
+        { "id": "b10", "specialName": "mood", "carries": "😊 \"Happy\"", "icon": "🦋", "color": "#FF9FF3", "flower": "🌸 Joy Peony" },
+        { "id": "b11", "specialName": "coins", "carries": "🪙 250 coins", "icon": "🦋", "color": "#FECA57", "flower": "🌼 Golden Marigold" },
+        { "id": "b12", "specialName": "favorite_food", "carries": "🍱 \"Fresh Bamboo\"", "icon": "🦋", "color": "#54A0FF", "flower": "🌿 Moon Orchid" }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "pattern_discovery",
+      "title": "Activity 1: Discovery Puzzle - Help Poko Stay Organized",
+      "subtitle": "Connect each Special Name on the left to its Stored Detail on the right!",
+      "description": "Help Poko organize his board by matching his daily items to the correct stored record:",
+      "leftHeader": "🏷️ Special Name Tag",
+      "rightHeader": "📦 Stored Detail",
+      "missionTitle": "Help Poko Match His Organizer Records",
+      "successTitle": "🎉 Organizer Records Connected!",
+      "successText": "You matched every Special Name on Poko's board to its stored detail!",
+      "connections": [
+        { "id": 1, "name": "firewood", "value": "35 logs 🪵" },
+        { "id": 2, "name": "favorite_food", "value": "\"Fresh Bamboo\" 🍱" },
+        { "id": 3, "name": "water", "value": "2.5 Liters 💧" },
+        { "id": 4, "name": "coins", "value": "250 coins 🪙" },
+        { "id": 5, "name": "healthy", "value": "True ✅" }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "questions",
+      "title": "Questions: Managing Poko's Organizer (Part 1)",
+      "subtitle": "Help Poko manage his information records! (Questions 1-4)",
+      "bank": [
+        {
+          "id": 1,
+          "type": "mcq",
+          "title": "Question 1: Updating Poko's Water Record",
+          "question": "Poko drank some water after a long walk through Whispering Forest. Which record on his organizer board should he update?",
+          "options": [
+            "water",
+            "home",
+            "height",
+            "friend"
+          ],
+          "answer": 0,
+          "explanation": "Since Poko drank water, he needs to update the 'water' record to reflect his new water level!"
+        },
+        {
+          "id": 2,
+          "type": "mcq",
+          "title": "Question 2: Checking the Weight Record",
+          "question": "Poko steps onto a wooden scale and opens the page named 'weight' in his organizer. What information should he see stored there?",
+          "options": [
+            "98.8 kg",
+            "Honey Cave",
+            "18.5°C",
+            "Fresh Bamboo"
+          ],
+          "answer": 0,
+          "explanation": "The record named 'weight' stores Poko's body weight, which is 98.8 kg!"
+        },
+        {
+          "id": 3,
+          "type": "mcq",
+          "title": "Question 3: Counting Bamboo Sticks",
+          "question": "Poko counts his winter food stack and sees 42 whole bamboo sticks. How is the number 42 stored in his organizer?",
+          "options": [
+            "As a whole number (Integer)",
+            "As a decimal measurement (Float)",
+            "As text inside quotes (String)",
+            "As a yes/no answer (Boolean)"
+          ],
+          "answer": 0,
+          "explanation": "Whole count numbers like 42 bamboo sticks are whole numbers (Integers)!"
+        },
+        {
+          "id": 4,
+          "type": "mcq",
+          "title": "Question 4: Counting Forest Coins",
+          "question": "Inside his treasure chest, Poko counts 250 Golden Forest Coins. Which type of value is used for whole counts like 250?",
+          "options": [
+            "Integer (whole count without decimals)",
+            "Float (decimal measurement)",
+            "Boolean (True or False)",
+            "String (quoted text word)"
+          ],
+          "answer": 0,
+          "explanation": "Counting whole objects like 250 coins uses an Integer!"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "case_study",
+      "title": "Activity 2: Continue Poko's Organizer",
+      "subtitle": "Assign each stored detail into the correct special name slot on Poko's board!",
+      "databaseName": "Poko's Forest Organizer Board",
+      "slots": [
+        { "varName": "home", "targetValue": "\"Honey Cave\"", "currentValue": null },
+        { "varName": "healthy", "targetValue": "True", "currentValue": null },
+        { "varName": "weight", "targetValue": "98.8 kg", "currentValue": null },
+        { "varName": "temperature", "targetValue": "18.5°C", "currentValue": null }
+      ],
+      "capsules": ["\"Honey Cave\"", "True", "98.8 kg", "18.5°C"]
+    },
+    {
+      "id": 6,
+      "type": "questions",
+      "title": "Questions: Data Types & Values (Part 2)",
+      "subtitle": "Help Poko identify measurements, text, and status values! (Questions 5-10)",
+      "bank": [
+        {
+          "id": 1,
+          "type": "mcq",
+          "title": "Question 5: Water Measurement",
+          "question": "Poko measures the water level in his outdoor barrel and finds exactly 2.5 Liters of clean water remaining. What type of number is 2.5?",
+          "options": [
+            "Float (a measurement number with a decimal point)",
+            "Integer (a whole counting number)",
+            "Boolean (True or False)",
+            "String (quoted text words)"
+          ],
+          "answer": 0,
+          "explanation": "Numbers with decimal points like 2.5 Liters are Float measurement numbers!"
+        },
+        {
+          "id": 2,
+          "type": "mcq",
+          "title": "Question 6: Cabin Temperature",
+          "question": "Poko checks the wooden thermometer inside Honey Cave and reads 18.5°C. Why is 18.5 stored as a Float?",
+          "options": [
+            "Because it contains a decimal point representing a precise temperature measurement",
+            "Because it is a whole count of coins",
+            "Because it is written in text quotation marks",
+            "Because it is a True or False answer"
+          ],
+          "answer": 0,
+          "explanation": "Continuous measurements like 18.5°C contain decimal points and are stored as Floats!"
+        },
+        {
+          "id": 3,
+          "type": "mcq",
+          "title": "Question 7: Poko's Current Mood",
+          "question": "Poko writes his mood as \"Happy\" on his organizer board. What type of information is text wrapped in quotes?",
+          "options": [
+            "String (text words inside quotation marks)",
+            "Integer (whole counting numbers)",
+            "Float (decimal measurements)",
+            "Boolean (True or False)"
+          ],
+          "answer": 0,
+          "explanation": "Words and text wrapped in quotation marks like \"Happy\" are Strings!"
+        },
+        {
+          "id": 4,
+          "type": "mcq",
+          "title": "Question 8: Health Status",
+          "question": "The Forest Doctor confirms Poko is healthy, so Poko records `healthy = True`. What type of value is `True`?",
+          "options": [
+            "Boolean (a logical True or False value)",
+            "String (quoted text)",
+            "Float (decimal number)",
+            "Integer (whole number)"
+          ],
+          "answer": 0,
+          "explanation": "True and False are Boolean values!"
+        },
+        {
+          "id": 5,
+          "type": "mcq",
+          "title": "Question 9: Home Record Page",
+          "question": "When Poko opens the organizer page labeled `home`, what stored information does he find?",
+          "options": [
+            "\"Honey Cave\"",
+            "98.8 kg",
+            "10 Hours",
+            "25 kg"
+          ],
+          "answer": 0,
+          "explanation": "The record labeled `home` stores the text value \"Honey Cave\"!"
+        },
+        {
+          "id": 6,
+          "type": "mcq",
+          "title": "Question 10: Best Friend Record",
+          "question": "Poko wants to check who his best friend is. He looks at the label `friend`. What value is stored under `friend`?",
+          "options": [
+            "\"Bobo\"",
+            "\"Poko\"",
+            "42",
+            "18.5"
+          ],
+          "answer": 0,
+          "explanation": "The label `friend` stores his best friend's name, \"Bobo\"!"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "guided_practice",
+      "title": "Guided Practice: Setting Up Poko's Records",
+      "subtitle": "Fill in the missing parts of Poko's organizer record statements:",
+      "exercises": [
+        {
+          "id": "e1",
+          "prompt": "Create a record named home and assign \"Honey Cave\":",
+          "prefix": "home = ",
+          "placeholder": "\"Honey Cave\"",
+          "expected": "\"Honey Cave\"",
+          "hint": "Type \"Honey Cave\" in double quotes."
+        },
+        {
+          "id": "e2",
+          "prompt": "Create a record named friend and assign \"Bobo\":",
+          "prefix": "friend = ",
+          "placeholder": "\"Bobo\"",
+          "expected": "\"Bobo\"",
+          "hint": "Type \"Bobo\" in double quotes."
+        },
+        {
+          "id": "e3",
+          "prompt": "Create an integer record named coins and assign 250:",
+          "prefix": "coins = ",
+          "placeholder": "250",
+          "expected": "250",
+          "hint": "Type the whole number 250 without quotes."
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "concept_reveal",
+      "title": "📖 Concept Discovery: How Poko Writes Records (=)",
+      "subtitle": "How Poko connects a special name to its information using the equal sign (=)",
+      "pages": [
+        {
+          "pageNumber": 1,
+          "heading": "Rule 1: Special Name goes on the LEFT",
+          "content": "On Poko's organizer board, the special name (like home or water) always sits on the left side of the equal sign."
+        },
+        {
+          "pageNumber": 2,
+          "heading": "Rule 2: Equal Sign (=) Connects the Name to Information",
+          "content": "The equal sign (=) stores the information on the right into the special name on the left."
+        },
+        {
+          "pageNumber": 3,
+          "heading": "Rule 3: Stored Information goes on the RIGHT",
+          "content": "The information item (like 250 coins or \"Honey Cave\") sits on the right side of the equal sign."
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "python_syntax",
+      "title": "📖 Python Connection: Poko's Organizer Statements",
+      "subtitle": "Anatomy of a Python Record Assignment",
+      "breakdown": [
+        {
+          "part": "Special Name",
+          "codeSnippet": "home",
+          "explanation": "The carved wooden label plaque on Poko's board."
+        },
+        {
+          "part": "Assignment Operator",
+          "codeSnippet": "=",
+          "explanation": "Connecting the information to the name."
+        },
+        {
+          "part": "Stored Information",
+          "codeSnippet": "\"Honey Cave\"",
+          "explanation": "The text information stored under the name, wrapped in quotes."
+        }
+      ],
+      "fullCodeExample": "# Writing Poko's records in Python\nhome = \"Honey Cave\"\nfriend = \"Bobo\"\ncoins = 250\nhealthy = True"
+    },
+    {
+      "id": 10,
+      "type": "questions",
+      "title": "Questions: Creating Records with =",
+      "subtitle": "Help Poko write record statements correctly! (Questions 11-14)",
+      "bank": [
+        {
+          "id": 1,
+          "type": "mcq",
+          "title": "Question 11: Storing Honey Jars",
+          "question": "In Poko's organizer, how does he write a record to store his 5 honey jars in code?",
+          "options": [
+            "honey_jars = 5",
+            "5 = honey_jars",
+            "honey_jars == 5",
+            "create honey_jars 5"
+          ],
+          "answer": 0,
+          "explanation": "Correct! `name = value` is how Poko writes a record statement."
+        },
+        {
+          "id": 2,
+          "type": "true_false",
+          "title": "Question 12: Left Side Naming Rule",
+          "question": "True or False: In Python, `apples = 18` is valid, but `18 = apples` is INVALID.",
+          "options": [
+            "True",
+            "False",
+            "Only on weekends",
+            "Only inside Honey Cave"
+          ],
+          "answer": 0,
+          "explanation": "True! The special name MUST be written on the left side of the equal sign."
+        },
+        {
+          "id": 3,
+          "type": "choose_label",
+          "title": "Question 13: Storing Energy Level",
+          "question": "Which Python statement correctly records Poko's energy level of 95?",
+          "options": [
+            "energy = 95",
+            "95 = energy",
+            "energy == 95",
+            "record energy 95"
+          ],
+          "answer": 0,
+          "explanation": "Correct! `energy = 95` stores 95 into the special name 'energy'."
+        },
+        {
+          "id": 4,
+          "type": "drag_drop",
+          "title": "Question 14: Assigning Water Level",
+          "question": "Assign the value 2.5 Liters into the record `water`:",
+          "targetContainer": "water =",
+          "availableValues": ["2.5", "18.5", "250", "98.8"],
+          "correctValue": "2.5",
+          "explanation": "Great job! `water = 2.5` connects 2.5 Liters of water to the name 'water'."
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "type": "guided_practice",
+      "title": "Interactive Practice: Updating Poko's Records",
+      "subtitle": "Fill in the missing parts of Poko's updated record statements:",
+      "exercises": [
+        {
+          "id": "e1",
+          "prompt": "Poko rests and updates his energy to 95:",
+          "prefix": "energy = ",
+          "placeholder": "95",
+          "expected": "95",
+          "hint": "Type the whole number 95."
+        },
+        {
+          "id": "e2",
+          "prompt": "Poko drinks water and updates water level to 2.5:",
+          "prefix": "water = ",
+          "placeholder": "2.5",
+          "expected": "2.5",
+          "hint": "Type 2.5."
+        },
+        {
+          "id": "e3",
+          "prompt": "Poko changes his mood to \"Happy\":",
+          "prefix": "mood = ",
+          "placeholder": "\"Happy\"",
+          "expected": "\"Happy\"",
+          "hint": "Type \"Happy\" wrapped in double quotes."
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "type": "questions",
+      "title": "Questions: Updating Poko's Records",
+      "subtitle": "Test your understanding of updating stored information! (Questions 15-18)",
+      "bank": [
+        {
+          "id": 1,
+          "type": "mcq",
+          "title": "Question 15: Overwriting Energy Values",
+          "question": "Poko rests after chopping firewood and his energy increases from 90 to 95. When he runs `energy = 95`, what happens to his old energy level?",
+          "options": [
+            "The new value 95 overwrites the old value",
+            "Both values are added together",
+            "The old value stays unchanged",
+            "The organizer board crashes"
+          ],
+          "answer": 0,
+          "explanation": "Correct! Re-assigning a record overwrites the previous value with the new value."
+        },
+        {
+          "id": 2,
+          "type": "mcq",
+          "title": "Question 16: Sequential Firewood Updates",
+          "question": "Poko looks at his log notes:\n`firewood = 30`\n`firewood = 35`\nWhat is stored under `firewood` at the end?",
+          "options": [
+            "35",
+            "30",
+            "65",
+            "0"
+          ],
+          "answer": 0,
+          "explanation": "Correct! The second update `firewood = 35` changes the value of `firewood` to 35."
+        },
+        {
+          "id": 3,
+          "type": "mcq",
+          "title": "Question 17: Updating Forest Coins",
+          "question": "Poko starts his day with 200 coins and earns more: `coins = 250`. What value is stored in `coins` now?",
+          "options": [
+            "250",
+            "200",
+            "450",
+            "50"
+          ],
+          "answer": 0,
+          "explanation": "Updating `coins = 250` replaces 200 with 250 in memory!"
+        },
+        {
+          "id": 4,
+          "type": "mcq",
+          "title": "Question 18: Updating Poko's Mood",
+          "question": "If Poko checks his mood: `mood = \"Calm\"` and then updates `mood = \"Happy\"`, what is his mood now?",
+          "options": [
+            "\"Happy\"",
+            "\"Calm\"",
+            "\"CalmHappy\"",
+            "None"
+          ],
+          "answer": 0,
+          "explanation": "Updating `mood = \"Happy\"` changes Poko's mood to \"Happy\"!"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "type": "questions",
+      "title": "Questions: Fixed vs Changing Records",
+      "subtitle": "Classify values into fixed constants and changing records! (Questions 19-22)",
+      "bank": [
+        {
+          "id": 1,
+          "type": "mcq",
+          "title": "Question 19: Hours in a Day",
+          "question": "Poko notes that there are always 24 hours in a day, but his energy level changes throughout the day. What is hours in a day?",
+          "options": [
+            "A Constant (a value that never changes)",
+            "A Variable (a value that changes)",
+            "A String text word",
+            "An invalid calculation"
+          ],
+          "answer": 0,
+          "explanation": "Correct! Values that stay fixed are Constants, while values that change are Variables!"
+        },
+        {
+          "id": 2,
+          "type": "true_false",
+          "title": "Question 20: Naming Constants",
+          "question": "Poko's height is 1.42 meters, which stays fixed. How are fixed constant values usually named in Python?",
+          "options": [
+            "In ALL_CAPS (like `POKO_HEIGHT = 1.42`)",
+            "In all lowercase with hyphens",
+            "Inside single quotes",
+            "Starting with a number"
+          ],
+          "answer": 0,
+          "explanation": "True! Python programmers use ALL_CAPS for constant naming conventions."
+        },
+        {
+          "id": 3,
+          "type": "mcq",
+          "title": "Question 21: Daily Changing Detail",
+          "question": "Which of Poko's details is most likely to change daily during his adventure?",
+          "options": [
+            "His energy level",
+            "The number of hours in a day",
+            "His name",
+            "His species (Panda)"
+          ],
+          "answer": 0,
+          "explanation": "Energy level changes daily as Poko explores and rests!"
+        },
+        {
+          "id": 4,
+          "type": "mcq",
+          "title": "Question 22: Purpose of Special Names",
+          "question": "Why does Poko use special names for information that changes?",
+          "options": [
+            "So he can update the stored value whenever something changes",
+            "So his organizer never lets him open it",
+            "Because numbers cannot be written without names",
+            "To make his backpack lighter"
+          ],
+          "answer": 0,
+          "explanation": "Special names allow Poko to update and retrieve changing information whenever needed!"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "type": "questions",
+      "title": "Questions: Naming Rules for Poko's Records",
+      "subtitle": "Check which record names follow Python rules! (Questions 23-26)",
+      "bank": [
+        {
+          "id": 1,
+          "type": "choose_label",
+          "title": "Question 23: Invalid Digit Start Check",
+          "question": "Poko wants to name a record for his 6 storage boxes. Which name is INVALID because it starts with a number?",
+          "options": ["6storage_boxes", "storage_boxes", "boxesCount", "poko_boxes"],
+          "answer": "6storage_boxes",
+          "explanation": "Record names in Python CANNOT start with a number!"
+        },
+        {
+          "id": 2,
+          "type": "choose_label",
+          "title": "Question 24: Python Naming Conventions",
+          "question": "Which name is standard in Python for Poko's favorite food?",
+          "options": ["favorite_food (snake_case)", "favorite-food", "favorite food", "FavoriteFood!"],
+          "answer": "favorite_food (snake_case)",
+          "explanation": "Python uses snake_case with lowercase letters and underscores between words!"
+        },
+        {
+          "id": 3,
+          "type": "choose_label",
+          "title": "Question 25: Invalid Space Check",
+          "question": "Which record name is INVALID because it contains a space?",
+          "options": ["sleep hours", "sleep_hours", "sleepHours", "_sleep_hours"],
+          "answer": "sleep hours",
+          "explanation": "Record names CANNOT contain spaces!"
+        },
+        {
+          "id": 4,
+          "type": "true_false",
+          "title": "Question 26: Case Sensitivity Check",
+          "question": "In Python, are `Poko_Weight` and `poko_weight` treated as the same record?",
+          "options": [
+            "No, Python is case-sensitive, so they are two different records",
+            "Yes, capital letters are ignored",
+            "Yes, Python automatically converts them",
+            "Only if written on wood"
+          ],
+          "answer": 0,
+          "explanation": "Python is case-sensitive! Capital letters create distinct variable names."
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "type": "observation",
+      "title": "Observation: Types of Information in Poko's Organizer",
+      "subtitle": "Observe how different details require different types of records.",
+      "questions": [
+        {
+          "prompt": "Poko has 6 storage boxes 📦. Which type of value represents whole numbers like 6?",
+          "options": [
+            "Integer (whole numbers without decimals, e.g., 6, 35, 250)",
+            "String (text wrapped in quotes, e.g., \"6\")",
+            "Boolean (True or False)"
+          ],
+          "answer": "Integer (whole numbers without decimals, e.g., 6, 35, 250)",
+          "explanation": "Correct! Whole count numbers like 6 boxes are Integers (int)."
+        },
+        {
+          "prompt": "Poko measures his height: 1.42 meters 📏. Which type of value represents decimal numbers like 1.42?",
+          "options": [
+            "Float (decimal numbers, e.g., 1.42, 98.8, 2.5, 18.5)",
+            "Integer (whole numbers)",
+            "Boolean (True or False)"
+          ],
+          "answer": "Float (decimal numbers, e.g., 1.42, 98.8, 2.5, 18.5)",
+          "explanation": "Right! Decimal measurement quantities like 1.42 meters are Float numbers."
+        },
+        {
+          "prompt": "Poko checks if he is healthy: `healthy = True`. What data type is `True`?",
+          "options": [
+            "Boolean (logical truth value: True or False)",
+            "String (text in quotes)",
+            "Integer (whole number)"
+          ],
+          "answer": "Boolean (logical truth value: True or False)",
+          "explanation": "Spot on! True and False are Boolean values (bool)."
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "type": "questions",
+      "title": "Questions: Four Types of Information (int, float, str, bool)",
+      "subtitle": "Help Poko classify his organizer records! (Questions 27-30)",
+      "bank": [
+        {
+          "id": 1,
+          "type": "mcq",
+          "title": "Question 27: Poko's Age Record",
+          "question": "Poko records his age as `poko_age = 8`. What data type is `8`?",
+          "options": [
+            "Integer (int)",
+            "Float (float)",
+            "String (str)",
+            "Boolean (bool)"
+          ],
+          "answer": 0,
+          "explanation": "8 is a whole number without decimals or quotes, making it an Integer."
+        },
+        {
+          "id": 2,
+          "type": "mcq",
+          "title": "Question 28: Poko's Weight Record",
+          "question": "Poko records his weight as `weight = 98.8`. What data type is `98.8`?",
+          "options": [
+            "Float (float)",
+            "Integer (int)",
+            "String (str)",
+            "Boolean (bool)"
+          ],
+          "answer": 0,
+          "explanation": "98.8 contains a decimal point, making it a Float number."
+        },
+        {
+          "id": 3,
+          "type": "mcq",
+          "title": "Question 29: Poko's Home Record",
+          "question": "Poko records his home as `home = \"Honey Cave\"`. What data type is `\"Honey Cave\"`?",
+          "options": [
+            "String (str)",
+            "Integer (int)",
+            "Float (float)",
+            "Boolean (bool)"
+          ],
+          "answer": 0,
+          "explanation": "\"Honey Cave\" is wrapped in quotes, making it a String."
+        },
+        {
+          "id": 4,
+          "type": "mcq",
+          "title": "Question 30: Poko's Health Status",
+          "question": "Poko records his health status as `healthy = True`. What data type is `True`?",
+          "options": [
+            "Boolean (bool)",
+            "String (str)",
+            "Integer (int)",
+            "Float (float)"
+          ],
+          "answer": 0,
+          "explanation": "`True` is a Boolean data type."
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "type": "python_syntax",
+      "title": "📖 Python Connection: Managing Poko's Organizer",
+      "subtitle": "Writing scripts with multiple records and operations",
+      "breakdown": [
+        {
+          "part": "Multiple Records",
+          "codeSnippet": "coins = 250\nwater = 2.5",
+          "explanation": "Storing integer coins and float water level together."
+        },
+        {
+          "part": "Displaying Output",
+          "codeSnippet": "print(coins)",
+          "explanation": "Displaying stored values on screen."
+        },
+        {
+          "part": "Updating Records",
+          "codeSnippet": "coins = coins + 50",
+          "explanation": "Updating record with addition."
+        }
+      ],
+      "fullCodeExample": "# Multiple records & operations\ncoins = 250\nwater = 2.5\nhealthy = True\n\ncoins = coins + 50\nprint(\"Forest Coins:\", coins)\nprint(\"Water Level:\", water)"
+    },
+    {
+      "id": 18,
+      "type": "questions",
+      "title": "Questions: Updating & Printing Poko's Records",
+      "subtitle": "Test your understanding of updating and printing records! (Questions 31-34)",
+      "bank": [
+        {
+          "id": 1,
+          "type": "mcq",
+          "title": "Question 31: Apple Addition",
+          "question": "Poko has 18 apples and collects 5 more: `apples = 18 + 5`. What is stored in `apples` now?",
+          "options": [
+            "23",
+            "185",
+            "18",
+            "5"
+          ],
+          "answer": 0,
+          "explanation": "Correct! 18 + 5 = 23. The record `apples` is updated to 23."
+        },
+        {
+          "id": 2,
+          "type": "mcq",
+          "title": "Question 32: Printing Poko's Name",
+          "question": "What does `print(poko_name)` output if `poko_name = \"Poko\"`?",
+          "options": [
+            "Poko",
+            "poko_name",
+            "print(poko_name)",
+            "Error"
+          ],
+          "answer": 0,
+          "explanation": "`print(poko_name)` displays the value stored inside the record (`Poko`)."
+        },
+        {
+          "id": 3,
+          "type": "mcq",
+          "title": "Question 33: Spending Forest Coins",
+          "question": "Poko has 250 coins and spends 50: `coins = 250 - 50`. What is stored in `coins`?",
+          "options": [
+            "200",
+            "250",
+            "300",
+            "50"
+          ],
+          "answer": 0,
+          "explanation": "250 - 50 = 200. The record `coins` is updated to 200."
+        },
+        {
+          "id": 4,
+          "type": "mcq",
+          "title": "Question 34: String Quotes Check",
+          "question": "If Poko writes `home = Honey Cave` without quotation marks, what will Python do?",
+          "options": [
+            "Throw a NameError because String text must be wrapped in quotes!",
+            "Automatically add quotes for you",
+            "Store it as an Integer",
+            "Convert it to a Float"
+          ],
+          "answer": 0,
+          "explanation": "Correct! Without quotes, Python looks for a variable named Honey Cave and throws a NameError!"
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "type": "case_study",
+      "title": "Interactive Case Study: Poko's Winter Inventory",
+      "subtitle": "Match each special name tag to its stored detail!",
+      "databaseName": "Poko's Winter Organizer Inventory",
+      "slots": [
+        { "varName": "home", "targetValue": "\"Honey Cave\"", "currentValue": null },
+        { "varName": "friend", "targetValue": "\"Bobo\"", "currentValue": null },
+        { "varName": "favorite_food", "targetValue": "\"Fresh Bamboo\"", "currentValue": null },
+        { "varName": "coins", "targetValue": "250", "currentValue": null }
+      ],
+      "capsules": ["\"Honey Cave\"", "\"Bobo\"", "\"Fresh Bamboo\"", "250"]
+    },
+    {
+      "id": 20,
+      "type": "playground",
+      "title": "Coding Playground",
+      "subtitle": "Run live Python code to create, update, and print Poko's records!",
+      "defaultCode": "# Help Poko store his winter records in Python variables!\npoko_name = \"Poko\"\nhome = \"Honey Cave\"\ncoins = 250\nhealthy = True\n\nprint(\"Name:\", poko_name)\nprint(\"Home:\", home)\nprint(\"Coins:\", coins)\nprint(\"Healthy:\", healthy)",
+      "hints": [
+        "Try updating coins to coins + 50!",
+        "Try changing home to \"Honey Cabin\"",
+        "Use print(variable_name) to see live memory output!"
+      ]
+    },
+    {
+      "id": 21,
+      "type": "challenge",
+      "title": "Coding Challenge",
+      "subtitle": "Write Python code to manage Poko's 6 winter records!",
+      "missionText": "Create 6 variables for Poko's winter organizer:\n1. poko_name = \"Poko\"\n2. home = \"Honey Cave\"\n3. coins = 250\n4. water = 2.5\n5. healthy = True\n6. firewood = 35\n\nThen print all 6 variables using print().",
+      "starterCode": "# Write your Python code below:\npoko_name = \"Poko\"\nhome = \"Honey Cave\"\ncoins = 250\nwater = 2.5\nhealthy = True\nfirewood = 35\n\nprint(poko_name)\nprint(home)\nprint(coins)\nprint(water)\nprint(healthy)\nprint(firewood)",
+      "requiredVars": ["poko_name", "home", "coins", "water", "healthy", "firewood"]
+    },
+    {
+      "id": 22,
+      "type": "success_screen",
+      "title": "Variables Storage is Complete! 🎉",
+      "subtitle": "All food items, labels, integers, floats, booleans, and strings are safely stored in memory!",
+      "badgeUnlocked": {
+        "title": "Variables Hero Badge",
+        "icon": "🐼",
+        "description": "Mastered all Python Variable concepts!"
+      },
+      "rewards": {
+        "xp": 500,
+        "coins": 100,
+        "rank": "Forest Variable Master"
+      },
+      "nextChapterId": 5,
+      "nextChapterTitle": "Poko's Grand Synthesis (Variables Master Challenge 💎)"
+    }
+  ]
+}

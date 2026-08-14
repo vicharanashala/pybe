@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($f = Get-Item \"C:\\\\Users\\\\wdas1\\\\Downloads\\\\Flight218_v1.1 - Copy\\\\Flight 218_v1.html\"; \"{0} KB, {1} lines\" -f [math]::Round\\($f.Length/1KB,1\\), \\(Get-Content $f.FullName | Measure-Object -Line\\).Lines)",
+      "Bash(node -e ' *)",
+      "Bash(node --check /tmp/chk.js)",
+      "Bash(grep -n \"^const \\\\|^let \\\\|^var \\\\|^/\\\\* ---\\\\|^  [a-zA-Z_]*\\(\\\\|^[A-Z]*:\\\\s*{\\\\|^};\" \"Flight 218_v2.html\")",
+      "Bash(grep -n \"^}$\" \"Flight 218_v3.html\")",
+      "Bash(awk -F: '$1>1740 && $1<1900')",
+      "Bash(grep -n \"^/\\\\* =\\\\{5,\\\\}\\\\|^   [A-Z][A-Z ]\\\\{3,\\\\}$\\\\|^const \\\\|^function \\\\|^let \\\\|^var \" \"Flight 218_v3.html\")",
+      "Bash(sed '1d;$d')",
+      "Bash(node --check /tmp/f218.js)",
+      "Bash(node --check /tmp/f218b.js)",
+      "PowerShell(Copy-Item \"C:\\\\Users\\\\wdas1\\\\Downloads\\\\Flight218_v1.1 - Copy\\\\Flight 218_v4.html\" \"C:\\\\Users\\\\wdas1\\\\Downloads\\\\Flight218_v1.1 - Copy\\\\Flight 218_v5.html\" -Force)",
+      "mcp__claude-in-chrome__tabs_context_mcp",
+      "Bash(awk 'NR>=2376 && NR<=2600' \"Flight 218_v6.html\")"
+    ]
+  }
+}

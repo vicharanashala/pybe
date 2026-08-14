@@ -1,0 +1,135 @@
+/* =========================================================
+   editor.css
+   Styled textarea "code editor" + run/output console
+   ========================================================= */
+
+/* ---------- Editor Wrapper ---------- */
+.code-editor-wrapper {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid #2b2118;
+}
+
+/* Fake "title bar" like a code editor window */
+.code-editor-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #241b13;
+  padding: 8px 14px;
+}
+
+.titlebar-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.titlebar-dot.red { background: #e05555; }
+.titlebar-dot.yellow { background: #e0b155; }
+.titlebar-dot.green { background: #5cb85c; }
+
+.titlebar-filename {
+  margin-left: var(--space-sm);
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  color: #c9b78a;
+}
+
+/* ---------- Textarea acting as the code area ---------- */
+.code-textarea {
+  width: 100%;
+  min-height: 200px;
+  border: none;
+  resize: vertical;
+  background: #1e1710;
+  color: #f3e9d2;
+  font-family: var(--font-code);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding: var(--space-md) var(--space-lg);
+  tab-size: 4;
+}
+
+.code-textarea:focus {
+  outline: none;
+  background: #221a12;
+}
+
+.code-textarea::selection {
+  background: rgba(201, 147, 44, 0.4);
+}
+
+/* ---------- Editor Action Row ---------- */
+.editor-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #241b13;
+  padding: var(--space-sm) var(--space-lg);
+}
+
+.run-btn {
+  background: var(--color-gold);
+  color: var(--color-maroon-dark);
+  font-weight: 700;
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  padding: 8px 20px;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.run-btn:hover:not(:disabled) {
+  background: var(--color-gold-light);
+  transform: translateY(-1px);
+}
+
+.editor-hint {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  color: #b8a67d;
+  font-style: italic;
+}
+
+/* ---------- Output Console ---------- */
+.code-output {
+  background: #14100a;
+  color: #d9cdb0;
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+  padding: var(--space-md) var(--space-lg);
+  min-height: 60px;
+  border-top: 1px dashed #3a2e1f;
+  white-space: pre-wrap;
+}
+
+.code-output.empty::before {
+  content: "▶ Output will appear here once you run the code...";
+  color: #6f6350;
+  font-style: italic;
+}
+
+.code-output.success {
+  color: #8fd88f;
+}
+
+.code-output.error {
+  color: #f19a94;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .code-textarea {
+    font-size: 0.85rem;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .editor-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+  }
+}

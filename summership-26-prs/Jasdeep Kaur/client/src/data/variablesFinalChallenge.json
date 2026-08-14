@@ -1,0 +1,107 @@
+{
+  "title": "Variables World Master Challenge 💎",
+  "conceptQuestions": [
+    {
+      "id": 1,
+      "category": "Poko's Organizer",
+      "concept": "What is Variable",
+      "type": "click_answer",
+      "question": "Poko updates his water level from 3.0 Liters to 2.5 Liters after drinking. What container in memory holds this changing value?",
+      "options": ["A fixed constant", "A Python Variable", "A permanent string", "A static label"],
+      "answer": "A Python Variable",
+      "explanation": "Values that change dynamically like water level are stored in Python Variables!"
+    },
+    {
+      "id": 2,
+      "category": "Forest Supplies",
+      "concept": "Integer",
+      "type": "click_answer",
+      "question": "Inside Honey Cave, Poko counts 42 bamboo sticks. Which Python data type represents this exact whole count?",
+      "options": ["Integer", "Float", "String", "Boolean"],
+      "answer": "Integer",
+      "explanation": "Whole counting numbers without decimals like 42 are Integers!"
+    },
+    {
+      "id": 3,
+      "category": "Cabin Temperature",
+      "concept": "Float",
+      "type": "click_answer",
+      "question": "The wooden thermometer inside Poko's cabin reads 18.5°C. Which Python data type is 18.5?",
+      "options": ["Float", "Integer", "Boolean", "String"],
+      "answer": "Float",
+      "explanation": "Continuous measurements containing decimal points like 18.5 are Floats!"
+    },
+    {
+      "id": 4,
+      "category": "Poko's Home",
+      "concept": "String",
+      "type": "click_answer",
+      "question": "Poko stores his home location as `home = \"Honey Cave\"`. Why is \"Honey Cave\" wrapped in quotes?",
+      "options": ["Because text words are stored as Strings", "Because it is an Integer count", "Because it is a Float measurement", "Because it is a Boolean answer"],
+      "answer": "Because text words are stored as Strings",
+      "explanation": "Textual data wrapped in quotation marks is represented as a String!"
+    },
+    {
+      "id": 5,
+      "category": "Health Status",
+      "concept": "Boolean",
+      "type": "click_answer",
+      "question": "The doctor confirms Poko is healthy, so Poko records `healthy = True`. What data type is `True`?",
+      "options": ["Boolean", "String", "Integer", "Float"],
+      "answer": "Boolean",
+      "explanation": "True and False are logical Boolean values!"
+    }
+  ],
+  "codingChallenges": [
+    {
+      "id": 1,
+      "type": "write_code",
+      "typeLabel": "✍️ Write Python Code",
+      "title": "Poko's Food Harvest",
+      "category": "Poko's Food Harvest",
+      "scenario": "Poko collected 18 apples and 42 bamboo sticks. Create a variable `total_food` that calculates `apples + bamboo` and print it.",
+      "initialCode": "apples = 18\nbamboo = 42\n# Write code to create total_food and print it:\n",
+      "expectedOutput": "60"
+    },
+    {
+      "id": 2,
+      "type": "write_code",
+      "typeLabel": "✍️ Write Python Code",
+      "title": "Poko's Water Barrel",
+      "category": "Water Level",
+      "scenario": "Poko has 2.5 Liters of water. Create a variable `water` assigned to `2.5` and print `water`.",
+      "initialCode": "# Create water = 2.5 and print water:\n",
+      "expectedOutput": "2.5"
+    },
+    {
+      "id": 3,
+      "type": "write_code",
+      "typeLabel": "✍️ Write Python Code",
+      "title": "Poko's Golden Coins",
+      "category": "Treasure Chest",
+      "scenario": "Poko has 250 coins and earns 50 more. Create a variable `coins = 250 + 50` and print `coins`.",
+      "initialCode": "# Create coins = 250 + 50 and print coins:\n",
+      "expectedOutput": "300"
+    },
+    {
+      "id": 4,
+      "type": "write_code",
+      "typeLabel": "✍️ Write Python Code",
+      "title": "Poko's Home Location",
+      "category": "Home Location",
+      "scenario": "Store Poko's home string `home = \"Honey Cave\"` and print `home`.",
+      "initialCode": "# Create home = \"Honey Cave\" and print home:\n",
+      "expectedOutput": "Honey Cave"
+    },
+    {
+      "id": 5,
+      "type": "write_code",
+      "typeLabel": "✍️ Write Python Code",
+      "title": "Poko's Firewood Log Stack",
+      "category": "Cabin Firewood",
+      "scenario": "Poko stacked 35 firewood logs. Create `firewood = 35` and print `firewood`.",
+      "initialCode": "# Create firewood = 35 and print firewood:\n",
+      "expectedOutput": "35"
+    }
+  ]
+}

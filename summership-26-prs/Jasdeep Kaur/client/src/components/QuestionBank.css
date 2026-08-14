@@ -1,0 +1,187 @@
+/* ==========================================================
+   INTERACTIVE QUESTION BANK STYLING (DISNEY/PIXAR WOODEN THEME)
+   ========================================================== */
+
+.question-bank-wrapper {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.question-bank-card {
+  background: linear-gradient(145deg, #5C3A21, #4A2E1A);
+  border: 4px solid #B9772B;
+  border-radius: 26px;
+  padding: 28px 32px;
+  width: 100%;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+.forest-mission-card {
+  background: linear-gradient(145deg, #4A2E1A, #382112);
+  border: 2px solid #B9772B;
+  border-radius: 16px;
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.mission-badge-tag {
+  background: linear-gradient(145deg, #E0A43A, #B9772B);
+  border: 1.5px solid #FFF5E8;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 4px 12px;
+  border-radius: 12px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.mission-title-text {
+  font-size: 13px;
+  color: #FFF5E8;
+  font-weight: 800;
+}
+
+.qb-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  border-bottom: 2px dashed rgba(224, 164, 58, 0.4);
+  padding-bottom: 10px;
+}
+
+.qb-badge {
+  background: linear-gradient(145deg, #E0A43A, #B9772B);
+  border: 1.5px solid #FFF5E8;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 5px 14px;
+  border-radius: 14px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.qb-progress-counter {
+  font-size: 14px;
+  color: #FFF5E8;
+  font-weight: 900;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.qb-question-text {
+  font-family: "Georgia", serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: #FFF5E8;
+  line-height: 1.4;
+  margin-bottom: 22px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+/* MCQ Options Grid (2x2 Side-by-Side Layout) */
+.options-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+@media (max-width: 640px) {
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Polished Wooden Buttons */
+.opt-btn {
+  background: linear-gradient(145deg, #6B3E26, #4A2E1A);
+  border: 2px solid #E0A43A;
+  border-radius: 20px;
+  padding: 14px 20px;
+  color: #FFF5E8;
+  font-size: 15px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.45);
+  font-family: inherit;
+}
+
+.opt-btn:hover:not(:disabled) {
+  background: linear-gradient(145deg, #B9772B, #7A4A2A);
+  border-color: #FFF5E8;
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(224, 164, 58, 0.5);
+}
+
+.opt-letter {
+  background: linear-gradient(135deg, #4A2E1A, #341D10);
+  border: 2px solid #E0A43A;
+  color: #E0A43A;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 14px;
+  flex-shrink: 0;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.6);
+}
+
+.opt-text {
+  flex: 1;
+  font-size: 15px;
+  color: #FFF5E8;
+  line-height: 1.4;
+  font-weight: 800;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Answer Feedback States */
+.opt-correct {
+  background: linear-gradient(145deg, #2E5A27, #1E3D19) !important;
+  border-color: #87A96B !important;
+  color: #FFF5E8 !important;
+  box-shadow: 0 0 20px rgba(135, 169, 107, 0.5) !important;
+}
+
+.opt-correct .opt-text, .opt-correct .opt-letter {
+  color: #FFF5E8 !important;
+}
+
+.opt-wrong {
+  background: linear-gradient(145deg, #7F2424, #541717) !important;
+  border-color: #FF6B6B !important;
+  color: #FFF5E8 !important;
+  box-shadow: 0 0 15px rgba(255, 107, 107, 0.4) !important;
+}
+
+.opt-wrong .opt-text, .opt-wrong .opt-letter {
+  color: #FFF5E8 !important;
+}
+
+/* True / False Layout */
+.tf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.tf-btn {
+  justify-content: center;
+  text-align: center;
+}

@@ -1,0 +1,174 @@
+/* =========================================================
+   base.css
+   Foundation: reset, CSS variables, typography, base layout
+   ========================================================= */
+
+/* ---------- CSS Variables (Design Tokens) ---------- */
+:root {
+  /* Storybook palette — inspired by Mughal-era parchment & court colors */
+  --color-parchment: #f5ecd9;
+  --color-parchment-dark: #ead9b8;
+  --color-maroon: #7a1f2b;
+  --color-maroon-dark: #591622;
+  --color-gold: #c9932c;
+  --color-gold-light: #e6c874;
+  --color-ink: #2b2118;
+  --color-ink-soft: #4a3c2c;
+
+  /* Feedback colors */
+  --color-success: #2e7d32;
+  --color-success-bg: #e6f4ea;
+  --color-error: #b3261e;
+  --color-error-bg: #fbe9e7;
+
+  /* Neutral surfaces */
+  --color-surface: #ffffff;
+  --color-surface-dim: #faf6ee;
+  --color-border: #d8c9a3;
+
+  /* Typography */
+  --font-story: 'Georgia', 'Times New Roman', serif;
+  --font-ui: 'Segoe UI', Tahoma, Verdana, sans-serif;
+  --font-code: 'Consolas', 'Courier New', monospace;
+
+  /* Spacing scale */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+
+  /* Radii & shadow */
+  --radius-md: 10px;
+  --radius-lg: 18px;
+  --shadow-card: 0 8px 24px rgba(43, 33, 24, 0.18);
+  --shadow-soft: 0 2px 8px rgba(43, 33, 24, 0.12);
+
+  /* Layout */
+  --max-content-width: 860px;
+  --transition-fast: 0.18s ease;
+  --transition-medium: 0.32s ease;
+}
+
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100%;
+  font-family: var(--font-ui);
+  color: var(--color-ink);
+  background: linear-gradient(
+    180deg,
+    var(--color-parchment) 0%,
+    var(--color-parchment-dark) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- Base Typography ---------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-story);
+  color: var(--color-maroon-dark);
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 1.9rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-md);
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: var(--space-sm);
+}
+
+p {
+  font-size: 1rem;
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-md);
+}
+
+strong {
+  color: var(--color-maroon);
+}
+
+code, pre {
+  font-family: var(--font-code);
+}
+
+/* ---------- Base Layout Skeleton ---------- */
+.pybe-header,
+.storybook-stage,
+.pybe-footer {
+  width: 100%;
+}
+
+.storybook-stage {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--space-lg) var(--space-md);
+}
+
+/* ---------- Utility Classes ---------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
