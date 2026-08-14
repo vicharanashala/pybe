@@ -8,7 +8,7 @@ PyBe is a scenario-driven Python learning prototype built from the supplied PRD 
 
 - Scenario browser with difficulty, concept, and search filters
 - Interactive learning session: learner reasoning, abstraction mapping, conversational prompts, Python construct generation, prompt scoring, and reflection capture
-- Dashboard with progress, prompt maturity, concept mastery, misconceptions, and recent sessions
+- Dashboard with progress, prompt maturity, concept mastery, misconceptions, recent sessions, and a new streak/XP gamification layer
 - Roadmap view covering V0 through V3 from the source documents
 - JSON-file backed API with seed data
 

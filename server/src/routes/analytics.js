@@ -34,4 +34,23 @@ router.get('/', async (_req, res, next) => {
   }
 });
 
+router.get('/streak', async (req, res, next) => {
+  try {
+    const learnerName = req.query.learnerName || 'Guest learner';
+    const [sessions, db] = await Promise.all([store.listSessions(), store.readDb()]);
+    const user = (db.users || []).find((item) => item.learnerName === learnerName);
+    const userSessions = sessions.filter((session) => session.learnerName === learnerName);
+
+    res.json({
+      learnerName,
+      streak: user?.streak || 1,
+      totalXP: user?.xp || 0,
+      lastSessionAt: user?.lastActiveAt || null,
+      sessionCount: userSessions.length
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
