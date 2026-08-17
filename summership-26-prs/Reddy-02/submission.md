@@ -8,7 +8,7 @@ Vignan's LARA Institute of Technology & Science
 
 ### Team GitHub commits
 
-https://github.com/vicharanashala/pybe/commits/feature/real-life-online-payment
+https://github.com/saisrinivas77/pybe/commit/431e8c979d59c3be84dc560759d0405c43d8a514
 
 ### Branch Name / PR Link(s) representing my individual contribution
 
@@ -16,7 +16,7 @@ Branch:
 `feature/real-life-online-payment`
 
 Pull Request:
-https://github.com/vicharanashala/pybe/pull/new/feature/real-life-online-payment
+https://github.com/saisrinivas77/pybe/pull/new/feature/real-life-online-payment
 
 ---
 
