@@ -5,6 +5,7 @@ import {
   ChartNoAxesCombined,
   Code2,
   Compass,
+  HelpCircle,
   Lightbulb,
   MessageSquareText,
   MoonStar,
@@ -16,6 +17,8 @@ import {
   SunMedium,
 } from "lucide-react";
 import "./styles.css";
+import HelpManual from "./components/HelpManual";
+import HelpTooltip from "./components/HelpTooltip";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
@@ -48,6 +51,8 @@ function App() {
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(true);
+  const [helpSection, setHelpSection] = useState("getting-started");
   const [theme, setTheme] = useState(() => {
     const savedTheme = localStorage.getItem("pybe-theme");
     if (savedTheme) return savedTheme;
@@ -60,6 +65,11 @@ function App() {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("pybe-theme", theme);
   }, [theme]);
+
+  function openHelp(sectionId = "getting-started") {
+    setHelpSection(sectionId);
+    setHelpOpen(true);
+  }
 
   const concepts = useMemo(
     () =>
@@ -202,22 +212,34 @@ function App() {
       <section className="workspace">
         <header className="hero">
           <div>
-            <p>AI-native learning journey</p>
+            <div className="hero-tagline-row">
+              <p>AI-native learning journey</p>
+              <button
+                type="button"
+                className="hero-help-btn"
+                onClick={() => openHelp("getting-started")}
+              >
+                <HelpCircle size={16} />
+                <span>Help & Guide</span>
+              </button>
+            </div>
             <h1>Learn Python by reasoning through real situations first.</h1>
           </div>
-          <div className="hero-stats">
-            <span>
-              {analytics?.scenarioCount || 0}
-              <small>Scenarios</small>
-            </span>
-            <span>
-              {analytics?.sessionCount || 0}
-              <small>Sessions</small>
-            </span>
-            <span>
-              {analytics?.averagePromptScore || 0}
-              <small>Prompt score</small>
-            </span>
+          <div className="hero-controls">
+            <div className="hero-stats">
+              <span>
+                {analytics?.scenarioCount || 0}
+                <small>Scenarios</small>
+              </span>
+              <span>
+                {analytics?.sessionCount || 0}
+                <small>Sessions</small>
+              </span>
+              <span>
+                {analytics?.averagePromptScore || 0}
+                <small>Prompt score</small>
+              </span>
+            </div>
           </div>
         </header>
 
@@ -228,14 +250,35 @@ function App() {
               <h2>{selected?.title}</h2>
             </div>
             <p className="context">{selected?.context}</p>
-            <div className="objective-row">
-              {selected?.objectives.map((item) => (
-                <span key={item}>{item}</span>
-              ))}
+            
+            <div className="objective-header-row">
+              <span className="objective-label">
+                Hint Chips
+                <HelpTooltip
+                  title="Hint Chips"
+                  content="Hint chips guide you toward the core concept step by step without giving away the answer directly. Try to think before using every hint."
+                  sectionId="learning-session"
+                  onOpenManual={openHelp}
+                />
+              </span>
+              <div className="objective-row">
+                {selected?.objectives.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
             </div>
+
             <form onSubmit={submitSession} className="learning-form">
               <label>
-                Your reasoning
+                <span className="label-text-with-help">
+                  Your reasoning
+                  <HelpTooltip
+                    title="Your Reasoning"
+                    content="Describe how you would solve the situation using your own words. Focus on thinking in plain English—do not worry about Python syntax initially."
+                    sectionId="learning-session"
+                    onOpenManual={openHelp}
+                  />
+                </span>
                 <textarea
                   required
                   value={form.reasoning}
@@ -246,7 +289,15 @@ function App() {
                 />
               </label>
               <label>
-                Prompt you would give an AI mentor
+                <span className="label-text-with-help">
+                  Prompt you would give an AI mentor
+                  <HelpTooltip
+                    title="AI Mentor Prompt"
+                    content="Formulate a clear question or instruction for an AI mentor. Provide context and specify what explanation or steps you want."
+                    sectionId="learning-session"
+                    onOpenManual={openHelp}
+                  />
+                </span>
                 <textarea
                   value={form.promptText}
                   onChange={(event) =>
@@ -256,7 +307,15 @@ function App() {
                 />
               </label>
               <label>
-                Reflection
+                <span className="label-text-with-help">
+                  Reflection
+                  <HelpTooltip
+                    title="Reflection"
+                    content="Think about what you learned from this scenario. Reflecting on your thought process reinforces long-term understanding."
+                    sectionId="learning-session"
+                    onOpenManual={openHelp}
+                  />
+                </span>
                 <textarea
                   value={form.reflection}
                   onChange={(event) =>
@@ -276,8 +335,14 @@ function App() {
             <div className="section-title">
               <Sparkles size={20} />
               <h2>AI Mentor Output</h2>
+              <HelpTooltip
+                title="AI Mentor Output"
+                content="Review your Prompt Maturity score, Abstraction Mapping breakdown, generated Python code, and misconception signals."
+                sectionId="mentor-output"
+                onOpenManual={openHelp}
+              />
             </div>
-            {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
+            {!activeResult ? <EmptyResult /> : <Result result={activeResult} onOpenHelp={openHelp} />}
           </section>
         </div>
 
@@ -305,6 +370,12 @@ function App() {
           </div>
         </section>
       </section>
+
+      <HelpManual
+        isOpen={helpOpen}
+        onClose={() => setHelpOpen(false)}
+        initialSectionId={helpSection}
+      />
     </main>
   );
 }
@@ -321,14 +392,35 @@ function EmptyResult() {
   );
 }
 
-function Result({ result }) {
+function Result({ result, onOpenHelp }) {
   return (
     <div className="result-stack">
       <div className="score">
         <span>{result.promptScore}</span>
-        <small>Prompt maturity</small>
+        <small className="score-label-with-help">
+          Prompt maturity
+          {onOpenHelp && (
+            <HelpTooltip
+              title="Prompt Maturity Score"
+              content="Measures how effectively you communicated your request to the AI mentor. A lower score does NOT mean lack of Python skill!"
+              sectionId="mentor-output"
+              onOpenManual={onOpenHelp}
+            />
+          )}
+        </small>
       </div>
       <div>
+        <div className="mapping-header-row">
+          <strong>Abstraction Mapping</strong>
+          {onOpenHelp && (
+            <HelpTooltip
+              title="Abstraction Mapping"
+              content="Connects your real-world logic directly to computer science concepts and Python code."
+              sectionId="mentor-output"
+              onOpenManual={onOpenHelp}
+            />
+          )}
+        </div>
         {result.abstractionMap.map((item) => (
           <article className="mapping" key={item.pattern}>
             <strong>{item.pattern}</strong>
