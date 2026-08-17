@@ -32,7 +32,7 @@ I owned and built "The Payment That Didn't Go Through", a scenario-driven learni
 
 ### Feature Request mapping — which problem statement or Feature Request Document does this map to?
 
-Maps to PyBe's scenario architecture for Explorer-level concept mapping, adding runtime error handling to the team's Python concept catalog alongside loops and conditionals.
+Maps to PyBe's core scenario architecture. It sits as the Explorer-level Exception Handling (`try / except`) module within the team's modular Python concept catalog alongside loops and conditionals.
 
 ---
 
