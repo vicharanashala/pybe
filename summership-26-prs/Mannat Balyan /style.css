@@ -1,0 +1,136 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f1e8;
+    color: #17231f;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.tip-card {
+    background: #ffffff;
+    border: 1px solid #ded7cb;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff2d9;
+    border-radius: 10px;
+    font-size: 25px;
+}
+
+.header h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.header p {
+    color: #68736f;
+}
+
+.tip-content {
+    background: #f8f5ed;
+    border: 1px solid #ded7cb;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.label {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #66730a;
+    margin-bottom: 12px;
+}
+
+.tip-content h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.tip-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #3f4a46;
+}
+
+pre {
+    background: #111916;
+    color: #e6f2eb;
+    padding: 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+code {
+    font-family: Consolas, monospace;
+    line-height: 1.5;
+}
+
+button {
+    border: none;
+    background: #66730a;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.tip-counter {
+    text-align: center;
+    margin-top: 18px;
+    color: #68736f;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 30px 15px;
+    }
+
+    .tip-card {
+        padding: 20px;
+    }
+
+    .header h1 {
+        font-size: 22px;
+    }
+
+    .tip-content {
+        padding: 18px;
+    }
+}
