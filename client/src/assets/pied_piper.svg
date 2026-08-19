@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <!-- Background Sky Gradient -->
+    <linearGradient id="p_sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090d16" />
+      <stop offset="35%" stop-color="#0f172a" />
+      <stop offset="70%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <!-- River Water Gradient -->
+    <linearGradient id="p_river" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="30%" stop-color="#0369a1" />
+      <stop offset="70%" stop-color="#075985" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+
+    <!-- Wooden Bridge Gradient -->
+    <linearGradient id="p_wood" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b45309" />
+      <stop offset="50%" stop-color="#78350f" />
+      <stop offset="100%" stop-color="#451a03" />
+    </linearGradient>
+
+    <!-- Flute Gold -->
+    <linearGradient id="p_gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#eab308" />
+      <stop offset="100%" stop-color="#ca8a04" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="p_glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Sky -->
+  <rect width="1200" height="675" fill="url(#p_sky)" />
+
+  <!-- Distant Hills & Hamelin Village Silhouette -->
+  <path d="M0 400 Q300 280 600 350 Q900 290 1200 380 L1200 675 L0 675 Z" fill="#064e3b" opacity="0.6" />
+  <path d="M0 450 Q400 360 800 420 Q1050 380 1200 440 L1200 675 L0 675 Z" fill="#0f172a" opacity="0.9" />
+
+  <!-- Village Houses in Background -->
+  <g transform="translate(100, 290)">
+    <path d="M0 120 L0 50 L40 10 L80 50 L80 120 Z" fill="#1e1b4b" />
+    <rect x="25" y="60" width="30" height="35" fill="#fef08a" opacity="0.8" rx="3" />
+    <path d="M120 120 L120 40 L170 0 L220 40 L220 120 Z" fill="#0f172a" />
+    <rect x="150" y="50" width="35" height="40" fill="#38bdf8" opacity="0.8" rx="3" />
+  </g>
+
+  <!-- Rushing Blue River Across Lower Center -->
+  <path d="M0 480 Q350 430 700 490 Q950 530 1200 470 L1200 675 L0 675 Z" fill="url(#p_river)" />
+  <!-- Water Waves & Foam Lines -->
+  <path d="M50 520 Q300 470 550 530 Q800 580 1150 510" stroke="#7dd3fc" stroke-width="5" fill="none" opacity="0.7" stroke-dasharray="25 15" />
+  <path d="M20 570 Q400 510 750 580 Q1000 620 1180 560" stroke="#38bdf8" stroke-width="6" fill="none" opacity="0.6" stroke-dasharray="35 20" />
+  <path d="M100 620 Q500 560 850 630" stroke="#bae6fd" stroke-width="4" fill="none" opacity="0.8" stroke-dasharray="15 10" />
+
+  <!-- River Bank Rocks -->
+  <ellipse cx="180" cy="530" rx="45" ry="25" fill="#334155" />
+  <ellipse cx="230" cy="550" rx="35" ry="18" fill="#1e293b" />
+  <ellipse cx="980" cy="510" rx="55" ry="28" fill="#334155" />
+  <ellipse cx="1040" cy="530" rx="40" ry="20" fill="#1e293b" />
+
+  <!-- Wooden Bridge Across River -->
+  <g id="wooden-bridge">
+    <!-- Support Pillars in River -->
+    <rect x="340" y="440" width="30" height="150" fill="#451a03" rx="4" />
+    <rect x="740" y="440" width="30" height="150" fill="#451a03" rx="4" />
+    <!-- Arch Bridge Deck -->
+    <path d="M150 480 Q600 370 1050 480 L1050 520 Q600 410 150 520 Z" fill="url(#p_wood)" stroke="#27272a" stroke-width="3" />
+    <!-- Wood Planks Detail -->
+    <path d="M150 480 Q600 370 1050 480" stroke="#f59e0b" stroke-width="4" stroke-dasharray="12 6" fill="none" />
+    <!-- Bridge Handrail -->
+    <path d="M150 440 Q600 330 1050 440" stroke="#b45309" stroke-width="10" fill="none" />
+    <path d="M150 440 Q600 330 1050 440" stroke="url(#p_gold)" stroke-width="3" fill="none" />
+    <!-- Railing Posts -->
+    <line x1="250" y1="455" x2="250" y2="495" stroke="#78350f" stroke-width="8" />
+    <line x1="450" y1="415" x2="450" y2="455" stroke="#78350f" stroke-width="8" />
+    <line x1="650" y1="415" x2="650" y2="455" stroke="#78350f" stroke-width="8" />
+    <line x1="850" y1="455" x2="850" y2="495" stroke="#78350f" stroke-width="8" />
+  </g>
+
+  <!-- The Pied Piper on the Bridge Leading the Procession -->
+  <g transform="translate(680, 270)">
+    <!-- Feathered Hat -->
+    <path d="M40 30 Q70 5 110 25 Q70 40 30 40 Z" fill="#9333ea" />
+    <path d="M90 20 Q120 -15 130 -25" stroke="#ef4444" stroke-width="6" stroke-linecap="round" />
+    <!-- Head -->
+    <circle cx="70" cy="55" r="26" fill="#fed7aa" />
+    <!-- Eye & Smile -->
+    <circle cx="80" cy="50" r="3" fill="#1e293b" />
+    <path d="M75 62 Q82 68 88 62" stroke="#e11d48" stroke-width="2" fill="none" />
+    <!-- Pied Tunic (Red & Gold) -->
+    <path d="M30 85 Q70 70 110 85 L125 210 L15 210 Z" fill="#7c3aed" />
+    <path d="M50 85 L90 85 L100 210 L40 210 Z" fill="#eab308" />
+    <!-- Golden Flute in Hands -->
+    <rect x="75" y="55" width="130" height="12" rx="6" fill="url(#p_gold)" filter="url(#p_glow)" transform="rotate(-14 75 55)"/>
+    <!-- Magical Soundwaves & Floating Music Notes -->
+    <g fill="#fde047" font-size="34" font-weight="bold" filter="url(#p_glow)">
+      <text x="210" y="10">🎶</text>
+      <text x="260" y="-20">🎵</text>
+      <text x="320" y="10">🎶</text>
+    </g>
+  </g>
+
+  <!-- Procession of Cartoon Rats Following Across the Bridge into River -->
+  <g transform="translate(180, 420)">
+    <!-- Rat 1 (Leading on Bridge) -->
+    <g transform="translate(320, 0)">
+      <ellipse cx="0" cy="0" rx="28" ry="16" fill="#475569" stroke="#334155" stroke-width="2" />
+      <circle cx="24" cy="-5" r="8" fill="#475569" />
+      <circle cx="27" cy="-7" r="2.5" fill="#ef4444" />
+      <path d="M-28 0 Q-45 -12 -40 8" stroke="#f472b6" stroke-width="3" fill="none" />
+    </g>
+
+    <!-- Rat 2 -->
+    <g transform="translate(230, 15)">
+      <ellipse cx="0" cy="0" rx="25" ry="15" fill="#64748b" />
+      <circle cx="21" cy="-4" r="7" fill="#64748b" />
+      <circle cx="24" cy="-6" r="2" fill="#ef4444" />
+      <path d="M-25 0 Q-40 -10 -35 6" stroke="#f472b6" stroke-width="3" fill="none" />
+    </g>
+
+    <!-- Rat 3 -->
+    <g transform="translate(140, 25)">
+      <ellipse cx="0" cy="0" rx="30" ry="17" fill="#334155" />
+      <circle cx="26" cy="-5" r="9" fill="#334155" />
+      <circle cx="29" cy="-7" r="2.5" fill="#ef4444" />
+      <path d="M-30 0 Q-50 -12 -42 8" stroke="#f472b6" stroke-width="3.5" fill="none" />
+    </g>
+
+    <!-- Rat 4 (Entering Water/Splashing) -->
+    <g transform="translate(50, 40)">
+      <ellipse cx="0" cy="0" rx="26" ry="14" fill="#475569" />
+      <circle cx="22" cy="-4" r="7" fill="#475569" />
+      <circle cx="25" cy="-6" r="2" fill="#ef4444" />
+      <!-- Water Splash Rings -->
+      <ellipse cx="0" cy="10" rx="35" ry="8" fill="none" stroke="#7dd3fc" stroke-width="3" opacity="0.8" />
+    </g>
+
+    <!-- Rat 5 (Swimming in River) -->
+    <g transform="translate(-40, 55)">
+      <path d="M-15 0 C-15 -10 15 -10 15 0 Z" fill="#64748b" />
+      <circle cx="12" cy="-4" r="6" fill="#64748b" />
+      <circle cx="15" cy="-6" r="2" fill="#ef4444" />
+      <ellipse cx="0" cy="5" rx="28" ry="6" fill="none" stroke="#bae6fd" stroke-width="2.5" />
+    </g>
+  </g>
+
+  <!-- Story Title Banner at Top -->
+  <g transform="translate(600, 70)">
+    <rect x="-340" y="-32" width="680" height="64" rx="32" fill="rgba(15, 23, 42, 0.85)" stroke="#38bdf8" stroke-width="2.5" />
+    <text x="0" y="8" text-anchor="middle" fill="#38bdf8" font-size="24" font-weight="900" font-family="system-ui, sans-serif" letter-spacing="1">🎶 PIED PIPER: RIVER CROSSING CAPACITY</text>
+  </g>
+</svg>
