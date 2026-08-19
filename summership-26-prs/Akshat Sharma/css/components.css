@@ -1,0 +1,417 @@
+/* =========================================================
+   components.css
+   Reusable UI atoms: buttons, progress bar, quiz, badges
+   ========================================================= */
+
+/* ---------- Navigation Buttons ---------- */
+.nav-btn {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: var(--radius-md);
+  backdrop-filter: blur(8px);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    background var(--transition-fast);
+  box-shadow: var(--shadow-soft);
+}
+
+.nav-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.nav-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.nav-btn-back {
+  background: var(--color-surface);
+  color: var(--color-maroon);
+  border: 1px solid var(--color-border);
+}
+
+.nav-btn-back:hover:not(:disabled) {
+  background: var(--color-parchment);
+}
+
+.nav-btn-next {
+  background: var(--color-maroon);
+  color: #ffffff;
+}
+
+.nav-btn-next:hover:not(:disabled) {
+  background: var(--color-maroon-dark);
+}
+
+[data-theme="dark"] .nav-btn-next {
+  background: var(--color-gold-light);
+  color: #0f172a;
+}
+
+[data-theme="dark"] .nav-btn-next:hover:not(:disabled) {
+  background: var(--color-gold);
+}
+
+/* ---------- Progress Bar ---------- */
+.progress-track {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  max-width: var(--max-content-width);
+}
+
+.progress-segment {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(245, 236, 217, 0.35);
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition-fast);
+}
+
+.progress-segment.completed {
+  background: var(--color-gold);
+}
+
+.progress-segment.active {
+  background: rgba(201, 147, 44, 0.5);
+}
+
+.progress-segment.active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-gold);
+  animation: pulseWidth 1.4s ease-in-out infinite;
+}
+
+@keyframes pulseWidth {
+  0% { transform: scaleX(0.2); transform-origin: left; }
+  50% { transform: scaleX(1); transform-origin: left; }
+  100% { transform: scaleX(0.2); transform-origin: left; }
+}
+
+/* CT sub-step ticks (labels now driven by CT_SUBSTEP_LABELS in lessonData.js) */
+.ct-subticks {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.ct-subtick {
+  flex: 1;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-dim);
+  border: 1px solid var(--color-border);
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  transition: all var(--transition-fast);
+}
+
+.ct-subtick.active {
+  background: var(--color-maroon);
+  color: #ffffff;
+  border-color: var(--color-maroon);
+}
+
+[data-theme="dark"] .ct-subtick.active {
+  background: var(--color-gold-light);
+  color: #0f172a;
+  border-color: var(--color-gold-light);
+}
+
+.ct-subtick.done {
+  background: var(--color-gold-light);
+  color: var(--color-maroon-dark);
+  border-color: var(--color-gold);
+}
+
+[data-theme="dark"] .ct-subtick.done {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--color-gold-light);
+  border-color: var(--color-gold-light);
+}
+
+/* ---------- Generic Content Card (used inside steps) ---------- */
+.mini-card {
+  background: var(--color-surface-dim);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+}
+
+/* ---------- Quiz / Question Options ---------- */
+.question-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.option-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.option-btn {
+  text-align: left;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  transition: all var(--transition-fast);
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--color-gold);
+  background: var(--color-parchment);
+}
+
+.option-btn.selected {
+  border-color: var(--color-maroon);
+  background: var(--color-parchment-dark);
+  font-weight: 600;
+}
+
+.option-btn.correct {
+  border-color: var(--color-success);
+  background: var(--color-success-bg);
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+.option-btn.incorrect {
+  border-color: var(--color-error);
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  font-weight: 700;
+}
+
+/* ---------- Feedback Badges ---------- */
+.feedback-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  width: fit-content;
+}
+
+.feedback-badge.success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.feedback-badge.error {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+/* ---------- Reflection Textarea (non-code, free response) ---------- */
+.reflection-input {
+  width: 100%;
+  min-height: 120px;
+  padding: var(--space-md);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  resize: vertical;
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.reflection-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+/* =========================================================
+   NEW: ASSOCIATIVE MAPPING PEDAGOGY COMPONENTS
+   ========================================================= */
+
+/* ---------- Mapping Visual (animated province -> tax rows) ---------- */
+.mapping-visual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.mapping-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  opacity: 0;
+  transform: translateX(-12px);
+  animation: mappingRowIn 0.5s ease forwards;
+}
+
+@keyframes mappingRowIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mapping-key {
+  font-family: var(--font-story);
+  font-weight: 700;
+  color: var(--color-maroon);
+  min-width: 90px;
+}
+
+.mapping-arrow {
+  color: var(--color-gold);
+  font-size: 1.2rem;
+  font-weight: 700;
+  animation: arrowPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%, 100% { transform: translateX(0); opacity: 0.75; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+
+.mapping-value {
+  font-family: var(--font-code);
+  color: var(--color-ink-soft);
+  background: var(--color-surface-dim);
+  padding: 2px 10px;
+  border-radius: 6px;
+}
+
+/* ---------- Matching Activity Board ---------- */
+.matching-board {
+  display: flex;
+  gap: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+.matching-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.match-chip {
+  text-align: center;
+  font-weight: 600;
+}
+
+.match-chip.selected {
+  border-color: var(--color-gold);
+  background: var(--color-gold-light);
+  transform: scale(1.02);
+}
+
+/* ---------- Discovery Questions ---------- */
+.discovery-block {
+  margin-bottom: var(--space-md);
+}
+
+.discovery-followup {
+  margin-top: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-parchment);
+  border-left: 3px solid var(--color-gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-style: italic;
+  color: var(--color-ink-soft);
+}
+
+/* ---------- Retrieval Activity ---------- */
+.retrieval-prompt h3 {
+  color: var(--color-maroon-dark);
+}
+
+.retrieval-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.retrieval-btn {
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ---------- Reveal Legend (Story -> Python) ---------- */
+.reveal-legend {
+  margin-top: var(--space-md);
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.legend-row:last-child {
+  border-bottom: none;
+}
+
+.legend-story {
+  flex: 1;
+  font-family: var(--font-story);
+  color: var(--color-maroon);
+  font-weight: 600;
+}
+
+.legend-arrow {
+  color: var(--color-gold);
+  font-weight: 700;
+}
+
+.legend-python {
+  flex: 1;
+  font-family: var(--font-code);
+  color: var(--color-ink-soft);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .ct-subticks {
+    flex-wrap: wrap;
+  }
+
+  .ct-subtick {
+    flex: 1 1 45%;
+  }
+
+  .nav-btn {
+    padding: 8px 16px;
+    font-size: 0.88rem;
+  }
+
+  .matching-board {
+    flex-direction: column;
+  }
+
+  .mapping-row {
+    flex-wrap: wrap;
+  }
+
+  .legend-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
