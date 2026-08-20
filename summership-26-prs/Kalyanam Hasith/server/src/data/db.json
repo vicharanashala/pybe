@@ -1,0 +1,2380 @@
+{
+  "scenarios": [
+    {
+      "_id": "8d2e9566-cd67-4482-a2a5-c7b57f983c0c",
+      "title": "Bag Weight Label",
+      "difficulty": "Beginner",
+      "concepts": [
+        "variables"
+      ],
+      "context": "A student has one school bag with a weight written on a scale.",
+      "prompt": "What single piece of information would you store so the computer can remember the bag weight?",
+      "objectives": [
+        "Identify one value",
+        "Give the value a name",
+        "Connect naming to a variable"
+      ],
+      "sampleReasoning": "I only need to remember the bag weight, so I would store it with a clear name.",
+      "effectivenessScore": 96,
+      "createdAt": "2026-08-09T07:55:16.567Z",
+      "updatedAt": "2026-08-09T07:55:16.567Z"
+    },
+    {
+      "_id": "de83f155-a984-43c9-90ad-62e30c54df55",
+      "title": "Rainy Day Choice",
+      "difficulty": "Beginner",
+      "concepts": [
+        "conditionals"
+      ],
+      "context": "Before leaving home, a learner checks whether it is raining.",
+      "prompt": "What small decision rule would help the learner decide whether to carry an umbrella?",
+      "objectives": [
+        "Notice one condition",
+        "Choose one action",
+        "Map the rule to if/else"
+      ],
+      "sampleReasoning": "If it is raining, carry an umbrella. Otherwise, leave it at home.",
+      "effectivenessScore": 95,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "81d0753f-0aca-4d76-bb58-ab738fd1653f",
+      "title": "Two Snack Prices",
+      "difficulty": "Beginner",
+      "concepts": [
+        "arithmetic",
+        "variables"
+      ],
+      "context": "A learner buys one samosa and one juice from the canteen.",
+      "prompt": "How would you figure out the total cost using just the two prices?",
+      "objectives": [
+        "Store two values",
+        "Add values",
+        "Name the result"
+      ],
+      "sampleReasoning": "I would keep the two prices separately and add them to get the total.",
+      "effectivenessScore": 94,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "08c42975-eca9-4ecc-9bb5-9e574d83482b",
+      "title": "Greeting by Name",
+      "difficulty": "Beginner",
+      "concepts": [
+        "strings",
+        "variables"
+      ],
+      "context": "A classroom screen should greet one learner by name.",
+      "prompt": "What text should the computer remember, and how should it combine that text into a greeting?",
+      "objectives": [
+        "Store text",
+        "Combine text",
+        "Recognize strings"
+      ],
+      "sampleReasoning": "The computer should store the learner name and place it inside a greeting sentence.",
+      "effectivenessScore": 93,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "8ecc024b-8fcb-4726-b1d3-b369d15cd58e",
+      "title": "Pass Mark Check",
+      "difficulty": "Beginner",
+      "concepts": [
+        "comparisons",
+        "conditionals"
+      ],
+      "context": "A learner receives one test score and wants to know whether it is at least the pass mark.",
+      "prompt": "What comparison would decide if the learner passed?",
+      "objectives": [
+        "Compare two numbers",
+        "Create a yes/no result",
+        "Map comparison to condition"
+      ],
+      "sampleReasoning": "I would compare the score with the pass mark and decide pass if it is high enough.",
+      "effectivenessScore": 92,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "ef69d41d-bc71-426d-9098-41252f79498f",
+      "title": "Pocket Money Left",
+      "difficulty": "Beginner",
+      "concepts": [
+        "subtraction",
+        "variables"
+      ],
+      "context": "A learner starts with pocket money and spends a small amount on stationery.",
+      "prompt": "What two values matter, and how would you find the money left?",
+      "objectives": [
+        "Name starting amount",
+        "Name spent amount",
+        "Subtract to find remaining value"
+      ],
+      "sampleReasoning": "Start with the original money, subtract the spent amount, and store what remains.",
+      "effectivenessScore": 91,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "cd6df59a-a106-4164-9955-f19817fea916",
+      "title": "Favorite Color List",
+      "difficulty": "Beginner",
+      "concepts": [
+        "lists"
+      ],
+      "context": "Three friends each say their favorite color.",
+      "prompt": "How would you keep all three colors together instead of making separate notes?",
+      "objectives": [
+        "Group related values",
+        "Recognize a collection",
+        "Map grouping to a list"
+      ],
+      "sampleReasoning": "Since all values are colors, I would keep them together in one list.",
+      "effectivenessScore": 90,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "1c1b3b69-a22f-4e19-bdb1-f03ee717051b",
+      "title": "First Item in a Bag",
+      "difficulty": "Beginner",
+      "concepts": [
+        "lists",
+        "indexing"
+      ],
+      "context": "A bag contains a pencil, eraser, and ruler in that order.",
+      "prompt": "How would you ask for only the first item?",
+      "objectives": [
+        "Notice order",
+        "Pick one position",
+        "Connect position to indexing"
+      ],
+      "sampleReasoning": "The first item is based on its position in the ordered group.",
+      "effectivenessScore": 89,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "a8000d50-3196-4b8d-9cdb-2f78199c64e9",
+      "title": "Attendance Count",
+      "difficulty": "Beginner",
+      "concepts": [
+        "counting",
+        "lists"
+      ],
+      "context": "A teacher has a short list of students present today.",
+      "prompt": "What question would help you find how many students are present?",
+      "objectives": [
+        "Recognize a group",
+        "Ask for its size",
+        "Connect size to length"
+      ],
+      "sampleReasoning": "I would count how many names are in the present-students list.",
+      "effectivenessScore": 88,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "7a057b8f-9427-4c8f-ba43-a69cf3e30947",
+      "title": "Temperature Message",
+      "difficulty": "Beginner",
+      "concepts": [
+        "conditionals",
+        "comparisons"
+      ],
+      "context": "A weather display has one temperature reading.",
+      "prompt": "What simple rule would decide whether to show Hot or Comfortable?",
+      "objectives": [
+        "Set a threshold",
+        "Compare one value",
+        "Choose one message"
+      ],
+      "sampleReasoning": "If the temperature is above the threshold, show Hot; otherwise show Comfortable.",
+      "effectivenessScore": 87,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "37c605a6-bc0b-4c76-b0eb-3ef79d3f8655",
+      "title": "Water Bottle Reminder",
+      "difficulty": "Explorer",
+      "concepts": [
+        "loops"
+      ],
+      "context": "A learner wants a reminder for each break in the school day.",
+      "prompt": "How would you avoid writing the same reminder separately for every break?",
+      "objectives": [
+        "Recognize repeated action",
+        "Identify each break",
+        "Map repetition to a loop"
+      ],
+      "sampleReasoning": "For every break, show the same water reminder.",
+      "effectivenessScore": 96,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "59ca780b-a0eb-463c-90e1-b3958c7579df",
+      "title": "Find the Longest Pencil",
+      "difficulty": "Explorer",
+      "concepts": [
+        "loops",
+        "comparisons"
+      ],
+      "context": "A learner has several pencil lengths and wants to know which one is longest.",
+      "prompt": "What small comparison would you repeat as you look through the lengths?",
+      "objectives": [
+        "Keep current best",
+        "Compare one item at a time",
+        "Update when larger"
+      ],
+      "sampleReasoning": "Start with one pencil as the longest, then compare each next pencil against it.",
+      "effectivenessScore": 95,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "940f0f5a-c9e6-4d00-a1c3-e16a1522a411",
+      "title": "Clean Chore Checklist",
+      "difficulty": "Explorer",
+      "concepts": [
+        "lists",
+        "loops"
+      ],
+      "context": "A family has a checklist of small chores for Saturday morning.",
+      "prompt": "How would you go through each chore and mark it as done?",
+      "objectives": [
+        "Store chores in a list",
+        "Process one chore at a time",
+        "Repeat a simple action"
+      ],
+      "sampleReasoning": "Put chores in a list and handle each chore one by one.",
+      "effectivenessScore": 94,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "6357eda8-932c-422c-9a66-455a97d8bd6c",
+      "title": "Movie Age Filter",
+      "difficulty": "Explorer",
+      "concepts": [
+        "filtering",
+        "conditionals"
+      ],
+      "context": "A movie app has a list of films, each with a minimum age.",
+      "prompt": "What rule would decide which movies a 12-year-old can see?",
+      "objectives": [
+        "Check one item rule",
+        "Keep allowed items",
+        "Map rule to filtering"
+      ],
+      "sampleReasoning": "For each movie, keep it only if the learner age is at least the minimum age.",
+      "effectivenessScore": 93,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "a7d11a9b-0a08-4f78-8920-a4013f56185f",
+      "title": "Classroom Supply Lookup",
+      "difficulty": "Explorer",
+      "concepts": [
+        "dictionaries"
+      ],
+      "context": "A class monitor tracks how many chalk pieces, markers, and notebooks are available.",
+      "prompt": "How would you store each supply name with its count?",
+      "objectives": [
+        "Pair names with values",
+        "Look up by name",
+        "Map pairs to a dictionary"
+      ],
+      "sampleReasoning": "Each supply has a count, so I would store supply names as keys with counts as values.",
+      "effectivenessScore": 92,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "442d1b31-13f3-496f-8a51-52a489da8248",
+      "title": "Bus Stop Search",
+      "difficulty": "Explorer",
+      "concepts": [
+        "search",
+        "loops"
+      ],
+      "context": "A route list contains several bus stops, and a learner wants to know if Library Stop is included.",
+      "prompt": "How would you check the stops one at a time until you find the target?",
+      "objectives": [
+        "Identify target",
+        "Scan a list",
+        "Stop when found"
+      ],
+      "sampleReasoning": "Look at each stop and compare it with the stop I want.",
+      "effectivenessScore": 91,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "d94fc599-b88d-4ec1-80d2-b46bc2d93fc7",
+      "title": "Average Practice Score",
+      "difficulty": "Explorer",
+      "concepts": [
+        "averages",
+        "loops"
+      ],
+      "context": "A learner has five practice scores and wants one average score.",
+      "prompt": "What two small steps are needed before dividing?",
+      "objectives": [
+        "Add all scores",
+        "Count scores",
+        "Divide total by count"
+      ],
+      "sampleReasoning": "Find the total of all scores, count how many scores there are, then divide.",
+      "effectivenessScore": 90,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "3aca13eb-b2a4-4363-a5c6-a856180c207f",
+      "title": "Separate Even Roll Numbers",
+      "difficulty": "Explorer",
+      "concepts": [
+        "modulo",
+        "filtering"
+      ],
+      "context": "A class list has roll numbers, and the teacher wants only even-numbered students for Team A.",
+      "prompt": "What small test tells you whether a roll number is even?",
+      "objectives": [
+        "Test divisibility by two",
+        "Keep matching numbers",
+        "Connect remainder to modulo"
+      ],
+      "sampleReasoning": "A roll number is even if dividing by two leaves no remainder.",
+      "effectivenessScore": 89,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "6a67842e-68b5-4147-a6bc-a9ef43c612c0",
+      "title": "Capitalize Name Tags",
+      "difficulty": "Explorer",
+      "concepts": [
+        "strings",
+        "loops"
+      ],
+      "context": "A club has names typed in lowercase and wants neat name tags.",
+      "prompt": "What same text-cleaning action should happen to every name?",
+      "objectives": [
+        "Recognize repeated string change",
+        "Apply to each name",
+        "Create cleaned names"
+      ],
+      "sampleReasoning": "For each name, convert it to title case before printing the tag.",
+      "effectivenessScore": 88,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "f7fc2f8d-44f6-40a6-aa60-0ea80de2abb6",
+      "title": "Find Missing Homework",
+      "difficulty": "Explorer",
+      "concepts": [
+        "sets",
+        "comparison"
+      ],
+      "context": "A teacher has one list of all students and another list of students who submitted homework.",
+      "prompt": "How would you reason about who is missing from the submitted list?",
+      "objectives": [
+        "Compare two groups",
+        "Find difference",
+        "Map group difference to sets"
+      ],
+      "sampleReasoning": "Take everyone in the class and remove the students who submitted.",
+      "effectivenessScore": 87,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "e4a86618-8b9a-4f03-984e-27a295308402",
+      "title": "Reusable Discount Rule",
+      "difficulty": "Builder",
+      "concepts": [
+        "functions",
+        "conditionals"
+      ],
+      "context": "A shop gives the same discount rule to many different bills.",
+      "prompt": "What inputs should a reusable discount helper receive?",
+      "objectives": [
+        "Identify reusable rule",
+        "Choose inputs",
+        "Return discounted price"
+      ],
+      "sampleReasoning": "The helper needs the bill amount and should return the final price after applying the rule.",
+      "effectivenessScore": 96,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "97079f3f-e170-4fe9-98ce-e84f42659036",
+      "title": "Mini Quiz Checker",
+      "difficulty": "Builder",
+      "concepts": [
+        "functions",
+        "comparisons"
+      ],
+      "context": "A quiz app needs to check one answer against one correct answer.",
+      "prompt": "How would you design a tiny reusable checker for one question?",
+      "objectives": [
+        "Accept learner answer",
+        "Accept correct answer",
+        "Return right or wrong"
+      ],
+      "sampleReasoning": "Compare the learner answer with the correct answer and return whether they match.",
+      "effectivenessScore": 95,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "03042b5d-e1ef-475c-861a-54198ed95ddc",
+      "title": "Step Counter Function",
+      "difficulty": "Builder",
+      "concepts": [
+        "functions",
+        "lists"
+      ],
+      "context": "A fitness note has a list of step counts from different walks.",
+      "prompt": "How would you make a reusable helper that returns the total steps?",
+      "objectives": [
+        "Accept a list",
+        "Add all values",
+        "Return total"
+      ],
+      "sampleReasoning": "The function should take step counts, add them, and give back the total.",
+      "effectivenessScore": 94,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "c866ac2f-b09e-46a5-93ac-e871aca1e65e",
+      "title": "Safe Username Maker",
+      "difficulty": "Builder",
+      "concepts": [
+        "functions",
+        "strings"
+      ],
+      "context": "A classroom app needs to turn a full name into a simple username.",
+      "prompt": "What small text transformations should a username function perform?",
+      "objectives": [
+        "Accept a name",
+        "Normalize text",
+        "Return username"
+      ],
+      "sampleReasoning": "Make the name lowercase and remove spaces so it can be used as a username.",
+      "effectivenessScore": 93,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "f858aa68-8807-4853-9838-e55ca751b75d",
+      "title": "Retry Until Valid",
+      "difficulty": "Builder",
+      "concepts": [
+        "while loops",
+        "validation"
+      ],
+      "context": "A form should keep asking until the learner enters a positive number.",
+      "prompt": "What condition tells the program to keep asking?",
+      "objectives": [
+        "Define valid input",
+        "Repeat while invalid",
+        "Stop after valid value"
+      ],
+      "sampleReasoning": "Keep asking while the number is not positive, then stop once it is valid.",
+      "effectivenessScore": 92,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "a0344386-072d-4e6b-a499-218be73ed607",
+      "title": "Simple Score Report",
+      "difficulty": "Builder",
+      "concepts": [
+        "dictionaries",
+        "functions"
+      ],
+      "context": "A tutor wants a small report showing a learner name and score together.",
+      "prompt": "How would you package two related pieces of information in one result?",
+      "objectives": [
+        "Create key-value structure",
+        "Return structured result",
+        "Connect structure to dictionary"
+      ],
+      "sampleReasoning": "Return a dictionary with the learner name and score as labeled values.",
+      "effectivenessScore": 91,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "06a0cdb7-8e5a-4eb9-8ff9-6992dd493c7b",
+      "title": "Task Status Updater",
+      "difficulty": "Builder",
+      "concepts": [
+        "dictionaries",
+        "mutation"
+      ],
+      "context": "A to-do app has tasks with statuses and needs to mark one task as done.",
+      "prompt": "What exact value changes when a task is completed?",
+      "objectives": [
+        "Find one task",
+        "Change one status",
+        "Understand updating data"
+      ],
+      "sampleReasoning": "Find the task by name and change its status from pending to done.",
+      "effectivenessScore": 90,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "5990eff8-297d-44d7-b235-74eda83b6beb",
+      "title": "Small Receipt Builder",
+      "difficulty": "Builder",
+      "concepts": [
+        "functions",
+        "formatting"
+      ],
+      "context": "A cafe wants a short text receipt for one item and its price.",
+      "prompt": "What pieces should a receipt function combine into a readable line?",
+      "objectives": [
+        "Accept item and price",
+        "Format text",
+        "Return one receipt line"
+      ],
+      "sampleReasoning": "Combine the item name and price into one clear sentence.",
+      "effectivenessScore": 89,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "9fd49fd3-9f7c-45e5-8b40-ca1c4f66283a",
+      "title": "Choose Next Scenario",
+      "difficulty": "Builder",
+      "concepts": [
+        "conditionals",
+        "adaptive logic"
+      ],
+      "context": "PyBe wants to choose an easier or harder next scenario based on one score.",
+      "prompt": "What simple score rule could decide the next difficulty?",
+      "objectives": [
+        "Set score thresholds",
+        "Branch by score",
+        "Return next level"
+      ],
+      "sampleReasoning": "If the score is high choose harder, if low choose easier, otherwise stay similar.",
+      "effectivenessScore": 88,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "e31e0fd2-0041-4988-a6e0-8574f765cabe",
+      "title": "Reflection Keyword Finder",
+      "difficulty": "Builder",
+      "concepts": [
+        "strings",
+        "search"
+      ],
+      "context": "PyBe reads a short reflection and checks whether the learner mentioned confusion.",
+      "prompt": "What tiny search would detect that the reflection may need extra support?",
+      "objectives": [
+        "Choose keywords",
+        "Search text",
+        "Return support signal"
+      ],
+      "sampleReasoning": "Look for words like confused or stuck and flag the reflection if they appear.",
+      "effectivenessScore": 87,
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    }
+  ],
+  "debugChallenges": [
+    {
+      "_id": "9af3a645-02ed-410b-8092-fe042d47598a",
+      "title": "List Slicing Error",
+      "difficulty": "Explorer",
+      "concepts": [
+        "lists",
+        "slicing"
+      ],
+      "context": "As a developer, you are tasked with extracting a subset of user preferences from a large list.",
+      "buggyCode": "# Goal: Extract the last three user preferences from the list.\npreferences = ['reading', 'hiking', 'swimming', 'fishing', 'cycling']\nprint(preferences[-3:10])",
+      "solutionCode": "# Goal: Extract the last three user preferences from the list.\npreferences = ['reading', 'hiking', 'swimming', 'fishing', 'cycling']\nprint(preferences[-3:])",
+      "expectedLogic": "1. Access the last three elements of the preferences list using negative indexing and slicing.\n2. Print the extracted values.",
+      "stripVariables": [
+        "preferences"
+      ],
+      "hints": [
+        "Check the slicing operation.",
+        "Verify the negative indexing."
+      ],
+      "bugExplanation": "The code will throw an IndexError because the slicing operation attempts to access an index out of range.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "['fishing', 'cycling']"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "91985e33-9c59-4b94-ad3a-1c52ad56137a",
+      "title": "List Append Error",
+      "difficulty": "Builder",
+      "concepts": [
+        "lists"
+      ],
+      "context": "As a software engineer, you are tasked with modifying a list of user preferences based on user input.",
+      "buggyCode": "# Goal: Append the new user preference to the list.\nuser_input = 'gaming'\npreferences = ['reading', 'hiking', 'swimming']\npreferences[user_input] = True\nprint(preferences)\npreferences.append(user_input)\nprint(preferences)",
+      "solutionCode": "# Goal: Append the new user preference to the list.\nuser_input = 'gaming'\npreferences = ['reading', 'hiking', 'swimming']\npreferences.append(user_input)\nprint(preferences)",
+      "expectedLogic": "1. Append the user input to the preferences list using the append method.\n2. Print the updated list.",
+      "stripVariables": [
+        "user_input",
+        "preferences"
+      ],
+      "hints": [
+        "Check the dictionary assignment.",
+        "Verify the append method."
+      ],
+      "bugExplanation": "The code will throw a TypeError because the assignment operation attempts to treat the list as a dictionary.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "['reading', 'hiking', 'swimming', 'gaming']"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "9b2b3a54-4c6d-432a-b305-b1695728f68a",
+      "title": "List Insertion Error",
+      "difficulty": "Builder",
+      "concepts": [
+        "lists"
+      ],
+      "context": "As a software engineer, you are tasked with inserting a new user preference at a specific position in the list.",
+      "buggyCode": "# Goal: Insert the new user preference at the beginning of the list.\nuser_input = 'gaming'\npreferences = ['reading', 'hiking', 'swimming']\npreferences.insert(1, user_input)\nprint(preferences)",
+      "solutionCode": "# Goal: Insert the new user preference at the beginning of the list.\nuser_input = 'gaming'\npreferences = ['reading', 'hiking', 'swimming']\npreferences.insert(0, user_input)\nprint(preferences)",
+      "expectedLogic": "1. Insert the user input at the specified position in the preferences list using the insert method.\n2. Print the updated list.",
+      "stripVariables": [
+        "user_input",
+        "preferences"
+      ],
+      "hints": [
+        "Check the insertion operation.",
+        "Verify the insert method."
+      ],
+      "bugExplanation": "The code will throw a ValueError because the insertion operation attempts to insert at an index out of range.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "['gaming', 'reading', 'hiking', 'swimming']"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "3e2c7134-f1f2-4fd2-a05b-7205bbe08f82",
+      "title": "Indexing Issue",
+      "difficulty": "Explorer",
+      "concepts": [
+        "lists"
+      ],
+      "context": "You are building a program to track student scores in a class. You want to print the average score of the class.",
+      "buggyCode": "# Goal: Print the average score of the class\nscores = [85, 90, 78, 92, 88]\nnumber_of_students = len(scores)\nprint(scores[number_of_students-1])",
+      "solutionCode": "# Goal: Print the average score of the class\nscores = [85, 90, 78, 92, 88]\nnumber_of_students = len(scores)\nprint(sum(scores) / number_of_students)",
+      "expectedLogic": [
+        "1. Calculate the length of the scores list to get the number of students.",
+        "2. Use the sum() function to add up all scores.",
+        "3. Divide the sum by the number of students to get the average score.",
+        "4. Print the average score."
+      ],
+      "stripVariables": [
+        "scores",
+        "number_of_students"
+      ],
+      "hints": [
+        "Hint: Think about what happens when you try to index the list with the length of the list.",
+        "Hint: Consider using the sum() function to add up all scores."
+      ],
+      "bugExplanation": "The original code fails because it tries to index the list with its length, which is out of bounds.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "88.0"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+
+    {
+      "_id": "5759389e-3738-4774-ba28-c15323d48363",
+      "title": "Infinite Loop",
+      "difficulty": "Beginner",
+      "concepts": [
+        "loops"
+      ],
+      "context": "Imagine you're trying to create a countdown timer for a new year's party.\nYou want it to display the number of seconds left until midnight.",
+      "buggyCode": "# Goal: Countdown timer\nfor i in range(60*60*23 + 1):\n    print(i)\n    i += 1",
+      "solutionCode": "# Goal: Countdown timer\nfor i in range(60*60*23):\n    print(i)",
+      "expectedLogic": "1. Initialize a counter variable `i` to the number of seconds remaining until midnight.\n2. Use a for loop to iterate from `i` down to 0, decrementing by 1 each time.\n3. Inside the loop, print the current value of `i`.",
+      "stripVariables": [
+        "i"
+      ],
+      "hints": [
+        "Think about what happens when `i` is equal to the total number of seconds remaining. Should it still be in the loop?",
+        "Remember the `range()` function is exclusive of the end value."
+      ],
+      "bugExplanation": "The original code has an infinite loop because the `range()` function is exclusive of the end value, so when `i` equals the total number of seconds remaining, it should exit the loop. However, the condition `i + 1` keeps it in an infinite loop.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": ""
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "c49ce924-39d0-4582-9e41-197f65d8c83b",
+      "title": "Print Numbers",
+      "difficulty": "Explorer",
+      "concepts": [
+        "loops"
+      ],
+      "context": "You want to create a program that generates a list of all numbers from 1 to 10, but only prints the odd ones.",
+      "buggyCode": "# Goal: Generate list of odd numbers from 1 to 10 and print them\nlist = [i for i in range(1, 11) if i % 2 == 0]\nfor i in list:\n    if i % 2 != 0:\n        print(i)",
+      "solutionCode": "# Goal: Generate list of odd numbers from 1 to 10 and print them\nlist = [i for i in range(1, 11) if i % 2 != 0]\nfor i in list:\n    print(i)",
+      "expectedLogic": "1. Use list comprehension to create a list of numbers from 1 to 10.\n2. Filter the list to only include odd numbers by checking if `i % 2 != 0`.\n3. Print each odd number in the list.",
+      "stripVariables": [
+        "i",
+        "list"
+      ],
+      "hints": [
+        "Think about the condition `i % 2 == 0`. Shouldn't it be checking for odd numbers instead of even numbers?",
+        "Remember to check the `range()` function's end value."
+      ],
+      "bugExplanation": "The original code incorrectly filters the list for even numbers instead of odd numbers, resulting in an empty list being printed.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "1\n3\n5\n7\n9"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "23d13650-0be4-4128-a021-39067d914aed",
+      "title": "Prime Numbers",
+      "difficulty": "Builder",
+      "concepts": [
+        "loops"
+      ],
+      "context": "Imagine you're building a prime number sieve.\nYou want to print all prime numbers up to a given number.",
+      "buggyCode": "# Goal: Prime number sieve\nn = 25\nfor i in range(2, n):\n    for j in range(2, i):\n        if i % j == 0:\n            print(f\"{i} is not a prime number\")",
+      "solutionCode": "# Goal: Prime number sieve\nn = 25\nfor i in range(2, n):\n    is_prime = True\n    for j in range(2, int(i ** 0.5) + 1):\n        if i % j == 0:\n            is_prime = False\n            break\n    if is_prime:\n        print(i)",
+      "expectedLogic": "1. Initialize a counter variable `i` to 2 and iterate up to the given number `n`.\n2. Inside the outer loop, iterate from 2 to the square root of `i` (inclusive).\n3. Check if `i` is divisible by any number in the inner loop. If it is, mark it as not prime.\n4. If `i` is not marked as not prime, print it as a prime number.",
+      "stripVariables": [
+        "i",
+        "j",
+        "n"
+      ],
+      "hints": [
+        "Think about the condition `i % j == 0`. Shouldn't it be checking for non-divisibility instead?",
+        "Remember to use the square root of `i` as the upper bound for the inner loop."
+      ],
+      "bugExplanation": "The original code incorrectly prints a number as not prime if it's divisible by any number up to itself, resulting in incorrect results.",
+      "testCases": [
+        {
+          "setupCode": "n = 25",
+          "expectedOutput": "2\n3\n5\n7\n11\n13\n17\n19\n23"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "c8f63506-4434-4e9d-9610-3ae6db11f4b3",
+      "title": "FizzBuzz",
+      "difficulty": "Explorer",
+      "concepts": [
+        "loops"
+      ],
+      "context": "Imagine you're creating a program that prints the numbers from 1 to `n`, but with a twist: for multiples of 3, print \"Fizz\" instead of the number, and for multiples of 5, print \"Buzz\" instead of the number.",
+      "buggyCode": "# Goal: FizzBuzz\nn = 15\nfor i in range(1, n + 1):\n    if i % 3 == 0:\n        print(\"Fizz\")\n    elif i % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(i)",
+      "solutionCode": "# Goal: FizzBuzz\nn = 15\nfor i in range(1, n + 1):\n    if i % 3 == 0:\n        print(\"Fizz\")\n    if i % 5 == 0:\n        print(\"Buzz\")\n    else:\n        print(i)",
+      "expectedLogic": "1. Initialize a counter variable `i` to 1 and iterate up to `n` (inclusive).\n2. Inside the loop, check if `i` is a multiple of 3. If it is, print \"Fizz\".\n3. Check if `i` is a multiple of 5. If it is, print \"Buzz\".\n4. If neither condition is true, print the value of `i`.",
+      "stripVariables": [
+        "i",
+        "n"
+      ],
+      "hints": [
+        "Think about the correct order of the conditions.",
+        "Remember to use the `if-elif-else` structure for multiple conditions."
+      ],
+      "bugExplanation": "The original code incorrectly uses an `elif` condition to check for multiples of 5, which will prevent it from printing \"Fizz\" when `i` is also a multiple of 3.",
+      "testCases": [
+        {
+          "setupCode": "n = 15",
+          "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "bf569fa4-227a-4834-8db2-1ff85866c651",
+      "title": "Divisible by 5 Loop",
+      "difficulty": "Explorer",
+      "concepts": [
+        "loops"
+      ],
+      "context": "You are tasked with writing a program that prints all numbers from 1 to 100 that are divisible by 5.",
+      "buggyCode": "# Goal: Print all numbers from 1 to 100 that are divisible by 5\nfor i in range(1, 100):\n    if i % 5 == 0:\n        if i > 10:\n            print(i)\n",
+      "solutionCode": "# Goal: Print all numbers from 1 to 100 that are divisible by 5\nfor i in range(1, 100):\n    if i % 5 == 0:\n        print(i)\n",
+      "expectedLogic": "1. Use a loop to iterate from 1 to 100.\n2. In each iteration, check if the current number is divisible by 5.\n3. If true, print the current number.",
+      "stripVariables": [
+        "i"
+      ],
+      "hints": [
+        "The condition to print the number should be before the if statement.",
+        "The extra condition to check if i is greater than 10 is unnecessary."
+      ],
+      "bugExplanation": "The buggy code prints the numbers divisible by 5 only after the 10th number, and it does not print the first 10 numbers that are divisible by 5, leading to incorrect results.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "5\n10\n15\n20\n25\n30\n35\n40\n45\n50"
+        },
+        {
+          "setupCode": "",
+          "expectedOutput": "55\n60\n65\n70\n75\n80\n85\n90\n95\n100"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "5c8bbbeb-1ec1-4e33-b549-a71e0363a954",
+      "title": "Last Index of a Substring",
+      "difficulty": "Beginner",
+      "concepts": [
+        "strings"
+      ],
+      "context": "Write a function to find the last index of a substring within a given string.",
+      "buggyCode": "# Goal: Find the last index of a substring\ndef last_index(main_str, sub_str):\n  for i in range(len(main_str) - len(sub_str), -1, -1):\n    if main_str[i:i + len(sub_str)] == sub_str:\n      return i\n  return -1\n# Test cases:\ntest_case_setup\nprint(last_index(\"hello\", \"ll\"))\nprint(last_index(\"abc\", \"xyz\"))",
+      "solutionCode": "# Goal: Find the last index of a substring\ndef last_index(main_str, sub_str):\n  return max((i for i in range(len(main_str) - len(sub_str), -1, -1) if main_str[i:i + len(sub_str)] == sub_str), default=-1)\n# Test cases:\ntest_case_setup\nprint(last_index(\"hello\", \"ll\"))\nprint(last_index(\"abc\", \"xyz\"))",
+      "expectedLogic": [
+        "1. Initialize a generator expression to find the indices where the substring matches.",
+        "2. Use the max function with a default value of -1 to find the last index.",
+        "3. If no match is found, return -1."
+      ],
+      "stripVariables": [
+        "main_str",
+        "sub_str",
+        "i"
+      ],
+      "hints": [
+        "Use a generator expression to find the indices.",
+        "Consider using the max function to find the last index."
+      ],
+      "bugExplanation": "The original code uses a loop that iterates from the end of the string, but it doesn't handle the case where the substring is not present. The fix uses a generator expression and the max function to find the last index efficiently.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "2\n-1"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "d56cff98-272f-4acb-853a-505717795a73",
+      "title": "Remove Extra Spaces",
+      "difficulty": "Beginner",
+      "concepts": [
+        "strings"
+      ],
+      "context": "Write a function to remove extra spaces from a given string.",
+      "buggyCode": "# Goal: Remove extra spaces\ndef remove_spaces(input_str):\n  output_str = \"\"\n  for char in input_str:\n    if char == \" \":\n      output_str += char\n  return output_str\n# Test cases:\ntest_case_setup\nprint(remove_spaces(\"   hello   \"))\nprint(remove_spaces(\"hello\"))",
+      "solutionCode": "# Goal: Remove extra spaces\ndef remove_spaces(input_str):\n  return \" \\'.join(filter(None, input_str.split(\" \")))\n# Test cases:\ntest_case_setup\nprint(remove_spaces(\"   hello   \"))\nprint(remove_spaces(\"hello\"))",
+      "expectedLogic": [
+        "1. Split the input string into a list of substrings using spaces as separators.",
+        "2. Use a filter function to remove empty strings from the list.",
+        "3. Join the remaining substrings back into a single string with spaces as separators."
+      ],
+      "stripVariables": [
+        "input_str",
+        "output_str"
+      ],
+      "hints": [
+        "Use the split function to split the string into substrings.",
+        "Consider using the filter function to remove empty strings."
+      ],
+      "bugExplanation": "The original code uses a loop to remove extra spaces, which can be inefficient for large strings. The fix uses the split and filter functions to remove extra spaces efficiently.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "hello\nhello"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "cd2ba19d-d37e-4a1f-933c-ad92a7ef5197",
+      "title": "Palindrome Check",
+      "difficulty": "Explorer",
+      "concepts": [
+        "strings"
+      ],
+      "context": "Write a function to check if a given string is a palindrome.",
+      "buggyCode": "# Goal: Check if a string is a palindrome\ndef is_palindrome(input_str):\n  reversed_str = input_str[::-1]\n  return input_str == reversed_str\n# Test cases:\ntest_case_setup\nprint(is_palindrome(\"madam\"))\nprint(is_palindrome(\"hello\"))",
+      "solutionCode": "# Goal: Check if a string is a palindrome\ndef is_palindrome(input_str):\n  return input_str == input_str[::-1]\n# Test cases:\ntest_case_setup\nprint(is_palindrome(\"madam\"))\nprint(is_palindrome(\"hello\"))",
+      "expectedLogic": [
+        "1. Use slicing to reverse the input string.",
+        "2. Compare the reversed string with the original string.",
+        "3. Return True if they are equal, False otherwise."
+      ],
+      "stripVariables": [
+        "input_str",
+        "reversed_str"
+      ],
+      "hints": [
+        "Use slicing to reverse the string.",
+        "Consider comparing the string with its reverse directly."
+      ],
+      "bugExplanation": "The original code reverses the string and then compares it with the original string. The fix directly compares the string with its reverse, which is more efficient.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "True\nFalse"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "482a0291-9bb7-4b75-85e0-65e50c12083f",
+      "title": "Replace Spaces with Underscores",
+      "difficulty": "Builder",
+      "concepts": [
+        "strings"
+      ],
+      "context": "Write a function to replace all spaces in a given string with underscores.",
+      "buggyCode": "# Goal: Replace spaces with underscores\ndef replace_spaces(input_str):\n  output_str = \"\"\n  for char in input_str:\n    if char == \" \":\n      output_str += \"_\"\n    else:\n      output_str += char\n  return output_str\n# Test cases:\ntest_case_setup\nprint(replace_spaces(\"hello world\"))\nprint(replace_spaces(\"hello\"))",
+      "solutionCode": "# Goal: Replace spaces with underscores\ndef replace_spaces(input_str):\n  return input_str.replace(\" \", \"_\")\n# Test cases:\ntest_case_setup\nprint(replace_spaces(\"hello world\"))\nprint(replace_spaces(\"hello\"))",
+      "expectedLogic": [
+        "1. Use the replace function to replace all spaces with underscores.",
+        "2. Return the modified string."
+      ],
+      "stripVariables": [
+        "input_str",
+        "output_str"
+      ],
+      "hints": [
+        "Use the replace function to replace all spaces.",
+        "Consider using a list comprehension or generator expression to create the new string."
+      ],
+      "bugExplanation": "The original code uses a loop to replace spaces with underscores, which can be inefficient for large strings. The fix uses the replace function, which is more efficient.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "hello_world\nhello"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "0c8cca3d-d198-4ecb-ab46-dfe45e577a81",
+      "title": "String Comparison Issue",
+      "difficulty": "Beginner",
+      "concepts": [
+        "strings"
+      ],
+      "context": "You are building a simple quiz system and want to compare user input with a predefined answer.",
+      "buggyCode": "def compare_answer(user_input):\n  answers = {\"What is 2 + 2\": \"4\", \"What is 5 - 1\": \"4\"}\n  if user_input == answers['What is 2 + 2']:\n    return True\n  else:\n    return False\nprint(compare_answer(\"What is 2 + 2\"))",
+      "solutionCode": "def compare_answer(user_input):\n  answers = {\"What is 2 + 2\": \"4\", \"What is 5 - 1\": \"4\"}\n  return user_input in answers.values()\nprint(compare_answer(\"What is 2 + 2\"))",
+      "expectedLogic": "1. The function compare_answer should take a user's input as a parameter.\n2. The function should define a dictionary with question-answer pairs.\n3. The function should check if the user's input is a value in the dictionary.\n4. The function should return True if the input matches a value in the dictionary, False otherwise.",
+      "stripVariables": [
+        "user_input",
+        "answers"
+      ],
+      "hints": [
+        "Consider what could happen if the user input is not found in the dictionary.",
+        "Think about how you can simplify the comparison logic."
+      ],
+      "bugExplanation": "The original code had a logical error. It was comparing the user's input with the exact key in the dictionary instead of checking if the input is a value in the dictionary.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "True"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "c59604d3-d9f9-45bc-914c-5c9c39ce63a6",
+      "title": "Incorrect Variable Assignment",
+      "difficulty": "Beginner",
+      "concepts": [
+        "variables"
+      ],
+      "context": "You're creating a quiz app that asks users for their name. However, when you try to greet them, the app crashes.",
+      "buggyCode": "# Goal: Create a quiz app that greets the user by name\nname = input('What is your name?\n')\nprint('Hello ' + name + '!')",
+      "solutionCode": "# Goal: Create a quiz app that greets the user by name\nname = input('What is your name?\n')\nprint('Hello ' + str(name) + '!')",
+      "expectedLogic": [
+        1,
+        "Ask the user for their name",
+        2,
+        "Store the user's name in the variable 'name'",
+        3,
+        "Print out a greeting message with the user's name"
+      ],
+      "stripVariables": [
+        "name"
+      ],
+      "hints": [
+        "Try printing out the value of 'name' to see what's going on.",
+        "Remember, when printing out a variable, it needs to be converted to a string."
+      ],
+      "bugExplanation": "When you concatenated a string with a variable, Python expected the variable to be a string too. However, the variable 'name' is actually a string of characters, not a string object. To fix this, we need to convert the variable to a string using str().",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "Hello User!"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "2a5d1b7a-aaca-4f15-9123-35d341a149e4",
+      "title": "Incorrect Variable Scoping",
+      "difficulty": "Explorer",
+      "concepts": [
+        "variables"
+      ],
+      "context": "You're creating a calculator app that keeps a running sum. However, when you try to print out the sum, the app crashes.",
+      "buggyCode": "# Goal: Create a calculator app that keeps a running sum\nsum = 0\ndef add(x):\n  sum = x\nprint(sum)",
+      "solutionCode": "# Goal: Create a calculator app that keeps a running sum\nsum = 0\ndef add(x):\n  global sum\n  sum = x\nprint(sum)",
+      "expectedLogic": [
+        1,
+        "Create a variable 'sum' to store the running sum",
+        2,
+        "Create a function 'add' that takes in a number 'x' and adds it to the running sum",
+        3,
+        "Print out the running sum"
+      ],
+      "stripVariables": [
+        "sum",
+        "x"
+      ],
+      "hints": [
+        "Try printing out the value of 'sum' inside the 'add' function to see what's going on.",
+        "Remember, when modifying a global variable, you need to use the 'global' keyword."
+      ],
+      "bugExplanation": "When we assigned a new value to 'sum' inside the 'add' function, it created a new local variable 'sum' that shadowed the global variable 'sum'. To fix this, we need to use the 'global' keyword to indicate that we're modifying the global variable.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "10"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "76913822-e1fb-4b00-b1fa-140ea0b0ec31",
+      "title": "Incorrect Variable Naming",
+      "difficulty": "Builder",
+      "concepts": [
+        "variables"
+      ],
+      "context": "You're creating a shopping cart app that keeps track of items. However, when you try to print out the number of items, the app crashes.",
+      "buggyCode": "# Goal: Create a shopping cart app that keeps track of items\nnum_of_items = 5\nprint(number_of_items)",
+      "solutionCode": "# Goal: Create a shopping cart app that keeps track of items\nnum_of_items = 5\nprint(num_of_items)",
+      "expectedLogic": [
+        1,
+        "Create a variable 'num_of_items' to store the number of items",
+        2,
+        "Set the initial number of items to 5",
+        3,
+        "Print out the number of items"
+      ],
+      "stripVariables": [
+        "num_of_items"
+      ],
+      "hints": [
+        "Try printing out the value of 'num_of_items' to see what's going on.",
+        "Remember, when printing out a variable, it needs to be spelled correctly."
+      ],
+      "bugExplanation": "When we used a different variable name 'number_of_items' to print out the value, Python looked for a variable with that name and couldn't find it. To fix this, we need to use the correct variable name 'num_of_items'.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "5"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "a86a6cad-5892-40e8-8a48-dc4cc93fad20",
+      "title": "Incorrect Variable Type",
+      "difficulty": "Builder",
+      "concepts": [
+        "variables"
+      ],
+      "context": "You're creating a weather app that keeps track of temperatures. However, when you try to print out the temperature in Celsius, the app crashes.",
+      "buggyCode": "# Goal: Create a weather app that keeps track of temperatures\ntemp = 25\nprint(temp + 100)",
+      "solutionCode": "# Goal: Create a weather app that keeps track of temperatures\ntemp = 25\nprint(temp + 100.0)",
+      "expectedLogic": [
+        1,
+        "Create a variable 'temp' to store the temperature",
+        2,
+        "Set the initial temperature to 25",
+        3,
+        "Print out the temperature plus 100"
+      ],
+      "stripVariables": [
+        "temp"
+      ],
+      "hints": [
+        "Try printing out the value of 'temp' to see what's going on.",
+        "Remember, when performing mathematical operations, variables need to be of the correct type."
+      ],
+      "bugExplanation": "When we tried to add an integer to a number, Python looked for a variable called '100' and couldn't find it. To fix this, we need to convert the number to a float by appending '.0'.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "125.0"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.568Z",
+      "updatedAt": "2026-08-09T07:55:16.568Z"
+    },
+    {
+      "_id": "da7d2381-d6b6-48f1-97f7-76a45c562dc6",
+      "title": "Incorrect Initializer for Counter",
+      "difficulty": "Beginner",
+      "concepts": [
+        "variables"
+      ],
+      "context": "You're tasked with creating a simple counter program that initializes with a given number. However, things get tricky when the counter starts.",
+      "buggyCode": "def counter(start):\n  count = 0\n  for i in range(start):\n    count += 1\n  return count\nprint(counter(10))",
+      "solutionCode": "def counter(start):\n  count = start\n  for i in range(start):\n    count += 1\n  return count\nprint(counter(10))",
+      "expectedLogic": [
+        "Create a function counter that takes a parameter start.",
+        "Initialize the count with the value of start.",
+        "Use a for loop to iterate from 0 to start-1 (inclusive).",
+        "Inside the loop, increment the count by 1.",
+        "After the loop, return the count."
+      ],
+      "stripVariables": [
+        "count",
+        "i",
+        "start"
+      ],
+      "hints": [
+        "The output is less than expected.",
+        "Double-check how you initialize and update the count variable."
+      ],
+      "bugExplanation": "The counter is initialized to 0 instead of 'start', causing it to miss the initial number and only count from 1 to 'start'-1.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "11"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "0c283b9c-7f78-45a3-a4d3-46d78bbbb9a0",
+      "title": "Slicing a List with Odd Indexing",
+      "difficulty": "Beginner",
+      "concepts": [
+        "slicing"
+      ],
+      "context": "You're trying to extract the first 3 elements from a list of exam scores, but the indexing is off.",
+      "buggyCode": "# Goal: Get the first 3 elements from the list of exam scores\nscores = [90, 85, 92, 88]\nprint(scores[1:4])",
+      "solutionCode": "# Goal: Get the first 3 elements from the list of exam scores\nscores = [90, 85, 92, 88]\nprint(scores[:3])",
+      "expectedLogic": "1. Understand the list slicing syntax in Python: list[start:stop:step]\n2. The start index is inclusive, so we want to slice from index 0 to 2.\n3. Use [:3] to get the first 3 elements.",
+      "stripVariables": [
+        "scores"
+      ],
+      "hints": [
+        "Check the indexing of your list and the slice syntax.",
+        "Think about which elements you want to keep and which to discard."
+      ],
+      "bugExplanation": "The original code was trying to slice the list from index 1 to 4, but since the indexing is 0-based, it would actually get elements from index 1 to 3, which is only 3 elements.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "[90, 85, 92]"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "89c1459a-1a9f-44a5-a4a2-b2aeeec54520",
+      "title": "Slicing a String",
+      "difficulty": "Explorer",
+      "concepts": [
+        "slicing",
+        "strings"
+      ],
+      "context": "You're trying to extract a substring from a string, but the slicing is off.",
+      "buggyCode": "# Goal: Get the first 5 characters from the string\nname = \"JohnDoe\"\nprint(name[1:5])",
+      "solutionCode": "# Goal: Get the first 5 characters from the string\nname = \"JohnDoe\"\nprint(name[:5])",
+      "expectedLogic": "1. Understand the string slicing syntax in Python: string[start:stop:step]\n2. The start index is inclusive, so we want to slice from index 0 to 4.\n3. Use [:5] to get the first 5 characters.",
+      "stripVariables": [
+        "name"
+      ],
+      "hints": [
+        "Check the indexing of your string and the slice syntax.",
+        "Think about which characters you want to keep and which to discard."
+      ],
+      "bugExplanation": "The original code was trying to slice the string from index 1 to 5, but since the indexing is 0-based, it would actually get characters from index 1 to 4.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "JohnD"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "1872801b-425a-4baf-a990-27a91ef9d1ab",
+      "title": "Slicing a List with Negative Indexing",
+      "difficulty": "Builder",
+      "concepts": [
+        "slicing"
+      ],
+      "context": "You're trying to get the last 3 elements from a list, but the indexing is off.",
+      "buggyCode": "# Goal: Get the last 3 elements from the list\nnumbers = [10, 20, 30, 40, 50]\nprint(numbers[-3:5])",
+      "solutionCode": "# Goal: Get the last 3 elements from the list\nnumbers = [10, 20, 30, 40, 50]\nprint(numbers[-3:])",
+      "expectedLogic": "1. Understand the negative indexing in Python: it counts from the end of the list.\n2. Use -3: to get the last 3 elements.",
+      "stripVariables": [
+        "numbers"
+      ],
+      "hints": [
+        "Check the indexing of your list and the slice syntax.",
+        "Think about which elements you want to keep and which to discard."
+      ],
+      "bugExplanation": "The original code was trying to slice the list from index -3 to 5, but since the list only has 5 elements, it would actually get elements from index -3 to 4.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "[40, 50]"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "4a1eadad-0881-44de-9fc1-ee54d975f782",
+      "title": "Slicing a Multi-Dimensional List",
+      "difficulty": "Builder",
+      "concepts": [
+        "slicing",
+        "lists"
+      ],
+      "context": "You're trying to extract a subset of a multi-dimensional list, but the slicing is off.",
+      "buggyCode": "# Goal: Get the first 2 rows and 3 columns from the 2D list\nmatrix = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]\nprint(matrix[1:3][1:4])",
+      "solutionCode": "# Goal: Get the first 2 rows and 3 columns from the 2D list\nmatrix = [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]\nprint(matrix[:2][1:4])",
+      "expectedLogic": "1. Understand the list slicing syntax in Python: list[start:stop:step]\n2. Apply slicing to the outer list: get the first 2 elements.\n3. Apply slicing to the inner list: get the next 3 elements.",
+      "stripVariables": [
+        "matrix"
+      ],
+      "hints": [
+        "Check the indexing of your list and the slice syntax.",
+        "Think about which elements you want to keep and which to discard."
+      ],
+      "bugExplanation": "The original code was trying to slice the list from index 1 to 3 and then from index 1 to 4, but the original code will slice up to but not including the stop index.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "[[5, 6, 7], [9, 10, 11]]"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "4958436b-afb2-41b2-93f1-bff275c4b18b",
+      "title": "Slice and Dice",
+      "difficulty": "Beginner",
+      "concepts": [
+        "slicing"
+      ],
+      "context": "You're trying to extract the last three elements from a list of exam scores and display them as a tuple.",
+      "buggyCode": "# Goal: Extract the last three exam scores from scores_list and print them as a tuple.\nlist_scores = [85, 90, 78, 95, 88, 92]\nexam_scores = list_scores[-1:]\nprint(exam_scores)",
+      "solutionCode": "# Goal: Extract the last three exam scores from scores_list and print them as a tuple.\nlist_scores = [85, 90, 78, 95, 88, 92]\nexam_scores = list_scores[-3:]\nprint(exam_scores)",
+      "expectedLogic": [
+        "1. Access the last three elements from the list_scores using slicing.",
+        "2. Assign the result to the exam_scores variable.",
+        "3. Print the exam_scores as a tuple."
+      ],
+      "stripVariables": [
+        "list_scores",
+        "exam_scores"
+      ],
+      "hints": [
+        "Hint: Make sure to use negative indexing correctly.",
+        "Hint: Think about how many elements you need to slice from the list."
+      ],
+      "bugExplanation": "The code should use -3: to get the last three elements, not just -1:.",
+      "testCases": [
+        {
+          "setupCode": "list_scores = [85, 90, 78, 95, 88, 92]",
+          "expectedOutput": "[88, 92, 95]"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "33a30199-42e5-481c-a328-3d52b8f20507",
+      "title": "Divide and Conquer",
+      "difficulty": "Beginner",
+      "concepts": [
+        "arithmetic"
+      ],
+      "context": "Tom needs to calculate how many groups of 5 friends can be made from a list of students. He's written a function to do this, but it's not working as expected.",
+      "buggyCode": "# Goal: Calculate how many groups of 5 friends can be made from a list of students\nstudents = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\ndef calculate_groups(students):\n    return students / 5\nprint(calculate_groups(students))",
+      "solutionCode": "# Goal: Calculate how many groups of 5 friends can be made from a list of students\nstudents = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\ndef calculate_groups(students):\n    return len(students) // 5\nprint(calculate_groups(students))",
+      "expectedLogic": [
+        1,
+        "Calculate the total number of students",
+        2,
+        "Divide the total number of students by the number of friends per group"
+      ],
+      "stripVariables": [
+        "students"
+      ],
+      "hints": [
+        "Think about what division does in Python. It returns a float, not an integer.",
+        "You need to calculate the integer division of the total number of students by the number of friends per group."
+      ],
+      "bugExplanation": "The original code is trying to divide a list of students by the number of friends per group. This will return a float, not an integer, which is not the desired result.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "2"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "4f7b6302-2e65-4bab-93da-664b4955100c",
+      "title": "Rounding Up",
+      "difficulty": "Explorer",
+      "concepts": [
+        "arithmetic"
+      ],
+      "context": "A company needs to ship a certain number of packages. Each package requires a certain number of boxes. They want to calculate how many boxes they need to ship, but they can't have any leftover boxes.",
+      "buggyCode": "# Goal: Calculate the total number of boxes needed to ship a certain number of packages\npackages = 10\nboxes_per_package = 3\ndef calculate_boxes(packages, boxes_per_package):\n    return math.ceil(packages * boxes_per_package)\nimport math\nprint(calculate_boxes(packages, boxes_per_package))",
+      "solutionCode": "# Goal: Calculate the total number of boxes needed to ship a certain number of packages\npackages = 10\nboxes_per_package = 3\ndef calculate_boxes(packages, boxes_per_package):\n    return math.ceil((packages + boxes_per_package - 1) / boxes_per_package)\nimport math\nprint(calculate_boxes(packages, boxes_per_package))",
+      "expectedLogic": [
+        1,
+        "Calculate the total number of packages",
+        2,
+        "Multiply the total number of packages by the number of boxes per package",
+        3,
+        "Use the ceiling function to round up to the nearest whole number"
+      ],
+      "stripVariables": [
+        "packages",
+        "boxes_per_package"
+      ],
+      "hints": [
+        "Think about how the ceiling function works. It rounds up to the nearest whole number.",
+        "You need to modify the original code to round up to the nearest whole number of boxes needed."
+      ],
+      "bugExplanation": "The original code is using the ceiling function to round up to the nearest whole number, but it's not doing it correctly.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "31"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "15cc650e-39b7-4fc2-a7ca-618889ac9a7d",
+      "title": "Floating Point Arithmetic",
+      "difficulty": "Builder",
+      "concepts": [
+        "arithmetic"
+      ],
+      "context": "A software engineer needs to calculate the sum of a list of numbers, but the results are not accurate due to floating point precision issues.",
+      "buggyCode": "# Goal: Calculate the sum of a list of numbers\nnumbers = [1.1, 2.2, 3.3, 4.4, 5.5]\ndef calculate_sum(numbers):\n    return sum(numbers)\nprint(calculate_sum(numbers))",
+      "solutionCode": "# Goal: Calculate the sum of a list of numbers\nnumbers = [1.1, 2.2, 3.3, 4.4, 5.5]\ndef calculate_sum(numbers):\n    return sum([round(num, 10) for num in numbers])\nprint(calculate_sum(numbers))",
+      "expectedLogic": [
+        1,
+        "Calculate the sum of the list of numbers",
+        2,
+        "Round each number to 10 decimal places before summing"
+      ],
+      "stripVariables": [
+        "numbers"
+      ],
+      "hints": [
+        "Think about how floating point numbers are represented in computers. They're not always exactly equal to the actual value.",
+        "You need to round each number to a high precision before summing them to get accurate results."
+      ],
+      "bugExplanation": "The original code is not handling floating point precision issues correctly.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "16.6"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "7eb6bd0c-628e-47f7-85b3-0b400368a163",
+      "title": "Integer Division",
+      "difficulty": "Beginner",
+      "concepts": [
+        "arithmetic"
+      ],
+      "context": "A game developer needs to calculate the number of turns it will take for a character to reach a certain distance. However, the character can only move a certain number of steps at a time.",
+      "buggyCode": "# Goal: Calculate the number of turns it will take for a character to reach a certain distance\nsteps_per_turn = 5\ndef calculate_turns(distance):\n    return distance / steps_per_turn\nprint(calculate_turns(15))",
+      "solutionCode": "# Goal: Calculate the number of turns it will take for a character to reach a certain distance\nsteps_per_turn = 5\ndef calculate_turns(distance):\n    return distance // steps_per_turn\nprint(calculate_turns(15))",
+      "expectedLogic": [
+        1,
+        "Calculate the number of steps per turn",
+        2,
+        "Divide the total distance by the number of steps per turn to get the number of turns"
+      ],
+      "stripVariables": [
+        "steps_per_turn"
+      ],
+      "hints": [
+        "Think about what division does in Python. It returns a float, not an integer.",
+        "You need to use integer division to get the correct number of turns."
+      ],
+      "bugExplanation": "The original code is trying to divide a distance by the number of steps per turn. This will return a float, not an integer, which is not the desired result.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "3"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "9db2bdf4-bffb-4f5c-8783-c30eef8302a5",
+      "title": "Arithmetic Error: Incorrect Division",
+      "difficulty": "Beginner",
+      "concepts": [
+        "arithmetic",
+        "integer division"
+      ],
+      "context": "A simple calculator program that takes in two numbers and a string operator.\nYou are tasked with adding a feature to handle division.",
+      "buggyCode": "def calculate(x, y, operator):\n  if operator == 'add':\n    return x + y\n  elif operator == 'subtract':\n    return x - y\n  elif operator == 'multiply':\n    return x * y\n  elif operator == 'divide':\n\n    return y / x\nresult = calculate(5, 2, 'divide')\nprint(result)",
+      "solutionCode": "def calculate(x, y, operator):\n  if operator == 'add':\n    return x + y\n  elif operator == 'subtract':\n    return x - y\n  elif operator == 'multiply':\n    return x * y\n  elif operator == 'divide':\n    return float(x) / y\nresult = calculate(5, 2, 'divide')\nprint(result)",
+      "expectedLogic": "1. Define a function calculate that takes in three parameters: x, y, and operator.\n2. Inside the function, use if-elif statements to determine which operation to perform.\n3. For division, use the float division operator (/) to ensure a decimal result.\n4. Test the function with x = 5, y = 2, and operator = 'divide'.",
+      "stripVariables": [
+        "x",
+        "y",
+        "operator",
+        "result"
+      ],
+      "hints": [
+        "Check the division operator (/) and what division operation you want to perform.",
+        "Consider what happens if you simply swap x and y in the division. Think about the result."
+      ],
+      "bugExplanation": "In the buggy code, the division is performed by simply returning y / x, which is the inverse operation of what is expected. This results in incorrect results.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "2.5"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "b27291f9-f987-4deb-989f-7cbfd880d04c",
+      "title": "Favoriting Songs",
+      "difficulty": "Beginner",
+      "concepts": [
+        "comparisons",
+        "dictionaries"
+      ],
+      "context": "As a music streaming service user, you want to add songs to your favorites list based on your ratings. However, you need to ensure that you don't add the same song multiple times.",
+      "buggyCode": "# Goal: Add song to favorites list if it has a higher rating than the existing favorite\nsongs = {'Song A': 5, 'Song B': 4}\nnew_song = {'Song C': 6}\ndef add_song_to_favorites(songs, new_song):\n  for song, rating in new_song.items():\n    if song in songs and rating > songs[song]:\n      songs[song] = rating\n  return songs\nsongs = add_song_to_favorites(songs, new_song)\nprint(songs)",
+      "solutionCode": "# Goal: Add song to favorites list if it has a higher rating than the existing favorite\nsongs = {'Song A': 5, 'Song B': 4}\nnew_song = {'Song C': 6}\ndef add_song_to_favorites(songs, new_song):\n  for song, rating in new_song.items():\n    if song in songs and rating > songs[song]:\n      songs[song] = rating\n  return songs\nsongs = add_song_to_favorites(songs, new_song)\nprint(songs)",
+      "expectedLogic": [
+        "Iterate over the new_song dictionary to access its items (song, rating).",
+        "For each song in new_song, check if it's already in songs.",
+        "If the song is already in songs and its rating is higher than the existing rating, update the rating in songs.",
+        "Return the updated songs dictionary.",
+        "Call add_song_to_favorites with songs and new_song as arguments.",
+        "Print the updated songs dictionary."
+      ],
+      "stripVariables": [
+        "songs",
+        "new_song"
+      ],
+      "hints": [
+        "What if the rating is the same as the existing rating?",
+        "Check the initial ratings and new song ratings carefully."
+      ],
+      "bugExplanation": "The bug is in the line where the rating is updated. If the rating is the same as the existing rating, it should not be updated.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "{'Song A': 5, 'Song B': 4, 'Song C': 6}"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "6e08dda5-e380-48e5-b803-c644486c441d",
+      "title": "Comparing Student Grades",
+      "difficulty": "Explorer",
+      "concepts": [
+        "comparisons",
+        "lists"
+      ],
+      "context": "As a teacher, you want to compare the grades of your students. You have a list of student names and their corresponding grades.",
+      "buggyCode": "# Goal: Find the students with the highest grade in each subject\nstudents = [{'name': 'Alice', 'Math': 90, 'Science': 80}, {'name': 'Bob', 'Math': 80, 'Science': 90}]\ndef find_highest_grader(students):\n\n  highest_subject = max(students, key=lambda x: x['Math'])\n  return highest_subject['name']\nprint(find_highest_grader(students))",
+      "solutionCode": "# Goal: Find the students with the highest grade in each subject\nstudents = [{'name': 'Alice', 'Math': 90, 'Science': 80}, {'name': 'Bob', 'Math': 80, 'Science': 90}]\ndef find_highest_grader(students):\n\n  highest_subjects = {subject: max([x[subject] for x in students]) for subject in students[0].keys()}\n  return {subject: [x['name'] for x in students if x[subject] == highest_subjects[subject]][0] for subject in highest_subjects}\nprint(find_highest_grader(students))",
+      "expectedLogic": [
+        "Iterate over each student in the students list to access their items (name, Math, Science).",
+        "For each subject, find the maximum grade among all students.",
+        "Return a dictionary with the subject as the key and the student with the highest grade as the value.",
+        "Call find_highest_grader with students as an argument.",
+        "Print the result."
+      ],
+      "stripVariables": [
+        "students"
+      ],
+      "hints": [
+        "What if there are multiple students with the same highest grade?",
+        "Think about how to find the student with the highest grade for each subject."
+      ],
+      "bugExplanation": "The bug is in the line where the highest subject is found. The max function is used with the entire students list as the key, which is incorrect. We need to find the maximum grade for each subject separately.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "{'Math': 'Alice', 'Science': 'Bob'}"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "d4d0fc49-2db2-45bb-bd91-553e98b5f225",
+      "title": "Finding the Smallest Number",
+      "difficulty": "Explorer",
+      "concepts": [
+        "comparisons",
+        "lists"
+      ],
+      "context": "As a developer, you want to find the smallest number in a list of numbers.",
+      "buggyCode": "# Goal: Find the smallest number in a list\nnumbers = [10, 5, 20, 3, 15]\ndef find_smallest_number(numbers):\n\n  smallest_number = numbers[0]\n  for number in numbers[1:]:\n    if number > smallest_number:\n      smallest_number = number\n  return smallest_number\nprint(find_smallest_number(numbers))",
+      "solutionCode": "# Goal: Find the smallest number in a list\nnumbers = [10, 5, 20, 3, 15]\ndef find_smallest_number(numbers):\n\n  smallest_number = min(numbers)\n  return smallest_number\nprint(find_smallest_number(numbers))",
+      "expectedLogic": [
+        "Find the smallest number in the list using the built-in min function.",
+        "Return the smallest number.",
+        "Call find_smallest_number with numbers as an argument.",
+        "Print the result."
+      ],
+      "stripVariables": [
+        "numbers"
+      ],
+      "hints": [
+        "What if the list is empty?",
+        "Think about how to find the smallest number in the list efficiently."
+      ],
+      "bugExplanation": "The bug is in the line where the smallest number is found. We iterate over the list to find the smallest number, but we can use the built-in min function which is more efficient.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "3"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "48755c50-5a6d-46fc-b25d-e64ca67c25cb",
+      "title": "Comparing Integers",
+      "difficulty": "Explorer",
+      "concepts": [
+        "comparisons"
+      ],
+      "context": "You have been tasked with writing a function that takes two integers as input and returns 'greater' if the first integer is larger, 'equal' if they are equal, and 'less' if the first integer is smaller. However, you notice that your function is not working correctly.",
+      "buggyCode": "# Goal: compare two integers and return the relationship\ndef compare(x, y):\n  if x > y:\n    return 'not greater'\n  elif x == y:\n    return 'not equal'\n  else:\n    return 'not less'\nprint(compare(5, 3))\nprint(compare(5, 5))\nprint(compare(3, 5))\n",
+      "solutionCode": "# Goal: compare two integers and return the relationship\ndef compare(x, y):\n  if x > y:\n    return 'greater'\n  elif x == y:\n    return 'equal'\n  else:\n    return 'less'\nprint(compare(5, 3))\nprint(compare(5, 5))\nprint(compare(3, 5))\n",
+      "expectedLogic": [
+        "1. The function should take two integers as input.",
+        "2. It should compare the two integers and return a string indicating their relationship.",
+        "3. If the first integer is greater than the second, return 'greater'.",
+        "4. If the first integer is equal to the second, return 'equal'.",
+        "5. If the first integer is less than the second, return 'less'."
+      ],
+      "stripVariables": [
+        "compare",
+        "x",
+        "y"
+      ],
+      "hints": [
+        "Think about what the return statements should be when the integers are not equal.",
+        "Consider what the return statements should be when the integers are equal."
+      ],
+      "bugExplanation": "The original code had incorrect return statements for the 'greater' and 'less' cases.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "greater\nequal\nless"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "b6af6ff3-816a-405d-84bd-19b14cd1ef6d",
+      "title": "Comparing Strings",
+      "difficulty": "Beginner",
+      "concepts": [
+        "comparisons"
+      ],
+      "context": "You are writing a function that takes two strings as input and returns 'alphabetically_before' if the first string comes before the second string alphabetically, 'alphabetically_after' if the second string comes before the first string alphabetically, and 'equal' if they are equal. However, you notice that your function is not working correctly.",
+      "buggyCode": "# Goal: compare two strings alphabetically and return the relationship\ndef compare(str1, str2):\n  if str1 < str2:\n    return 'alphabetically_after'\n  elif str1 == str2:\n    return 'alphabetically_before'\n  else:\n    return 'alphabetically_after'\nprint(compare('apple', 'banana'))\nprint(compare('apple', 'apple'))\nprint(compare('banana', 'apple'))\n",
+      "solutionCode": "# Goal: compare two strings alphabetically and return the relationship\ndef compare(str1, str2):\n  if str1 < str2:\n    return 'alphabetically_before'\n  elif str1 == str2:\n    return 'equal'\n  else:\n    return 'alphabetically_after'\nprint(compare('apple', 'banana'))\nprint(compare('apple', 'apple'))\nprint(compare('banana', 'apple'))\n",
+      "expectedLogic": [
+        "1. The function should take two strings as input.",
+        "2. It should compare the two strings alphabetically and return a string indicating their relationship.",
+        "3. If the first string comes before the second string alphabetically, return 'alphabetically_before'.",
+        "4. If the first string is equal to the second string alphabetically, return 'equal'.",
+        "5. If the second string comes before the first string alphabetically, return 'alphabetically_after'."
+      ],
+      "stripVariables": [
+        "compare",
+        "str1",
+        "str2"
+      ],
+      "hints": [
+        "Think about what the return statements should be when the first string comes before the second string alphabetically.",
+        "Consider what the return statements should be when the first string is equal to the second string alphabetically."
+      ],
+      "bugExplanation": "The original code had incorrect return statements for the 'alphabetically_before' and 'alphabetically_after' cases.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "alphabetically_before\nalphabetically_before\nequal"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "37aba1bb-0eb1-4512-94e6-bb3c5dc18b8f",
+      "title": "Using Conditional Statements with Multiple Conditions",
+      "difficulty": "Builder",
+      "concepts": [
+        "conditionals"
+      ],
+      "context": "You are building a program to determine the grade of a student based on their score and attendance. If their score is above 90 and their attendance is above 90%, they get an A. If their score is between 80 and 90 and their attendance is above 90%, they get a B. If their score is below 80 and their attendance is above 50%, they get a C.",
+      "buggyCode": "# Goal: Determine the grade of a student based on their score and attendance\ndef calculate_grade(score, attendance):\n    if score > 90 and attendance > 90:\n        return 'Grade: A'\n    elif score > 90 and attendance < 90:\n        return 'Grade: B'\n    else:\n        return 'Grade: C'\nscore = 85\nattendance = 0.8\ncalculate_grade(score, attendance)",
+      "solutionCode": "# Goal: Determine the grade of a student based on their score and attendance\ndef calculate_grade(score, attendance):\n    if score > 90 and attendance > 90:\n        return 'Grade: A'\n    elif score > 80 and score <= 90 and attendance > 90:\n        return 'Grade: B'\n    elif score < 80 and attendance > 50:\n        return 'Grade: C'\n    else:\n        return 'Grade: F'\nscore = 85\nattendance = 0.8\ncalculate_grade(score, attendance)",
+      "expectedLogic": [
+        "1. Check if the score is above 90 and the attendance is above 90%. If so, return 'Grade: A'.",
+        "2. Check if the score is between 80 and 90 and the attendance is above 90%. If so, return 'Grade: B'.",
+        "3. Check if the score is below 80 and the attendance is above 50%. If so, return 'Grade: C'."
+      ],
+      "stripVariables": [
+        "score",
+        "attendance"
+      ],
+      "hints": [
+        "Hint 1: Use elif statements to check for different score and attendance combinations.",
+        "Hint 2: Ensure you're checking for the correct conditions in each elif statement."
+      ],
+      "bugExplanation": "The original code failed because it didn't handle the case where the score is between 80 and 90 and the attendance is above 90%, and the case where the score is below 80 and the attendance is above 50%.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "Grade: B"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "c7f925bb-4029-4427-a2a3-26fd1da40fc5",
+      "title": "Even or Odd Number",
+      "difficulty": "Beginner",
+      "concepts": [
+        "conditionals"
+      ],
+      "context": "Write a program that asks the user for a number and then tells them if it's even or odd. If the number is not an integer, the program should print an error message.",
+      "buggyCode": "# Goal: Ask the user for a number and tell them if it's even or odd\nnumber = input('Enter a number: ')\nif number % 2 == 0:\n    print('The number is even')\n    print('The number is odd')\nelse:\n    print('The number is odd')",
+      "solutionCode": "# Goal: Ask the user for a number and tell them if it's even or odd\nnumber = input('Enter a number: ')\ntry:\n    number = int(number)\n    if number % 2 == 0:\n        print('The number is even')\n    else:\n        print('The number is odd')\nexcept ValueError:\n    print('Error: Please enter an integer')",
+      "expectedLogic": "1. Ask the user for a number.\n2. Attempt to convert the user's input into an integer.\n3. If the conversion fails, print an error message and exit.\n4. If the conversion succeeds, check if the number is even by using the modulo operator.\n5. Print whether the number is even or odd based on the result of the modulo operation.",
+      "stripVariables": [
+        "number"
+      ],
+      "hints": [
+        "Check how the user's input is converted into an integer.",
+        "Think about what happens when the user enters something that can't be converted into an integer."
+      ],
+      "bugExplanation": "The buggy code fails to convert the user's input into an integer before checking if it's even or odd. This means that the program will try to check if a string is even or odd, which will always print both messages, not just one.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "Error: Please enter an integer"
+        },
+        {
+          "setupCode": "",
+          "expectedOutput": "The number is odd"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "f9e89dfd-aff7-4134-adb3-46777fc1ae3c",
+      "title": "Guess My Number",
+      "difficulty": "Explorer",
+      "concepts": [
+        "conditionals"
+      ],
+      "context": "Create a program that allows the user to guess a number between 1 and 100.\nThe program should respond with one of 'too high', 'too low', or 'correct!' based on the user's guess.\n\nYour task is to implement the logic to determine the correct response.",
+      "buggyCode": "# Goal: Determine the correct response to the user's guess\nimport random\nnumber_to_guess = random.randint(1, 100)\nguess = int(input('Guess a number between 1 and 100: '))\nwhile guess != number_to_guess:\n    if guess < number_to_guess:\n        print('Too low')\n    elif guess > number_to_guess:\n        print('Too high')\n    else:\n        print('You win!')",
+      "solutionCode": "# Goal: Determine the correct response to the user's guess\nimport random\nnumber_to_guess = random.randint(1, 100)\nguess = int(input('Guess a number between 1 and 100: '))\nwhile guess != number_to_guess:\n    if guess < number_to_guess:\n        print('Too low')\n    else:\n        print('Too high')",
+      "expectedLogic": "1. Generate a random number between 1 and 100.\n2. Get the user's guess from the input function and convert it to an integer.\n3. Use a while loop to repeatedly ask the user for their guess until it matches the randomly generated number.\n4. Inside the loop, compare the guess with the randomly generated number using if-elif statements.\n5. If the guess is less than the number, print 'Too low'.\n6. If the guess is greater than the number, print 'Too high'.\n7. If the guess matches the number, print 'You win!' (in the solution code).",
+      "stripVariables": [
+        "number_to_guess",
+        "guess"
+      ],
+      "hints": [
+        "Consider what happens when the user guesses the correct number, but then they guess again (which should not happen).",
+        "Why do we need an else statement in the solution code? Think about the case when the guess is greater than the number."
+      ],
+      "bugExplanation": "The original code does not handle the case when the user guesses the correct number and then they guess again. It also does not print the correct response when the guess is greater than the number.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "Guess a number between 1 and 100: 50\nToo low\nGuess a number between 1 and 100: 75\nToo high"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "24dba5ea-7a2c-483d-867e-f415451c97fd",
+      "title": "Simple Calculator",
+      "difficulty": "Builder",
+      "concepts": [
+        "conditionals"
+      ],
+      "context": "Create a simple calculator that can perform addition, subtraction, multiplication, and division.\nThe user should be able to input a mathematical expression as a string.\n\nYour task is to implement the logic to evaluate the expression.",
+      "buggyCode": "# Goal: Evaluate a mathematical expression as a string\nimport re\nexpression = input('Enter a mathematical expression: ')\ntry:\n    result = eval(expression)\n    print('Result:', result)\nexcept Exception as e:\n    print('Error:', str(e))",
+      "solutionCode": "# Goal: Evaluate a mathematical expression as a string\nimport re\nimport math\nexpression = input('Enter a mathematical expression: ')\ntry:\n    if re.match('^[+-]?\\d+(\\.\\d+)?[\\+\\-*/](\\d+(\\.\\d+)?)*$', expression):\n        result = eval(expression)\n        print('Result:', result)\n    else:\n        print('Invalid expression!')\nexcept Exception as e:\n    print('Error:', str(e))",
+      "expectedLogic": "1. Get the user's input as a mathematical expression as a string.\n2. Use a regular expression to check if the expression is valid.\n3. If the expression is valid, use the eval function to evaluate it.\n4. Catch any exceptions that occur during evaluation and print an error message.\n5. If the expression is invalid, print 'Invalid expression!' (in the solution code).",
+      "stripVariables": [
+        "expression",
+        "result"
+      ],
+      "hints": [
+        "Consider how to handle expressions with multiple operators (e.g. 2+3*4).",
+        "What about expressions with invalid characters (e.g. 2+a*4)?"
+      ],
+      "bugExplanation": "The original code does not handle expressions with multiple operators or invalid characters.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "Enter a mathematical expression: 2+3\nResult: 5"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "21e30af6-1904-4cca-bbff-1df62d22d89d",
+      "title": "Weather Alert System",
+      "difficulty": "Beginner",
+      "concepts": [
+        "conditionals",
+        "logic"
+      ],
+      "context": "You are designing a simple weather alert system that sends a message based on the temperature. If it's below 0°C, the system should send a message saying 'It's freezing', otherwise it should say 'It's not freezing'.",
+      "buggyCode": "# Goal: Send a weather message based on the temperature\nif temp < 0:\n    print(\"It's not freezing, it's actually warm\")\nelse:\n    print(\"It's freezing\")\n",
+      "solutionCode": "# Goal: Send a weather message based on the temperature\nif temp < 0:\n    print(\"It's freezing\")\nelse:\n    print(\"It's not freezing\")\n",
+      "expectedLogic": [
+        "1. Ask the user for the temperature",
+        "2. Check if the temperature is less than 0",
+        "3. If the temperature is less than 0, print 'It's freezing'",
+        "4. If the temperature is not less than 0, print 'It's not freezing'"
+      ],
+      "stripVariables": [
+        "temp"
+      ],
+      "hints": [
+        "Think about what you want to happen when the temperature is less than 0",
+        "Double-check your print statements"
+      ],
+      "bugExplanation": "The original code sends a message saying it's not freezing when the temperature is actually below 0°C.",
+      "testCases": [
+        {
+          "setupCode": "temp = -5\n",
+          "expectedOutput": "It's freezing"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "399b115b-6d07-4ac7-969f-d5a285192b62",
+      "title": "Fizz Buzz Counter",
+      "difficulty": "Beginner",
+      "concepts": [
+        "control flow"
+      ],
+      "context": "You are tasked with writing a program that prints out the numbers from 1 to 100, but for multiples of 3, it should print 'Fizz' instead of the number, and for the multiples of 5, it should print 'Buzz'. For numbers which are multiples of both 3 and 5, it should print 'FizzBuzz'.",
+      "buggyCode": "# Goal: Print Fizz Buzz numbers\nfor i in range(1, 101):\n    if i % 3 == 0:\n        print('Fizz' if i % 5 == 0 else i)\n    else:\n        print(i)\n",
+      "solutionCode": "# Goal: Print Fizz Buzz numbers\nfor i in range(1, 101):\n    if i % 15 == 0:\n        print('FizzBuzz')\n    elif i % 3 == 0:\n        print('Fizz')\n    elif i % 5 == 0:\n        print('Buzz')\n    else:\n        print(i)\n",
+      "expectedLogic": "1. Iterate over the numbers 1 to 100.\n2. For each number, check if it is a multiple of 3 and/or 5.\n3. If it is a multiple of both 3 and 5, print 'FizzBuzz'.\n4. If it is only a multiple of 3, print 'Fizz'.\n5. If it is only a multiple of 5, print 'Buzz'.\n6. If it is not a multiple of either 3 or 5, print the number itself.",
+      "stripVariables": [
+        "i"
+      ],
+      "hints": [
+        "Check your logic for what numbers to print when.",
+        "Think about the correct conditions for printing 'FizzBuzz'."
+      ],
+      "bugExplanation": "The code had a problem with the conditions for when to print 'FizzBuzz'. It was trying to print 'Fizz' if i % 5 == 0, which is the condition for when to print 'Buzz'.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n16\n17\nFizz\n19\nBuzz\nFizz\n22\n23\nFizz\nBuzz\n26\n27\nFizz\n29\n30\nFizzBuzz\n"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "8cc06094-e7bb-49f6-b0e6-12a68092793d",
+      "title": "Conditional Logic Loop",
+      "difficulty": "Explorer",
+      "concepts": [
+        "control flow"
+      ],
+      "context": "You are tasked with writing a program that prints out the numbers from 1 to 10, but if a number is less than 5, it should print 'Less than 5' instead of the number.",
+      "buggyCode": "# Goal: Print numbers or 'Less than 5' depending on condition\nfor i in range(1, 11):\n    if i <= 5:\n        print('Less than 5')\n    else:\n        print(i)\n",
+      "solutionCode": "# Goal: Print numbers or 'Less than 5' depending on condition\nfor i in range(1, 11):\n    if i < 5:\n        print('Less than 5')\n    else:\n        print(i)\n",
+      "expectedLogic": "1. Iterate over the numbers 1 to 10.\n2. For each number, check if it is less than 5.\n3. If it is less than 5, print 'Less than 5'.\n4. If it is not less than 5, print the number itself.",
+      "stripVariables": [
+        "i"
+      ],
+      "hints": [
+        "Think about when 'Less than 5' should be printed.",
+        "Remember that we are looking for numbers LESS than 5, not LESS THAN OR EQUAL TO 5."
+      ],
+      "bugExplanation": "The code had a problem with the condition for when to print 'Less than 5'. It was using i <= 5, which includes the number 5 itself.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "1\nLess than 5\n3\nLess than 5\n5\n6\nLess than 5\n8\nLess than 5\n10\n"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "b52b5704-6115-4e67-8c59-e0118d73b7d0",
+      "title": "Nested Conditional Logic",
+      "difficulty": "Builder",
+      "concepts": [
+        "control flow"
+      ],
+      "context": "You are tasked with writing a program that prints out the numbers from 1 to 10, but if a number is less than 5, it should print 'Less than 5' instead of the number. If the number is also even, it should print 'Even Less than 5'.",
+      "buggyCode": "# Goal: Print numbers or 'Less than 5' or 'Even Less than 5' depending on conditions\nfor i in range(1, 11):\n    if i <= 5:\n        print('Less than 5')\n    elif i >= 5:\n        if i % 2 == 0:\n            print('Even Less than 5')\n        else:\n            print('More than 5')\n",
+      "solutionCode": "# Goal: Print numbers or 'Less than 5' or 'Even Less than 5' depending on conditions\nfor i in range(1, 11):\n    if i < 5:\n        if i % 2 == 0:\n            print('Even Less than 5')\n        else:\n            print('Less than 5')\n    else:\n        print(i)\n",
+      "expectedLogic": "1. Iterate over the numbers 1 to 10.\n2. For each number, check if it is less than 5.\n3. If it is less than 5, check if it is even or odd.\n4. If it is even and less than 5, print 'Even Less than 5'.\n5. If it is odd and less than 5, print 'Less than 5'.\n6. If it is not less than 5, print the number itself.",
+      "stripVariables": [
+        "i"
+      ],
+      "hints": [
+        "Think about when 'Less than 5', 'Even Less than 5', and the number itself should be printed.",
+        "Remember that we are looking for numbers LESS than 5, not LESS THAN OR EQUAL TO 5."
+      ],
+      "bugExplanation": "The code had problems with the conditions for when to print 'Less than 5' and 'Even Less than 5'. It was using i <= 5 and i >= 5, which are both incorrect, and it was also using the wrong conditions for when to print 'Even Less than 5'.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "1\nEven Less than 5\n3\nLess than 5\n5\n6\nEven Less than 5\n8\nLess than 5\n10\n"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "e20fb877-bfef-41db-903c-7347819a1ddd",
+      "title": "While Loop with Break",
+      "difficulty": "Builder",
+      "concepts": [
+        "control flow"
+      ],
+      "context": "You are tasked with writing a program that prints out the numbers from 1 to 10, but if a number is greater than 5, it should break out of the loop and not print the number.",
+      "buggyCode": "# Goal: Print numbers or break out of loop depending on condition\ni = 1\nwhile i <= 10:\n    if i >= 6:\n        break\n    print(i)\n",
+      "solutionCode": "# Goal: Print numbers or break out of loop depending on condition\ni = 1\nwhile i <= 10:\n    if i > 5:\n        break\n    print(i)\n",
+      "expectedLogic": "1. Initialize a variable i to 1.\n2. Enter a while loop that continues as long as i is less than or equal to 10.\n3. In the loop, check if i is greater than 5.\n4. If i is greater than 5, break out of the loop.\n5. If i is not greater than 5, print i.",
+      "stripVariables": [
+        "i"
+      ],
+      "hints": [
+        "Think about when the loop should break.",
+        "Remember that we are looking for numbers GREATER THAN 5, not GREATER THAN OR EQUAL TO 5."
+      ],
+      "bugExplanation": "The code had a problem with the condition for when to break out of the loop. It was using i >= 6, which includes the number 6 itself, instead of i > 5.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "1\n2\n3\n4\n5\n"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "456d57c8-f549-4848-8b0e-3f8b163c8cee",
+      "title": "Ternary Operator with Logical OR",
+      "difficulty": "Builder",
+      "concepts": [
+        "control flow"
+      ],
+      "context": "You are tasked with writing a program that prints out the numbers from 1 to 10, but if a number is even or greater than 5, it should print 'Special' instead of the number.",
+      "buggyCode": "# Goal: Print numbers or 'Special' depending on conditions\nfor i in range(1, 11):\n    print(i if (i % 2 == 0 or i > 5) else 'Special')\n",
+      "solutionCode": "# Goal: Print numbers or 'Special' depending on conditions\nfor i in range(1, 11):\n    if (i % 2 == 0 or i > 5):\n        print('Special')\n    else:\n        print(i)\n",
+      "expectedLogic": "1. Iterate over the numbers 1 to 10.\n2. For each number, check if it is even or greater than 5.\n3. If it is even or greater than 5, print 'Special'.\n4. If it is not even or not greater than 5, print the number itself.",
+      "stripVariables": [
+        "i"
+      ],
+      "hints": [
+        "Think about when 'Special' should be printed.",
+        "Remember that we are using a logical OR operator, so we need to check both conditions separately."
+      ],
+      "bugExplanation": "The code had a problem with the way it was using the ternary operator. It was trying to print 'Special' if the number was even or greater than 5, but the ternary operator was not formatted correctly.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "1\n2\nSpecial\n4\nSpecial\n6\nSpecial\n8\nSpecial\n10\n"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "55e14c93-8e0b-4752-ada7-3ffa36efcad6",
+      "title": "Student Grades Calculator",
+      "difficulty": "Explorer",
+      "concepts": [
+        "dictionaries"
+      ],
+      "context": "Mr. Smith has a dictionary of students and their grades. He wants to calculate the average grade for each student.",
+      "buggyCode": "def calculate_average(grades):\n            for student, score in grades.items():\n                total = 0\n                count = 0\n                for score2 in grades[student]:\n                    total += score2\n                    count += 1\n                print(student, total / count)\n\ngrade_dict = {'John': [90, 80, 70], 'Jane': [60, 50, 40]}\ncalculate_average(grade_dict)",
+      "solutionCode": "def calculate_average(grades):\n            for student, score_list in grades.items():\n                total = sum(score_list)\n                count = len(score_list)\n                average = total / count\n                print(student, average)\n\ngrade_dict = {'John': [90, 80, 70], 'Jane': [60, 50, 40]}\ncalculate_average(grade_dict)",
+      "expectedLogic": [
+        "1. Initialize a function `calculate_average` that accepts a dictionary of student grades.",
+        "2. Iterate over each student and their grade list in the input dictionary.",
+        "3. For each student, calculate the sum of their grades and count the number of grades.",
+        "4. Calculate the average grade by dividing the sum by the count.",
+        "5. Print the student's name and their average grade."
+      ],
+      "stripVariables": [
+        "grades",
+        "score",
+        "student",
+        "score2",
+        "total",
+        "count"
+      ],
+      "hints": [
+        "Hint 1: Think about how to correctly access the grade list for each student.",
+        "Hint 2: Consider using the built-in `sum` function to calculate the total grade."
+      ],
+      "bugExplanation": "The original code tries to access each grade as an element of the student's list of grades, which is incorrect.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "John 80.0\nJane 50.0"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "5b89969a-8f50-48bd-b1a4-ff47cd9efa60",
+      "title": "Fruit Inventory",
+      "difficulty": "Beginner",
+      "concepts": [
+        "dictionaries"
+      ],
+      "context": "A farmer has a dictionary of fruits and their quantities. He wants to update the quantity of apples.",
+      "buggyCode": "inventory = {'apples': 5, 'bananas': 10}\ninventory['apples'] += 1",
+      "solutionCode": "inventory = {'apples': 5, 'bananas': 10}\ninventory['apples'] += 1",
+      "expectedLogic": [
+        "1. Initialize a dictionary `inventory` with the current quantities of fruits.",
+        "2. Use the syntax `inventory['apples'] += 1` to increment the quantity of apples by 1."
+      ],
+      "stripVariables": [
+        "inventory",
+        "apples",
+        "bananas"
+      ],
+      "hints": [],
+      "bugExplanation": "This code does not actually update the quantity of apples because it does not use the correct syntax to increment the value in the dictionary.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "{'apples': 6, 'bananas': 10}"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "8f52f613-3da3-42d9-958f-b6c212932979",
+      "title": "User Data",
+      "difficulty": "Explorer",
+      "concepts": [
+        "dictionaries"
+      ],
+      "context": "A company has a dictionary of user data. They want to add a new user.",
+      "buggyCode": "user_data = {'John': {'age': 30, 'city': 'New York'}, 'Jane': {'age': 25, 'city': 'San Francisco'}}\nuser_data['John']['age'] = 31",
+      "solutionCode": "user_data = {'John': {'age': 30, 'city': 'New York'}, 'Jane': {'age': 25, 'city': 'San Francisco'}}\nnew_user = {'age': 35, 'city': 'Chicago'}\nuser_data['Bob'] = new_user",
+      "expectedLogic": [
+        "1. Initialize a nested dictionary `user_data` with user names as keys and dictionaries of user data as values.",
+        "2. Create a new dictionary `new_user` with the user's data.",
+        "3. Add the new user to the `user_data` dictionary using the syntax `user_data['Bob'] = new_user`."
+      ],
+      "stripVariables": [
+        "user_data",
+        "John",
+        "Jane",
+        "age",
+        "city",
+        "New York",
+        "San Francisco",
+        "Bob",
+        "new_user"
+      ],
+      "hints": [
+        "Hint 1: Think about how to create a new dictionary for the new user.",
+        "Hint 2: Use the correct syntax to add the new user to the `user_data` dictionary."
+      ],
+      "bugExplanation": "The original code tries to modify the existing user's data instead of adding a new user.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "{'John': {'age': 31, 'city': 'New York'}, 'Jane': {'age': 25, 'city': 'San Francisco'}, 'Bob': {'age': 35, 'city': 'Chicago'}}"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "a4273ad3-7d7c-4cb4-84ca-24ff5f910750",
+      "title": "Stock Prices",
+      "difficulty": "Builder",
+      "concepts": [
+        "dictionaries"
+      ],
+      "context": "A stock exchange has a dictionary of stock prices. They want to update the price of a stock.",
+      "buggyCode": "prices = {'AAPL': 100.0, 'GOOG': 2000.0}\nprices[1] = 150.0",
+      "solutionCode": "prices = {'AAPL': 100.0, 'GOOG': 2000.0}\nprices['AAPL'] = 150.0",
+      "expectedLogic": [
+        "1. Initialize a dictionary `prices` with stock symbols as keys and prices as values.",
+        "2. Use the syntax `prices['AAPL'] = 150.0` to update the price of AAPL."
+      ],
+      "stripVariables": [
+        "prices",
+        "AAPL",
+        "GOOG"
+      ],
+      "hints": [
+        "Hint 1: Think about how to correctly access the price of a stock.",
+        "Hint 2: Use the correct syntax to update the price of a stock."
+      ],
+      "bugExplanation": "The original code tries to access the price of a stock using an integer key instead of the stock symbol.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "{'AAPL': 150.0, 'GOOG': 2000.0}"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "3f921fa7-57c1-486d-8eb6-051e15065f8f",
+      "title": "Weather Data",
+      "difficulty": "Beginner",
+      "concepts": [
+        "dictionaries"
+      ],
+      "context": "A weather service has a dictionary of weather data. They want to get the temperature of a city.",
+      "buggyCode": "weather_data = {'city': 'New York', 'temperature': 25, 'humidity': 60}\nweather_data.get('temperature')",
+      "solutionCode": "weather_data = {'city': 'New York', 'temperature': 25, 'humidity': 60}\nweather_data['temperature']",
+      "expectedLogic": [
+        "1. Initialize a dictionary `weather_data` with weather data.",
+        "2. Use the syntax `weather_data['temperature']` to access the temperature of the city."
+      ],
+      "stripVariables": [
+        "weather_data",
+        "city",
+        "New York",
+        "temperature",
+        "humidity"
+      ],
+      "hints": [
+        "Hint 1: Think about how to correctly access the temperature of a city.",
+        "Hint 2: Use the correct syntax to access the temperature of a city."
+      ],
+      "bugExplanation": "The original code uses the `get` method to access the temperature, but it doesn't assign the result to a variable.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "25"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "1d9de31e-9840-47fe-9b77-c60e71dad14b",
+      "title": "Calculator Function",
+      "difficulty": "Beginner",
+      "concepts": [
+        "functions"
+      ],
+      "context": "You're building a simple calculator that takes in two numbers and an operator. The calculator should return the result of the operation.",
+      "buggyCode": "\ndef calculate(num1, num2, operator):\n  if operator == '+':\n    return num1 + num2\n  elif operator == '-':\n    return num1 - num2\n  elif operator == '*':\n    return num1 * num2\n  elif operator == '/':\n    return num1 / num2\n  else:\n    return None\n\nprint(calculate(10, 2, '+'))\nprint(calculate(10, 2, '-'))\nprint(calculate(10, 2, '*'))\nprint(calculate(10, 2, '/'))\nprint(calculate(10, 2, '^'))\n      ",
+      "solutionCode": "\ndef calculate(num1, num2, operator):\n  if operator == '+':\n    return num1 + num2\n  elif operator == '-':\n    return num1 - num2\n  elif operator == '*':\n    return num1 * num2\n  elif operator == '/':\n    return num1 / num2\n  else:\n    raise ValueError('Invalid operator')\n\nprint(calculate(10, 2, '+'))\nprint(calculate(10, 2, '-'))\nprint(calculate(10, 2, '*'))\nprint(calculate(10, 2, '/'))\ntry:\n    print(calculate(10, 2, '^'))\nexcept ValueError as e:\n    print(e)\n      ",
+      "expectedLogic": [
+        "1. The function `calculate` takes in three parameters: `num1`, `num2`, and `operator`.",
+        "2. The function checks the value of `operator` to determine which operation to perform.",
+        "3. If the `operator` is one of the valid operations (+, -, *, /), the function returns the result of the operation.",
+        "4. If the `operator` is not a valid operation, the function returns `None`. 5. In the solution, we raise a `ValueError` with a descriptive message when an invalid operator is used."
+      ],
+      "stripVariables": [
+        "calculate",
+        "num1",
+        "num2",
+        "operator"
+      ],
+      "hints": [
+        "Think about how you would handle an invalid operator. Would you want the function to return a default value or raise an error?",
+        "Recall that the `/` operator in Python performs floating point division, not integer division."
+      ],
+      "bugExplanation": "The original code fails conceptually because it returns `None` when an invalid operator is used, which can lead to silent errors or unexpected behavior.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "12"
+        },
+        {
+          "setupCode": "",
+          "expectedOutput": "8"
+        },
+        {
+          "setupCode": "",
+          "expectedOutput": "20"
+        },
+        {
+          "setupCode": "",
+          "expectedOutput": "5.0"
+        },
+        {
+          "setupCode": "",
+          "expectedOutput": "Invalid operator"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "9c5a4582-9621-41ba-96f1-16b4af704d4f",
+      "title": "Counter Function",
+      "difficulty": "Explorer",
+      "concepts": [
+        "functions"
+      ],
+      "context": "You're building a function that takes in a list of numbers and returns the count of even and odd numbers.",
+      "buggyCode": "\ndef count_even_odd(numbers):\n  count_even = 0\n  count_odd = 0\n  for number in numbers:\n    if number % 2 == 0:\n      count_even += 1\n      count_odd += 1\n  return count_even, count_odd\n\nnumbers = [1, 2, 3, 4, 5]\neven_count, odd_count = count_even_odd(numbers)\nprint(even_count, odd_count)\n      ",
+      "solutionCode": "\ndef count_even_odd(numbers):\n  count_even = 0\n  count_odd = 0\n  for number in numbers:\n    if number % 2 == 0:\n      count_even += 1\n    else:\n      count_odd += 1\n  return count_even, count_odd\n\nnumbers = [1, 2, 3, 4, 5]\neven_count, odd_count = count_even_odd(numbers)\nprint(even_count, odd_count)\n      ",
+      "expectedLogic": [
+        "1. The function `count_even_odd` takes in a list of numbers.",
+        "2. The function initializes two counters, `count_even` and `count_odd`, to 0.",
+        "3. The function iterates over the list of numbers and checks if each number is even (i.e., `number % 2 == 0`).",
+        "4. If a number is even, the function increments the `count_even` counter.",
+        "5. If a number is odd, the function increments the `count_odd` counter.",
+        "6. The function returns the counts of even and odd numbers."
+      ],
+      "stripVariables": [
+        "numbers",
+        "count_even",
+        "count_odd",
+        "number",
+        "even_count",
+        "odd_count"
+      ],
+      "hints": [
+        "Think about what happens when you increment `count_odd` for an even number.",
+        "Recall that the `%` operator returns the remainder of the division of two numbers."
+      ],
+      "bugExplanation": "The original code fails conceptually because it increments both `count_even` and `count_odd` for each even number, which leads to incorrect counts.",
+      "testCases": [
+        {
+          "setupCode": "numbers = [1, 2, 3, 4, 5]",
+          "expectedOutput": "2 3"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "bfb00985-2639-44d8-906e-01c014d2b517",
+      "title": "Average Function",
+      "difficulty": "Builder",
+      "concepts": [
+        "functions"
+      ],
+      "context": "You're building a function that takes in a list of numbers and returns the average of the numbers.",
+      "buggyCode": "\ndef calculate_average(numbers):\n  sum_numbers = 0\n  for number in numbers:\n    sum_numbers += number\n  return sum_numbers / len(numbers)\n\nnumbers = [1, 2, 3, 4, 5]\naverage = calculate_average(numbers)\nprint(average)\n      ",
+      "solutionCode": "\ndef calculate_average(numbers):\n  sum_numbers = 0\n  for number in numbers:\n    sum_numbers += number\n  return sum_numbers / len(numbers)\n\nnumbers = [1, 2, 3, 4, 5]\naverage = calculate_average(numbers)\nprint(average)\n      ",
+      "expectedLogic": [
+        "1. The function `calculate_average` takes in a list of numbers.",
+        "2. The function initializes a variable `sum_numbers` to 0.",
+        "3. The function iterates over the list of numbers and adds each number to `sum_numbers`. 4. The function returns the average of the numbers, calculated as `sum_numbers / len(numbers)`.\n",
+        "5. In the solution, we don't need to handle any edge cases or handle exceptions."
+      ],
+      "stripVariables": [
+        "numbers",
+        "sum_numbers",
+        "number",
+        "average"
+      ],
+      "hints": [
+        "Think about what happens when the input list is empty.",
+        "Recall that the `/` operator in Python performs floating point division, not integer division."
+      ],
+      "bugExplanation": "There is no bug in this code. It should run without errors and produce the correct output.",
+      "testCases": [
+        {
+          "setupCode": "numbers = [1, 2, 3, 4, 5]",
+          "expectedOutput": "3"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "43c27cf6-05a7-41c6-aae9-daeac1ba3e16",
+      "title": "Function Composition",
+      "difficulty": "Builder",
+      "concepts": [
+        "functions"
+      ],
+      "context": "You're building a function `add` that takes in two numbers and returns their sum, and another function `square` that takes in a number and returns its square. You want to use function composition to create a new function `square_then_add` that first squares a number and then adds 2 to the result.",
+      "buggyCode": "\ndef add(x, y):\n  return x + y\n\ndef square(x):\n  return x * x\n\ndef square_then_add(x):\n  return add(x**2, y=2)\n\nnumbers = [1, 2, 3, 4, 5]\nfor number in numbers:\n  result = square_then_add(number)\n  print(result)\n      ",
+      "solutionCode": "\ndef add(x, y):\n  return x + y\n\ndef square(x):\n  return x * x\n\ndef square_then_add(x):\n  return add(square(x), 2)\n\nnumbers = [1, 2, 3, 4, 5]\nfor number in numbers:\n  result = square_then_add(number)\n  print(result)\n      ",
+      "expectedLogic": [
+        "1. The function `add` takes in two numbers `x` and `y` and returns their sum.",
+        "2. The function `square` takes in a number `x` and returns its square.",
+        "3. The function `square_then_add` takes in a number `x` and uses function composition to first square `x` using the `square` function and then add 2 to the result using the `add` function.",
+        "4. In the solution, we pass the result of `square(x)` as the first argument to `add` instead of `x**2`."
+      ],
+      "stripVariables": [
+        "add",
+        "square",
+        "square_then_add",
+        "x",
+        "y",
+        "number",
+        "result"
+      ],
+      "hints": [
+        "Think about how you can use the `square` function to square the input number.",
+        "Recall that the `**` operator in Python raises the first number to the power of the second number."
+      ],
+      "bugExplanation": "The original code fails conceptually because it passes the result of `square(x)` as the second argument to `add`, instead of passing the result of `square(x)` and 2 as the two arguments to `add`.",
+      "testCases": [
+        {
+          "setupCode": "numbers = [1, 2, 3, 4, 5]",
+          "expectedOutput": "[5, 6, 7, 8, 9]"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    },
+    {
+      "_id": "ee07664f-ffd1-46d7-9552-88b669bfbb7d",
+      "title": "Function Execution Order Mystery",
+      "difficulty": "Beginner",
+      "concepts": [
+        "functions",
+        "function calls"
+      ],
+      "context": "Imagine you're building a simple e-commerce website. You need to write a function to calculate the subtotal of an order, considering discounts. However, the subtotal calculation is dependent on the discount calculation.",
+      "buggyCode": "# Goal: Calculate the subtotal of an order with a 10% discount\ndef calculate_discount(price):\n    return price * 0.1\ndef calculate_subtotal(price):\n    discount = calculate_discount(price)\n    return price + discount\nprint(calculate_subtotal(100))",
+      "solutionCode": "# Goal: Calculate the subtotal of an order with a 10% discount\ndef calculate_discount(price):\n    return price * 0.1\ndef calculate_subtotal(price):\n    discount = calculate_discount(price)\n    return price - discount\nprint(calculate_subtotal(100))",
+      "expectedLogic": [
+        1,
+        "Call calculate_discount to get the discount amount",
+        2,
+        "Subtract the discount from the original price to get the subtotal"
+      ],
+      "stripVariables": [
+        "price",
+        "discount",
+        "calculate_discount",
+        "calculate_subtotal"
+      ],
+      "hints": [
+        "Think about the function call order and its impact on the calculation",
+        "Check if the discount is being applied correctly"
+      ],
+      "bugExplanation": "The original code incorrectly added the discount to the original price, resulting in an incorrect subtotal.",
+      "testCases": [
+        {
+          "setupCode": "",
+          "expectedOutput": "90.0"
+        }
+      ],
+      "createdAt": "2026-08-09T07:55:16.569Z",
+      "updatedAt": "2026-08-09T07:55:16.569Z"
+    }
+  ],
+  "sessions": []
+}

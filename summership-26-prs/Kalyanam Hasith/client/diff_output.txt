@@ -1,0 +1,358 @@
+Created At: 2026-08-02T14:14:16+05:30
+Completed At: 2026-08-02T14:14:28+05:30
+
+				The command completed successfully.
+				Output:
+				<truncated 663 lines>
++  color: #93c5fd !important;
++}
++
++.workspace-bughunter .bug-explanation-card p {
++  color: #dbeafe !important;
++}
++
++/* Logic Comparison Cards Glass */
++.workspace-bughunter .logic-card {
++  background: rgba(15, 23, 42, 0.6) !important;
++  border: 1px solid rgba(255, 255, 255, 0.1) !important;
++  box-shadow: 0 4px 12px rgba(0,0,0,0.3) !important;
++}
++
++.workspace-bughunter .logic-card:hover {
++  border-color: rgba(255, 255, 255, 0.2) !important;
++  box-shadow: 0 8px 24px rgba(0,0,0,0.4) !important;
++  border: 1px solid rgba(255, 255, 255, 0.05);
++  border-bottom-left-radius: 2px;
++}
++
++.chat-input-area {
++  display: flex;
++  padding: 12px;
++  gap: 8px;
++  border-top: 1px solid rgba(255, 255, 255, 0.1);
++  background: rgba(0, 0, 0, 0.2);
++}
++
++.chat-input-area input {
++  flex: 1;
++  background: rgba(255, 255, 255, 0.05);
++  border: 1px solid rgba(255, 255, 255, 0.1);
++  color: #f8fafc;
++  padding: 10px 14px;
++  color: #0f172a;
++  border: none;
++  padding: 0 16px;
++  border-radius: 8px;
++  cursor: pointer;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  transition: all 0.2s ease;
++}
++
++.chat-input-area .send-btn:hover:not(:disabled) {
++  background: #0ea5e9;
++  transform: translateY(-1px);
++}
++
++.chat-input-area .send-btn:disabled {
++  background: rgba(255, 255, 255, 0.1);
++  color: rgba(255, 255, 255, 0.3);
++  cursor: not-allowed;
++}
++
++/* Loading Dots Animation */
++.chat-bubble.ai.loading {
++  display: flex;
++  gap: 4px;
++  align-items: center;
++  padding: 14px 16px;
++}
++
++.chat-bubble.ai.loading .dot {
++  width: 6px;
++  height: 6px;
++  background-color: #94a3b8;
++  border-radius: 50%;
++  animation: chatPulse 1.4s infinite ease-in-out both;
++}
++
++.chat-bubble.ai.loading .dot:nth-child(1) { animation-delay: -0.32s; }
++.chat-bubble.ai.loading .dot:nth-child(2) { animation-delay: -0.16s; }
++
++@keyframes chatPulse {
++  0%, 80%, 100% { transform: scale(0); }
++  40% { transform: scale(1); }
++}
++
++.workspace-bughunter .logic-card pre {
++  color: #f8fafc !important;
++}
++
++.workspace-bughunter .expected-card {
++  border-left: 5px solid #10b981 !important;
++}
++
++.workspace-bughunter .actual-card {
++  border-left: 5px solid #f43f5e !important;
++}
++
++.workspace-bughunter .result-panel .empty {
++  background: rgba(15, 23, 42, 0.4) !important;
++  border-color: rgba(255, 255, 255, 0.1) !important;
++  color: #94a3b8 !important;
++  backdrop-filter: blur(12px) !important;
++}
++
++.workspace-bughunter .result-panel .empty svg {
++  color: #38bdf8 !important;
++  filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.4)) !important;
++}
++
++/* ==========================================================================
++   AI Assistant Chat UI
++   ========================================================================== */
++.chat-container {
++  display: flex;
++  flex-direction: column;
++  background: rgba(15, 23, 42, 0.6);
++  border: 1px solid rgba(255, 255, 255, 0.1);
++  border-radius: 12px;
++  margin-top: 24px;
++  backdrop-filter: blur(12px);
++  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
++  overflow: hidden;
++  flex: 1;
++  max-height: 500px;
++}
++
++.chat-header {
++  display: flex;
++  align-items: center;
++  gap: 8px;
++  padding: 12px 16px;
++  background: rgba(255, 255, 255, 0.05);
++  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
++  font-weight: 600;
++  color: #f8fafc;
++  font-size: 0.9rem;
++}
++
++.chat-header svg {
++  color: #38bdf8;
++}
++
++.chat-messages {
++  display: flex;
++  flex-direction: column;
++  gap: 12px;
++  padding: 16px;
++  max-height: 250px;
++  overflow-y: auto;
++}
++
++.chat-bubble {
++  max-width: 85%;
++  padding: 10px 14px;
++  border-radius: 12px;
++  font-size: 0.9rem;
++  line-height: 1.4;
++  word-wrap: break-word;
++  white-space: pre-wrap;
++}
++
++.chat-bubble.user {
++  align-self: flex-end;
++  background: linear-gradient(135deg, #3b82f6, #2563eb);
++  color: #fff;
++  border-bottom-right-radius: 4px;
++  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
++}
++
++.chat-bubble.ai {
++  align-self: flex-start;
++  background: rgba(255, 255, 255, 0.08);
++  color: #e2e8f0;
++  border-bottom-left-radius: 4px;
++  border: 1px solid rgba(255, 255, 255, 0.1);
++}
++
++.chat-input-form {
++  display: flex;
++  padding: 12px;
++  background: rgba(0, 0, 0, 0.2);
++  border-top: 1px solid rgba(255, 255, 255, 0.1);
++}
++
++.chat-input-form input {
++  flex: 1;
++  background: rgba(255, 255, 255, 0.05);
++  border: 1px solid rgba(255, 255, 255, 0.1);
++  color: #fff;
++  padding: 10px 14px;
++  border-radius: 20px;
++  font-size: 0.9rem;
++  outline: none;
++  transition: all 0.2s ease;
++}
++
++.chat-input-form input:focus {
++  background: rgba(255, 255, 255, 0.1);
++  border-color: rgba(255, 255, 255, 0.2);
++}
++
++.chat-input-form input::placeholder {
++  color: #94a3b8;
++}
++
++.chat-input-form button {
++  background: none;
++  border: none;
++  color: #38bdf8;
++  padding: 8px 12px;
++  cursor: pointer;
++  border-radius: 50%;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  transition: all 0.2s ease;
++}
++
++.chat-input-form button:hover:not(:disabled) {
++  background: rgba(56, 189, 248, 0.1);
++  transform: scale(1.05);
++}
++
++.chat-input-form button:disabled {
++  color: #475569;
++  cursor: not-allowed;
++}
++
++.chat-loading {
++  display: flex;
++  gap: 4px;
++  padding: 8px;
++  align-items: center;
++}
++
++.chat-loading span {
++  width: 6px;
++  height: 6px;
++  background-color: #94a3b8;
++  border-radius: 50%;
++  animation: typing 1.4s infinite ease-in-out both;
++}
++
++.chat-loading span:nth-child(1) { animation-delay: -0.32s; }
++.chat-loading span:nth-child(2) { animation-delay: -0.16s; }
++
++@keyframes typing {
++  0%, 80%, 100% { transform: scale(0); }
++  40% { transform: scale(1); }
++}
++
++/* ==========================================================================
++   View Mode Toggle
++   ========================================================================== */
++
++.view-mode-toggle {
++  display: flex;
++  background: rgba(15, 23, 42, 0.6);
++  border: 1px solid rgba(255, 255, 255, 0.1);
++  border-radius: 8px;
++  padding: 4px;
++  margin-bottom: 16px;
++  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
++}
++
++.view-mode-toggle .toggle-btn {
++  flex: 1;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  gap: 8px;
++  padding: 10px 16px;
++  background: transparent;
++  border: none;
++  border-radius: 6px;
++  color: #94a3b8;
++  font-size: 0.95rem;
++  font-weight: 500;
++  cursor: pointer;
++  transition: all 0.2s ease;
++}
++
++.view-mode-toggle .toggle-btn:hover {
++  color: #f8fafc;
++  background: rgba(255, 255, 255, 0.05);
++}
++
++.view-mode-toggle .toggle-btn.active {
++  background: #38bdf8;
++  color: #0f172a;
++  box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3);
++}
++
++.english-translation-container {
++  padding: 24px !important;
++  background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9)) !important;
++  border: 1px solid rgba(56, 189, 248, 0.2) !important;
++  border-radius: 12px !important;
++  box-shadow: inset 0 2px 10px rgba(0,0,0,0.2) !important;
++  margin-bottom: 16px;
++}
++
++.english-translation-container pre {
++  font-family: 'Inter', sans-serif !important;
++  font-size: 1rem !important;
++  line-height: 1.8 !important;
++  color: #e2e8f0 !important;
++}
++
++
++/* ==========================================================================
++   Pseudocode Viewer
++   ========================================================================== */
++
++.pseudocode-viewer {
++  font-family: 'Inter', sans-serif;
++  font-size: 0.95rem;
++  line-height: 1.7;
++  color: #e2e8f0;
++}
++
++.pseudocode-line {
++  display: flex;
++  margin-bottom: 2px;
++}
++
++.pseudocode-line-num {
++  width: 24px;
++  min-width: 24px;
++  color: #475569;
++  text-align: right;
++  margin-right: 16px;
++  user-select: none;
++  font-size: 0.85rem;
++  padding-top: 2px;
++}
++
++.pseudocode-line-content {
++  white-space: pre-wrap;
++  flex: 1;
++}
++
++.pseudocode-kw {
++  color: #c084fc; /* Purple for keywords */
++  font-weight: 600;
++}
++
++.pseudocode-str {
++  color: #34d399; /* Green for strings */
++}
++
++/* Adjust padding for translation container since the viewer handles it */
++.english-translation-container {
++  padding: 16px !important;
++}
+

@@ -1,0 +1,106 @@
+{
+  "concepts": {
+    "python-decorator": {
+      "exemplars": [
+        {
+          "topicId": "python-decorator",
+          "levelId": 1,
+          "caseStudyId": "python-decorator_l1_c1",
+          "levelTitle": "The Hatori's Invisible Cloak"
+        }
+      ],
+      "editLessons": [],
+      "avoidPatterns": []
+    },
+    "python-decorators": {
+      "exemplars": [
+        {
+          "topicId": "python-decorators",
+          "levelId": 1,
+          "caseStudyId": "python-decorators_l1_c1",
+          "levelTitle": "The Wrapping Cloth"
+        }
+      ],
+      "editLessons": [],
+      "avoidPatterns": []
+    },
+    "lambda-functions": {
+      "exemplars": [
+        {
+          "topicId": "lambda-functions",
+          "levelId": 1,
+          "caseStudyId": "lambda-functions_l1_c1",
+          "levelTitle": "Small rivers, one rule at a time"
+        }
+      ],
+      "editLessons": [],
+      "avoidPatterns": []
+    },
+    "list-comprehension": {
+      "exemplars": [
+        {
+          "topicId": "list-comprehension",
+          "levelId": 1,
+          "caseStudyId": "list-comprehension_l1_c1",
+          "levelTitle": "The Pilgrim's Ledger"
+        }
+      ],
+      "editLessons": [],
+      "avoidPatterns": []
+    },
+    "lambda-function": {
+      "exemplars": [
+        {
+          "topicId": "lambda-function",
+          "levelId": 1,
+          "caseStudyId": "lambda-function_l1_c1",
+          "levelTitle": "Tiny rules for tiny moments"
+        }
+      ],
+      "editLessons": [],
+      "avoidPatterns": []
+    },
+    "exception-handling": {
+      "exemplars": [
+        {
+          "topicId": "exception-handling",
+          "levelId": 1,
+          "caseStudyId": "exception-handling_l1_c1",
+          "levelTitle": "The Landslide Notice"
+        }
+      ],
+      "editLessons": [],
+      "avoidPatterns": []
+    },
+    "variables": {
+      "exemplars": [
+        {
+          "topicId": "variables",
+          "levelId": 1,
+          "caseStudyId": "variables_l1_c1",
+          "levelTitle": "The Name on the Jar"
+        },
+        {
+          "topicId": "variables",
+          "levelId": 2,
+          "caseStudyId": "variables_l2_c1",
+          "levelTitle": "Level 1: Variables"
+        }
+      ],
+      "editLessons": [],
+      "avoidPatterns": []
+    },
+    "while-vs-for-loop": {
+      "exemplars": [
+        {
+          "topicId": "while-vs-for-loop",
+          "levelId": 1,
+          "caseStudyId": "while-vs-for-loop_l1_c1",
+          "levelTitle": "Kofi's Notebook: Two Ways to Repeat"
+        }
+      ],
+      "editLessons": [],
+      "avoidPatterns": []
+    }
+  }
+}

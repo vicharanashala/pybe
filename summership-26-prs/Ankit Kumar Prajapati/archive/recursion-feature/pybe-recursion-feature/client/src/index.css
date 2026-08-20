@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100 font-sans antialiased overflow-hidden selection:bg-blue-500 selection:text-white;
+  }
+
+  h3 {
+    @apply text-2xl font-bold text-slate-100 mb-3 tracking-tight;
+  }
+
+  h4 {
+    @apply text-xl font-semibold text-blue-400 mb-2;
+  }
+
+  p {
+    @apply text-slate-300 mb-3 leading-relaxed;
+  }
+
+  ul {
+    @apply list-disc list-inside space-y-2 text-slate-300 my-3 pl-2;
+  }
+
+  ol {
+    @apply list-decimal list-inside space-y-2 text-slate-300 my-3 pl-2;
+  }
+
+  em {
+    @apply text-blue-300 font-medium not-italic;
+  }
+}
+
+/* Custom Component Classes mapped from <z-*> tags */
+.z-announcement-box {
+  @apply bg-amber-950/40 border-l-4 border-amber-500 text-amber-200 p-4 rounded-r-lg shadow-lg font-medium italic my-4;
+}
+
+.z-thinking-box {
+  @apply bg-indigo-950/40 border-l-4 border-indigo-400 text-indigo-200 p-4 rounded-r-lg shadow-md italic my-4;
+}
+
+.z-question-box {
+  @apply bg-blue-950/40 border border-blue-800/60 text-blue-200 p-4 rounded-xl shadow-md font-medium my-4;
+}
+
+.z-ponder-box {
+  @apply bg-purple-950/40 border border-purple-800/60 text-purple-200 p-4 rounded-xl shadow-md font-medium text-xl my-4;
+}
+
+.z-answer-box {
+  @apply bg-emerald-950/40 border border-emerald-800/60 text-emerald-200 p-4 rounded-xl shadow-md my-4;
+}
+
+.z-explanation-box {
+  @apply bg-slate-900 border border-slate-700/80 text-slate-200 p-5 rounded-xl shadow-md space-y-2 my-4;
+}
+
+.z-reply-box {
+  @apply bg-slate-800/80 border-l-4 border-emerald-400 text-emerald-100 p-4 rounded-r-xl shadow-md font-mono my-3;
+}
+
+.z-click-box {
+  @apply bg-sky-950/60 border border-sky-600/50 text-sky-200 p-4 rounded-xl shadow-lg font-medium my-4;
+}
+
+.z-question-card-box {
+  @apply bg-slate-900/90 border border-slate-700 p-6 rounded-2xl shadow-xl my-6 space-y-4;
+}
+
+.z-options-box {
+  @apply space-y-3 my-4;
+}
+
+.z-options-box li {
+  @apply list-none bg-slate-800/60 border border-slate-700 hover:border-slate-500 p-3 rounded-lg text-slate-200 transition-colors cursor-pointer;
+}
+
+.z-correct-ans {
+  @apply text-emerald-400 font-semibold;
+}
+
+/* Python Code Block Styling */
+pre {
+  @apply bg-slate-900 border border-slate-800 p-4 rounded-xl overflow-x-auto my-4 font-mono text-sm shadow-inner;
+}
+
+code {
+  @apply font-mono text-blue-300 bg-slate-900 px-1.5 py-0.5 rounded border border-slate-800 text-sm;
+}
+
+pre code {
+  @apply bg-transparent border-0 p-0 text-slate-200;
+}
+
+/* Custom Scrollbar for Right Section */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(51, 65, 85, 0.8);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(71, 85, 105, 1);
+}

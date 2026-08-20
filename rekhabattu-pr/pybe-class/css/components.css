@@ -1,0 +1,1102 @@
+/* =========================================================
+   components.css
+   Reusable UI atoms: buttons, progress bar, quiz, badges
+   ========================================================= */
+
+/* ---------- Navigation Buttons ---------- */
+.nav-btn {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 10px 22px;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    background var(--transition-fast);
+  box-shadow: var(--shadow-soft);
+}
+
+.nav-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.nav-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.nav-btn-back {
+  background: var(--color-surface);
+  color: var(--color-maroon);
+  border: 1px solid var(--color-border);
+}
+
+.nav-btn-back:hover:not(:disabled) {
+  background: var(--color-parchment);
+}
+
+.nav-btn-next {
+  background: var(--color-maroon);
+  color: var(--color-gold-light);
+}
+
+.nav-btn-next:hover:not(:disabled) {
+  background: var(--color-maroon-dark);
+}
+
+/* ---------- Progress Bar ---------- */
+.progress-track {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  max-width: var(--max-content-width);
+}
+
+.progress-segment {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(245, 236, 217, 0.35);
+  position: relative;
+  overflow: hidden;
+  transition: background var(--transition-fast);
+}
+
+.progress-segment.completed {
+  background: var(--color-gold);
+}
+
+.progress-segment.active {
+  background: rgba(201, 147, 44, 0.5);
+}
+
+.progress-segment.active::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-gold);
+  animation: pulseWidth 1.4s ease-in-out infinite;
+}
+
+@keyframes pulseWidth {
+  0% { transform: scaleX(0.2); transform-origin: left; }
+  50% { transform: scaleX(1); transform-origin: left; }
+  100% { transform: scaleX(0.2); transform-origin: left; }
+}
+
+/* CT sub-step ticks (labels now driven by CT_SUBSTEP_LABELS in lessonData.js) */
+.ct-subticks {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.ct-subtick {
+  flex: 1;
+  padding: var(--space-sm);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-dim);
+  border: 1px solid var(--color-border);
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  transition: all var(--transition-fast);
+}
+
+.ct-subtick.active {
+  background: var(--color-maroon);
+  color: var(--color-gold-light);
+  border-color: var(--color-maroon);
+}
+
+.ct-subtick.done {
+  background: var(--color-gold-light);
+  color: var(--color-maroon-dark);
+  border-color: var(--color-gold);
+}
+
+/* ---------- Generic Content Card (used inside steps) ---------- */
+.mini-card {
+  background: var(--color-surface-dim);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+}
+
+/* ---------- Quiz / Question Options ---------- */
+.question-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.option-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.option-btn {
+  text-align: left;
+  padding: var(--space-md);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  transition: all var(--transition-fast);
+}
+
+.option-btn:hover:not(:disabled) {
+  border-color: var(--color-gold);
+  background: var(--color-parchment);
+}
+
+.option-btn.selected {
+  border-color: var(--color-maroon);
+  background: var(--color-parchment-dark);
+  font-weight: 600;
+  /* Override the global button:disabled opacity (0.5) so the
+     learner's pick stays at full visibility — it's the answer,
+     not an error. */
+  opacity: 1;
+}
+
+.option-btn.locked {
+  /* Unselected options after a pick: present but quiet.
+     Slightly dimmed (was 0.5 from global button:disabled) so
+     the picked one stands out, but not so dim it reads as
+     "wrong". */
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.option-btn.correct {
+  border-color: var(--color-success);
+  background: var(--color-success-bg);
+  color: var(--color-success);
+  font-weight: 700;
+}
+
+.option-btn.incorrect {
+  border-color: var(--color-error);
+  background: var(--color-error-bg);
+  color: var(--color-error);
+  font-weight: 700;
+}
+
+/* ---------- Feedback Badges ---------- */
+.feedback-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  width: fit-content;
+}
+
+.feedback-badge.success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+
+.feedback-badge.error {
+  background: var(--color-error-bg);
+  color: var(--color-error);
+}
+
+/* ---------- Reflection Textarea (non-code, free response) ---------- */
+.reflection-input {
+  width: 100%;
+  min-height: 120px;
+  padding: var(--space-md);
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  resize: vertical;
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.reflection-input:focus {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+/* =========================================================
+   NEW: ASSOCIATIVE MAPPING PEDAGOGY COMPONENTS
+   ========================================================= */
+
+/* ---------- Mapping Visual (animated province -> tax rows) ---------- */
+.mapping-visual {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.mapping-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  opacity: 0;
+  transform: translateX(-12px);
+  animation: mappingRowIn 0.5s ease forwards;
+}
+
+@keyframes mappingRowIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.mapping-key {
+  font-family: var(--font-story);
+  font-weight: 700;
+  color: var(--color-maroon);
+  min-width: 90px;
+}
+
+.mapping-arrow {
+  color: var(--color-gold);
+  font-size: 1.2rem;
+  font-weight: 700;
+  animation: arrowPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes arrowPulse {
+  0%, 100% { transform: translateX(0); opacity: 0.75; }
+  50% { transform: translateX(4px); opacity: 1; }
+}
+
+.mapping-value {
+  font-family: var(--font-code);
+  color: var(--color-ink-soft);
+  background: var(--color-surface-dim);
+  padding: 2px 10px;
+  border-radius: 6px;
+}
+
+/* ---------- Matching Activity Board ---------- */
+.matching-board {
+  display: flex;
+  gap: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+.matching-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.match-chip {
+  text-align: center;
+  font-weight: 600;
+}
+
+.match-chip.selected {
+  border-color: var(--color-gold);
+  background: var(--color-gold-light);
+  transform: scale(1.02);
+}
+
+.match-chip--visual {
+  display: flex;
+  min-height: 196px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  text-align: center;
+}
+
+.match-visual {
+  display: flex;
+  min-height: 154px;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink-soft);
+}
+
+.match-photo {
+  display: grid;
+  place-items: center;
+  width: 138px;
+  height: 154px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+}
+
+.match-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.match-visual svg {
+  display: block;
+  width: 105px;
+  height: 92px;
+}
+
+.match-visual .match-rose {
+  color: #a4364f;
+}
+
+.match-visual .match-honda {
+  color: #496d92;
+}
+
+.match-visual .match-aarav {
+  color: var(--color-maroon);
+}
+
+.match-label {
+  font-family: var(--font-ui);
+  font-weight: 700;
+}
+
+.student-details-diagram {
+  display: grid;
+  gap: 4px;
+  min-width: 112px;
+  padding: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-dim);
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+  text-align: left;
+}
+
+.student-details-diagram span {
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.student-details-diagram--filled {
+  border-color: var(--color-gold);
+  color: var(--color-maroon);
+  font-weight: 700;
+}
+
+.matching-feedback {
+  min-height: 1.5em;
+  margin: var(--space-sm) 0 0;
+  text-align: center;
+  color: var(--color-ink-soft);
+  font-style: italic;
+}
+
+/* ---------- Student Register (Screen 9) ---------- */
+.student-register {
+  width: min(100%, 460px);
+  margin: var(--space-md) auto;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  font-family: var(--font-code);
+}
+
+.student-register-row {
+  display: grid;
+  grid-template-columns: 1.6fr 0.8fr 0.8fr;
+}
+
+.student-register-row span {
+  padding: 10px var(--space-md);
+  border-right: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
+}
+
+.student-register-row span:last-child {
+  border-right: none;
+}
+
+.student-register-header {
+  background: var(--color-maroon);
+  color: var(--color-gold-light);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.78rem;
+}
+
+.student-register-header span {
+  border-top: none;
+}
+
+.student-register-entry {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 220ms ease-out, transform 220ms ease-out;
+}
+
+.student-register-entry.is-ready {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Class Builder (Screen 11) ---------- */
+.class-code-sheet {
+  width: min(100%, 620px);
+  margin: var(--space-sm) auto;
+  padding: var(--space-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-parchment);
+  box-shadow: var(--shadow-soft);
+}
+
+.class-code {
+  overflow-x: auto;
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  background: #241b13;
+  color: #f3e9d2;
+  font-family: var(--font-code);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+.class-code-line {
+  min-height: 1.75em;
+  white-space: pre;
+}
+
+.class-code-first-line {
+  display: flex;
+  align-items: center;
+  white-space: normal;
+}
+
+.code-blank {
+  min-width: 74px;
+  min-height: 1.8em;
+  padding: 2px 8px;
+  border: 1.5px dashed var(--color-gold);
+  border-radius: var(--radius-sm);
+  background: rgba(201, 147, 44, 0.12);
+  color: var(--color-gold-light);
+  font: inherit;
+  cursor: pointer;
+}
+
+.code-blank.filled {
+  border-style: solid;
+  background: rgba(201, 147, 44, 0.25);
+  cursor: default;
+}
+
+.code-blank.drag-over,
+.code-blank.selected {
+  background: rgba(201, 147, 44, 0.35);
+  box-shadow: 0 0 0 2px rgba(201, 147, 44, 0.35);
+}
+
+.code-blank.incorrect {
+  border-color: #e05555;
+  background: rgba(224, 85, 85, 0.2);
+}
+
+.code-token-tray {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.code-token-label {
+  color: var(--color-ink-soft);
+  font-size: 0.9rem;
+}
+
+.code-token {
+  padding: 7px 13px;
+  border: 1px solid var(--color-gold);
+  border-radius: 999px;
+  background: var(--color-surface);
+  color: var(--color-maroon);
+  font-family: var(--font-code);
+  font-weight: 700;
+  cursor: grab;
+}
+
+.code-token.selected {
+  background: var(--color-gold-light);
+  transform: translateY(-1px);
+}
+
+.code-token:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.code-builder-feedback {
+  min-height: 1.5em;
+  margin: var(--space-sm) 0 0;
+  color: var(--color-ink-soft);
+  font-style: italic;
+}
+
+.code-retry-btn {
+  margin-top: var(--space-xs);
+  padding: 6px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-maroon);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ---------- Class Wrap-up (Screen 12) ---------- */
+.wrap-up-celebration {
+  position: relative;
+  width: min(100%, 32em);
+  height: 72px;
+  margin: var(--space-md) auto calc(var(--space-sm) * -1);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 10px;
+  height: 18px;
+  border-radius: 2px;
+  transform: translateX(var(--confetti-x, 0)) rotate(0deg);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  opacity: 0;
+}
+
+.wrap-up-celebration.is-ready .confetti-piece {
+  animation: confetti-fall var(--confetti-duration, 1s) ease-out var(--confetti-delay, 0ms) forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    opacity: 0;
+    transform: translateX(var(--confetti-x, 0)) translateY(0) rotate(0deg) scale(0.9);
+  }
+  12% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(calc(var(--confetti-x, 0) + 28px)) translateY(170px) rotate(var(--confetti-rotate, 240deg)) scale(1);
+  }
+}
+
+.wrap-up-message {
+  max-width: 32em;
+  margin: var(--space-lg) auto;
+  padding: var(--space-lg);
+  border-left: 4px solid var(--color-gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: var(--color-surface-dim);
+  font-family: var(--font-story);
+  font-size: 1.08rem;
+  line-height: 1.6;
+}
+
+.wrap-up-message p {
+  margin: 0 0 var(--space-sm);
+}
+
+.wrap-up-message p:last-child {
+  margin-bottom: 0;
+  color: var(--color-ink-soft);
+  font-style: italic;
+}
+
+/* ---------- Discovery Questions ---------- */
+.discovery-block {
+  margin-bottom: var(--space-md);
+}
+
+.discovery-followup {
+  margin-top: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-parchment);
+  border-left: 3px solid var(--color-gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  font-style: italic;
+  color: var(--color-ink-soft);
+}
+
+/* ---------- Retrieval Activity ---------- */
+.retrieval-prompt h3 {
+  color: var(--color-maroon-dark);
+}
+
+.retrieval-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.retrieval-btn {
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ---------- Reveal Legend (Story -> Python) ---------- */
+.reveal-legend {
+  margin-top: var(--space-md);
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.legend-row:last-child {
+  border-bottom: none;
+}
+
+.legend-story {
+  flex: 1;
+  font-family: var(--font-story);
+  color: var(--color-maroon);
+  font-weight: 600;
+}
+
+.legend-arrow {
+  color: var(--color-gold);
+  font-weight: 700;
+}
+
+.legend-python {
+  flex: 1;
+  font-family: var(--font-code);
+  color: var(--color-ink-soft);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+  .ct-subticks {
+    flex-wrap: wrap;
+  }
+
+  .ct-subtick {
+    flex: 1 1 45%;
+  }
+
+  .nav-btn {
+    padding: 8px 16px;
+    font-size: 0.88rem;
+  }
+
+  .matching-board {
+    flex-direction: column;
+  }
+
+  .mapping-row {
+    flex-wrap: wrap;
+  }
+
+  .legend-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+/* ---------- Student Card (Screen 5 — One Student) ---------- */
+.student-card {
+  display: inline-block;
+  margin: var(--space-sm) 0;
+  padding: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-soft);
+  min-width: 220px;
+  text-align: left;
+  font-family: var(--font-ui);
+  overflow: hidden;
+}
+
+.student-card-header {
+  background: var(--color-maroon);
+  color: var(--color-gold-light);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 6px var(--space-md);
+}
+
+.student-card-body {
+  margin: 0;
+  padding: var(--space-sm) var(--space-md) var(--space-md);
+}
+
+.student-card-body dt {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--space-sm);
+}
+
+.student-card-body dt:first-child {
+  margin-top: 0;
+}
+
+.student-card-body dd {
+  margin: 2px 0 0 0;
+  font-size: 1.05rem;
+  font-family: var(--font-code);
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.student-card-blank {
+  /* Empty field — a dashed underline so it reads as
+     "a slot to be filled", not "missing data". */
+  display: inline-block;
+  min-width: 80px;
+  border-bottom: 1.5px dashed var(--color-ink-soft);
+  color: transparent;
+}
+
+/* ---------- Triptych (Screen 4 — The Pattern) ----------
+   Three small illustrations side by side, each with a
+   caption. Used to recap the three observation screens
+   (flower, car, person) before the learner names the
+   pattern. The container is the existing .step-media flex
+   row; the cells sit inside it. */
+.triptych {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  margin: var(--space-sm) 0 var(--space-md);
+  color: var(--color-ink-soft);
+}
+
+.triptych-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: 0;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  min-width: 110px;
+}
+
+.triptych-cell svg {
+  display: block;
+}
+
+.triptych-cell figcaption {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  font-style: italic;
+}
+
+/* ---------- Reveal keyword highlight ----------
+   Gold pill on key vocabulary words inside reveal lines.
+   Used by renderer.js#highlightKeyTerms. */
+.reveal-keyword {
+  display: inline-block;
+  padding: 0 6px;
+  margin: 0 1px;
+  background: var(--color-gold-light);
+  color: var(--color-maroon);
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  font-style: normal;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* ---------- Primary Action Button (Screen 6+) ----------
+   Used by the generate renderer for its one-action button. */
+.primary-btn {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 12px 28px;
+  margin: var(--space-md) 0;
+  border-radius: var(--radius-md);
+  background: var(--color-maroon);
+  color: var(--color-gold-light);
+  border: 2px solid var(--color-gold);
+  cursor: pointer;
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+  box-shadow: var(--shadow-soft);
+}
+
+.primary-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--color-maroon-dark);
+}
+
+.primary-btn:disabled {
+  background: var(--color-ink-soft);
+  border-color: var(--color-border);
+  color: var(--color-surface);
+  cursor: default;
+  box-shadow: none;
+}
+
+/* ---------- Scenario copy (Generate screens) ----------
+   Short paragraph above the action button. Tightened
+   line-height so it reads as a brief, not a story. */
+.step-scenario {
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--color-ink);
+  max-width: 36em;
+  margin: 0 auto var(--space-sm);
+}
+
+/* ---------- Card Stack (Screen 6 — Many Students) ----------
+   Cards pile up like a hand of playing cards: each one
+   shifted slightly down/right so the learner sees multiple
+   cards at once. The stack grows downward and to the right
+   so every card stays visible (no card sits perfectly behind
+   another). */
+.card-stack {
+  position: relative;
+  margin: var(--space-lg) auto var(--space-md);
+  padding: var(--space-md) var(--space-md) var(--space-md);
+  min-height: 200px;
+  max-width: 320px;
+}
+
+.card-stack > .student-card--mini {
+  /* Position each card absolutely so they overlap as a stack.
+     The card at index i is shifted (i*8px right, i*6px down).
+     Inline style on each card sets --i and we use it here. */
+  position: absolute;
+  top: calc(var(--i, 0) * 6px + var(--space-md));
+  left: calc(var(--i, 0) * 8px + var(--space-md));
+  width: 220px;
+  z-index: calc(var(--i, 0) + 1);
+}
+
+/* Mini variant of the student card — same shape, smaller text.
+   The stack positioning (top/left) is handled by the
+   .card-stack rules above; this class only adds the entrance
+   animation and a tiny font tweak. */
+.student-card--mini {
+  font-size: 0.85rem;
+  min-width: 0;
+  /* Initial faded state for the drop-in animation. We don't
+     translate the card here because the .card-stack already
+     positions it absolutely via top/left. */
+  opacity: 0;
+  transition: opacity 220ms ease-out;
+}
+
+.student-card--mini.is-ready {
+  opacity: 1;
+}
+
+.student-card--mini .student-card-body dd {
+  font-size: 0.95rem;
+}
+
+/* ---------- Pain Counter (Screen 7 — The Pain) ----------
+   A big numeric counter that ticks up rapidly to convey
+   the magnitude of maintaining 1000 cards by hand. */
+.pain-counter {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 5rem;
+  font-weight: 600;
+  color: var(--color-maroon);
+  text-align: center;
+  margin: var(--space-lg) 0 var(--space-xs);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.pain-status {
+  text-align: center;
+  font-size: 1.05rem;
+  color: var(--color-text-muted, #555);
+  margin-bottom: var(--space-md);
+}
+
+.pain-time {
+  color: var(--color-maroon);
+  font-weight: 600;
+}
+
+.pain-summary {
+  text-align: center;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--color-text-muted, #555);
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border, #e5d6b8);
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Solution Layout (Screen 8 — The Solution) ----------
+   Two-column conceptual diagram: empty structure on the left,
+   filled cards on the right, joined by an arrow. */
+.solution-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  margin: var(--space-lg) 0;
+  flex-wrap: wrap;
+}
+
+.solution-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.solution-label {
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted, #777);
+  font-weight: 500;
+}
+
+.solution-arrow {
+  font-size: 2.4rem;
+  color: var(--color-gold);
+  font-weight: 300;
+  align-self: center;
+  line-height: 1;
+  /* Hidden until the arrow stage fires. */
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 320ms ease-out, transform 320ms ease-out;
+}
+
+.solution-cards {
+  position: relative;
+  width: 220px;
+  height: 200px;
+}
+
+.solution-cards > .student-card--mini {
+  position: absolute;
+  top: calc(var(--i, 0) * 8px);
+  left: calc(var(--i, 0) * 10px);
+  width: 200px;
+  z-index: calc(var(--i, 0) + 1);
+  /* Each card is hidden until its stage class lands on the
+     layout. The :nth-child selectors below pick which card. */
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 280ms ease-out, transform 280ms ease-out;
+}
+
+/* Arrow: stage-arrow reveals it. */
+.solution-layout.stage-arrow .solution-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Cards: each card index has its own stage class. */
+.solution-layout.stage-card-1 .solution-cards > .student-card--mini:nth-child(1),
+.solution-layout.stage-card-2 .solution-cards > .student-card--mini:nth-child(2),
+.solution-layout.stage-card-3 .solution-cards > .student-card--mini:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* The structure (empty template) gets a gentle gold ring
+   from the start so the learner notices it as the conceptual
+   anchor. No animation — just a static frame. */
+.solution-side--template .student-card {
+  box-shadow: 0 0 0 2px var(--color-gold-light);
+}
+
+/* =========================================================
+   SCREEN 1 — REVEAL BLOCK (Rekha-specific addition)
+   Per-option opening + shared closing trio, with a 1.2s
+   anticipation beat between pick and reveal, and an aside
+   italic on the closing-trio's "Interesting..." line.
+   ========================================================= */
+.reveal-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-surface-dim);
+  border-left: 4px solid var(--color-gold);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  opacity: 0;
+  transform: translateX(-16px);
+  pointer-events: none;
+}
+
+.reveal-block.is-ready {
+  animation: revealSlideIn 0.4s var(--transition-medium) forwards;
+}
+
+.reveal-line {
+  font-family: var(--font-story);
+  font-size: 1.05rem;
+  color: var(--color-ink);
+  line-height: 1.55;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.reveal-line.is-ready {
+  animation: revealLineIn 0.3s var(--transition-medium) forwards;
+}
+
+.reveal-line.aside {
+  font-style: italic;
+  color: var(--color-ink-soft);
+}
+
+@keyframes revealSlideIn {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes revealLineIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,108 @@
+/*
+  level-map-enhanced.css
+  ------------------------
+  Additive only — scoped to new `lm-` classes layered inside your existing
+  `.level-map-*` structure, so nothing here overrides what's already
+  defined for `.level-map-card`, `.level-map-node`, `.level-map-row`, etc.
+
+  Import once, e.g. in LevelMap.jsx itself:
+    import "./level-map-enhanced.css";
+
+  Uses the same CSS custom properties as simulator-enhanced.css
+  (--sim-primary / --sim-accent / etc.) so the two stay visually
+  consistent. If you didn't add simulator-enhanced.css's :root block,
+  copy that block in too, or these fall back to the same bird-palette
+  defaults on their own.
+*/
+
+:root {
+  --lm-primary: var(--sim-primary, var(--color-primary, #3A7D7C));
+  --lm-primary-dark: var(--sim-primary-dark, var(--color-primary-dark, #2F6564));
+  --lm-accent: var(--sim-accent, var(--color-accent, #E8A33D));
+  --lm-locked: var(--color-locked, #B9B9B2);
+}
+
+.lm-progress-track {
+  height: 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--lm-primary) 12%, transparent);
+  overflow: hidden;
+  margin: 4px 0 14px;
+}
+
+.lm-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--lm-primary), var(--lm-accent));
+  transition: width 0.4s ease;
+}
+
+.lm-connector {
+  background: color-mix(in srgb, var(--lm-locked) 60%, transparent);
+  transition: background 0.3s ease;
+}
+
+.lm-connector-filled {
+  background: var(--lm-primary);
+}
+
+.lm-xp-pill {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--lm-accent) 20%, transparent);
+  color: var(--lm-primary-dark);
+  white-space: nowrap;
+}
+
+.lm-stars {
+  margin: 2px 0 0;
+  letter-spacing: 2px;
+}
+
+.lm-star {
+  color: color-mix(in srgb, var(--lm-locked) 70%, transparent);
+  font-size: 0.9rem;
+}
+
+.lm-star-filled {
+  color: var(--lm-accent);
+}
+
+.level-map-node.lm-node-unlocking {
+  animation: lm-unlock-pop 0.7s ease;
+}
+
+@keyframes lm-unlock-pop {
+  0% {
+    transform: scale(0.85);
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--lm-accent) 55%, transparent);
+  }
+  40% {
+    transform: scale(1.08);
+    box-shadow: 0 0 0 10px color-mix(in srgb, var(--lm-accent) 0%, transparent);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.level-map-row.is-current .level-map-start {
+  animation: lm-start-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes lm-start-pulse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .level-map-node.lm-node-unlocking,
+  .level-map-row.is-current .level-map-start {
+    animation: none !important;
+  }
+}

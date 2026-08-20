@@ -1,0 +1,247 @@
+/*
+  simulator-enhanced.css
+  -----------------------
+  Additive styles for the redesigned TrySimulator. Every selector is scoped
+  under `.sim-` class names so nothing here can collide with or override
+  your existing `.card`, `.btn`, `.console-log`, etc. definitions — those
+  keep working exactly as they do today; this file only adds new elements
+  layered inside them.
+
+  Colors are read from CSS custom properties (with fallbacks to the palette
+  already used in BirdIllustration.jsx: teal #3A7D7C, gold #E8A33D,
+  cream #FAF6EE) so this stays dark-mode-safe. If your global stylesheet
+  already defines tokens like --color-primary, rename the var() calls
+  below to match and drop the fallbacks.
+
+  Import this once, alongside your existing global CSS, e.g. in main.jsx:
+    import "./simulator-enhanced.css";
+*/
+
+:root {
+  --sim-primary: var(--color-primary, #3A7D7C);
+  --sim-primary-dark: var(--color-primary-dark, #2F6564);
+  --sim-accent: var(--color-accent, #E8A33D);
+  --sim-surface: var(--color-surface, #FAF6EE);
+  --sim-success: var(--color-success, #3A7D3C);
+  --sim-text: var(--color-text, #26302F);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --sim-surface: var(--color-surface, #1F2624);
+    --sim-text: var(--color-text, #EDEFEC);
+  }
+}
+
+.sim-card {
+  position: relative;
+}
+
+.sim-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.sim-difficulty-pill {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: color-mix(in srgb, var(--sim-primary) 14%, transparent);
+  color: var(--sim-primary-dark);
+}
+
+.sim-xp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  background: color-mix(in srgb, var(--sim-accent) 18%, transparent);
+  color: var(--sim-primary-dark);
+  white-space: nowrap;
+}
+
+.sim-xp-chip-icon {
+  font-size: 0.9em;
+}
+
+.sim-grid {
+  align-items: stretch;
+}
+
+.sim-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.sim-illustration-frame {
+  border-radius: 50%;
+  padding: 10px;
+  background: color-mix(in srgb, var(--sim-primary) 8%, transparent);
+  transition: transform 0.25s ease;
+}
+
+.sim-bounce {
+  animation: sim-bounce 0.5s ease;
+}
+
+@keyframes sim-bounce {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.12) rotate(-3deg); }
+  70% { transform: scale(0.97) rotate(2deg); }
+  100% { transform: scale(1); }
+}
+
+.sim-code {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--sim-primary) 16%, transparent);
+}
+
+.sim-code-topbar {
+  display: flex;
+  gap: 6px;
+  padding: 8px 10px;
+  background: color-mix(in srgb, var(--sim-primary-dark) 90%, black 10%);
+}
+
+.sim-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.sim-dot-red { background: #E8615D; }
+.sim-dot-yellow { background: #E8C23D; }
+.sim-dot-green { background: #57C285; }
+
+.sim-method-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sim-method-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.sim-method-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--sim-primary) 20%, transparent);
+}
+
+.sim-method-btn:focus-visible {
+  outline: 2px solid var(--sim-primary);
+  outline-offset: 2px;
+}
+
+.sim-method-tried {
+  opacity: 0.9;
+}
+
+.sim-method-check {
+  color: var(--sim-success);
+  font-weight: 800;
+}
+
+.sim-console {
+  position: relative;
+}
+
+.sim-line-in {
+  animation: sim-line-in 0.28s ease;
+}
+
+@keyframes sim-line-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sim-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0;
+}
+
+.sim-progress-track {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--sim-primary) 12%, transparent);
+  overflow: hidden;
+}
+
+.sim-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--sim-primary), var(--sim-accent));
+  transition: width 0.35s ease;
+}
+
+.sim-progress-caption {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.sim-continue-btn {
+  transition: transform 0.15s ease;
+}
+
+.sim-continue-btn:not(:disabled):hover {
+  transform: translateY(-1px);
+}
+
+.sim-xp-toast {
+  position: absolute;
+  top: -14px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--sim-primary-dark);
+  color: var(--sim-surface);
+  font-weight: 700;
+  font-size: 0.85rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+  animation: sim-toast-in 0.35s ease, sim-toast-out 0.35s ease 2.2s;
+}
+
+@keyframes sim-toast-in {
+  from { opacity: 0; transform: translateY(6px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes sim-toast-out {
+  to { opacity: 0; transform: translateY(-6px) scale(0.95); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sim-bounce,
+  .sim-line-in,
+  .sim-xp-toast,
+  .sim-method-btn,
+  .sim-continue-btn {
+    animation: none !important;
+    transition: none !important;
+  }
+}
