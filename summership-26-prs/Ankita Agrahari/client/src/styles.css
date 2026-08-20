@@ -1554,3 +1554,47 @@ textarea:focus {
   transform: translateY(-2px) scale(1.03);
   transition: all 0.2s ease;
 }
+
+/* --- Reset Editor Button --- */
+.btn-reset-editor {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 11px;
+  border-radius: 6px;
+  border: 1px solid #b9c7bf;
+  background: transparent;
+  color: #455a54;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
+}
+
+.btn-reset-editor:hover {
+  background: #eef2f0;
+  border-color: #7a9990;
+  color: #17201d;
+}
+
+.btn-reset-editor.armed {
+  background: #fff7e6;
+  border-color: #e09800;
+  color: #8a5c00;
+  font-weight: 600;
+  animation: reset-arm-shake 0.35s ease;
+}
+
+.btn-reset-editor.armed:hover {
+  background: #ffe8a3;
+  border-color: #c07a00;
+}
+
+@keyframes reset-arm-shake {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(-3px); }
+  40%  { transform: translateX(3px); }
+  60%  { transform: translateX(-2px); }
+  80%  { transform: translateX(2px); }
+  100% { transform: translateX(0); }
+}

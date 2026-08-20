@@ -8,7 +8,8 @@ import {
   AlertCircle,
   Terminal,
   CheckCircle2,
-  RefreshCw
+  RefreshCw,
+  RotateCcw
 } from 'lucide-react';
 import { verifyScenario } from '../utils/verification';
 import { getScenarioHint } from '../utils/hints';
@@ -55,6 +56,8 @@ export default function ChallengeWorkspace({ result, scenario }) {
   const [currentHint, setCurrentHint] = useState('');
   const [pyodideState, setPyodideState] = useState('idle');
   const [hoveredLine, setHoveredLine] = useState(null);
+  const [resetArmed, setResetArmed] = useState(false);
+  const resetArmTimerRef = useRef(null);
 
   const [leftWidth, setLeftWidth] = useState(55);
   const splitContainerRef = useRef(null);
@@ -131,15 +134,36 @@ export default function ChallengeWorkspace({ result, scenario }) {
     };
   }, [timerActive, challengeState]);
 
+  const buildStarterTemplate = () => {
+    const objectivesList = scenario?.objectives?.map(obj => `# - ${obj}`).join('\n') || '';
+    return `# Scenario: ${scenario?.title || 'Challenge'}\n# Objectives:\n${objectivesList}\n\n# Write your code to solve this scenario below:\n\n`;
+  };
+
   const startChallenge = () => {
     const seconds = isZen ? 0 : customMinutes * 60;
     setTimeLeft(seconds);
     setTimerActive(!isZen);
     setChallengeState('active');
+    setUserCode(buildStarterTemplate());
+  };
 
-    const objectivesList = scenario?.objectives?.map(obj => `# - ${obj}`).join('\n') || '';
-    const template = `# Scenario: ${scenario?.title || 'Challenge'}\n# Objectives:\n${objectivesList}\n\n# Write your code to solve this scenario below:\n\n`;
-    setUserCode(template);
+  const handleResetEditor = () => {
+    if (!resetArmed) {
+      // First click — arm the reset, auto-disarm after 3 seconds
+      setResetArmed(true);
+      if (resetArmTimerRef.current) clearTimeout(resetArmTimerRef.current);
+      resetArmTimerRef.current = setTimeout(() => setResetArmed(false), 3000);
+    } else {
+      // Second click — actually reset
+      clearTimeout(resetArmTimerRef.current);
+      setResetArmed(false);
+      setUserCode(buildStarterTemplate());
+      setConsoleOutput('');
+      setConsoleError(null);
+      setVerifyStatus(null);
+      setCurrentHint('');
+      setHintIndex(0);
+    }
   };
 
   const handleGetHint = () => {
@@ -389,12 +413,22 @@ for name in list(globals().keys()):
             </div>
 
             <div className="editor-actions">
-              <button type="button" className="btn-secondary" onClick={handleGetHint} title="Need a Hint?">
-                <HelpCircle size={14} /> Need a Hint
-              </button>
+              <div className="action-group">
+                <button type="button" className="btn-secondary" onClick={handleGetHint} title="Need a Hint?">
+                  <HelpCircle size={14} /> Need a Hint
+                </button>
+                <button
+                  type="button"
+                  className={`btn-reset-editor ${resetArmed ? 'armed' : ''}`}
+                  onClick={handleResetEditor}
+                  title={resetArmed ? 'Click again to confirm reset' : 'Reset editor to starter template'}
+                >
+                  <RotateCcw size={14} /> {resetArmed ? 'Confirm Reset?' : 'Reset Editor'}
+                </button>
+              </div>
               <div className="action-group">
                 <button type="button" className="btn-secondary btn-reveal" onClick={revealEarly}>
-                  Give Up & Reveal
+                  Give Up &amp; Reveal
                 </button>
                 <button
                   type="button"
