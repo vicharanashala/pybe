@@ -242,6 +242,12 @@ function Result({ result }) {
       <ul className="feedback">
         {result.promptFeedback.map((item) => <li key={item}>{item}</li>)}
       </ul>
+      {result.reflection && result.reflection.trim() !== '' && (
+        <div className="reflection">
+          <strong>Your Reflection</strong>
+          <p>{result.reflection}</p>
+        </div>
+      )}
       {result.misconceptions.length > 0 && (
         <div className="note">
           <strong>Misconception watch</strong>
