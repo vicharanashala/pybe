@@ -5,6 +5,7 @@ const scenarioRoutes = require('./routes/scenarios');
 const sessionRoutes = require('./routes/sessions');
 const analyticsRoutes = require('./routes/analytics');
 const roadmapRoutes = require('./routes/roadmap');
+const bookmarkRoutes = require('./routes/bookmarks');
 require('dotenv').config();
 
 const app = express();
@@ -18,6 +19,7 @@ app.get('/api/health', (_req, res) => res.json({ ok: true, product: 'PyBe' }));
 app.use('/api/scenarios', scenarioRoutes);
 app.use('/api/sessions', sessionRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/bookmarks', bookmarkRoutes);
 app.use('/api/roadmap', roadmapRoutes);
 
 app.use((error, _req, res, _next) => {

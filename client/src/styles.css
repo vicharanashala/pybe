@@ -121,6 +121,52 @@ select {
 .scenario small {
   color: inherit;
   opacity: .75;
+}.view-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.view-tab {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #385149;
+  border-radius: 8px;
+  background: transparent;
+  color: #f8f4ec;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.view-tab.active {
+  background: #d8f07c;
+  color: #14201c;
+  border-color: #d8f07c;
+}
+
+.scenario-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bookmark-toggle {
+  display: inline-flex;
+  color: inherit;
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+.bookmark-toggle:hover {
+  opacity: 1;
+}
+
+.empty-saved {
+  opacity: 0.75;
+  font-size: 0.85rem;
+  padding: 12px 4px;
 }
 
 .workspace {
