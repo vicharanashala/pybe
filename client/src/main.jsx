@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
+  Bookmark,
+  BookmarkCheck,
   Brain,
   ChartNoAxesCombined,
   Code2,
@@ -32,6 +34,8 @@ function App() {
   const [sessions, setSessions] = useState([]);
   const [analytics, setAnalytics] = useState(null);
   const [roadmap, setRoadmap] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
+  const [view, setView] = useState('browse');
   const [filters, setFilters] = useState({ q: '', difficulty: '', concept: '' });
   const [form, setForm] = useState({ learnerName: 'Guest learner', reasoning: '', promptText: '', reflection: '' });
   const [activeResult, setActiveResult] = useState(null);
@@ -42,16 +46,18 @@ function App() {
 
   async function refresh() {
     const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
-    const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
+    const [scenarioData, sessionData, analyticsData, roadmapData, bookmarkData] = await Promise.all([
       api(`/scenarios?${params}`),
       api('/sessions'),
       api('/analytics'),
-      api('/roadmap')
+      api('/roadmap'),
+      api('/bookmarks')
     ]);
     setScenarios(scenarioData);
     setSessions(sessionData);
     setAnalytics(analyticsData);
     setRoadmap(roadmapData);
+    setBookmarks(bookmarkData);
     setSelected((current) => current || scenarioData[0] || null);
     setLoading(false);
   }
@@ -75,6 +81,17 @@ function App() {
     } finally {
       setSubmitting(false);
     }
+  }
+
+  async function toggleBookmark(scenario) {
+    const existing = bookmarks.find((bookmark) => bookmark.scenarioId === scenario._id);
+    if (existing) {
+      await api(`/bookmarks/${existing._id}`, { method: 'DELETE' });
+    } else {
+      await api('/bookmarks', { method: 'POST', body: JSON.stringify({ scenarioId: scenario._id }) });
+    }
+    const bookmarkData = await api('/bookmarks');
+    setBookmarks(bookmarkData);
   }
 
   if (loading) return <main className="loading">Loading PyBe...</main>;
@@ -111,21 +128,50 @@ function App() {
           {concepts.map((concept) => <option key={concept}>{concept}</option>)}
         </select>
 
+                <div className="view-tabs">
+          <button className={view === 'browse' ? 'view-tab active' : 'view-tab'} onClick={() => setView('browse')}>
+            Browse
+          </button>
+          <button className={view === 'saved' ? 'view-tab active' : 'view-tab'} onClick={() => setView('saved')}>
+            Saved ({bookmarks.length})
+          </button>
+        </div>
+
         <div className="scenario-list">
-          {scenarios.map((scenario) => (
-            <button
-              key={scenario._id}
-              className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
-              onClick={() => {
-                setSelected(scenario);
-                setActiveResult(null);
-              }}
-            >
-              <span>{scenario.difficulty}</span>
-              <strong>{scenario.title}</strong>
-              <small>{scenario.concepts.join(' / ')}</small>
-            </button>
-          ))}
+          {(view === 'saved'
+            ? bookmarks.map((bookmark) => bookmark.scenario).filter(Boolean)
+            : scenarios
+          ).map((scenario) => {
+            const isBookmarked = bookmarks.some((bookmark) => bookmark.scenarioId === scenario._id);
+            return (
+              <button
+                key={scenario._id}
+                className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
+                onClick={() => {
+                  setSelected(scenario);
+                  setActiveResult(null);
+                }}
+              >
+                <span className="scenario-top">
+                  <span>{scenario.difficulty}</span>
+                  <span
+                    className="bookmark-toggle"
+                    role="button"
+                    tabIndex={0}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      toggleBookmark(scenario).catch(console.error);
+                    }}
+                  >
+                    {isBookmarked ? <BookmarkCheck size={16} /> : <Bookmark size={16} />}
+                  </span>
+                </span>
+                <strong>{scenario.title}</strong>
+                <small>{scenario.concepts.join(' / ')}</small>
+              </button>
+            );
+          })}
+          {view === 'saved' && bookmarks.length === 0 && <p className="empty-saved">No saved scenarios yet.</p>}
         </div>
       </aside>
 

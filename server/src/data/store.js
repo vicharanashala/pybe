@@ -8,7 +8,7 @@ async function ensureDb() {
   try {
     await fs.access(dbPath);
   } catch {
-    await writeDb({ scenarios: [], sessions: [] });
+    await writeDb({ scenarios: [], sessions: [], bookmarks: [] });
   }
 }
 
@@ -93,13 +93,43 @@ async function resetData(scenarios) {
     sessions: []
   });
 }
+async function listBookmarks() {
+  const db = await readDb();
+  const bookmarks = db.bookmarks || [];
+  return bookmarks
+    .map((bookmark) => ({
+      ...bookmark,
+      scenario: db.scenarios.find((scenario) => scenario._id === bookmark.scenarioId) || null
+    }))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+}
+
+async function addBookmark(scenarioId) {
+  const db = await readDb();
+  const existing = (db.bookmarks || []).find((bookmark) => bookmark.scenarioId === scenarioId);
+  if (existing) return existing;
+
+  const bookmark = createRecord({ scenarioId });
+  db.bookmarks = [...(db.bookmarks || []), bookmark];
+  await writeDb(db);
+  return bookmark;
+}
+
+async function removeBookmark(id) {
+  const db = await readDb();
+  db.bookmarks = (db.bookmarks || []).filter((bookmark) => bookmark._id !== id);
+  await writeDb(db);
+}
 
 module.exports = {
   addScenario,
   addSession,
+  addBookmark,
   getScenario,
   listScenarios,
   listSessions,
+  listBookmarks,
   readDb,
+  removeBookmark,
   resetData
 };
