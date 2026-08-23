@@ -164,9 +164,29 @@ select {
 }
 
 .empty-saved {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
   opacity: 0.75;
   font-size: 0.85rem;
-  padding: 12px 4px;
+  padding: 24px 8px;
+}
+
+.empty-saved button {
+  padding: 6px 14px;
+  border: 1px solid #385149;
+  border-radius: 8px;
+  background: transparent;
+  color: #f8f4ec;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.empty-saved button:hover {
+  border-color: #d8f07c;
+  color: #d8f07c;
 }
 
 .workspace {
@@ -535,5 +555,31 @@ meter {
 
   .analytics-list div {
     grid-template-columns: 1fr;
+  }
+}
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #d8f07c;
+  color: #14201c;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  z-index: 50;
+  animation: toast-in 0.2s ease-out;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
   }
 }

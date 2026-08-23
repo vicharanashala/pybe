@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import {
   Bookmark,
   BookmarkCheck,
+  BookmarkPlus,
   Brain,
   ChartNoAxesCombined,
   Code2,
@@ -36,6 +37,7 @@ function App() {
   const [roadmap, setRoadmap] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
   const [view, setView] = useState('browse');
+  const [toast, setToast] = useState(null);
   const [filters, setFilters] = useState({ q: '', difficulty: '', concept: '' });
   const [form, setForm] = useState({ learnerName: 'Guest learner', reasoning: '', promptText: '', reflection: '' });
   const [activeResult, setActiveResult] = useState(null);
@@ -83,16 +85,21 @@ function App() {
     }
   }
 
-  async function toggleBookmark(scenario) {
+    async function toggleBookmark(scenario) {
     const existing = bookmarks.find((bookmark) => bookmark.scenarioId === scenario._id);
     if (existing) {
       await api(`/bookmarks/${existing._id}`, { method: 'DELETE' });
+      setToast('Removed from Saved');
     } else {
       await api('/bookmarks', { method: 'POST', body: JSON.stringify({ scenarioId: scenario._id }) });
+      setToast('Saved for later');
     }
     const bookmarkData = await api('/bookmarks');
     setBookmarks(bookmarkData);
+    setTimeout(() => setToast(null), 2200);
   }
+
+
 
   if (loading) return <main className="loading">Loading PyBe...</main>;
 
@@ -171,7 +178,13 @@ function App() {
               </button>
             );
           })}
-          {view === 'saved' && bookmarks.length === 0 && <p className="empty-saved">No saved scenarios yet.</p>}
+          {view === 'saved' && bookmarks.length === 0 && (
+            <div className="empty-saved">
+              <BookmarkPlus size={28} />
+              <p>No saved scenarios yet.</p>
+              <button type="button" onClick={() => setView('browse')}>Browse scenarios</button>
+            </div>
+          )}
         </div>
       </aside>
 
@@ -185,6 +198,7 @@ function App() {
             <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
             <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
             <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
+            <span>{bookmarks.length}<small>Saved</small></span>
           </div>
         </header>
 
@@ -253,7 +267,8 @@ function App() {
             <SessionList sessions={sessions} />
           </div>
         </section>
-      </section>
+       </section>
+      {toast && <div className="toast">{toast}</div>}
     </main>
   );
 }
