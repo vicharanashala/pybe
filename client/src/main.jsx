@@ -139,6 +139,7 @@ function App() {
             <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
             <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
             <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
+              <span>{analytics?.streak?.current || 0}<small>🔥 Day streak</small></span>
           </div>
         </header>
 
