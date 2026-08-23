@@ -158,6 +158,12 @@ select {
   opacity: 0.75;
   cursor: pointer;
 }
+.main-bookmark {
+  margin-left: auto;
+  background: none;
+  border: none;
+  padding: 4px;
+}
 
 .bookmark-toggle:hover {
   opacity: 1;

@@ -212,6 +212,19 @@ function App() {
             <div className="section-title">
               <Compass size={20} />
               <h2>{selected?.title}</h2>
+            {selected && (
+    <button
+      type="button"
+      className="bookmark-toggle main-bookmark"
+      onClick={() => toggleBookmark(selected).catch(console.error)}
+    >
+      {bookmarks.some((bookmark) => bookmark.scenarioId === selected._id) ? (
+        <BookmarkCheck size={18} />
+      ) : (
+        <Bookmark size={18} />
+      )}
+    </button>
+  )}
             </div>
             <p className="context">{selected?.context}</p>
             <div className="objective-row">
@@ -260,11 +273,7 @@ function App() {
 
         <section className="dashboard">
           <div className="panel">
-            <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Learner Analytics</h2></div>
-            <Analytics analytics={analytics} />
-          </div>
-          <div className="panel">
-            <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
+          <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
             <Roadmap roadmap={roadmap} />
           </div>
           <div className="panel">
