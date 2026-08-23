@@ -144,9 +144,14 @@ function App() {
           </button>
         </div>
 
-        <div className="scenario-list">
+                <div className="scenario-list">
           {(view === 'saved'
-            ? bookmarks.map((bookmark) => bookmark.scenario).filter(Boolean)
+            ? bookmarks
+                .map((bookmark) => bookmark.scenario)
+                .filter(Boolean)
+                .filter((scenario) => !filters.difficulty || scenario.difficulty === filters.difficulty)
+                .filter((scenario) => !filters.concept || scenario.concepts.includes(filters.concept))
+                .filter((scenario) => !filters.q || scenario.title.toLowerCase().includes(filters.q.toLowerCase()))
             : scenarios
           ).map((scenario) => {
             const isBookmarked = bookmarks.some((bookmark) => bookmark.scenarioId === scenario._id);
