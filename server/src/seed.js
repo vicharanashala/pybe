@@ -203,6 +203,16 @@ const scenarios = [
     effectivenessScore: 87
   },
   {
+    title: "The Payment That Didn't Go Through",
+    difficulty: 'Explorer',
+    concepts: ['exception handling'],
+    context: 'A user is ordering food online for ₹420. Your account has ₹300 available. You click "Pay", but the payment cannot be completed because the balance is too low.',
+    prompt: 'What should the program do if the payment operation fails unexpectedly?',
+    objectives: ['Identify potential failure points', 'Prevent application crashes', 'Map error handling to try / except'],
+    sampleReasoning: 'Attempt the payment operation, handle the insufficient balance condition safely, and display a user-friendly message without crashing the app.',
+    effectivenessScore: 95
+  },
+  {
     title: 'Reusable Discount Rule',
     difficulty: 'Builder',
     concepts: ['functions', 'conditionals'],
