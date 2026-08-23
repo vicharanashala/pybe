@@ -8,7 +8,7 @@ async function ensureDb() {
   try {
     await fs.access(dbPath);
   } catch {
-    await writeDb({ scenarios: [], sessions: [] });
+    await writeDb({ scenarios: [], sessions: [], users: [] });
   }
 }
 
@@ -90,7 +90,8 @@ async function addSession(input) {
 async function resetData(scenarios) {
   await writeDb({
     scenarios: scenarios.map((scenario) => createRecord(scenario)),
-    sessions: []
+    sessions: [],
+    users: []
   });
 }
 
@@ -101,5 +102,6 @@ module.exports = {
   listScenarios,
   listSessions,
   readDb,
-  resetData
+  resetData,
+  writeDb
 };

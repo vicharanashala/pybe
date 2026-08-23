@@ -1,7 +1,7 @@
 {
   "scenarios": [
     {
-      "_id": "8cf644f0-1402-4763-9542-02bd2ca0d1dc",
+      "_id": "8dbc5a5a-0796-4abe-b520-f024475a92a2",
       "title": "Bag Weight Label",
       "difficulty": "Beginner",
       "concepts": [
@@ -16,11 +16,11 @@
       ],
       "sampleReasoning": "I only need to remember the bag weight, so I would store it with a clear name.",
       "effectivenessScore": 96,
-      "createdAt": "2026-06-19T11:54:44.732Z",
-      "updatedAt": "2026-06-19T11:54:44.732Z"
+      "createdAt": "2026-08-06T19:04:56.440Z",
+      "updatedAt": "2026-08-06T19:04:56.440Z"
     },
     {
-      "_id": "8f065c3d-36c5-48c5-948a-b7bc1a768bc9",
+      "_id": "95466cdd-90c6-4a89-bbc9-5020ae444aef",
       "title": "Rainy Day Choice",
       "difficulty": "Beginner",
       "concepts": [
@@ -35,11 +35,11 @@
       ],
       "sampleReasoning": "If it is raining, carry an umbrella. Otherwise, leave it at home.",
       "effectivenessScore": 95,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "c4dfb27a-c96b-4ff1-80ff-3bd5b5b12e74",
+      "_id": "e131d9df-5591-44cb-b173-113c23612a1c",
       "title": "Two Snack Prices",
       "difficulty": "Beginner",
       "concepts": [
@@ -55,11 +55,11 @@
       ],
       "sampleReasoning": "I would keep the two prices separately and add them to get the total.",
       "effectivenessScore": 94,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "3657a91d-1f2b-42d7-bfec-4fbfb80dd648",
+      "_id": "b422cc15-8fd7-4877-9867-9b374791fecb",
       "title": "Greeting by Name",
       "difficulty": "Beginner",
       "concepts": [
@@ -75,11 +75,11 @@
       ],
       "sampleReasoning": "The computer should store the learner name and place it inside a greeting sentence.",
       "effectivenessScore": 93,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "a29775e3-1744-4b5e-b213-ecbb9bf8ec39",
+      "_id": "068d6c0f-c202-4566-95fd-1808d70fe3da",
       "title": "Pass Mark Check",
       "difficulty": "Beginner",
       "concepts": [
@@ -95,11 +95,11 @@
       ],
       "sampleReasoning": "I would compare the score with the pass mark and decide pass if it is high enough.",
       "effectivenessScore": 92,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "734c083f-b08c-4524-ae1a-f2924cd6851a",
+      "_id": "bc170f03-b727-4aa4-8939-87458288c635",
       "title": "Pocket Money Left",
       "difficulty": "Beginner",
       "concepts": [
@@ -115,11 +115,11 @@
       ],
       "sampleReasoning": "Start with the original money, subtract the spent amount, and store what remains.",
       "effectivenessScore": 91,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "1324fea6-96d2-408c-8f58-cd92877f9dbd",
+      "_id": "f160a255-90a4-4052-a774-6f938c97e6a2",
       "title": "Favorite Color List",
       "difficulty": "Beginner",
       "concepts": [
@@ -134,11 +134,11 @@
       ],
       "sampleReasoning": "Since all values are colors, I would keep them together in one list.",
       "effectivenessScore": 90,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "8bb64eb9-5710-433b-bce9-95b4a5b995a1",
+      "_id": "b91551f7-174d-4e2e-b4e4-7c6420c57620",
       "title": "First Item in a Bag",
       "difficulty": "Beginner",
       "concepts": [
@@ -154,11 +154,11 @@
       ],
       "sampleReasoning": "The first item is based on its position in the ordered group.",
       "effectivenessScore": 89,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "73803faa-165f-4aee-b60f-3e08d470ce84",
+      "_id": "96381525-6f2c-4c5d-af2b-9c37c6c46da0",
       "title": "Attendance Count",
       "difficulty": "Beginner",
       "concepts": [
@@ -174,11 +174,11 @@
       ],
       "sampleReasoning": "I would count how many names are in the present-students list.",
       "effectivenessScore": 88,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "e510ab5f-1f11-46c9-b857-22a50e144e75",
+      "_id": "df736ad8-218d-4857-89ff-41ba163652e2",
       "title": "Temperature Message",
       "difficulty": "Beginner",
       "concepts": [
@@ -194,11 +194,11 @@
       ],
       "sampleReasoning": "If the temperature is above the threshold, show Hot; otherwise show Comfortable.",
       "effectivenessScore": 87,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "2a3496ef-bb71-4dde-83f5-37844063678d",
+      "_id": "ace933be-7d03-47f8-9f8f-5a1d7c00d421",
       "title": "Water Bottle Reminder",
       "difficulty": "Explorer",
       "concepts": [
@@ -213,11 +213,11 @@
       ],
       "sampleReasoning": "For every break, show the same water reminder.",
       "effectivenessScore": 96,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "71b887ca-fd3d-4c1a-83a9-f464f7c2a06d",
+      "_id": "a2ba0ab4-0997-4dbf-bb3d-2a67d4841511",
       "title": "Find the Longest Pencil",
       "difficulty": "Explorer",
       "concepts": [
@@ -233,11 +233,11 @@
       ],
       "sampleReasoning": "Start with one pencil as the longest, then compare each next pencil against it.",
       "effectivenessScore": 95,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "bf9c0f8c-308d-4e1f-9e37-9997c7e042b9",
+      "_id": "48890138-8f43-41b3-88d4-7cf8cc05bbbd",
       "title": "Clean Chore Checklist",
       "difficulty": "Explorer",
       "concepts": [
@@ -253,11 +253,11 @@
       ],
       "sampleReasoning": "Put chores in a list and handle each chore one by one.",
       "effectivenessScore": 94,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "ce225ef0-1111-4ed4-9318-7373018385e6",
+      "_id": "4481d6b4-70ba-4589-a5ef-491f10a214f4",
       "title": "Movie Age Filter",
       "difficulty": "Explorer",
       "concepts": [
@@ -273,11 +273,11 @@
       ],
       "sampleReasoning": "For each movie, keep it only if the learner age is at least the minimum age.",
       "effectivenessScore": 93,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "cc62f477-44c8-403b-82cf-0b2638ff501b",
+      "_id": "12fea61a-0f70-41bc-81e9-f2198ac1cdb7",
       "title": "Classroom Supply Lookup",
       "difficulty": "Explorer",
       "concepts": [
@@ -292,11 +292,11 @@
       ],
       "sampleReasoning": "Each supply has a count, so I would store supply names as keys with counts as values.",
       "effectivenessScore": 92,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "26b0c080-124d-4ff8-92ad-4f2380e3e89f",
+      "_id": "245cf684-1131-48ec-9b31-749736dd7a98",
       "title": "Bus Stop Search",
       "difficulty": "Explorer",
       "concepts": [
@@ -312,11 +312,11 @@
       ],
       "sampleReasoning": "Look at each stop and compare it with the stop I want.",
       "effectivenessScore": 91,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "169fc6d5-7b9b-483d-87ee-325e2d497c90",
+      "_id": "d0a28239-dbe7-4ccc-a493-da1775aa2965",
       "title": "Average Practice Score",
       "difficulty": "Explorer",
       "concepts": [
@@ -332,11 +332,11 @@
       ],
       "sampleReasoning": "Find the total of all scores, count how many scores there are, then divide.",
       "effectivenessScore": 90,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "e0bdac7d-2033-408f-833c-3f2734690398",
+      "_id": "805eb6da-4684-4057-bdcb-bacd47221bd9",
       "title": "Separate Even Roll Numbers",
       "difficulty": "Explorer",
       "concepts": [
@@ -352,11 +352,11 @@
       ],
       "sampleReasoning": "A roll number is even if dividing by two leaves no remainder.",
       "effectivenessScore": 89,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "decf41d5-8529-4685-b354-d02090bbb639",
+      "_id": "d7d7f75e-e8cc-4f09-bf28-09b281c27126",
       "title": "Capitalize Name Tags",
       "difficulty": "Explorer",
       "concepts": [
@@ -372,11 +372,11 @@
       ],
       "sampleReasoning": "For each name, convert it to title case before printing the tag.",
       "effectivenessScore": 88,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "418bec64-f75a-40fa-b849-42edba0d3939",
+      "_id": "229976b8-0715-41a2-9461-609b2604a5c0",
       "title": "Find Missing Homework",
       "difficulty": "Explorer",
       "concepts": [
@@ -392,11 +392,11 @@
       ],
       "sampleReasoning": "Take everyone in the class and remove the students who submitted.",
       "effectivenessScore": 87,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "07295b48-1037-4654-995f-df57d6fd7a7b",
+      "_id": "9d75b5f7-4213-49f8-a8ff-0c358f578826",
       "title": "Reusable Discount Rule",
       "difficulty": "Builder",
       "concepts": [
@@ -412,11 +412,11 @@
       ],
       "sampleReasoning": "The helper needs the bill amount and should return the final price after applying the rule.",
       "effectivenessScore": 96,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "88a35898-eba5-47ca-adf2-0805d633ea3d",
+      "_id": "4af1d1d7-a248-46d8-9ac1-095558b2a93f",
       "title": "Mini Quiz Checker",
       "difficulty": "Builder",
       "concepts": [
@@ -432,11 +432,11 @@
       ],
       "sampleReasoning": "Compare the learner answer with the correct answer and return whether they match.",
       "effectivenessScore": 95,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "9a8e5318-6fad-44ed-8e60-03da14d3f4db",
+      "_id": "f741bbc0-4e0e-48ab-9432-1c928116e031",
       "title": "Step Counter Function",
       "difficulty": "Builder",
       "concepts": [
@@ -452,11 +452,11 @@
       ],
       "sampleReasoning": "The function should take step counts, add them, and give back the total.",
       "effectivenessScore": 94,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "34c237f5-a9c8-478c-8980-8505ba0d2b94",
+      "_id": "a125391e-4bca-4a7c-be23-bf048a7725d0",
       "title": "Safe Username Maker",
       "difficulty": "Builder",
       "concepts": [
@@ -472,11 +472,11 @@
       ],
       "sampleReasoning": "Make the name lowercase and remove spaces so it can be used as a username.",
       "effectivenessScore": 93,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "9bcdd1e0-2f8a-416e-a0e2-60e188e33dcd",
+      "_id": "df808839-d86b-4a2e-83fe-ad4f74bcf180",
       "title": "Retry Until Valid",
       "difficulty": "Builder",
       "concepts": [
@@ -492,11 +492,11 @@
       ],
       "sampleReasoning": "Keep asking while the number is not positive, then stop once it is valid.",
       "effectivenessScore": 92,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "54de8788-6a15-4377-a15f-e4cb73632c42",
+      "_id": "f2d49c73-80ba-49e2-a245-d2285355a7a4",
       "title": "Simple Score Report",
       "difficulty": "Builder",
       "concepts": [
@@ -512,11 +512,11 @@
       ],
       "sampleReasoning": "Return a dictionary with the learner name and score as labeled values.",
       "effectivenessScore": 91,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "d98ea7cd-5792-41b6-9a66-03267e936bc1",
+      "_id": "3e382224-7c20-4d97-ae95-0d286bccc4b3",
       "title": "Task Status Updater",
       "difficulty": "Builder",
       "concepts": [
@@ -532,11 +532,11 @@
       ],
       "sampleReasoning": "Find the task by name and change its status from pending to done.",
       "effectivenessScore": 90,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "e5b52a26-a324-40eb-84f7-fb757eecdceb",
+      "_id": "215700f4-8c9c-4dab-a8aa-e9c8b72f31d9",
       "title": "Small Receipt Builder",
       "difficulty": "Builder",
       "concepts": [
@@ -552,11 +552,11 @@
       ],
       "sampleReasoning": "Combine the item name and price into one clear sentence.",
       "effectivenessScore": 89,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "f57b40d9-7510-43dc-ae04-230a9d8331b3",
+      "_id": "08340019-c96f-461e-94c3-28e7ed7d3e79",
       "title": "Choose Next Scenario",
       "difficulty": "Builder",
       "concepts": [
@@ -572,11 +572,11 @@
       ],
       "sampleReasoning": "If the score is high choose harder, if low choose easier, otherwise stay similar.",
       "effectivenessScore": 88,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     },
     {
-      "_id": "5cf0ecd0-c690-45d4-a9b4-12e36403b125",
+      "_id": "947d4f3a-0b3a-4a23-9202-a0a18337790f",
       "title": "Reflection Keyword Finder",
       "difficulty": "Builder",
       "concepts": [
@@ -592,9 +592,10 @@
       ],
       "sampleReasoning": "Look for words like confused or stuck and flag the reflection if they appear.",
       "effectivenessScore": 87,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T19:04:56.442Z",
+      "updatedAt": "2026-08-06T19:04:56.442Z"
     }
   ],
-  "sessions": []
+  "sessions": [],
+  "users": []
 }

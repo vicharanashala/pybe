@@ -174,6 +174,25 @@ select {
   font-weight: 800;
 }
 
+.streak-badge {
+  background: rgba(216, 240, 124, .22) !important;
+  border-color: rgba(216, 240, 124, .45) !important;
+}
+
+.xp-toast {
+  position: sticky;
+  top: 20px;
+  z-index: 20;
+  align-self: start;
+  justify-self: end;
+  background: #17231f;
+  color: #d8f07c;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  box-shadow: 0 10px 28px rgba(23, 35, 31, .2);
+}
+
 .hero-stats small {
   display: block;
   font-size: .75rem;

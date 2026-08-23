@@ -106,4 +106,13 @@ function masterySignals(maps, promptScore) {
   return signals;
 }
 
-module.exports = { mapReasoning, generateCode, explainCode, evaluatePrompt, detectMisconceptions, masterySignals };
+function calculateXP(sessionResult = {}) {
+  const promptScore = Number(sessionResult.promptScore || 0);
+  const reflectionText = String(sessionResult.reflection || '').trim();
+  const promptBonus = Math.max(0, Math.round(promptScore / 10));
+  const reflectionBonus = reflectionText ? 10 : 0;
+  const completenessBonus = reflectionText.length > 40 ? 15 : reflectionText.length > 10 ? 5 : 0;
+  return 40 + promptBonus + reflectionBonus + completenessBonus;
+}
+
+module.exports = { mapReasoning, generateCode, explainCode, evaluatePrompt, detectMisconceptions, masterySignals, calculateXP };
