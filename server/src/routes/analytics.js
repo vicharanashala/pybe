@@ -1,6 +1,7 @@
 const express = require('express');
 const store = require('../data/store');
 const { computeStreak } = require('../services/streak');
+const { computeTotalTimeSpent } = require('../services/engagement');
 
 const router = express.Router();
 
@@ -22,6 +23,7 @@ router.get('/', async (_req, res, next) => {
       });
     });
     const streak = computeStreak(sessions.map((session) => session.createdAt));
+   const totalTimeSpentSeconds = computeTotalTimeSpent(sessions);
 
     res.json({
       scenarioCount,
@@ -30,7 +32,8 @@ router.get('/', async (_req, res, next) => {
       conceptCounts,
       misconceptionCounts,
       recentSessions: sessions.slice(0, 5),
-      streak
+      streak,
+            totalTimeSpentSeconds
     });
 
   } catch (error) {

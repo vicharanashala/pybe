@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
   Brain,
@@ -24,7 +24,25 @@ async function api(path, options) {
   });
   if (!response.ok) throw new Error(await response.text());
   return response.json();
+  }
+  function formatDuration(totalSeconds = 0) {
+  const seconds = Math.max(0, Number(totalSeconds) || 0);
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  if (hours > 0) return `${hours}h ${minutes}m`;
+  if (minutes > 0) return `${minutes}m`;
+  return '<1m';
 }
+
+function formatLastActive(dateString) {
+  if (!dateString) return 'Never';
+  const today = new Date().toISOString().slice(0, 10);
+  const diffDays = Math.round((new Date(today) - new Date(dateString)) / (24 * 60 * 60 * 1000));
+  if (diffDays <= 0) return 'Today';
+  if (diffDays === 1) return 'Yesterday';
+  return `${diffDays} days ago`;
+}
+
 
 function App() {
   const [scenarios, setScenarios] = useState([]);
@@ -37,8 +55,13 @@ function App() {
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
+    const sessionStartRef = useRef(Date.now());
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
+
+  useEffect(() => {
+    sessionStartRef.current = Date.now();
+  }, [selected?._id]);
 
   async function refresh() {
     const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
@@ -60,14 +83,16 @@ function App() {
     refresh().catch(console.error);
   }, [filters.q, filters.difficulty, filters.concept]);
 
-  async function submitSession(event) {
+   const durationSeconds = Math.round((Date.now() - sessionStartRef.current) / 1000);
+    async function submitSession(event) {
     event.preventDefault();
     if (!selected || !form.reasoning.trim()) return;
     setSubmitting(true);
     try {
+      const durationSeconds = Math.round((Date.now() - sessionStartRef.current) / 1000);
       const result = await api('/sessions', {
         method: 'POST',
-        body: JSON.stringify({ ...form, scenarioId: selected._id })
+        body: JSON.stringify({ ...form, scenarioId: selected._id, durationSeconds })
       });
       setActiveResult(result);
       setForm({ ...form, reasoning: '', promptText: '', reflection: '' });
@@ -140,6 +165,8 @@ function App() {
             <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
             <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
               <span>{analytics?.streak?.current || 0}<small>🔥 Day streak</small></span>
+              <span>{formatDuration(analytics?.totalTimeSpentSeconds)}<small>⏱️ Time learning</small></span>
+              <span>{formatLastActive(analytics?.streak?.lastActiveDate)}<small>Last active</small></span>
           </div>
         </header>
 

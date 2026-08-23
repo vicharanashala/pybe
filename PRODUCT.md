@@ -49,3 +49,22 @@ regular practice without needing to add authentication or a database.
 - `server/src/routes/analytics.js` — modified (added streak to response)
 - `client/src/main.jsx` — modified (added streak badge)
 - `server/package.json` — modified (added `test` script)
+
+
+
+
+## Engagement Summary (streak + time + last active)
+
+Extends the streak feature with two more signals on the same dashboard card:
+
+- **Time learning** — total time spent across all sessions, tracked from
+  when a learner opens a scenario to when they submit their reasoning.
+  Stored per-session as `durationSeconds` and summed on the backend
+  (`server/src/services/engagement.js`).
+- **Last active** — shows "Today", "Yesterday", or "X days ago" based on
+  the learner's most recent session, reusing the streak service's
+  `lastActiveDate`.
+
+Together these give a learner a quick, at-a-glance sense of how
+consistently and how long they've been practicing — without needing
+login or persistent accounts, staying true to PyBe's local-first design.
