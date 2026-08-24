@@ -179,6 +179,46 @@ select {
   font-size: 0.85rem;
   padding: 24px 8px;
 }
+.scenario-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bookmark-note {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 4px 8px;
+}
+
+.bookmark-note textarea {
+  min-height: 50px;
+  padding: 6px 8px;
+  border: 1px solid #385149;
+  border-radius: 6px;
+  background: #14201c;
+  color: #f8f4ec;
+  font-size: 0.78rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.bookmark-note button {
+  align-self: flex-end;
+  padding: 4px 12px;
+  border: 1px solid #385149;
+  border-radius: 6px;
+  background: transparent;
+  color: #f8f4ec;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.bookmark-note button:hover {
+  border-color: #d8f07c;
+  color: #d8f07c;
+}
 
 .empty-saved button {
   padding: 6px 14px;

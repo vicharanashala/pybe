@@ -38,6 +38,7 @@ function App() {
   const [bookmarks, setBookmarks] = useState([]);
   const [view, setView] = useState('browse');
   const [toast, setToast] = useState(null);
+  const [noteDrafts, setNoteDrafts] = useState({});
   const [filters, setFilters] = useState({ q: '', difficulty: '', concept: '' });
   const [form, setForm] = useState({ learnerName: 'Guest learner', reasoning: '', promptText: '', reflection: '' });
   const [activeResult, setActiveResult] = useState(null);
@@ -98,8 +99,14 @@ function App() {
     setBookmarks(bookmarkData);
     setTimeout(() => setToast(null), 2200);
   }
-
-
+   async function saveBookmarkNote(bookmark) {
+    const note = noteDrafts[bookmark._id] ?? bookmark.note ?? '';
+    await api(`/bookmarks/${bookmark._id}`, { method: 'PATCH', body: JSON.stringify({ note }) });
+    const bookmarkData = await api('/bookmarks');
+    setBookmarks(bookmarkData);
+    setToast('Note saved');
+    setTimeout(() => setToast(null), 2200);
+  }
 
   if (loading) return <main className="loading">Loading PyBe...</main>;
 
@@ -154,35 +161,51 @@ function App() {
                 .filter((scenario) => !filters.q || scenario.title.toLowerCase().includes(filters.q.toLowerCase()))
             : scenarios
           ).map((scenario) => {
-            const isBookmarked = bookmarks.some((bookmark) => bookmark.scenarioId === scenario._id);
-            return (
-              <button
-                key={scenario._id}
-                className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
-                onClick={() => {
-                  setSelected(scenario);
-                  setActiveResult(null);
-                }}
-              >
-                <span className="scenario-top">
-                  <span>{scenario.difficulty}</span>
-                  <span
-                    className="bookmark-toggle"
-                    role="button"
-                    tabIndex={0}
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      toggleBookmark(scenario).catch(console.error);
-                    }}
-                  >
-                    {isBookmarked ? <BookmarkCheck size={16} /> : <Bookmark size={16} />}
-                  </span>
-                </span>
-                <strong>{scenario.title}</strong>
-                <small>{scenario.concepts.join(' / ')}</small>
-              </button>
-            );
-          })}
+  const isBookmarked = bookmarks.some((bookmark) => bookmark.scenarioId === scenario._id);
+  const bookmarkRecord = bookmarks.find((bookmark) => bookmark.scenarioId === scenario._id);
+  return (
+    <div key={scenario._id} className="scenario-wrap">
+      <button
+        className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
+        onClick={() => {
+          setSelected(scenario);
+          setActiveResult(null);
+        }}
+      >
+        <span className="scenario-top">
+          <span>{scenario.difficulty}</span>
+          <span
+            className="bookmark-toggle"
+            role="button"
+            tabIndex={0}
+            onClick={(event) => {
+              event.stopPropagation();
+              toggleBookmark(scenario).catch(console.error);
+            }}
+          >
+            {isBookmarked ? <BookmarkCheck size={16} /> : <Bookmark size={16} />}
+          </span>
+        </span>
+        <strong>{scenario.title}</strong>
+        <small>{scenario.concepts.join(' / ')}</small>
+      </button>
+      {view === 'saved' && bookmarkRecord && (
+        <div className="bookmark-note">
+          <textarea
+            placeholder="Add a note..."
+            value={noteDrafts[bookmarkRecord._id] ?? bookmarkRecord.note ?? ''}
+            onChange={(event) =>
+              setNoteDrafts({ ...noteDrafts, [bookmarkRecord._id]: event.target.value })
+            }
+          />
+          <button type="button" onClick={() => saveBookmarkNote(bookmarkRecord)}>
+            Save note
+          </button>
+        </div>
+      )}
+    </div>
+  );
+})}
           {view === 'saved' && bookmarks.length === 0 && (
             <div className="empty-saved">
               <BookmarkPlus size={28} />

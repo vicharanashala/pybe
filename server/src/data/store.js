@@ -115,6 +115,16 @@ async function addBookmark(scenarioId) {
   return bookmark;
 }
 
+async function updateBookmarkNote(id, note) {
+  const db = await readDb();
+  const bookmarks = db.bookmarks || [];
+  const index = bookmarks.findIndex((bookmark) => bookmark._id === id);
+  if (index === -1) return null;
+  bookmarks[index] = { ...bookmarks[index], note, updatedAt: now() };
+  db.bookmarks = bookmarks;
+  await writeDb(db);
+  return bookmarks[index];
+}
 async function removeBookmark(id) {
   const db = await readDb();
   db.bookmarks = (db.bookmarks || []).filter((bookmark) => bookmark._id !== id);
@@ -131,5 +141,6 @@ module.exports = {
   listBookmarks,
   readDb,
   removeBookmark,
-  resetData
+  resetData,
+  updateBookmarkNote
 };
