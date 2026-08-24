@@ -146,6 +146,22 @@ select {
   border-color: #d8f07c;
 }
 
+.copy-saved {
+  padding: 8px 12px;
+  border: 1px solid #385149;
+  border-radius: 8px;
+  background: transparent;
+  color: #f8f4ec;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.copy-saved:hover {
+  border-color: #d8f07c;
+  color: #d8f07c;
+}
 .scenario-top {
   display: flex;
   align-items: center;

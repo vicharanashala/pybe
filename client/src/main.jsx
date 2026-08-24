@@ -107,6 +107,16 @@ function App() {
     setToast('Note saved');
     setTimeout(() => setToast(null), 2200);
   }
+    async function copySavedList() {
+    const lines = bookmarks
+      .map((bookmark) => bookmark.scenario)
+      .filter(Boolean)
+      .map((scenario) => `- ${scenario.title} (${scenario.difficulty})`);
+    const text = lines.length ? lines.join('\n') : 'No saved scenarios yet.';
+    await navigator.clipboard.writeText(text);
+    setToast('Copied saved list');
+    setTimeout(() => setToast(null), 2200);
+  }
 
   if (loading) return <main className="loading">Loading PyBe...</main>;
 
@@ -142,13 +152,18 @@ function App() {
           {concepts.map((concept) => <option key={concept}>{concept}</option>)}
         </select>
 
-                <div className="view-tabs">
+                        <div className="view-tabs">
           <button className={view === 'browse' ? 'view-tab active' : 'view-tab'} onClick={() => setView('browse')}>
             Browse
           </button>
           <button className={view === 'saved' ? 'view-tab active' : 'view-tab'} onClick={() => setView('saved')}>
             Saved ({bookmarks.length})
           </button>
+          {view === 'saved' && bookmarks.length > 0 && (
+            <button type="button" className="copy-saved" onClick={() => copySavedList().catch(console.error)}>
+              Copy
+            </button>
+          )}
         </div>
 
                 <div className="scenario-list">
