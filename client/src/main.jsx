@@ -1,10 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
+  BookOpen,
   Brain,
   ChartNoAxesCombined,
   Code2,
   Compass,
+  Gamepad2,
   Lightbulb,
   MessageSquareText,
   Play,
@@ -13,6 +15,7 @@ import {
   Send,
   Sparkles
 } from 'lucide-react';
+import { ExceptionStudio } from './ExceptionStudio';
 import './styles.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -27,6 +30,7 @@ async function api(path, options) {
 }
 
 function App() {
+  const [activeView, setActiveView] = useState('studio'); // 'studio' | 'workspace'
   const [scenarios, setScenarios] = useState([]);
   const [selected, setSelected] = useState(null);
   const [sessions, setSessions] = useState([]);
@@ -41,23 +45,32 @@ function App() {
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
   async function refresh() {
-    const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
-    const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
-      api(`/scenarios?${params}`),
-      api('/sessions'),
-      api('/analytics'),
-      api('/roadmap')
-    ]);
-    setScenarios(scenarioData);
-    setSessions(sessionData);
-    setAnalytics(analyticsData);
-    setRoadmap(roadmapData);
-    setSelected((current) => current || scenarioData[0] || null);
-    setLoading(false);
+    try {
+      const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
+      const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
+        api(`/scenarios?${params}`),
+        api('/sessions'),
+        api('/analytics'),
+        api('/roadmap')
+      ]);
+      setScenarios(scenarioData || []);
+      setSessions(sessionData || []);
+      setAnalytics(analyticsData || null);
+      setRoadmap(roadmapData || []);
+      setSelected((current) => current || (scenarioData && scenarioData[0]) || null);
+    } catch (err) {
+      console.warn('Backend API server not reachable, running standalone mode:', err);
+      setScenarios([]);
+      setSessions([]);
+      setAnalytics(null);
+      setRoadmap([]);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
-    refresh().catch(console.error);
+    refresh();
   }, [filters.q, filters.difficulty, filters.concept]);
 
   async function submitSession(event) {
@@ -72,8 +85,32 @@ function App() {
       setActiveResult(result);
       setForm({ ...form, reasoning: '', promptText: '', reflection: '' });
       await refresh();
+    } catch (err) {
+      console.error('Session submission error:', err);
     } finally {
       setSubmitting(false);
+    }
+  }
+
+  async function handleChildhoodReasoningSubmit(reasoningText, storyTitle) {
+    try {
+      const matchingScenario = scenarios.find((s) => s.title.includes(storyTitle.split('&')[0].trim())) || selected || scenarios[0];
+      if (!matchingScenario) return null;
+      const result = await api('/sessions', {
+        method: 'POST',
+        body: JSON.stringify({
+          learnerName: 'Guest learner',
+          reasoning: reasoningText,
+          promptText: `Explain Python Exception handling for ${storyTitle}`,
+          reflection: 'Studied childhood story scenario',
+          scenarioId: matchingScenario._id
+        })
+      });
+      await refresh();
+      return result;
+    } catch (err) {
+      console.warn('Backend session recording skipped:', err);
+      return null;
     }
   }
 
@@ -88,6 +125,21 @@ function App() {
             <strong>PyBe</strong>
             <span>Scenario-first Python</span>
           </div>
+        </div>
+
+        <div className="view-mode-toggle">
+          <button
+            className={activeView === 'studio' ? 'toggle-btn active' : 'toggle-btn'}
+            onClick={() => setActiveView('studio')}
+          >
+            <Gamepad2 size={18} /> Childhood Stories (Exceptions)
+          </button>
+          <button
+            className={activeView === 'workspace' ? 'toggle-btn active' : 'toggle-btn'}
+            onClick={() => setActiveView('workspace')}
+          >
+            <BookOpen size={18} /> Standard Scenarios
+          </button>
         </div>
 
         <label className="search">
@@ -119,6 +171,7 @@ function App() {
               onClick={() => {
                 setSelected(scenario);
                 setActiveResult(null);
+                setActiveView('workspace');
               }}
             >
               <span>{scenario.difficulty}</span>
@@ -130,83 +183,89 @@ function App() {
       </aside>
 
       <section className="workspace">
-        <header className="hero">
-          <div>
-            <p>AI-native learning journey</p>
-            <h1>Learn Python by reasoning through real situations first.</h1>
-          </div>
-          <div className="hero-stats">
-            <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
-            <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
-            <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
-          </div>
-        </header>
+        {activeView === 'studio' ? (
+          <ExceptionStudio onSubmitReasoning={handleChildhoodReasoningSubmit} />
+        ) : (
+          <>
+            <header className="hero">
+              <div>
+                <p>AI-native learning journey</p>
+                <h1>Learn Python by reasoning through real situations first.</h1>
+              </div>
+              <div className="hero-stats">
+                <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
+                <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
+                <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
+              </div>
+            </header>
 
-        <div className="main-grid">
-          <section className="panel learning-panel">
-            <div className="section-title">
-              <Compass size={20} />
-              <h2>{selected?.title}</h2>
-            </div>
-            <p className="context">{selected?.context}</p>
-            <div className="objective-row">
-              {selected?.objectives.map((item) => <span key={item}>{item}</span>)}
-            </div>
-            <form onSubmit={submitSession} className="learning-form">
-              <label>
-                Your reasoning
-                <textarea
-                  required
-                  value={form.reasoning}
-                  onChange={(event) => setForm({ ...form, reasoning: event.target.value })}
-                  placeholder={selected?.prompt}
-                />
-              </label>
-              <label>
-                Prompt you would give an AI mentor
-                <textarea
-                  value={form.promptText}
-                  onChange={(event) => setForm({ ...form, promptText: event.target.value })}
-                  placeholder="Explain my approach step by step, then show the Python concept and code..."
-                />
-              </label>
-              <label>
-                Reflection
-                <textarea
-                  value={form.reflection}
-                  onChange={(event) => setForm({ ...form, reflection: event.target.value })}
-                  placeholder="What did you notice about your thinking?"
-                />
-              </label>
-              <button className="primary" disabled={submitting}>
-                <Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}
-              </button>
-            </form>
-          </section>
+            <div className="main-grid">
+              <section className="panel learning-panel">
+                <div className="section-title">
+                  <Compass size={20} />
+                  <h2>{selected?.title}</h2>
+                </div>
+                <p className="context">{selected?.context}</p>
+                <div className="objective-row">
+                  {selected?.objectives?.map((item) => <span key={item}>{item}</span>)}
+                </div>
+                <form onSubmit={submitSession} className="learning-form">
+                  <label>
+                    Your reasoning
+                    <textarea
+                      required
+                      value={form.reasoning}
+                      onChange={(event) => setForm({ ...form, reasoning: event.target.value })}
+                      placeholder={selected?.prompt || 'Enter your reasoning...'}
+                    />
+                  </label>
+                  <label>
+                    Prompt you would give an AI mentor
+                    <textarea
+                      value={form.promptText}
+                      onChange={(event) => setForm({ ...form, promptText: event.target.value })}
+                      placeholder="Explain my approach step by step, then show the Python concept and code..."
+                    />
+                  </label>
+                  <label>
+                    Reflection
+                    <textarea
+                      value={form.reflection}
+                      onChange={(event) => setForm({ ...form, reflection: event.target.value })}
+                      placeholder="What did you notice about your thinking?"
+                    />
+                  </label>
+                  <button className="primary" disabled={submitting}>
+                    <Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}
+                  </button>
+                </form>
+              </section>
 
-          <section className="panel result-panel">
-            <div className="section-title">
-              <Sparkles size={20} />
-              <h2>AI Mentor Output</h2>
+              <section className="panel result-panel">
+                <div className="section-title">
+                  <Sparkles size={20} />
+                  <h2>AI Mentor Output</h2>
+                </div>
+                {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
+              </section>
             </div>
-            {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
-          </section>
-        </div>
 
-        <section className="dashboard">
-          <div className="panel">
-            <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Learner Analytics</h2></div>
-            <Analytics analytics={analytics} />
-          </div>
-          <div className="panel">
-            <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
-            <Roadmap roadmap={roadmap} />
-          </div>
-          <div className="panel">
-            <div className="section-title"><MessageSquareText size={20} /><h2>Recent Sessions</h2></div>
-            <SessionList sessions={sessions} />
-          </div>
-        </section>
+            <section className="dashboard">
+              <div className="panel">
+                <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Learner Analytics</h2></div>
+                <Analytics analytics={analytics} />
+              </div>
+              <div className="panel">
+                <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
+                <Roadmap roadmap={roadmap} />
+              </div>
+              <div className="panel">
+                <div className="section-title"><MessageSquareText size={20} /><h2>Recent Sessions</h2></div>
+                <SessionList sessions={sessions} />
+              </div>
+            </section>
+          </>
+        )}
       </section>
     </main>
   );
@@ -224,9 +283,9 @@ function EmptyResult() {
 function Result({ result }) {
   return (
     <div className="result-stack">
-      <div className="score"><span>{result.promptScore}</span><small>Prompt maturity</small></div>
+      <div className="score"><span>{result.promptScore || 0}</span><small>Prompt maturity</small></div>
       <div>
-        {result.abstractionMap.map((item) => (
+        {result.abstractionMap?.map((item) => (
           <article className="mapping" key={item.pattern}>
             <strong>{item.pattern}</strong>
             <span>{item.pythonConcept}</span>
@@ -240,9 +299,9 @@ function Result({ result }) {
         <p>{result.codeExplanation}</p>
       </div>
       <ul className="feedback">
-        {result.promptFeedback.map((item) => <li key={item}>{item}</li>)}
+        {result.promptFeedback?.map((item) => <li key={item}>{item}</li>)}
       </ul>
-      {result.misconceptions.length > 0 && (
+      {result.misconceptions?.length > 0 && (
         <div className="note">
           <strong>Misconception watch</strong>
           {result.misconceptions.map((item) => <p key={item}>{item}</p>)}

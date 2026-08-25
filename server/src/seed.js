@@ -3,6 +3,56 @@ require('dotenv').config();
 
 const scenarios = [
   {
+    title: 'Red Riding Hood & The Disguise Trap',
+    difficulty: 'Explorer',
+    concepts: ['exception handling', 'try-except', 'AttributeError'],
+    context: 'Red Riding Hood visits Grandma cottage. If the Wolf is disguised as Grandma, calling grandma.bake_pastries() throws an AttributeError!',
+    prompt: 'How would you use try-except to safely check if Grandma is present or if it is the Wolf, calling the Woodcutter on error?',
+    objectives: ['Wrap risky action in try block', 'Catch AttributeError / NameError', 'Handle unexpected guest gracefully'],
+    sampleReasoning: 'I will try to ask Grandma to bake pastries. If an AttributeError happens because it is the Wolf, I catch it and alert the woodcutter.',
+    effectivenessScore: 99
+  },
+  {
+    title: 'The Tortoise & The Hare: Sleepy Divide',
+    difficulty: 'Explorer',
+    concepts: ['exception handling', 'ZeroDivisionError', 'try-except-else'],
+    context: 'The Hare takes a nap mid-race! Calculating race time (distance / hare_speed) throws a ZeroDivisionError when hare_speed is 0.',
+    prompt: 'How would you handle division by zero when Hare speed is 0, using the else block for normal race completion?',
+    objectives: ['Catch ZeroDivisionError', 'Prevent program crash during Hare nap', 'Use else block for successful race run'],
+    sampleReasoning: 'Try dividing distance by speed. If speed is 0, catch ZeroDivisionError and wake up the Hare. Else, print finish time.',
+    effectivenessScore: 98
+  },
+  {
+    title: 'Goldilocks & The Three Bears: Bowl & Bed Check',
+    difficulty: 'Explorer',
+    concepts: ['exception handling', 'IndexError', 'KeyError'],
+    context: 'Goldilocks checks porridge bowls array and bed dictionary. Asking for bowl at index 5 or missing key goldilocks causes errors!',
+    prompt: 'How would you catch IndexError for invalid porridge indices and KeyError for missing bear bed keys?',
+    objectives: ['Recognize collection boundary errors', 'Catch IndexError on array access', 'Catch KeyError on dictionary lookup'],
+    sampleReasoning: 'Try accessing porridge[index] and bear_beds[name]. If index is out of bounds catch IndexError, if key missing catch KeyError.',
+    effectivenessScore: 97
+  },
+  {
+    title: 'The Boy Who Cried Wolf: Custom Alarms',
+    difficulty: 'Builder',
+    concepts: ['exception handling', 'raise', 'ValueError', 'custom exceptions'],
+    context: 'The shepherd boy raises false alarms. If alarm is a prank, raise ValueError. If real wolf comes, raise WolfAlarmError!',
+    prompt: 'How would you raise built-in and custom Python exceptions based on whether a wolf alarm is real or false?',
+    objectives: ['Create custom exception class', 'Use raise statement to trigger errors', 'Distinguish pranks from real emergencies'],
+    sampleReasoning: 'If the alarm is a prank, raise ValueError with false alarm message. If a real wolf is spotted, raise custom WolfAlarmError.',
+    effectivenessScore: 96
+  },
+  {
+    title: 'The Three Little Pigs: Brick House Cleanup',
+    difficulty: 'Builder',
+    concepts: ['exception handling', 'try-except-finally', 'resource cleanup'],
+    context: 'The Wolf blows straw and stick houses down. Straw building raises HouseBlownError, but finally ALWAYS cleans construction tools!',
+    prompt: 'How would you construct the try-except-finally block to ensure tools are cleaned up regardless of whether the house collapses?',
+    objectives: ['Understand finally block execution', 'Handle house destruction exceptions', 'Guarantee resource cleanup on site'],
+    sampleReasoning: 'Try building house with chosen material. If wolf blows it down, catch exception. In finally block, always lock tools and clean site.',
+    effectivenessScore: 95
+  },
+  {
     title: 'Bag Weight Label',
     difficulty: 'Beginner',
     concepts: ['variables'],

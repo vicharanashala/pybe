@@ -1,7 +1,113 @@
 {
   "scenarios": [
     {
-      "_id": "8cf644f0-1402-4763-9542-02bd2ca0d1dc",
+      "_id": "42d98711-69c5-481b-90e6-8d20a7a2b721",
+      "title": "Red Riding Hood & The Disguise Trap",
+      "difficulty": "Explorer",
+      "concepts": [
+        "exception handling",
+        "try-except",
+        "AttributeError"
+      ],
+      "context": "Red Riding Hood visits Grandma cottage. If the Wolf is disguised as Grandma, calling grandma.bake_pastries() throws an AttributeError!",
+      "prompt": "How would you use try-except to safely check if Grandma is present or if it is the Wolf, calling the Woodcutter on error?",
+      "objectives": [
+        "Wrap risky action in try block",
+        "Catch AttributeError / NameError",
+        "Handle unexpected guest gracefully"
+      ],
+      "sampleReasoning": "I will try to ask Grandma to bake pastries. If an AttributeError happens because it is the Wolf, I catch it and alert the woodcutter.",
+      "effectivenessScore": 99,
+      "createdAt": "2026-08-06T14:21:02.567Z",
+      "updatedAt": "2026-08-06T14:21:02.567Z"
+    },
+    {
+      "_id": "c769d30e-448a-4a90-b9af-288448f6cd19",
+      "title": "The Tortoise & The Hare: Sleepy Divide",
+      "difficulty": "Explorer",
+      "concepts": [
+        "exception handling",
+        "ZeroDivisionError",
+        "try-except-else"
+      ],
+      "context": "The Hare takes a nap mid-race! Calculating race time (distance / hare_speed) throws a ZeroDivisionError when hare_speed is 0.",
+      "prompt": "How would you handle division by zero when Hare speed is 0, using the else block for normal race completion?",
+      "objectives": [
+        "Catch ZeroDivisionError",
+        "Prevent program crash during Hare nap",
+        "Use else block for successful race run"
+      ],
+      "sampleReasoning": "Try dividing distance by speed. If speed is 0, catch ZeroDivisionError and wake up the Hare. Else, print finish time.",
+      "effectivenessScore": 98,
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
+    },
+    {
+      "_id": "b0f0dbb1-ff22-43ee-b20a-047043b8ff5d",
+      "title": "Goldilocks & The Three Bears: Bowl & Bed Check",
+      "difficulty": "Explorer",
+      "concepts": [
+        "exception handling",
+        "IndexError",
+        "KeyError"
+      ],
+      "context": "Goldilocks checks porridge bowls array and bed dictionary. Asking for bowl at index 5 or missing key goldilocks causes errors!",
+      "prompt": "How would you catch IndexError for invalid porridge indices and KeyError for missing bear bed keys?",
+      "objectives": [
+        "Recognize collection boundary errors",
+        "Catch IndexError on array access",
+        "Catch KeyError on dictionary lookup"
+      ],
+      "sampleReasoning": "Try accessing porridge[index] and bear_beds[name]. If index is out of bounds catch IndexError, if key missing catch KeyError.",
+      "effectivenessScore": 97,
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
+    },
+    {
+      "_id": "10e31348-9536-45ac-a92f-8f92e72a6e6a",
+      "title": "The Boy Who Cried Wolf: Custom Alarms",
+      "difficulty": "Builder",
+      "concepts": [
+        "exception handling",
+        "raise",
+        "ValueError",
+        "custom exceptions"
+      ],
+      "context": "The shepherd boy raises false alarms. If alarm is a prank, raise ValueError. If real wolf comes, raise WolfAlarmError!",
+      "prompt": "How would you raise built-in and custom Python exceptions based on whether a wolf alarm is real or false?",
+      "objectives": [
+        "Create custom exception class",
+        "Use raise statement to trigger errors",
+        "Distinguish pranks from real emergencies"
+      ],
+      "sampleReasoning": "If the alarm is a prank, raise ValueError with false alarm message. If a real wolf is spotted, raise custom WolfAlarmError.",
+      "effectivenessScore": 96,
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
+    },
+    {
+      "_id": "13db3b27-a1a0-4b5e-9a91-c123cc1c8f26",
+      "title": "The Three Little Pigs: Brick House Cleanup",
+      "difficulty": "Builder",
+      "concepts": [
+        "exception handling",
+        "try-except-finally",
+        "resource cleanup"
+      ],
+      "context": "The Wolf blows straw and stick houses down. Straw building raises HouseBlownError, but finally ALWAYS cleans construction tools!",
+      "prompt": "How would you construct the try-except-finally block to ensure tools are cleaned up regardless of whether the house collapses?",
+      "objectives": [
+        "Understand finally block execution",
+        "Handle house destruction exceptions",
+        "Guarantee resource cleanup on site"
+      ],
+      "sampleReasoning": "Try building house with chosen material. If wolf blows it down, catch exception. In finally block, always lock tools and clean site.",
+      "effectivenessScore": 95,
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
+    },
+    {
+      "_id": "51bfcb86-bee0-4d53-ae9d-712b1ea5ed57",
       "title": "Bag Weight Label",
       "difficulty": "Beginner",
       "concepts": [
@@ -16,11 +122,11 @@
       ],
       "sampleReasoning": "I only need to remember the bag weight, so I would store it with a clear name.",
       "effectivenessScore": 96,
-      "createdAt": "2026-06-19T11:54:44.732Z",
-      "updatedAt": "2026-06-19T11:54:44.732Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "8f065c3d-36c5-48c5-948a-b7bc1a768bc9",
+      "_id": "156be356-ecca-4c8c-ac67-0d9db23720e2",
       "title": "Rainy Day Choice",
       "difficulty": "Beginner",
       "concepts": [
@@ -35,11 +141,11 @@
       ],
       "sampleReasoning": "If it is raining, carry an umbrella. Otherwise, leave it at home.",
       "effectivenessScore": 95,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "c4dfb27a-c96b-4ff1-80ff-3bd5b5b12e74",
+      "_id": "73757d69-08a1-4028-8041-8af94d1306f2",
       "title": "Two Snack Prices",
       "difficulty": "Beginner",
       "concepts": [
@@ -55,11 +161,11 @@
       ],
       "sampleReasoning": "I would keep the two prices separately and add them to get the total.",
       "effectivenessScore": 94,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "3657a91d-1f2b-42d7-bfec-4fbfb80dd648",
+      "_id": "963ca640-824c-4f4f-9075-aedf13d296f5",
       "title": "Greeting by Name",
       "difficulty": "Beginner",
       "concepts": [
@@ -75,11 +181,11 @@
       ],
       "sampleReasoning": "The computer should store the learner name and place it inside a greeting sentence.",
       "effectivenessScore": 93,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "a29775e3-1744-4b5e-b213-ecbb9bf8ec39",
+      "_id": "f2a687af-26a9-42c8-9a76-f82995195291",
       "title": "Pass Mark Check",
       "difficulty": "Beginner",
       "concepts": [
@@ -95,11 +201,11 @@
       ],
       "sampleReasoning": "I would compare the score with the pass mark and decide pass if it is high enough.",
       "effectivenessScore": 92,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "734c083f-b08c-4524-ae1a-f2924cd6851a",
+      "_id": "6b66f0b1-6498-48ed-b652-51fd7199150d",
       "title": "Pocket Money Left",
       "difficulty": "Beginner",
       "concepts": [
@@ -115,11 +221,11 @@
       ],
       "sampleReasoning": "Start with the original money, subtract the spent amount, and store what remains.",
       "effectivenessScore": 91,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "1324fea6-96d2-408c-8f58-cd92877f9dbd",
+      "_id": "dd77271a-43c7-4893-b25a-ae9a9eb6bbae",
       "title": "Favorite Color List",
       "difficulty": "Beginner",
       "concepts": [
@@ -134,11 +240,11 @@
       ],
       "sampleReasoning": "Since all values are colors, I would keep them together in one list.",
       "effectivenessScore": 90,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "8bb64eb9-5710-433b-bce9-95b4a5b995a1",
+      "_id": "3d99004d-aed7-4afd-8c94-85b438669cf2",
       "title": "First Item in a Bag",
       "difficulty": "Beginner",
       "concepts": [
@@ -154,11 +260,11 @@
       ],
       "sampleReasoning": "The first item is based on its position in the ordered group.",
       "effectivenessScore": 89,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "73803faa-165f-4aee-b60f-3e08d470ce84",
+      "_id": "b3eb61c4-f3f9-45ea-8321-0329b90e5de6",
       "title": "Attendance Count",
       "difficulty": "Beginner",
       "concepts": [
@@ -174,11 +280,11 @@
       ],
       "sampleReasoning": "I would count how many names are in the present-students list.",
       "effectivenessScore": 88,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "e510ab5f-1f11-46c9-b857-22a50e144e75",
+      "_id": "f67c246e-966c-4818-8ba0-f67ba957a014",
       "title": "Temperature Message",
       "difficulty": "Beginner",
       "concepts": [
@@ -194,11 +300,11 @@
       ],
       "sampleReasoning": "If the temperature is above the threshold, show Hot; otherwise show Comfortable.",
       "effectivenessScore": 87,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "2a3496ef-bb71-4dde-83f5-37844063678d",
+      "_id": "687c33d6-1428-48a5-a60d-fec187a60433",
       "title": "Water Bottle Reminder",
       "difficulty": "Explorer",
       "concepts": [
@@ -213,11 +319,11 @@
       ],
       "sampleReasoning": "For every break, show the same water reminder.",
       "effectivenessScore": 96,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "71b887ca-fd3d-4c1a-83a9-f464f7c2a06d",
+      "_id": "df90c945-9b13-443c-b00a-07b6ab5f815c",
       "title": "Find the Longest Pencil",
       "difficulty": "Explorer",
       "concepts": [
@@ -233,11 +339,11 @@
       ],
       "sampleReasoning": "Start with one pencil as the longest, then compare each next pencil against it.",
       "effectivenessScore": 95,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "bf9c0f8c-308d-4e1f-9e37-9997c7e042b9",
+      "_id": "a5fc2b48-14b2-4c3c-8ffc-648f651b1cbf",
       "title": "Clean Chore Checklist",
       "difficulty": "Explorer",
       "concepts": [
@@ -253,11 +359,11 @@
       ],
       "sampleReasoning": "Put chores in a list and handle each chore one by one.",
       "effectivenessScore": 94,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "ce225ef0-1111-4ed4-9318-7373018385e6",
+      "_id": "f1be860f-5a51-4c0b-b163-de034b071dff",
       "title": "Movie Age Filter",
       "difficulty": "Explorer",
       "concepts": [
@@ -273,11 +379,11 @@
       ],
       "sampleReasoning": "For each movie, keep it only if the learner age is at least the minimum age.",
       "effectivenessScore": 93,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "cc62f477-44c8-403b-82cf-0b2638ff501b",
+      "_id": "53bb2f70-81e1-48e4-9557-b10d9fc96db1",
       "title": "Classroom Supply Lookup",
       "difficulty": "Explorer",
       "concepts": [
@@ -292,11 +398,11 @@
       ],
       "sampleReasoning": "Each supply has a count, so I would store supply names as keys with counts as values.",
       "effectivenessScore": 92,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "26b0c080-124d-4ff8-92ad-4f2380e3e89f",
+      "_id": "81f7a14b-03a9-4b2f-bf9d-93b7224a8fc6",
       "title": "Bus Stop Search",
       "difficulty": "Explorer",
       "concepts": [
@@ -312,11 +418,11 @@
       ],
       "sampleReasoning": "Look at each stop and compare it with the stop I want.",
       "effectivenessScore": 91,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "169fc6d5-7b9b-483d-87ee-325e2d497c90",
+      "_id": "68755bad-e2c5-4ee0-aaa0-2219b3631bcb",
       "title": "Average Practice Score",
       "difficulty": "Explorer",
       "concepts": [
@@ -332,11 +438,11 @@
       ],
       "sampleReasoning": "Find the total of all scores, count how many scores there are, then divide.",
       "effectivenessScore": 90,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "e0bdac7d-2033-408f-833c-3f2734690398",
+      "_id": "1d0ebbaf-e221-4b8d-a946-355805e530f7",
       "title": "Separate Even Roll Numbers",
       "difficulty": "Explorer",
       "concepts": [
@@ -352,11 +458,11 @@
       ],
       "sampleReasoning": "A roll number is even if dividing by two leaves no remainder.",
       "effectivenessScore": 89,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "decf41d5-8529-4685-b354-d02090bbb639",
+      "_id": "4431b572-4859-4991-9259-49194a7d1958",
       "title": "Capitalize Name Tags",
       "difficulty": "Explorer",
       "concepts": [
@@ -372,11 +478,11 @@
       ],
       "sampleReasoning": "For each name, convert it to title case before printing the tag.",
       "effectivenessScore": 88,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "418bec64-f75a-40fa-b849-42edba0d3939",
+      "_id": "d6554337-9214-4a7e-8d59-97ba61487fb7",
       "title": "Find Missing Homework",
       "difficulty": "Explorer",
       "concepts": [
@@ -392,11 +498,11 @@
       ],
       "sampleReasoning": "Take everyone in the class and remove the students who submitted.",
       "effectivenessScore": 87,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "07295b48-1037-4654-995f-df57d6fd7a7b",
+      "_id": "bdf7b25f-2532-4b70-81c3-1baa24759e2b",
       "title": "Reusable Discount Rule",
       "difficulty": "Builder",
       "concepts": [
@@ -412,11 +518,11 @@
       ],
       "sampleReasoning": "The helper needs the bill amount and should return the final price after applying the rule.",
       "effectivenessScore": 96,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "88a35898-eba5-47ca-adf2-0805d633ea3d",
+      "_id": "6be4ec49-03eb-4ba4-8237-e435d9ddf375",
       "title": "Mini Quiz Checker",
       "difficulty": "Builder",
       "concepts": [
@@ -432,11 +538,11 @@
       ],
       "sampleReasoning": "Compare the learner answer with the correct answer and return whether they match.",
       "effectivenessScore": 95,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "9a8e5318-6fad-44ed-8e60-03da14d3f4db",
+      "_id": "ceb1ba00-474c-47d7-9f7d-e6205b16e616",
       "title": "Step Counter Function",
       "difficulty": "Builder",
       "concepts": [
@@ -452,11 +558,11 @@
       ],
       "sampleReasoning": "The function should take step counts, add them, and give back the total.",
       "effectivenessScore": 94,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "34c237f5-a9c8-478c-8980-8505ba0d2b94",
+      "_id": "f3e233e1-3960-4b51-9dce-a7b0cf787861",
       "title": "Safe Username Maker",
       "difficulty": "Builder",
       "concepts": [
@@ -472,11 +578,11 @@
       ],
       "sampleReasoning": "Make the name lowercase and remove spaces so it can be used as a username.",
       "effectivenessScore": 93,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "9bcdd1e0-2f8a-416e-a0e2-60e188e33dcd",
+      "_id": "66ab507a-6173-4c73-9598-84d6fb3c3b22",
       "title": "Retry Until Valid",
       "difficulty": "Builder",
       "concepts": [
@@ -492,11 +598,11 @@
       ],
       "sampleReasoning": "Keep asking while the number is not positive, then stop once it is valid.",
       "effectivenessScore": 92,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "54de8788-6a15-4377-a15f-e4cb73632c42",
+      "_id": "633660b2-c52f-4383-8a91-af9b33c141ae",
       "title": "Simple Score Report",
       "difficulty": "Builder",
       "concepts": [
@@ -512,11 +618,11 @@
       ],
       "sampleReasoning": "Return a dictionary with the learner name and score as labeled values.",
       "effectivenessScore": 91,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "d98ea7cd-5792-41b6-9a66-03267e936bc1",
+      "_id": "a8e16d77-5929-4664-87a7-6943a085f2be",
       "title": "Task Status Updater",
       "difficulty": "Builder",
       "concepts": [
@@ -532,11 +638,11 @@
       ],
       "sampleReasoning": "Find the task by name and change its status from pending to done.",
       "effectivenessScore": 90,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "e5b52a26-a324-40eb-84f7-fb757eecdceb",
+      "_id": "898ac2ff-b032-4177-a38b-fb0506d9e94c",
       "title": "Small Receipt Builder",
       "difficulty": "Builder",
       "concepts": [
@@ -552,11 +658,11 @@
       ],
       "sampleReasoning": "Combine the item name and price into one clear sentence.",
       "effectivenessScore": 89,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "f57b40d9-7510-43dc-ae04-230a9d8331b3",
+      "_id": "c1c0a348-0cd6-4109-93b1-6c3dc780ac09",
       "title": "Choose Next Scenario",
       "difficulty": "Builder",
       "concepts": [
@@ -572,11 +678,11 @@
       ],
       "sampleReasoning": "If the score is high choose harder, if low choose easier, otherwise stay similar.",
       "effectivenessScore": 88,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     },
     {
-      "_id": "5cf0ecd0-c690-45d4-a9b4-12e36403b125",
+      "_id": "a3d6384b-4b74-4333-be88-baefd894b798",
       "title": "Reflection Keyword Finder",
       "difficulty": "Builder",
       "concepts": [
@@ -592,8 +698,8 @@
       ],
       "sampleReasoning": "Look for words like confused or stuck and flag the reflection if they appear.",
       "effectivenessScore": 87,
-      "createdAt": "2026-06-19T11:54:44.733Z",
-      "updatedAt": "2026-06-19T11:54:44.733Z"
+      "createdAt": "2026-08-06T14:21:02.570Z",
+      "updatedAt": "2026-08-06T14:21:02.570Z"
     }
   ],
   "sessions": []

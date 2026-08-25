@@ -34,6 +34,12 @@ const conceptRules = [
     pattern: 'Selection and filtering',
     pythonConcept: 'comparisons and list comprehensions',
     explanation: 'You are narrowing options using rules, which Python can express with comparisons and filters.'
+  },
+  {
+    keywords: ['try', 'except', 'error', 'catch', 'finally', 'raise', 'zero', 'index', 'key', 'handling', 'safely'],
+    pattern: 'Exception handling',
+    pythonConcept: 'try...except...else...finally',
+    explanation: 'You are anticipating potential runtime failures and catching them safely so the program does not crash.'
   }
 ];
 
@@ -52,6 +58,11 @@ function generateCode(scenario, maps) {
   const hasLoop = concepts.includes('loop');
   const hasCondition = concepts.includes('if');
   const hasFunction = concepts.includes('function');
+  const hasException = concepts.includes('try');
+
+  if (hasException) {
+    return 'try:\n    # Risky operation\n    result = 10 / 0\nexcept ZeroDivisionError as e:\n    print(f"Handled error: {e}")\nelse:\n    print("No errors occurred!")\nfinally:\n    print("Execution complete, resources cleaned up!")';
+  }
 
   if (hasLoop && hasCondition) {
     return 'items = [12, 7, 19, 4]\nthreshold = 10\n\nfor item in items:\n    if item >= threshold:\n        print(f"{item} needs attention")\n    else:\n        print(f"{item} is okay")';

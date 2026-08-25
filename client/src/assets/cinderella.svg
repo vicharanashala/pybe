@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" width="1200" height="675">
+  <defs>
+    <!-- Sky & Night Gradient -->
+    <linearGradient id="c_sky" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030712" />
+      <stop offset="40%" stop-color="#1e1b4b" />
+      <stop offset="85%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#38bdf8" />
+    </linearGradient>
+
+    <!-- Marble Steps Gradient -->
+    <linearGradient id="c_marble" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc" />
+      <stop offset="30%" stop-color="#e2e8f0" />
+      <stop offset="70%" stop-color="#cbd5e1" />
+      <stop offset="100%" stop-color="#94a3b8" />
+    </linearGradient>
+
+    <linearGradient id="c_carpet" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="50%" stop-color="#b91c1c" />
+      <stop offset="100%" stop-color="#7f1d1d" />
+    </linearGradient>
+
+    <!-- Glass Slipper Crystal Shimmer -->
+    <linearGradient id="c_glass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="40%" stop-color="#e0f2fe" stop-opacity="0.9" />
+      <stop offset="80%" stop-color="#7dd3fc" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.6" />
+    </linearGradient>
+
+    <!-- Gold Accent -->
+    <linearGradient id="c_gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fef08a" />
+      <stop offset="50%" stop-color="#eab308" />
+      <stop offset="100%" stop-color="#ca8a04" />
+    </linearGradient>
+
+    <!-- Sparkle Glow Filter -->
+    <filter id="c_glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Background Sky -->
+  <rect width="1200" height="675" fill="url(#c_sky)" />
+
+  <!-- Stars in Night Sky -->
+  <g fill="#ffffff" opacity="0.85">
+    <circle cx="120" cy="90" r="3" />
+    <circle cx="240" cy="140" r="2.5" />
+    <circle cx="360" cy="70" r="3.5" />
+    <circle cx="500" cy="110" r="2" />
+    <circle cx="700" cy="60" r="4" />
+    <circle cx="880" cy="120" r="2.5" />
+    <circle cx="1020" cy="80" r="3" />
+    <circle cx="1140" cy="150" r="2" />
+    <!-- Magic Star Burst -->
+    <polygon points="360,70 364,82 376,82 366,90 370,102 360,94 350,102 354,90 344,82 356,82" fill="#fef08a" opacity="0.9" />
+    <polygon points="700,60 703,70 714,70 705,77 708,87 700,80 692,87 695,77 686,70 697,70" fill="#e0f2fe" opacity="0.9" />
+  </g>
+
+  <!-- Palace Architecture & Arches -->
+  <path d="M100 675 L100 240 Q150 180 200 240 L200 675 Z" fill="#0f172a" opacity="0.85" />
+  <path d="M1000 675 L1000 240 Q1050 180 1100 240 L1100 675 Z" fill="#0f172a" opacity="0.85" />
+  <!-- Grand Palace Archway -->
+  <path d="M200 450 Q600 120 1000 450 L1000 675 L200 675 Z" fill="#1e1b4b" opacity="0.6" />
+
+  <!-- Faint Clock Tower Showing Midnight (12:00) -->
+  <g transform="translate(600, 210)" filter="url(#c_glow)">
+    <!-- Outer Clock Ring -->
+    <circle cx="0" cy="0" r="75" fill="#0f172a" opacity="0.85" stroke="url(#c_gold)" stroke-width="6" />
+    <circle cx="0" cy="0" r="64" fill="#1e293b" opacity="0.9" stroke="#38bdf8" stroke-width="2" />
+    <!-- Clock Numbers -->
+    <text x="0" y="-40" text-anchor="middle" fill="#fef08a" font-size="20" font-weight="900" font-family="serif">XII</text>
+    <text x="45" y="6" text-anchor="middle" fill="#94a3b8" font-size="14" font-family="serif">III</text>
+    <text x="0" y="52" text-anchor="middle" fill="#94a3b8" font-size="14" font-family="serif">VI</text>
+    <text x="-45" y="6" text-anchor="middle" fill="#94a3b8" font-size="14" font-family="serif">IX</text>
+    <!-- Midnight Hands pointing straight up to XII -->
+    <line x1="0" y1="0" x2="0" y2="-48" stroke="#ef4444" stroke-width="6" stroke-linecap="round" />
+    <line x1="0" y1="0" x2="0" y2="-36" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+    <circle cx="0" cy="0" r="7" fill="#fef08a" />
+    <!-- Faint Midnight Chime Glow -->
+    <text x="0" y="-88" text-anchor="middle" fill="#fef08a" font-size="16" font-weight="bold" font-family="sans-serif" opacity="0.9">🕛 MIDNIGHT CHIME</text>
+  </g>
+
+  <!-- Grand Marble Staircase -->
+  <!-- Step 5 (Top) -->
+  <polygon points="350,420 850,420 880,445 320,445" fill="url(#c_marble)" />
+  <rect x="320" y="445" width="560" height="15" fill="#64748b" />
+  <!-- Step 4 -->
+  <polygon points="300,460 900,460 930,490 270,490" fill="url(#c_marble)" />
+  <rect x="270" y="490" width="660" height="15" fill="#64748b" />
+  <!-- Step 3 -->
+  <polygon points="240,505 960,505 990,540 210,540" fill="url(#c_marble)" />
+  <rect x="210" y="540" width="780" height="15" fill="#475569" />
+  <!-- Step 2 -->
+  <polygon points="180,555 1020,555 1060,595 140,595" fill="url(#c_marble)" />
+  <rect x="140" y="595" width="920" height="15" fill="#334155" />
+  <!-- Step 1 (Bottom) -->
+  <polygon points="100,610 1100,610 1150,675 50,675" fill="url(#c_marble)" />
+
+  <!-- Royal Red Carpet down Staircase -->
+  <polygon points="520,420 680,420 720,675 480,675" fill="url(#c_carpet)" />
+  <!-- Gold Carpet Trim -->
+  <line x1="520" y1="420" x2="480" y2="675" stroke="url(#c_gold)" stroke-width="4" />
+  <line x1="680" y1="420" x2="720" y2="675" stroke="url(#c_gold)" stroke-width="4" />
+
+  <!-- Sparkling Glass Slipper on Step #3 -->
+  <g transform="translate(560, 480)" filter="url(#c_glow)">
+    <!-- Glass Slipper Silhouette -->
+    <path d="M0 35 Q40 35 75 0 Q95 25 130 35 L130 46 L0 46 Z" fill="url(#c_glass)" stroke="#ffffff" stroke-width="3" />
+    <path d="M15 35 Q60 -15 80 0" stroke="#ffffff" stroke-width="3.5" fill="none" />
+    <!-- High Heel -->
+    <path d="M5 46 L10 70 L20 70 L18 46 Z" fill="url(#c_glass)" stroke="#ffffff" stroke-width="2" />
+    
+    <!-- Magic Sparkles bursting from Slipper -->
+    <g fill="#ffffff">
+      <circle cx="35" cy="-15" r="5" fill="#ffffff" />
+      <circle cx="95" cy="-8" r="4" fill="#fef08a" />
+      <circle cx="135" cy="15" r="3.5" fill="#7dd3fc" />
+      <circle cx="10" cy="10" r="3" fill="#ffffff" />
+      <!-- Cross Sparkle -->
+      <path d="M35 -25 L35 -5 M25 -15 L45 -15" stroke="#ffffff" stroke-width="3" />
+      <path d="M95 -18 L95 2 M85 -8 L105 -8" stroke="#fef08a" stroke-width="2.5" />
+    </g>
+  </g>
+
+  <!-- Story Title Banner at Top -->
+  <g transform="translate(600, 70)">
+    <rect x="-310" y="-32" width="620" height="64" rx="32" fill="rgba(15, 23, 42, 0.85)" stroke="url(#c_gold)" stroke-width="2.5" />
+    <text x="0" y="8" text-anchor="middle" fill="#fef08a" font-size="24" font-weight="900" font-family="system-ui, sans-serif" letter-spacing="1">👠 CINDERELLA: MIDNIGHT GLASS SLIPPER</text>
+  </g>
+</svg>
