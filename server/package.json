@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "seed": "node src/seed.js"
+    "seed": "node src/seed.js",
+    "test": "jest"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -15,6 +16,7 @@
     "pybe-mern-app": "file:.."
   },
   "devDependencies": {
+    "jest": "^29.7.0",
     "nodemon": "^3.1.9"
   }
 }
