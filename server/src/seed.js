@@ -301,6 +301,46 @@ const scenarios = [
     objectives: ['Choose keywords', 'Search text', 'Return support signal'],
     sampleReasoning: 'Look for words like confused or stuck and flag the reflection if they appear.',
     effectivenessScore: 87
+  },
+  {
+    title: 'Nested Gift Boxes',
+    difficulty: 'Explorer',
+    concepts: ['recursion'],
+    context: 'A gift box contains a smaller box inside it, and that box may contain another smaller box, and so on.',
+    prompt: 'How would you open boxes until you find the one with no box inside it?',
+    objectives: ['Recognize a smaller version of the same problem', 'Identify the stopping point', 'Map repeated unwrapping to recursion'],
+    sampleReasoning: 'Open the box. If there is another box inside, open that smaller box the same way. Stop once a box has no box inside it — that is the base case.',
+    effectivenessScore: 92
+  },
+  {
+    title: 'Countdown Announcer',
+    difficulty: 'Explorer',
+    concepts: ['recursion'],
+    context: 'A game show announcer counts down from a starting number to zero before the round begins.',
+    prompt: 'How would you announce each number by handling a smaller countdown each time?',
+    objectives: ['Handle one number at a time', 'Call the same rule on a smaller number', 'Recognize when to stop'],
+    sampleReasoning: 'Announce the current number, then handle a smaller version of the same countdown, repeating until I reach the base case of zero.',
+    effectivenessScore: 90
+  },
+  {
+    title: 'Folder Size Total',
+    difficulty: 'Builder',
+    concepts: ['recursion'],
+    context: 'A computer folder contains files and other subfolders, and each subfolder can contain more subfolders.',
+    prompt: 'How would you find the total size without knowing how many folders are nested inside?',
+    objectives: ['Apply the same rule to each subfolder', 'Add up sizes as you return', 'Identify the base case (a folder with no subfolders)'],
+    sampleReasoning: 'For each subfolder, apply the same rule to a smaller version of the folder, until I reach the base case — a folder with no subfolders — then add everything together.',
+    effectivenessScore: 89
+  },
+  {
+    title: 'Family Tree Ancestor Count',
+    difficulty: 'Builder',
+    concepts: ['recursion'],
+    context: 'A family tree record lets you look up a person\u2019s parents, and each parent has their own parents recorded the same way.',
+    prompt: 'How would you count all ancestors without knowing how many generations are recorded?',
+    objectives: ['Ask each parent to count their own ancestors', 'Combine smaller results', 'Recognize the base case (no recorded parents)'],
+    sampleReasoning: 'Ask each parent to count their ancestors using the same rule on a smaller version of the family tree, until I reach the base case where a person has no recorded parents.',
+    effectivenessScore: 88
   }
 ];
 
