@@ -21,7 +21,7 @@ router.post('/', async (req, res, next) => {
     const abstractionMap = engine.mapReasoning(req.body.reasoning);
     const generatedCode = engine.generateCode(scenario, abstractionMap);
     const prompt = engine.evaluatePrompt(req.body.promptText);
-    const session = await store.addSession({
+       const session = await store.addSession({
       learnerName: req.body.learnerName || 'Guest learner',
       scenario: scenario._id,
       reasoning: req.body.reasoning,
@@ -33,7 +33,8 @@ router.post('/', async (req, res, next) => {
       promptFeedback: prompt.feedback,
       reflection: req.body.reflection || '',
       misconceptions: engine.detectMisconceptions(req.body.reasoning),
-      masterySignals: engine.masterySignals(abstractionMap, prompt.score)
+      masterySignals: engine.masterySignals(abstractionMap, prompt.score),
+      durationSeconds: Math.max(0, Math.round(Number(req.body.durationSeconds) || 0))
     });
     res.status(201).json(session);
   } catch (error) {

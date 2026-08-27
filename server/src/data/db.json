@@ -596,5 +596,38 @@
       "updatedAt": "2026-06-19T11:54:44.733Z"
     }
   ],
-  "sessions": []
+  "sessions": [
+    {
+      "_id": "81c94d38-6b7a-4a50-85d7-49fb279a224c",
+      "learnerName": "Guest learner",
+      "scenario": "8cf644f0-1402-4763-9542-02bd2ca0d1dc",
+      "reasoning": "I would store the bag weight in a ",
+      "promptText": "",
+      "abstractionMap": [
+        {
+          "pattern": "Sequential thinking",
+          "pythonConcept": "statements and variables",
+          "explanation": "You described a step-by-step solution. Python starts by representing those steps as statements."
+        }
+      ],
+      "generatedCode": "scenario = \"Bag Weight Label\"\nreasoning = \"Break the situation into clear steps\"\nprint(scenario)\nprint(reasoning)",
+      "codeExplanation": "The code starts from your natural reasoning and turns it into Python structure: Sequential thinking becomes statements and variables.",
+      "promptScore": 35,
+      "promptFeedback": [
+        "Add more context about the situation and expected output.",
+        "Ask the AI to explain its reasoning, not just produce code.",
+        "Include an example input or output to make the prompt testable.",
+        "Name the Python concept you think may apply."
+      ],
+      "reflection": "",
+      "misconceptions": [
+        "Reasoning is brief. Try naming the inputs, decision rule, and expected result."
+      ],
+      "masterySignals": [
+        "Recognized sequential thinking"
+      ],
+      "createdAt": "2026-08-23T05:28:43.060Z",
+      "updatedAt": "2026-08-23T05:28:43.060Z"
+    }
+  ]
 }
