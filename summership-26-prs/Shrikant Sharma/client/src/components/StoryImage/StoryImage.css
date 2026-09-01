@@ -1,0 +1,202 @@
+.si-hero {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  animation: si-fade 1.3s ease both;
+}
+
+.si-scene {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.si-sun-rays {
+  transform-origin: 1190px 150px;
+  animation: si-rays-spin 90s linear infinite;
+}
+
+.si-moon {
+  animation: si-moon-drift 14s ease-in-out infinite alternate;
+}
+
+.si-clouds ellipse {
+  animation: si-cloud 22s ease-in-out infinite alternate;
+}
+
+.si-clouds ellipse:nth-of-type(2) {
+  animation-duration: 26s;
+}
+
+.si-water-line {
+  animation: si-shimmer 4.2s ease-in-out infinite alternate;
+}
+
+.si-water-line--2 {
+  animation-delay: 1.2s;
+}
+
+.si-water-line--3 {
+  animation-delay: 2.1s;
+}
+
+.si-book {
+  animation: si-float 6s ease-in-out infinite alternate;
+}
+
+.si-page-line {
+  animation: si-shimmer 5s ease-in-out infinite alternate;
+}
+
+.si-rabbit {
+  animation: si-rabbit-bob 4.4s ease-in-out infinite alternate;
+}
+
+.si-turtle {
+  animation: si-turtle-bob 5.2s ease-in-out infinite alternate;
+}
+
+.si-wing {
+  animation: si-flap 3.4s ease-in-out infinite alternate;
+}
+
+.si-wing--l {
+  transform-origin: 900px 296px;
+}
+
+.si-wing--r {
+  transform-origin: 940px 296px;
+  animation-delay: 0.15s;
+}
+
+.si-leaf {
+  position: absolute;
+  top: -6%;
+  opacity: 0.92;
+  animation: si-leaf-fall var(--dur) linear infinite;
+  animation-delay: var(--delay);
+  will-change: transform;
+}
+
+.si-leaf svg {
+  width: 100%;
+  height: 100%;
+}
+
+.si-particle {
+  position: absolute;
+  border-radius: 50%;
+  background: #d8a84c;
+  box-shadow: 0 0 8px rgba(216, 168, 76, 0.75);
+  opacity: 0.35;
+  animation: si-twinkle var(--dur) ease-in-out infinite alternate;
+  animation-delay: var(--delay);
+}
+
+@keyframes si-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes si-rays-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes si-moon-drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes si-cloud {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(18px);
+  }
+}
+
+@keyframes si-shimmer {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+
+@keyframes si-float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-9px);
+  }
+}
+
+@keyframes si-rabbit-bob {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes si-turtle-bob {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes si-flap {
+  from {
+    transform: rotate(-4deg);
+  }
+  to {
+    transform: rotate(9deg);
+  }
+}
+
+@keyframes si-leaf-fall {
+  0% {
+    transform: translate3d(0, -4vh, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(var(--sway), 104vh, 0) rotate(var(--spin));
+  }
+}
+
+@keyframes si-twinkle {
+  from {
+    opacity: 0.18;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 0.85;
+    transform: scale(1.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .si-hero *,
+  .si-hero *::before,
+  .si-hero *::after {
+    animation: none !important;
+  }
+}

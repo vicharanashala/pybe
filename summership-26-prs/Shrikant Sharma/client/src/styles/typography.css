@@ -1,0 +1,57 @@
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-h);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 32px;
+}
+
+h3 {
+  font-size: 22px;
+}
+
+code,
+pre {
+  font-family: var(--font-mono);
+}
+
+code {
+  font-size: 0.9em;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--color-code-bg);
+  color: var(--color-text-h);
+}
+
+@media (max-width: 720px) {
+  h1 {
+    font-size: 34px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+}
