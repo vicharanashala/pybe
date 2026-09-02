@@ -121,6 +121,134 @@ select {
 .scenario small {
   color: inherit;
   opacity: .75;
+}.view-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.view-tab {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #385149;
+  border-radius: 8px;
+  background: transparent;
+  color: #f8f4ec;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.view-tab.active {
+  background: #d8f07c;
+  color: #14201c;
+  border-color: #d8f07c;
+}
+
+.copy-saved {
+  padding: 8px 12px;
+  border: 1px solid #385149;
+  border-radius: 8px;
+  background: transparent;
+  color: #f8f4ec;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.copy-saved:hover {
+  border-color: #d8f07c;
+  color: #d8f07c;
+}
+.scenario-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bookmark-toggle {
+  display: inline-flex;
+  color: inherit;
+  opacity: 0.75;
+  cursor: pointer;
+}
+.main-bookmark {
+  margin-left: auto;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.bookmark-toggle:hover {
+  opacity: 1;
+}
+
+.empty-saved {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  opacity: 0.75;
+  font-size: 0.85rem;
+  padding: 24px 8px;
+}
+.scenario-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bookmark-note {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 0 4px 8px;
+}
+
+.bookmark-note textarea {
+  min-height: 50px;
+  padding: 6px 8px;
+  border: 1px solid #385149;
+  border-radius: 6px;
+  background: #14201c;
+  color: #f8f4ec;
+  font-size: 0.78rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.bookmark-note button {
+  align-self: flex-end;
+  padding: 4px 12px;
+  border: 1px solid #385149;
+  border-radius: 6px;
+  background: transparent;
+  color: #f8f4ec;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.bookmark-note button:hover {
+  border-color: #d8f07c;
+  color: #d8f07c;
+}
+
+.empty-saved button {
+  padding: 6px 14px;
+  border: 1px solid #385149;
+  border-radius: 8px;
+  background: transparent;
+  color: #f8f4ec;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.empty-saved button:hover {
+  border-color: #d8f07c;
+  color: #d8f07c;
 }
 
 .workspace {
@@ -489,5 +617,31 @@ meter {
 
   .analytics-list div {
     grid-template-columns: 1fr;
+  }
+}
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #d8f07c;
+  color: #14201c;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  z-index: 50;
+  animation: toast-in 0.2s ease-out;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
   }
 }

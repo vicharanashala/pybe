@@ -1,6 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
+  Bookmark,
+  BookmarkCheck,
+  BookmarkPlus,
   Brain,
   ChartNoAxesCombined,
   Code2,
@@ -32,6 +35,10 @@ function App() {
   const [sessions, setSessions] = useState([]);
   const [analytics, setAnalytics] = useState(null);
   const [roadmap, setRoadmap] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
+  const [view, setView] = useState('browse');
+  const [toast, setToast] = useState(null);
+  const [noteDrafts, setNoteDrafts] = useState({});
   const [filters, setFilters] = useState({ q: '', difficulty: '', concept: '' });
   const [form, setForm] = useState({ learnerName: 'Guest learner', reasoning: '', promptText: '', reflection: '' });
   const [activeResult, setActiveResult] = useState(null);
@@ -42,16 +49,18 @@ function App() {
 
   async function refresh() {
     const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
-    const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
+    const [scenarioData, sessionData, analyticsData, roadmapData, bookmarkData] = await Promise.all([
       api(`/scenarios?${params}`),
       api('/sessions'),
       api('/analytics'),
-      api('/roadmap')
+      api('/roadmap'),
+      api('/bookmarks')
     ]);
     setScenarios(scenarioData);
     setSessions(sessionData);
     setAnalytics(analyticsData);
     setRoadmap(roadmapData);
+    setBookmarks(bookmarkData);
     setSelected((current) => current || scenarioData[0] || null);
     setLoading(false);
   }
@@ -75,6 +84,38 @@ function App() {
     } finally {
       setSubmitting(false);
     }
+  }
+
+    async function toggleBookmark(scenario) {
+    const existing = bookmarks.find((bookmark) => bookmark.scenarioId === scenario._id);
+    if (existing) {
+      await api(`/bookmarks/${existing._id}`, { method: 'DELETE' });
+      setToast('Removed from Saved');
+    } else {
+      await api('/bookmarks', { method: 'POST', body: JSON.stringify({ scenarioId: scenario._id }) });
+      setToast('Saved for later');
+    }
+    const bookmarkData = await api('/bookmarks');
+    setBookmarks(bookmarkData);
+    setTimeout(() => setToast(null), 2200);
+  }
+   async function saveBookmarkNote(bookmark) {
+    const note = noteDrafts[bookmark._id] ?? bookmark.note ?? '';
+    await api(`/bookmarks/${bookmark._id}`, { method: 'PATCH', body: JSON.stringify({ note }) });
+    const bookmarkData = await api('/bookmarks');
+    setBookmarks(bookmarkData);
+    setToast('Note saved');
+    setTimeout(() => setToast(null), 2200);
+  }
+    async function copySavedList() {
+    const lines = bookmarks
+      .map((bookmark) => bookmark.scenario)
+      .filter(Boolean)
+      .map((scenario) => `- ${scenario.title} (${scenario.difficulty})`);
+    const text = lines.length ? lines.join('\n') : 'No saved scenarios yet.';
+    await navigator.clipboard.writeText(text);
+    setToast('Copied saved list');
+    setTimeout(() => setToast(null), 2200);
   }
 
   if (loading) return <main className="loading">Loading PyBe...</main>;
@@ -111,21 +152,82 @@ function App() {
           {concepts.map((concept) => <option key={concept}>{concept}</option>)}
         </select>
 
-        <div className="scenario-list">
-          {scenarios.map((scenario) => (
-            <button
-              key={scenario._id}
-              className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
-              onClick={() => {
-                setSelected(scenario);
-                setActiveResult(null);
-              }}
-            >
-              <span>{scenario.difficulty}</span>
-              <strong>{scenario.title}</strong>
-              <small>{scenario.concepts.join(' / ')}</small>
+                        <div className="view-tabs">
+          <button className={view === 'browse' ? 'view-tab active' : 'view-tab'} onClick={() => setView('browse')}>
+            Browse
+          </button>
+          <button className={view === 'saved' ? 'view-tab active' : 'view-tab'} onClick={() => setView('saved')}>
+            Saved ({bookmarks.length})
+          </button>
+          {view === 'saved' && bookmarks.length > 0 && (
+            <button type="button" className="copy-saved" onClick={() => copySavedList().catch(console.error)}>
+              Copy
             </button>
-          ))}
+          )}
+        </div>
+
+                <div className="scenario-list">
+          {(view === 'saved'
+            ? bookmarks
+                .map((bookmark) => bookmark.scenario)
+                .filter(Boolean)
+                .filter((scenario) => !filters.difficulty || scenario.difficulty === filters.difficulty)
+                .filter((scenario) => !filters.concept || scenario.concepts.includes(filters.concept))
+                .filter((scenario) => !filters.q || scenario.title.toLowerCase().includes(filters.q.toLowerCase()))
+            : scenarios
+          ).map((scenario) => {
+  const isBookmarked = bookmarks.some((bookmark) => bookmark.scenarioId === scenario._id);
+  const bookmarkRecord = bookmarks.find((bookmark) => bookmark.scenarioId === scenario._id);
+  return (
+    <div key={scenario._id} className="scenario-wrap">
+      <button
+        className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
+        onClick={() => {
+          setSelected(scenario);
+          setActiveResult(null);
+        }}
+      >
+        <span className="scenario-top">
+          <span>{scenario.difficulty}</span>
+          <span
+            className="bookmark-toggle"
+            role="button"
+            tabIndex={0}
+            onClick={(event) => {
+              event.stopPropagation();
+              toggleBookmark(scenario).catch(console.error);
+            }}
+          >
+            {isBookmarked ? <BookmarkCheck size={16} /> : <Bookmark size={16} />}
+          </span>
+        </span>
+        <strong>{scenario.title}</strong>
+        <small>{scenario.concepts.join(' / ')}</small>
+      </button>
+      {view === 'saved' && bookmarkRecord && (
+        <div className="bookmark-note">
+          <textarea
+            placeholder="Add a note..."
+            value={noteDrafts[bookmarkRecord._id] ?? bookmarkRecord.note ?? ''}
+            onChange={(event) =>
+              setNoteDrafts({ ...noteDrafts, [bookmarkRecord._id]: event.target.value })
+            }
+          />
+          <button type="button" onClick={() => saveBookmarkNote(bookmarkRecord)}>
+            Save note
+          </button>
+        </div>
+      )}
+    </div>
+  );
+})}
+          {view === 'saved' && bookmarks.length === 0 && (
+            <div className="empty-saved">
+              <BookmarkPlus size={28} />
+              <p>No saved scenarios yet.</p>
+              <button type="button" onClick={() => setView('browse')}>Browse scenarios</button>
+            </div>
+          )}
         </div>
       </aside>
 
@@ -139,6 +241,7 @@ function App() {
             <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
             <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
             <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
+            <span>{bookmarks.length}<small>Saved</small></span>
           </div>
         </header>
 
@@ -147,6 +250,19 @@ function App() {
             <div className="section-title">
               <Compass size={20} />
               <h2>{selected?.title}</h2>
+            {selected && (
+    <button
+      type="button"
+      className="bookmark-toggle main-bookmark"
+      onClick={() => toggleBookmark(selected).catch(console.error)}
+    >
+      {bookmarks.some((bookmark) => bookmark.scenarioId === selected._id) ? (
+        <BookmarkCheck size={18} />
+      ) : (
+        <Bookmark size={18} />
+      )}
+    </button>
+  )}
             </div>
             <p className="context">{selected?.context}</p>
             <div className="objective-row">
@@ -195,11 +311,7 @@ function App() {
 
         <section className="dashboard">
           <div className="panel">
-            <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Learner Analytics</h2></div>
-            <Analytics analytics={analytics} />
-          </div>
-          <div className="panel">
-            <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
+          <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
             <Roadmap roadmap={roadmap} />
           </div>
           <div className="panel">
@@ -207,7 +319,8 @@ function App() {
             <SessionList sessions={sessions} />
           </div>
         </section>
-      </section>
+       </section>
+      {toast && <div className="toast">{toast}</div>}
     </main>
   );
 }
