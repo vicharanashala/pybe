@@ -491,3 +491,56 @@ meter {
     grid-template-columns: 1fr;
   }
 }
+.clear-filters {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border: 1px solid #385149;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.clear-filters:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.scenario-count {
+  font-size: 0.8rem;
+  color: #b9c7bf;
+  padding: 0 2px;
+}
+
+.empty-state {
+  padding: 24px 16px;
+  text-align: center;
+  border: 1px solid #385149;
+  border-radius: 8px;
+  color: #b9c7bf;
+}
+
+.empty-state strong {
+  display: block;
+  margin-bottom: 8px;
+  color: inherit;
+}
+
+.empty-state p {
+  margin: 0 0 16px;
+  font-size: 0.85rem;
+}
+
+.empty-state button {
+  padding: 8px 14px;
+  border: 1px solid #385149;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.empty-state button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
