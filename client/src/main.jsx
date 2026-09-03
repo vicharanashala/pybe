@@ -33,6 +33,13 @@ function App() {
   const [analytics, setAnalytics] = useState(null);
   const [roadmap, setRoadmap] = useState([]);
   const [filters, setFilters] = useState({ q: '', difficulty: '', concept: '' });
+  function clearFilters() {
+    setFilters({
+      q: '',
+      difficulty: '',
+      concept: ''
+    });
+  }
   const [form, setForm] = useState({ learnerName: 'Guest learner', reasoning: '', promptText: '', reflection: '' });
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -110,26 +117,44 @@ function App() {
           <option value="">All concepts</option>
           {concepts.map((concept) => <option key={concept}>{concept}</option>)}
         </select>
-
+        <button
+            type="button"
+            className="clear-filters"
+            onClick={clearFilters}
+          >
+            Clear Filters
+        </button>
+        <div className="scenario-count">
+            {scenarios.length} {scenarios.length === 1 ? 'scenario' : 'scenarios'} found
+        </div>
         <div className="scenario-list">
-          {scenarios.map((scenario) => (
-            <button
-              key={scenario._id}
-              className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
-              onClick={() => {
-                setSelected(scenario);
-                setActiveResult(null);
-              }}
-            >
-              <span>{scenario.difficulty}</span>
-              <strong>{scenario.title}</strong>
-              <small>{scenario.concepts.join(' / ')}</small>
-            </button>
-          ))}
+          {scenarios.length === 0 ? (
+            <div className="empty-state">
+              <strong>No scenarios found</strong>
+              <p>Try changing your search or filters.</p>
+              <button type="button" onClick={clearFilters}>
+                Clear Filters
+              </button>
+            </div>
+          ) : (
+            scenarios.map((scenario) => (
+              <button
+                key={scenario._id}
+                className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
+                onClick={() => {
+                  setSelected(scenario);
+                  setActiveResult(null);
+                }}
+              >
+                <span>{scenario.difficulty}</span>
+                <strong>{scenario.title}</strong>
+                <small>{scenario.concepts.join(' / ')}</small>
+              </button>
+            ))
+          )}
         </div>
       </aside>
-
-      <section className="workspace">
+        <section className="workspace">
         <header className="hero">
           <div>
             <p>AI-native learning journey</p>
