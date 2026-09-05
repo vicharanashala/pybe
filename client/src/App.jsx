@@ -4,12 +4,12 @@ import ScenarioBrowser from './pages/ScenarioBrowser';
 import ReasoningStudio from './pages/ReasoningStudio';
 import Dashboard from './pages/Dashboard';
 import AILearning from './pages/AILearning';
+import LearningJourney from './pages/LearningJourney';
 import AITutor from './components/AITutor';
-import StoryLearningFlow from './components/StoryLearningFlow';
 
 const TABS = [
   { id: 'browser', label: 'Scenario Browser', icon: LayoutGrid },
-  { id: 'story', label: 'Story Flow', icon: BookOpen },
+  { id: 'journey', label: 'Learning Journey', icon: BookOpen },
   { id: 'ai', label: 'AI Mentor', icon: Sparkles },
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { id: 'studio', label: 'Reasoning Studio', icon: MessagesSquare }
@@ -66,7 +66,7 @@ function App() {
           onActiveScenarioChange={setActiveScenario}
         />
       )}
-      {activeTab === 'story' && <StoryLearningFlow />}
+      {activeTab === 'journey' && <LearningJourney />}
       {activeTab === 'ai' && <AILearning onOpenScenario={openScenario} />}
       {activeTab === 'dashboard' && <Dashboard onOpenScenario={openScenario} />}
       {activeTab === 'studio' && <ReasoningStudio />}

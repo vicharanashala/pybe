@@ -1583,6 +1583,32 @@ meter {
   gap: 4px 24px;
 }
 
+.journey-status-card {
+  border: 1px solid #d8e4a8;
+  border-radius: 10px;
+  padding: 16px;
+  background: #fbfcef;
+}
+
+.journey-status-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.journey-status-heading div {
+  display: grid;
+  gap: 5px;
+}
+
+.journey-status-heading span {
+  color: #5b6b4f;
+  font-size: .9rem;
+  font-weight: 700;
+}
+
 .activity-feed {
   list-style: none;
   margin: 0;

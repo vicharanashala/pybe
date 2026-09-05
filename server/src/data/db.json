@@ -1401,5 +1401,25 @@
       "updatedAt": "2026-07-22T10:08:32.887Z"
     }
   ],
-  "tutorConversations": []
+  "tutorConversations": [
+    {
+      "_id": "90e26deb-d17a-4eed-ba93-bad99345ecab",
+      "learnerId": "4bb9aafb-4b2a-47ce-9351-294ba86f8a55",
+      "scenarioId": null,
+      "messages": [
+        {
+          "role": "user",
+          "content": "explain variable",
+          "timestamp": "2026-08-21T06:17:48.632Z"
+        },
+        {
+          "role": "assistant",
+          "content": "Think of it step by step: first decide what information matters, then decide how it changes, then decide what Python should print. Which of those three feels unclear for \"this scenario\"?",
+          "timestamp": "2026-08-21T06:17:48.632Z"
+        }
+      ],
+      "createdAt": "2026-08-21T06:17:48.633Z",
+      "updatedAt": "2026-08-21T06:17:48.633Z"
+    }
+  ]
 }
