@@ -34,12 +34,39 @@ const conceptRules = [
     pattern: 'Selection and filtering',
     pythonConcept: 'comparisons and list comprehensions',
     explanation: 'You are narrowing options using rules, which Python can express with comparisons and filters.'
+  },
+  {
+    keywords: ['recursion', 'recursive', 'itself', 'base case', 'smaller version', 'calls itself', 'until it stops', 'breaks down'],
+    pattern: 'Recursive breakdown',
+    pythonConcept: 'recursive functions',
+    explanation: 'You described solving a problem by handling a smaller version of the same problem, and stopping once it is simple enough — that is exactly how recursion works: a function that calls itself with a smaller input until it reaches a base case.'
   }
 ];
 
+/**
+ * Escapes a string for safe use inside a RegExp constructor.
+ */
+function escapeRegExp(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
+ * Whether `keyword` appears in `text` as a whole word/phrase, not as a
+ * substring inside an unrelated word.
+ *
+ * Fixes a real bug in the original substring-based matching: with plain
+ * `.includes()`, the keyword "if" matched inside words like "gift" or
+ * "different", silently misclassifying reasoning that had nothing to do
+ * with conditionals. Word-boundary matching (`\b...\b`) avoids that
+ * while still matching multi-word phrases like "base case" correctly.
+ */
+function containsKeyword(text, keyword) {
+  const pattern = new RegExp(`\\b${escapeRegExp(keyword)}\\b`, 'i');
+  return pattern.test(text);
+}
+
 function mapReasoning(reasoning = '') {
-  const lower = reasoning.toLowerCase();
-  const matches = conceptRules.filter((rule) => rule.keywords.some((keyword) => lower.includes(keyword)));
+  const matches = conceptRules.filter((rule) => rule.keywords.some((keyword) => containsKeyword(reasoning, keyword)));
   return matches.length ? matches : [{
     pattern: 'Sequential thinking',
     pythonConcept: 'statements and variables',
@@ -49,9 +76,14 @@ function mapReasoning(reasoning = '') {
 
 function generateCode(scenario, maps) {
   const concepts = maps.map((item) => item.pythonConcept).join(', ');
+  const hasRecursion = concepts.includes('recursive');
   const hasLoop = concepts.includes('loop');
   const hasCondition = concepts.includes('if');
   const hasFunction = concepts.includes('function');
+
+  if (hasRecursion) {
+    return 'def count_down(remaining):\n    if remaining <= 0:\n        print("Done!")\n        return\n\n    print(remaining)\n    count_down(remaining - 1)  # solve a smaller version of the same problem\n\ncount_down(5)';
+  }
 
   if (hasLoop && hasCondition) {
     return 'items = [12, 7, 19, 4]\nthreshold = 10\n\nfor item in items:\n    if item >= threshold:\n        print(f"{item} needs attention")\n    else:\n        print(f"{item} is okay")';
