@@ -2,8 +2,12 @@ node_modules/
 **/node_modules/
 client/dist/
 **/dist/
+dist/
+build/
 .env
 **/.env
 npm-debug.log*
+*.log
 .DS_Store
 **/.DS_Store
+**/storyProgress.json
