@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyBe — The Royal Scribe's Secret</title>
+
+  <!-- Stylesheets: order matters, base first, then thematic, then components -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/inscription.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="pybe-header">
+    <div class="pybe-brand">
+      <span class="pybe-logo">🏺</span>
+      <span class="pybe-title">PyBe</span>
+      <span class="pybe-subtitle">The Royal Scribe's Secret</span>
+    </div>
+
+    <!-- Progress bar: macro segments for the 8 stages -->
+    <div class="progress-track" id="progress-track" aria-label="Lesson progress">
+      <!-- Segments generated dynamically by navigation.js -->
+    </div>
+  </header>
+
+  <!-- ===================== MAIN STAGE AREA ===================== -->
+  <main class="lesson-stage">
+    <section class="lesson-card" id="lesson-card">
+      <!-- Dynamic step content is injected here by renderer.js -->
+      <div class="card-loading">
+        <p>Brushing the dust off an ancient tablet…</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER NAVIGATION ===================== -->
+  <footer class="pybe-footer">
+    <button id="btn-back" class="nav-btn nav-btn-back" type="button">
+      ← Back
+    </button>
+
+    <div class="step-indicator" id="step-indicator">
+      <!-- e.g. "Stage 3 of 8" filled in by navigation.js -->
+    </div>
+
+    <button id="btn-next" class="nav-btn nav-btn-next" type="button" disabled>
+      Next →
+    </button>
+  </footer>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <!-- Order matters: data first, then engine, then renderer/interactions, then navigation (boots the app) -->
+  <script src="js/lessonData.js"></script>
+  <script src="js/lessonEngine.js"></script>
+  <script src="js/interactions.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/navigation.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+/* =========================================================
+   inscription.css
+   Styles for the carved stone tablet, character tiles,
+   index ruler, and the Python code reveal panel.
+   ========================================================= */
+
+/* ---------- Header ---------- */
+.pybe-header {
+  background: linear-gradient(180deg, var(--color-terracotta-dark), var(--color-terracotta));
+  color: var(--color-sandstone);
+  padding: var(--space-md) var(--space-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.pybe-brand {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  max-width: var(--max-content-width);
+  margin: 0 auto var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.pybe-logo {
+  font-size: 1.4rem;
+}
+
+.pybe-title {
+  font-family: var(--font-story);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--color-gold-light);
+}
+
+.pybe-subtitle {
+  font-family: var(--font-story);
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.progress-track {
+  display: flex;
+  gap: 4px;
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+}
+
+.progress-segment {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.25);
+  transition: background var(--transition-medium);
+}
+
+.progress-segment.is-complete {
+  background: var(--color-gold-light);
+}
+
+.progress-segment.is-current {
+  background: var(--color-sandstone);
+}
+
+/* ---------- Lesson Card ---------- */
+.lesson-card {
+  width: 100%;
+  max-width: var(--max-content-width);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-xl);
+  animation: card-in var(--transition-medium);
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-loading {
+  text-align: center;
+  padding: var(--space-xl) 0;
+  font-family: var(--font-story);
+  font-style: italic;
+  color: var(--color-dusk-soft);
+}
+
+.eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-xs);
+}
+
+/* ---------- Stone Tablet ---------- */
+.tablet {
+  background:
+    repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.02) 0 2px, transparent 2px 6px),
+    linear-gradient(180deg, #e8d5aa, #d9bd85);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  margin: var(--space-md) 0;
+  box-shadow: inset 0 2px 6px rgba(44, 36, 24, 0.18);
+}
+
+.tablet-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+}
+
+.char-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.char-glyph {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-code);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-dusk);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+}
+
+button.char-glyph {
+  cursor: pointer;
+}
+
+button.char-glyph:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-gold);
+}
+
+.char-glyph.is-inspected {
+  background: var(--color-sandstone-dark);
+  border-color: var(--color-gold);
+}
+
+.char-glyph.is-selected {
+  background: var(--color-gold-light);
+  border-color: var(--color-terracotta);
+}
+
+.char-glyph.is-correct {
+  background: var(--color-success-bg);
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.char-glyph.is-incorrect {
+  background: var(--color-error-bg);
+  border-color: var(--color-error);
+  color: var(--color-error);
+}
+
+.char-index {
+  font-size: 0.68rem;
+  color: var(--color-dusk-soft);
+  font-family: var(--font-code);
+}
+
+/* ---------- Code Panel ---------- */
+.code-panel {
+  background: var(--color-dusk);
+  color: #f2e9d0;
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+  margin: var(--space-md) 0;
+  font-family: var(--font-code);
+  font-size: 0.95rem;
+  overflow-x: auto;
+}
+
+.code-panel .code-line {
+  white-space: pre;
+}
+
+.code-panel .code-comment {
+  color: #9a8f77;
+}
+
+.code-panel .code-output {
+  color: var(--color-gold-light);
+  margin-top: var(--space-sm);
+  border-top: 1px dashed rgba(242, 233, 208, 0.25);
+  padding-top: var(--space-sm);
+}
