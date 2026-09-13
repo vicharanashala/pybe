@@ -1,0 +1,378 @@
+.lesson-page{
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:40px;
+
+background:
+linear-gradient(180deg,#5b1f1f 0%,#7b2e2e 45%,#9b6b3f 100%);
+
+}
+.wrong{
+    margin:12px 0 20px;
+    padding:14px;
+    background:#f8dddd;
+    border-left:5px solid #a72d2d;
+    border-radius:10px;
+    color:#7b2e2e;
+    line-height:1.7;
+    animation:fadeIn .3s ease;
+}
+
+.option{
+    width:100%;
+    margin-top:14px;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+.lesson-card{
+
+width:900px;
+max-width:95%;
+
+background:#fbf5ea;
+
+padding:50px;
+
+border-radius:28px;
+
+border:4px solid #c8a25d;
+
+box-shadow:
+0 25px 60px rgba(0,0,0,.35),
+inset 0 0 0 2px #f4e5bf;
+
+}
+
+
+
+/* ---------------- HEADINGS ---------------- */
+
+.lesson-card h1{
+
+text-align:center;
+
+font-size:48px;
+
+color:#6b2a2a;
+
+margin-bottom:20px;
+
+}
+
+.lesson-card h2{
+
+color:#8b5a2b;
+
+margin:30px 0 18px;
+
+}
+
+.lesson-card p{
+
+font-size:18px;
+
+line-height:1.9;
+
+color:#4d4036;
+
+margin-bottom:18px;
+
+}
+
+/* ---------------- DIVIDER ---------------- */
+
+.lesson-card hr{
+
+margin:35px 0;
+
+border:none;
+
+height:2px;
+
+background:#d8b66c;
+
+}
+
+/* ---------------- HIGHLIGHT ---------------- */
+
+.highlight{
+
+background:#f5ecd8;
+
+padding:18px;
+
+border-left:6px solid #c8a25d;
+
+border-radius:12px;
+
+font-style:italic;
+
+color:#7b2e2e;
+
+margin:20px 0;
+
+}
+
+/* ---------------- ANCIENT SCROLL ---------------- */
+
+.scroll{
+
+background:#f8f2df;
+
+border:3px solid #d8b66c;
+
+border-radius:18px;
+
+padding:25px;
+
+margin:25px 0;
+
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+}
+
+.scroll pre{
+
+font-size:17px;
+
+line-height:1.8;
+
+white-space:pre-wrap;
+
+color:#493d34;
+
+}
+
+/* ---------------- ORACLE CONSOLE ---------------- */
+
+.console{
+
+background:#2d2d2d;
+
+color:white;
+
+padding:24px;
+
+border-radius:15px;
+
+margin:25px 0;
+
+font-family:Consolas, monospace;
+
+box-shadow:0 8px 18px rgba(0,0,0,.25);
+
+}
+
+.console.success{
+
+border:2px solid #5cb85c;
+
+}
+
+.console pre{
+
+white-space:pre-wrap;
+
+font-size:16px;
+
+}
+
+/* ---------------- SPELL CARDS ---------------- */
+
+.spell-step{
+
+background:#fffaf0;
+
+border-left:6px solid #c79a35;
+
+padding:20px;
+
+margin:18px 0;
+
+border-radius:12px;
+
+}
+
+.spell-step h3{
+
+color:#7b2e2e;
+
+margin-bottom:10px;
+
+}
+
+/* ---------------- LIST ---------------- */
+
+.lesson-card ul{
+
+margin:20px 0 20px 25px;
+
+}
+
+.lesson-card li{
+
+margin-bottom:12px;
+
+font-size:18px;
+
+line-height:1.8;
+
+color:#4d4036;
+
+}
+
+/* ---------------- BUTTON ---------------- */
+.lesson-card button,
+.option,
+.success button{
+
+margin-top:35px;
+
+padding:16px 34px;
+
+border:none;
+
+border-radius:14px;
+
+background:#7b2e2e;
+
+color:white;
+
+font-size:18px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+box-shadow:0 8px 20px rgba(0,0,0,.2);
+
+}
+
+/* Reflection Challenge Buttons */
+
+.option{
+
+display:block;
+
+width:100%;
+
+margin:16px 0;
+
+padding:18px;
+
+background:#7b2e2e;
+
+color:white;
+
+border:none;
+
+border-radius:14px;
+
+font-size:18px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+box-shadow:0 8px 20px rgba(0,0,0,.18);
+
+}
+
+.option:hover{
+
+background:#5d1f1f;
+
+transform:translateY(-3px);
+
+}
+
+.success{
+
+margin-top:25px;
+
+padding:25px;
+
+background:#f5ecd8;
+
+border-left:6px solid #c8a25d;
+
+border-radius:14px;
+
+text-align:left;
+
+}
+
+.success h3{
+
+color:#661e1e;
+
+margin-bottom:10px;
+
+font-size:28px;
+
+}
+
+.success button{
+
+margin-top:20px;
+
+width:100%;
+
+}
+/* Continue Button */
+
+.success button{
+
+width:100%;
+
+padding:18px;
+
+margin-top:22px;
+
+background:#7b2e2e !important;
+
+color:white !important;
+
+border:none;
+
+border-radius:14px;
+
+font-size:18px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+box-shadow:0 8px 20px rgba(0,0,0,.2);
+
+}
+
+.success button:hover{
+
+background:#5d1f1f !important;
+
+transform:translateY(-3px);
+
+}

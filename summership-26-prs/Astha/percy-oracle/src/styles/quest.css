@@ -1,0 +1,185 @@
+.quest{
+min-height:100vh;
+background:linear-gradient(180deg,#f8f3ea,#efe5d5,#e6d8c5);
+display:flex;
+justify-content:center;
+align-items:center;
+padding:60px 20px;
+}
+
+.quest-card{
+width:900px;
+background:#fffaf4;
+border:2px solid #ead7b5;
+border-radius:28px;
+padding:45px;
+box-shadow:0 18px 50px rgba(0,0,0,.12);
+}
+
+.quest-card h1{
+font-family:"Cormorant Garamond",serif;
+font-size:48px;
+color:#6b4423;
+text-align:center;
+margin-bottom:5px;
+}
+
+.quest-card h2{
+font-family:"Cormorant Garamond",serif;
+text-align:center;
+color:#7a5432;
+margin-bottom:30px;
+}
+
+.story{
+line-height:1.9;
+font-size:18px;
+color:#55483d;
+margin-bottom:30px;
+}
+
+.oracle-hint{
+background:#fff5e8;
+border-left:6px solid #b8864a;
+padding:18px;
+border-radius:12px;
+margin-bottom:35px;
+}
+
+.oracle-hint strong{
+color:#7b2e2e;
+}
+
+.oracle-hint p{
+margin-top:10px;
+line-height:1.8;
+}
+
+.artifact-card{
+background:#fcf7ef;
+border:1px solid #ead9ba;
+border-radius:18px;
+padding:22px;
+margin-bottom:22px;
+transition:.3s;
+}
+
+.artifact-card:hover{
+transform:translateY(-4px);
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.artifact-card h3{
+font-family:"Cormorant Garamond",serif;
+font-size:30px;
+color:#6b4423;
+margin-bottom:12px;
+}
+
+.artifact-card strong{
+display:block;
+margin-bottom:10px;
+color:#7b2e2e;
+}
+
+.artifact-card p{
+line-height:1.8;
+color:#564d45;
+margin-bottom:15px;
+}
+
+.artifact-card small{
+display:block;
+background:#f4ecdf;
+padding:12px;
+border-radius:10px;
+margin-bottom:18px;
+color:#6a5a4a;
+}
+
+.choice{
+padding:14px 30px;
+border:none;
+border-radius:12px;
+background:#7b2e2e;
+color:white;
+cursor:pointer;
+font-size:16px;
+transition:.3s;
+}
+
+.choice:hover{
+background:#5f1f1f;
+transform:translateY(-2px);
+}
+
+.wrong{
+margin-top:30px;
+padding:22px;
+background:#fff1ef;
+border-left:6px solid #cc4c4c;
+border-radius:12px;
+line-height:1.8;
+animation:shake .4s;
+}
+
+.correct{
+margin-top:30px;
+padding:24px;
+background:#f4fff4;
+border-left:6px solid #4b9b5f;
+border-radius:12px;
+line-height:1.8;
+}
+
+.lesson-box{
+margin-top:25px;
+background:#f9f4e8;
+padding:20px;
+border-radius:12px;
+border:1px solid #e5d4ae;
+}
+
+.lesson-box h3{
+margin-bottom:12px;
+color:#6b4423;
+}
+
+.correct button{
+margin-top:25px;
+padding:14px 26px;
+border:none;
+border-radius:12px;
+background:#7b2e2e;
+color:white;
+cursor:pointer;
+font-size:16px;
+}
+.wrong,
+.correct{
+    margin-top:18px;
+    animation:fadeIn .3s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.correct button:hover{
+background:#5f1f1f;
+}
+
+@keyframes shake{
+0%{transform:translateX(-6px);}
+25%{transform:translateX(6px);}
+50%{transform:translateX(-5px);}
+75%{transform:translateX(5px);}
+100%{transform:translateX(0);}
+}
