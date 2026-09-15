@@ -1,0 +1,21 @@
+{
+  "name": "pybe-betaal-tales-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Express API server for the PyBe Py-Betaal Tales story-driven Python module.",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "seed": "node src/seed.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "morgan": "^1.10.0",
+    "pybe-betaal-tales": "file:.."
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

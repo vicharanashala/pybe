@@ -1,0 +1,14 @@
+{
+  "name": "pybe-expedition-island-of-names",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "installAll": "npm install --prefix client",
+    "dev": "npm run dev --prefix client",
+    "build": "npm run build --prefix client",
+    "preview": "npm run preview --prefix client"
+  },
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

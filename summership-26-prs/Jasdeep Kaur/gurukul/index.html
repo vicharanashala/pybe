@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>500 BCE Ancient Gurukul — Sacred Lotus Loops Adventure</title>
+  
+  <!-- Google Fonts: Kalam, Tillana, Lora, VT323, Cinzel, Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cinzel:wght@600;700;800&family=Kalam:wght@300;400;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Tillana:wght@600;800&family=VT323&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css?v=3.0">
+</head>
+<body class="paper-texture-bg">
+
+  <!-- Ambient Sky, Floating Dust Particles & Soaring Birds Canvas Overlay -->
+  <div class="ambient-layer">
+    <div class="morning-sun-aura"></div>
+    <div class="sunbeam-ray"></div> 
+    <div class="sunbeam-ray ray-2"></div>
+    <div class="sunbeam-ray ray-3"></div>
+    <div class="sunbeam-ray ray-4"></div>
+    <canvas id="ambientCanvas"></canvas>
+  </div>
+
+  <!-- Main Ancient Gurukul Header -->
+  <header class="gurukul-header">
+    <div class="pathshala-emblem">
+      <div class="emblem-text">
+        <span class="sub-title">500 BCE Ancient Vedic Academy</span>
+        <h1 class="main-title">Gurukul Sacred Loops</h1>
+      </div>
+    </div>
+    
+    <div class="header-controls">
+      <button class="vintage-btn secondary sm" id="soundToggleBtn" title="Toggle Ambient Sound & Chimes">
+        <i class="fa-solid fa-volume-high"></i> <span>Sound: ON</span>
+      </button>
+      <button class="vintage-btn primary sm active-nav" id="navHomeBtn" onclick="showLandingPage()">
+        <i class="fa-solid fa-torii-gate"></i> <span>Angavada</span>
+      </button>
+      <button class="vintage-btn primary sm" id="navChestBtn" onclick="showWoodenChest()">
+        <i class="fa-solid fa-scroll"></i> <span>Manuscript Chest</span>
+      </button>
+      <button class="vintage-btn primary sm" id="navPrikshaBtn" onclick="openGurukulPrikshaView()">
+        <i class="fa-solid fa-trophy"></i> <span>Gurukul Priksha</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       VIEW 1: LANDING SCENE (500 BCE GURUKUL ANGAVADA UNDER BANYAN TREE)
+       =================================================================== -->
+  <main id="landingView" class="view-container active-view">
+    <div class="landing-hero-wrapper">
+      
+      <!-- Left Side (45%): Ancient Palm-Leaf Story Card -->
+      <article class="landing-story-card parchment-paper">
+        <header class="ornamental-header">
+          <span class="tree-badge">🌳 500 BCE Sacred Angavada</span>
+          <h2 class="landing-main-title">Sacred Gurukul</h2>
+          <p class="landing-subtitle">The Ancient Science of Repetition & Loops</p>
+        </header>
+
+        <div class="landing-story-body custom-scroll">
+          <p class="story-para">The golden rays of the soft morning sun illuminate the peaceful Gurukul angavada set in 500 BCE Ancient India.</p>
+          <p class="story-para">A gentle breeze sways the broad leaves of the ancient Banyan tree, while floating dust particles glisten in the warm sunbeams and wild birds soar across the morning sky.</p>
+
+          <div class="bell-chime-callout" onclick="playTripleBellSound()" title="Ring Sacred Ashram Brass Bell">
+            <span class="bell-shake">🔔</span>
+            <span class="bell-text">"Tan... Tan... Tan..."</span>
+            <span class="bell-subtext">The sacred brass bell echoes across the lotus pond.</span>
+          </div>
+
+          <p class="story-para">Learners (Shiṣya) arrive with their woven cloth bags (Jhola) and seat themselves on natural reed mats upon the cool mud angavada.</p>
+          <p class="story-para">They place their wooden practice slates (Patta) and reed pens (Kalam) near clay ink pots, ready for the morning lesson.</p>
+
+          <div class="story-para highlight-para">
+            Beneath the ancient Banyan tree sits Acharya (the Guru), dressed in simple cotton robes. Near him, an oil lamp (diya) flickers gently at the sacred Yajna altar.
+          </div>
+
+          <ul class="story-list-no">
+            <li><span class="red-x">❌</span> No modern screens</li>
+            <li><span class="red-x">❌</span> No abstract jargon</li>
+            <li><span class="red-x">❌</span> No dry syntax</li>
+          </ul>
+
+          <div class="story-virtues-box">
+            <span>🪷 Sacred Lotus Pond</span>
+            <span>📜 Tala-Patra Manuscripts</span>
+            <span>📿 Rudraksha Beads</span>
+            <span>🔥 Agni Yajna Rituals</span>
+          </div>
+
+          <div class="masterji-dialogue-card">
+            <div class="guru-icon">👴🏽</div>
+            <div class="dialogue-text">
+              <p>Acharya folds his hands in greeting and says:</p>
+              <blockquote class="accent-quote">
+                "Namaste, Vats! Welcome to our Gurukul. Today we shall uncover the sacred secret of repetition — how a single command can repeat a hundred noble deeds efficiently through Loops (Avṛtti)."
+              </blockquote>
+            </div>
+          </div>
+
+          <p class="story-para ending">The learners listen intently as Acharya prepares to assign today's task: Gathering Sacred Lotus Flowers from the pond.</p>
+        </div>
+
+        <div class="landing-action-box">
+          <button class="vintage-btn primary hero-enter-btn" onclick="startCinematicEntry()">
+            <span>🪷 Step Into the Angavada</span> <i class="fa-solid fa-arrow-right"></i>
+          </button>
+          <p class="sanskrit-motto">"तमसो मा ज्योतिर्गमय" (From Darkness Lead Me to Light)</p>
+        </div>
+      </article>
+
+      <!-- Right Side (55%): Cinematic Hero Artwork Frame -->
+      <aside class="landing-illustration-card">
+        <div class="hero-image-frame">
+          <img src="assets/images/landing_hero.png" alt="Acharya teaching under Banyan tree in 500 BCE Gurukul" class="hero-art-img">
+          <div class="sunbeam-overlay"></div>
+          
+          <!-- Animated Diya Light Indicator -->
+          <div class="diya-flicker-container" title="Flickering Sacred Diya Lamp">
+            <div class="diya-flame"></div>
+            <div class="diya-base">🪔</div>
+          </div>
+
+          <div class="illustration-badge">
+            <span>🌳 500 BCE Banyan Angavada & Lotus Pond</span>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- Bottom Features Strip -->
+    <section class="landing-features-strip parchment-paper">
+      <h3 class="strip-heading">📜 Ancient Handcrafted Learning System</h3>
+      <div class="features-grid">
+        <div class="feature-item-card">
+          <div class="feat-icon">🪵</div>
+          <h4>Carved Wooden Board (Patta)</h4>
+          <p>Tactile line-by-line chalk code execution on dark teak practice slates</p>
+        </div>
+        <div class="feature-item-card">
+          <div class="feat-icon">📜</div>
+          <h4>Palm-Leaf Scroll (Tala-patra)</h4>
+          <p>Unrolling manuscript stories guiding manual vs. automated loop logic</p>
+        </div>
+        <div class="feature-item-card">
+          <div class="feat-icon">📿</div>
+          <h4>Rudraksha Prayer Mala</h4>
+          <p>Illuminated amber prayer bead progress tracker for step milestones</p>
+        </div>
+        <div class="feature-item-card">
+          <div class="feat-icon">🪷</div>
+          <h4>Lotus Pond & Cloth Jhola</h4>
+          <p>Real-time visual lotus flower collection simulation into inventory</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================================
+       VIEW 2: CINEMATIC ENTRY SCENE VIEW (STEP INTO THE ANGAVADA)
+       =================================================================== -->
+  <section id="cinematicEntryView" class="view-container">
+    <div class="cinematic-wrapper" style="min-height: 85vh; padding: 2rem 0;">
+      
+      <div class="cinematic-dialogue-modal parchment-paper" style="max-width: 920px; width: 92%; margin: 0 auto;">
+        <div class="cinematic-speech-box" style="text-align: center;">
+          <h2 class="guru-welcome-title">Welcome to the Traditional Learning Era</h2>
+          <p class="typewriter-text" id="masterJiWelcomeText" style="font-size: 1.15rem; max-width: 750px; margin: 0.5rem auto 1rem;">"Welcome! Observe how education flourished in traditional times under the shade of ancient Banyan trees."</p>
+        </div>
+
+        <!-- 4-by-4 (2x2 Grid) Showcase of User's Exact 4 Uploaded Images -->
+        <div class="user-images-gallery-section" style="margin: 1rem 0; text-align: left;">
+          <div style="font-family:var(--font-heading); color:var(--maroon); font-size:1.35rem; font-weight:bold; border-bottom:2px dashed var(--warm-beige-dark); padding-bottom:0.5rem; margin-bottom:1rem; text-align:center;">
+            📜 Traditional Education Era Gallery (How Learning Used to Be)
+          </div>
+
+          <div class="user-images-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:1.2rem;">
+            
+            <!-- Card 1 -->
+            <div class="user-img-card parchment-paper" style="padding:0.8rem; border-radius:10px; text-align:center;" onclick="switchCinematicArtwork('assets/images/user_img_1.jpg', null)">
+              <div class="user-img-frame" style="overflow:hidden; border-radius:8px; border:3px solid var(--mud-brown); height:190px; box-shadow:0 6px 15px rgba(0,0,0,0.2); cursor:pointer;">
+                <img src="assets/images/user_img_1.jpg" alt="Outdoor Banyan Slate Class" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.3s ease;">
+              </div>
+              <h4 style="font-family:var(--font-heading); color:var(--maroon); font-size:1.1rem; margin-top:0.6rem;">Outdoor Banyan Slate Class</h4>
+              <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--dark-wood); margin-top:0.2rem; line-height:1.4;">Studying under the shade of ancient trees with chalk slates (2+2= / A+).</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="user-img-card parchment-paper" style="padding:0.8rem; border-radius:10px; text-align:center;" onclick="switchCinematicArtwork('assets/images/user_img_2.jpg', null)">
+              <div class="user-img-frame" style="overflow:hidden; border-radius:8px; border:3px solid var(--mud-brown); height:190px; box-shadow:0 6px 15px rgba(0,0,0,0.2); cursor:pointer;">
+                <img src="assets/images/user_img_2.jpg" alt="Village Bal Mela Pathshala" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.3s ease;">
+              </div>
+              <h4 style="font-family:var(--font-heading); color:var(--maroon); font-size:1.1rem; margin-top:0.6rem;">Village Bal Mela Pathshala</h4>
+              <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--dark-wood); margin-top:0.2rem; line-height:1.4;">Community gatherings in open village spaces for interactive peer learning.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="user-img-card parchment-paper" style="padding:0.8rem; border-radius:10px; text-align:center;" onclick="switchCinematicArtwork('assets/images/user_img_3.png', null)">
+              <div class="user-img-frame" style="overflow:hidden; border-radius:8px; border:3px solid var(--mud-brown); height:190px; box-shadow:0 6px 15px rgba(0,0,0,0.2); cursor:pointer;">
+                <img src="assets/images/user_img_3.png" alt="Traditional Outdoor Mentorship" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.3s ease;">
+              </div>
+              <h4 style="font-family:var(--font-heading); color:var(--maroon); font-size:1.1rem; margin-top:0.6rem;">Traditional Outdoor Mentorship</h4>
+              <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--dark-wood); margin-top:0.2rem; line-height:1.4;">Personalized teacher guidance cultivating discipline and moral values.</p>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="user-img-card parchment-paper" style="padding:0.8rem; border-radius:10px; text-align:center;" onclick="switchCinematicArtwork('assets/images/user_img_4.jpg', null)">
+              <div class="user-img-frame" style="overflow:hidden; border-radius:8px; border:3px solid var(--mud-brown); height:190px; box-shadow:0 6px 15px rgba(0,0,0,0.2); cursor:pointer;">
+                <img src="assets/images/user_img_4.jpg" alt="Gurukul Group Recitation" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.3s ease;">
+              </div>
+              <h4 style="font-family:var(--font-heading); color:var(--maroon); font-size:1.1rem; margin-top:0.6rem;">Gurukul Group Recitation</h4>
+              <p style="font-family:var(--font-body); font-size:0.9rem; color:var(--dark-wood); margin-top:0.2rem; line-height:1.4;">Students reciting multiplication tables on reed mats to build memory.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <button class="vintage-btn primary large-btn" onclick="startFoundationalJourney()" style="margin-top:0.8rem;">
+          <span>📜 Begin Foundational Wisdom & Manuscript Chest</span> <i class="fa-solid fa-scroll"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       VIEW 3: WOODEN MANUSCRIPT CHEST VIEW (Patta Sandook)
+       =================================================================== -->
+  <section id="woodenChestView" class="view-container">
+    <div class="chest-wrapper">
+      <header class="chest-header ornamental-header">
+        <span class="tree-badge">📦 Acharya's Ancient Manuscript Chest</span>
+        <h2 class="chest-main-title">Select Your Palm-Leaf Manuscript</h2>
+        <p class="chest-subtitle">Each manuscript unveils a new chapter of loop wisdom!</p>
+      </header>
+
+      <!-- Foundational Wisdom Review Banner -->
+      <div style="background:var(--warm-beige); border:2px dashed var(--mustard-yellow); border-radius:12px; padding:1rem 1.4rem; margin-bottom:1.8rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <h4 style="font-family:var(--font-heading); color:var(--maroon); font-size:1.2rem; margin-bottom:0.2rem;">📜 Foundational Wisdom (Chapters 1 - 3)</h4>
+          <p style="font-family:var(--font-body); font-size:0.95rem; color:var(--dark-wood);">1. Origin of Repetition | 2. History of Loops | 3. Anatomy of Loops</p>
+        </div>
+        <button class="vintage-btn secondary sm" onclick="startFoundationalJourney()">
+          <span>Review Foundations 📜</span>
+        </button>
+      </div>
+
+      <div class="slates-chest-grid">
+        
+        <!-- Slate 1: For Loop (Lotus Flower Collection) -->
+        <div class="slate-card unlocked" id="slateCardFor" onclick="startForLoopAdventure()">
+          <div class="slate-wood-frame">
+            <div class="slate-status-ribbon unlocked">✨ Unlocked</div>
+            <div class="slate-icon">🪷</div>
+            <h3 class="slate-title">For Loop (Punarāvṛtti)</h3>
+            <p class="slate-subtitle">Sacred Lotus Gathering (Fixed Count)</p>
+            <div class="slate-mini-preview">
+              <span>Gather 10 Sacred Lotuses...</span>
+              <span>for lotus in range(1, 11)...</span>
+            </div>
+            <button class="vintage-btn primary sm slate-action-btn">
+              <span>Begin Lesson</span> <i class="fa-solid fa-play"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Slate 2: While Loop (Temple Well Water Draw) -->
+        <div class="slate-card locked" id="slateCardWhile" onclick="handleLockedSlate('While Loop')">
+          <div class="slate-wood-frame">
+            <div class="slate-status-ribbon locked">🔒 Locked</div>
+            <div class="slate-icon">🏺</div>
+            <h3 class="slate-title">While Loop (Condition Control)</h3>
+            <p class="slate-subtitle">Drawing Temple Water Until Full</p>
+            <div class="slate-mini-preview dimmed">
+              <span>while vessel_full == False...</span>
+            </div>
+            <button class="vintage-btn secondary sm slate-action-btn disabled">
+              <span>Locked 🔒</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Slate 3: Do-While Loop (Banyan Tree Riddle) -->
+        <div class="slate-card locked" id="slateCardDoWhile" onclick="handleLockedSlate('Do While Loop')">
+          <div class="slate-wood-frame">
+            <div class="slate-status-ribbon locked">🔒 Locked</div>
+            <div class="slate-icon">📜</div>
+            <h3 class="slate-title">Do-While Loop (Post Check)</h3>
+            <p class="slate-subtitle">Whispering Banyan Riddle</p>
+            <div class="slate-mini-preview dimmed">
+              <span>Execute once, then check...</span>
+            </div>
+            <button class="vintage-btn secondary sm slate-action-btn disabled">
+              <span>Locked 🔒</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Shortcut to Gurukul Priksha -->
+      <div style="text-align:center; margin-top:3rem;">
+        <button class="vintage-btn primary large-btn" onclick="openGurukulPrikshaView()">
+          <span>🏆 Enter Gurukul Priksha (Coding Arena)</span> <i class="fa-solid fa-code"></i>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       VIEW 4: INTERACTIVE SACRED LOTUS LOOP ADVENTURE VIEW
+       =================================================================== -->
+  <section id="slateAdventureView" class="view-container">
+    <div class="adventure-container">
+      
+      <!-- Top Adventure Progress & Rudraksha Mala Tracker Bar -->
+      <div class="adventure-progress-header parchment-paper">
+        <button class="vintage-btn secondary sm" onclick="showWoodenChest()">
+          <i class="fa-solid fa-chevron-left"></i> <span>Back to Chest</span>
+        </button>
+        <div class="adventure-title-badge">
+          <span id="adventureModuleTitle">📜 Sacred Lotus Gathering — For Loop</span>
+        </div>
+        <div class="adventure-step-indicator" id="adventureStepIndicator">
+          Step 1 of 7: Story at the Lotus Pond
+        </div>
+      </div>
+
+      <!-- Rudraksha Prayer Bead Mala Progress Tracker -->
+      <div class="rudraksha-mala-container" id="rudrakshaMalaTracker" title="Rudraksha Prayer Bead Progress Tracker">
+        <div class="mala-string"></div>
+        <div class="rudraksha-bead active" id="bead1"><span>1</span></div>
+        <div class="rudraksha-bead" id="bead2"><span>2</span></div>
+        <div class="rudraksha-bead" id="bead3"><span>3</span></div>
+        <div class="rudraksha-bead" id="bead4"><span>4</span></div>
+        <div class="rudraksha-bead" id="bead5"><span>5</span></div>
+        <div class="rudraksha-bead" id="bead6"><span>6</span></div>
+        <div class="rudraksha-bead" id="bead7"><span>7</span></div>
+        <div class="rudraksha-bead" id="bead8"><span>8</span></div>
+        <div class="rudraksha-bead" id="bead9"><span>9</span></div>
+        <div class="rudraksha-bead" id="bead10"><span>10</span></div>
+      </div>
+
+      <!-- Main Adventure Content Container -->
+      <div id="adventureStageArea" class="adventure-stage-area">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===================================================================
+       VIEW 5: GURUKUL PRIKSHA (500 BCE CODING ARENA)
+       =================================================================== -->
+  <section id="prikshaView" class="view-container">
+    <div class="priksha-container" style="max-width:1380px; margin:2rem auto 4rem; padding:0 1.5rem;">
+      
+      <!-- Priksha Header Banner -->
+      <header class="priksha-header parchment-paper" style="margin-bottom:1.8rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+        <div>
+          <div class="tree-badge">🏆 Acharya's Challenge Arena</div>
+          <h2 class="landing-main-title" style="font-size:2.4rem;">Gurukul Priksha</h2>
+          <p class="landing-subtitle">Solve 500 BCE Gurukul story challenges with Python loop logic!</p>
+        </div>
+        
+        <div class="priksha-stats-bar" style="display:flex; gap:1.2rem; align-items:center;">
+          <div class="stat-pill" style="background:var(--warm-beige); border:2px solid var(--mustard-yellow); padding:0.6rem 1.2rem; border-radius:8px; text-align:center;">
+            <div style="font-family:var(--font-handwriting); font-size:1.1rem; color:var(--maroon);">Solved Challenges</div>
+            <div style="font-family:var(--font-heading); font-size:1.6rem; color:var(--forest-green);" id="prikshaSolvedCount">0 / 12</div>
+          </div>
+
+          <div class="stat-pill" style="background:var(--warm-beige); border:2px solid var(--mustard-yellow); padding:0.6rem 1.2rem; border-radius:8px; text-align:center;">
+            <div style="font-family:var(--font-handwriting); font-size:1.1rem; color:var(--maroon);">Wisdom Stars</div>
+            <div style="font-family:var(--font-heading); font-size:1.6rem; color:var(--mustard-dark);" id="prikshaStarsCount">⭐ 0</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Challenge Split Layout -->
+      <div class="priksha-layout-grid" style="display:grid; grid-template-columns: 1fr 1.25fr; gap:1.8rem; align-items:start;">
+        
+        <!-- Left Side: Problem Statement & Ancient Palm-Leaf Story Card -->
+        <article class="priksha-problem-card parchment-paper" style="min-height:680px; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <!-- Challenge Selector Dropdown / Pills -->
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px dashed var(--warm-beige-dark); padding-bottom:0.8rem; margin-bottom:1rem;">
+              <span id="challengeDifficultyBadge" class="slate-status-ribbon unlocked" style="position:static;">Level: Easy</span>
+              <span id="challengeNumberBadge" style="font-family:var(--font-handwriting); font-size:1.2rem; color:var(--maroon); font-weight:700;">Challenge 1 of 12</span>
+            </div>
+
+            <!-- Challenge Selector Grid -->
+            <div id="challengeSelectorGrid" style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.2rem;">
+              <!-- Populated by JS -->
+            </div>
+
+            <h3 id="challengeTitle" style="font-family:var(--font-heading); color:var(--maroon); font-size:2rem; margin-bottom:0.6rem;">📚 Challenge 1: Morning Attendance Register</h3>
+            
+            <!-- Acharya Dialogue Box -->
+            <div class="masterji-quote-box" style="margin-bottom:1.2rem;">
+              <div class="avatar-circle">👴🏽</div>
+              <div class="quote-text">
+                <span class="speaker-name">Acharya</span>
+                <p id="challengeMasterJiStory" class="dialogue" style="font-size:1.2rem;">"The Gurukul has N students. We must call their roll numbers from 1 to N for morning assembly!"</p>
+              </div>
+            </div>
+
+            <!-- Problem Details -->
+            <div style="background:var(--warm-beige); border:2px solid var(--warm-beige-dark); border-radius:8px; padding:1rem; margin-bottom:1rem;">
+              <h4 style="font-family:var(--font-handwriting); color:var(--maroon); font-size:1.25rem;">📌 Problem Statement:</h4>
+              <p id="challengeProblemDesc" class="story-para" style="font-size:1.05rem; margin-bottom:0.6rem;">Given an integer N representing total students, write Python code to print roll numbers from 1 to N line by line.</p>
+              
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.8rem; margin-top:0.8rem;">
+                <div style="background:rgba(0,0,0,0.04); padding:0.6rem; border-radius:6px;">
+                  <strong style="color:var(--terracotta);">Input:</strong>
+                  <pre id="challengeInputFormat" style="font-family:var(--font-code); font-size:1.15rem; color:var(--dark-wood);">N = 5</pre>
+                </div>
+                <div style="background:rgba(0,0,0,0.04); padding:0.6rem; border-radius:6px;">
+                  <strong style="color:var(--forest-green);">Expected Output:</strong>
+                  <pre id="challengeExpectedOutput" style="font-family:var(--font-code); font-size:1.15rem; color:var(--dark-wood);">1
+2
+3
+4
+5</pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hint Section -->
+            <div style="margin-top:1rem;">
+              <button class="vintage-btn secondary sm" id="revealHintBtn" onclick="revealCurrentChallengeHint()">
+                💡 Reveal Hint (<span id="hintCountText">0 / 3</span>)
+              </button>
+              <div id="hintDisplayBox" style="margin-top:0.6rem; display:none; background:#F8EDD5; border:1px dashed var(--mustard-yellow); padding:0.8rem; border-radius:6px; font-family:var(--font-handwriting); font-size:1.15rem; color:var(--maroon);"></div>
+            </div>
+          </div>
+
+          <!-- Bottom Action Controls -->
+          <div style="display:flex; justify-content:space-between; margin-top:1.5rem; pt:1rem; border-top:2px dashed var(--warm-beige-dark);">
+            <button class="vintage-btn secondary sm" id="prevChallengeBtn" onclick="prevChallenge()">
+              <i class="fa-solid fa-chevron-left"></i> Previous
+            </button>
+            <button class="vintage-btn secondary sm" id="nextChallengeBtn" onclick="nextChallenge()">
+              Next <i class="fa-solid fa-chevron-right"></i>
+            </button>
+          </div>
+        </article>
+
+        <!-- Right Side: Wooden Frame Python Code Editor & Output Console -->
+        <article class="priksha-editor-card" style="display:flex; flex-direction:column; gap:1.2rem;">
+          
+          <!-- Wooden Code Editor Window -->
+          <div class="wooden-editor-frame" style="background:linear-gradient(145deg, #46110B 0%, #2A0906 100%); border:8px solid var(--mud-brown); border-radius:18px; padding:1.2rem; box-shadow:0 15px 35px rgba(0,0,0,0.45);">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px double rgba(255,255,255,0.3); padding-bottom:0.6rem; margin-bottom:0.8rem;">
+              <span style="color:var(--chalk-yellow); font-family:var(--font-handwriting); font-size:1.2rem;"><i class="fa-solid fa-pen-ruler"></i> Carved Teak Practice Board (Python 3)</span>
+              <button class="vintage-btn secondary sm" onclick="resetDefaultCode()" style="padding:0.2rem 0.6rem; font-size:0.85rem;">Reset Code</button>
+            </div>
+
+            <!-- Textarea Python Code Editor -->
+            <textarea id="prikshaCodeTextarea" class="code-editor-textarea" spellcheck="false" style="width:100%; height:260px; background:#1A211A; color:#85F69C; font-family:var(--font-code); font-size:1.35rem; border:2px solid #362112; border-radius:8px; padding:1rem; outline:none; resize:none; line-height:1.5;"></textarea>
+
+            <!-- Editor Buttons -->
+            <div style="display:flex; gap:1rem; margin-top:1rem;">
+              <button class="vintage-btn secondary" onclick="runPrikshaCode(false)" style="flex:1; justify-content:center;">
+                ▶ Run Code
+              </button>
+              <button class="vintage-btn primary" onclick="runPrikshaCode(true)" style="flex:1.2; justify-content:center;">
+                ✅ Check Solution & Run Tests
+              </button>
+            </div>
+          </div>
+
+          <!-- Output Terminal & Hidden Test Case Evaluation Slate -->
+          <div class="terminal-frame" style="background:var(--ivory-paper); border:3px solid var(--warm-beige-dark); border-radius:12px; padding:1.2rem; box-shadow:var(--shadow-paper);">
+            <h4 style="font-family:var(--font-heading); color:var(--maroon); font-size:1.4rem; margin-bottom:0.6rem;"><i class="fa-solid fa-terminal"></i> Output Terminal & Evaluation:</h4>
+            
+            <div id="prikshaOutputConsole" class="simulation-slate-box" style="height:180px; font-size:1.15rem; background:#1A211A; color:var(--chalk-white);">
+              <div style="color:var(--chalk-yellow);">Ready to execute Python code... Click 'Run Code' or 'Check Solution'!</div>
+            </div>
+
+            <div id="testEvaluationStats" style="display:none; margin-top:1rem; background:var(--warm-beige); border:2px solid var(--mustard-yellow); padding:0.8rem; border-radius:8px;">
+              <div style="display:flex; justify-content:space-around; flex-wrap:wrap; font-family:var(--font-handwriting); font-size:1.1rem; color:var(--maroon);">
+                <div>✅ Passed: <strong id="statPassed">0/3</strong></div>
+                <div>⚡ Exec Time: <strong id="statTime">12ms</strong></div>
+                <div>💾 Memory: <strong id="statMemory">1.2 MB</strong></div>
+                <div>⭐ Code Quality: <strong id="statQuality">A+</strong></div>
+              </div>
+            </div>
+          </div>
+
+        </article>
+
+      </div>
+    </div>
+
+    <!-- Single Challenge Victory Mini-Modal Overlay -->
+    <div id="prikshaSingleRewardModal" class="priksha-reward-modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.75); z-index:9998; justify-content:center; align-items:center;">
+      <div class="parchment-paper" style="max-width:550px; width:92%; text-align:center; padding:2rem; border:4px solid var(--mustard-yellow); border-radius:16px; box-shadow:0 15px 35px rgba(0,0,0,0.5);">
+        
+        <div style="font-size:3rem; margin-bottom:0.5rem; animation: bounce 0.6s ease infinite alternate;">🎉</div>
+        <h3 id="singleModalTitle" style="font-family:var(--font-heading); color:var(--maroon); font-size:1.9rem; margin-bottom:0.4rem;">Challenge Solved!</h3>
+        
+        <div class="masterji-quote-box reward" style="margin:1rem 0;">
+          <div class="avatar-circle">👴🏽</div>
+          <div class="quote-text">
+            <span class="speaker-name">Acharya</span>
+            <p id="singleModalDialogue" class="dialogue font-large">"Aati Uttam! Excellent logic building!"</p>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:1.5rem; margin:1.2rem 0;">
+          <div style="background:var(--warm-beige); border:2px solid var(--mustard-yellow); padding:0.6rem 1.2rem; border-radius:8px; font-weight:bold;">⭐ +10 Wisdom Stars</div>
+          <div style="background:var(--warm-beige); border:2px solid var(--mustard-yellow); padding:0.6rem 1.2rem; border-radius:8px; font-weight:bold;">📿 Mala Bead Illuminated</div>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:1rem; margin-top:1rem; flex-wrap:wrap;">
+          <button class="vintage-btn secondary" onclick="closeSingleRewardModal()">Stay on Challenge</button>
+          <button class="vintage-btn primary" onclick="closeSingleRewardModal(); nextChallenge();">Next Challenge ➡️</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grand Gurukul Graduation & Copper Seal Certificate Modal Overlay -->
+    <div id="prikshaRewardModal" class="priksha-reward-modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.88); z-index:9999; justify-content:center; align-items:center; overflow-y:auto; padding:1.5rem 0;">
+      
+      <!-- Celebratory Particle Confetti Canvas -->
+      <canvas id="celebrationCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10000;"></canvas>
+
+      <div class="certificate-parchment-frame" style="max-width:820px; width:92%; text-align:center; max-height:92vh; overflow-y:auto; position:relative; z-index:10001;">
+        
+        <!-- Top Ornate Header & Royal Copper Seal -->
+        <div class="certificate-header-seal">
+          <div style="text-align:left;">
+            <span style="font-family:var(--font-handwriting); color:var(--terracotta); font-size:1.1rem; font-weight:700;">📜 ॐ श्री गुरुभ्यो नमः</span>
+            <div style="font-family:var(--font-heading); color:var(--maroon); font-size:1.6rem; font-weight:bold;">500 BCE Ancient Gurukul Academy</div>
+          </div>
+          <div class="royal-wax-seal">
+            <span style="font-size:1.1rem;">🪷</span>
+            <span>गुरुकुल</span>
+            <span>उपाधि</span>
+          </div>
+        </div>
+
+        <!-- Acharya Banner Artwork -->
+        <div style="max-width:640px; margin:0 auto 1.2rem; border:5px solid var(--mud-brown); border-radius:14px; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.35);">
+          <img src="assets/images/reward_ceremony.png?v=2" alt="Acharya conferring sacred certificate" style="width:100%; display:block;">
+        </div>
+
+        <!-- Acharya Appreciative Dialogue -->
+        <div class="masterji-quote-box reward" style="margin-bottom:1.2rem; text-align:left;">
+          <div class="avatar-circle">👴🏽</div>
+          <div class="quote-text">
+            <span class="speaker-name">Acharya (Gurukul Guru)</span>
+            <p class="dialogue font-large">"Aati Uttam Vats! (अति उत्तम वत्स!) You have triumphantly solved all 12 Gurukul Priksha challenges! Your mastery over Python loops shines like the morning sun over the sacred Lotus Pond!"</p>
+          </div>
+        </div>
+
+        <!-- Royal Certificate Upadhi Body -->
+        <div class="certificate-recipient-box">
+          <h2 class="certificate-title">🏆 GURUKUL TAMRA-PATRA SAMMAN (गुरुकुल ताम्रपत्र)</h2>
+          <p class="certificate-subtitle">Certificate of Master-Level Excellence in Programming Loops</p>
+          
+          <div style="margin:1.2rem 0;">
+            <span style="font-size:1.1rem; color:var(--mud-brown);">This sacred copper seal certificate is proudly presented to:</span>
+            <br>
+            <div style="display:inline-flex; align-items:center; gap:0.5rem; margin-top:0.4rem;">
+              <span class="certificate-name-display" id="displayStudentName">Shiṣya Programmer</span>
+            </div>
+            <div class="no-print" style="margin-top:0.5rem;">
+              <label style="font-size:0.9rem; color:var(--mud-brown); font-weight:600;">✍️ Customize Name for Certificate: </label>
+              <input type="text" id="certificateStudentNameInput" value="Shiṣya Programmer" oninput="updateCertificateName(this.value)" placeholder="Enter your name..." style="padding:0.3rem 0.8rem; font-family:var(--font-heading); font-size:1rem; border:2px solid var(--mustard-yellow); border-radius:6px; outline:none; background:#FFFDF7; width:220px; text-align:center;">
+            </div>
+          </div>
+
+          <p style="font-size:1.05rem; line-height:1.6; color:var(--dark-wood); max-width:680px; margin:0 auto;">
+            For demonstrating complete mastery over <strong>For Loops, While Loops, Do-While Logic, State Iterations, and Algorithmic Problem Solving</strong> under the Sacred Banyan Tree.
+          </p>
+
+          <!-- Bronze & Copper Seal Achievement Badges Grid -->
+          <div class="copper-seals-grid">
+            <div class="copper-seal-card">
+              <div class="seal-emblem">🪷</div>
+              <div class="seal-title">Padma Mudra</div>
+              <div class="seal-sub">Sacred Lotus Master</div>
+            </div>
+            <div class="copper-seal-card">
+              <div class="seal-emblem">🏺</div>
+              <div class="seal-title">Jala Mudra</div>
+              <div class="seal-sub">Temple Well Keeper</div>
+            </div>
+            <div class="copper-seal-card">
+              <div class="seal-emblem">📿</div>
+              <div class="seal-title">Rishi Mudra</div>
+              <div class="seal-sub">Rudraksha Seeker</div>
+            </div>
+            <div class="copper-seal-card">
+              <div class="seal-emblem">🔥</div>
+              <div class="seal-title">Agni Acharya</div>
+              <div class="seal-sub">Yajna Master</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Acharya Blessing Interactive Box -->
+        <div id="masterJiBlessingArea" class="masterji-blessing-area">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+            <div style="text-align:left;">
+              <div style="font-family:var(--font-heading); color:var(--maroon); font-size:1.2rem; font-weight:bold;">🙏 Acharya's Eternal Blessing (आशीर्वाद)</div>
+              <div id="blessingMessageText" style="font-family:var(--font-handwriting); font-size:1.15rem; color:var(--mud-brown); margin-top:0.2rem;">
+                Click below to touch Acharya's feet and receive a sacred coding blessing!
+              </div>
+            </div>
+            <button class="vintage-btn secondary no-print" onclick="seekMasterJiBlessings()" style="padding:0.5rem 1rem;">
+              <span>🙏 Seek Blessings (चरण स्पर्श)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Footer Signatures & Date -->
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; border-top:2px solid var(--mustard-yellow); padding-top:1rem; margin-top:1.5rem; text-align:left;">
+          <div>
+            <div style="font-size:0.85rem; color:var(--mud-brown);">DATE OF CONFERRAL</div>
+            <div id="certificateDateDisplay" style="font-family:var(--font-heading); font-size:1.1rem; color:var(--maroon); font-weight:bold;">500 BCE</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-size:1.8rem; margin-bottom:-0.4rem;">🍃</div>
+            <div style="font-family:var(--font-handwriting); font-size:1.3rem; color:var(--terracotta); font-weight:bold;">~ Acharya (गुरुदेव)</div>
+            <div style="font-size:0.8rem; color:var(--mud-brown);">HEAD ACHARYA, 500 BCE GURUKUL</div>
+          </div>
+        </div>
+
+        <!-- Action Control Buttons -->
+        <div class="no-print" style="display:flex; justify-content:center; gap:1rem; margin-top:1.8rem; flex-wrap:wrap;">
+          <button class="vintage-btn primary large-btn" onclick="printCertificate()">
+            <span>🖨️ Print / Save Certificate</span>
+          </button>
+          <button class="vintage-btn secondary large-btn" onclick="triggerCelebrationConfetti()">
+            <span>🎉 Celebrate Confetti</span>
+          </button>
+          <button class="vintage-btn secondary large-btn" onclick="closePrikshaRewardModal()">
+            <span>Close & Explore 🏛️</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Fullscreen Image Lightbox Modal -->
+  <div id="imageLightboxModal" onclick="closeImageLightbox()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.88); z-index:99999; justify-content:center; align-items:center; cursor:pointer;">
+    <div style="max-width:90%; max-height:90%; text-align:center; position:relative;">
+      <img id="lightboxImage" src="" alt="Full view" style="max-width:100%; max-height:85vh; border:4px solid var(--mustard-yellow); border-radius:12px; box-shadow:0 15px 35px rgba(0,0,0,0.6);">
+      <div style="margin-top:0.8rem; color:var(--warm-beige); font-family:var(--font-handwriting); font-size:1.2rem;">Click anywhere to close ✖</div>
+    </div>
+  </div>
+
+  <!-- Custom JavaScript Engine -->
+  <script src="script.js?v=3.0"></script>
+</body>
+</html>

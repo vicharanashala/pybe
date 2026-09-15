@@ -1,0 +1,962 @@
+{
+  "id": "polymorphism",
+  "title": "The Forest of Many Voices",
+  "subtitle": "A saga about discovering polymorphism",
+  "icon": "🎭",
+  "accent": "#34d399",
+  "completeMessage": "You have discovered the core patterns of Polymorphism.",
+  "characters": {
+    "narrator": {
+      "name": "Narrator",
+      "avatar": "📖"
+    },
+    "priya": {
+      "name": "Dr. Priya",
+      "avatar": "🔬"
+    },
+    "pip": {
+      "name": "Pip",
+      "avatar": "🦉"
+    }
+  },
+  "arcs": [
+    {
+      "arc": 1,
+      "name": "Many Forms",
+      "color": "#34d399",
+      "acts": [
+        {
+          "act": 1,
+          "name": "The Same Request",
+          "concept": "same action / different behavior",
+          "image": "/images/poly_act1.jpeg",
+          "transferScenario": {
+            "title": "The Same Instruction",
+            "text": "In art class, a teacher gives one instruction to three children: “draw a line.” Priya watches, the child with a pencil draws a thin grey line, the child with a pen draws a thin blue line, and the child with a crayon draws a thick red line.",
+            "question": "The instruction was the same for all three, but the result was different. Using your understanding, why did the same instruction produce different results?",
+            "options": [
+              "Because each child tool drew differently, even though the instruction was the same",
+              "Because the teacher gave three different instructions",
+              "The results were actually identical"
+            ],
+            "answerIndex": 0,
+            "hint": "The instruction was identical; the tool changed the outcome."
+          },
+          "narrative": [
+            {
+              "speaker": "narrator",
+              "text": "A quiet afternoon at Vedanta Reserve. Priya is observing three very different animals."
+            },
+            {
+              "speaker": "priya",
+              "text": "Let's try something simple. Dog, Cat, Bird, I want each of you to make your sound."
+            },
+            {
+              "speaker": "pip",
+              "text": "Hoo! That's the same request for all three!"
+            },
+            {
+              "speaker": "narrator",
+              "text": "The dog barks. The cat meows. The bird chirps."
+            },
+            {
+              "speaker": "priya",
+              "text": "Interesting. I gave exactly the same request... but each animal responded differently."
+            }
+          ],
+          "observationPrompt": "Priya writes three words in her journal: 'same request, different response.'",
+          "questions": [
+            "What was the same about Priya's request to all three animals?",
+            "What was different about their responses?",
+            "Why do you think the same request produced different results?"
+          ],
+          "expectedInsight": "Learner recognizes that the same action or request can produce different behavior depending on the object.",
+          "slidesFile": "polymorphism_act1.py",
+          "storyBridge": [
+            {
+              "speaker": "priya",
+              "text": "You saw the pattern, the same request, three completely different responses. The dog barked, the cat meowed, the bird chirped."
+            },
+            {
+              "speaker": "pip",
+              "text": "Hoo! Programmers noticed the same thing! Different objects can respond to the same kind of request, each in its own way!"
+            },
+            {
+              "speaker": "priya",
+              "text": "In Python, each of these animals is its own type of object, its own class. And classes can hold their own version of an action. Let me show you how they are born as separate things."
+            }
+          ],
+          "syntaxLesson": [
+            {
+              "slideTitle": "Step 1, Three Animals, Three Classes",
+              "storyConnection": "Priya is observing three very different animals, a Dog, a Cat, and a Bird.",
+              "explanation": "Each animal is its own type. In Python we create a type with the word 'class'. For now each class is just its own empty box, three separate kinds of object, waiting to be given their own actions.",
+              "code": "class Dog:\n    pass\n\n\nclass Cat:\n    pass\n\n\nclass Bird:\n    pass",
+              "highlightWords": [
+                "class",
+                "Dog",
+                "Cat",
+                "Bird"
+              ]
+            },
+            {
+              "slideTitle": "Step 2, Objects of Many Forms",
+              "storyConnection": "\"I want each of you to make your sound.\", Dr. Priya",
+              "explanation": "From each class we can create actual objects, a specific dog, a specific cat, a specific bird. They are different kinds of objects, so later they can respond to the same request in different ways.",
+              "code": "dog = Dog()\ncat = Cat()\nbird = Bird()",
+              "highlightWords": [
+                "Dog()",
+                "Cat()",
+                "Bird()"
+              ]
+            },
+            {
+              "slideTitle": "Step 3, The Same Request",
+              "storyConnection": "\"I gave exactly the same request... but each animal responded differently.\", Dr. Priya",
+              "explanation": "Priya's request was one thing, \"make your sound.\" Whether the response is a bark, a meow, or a chirp depends on which object received the request. Different classes, different behavior.",
+              "code": "dog # → bark \"Woof!\"\ncat # → meow \"Meow!\"\nbird # → chirp \"Chirp!\"",
+              "highlightWords": [
+                "bark",
+                "meow",
+                "chirp"
+              ]
+            }
+          ],
+          "codeReveal": null,
+          "summaryGuide": [
+            "One request was given to three different objects.",
+            "Each object responded in its own way.",
+            "Same action → different behavior."
+          ],
+          "observationOptions": {
+            "question": "Why did the dog, cat, and bird each answer differently to the same request?",
+            "options": [
+              "Because the request was different for each",
+              "Because each object responds to the same request in its own way",
+              "Because the animals copied each other"
+            ],
+            "answerIndex": 1,
+            "hint": "Same request, different objects, different responses."
+          },
+          "mcqs": [
+            {
+              "question": "What pattern did Priya notice?",
+              "options": [
+                "Different requests always produce the same result.",
+                "The same request can produce different behavior.",
+                "Animals must all behave identically."
+              ],
+              "answerIndex": 1,
+              "hint": "Think about what happened when Priya gave all three animals the same request."
+            },
+            {
+              "question": "The dog barks, the cat meows, the bird chirps. What produced the different results?",
+              "options": [
+                "The different objects that received the same request",
+                "The weather",
+                "The time of day"
+              ],
+              "answerIndex": 0,
+              "hint": "Which animal did the request run on?"
+            },
+            {
+              "question": "If the same instruction can give different results, that means...",
+              "options": [
+                "Different objects can behave differently to the same action",
+                "All objects must behave the same",
+                "Instructions are useless"
+              ],
+              "answerIndex": 0,
+              "hint": "The request was identical, so the difference came from the objects."
+            }
+          ]
+        },
+        {
+          "act": 2,
+          "name": "Different Voices",
+          "concept": "same method name / different implementation",
+          "image": "/images/poly_act2.jpeg",
+          "transferScenario": {
+            "title": "The Reminder App",
+            "text": "Priya opens a reminder app. The app can send a reminder by Email, by SMS, and by WhatsApp. All three have an action called sendReminder, but each one delivers the message in a different way.",
+            "question": "All three have the same method name, sendReminder, yet each works differently. Using your understanding, what is the same and what is different?",
+            "options": [
+              "They all share the sendReminder name, but each sends the message in its own way",
+              "They all share the exact same sending code",
+              "They have different method names"
+            ],
+            "answerIndex": 0,
+            "hint": "Same action name, personal delivery."
+          },
+          "narrative": [
+            {
+              "speaker": "narrator",
+              "text": "Priya opens her notebook and starts translating what she observed into a programming pattern."
+            },
+            {
+              "speaker": "priya",
+              "text": "The animals all respond to the same kind of request, making a sound, but each one has its own way of doing it."
+            },
+            {
+              "speaker": "pip",
+              "text": "Hoo! So the dog has its own sound, the cat has its own sound, and the bird has its own sound!"
+            },
+            {
+              "speaker": "priya",
+              "text": "Exactly. They can all have a speak behaviour, but the implementation can be different."
+            }
+          ],
+          "observationPrompt": "Priya draws three boxes in her journal: Dog, Cat, and Bird.",
+          "questions": [
+            "What behaviour do the Dog, Cat, and Bird all have in common?",
+            "Does each animal perform that behaviour in exactly the same way?",
+            "What would happen if each animal had its own version of speak?"
+          ],
+          "expectedInsight": "Learner understands that different classes can provide their own implementation of the same method.",
+          "slidesFile": "polymorphism_act2.py",
+          "storyBridge": [
+            {
+              "speaker": "priya",
+              "text": "You noticed it, every animal has a 'make a sound' behaviour, but each one carries it out in its own way. The dog barks, the cat meows, the bird chirps."
+            },
+            {
+              "speaker": "pip",
+              "text": "Hoo! In Python, every class can define a method, and two different classes can even use the same method name!"
+            },
+            {
+              "speaker": "priya",
+              "text": "Exactly. In Python, different classes can define a method with the same name, and the behaviour inside each one can be completely different. Let me show you."
+            }
+          ],
+          "syntaxLesson": [
+            {
+              "slideTitle": "Step 1, Same Method Name, Three Classes",
+              "storyConnection": "\"So the dog has its own sound, the cat has its own sound, and the bird has its own sound!\", Pip",
+              "explanation": "All three classes define a method with the SAME name, speak. Python is completely happy with this, because each class keeps its own personal copy.",
+              "code": "class Dog:\n    def speak(self):\n        pass\n\n\nclass Cat:\n    def speak(self):\n        pass\n\n\nclass Bird:\n    def speak(self):\n        pass",
+              "highlightWords": [
+                "speak"
+              ]
+            },
+            {
+              "slideTitle": "Step 2, Different Voices Inside",
+              "storyConnection": "\"They can all have a speak behaviour, but the implementation can be different.\", Dr. Priya",
+              "explanation": "The method has the same name everywhere, but each class fills it with its own behavior. Dog prints 'Woof!', Cat prints 'Meow!', Bird prints 'Chirp!'.",
+              "code": "class Dog:\n    def speak(self):\n        print(\"Woof!\")\n\n\nclass Cat:\n    def speak(self):\n        print(\"Meow!\")\n\n\nclass Bird:\n    def speak(self):\n        print(\"Chirp!\")",
+              "highlightWords": [
+                "Woof!",
+                "Meow!",
+                "Chirp!"
+              ]
+            },
+            {
+              "slideTitle": "Step 3, Each Object Uses Its Own",
+              "storyConnection": "\"Hoo! So the dog has its own sound, the cat has its own sound!\", Pip",
+              "explanation": "When we call speak() on a Dog object, Python runs Dog's version. On a Cat, Cat's version. Same method name, different result, decided by the object itself.",
+              "code": "dog = Dog()\ndog.speak()  # Woof!\n\ncat = Cat()\ncat.speak()  # Meow!",
+              "highlightWords": [
+                "speak",
+                "Woof!",
+                "Meow!"
+              ]
+            }
+          ],
+          "codeReveal": null,
+          "summaryGuide": [
+            "Different classes can use the SAME method name.",
+            "Each class fills it with its own implementation.",
+            "The name is shared, the behaviour inside is personal."
+          ],
+          "observationOptions": {
+            "question": "What do the three classes share, and what is different?",
+            "options": [
+              "They share the speak method name, but each has its own behaviour inside",
+              "They share nothing at all",
+              "They share the same behaviour inside every method"
+            ],
+            "answerIndex": 0,
+            "hint": "Same name, different voice."
+          },
+          "mcqs": [
+            {
+              "question": "If Dog, Cat, and Bird all have a speak() method, what can be different?",
+              "options": [
+                "The method name must always be different.",
+                "The behavior inside the method can be different.",
+                "Only the Dog can have a speak() method."
+              ],
+              "answerIndex": 1,
+              "hint": "They can share the same action name while responding differently."
+            },
+            {
+              "question": "Two classes define a method with the same name. What stays different?",
+              "options": [
+                "The method name",
+                "The behaviour inside the method",
+                "The class keyword"
+              ],
+              "answerIndex": 1,
+              "hint": "Same name, personal behaviour."
+            },
+            {
+              "question": "When cat.speak() runs, which code prints?",
+              "options": [
+                "Dog speak()",
+                "Cat speak()",
+                "Every speak() at once"
+              ],
+              "answerIndex": 1,
+              "hint": "The object decides."
+            }
+          ]
+        },
+        {
+          "act": 3,
+          "name": "One Command",
+          "concept": "polymorphic method call",
+          "image": "/images/poly_act3.jpeg",
+          "transferScenario": {
+            "title": "The Media Player",
+            "text": "Priya builds a tiny media player. She calls play() on an audio file, then on a video file, then on a live stream. Every time the command is exactly play(), but each file responds in its own way.",
+            "question": "The same play() call gives different results. What decides the result, the file object it runs on, or something else? Explain.",
+            "options": [
+              "The play() command is the same; the file object it runs on decides the result",
+              "Python guesses what the file wants",
+              "Every file must play in exactly the same way"
+            ],
+            "answerIndex": 0,
+            "hint": "The command stayed the same, only the object changed."
+          },
+          "narrative": [
+            {
+              "speaker": "narrator",
+              "text": "Priya now wants to test her idea directly."
+            },
+            {
+              "speaker": "priya",
+              "text": "If each animal understands speak(), maybe I don't need to give each animal a different instruction."
+            },
+            {
+              "speaker": "pip",
+              "text": "Hoo! One command for everyone?"
+            },
+            {
+              "speaker": "priya",
+              "text": "Let's see what happens."
+            }
+          ],
+          "observationPrompt": "Priya points at the animals and writes one command in her journal.",
+          "questions": [
+            "If Dog and Cat both have speak(), can we use the same method name for both?",
+            "What should happen when we call dog.speak()?",
+            "What should happen when we call cat.speak()?"
+          ],
+          "expectedInsight": "Learner understands that the same method call can trigger different behavior depending on the object.",
+          "slidesFile": "polymorphism_basics.py",
+          "storyBridge": [
+            {
+              "speaker": "priya",
+              "text": "You saw it clearly. We give the same command, speak, and each object runs its own version of it."
+            },
+            {
+              "speaker": "pip",
+              "text": "Hoo! The object decides which implementation runs! Dog gets the woof, Cat gets the meow!"
+            },
+            {
+              "speaker": "priya",
+              "text": "That's the heart of it: the same command, and the result depends on the object you send it to. Let me show you how Python writes it, step by step."
+            }
+          ],
+          "syntaxLesson": [
+            {
+              "slideTitle": "Step 1, Different Animals",
+              "storyConnection": "\"The animals all respond to the same kind of request, making a sound, but each one has its own way of doing it.\", Dr. Priya",
+              "explanation": "Dog and Cat are separate classes, but both provide a speak() method, each with its own implementation.",
+              "code": "class Dog:\n    def speak(self):\n        print(\"Woof!\")\n\n\nclass Cat:\n    def speak(self):\n        print(\"Meow!\")",
+              "highlightWords": [
+                "speak"
+              ]
+            },
+            {
+              "slideTitle": "Step 2, One Method Name",
+              "storyConnection": "\"If each animal understands speak(), maybe I don't need to give each animal a different instruction.\", Dr. Priya",
+              "explanation": "Both objects respond to the same method name, speak(). The command doesn't change; only the object we send it to changes.",
+              "code": "dog = Dog()\ncat = Cat()\ndog.speak()\ncat.speak()",
+              "highlightWords": [
+                "speak"
+              ]
+            },
+            {
+              "slideTitle": "Step 3, Different Results",
+              "storyConnection": "\"I gave exactly the same request... but each animal responded differently.\", Dr. Priya",
+              "explanation": "Because the objects belong to different classes, the same method name produces different behavior. This is polymorphism in action.",
+              "code": "dog.speak() # Woof!\ncat.speak() # Meow!",
+              "highlightWords": [
+                "Woof!",
+                "Meow!"
+              ]
+            }
+          ],
+          "codeReveal": {
+            "file": "polymorphism_basics.py",
+            "template": "class Dog:\n    def speak(self):\n        print(\"Woof!\")\n\n\nclass Cat:\n    def speak(self):\n        print(\"Meow!\")\n\n\ndog = Dog()\ncat = Cat()\ndog.____()\ncat.speak()\n# Woof!\n# Meow!",
+            "blanks": [
+              {
+                "placeholder": "????",
+                "answer": "speak",
+                "hint": "What method do both Dog and Cat provide for making their sound?"
+              }
+            ],
+            "explanation": "Dog and Cat both provide speak(), but each class implements it differently. The same method call can therefore produce different behavior, your first glimpse of polymorphism."
+          },
+          "summaryGuide": [
+            "The same method call runs on different objects.",
+            "Each object runs its own version of the method.",
+            "The object decides which implementation runs."
+          ],
+          "codeTask": {
+            "title": "Now Try, You Write the Code",
+            "instructions": "Write the file yourself: class Dog with speak() printing “Woof!”, class Cat with speak() printing “Meow!”. Create a dog and a cat, then call speak() on both to show the same method name giving different results.",
+            "acceptableSubstrings": [
+              "class Dog",
+              "class Cat",
+              "def speak",
+              "dog.speak",
+              "cat.speak"
+            ],
+            "modelAnswer": "class Dog:\n    def speak(self):\n        print(\"Woof!\")\n\n\nclass Cat:\n    def speak(self):\n        print(\"Meow!\")\n\n\ndog = Dog()\ncat = Cat()\ndog.speak()\ncat.speak()"
+          },
+          "observationOptions": {
+            "question": "When we call speak() on a dog and then a cat, what decides the result?",
+            "options": [
+              "The object the method runs on",
+              "A random choice by Python",
+              "The number of animals in the journal"
+            ],
+            "answerIndex": 0,
+            "hint": "Which animal did the command run on?"
+          },
+          "mcqs": [
+            {
+              "question": "What happens when we call speak() on different animal objects?",
+              "options": [
+                "Every animal must produce the same output.",
+                "Each object can perform its own version of speak().",
+                "Python randomly chooses a method."
+              ],
+              "answerIndex": 1,
+              "hint": "The object determines which implementation of speak() is used."
+            },
+            {
+              "question": "When the same method call runs differently on different objects, this behaviour is called...",
+              "options": [
+                "Polymorphism",
+                "Copying",
+                "Guessing"
+              ],
+              "answerIndex": 0,
+              "hint": "It means many forms, the word you will meet at the end."
+            },
+            {
+              "question": "Can we write one command and use it on both a Dog object and a Cat object?",
+              "options": [
+                "No, we need two commands",
+                "Yes, because both objects provide speak()",
+                "Only if the objects are the same class"
+              ],
+              "answerIndex": 1,
+              "hint": "They both understand the same method name."
+            }
+          ]
+        },
+        {
+          "act": 4,
+          "name": "The Forest Loop",
+          "concept": "polymorphism in a loop",
+          "image": "/images/poly_act4.jpeg",
+          "transferScenario": {
+            "title": "The Zoo Loop",
+            "text": "Priya places a Dog, a Cat, and a Bird into one list, then writes a single loop that asks each animal to make its sound. She never checks which animal is which.",
+            "question": "For that one loop to work with all three animals, what must every animal in the list provide?",
+            "options": [
+              "Each animal must provide a compatible behaviour the loop calls, like speak()",
+              "They must all be the exact same class",
+              "Nothing, the loop guesses"
+            ],
+            "answerIndex": 0,
+            "hint": "One behaviour the loop can always use."
+          },
+          "narrative": [
+            {
+              "speaker": "narrator",
+              "text": "Priya now has several animals in her notebook. Writing a separate command for every animal feels repetitive."
+            },
+            {
+              "speaker": "priya",
+              "text": "Dog.speak(), Cat.speak(), Bird.speak()... I don't want to keep writing separate instructions."
+            },
+            {
+              "speaker": "pip",
+              "text": "Hoo! What if you put all the animals together?"
+            },
+            {
+              "speaker": "priya",
+              "text": "Then I could ask every animal to speak using one instruction."
+            }
+          ],
+          "observationPrompt": "Priya draws a list containing Dog, Cat, and Bird.",
+          "questions": [
+            "What do all the animals in the list have in common?",
+            "Could one loop ask every animal to speak?",
+            "Why wouldn't the loop need to know whether the current animal is a Dog, Cat, or Bird?"
+          ],
+          "expectedInsight": "Learner understands that polymorphism allows common code to operate on different object types as long as they provide the expected behavior.",
+          "slidesFile": "polymorphism_loop.py",
+          "storyBridge": [
+            {
+              "speaker": "priya",
+              "text": "Now the beauty of it. Because every animal understands speak(), we can handle all of them together."
+            },
+            {
+              "speaker": "pip",
+              "text": "Hoo! One list, one loop, and speak() works for every single animal inside it!"
+            },
+            {
+              "speaker": "priya",
+              "text": "The loop never needs to know whether the current creature is a Dog, a Cat, or a Bird. It just asks each one to speak."
+            }
+          ],
+          "syntaxLesson": [
+            {
+              "slideTitle": "Step 1, Every Animal Understands",
+              "storyConnection": "\"Dog.speak(), Cat.speak(), Bird.speak()... I don't want to keep writing separate instructions.\", Dr. Priya",
+              "explanation": "Each class provides its own speak() method, so every animal can answer the same request. That shared behavior is what lets us treat them together.",
+              "code": "class Dog:\n    def speak(self):\n        print(\"Woof!\")\n\n\nclass Cat:\n    def speak(self):\n        print(\"Meow!\")\n\n\nclass Bird:\n    def speak(self):\n        print(\"Chirp!\")",
+              "highlightWords": [
+                "speak"
+              ]
+            },
+            {
+              "slideTitle": "Step 2, One List, Many Animals",
+              "storyConnection": "\"Hoo! What if you put all the animals together?\", Pip",
+              "explanation": "Different types of objects can be stored together in one list when they all provide the same behavior. The list doesn't care about their exact type.",
+              "code": "animals = [Dog(), Cat(), Bird()]",
+              "highlightWords": [
+                "animals"
+              ]
+            },
+            {
+              "slideTitle": "Step 3, One Loop Asks Everyone",
+              "storyConnection": "\"Then I could ask every animal to speak using one instruction.\", Dr. Priya",
+              "explanation": "The loop doesn't need to check which animal it has. It simply asks the current object to speak(), and each one responds in its own way.",
+              "code": "for animal in animals:\n    animal.speak()",
+              "highlightWords": [
+                "speak"
+              ]
+            }
+          ],
+          "codeReveal": {
+            "file": "polymorphism_loop.py",
+            "template": "class Dog:\n    def speak(self):\n        print(\"Woof!\")\n\n\nclass Cat:\n    def speak(self):\n        print(\"Meow!\")\n\n\nclass Bird:\n    def speak(self):\n        print(\"Chirp!\")\n\n\nanimals = [Dog(), Cat(), Bird()]\n\nfor animal in animals:\n    animal.____()\n\n# Woof!\n# Meow!\n# Chirp!",
+            "blanks": [
+              {
+                "placeholder": "????",
+                "answer": "speak",
+                "hint": "What common method can every animal in the list perform?"
+              }
+            ],
+            "explanation": "Polymorphism lets one piece of code work with different object types. The loop calls speak() on each animal, and each one responds in its own way."
+          },
+          "summaryGuide": [
+            "Different objects can be kept in one collection.",
+            "One loop can talk to all of them.",
+            "Every object must provide the behaviour the loop expects."
+          ],
+          "codeTask": {
+            "title": "Now Try, You Write the Code",
+            "instructions": "Write the file yourself: classes Dog, Cat, and Bird each with speak(), a list containing one of each, and one loop that calls speak() on every animal.",
+            "acceptableSubstrings": [
+              "class Dog",
+              "class Cat",
+              "class Bird",
+              "animals = [",
+              "for animal in animals"
+            ],
+            "modelAnswer": "class Dog:\n    def speak(self):\n        print(\"Woof!\")\n\n\nclass Cat:\n    def speak(self):\n        print(\"Meow!\")\n\n\nclass Bird:\n    def speak(self):\n        print(\"Chirp!\")\n\n\nanimals = [Dog(), Cat(), Bird()]\n\nfor animal in animals:\n    animal.speak()"
+          },
+          "observationOptions": {
+            "question": "What must every animal in the list provide so the loop can ask each one to speak?",
+            "options": [
+              "The speak() behaviour",
+              "Its own private loop",
+              "Nothing at all"
+            ],
+            "answerIndex": 0,
+            "hint": "The one common behaviour the loop needs."
+          },
+          "mcqs": [
+            {
+              "question": "Why can one loop call speak() on Dog, Cat, and Bird?",
+              "options": [
+                "Because all objects are secretly the same class.",
+                "Because each object provides a compatible speak() behavior.",
+                "Because Python ignores the class of the object."
+              ],
+              "answerIndex": 1,
+              "hint": "The loop only needs the objects to provide the behavior it wants to use."
+            },
+            {
+              "question": "What happens when the loop calls speak() on each animal in one list?",
+              "options": [
+                "Each animal runs its own version",
+                "The loop stops",
+                "Only the first animal speaks"
+              ],
+              "answerIndex": 0,
+              "hint": "One loop, many voices."
+            },
+            {
+              "question": "Why does the loop not need to know the type of each animal?",
+              "options": [
+                "Because every animal already provides the speak() behaviour it needs",
+                "Because types do not exist",
+                "Because the loop is too small"
+              ],
+              "answerIndex": 0,
+              "hint": "The loop only uses the shared behaviour."
+            }
+          ]
+        },
+        {
+          "act": 5,
+          "name": "The Forest Grows",
+          "concept": "flexibility through polymorphism",
+          "image": "/images/poly_act5.jpeg",
+          "transferScenario": {
+            "title": "The New Payment",
+            "text": "Priya's checkout app has a list of payment methods, Card, Cash, and Wallet, and one loop that calls pay() on each. The next day she adds a brand new method: UPI. She does not touch the loop at all, and it still works.",
+            "question": "How is adding UPI like adding the Lion to the zoo loop? What does this tell you about the flexibility polymorphism gives you?",
+            "options": [
+              "UPI joins without touching the loop, as long as it provides pay()",
+              "The loop must be rewritten for each new payment method",
+              "UPI cannot join the app at all"
+            ],
+            "answerIndex": 0,
+            "hint": "Same story as the Lion joining the zoo loop."
+          },
+          "narrative": [
+            {
+              "speaker": "narrator",
+              "text": "The next morning, Priya adds another animal to her catalogue."
+            },
+            {
+              "speaker": "priya",
+              "text": "I've added a Lion. It can speak too, but its sound is a roar."
+            },
+            {
+              "speaker": "pip",
+              "text": "Hoo! Do you need to rewrite your whole loop?"
+            },
+            {
+              "speaker": "priya",
+              "text": "No. That's the beautiful part. The loop already knows what to do."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Priya adds the Lion to the list. The same loop handles it automatically."
+            }
+          ],
+          "observationPrompt": "Priya circles the loop in her journal.",
+          "questions": [
+            "What changed when Priya added the Lion?",
+            "Did she need to create a new loop for the Lion?",
+            "What does this tell you about using a common behavior across different objects?"
+          ],
+          "expectedInsight": "Learner recognizes that polymorphism makes code extensible and reduces the need for type-specific logic.",
+          "slidesFile": "polymorphism_flexible.py",
+          "storyBridge": [
+            {
+              "speaker": "priya",
+              "text": "And this is the real payoff. When I added the Lion, nothing in the loop changed."
+            },
+            {
+              "speaker": "pip",
+              "text": "Hoo! The code that was already written just... kept working!"
+            },
+            {
+              "speaker": "priya",
+              "text": "Exactly. That's what flexibility looks like, new objects join in as long as they provide the behaviour the code expects."
+            }
+          ],
+          "syntaxLesson": [
+            {
+              "slideTitle": "Step 1, A New Voice Joins",
+              "storyConnection": "\"I've added a Lion. It can speak too, but its sound is a roar.\", Dr. Priya",
+              "explanation": "Lion provides the same speak() method, but with its own behavior. Nothing about Dog, Cat, or Bird changes.",
+              "code": "class Lion:\n    def speak(self):\n        print(\"Roar!\")",
+              "highlightWords": [
+                "speak",
+                "Roar!"
+              ]
+            },
+            {
+              "slideTitle": "Step 2, The Lion Joins the List",
+              "storyConnection": "Priya adds the Lion to the list. The same loop handles it automatically.",
+              "explanation": "The Lion can join the existing collection of animals, no list-handling code needs to change.",
+              "code": "animals = [Dog(), Cat(), Bird(), Lion()]",
+              "highlightWords": [
+                "Lion()"
+              ]
+            },
+            {
+              "slideTitle": "Step 3, The Loop Was Never Touched",
+              "storyConnection": "\"No. That's the beautiful part. The loop already knows what to do.\", Dr. Priya",
+              "explanation": "The existing loop works without knowing that Lion was added. Each animal speaks in its own way, including the brand new one.",
+              "code": "for animal in animals:\n    animal.speak()\n\n# Woof!\n# Meow!\n# Chirp!\n# Roar!",
+              "highlightWords": [
+                "speak",
+                "Roar!"
+              ]
+            }
+          ],
+          "codeReveal": {
+            "file": "polymorphism_flexible.py",
+            "template": "class Dog:\n    def speak(self):\n        print(\"Woof!\")\n\n\nclass Cat:\n    def speak(self):\n        print(\"Meow!\")\n\n\nclass Bird:\n    def speak(self):\n        print(\"Chirp!\")\n\n\nclass Lion:\n    def speak(self):\n        print(\"Roar!\")\n\n\nanimals = [Dog(), Cat(), Bird(), Lion()]\n\nfor animal in animals:\n    animal.____()\n\n# Woof!\n# Meow!\n# Chirp!\n# Roar!",
+            "blanks": [
+              {
+                "placeholder": "????",
+                "answer": "speak",
+                "hint": "The loop needs to call the common behaviour provided by every animal, including the new Lion."
+              }
+            ],
+            "explanation": "Polymorphism makes code easy to extend. Adding the Lion required no changes to the loop, new objects join in when they provide the expected behavior."
+          },
+          "summaryGuide": [
+            "New objects can join without changing the existing loop.",
+            "As long as they provide the expected behaviour, old code just works.",
+            "This flexibility is the payoff of polymorphism."
+          ],
+          "codeTask": {
+            "title": "Now Try, You Write the Code",
+            "instructions": "Write the file yourself: classes Dog, Cat, Bird, and Lion each with speak(), one list with all four, and one loop calling speak(), proving the Lion joins in without touching the loop.",
+            "acceptableSubstrings": [
+              "class Lion",
+              "animals = [",
+              "for animal in animals",
+              "Roar"
+            ],
+            "modelAnswer": "class Dog:\n    def speak(self):\n        print(\"Woof!\")\n\n\nclass Cat:\n    def speak(self):\n        print(\"Meow!\")\n\n\nclass Bird:\n    def speak(self):\n        print(\"Chirp!\")\n\n\nclass Lion:\n    def speak(self):\n        print(\"Roar!\")\n\n\nanimals = [Dog(), Cat(), Bird(), Lion()]\n\nfor animal in animals:\n    animal.speak()"
+          },
+          "observationOptions": {
+            "question": "What did Priya NOT have to do when adding the Lion?",
+            "options": [
+              "Rewrite the loop",
+              "Create the Lion class",
+              "Give the Lion a sound"
+            ],
+            "answerIndex": 0,
+            "hint": "The loop already knew what to do."
+          },
+          "mcqs": [
+            {
+              "question": "What is one advantage of using polymorphism here?",
+              "options": [
+                "We need a separate loop for every animal.",
+                "We can add new objects without changing the common loop.",
+                "Every animal must behave identically."
+              ],
+              "answerIndex": 1,
+              "hint": "Think about what happened when Priya added the Lion."
+            },
+            {
+              "question": "Adding a new object that provides the expected behaviour means...",
+              "options": [
+                "Old code keeps working with no changes",
+                "Every line must be rewritten",
+                "The program crashes"
+              ],
+              "answerIndex": 0,
+              "hint": "That is the flexibility payoff."
+            },
+            {
+              "question": "The Lion joined and the loop ran without changes. This shows polymorphism makes code...",
+              "options": [
+                "Easy to extend",
+                "Harder to use",
+                "Frozen forever"
+              ],
+              "answerIndex": 0,
+              "hint": "Think about adding things easily."
+            }
+          ]
+        },
+        {
+          "act": 6,
+          "name": "The Word",
+          "concept": "polymorphism",
+          "image": "/images/poly_act6.jpeg",
+          "transferScenario": {
+            "title": "The One Remote",
+            "text": "At the station there is one TV remote. Priya points it at the TV, the AC, and the fan in turn, pressing the same POWER button each time. The TV turns on, the AC starts cooling, the fan starts spinning, three different responses to one button.",
+            "question": "In your own words, what is this pattern called, and why is it useful when new kinds of devices keep getting added?",
+            "options": [
+              "Polymorphism: one button, many different responses",
+              "A wiring problem",
+              "Three different buttons disguised as one"
+            ],
+            "answerIndex": 0,
+            "hint": "One POWER button, many forms of response."
+          },
+          "narrative": [
+            {
+              "speaker": "narrator",
+              "text": "Priya looks at the finished page in her field journal."
+            },
+            {
+              "speaker": "priya",
+              "text": "Dog, Cat, Bird, Lion. Different animals. Different implementations. But I can ask all of them to perform the same action."
+            },
+            {
+              "speaker": "pip",
+              "text": "Hoo! One action... many forms!"
+            },
+            {
+              "speaker": "priya",
+              "text": "Exactly. One interface, different behavior depending on the object."
+            },
+            {
+              "speaker": "narrator",
+              "text": "Priya writes one final word across the page."
+            },
+            {
+              "speaker": "priya",
+              "text": "POLYMORPHISM."
+            }
+          ],
+          "observationPrompt": "Priya closes her journal and asks you to explain the pattern in your own words.",
+          "questions": [
+            "What does polymorphism mean in the animal example?",
+            "Why can the same speak() call produce different results?",
+            "Why is polymorphism useful when adding new types of objects?"
+          ],
+          "expectedInsight": "Learner explains polymorphism as the ability to use a common interface or method with different object types that provide different implementations.",
+          "slidesFile": "polymorphism_final.py",
+          "storyBridge": [
+            {
+              "speaker": "priya",
+              "text": "One request. Many forms. Different objects, all answering the same command in their own way."
+            },
+            {
+              "speaker": "pip",
+              "text": "Hoo! That's POLYMORPHISM!"
+            },
+            {
+              "speaker": "priya",
+              "text": "And now you've seen it with your own eyes, the same method call, producing different behavior depending on the object it runs on. Let me show you the whole pattern in Python."
+            }
+          ],
+          "syntaxLesson": [
+            {
+              "slideTitle": "Step 1, Different Implementations",
+              "storyConnection": "\"Dog, Cat, Bird, Lion. Different animals. Different implementations.\", Dr. Priya",
+              "explanation": "Each animal provides its own implementation of speak(). The method name is shared; the behavior inside is personal.",
+              "code": "class Dog:\n    def speak(self):\n        print(\"Woof!\")\n\n\nclass Cat:\n    def speak(self):\n        print(\"Meow!\")\n\n\nclass Bird:\n    def speak(self):\n        print(\"Chirp!\")",
+              "highlightWords": [
+                "speak"
+              ]
+            },
+            {
+              "slideTitle": "Step 2, One Collection",
+              "storyConnection": "\"But I can ask all of them to perform the same action.\", Dr. Priya",
+              "explanation": "Different objects can be grouped together because they all provide speak(). Their difference is what makes the group interesting.",
+              "code": "animals = [Dog(), Cat(), Bird()]",
+              "highlightWords": [
+                "animals"
+              ]
+            },
+            {
+              "slideTitle": "Step 3, One Common Command",
+              "storyConnection": "\"Hoo! One action... many forms!\", Pip",
+              "explanation": "The same speak() call produces a different result for each object. That is polymorphism: one interface, many forms.",
+              "code": "for animal in animals:\n    animal.speak()\n\n# Woof!\n# Meow!\n# Chirp!",
+              "highlightWords": [
+                "speak"
+              ]
+            }
+          ],
+          "codeReveal": {
+            "file": "polymorphism_final.py",
+            "template": "class Dog:\n    def speak(self):\n        print(\"Woof!\")\n\n\nclass Cat:\n    def speak(self):\n        print(\"Meow!\")\n\n\nclass Bird:\n    def speak(self):\n        print(\"Chirp!\")\n\n\nanimals = [Dog(), Cat(), Bird()]\n\nfor animal in animals:\n    animal.____()\n\n# Woof!\n# Meow!\n# Chirp!",
+            "blanks": [
+              {
+                "placeholder": "????",
+                "answer": "speak",
+                "hint": "What common method is used to ask every animal to make its sound?"
+              }
+            ],
+            "explanation": "Polymorphism means that the same method call can produce different behavior depending on the object. Here, every animal responds to speak() in its own way."
+          },
+          "summaryGuide": [
+            "Polymorphism = one action, many forms.",
+            "Same interface, different behaviour depending on the object.",
+            "New objects can join without rewriting existing code."
+          ],
+          "codeTask": {
+            "title": "Now Try, You Write the Code",
+            "instructions": "Write the file yourself to demonstrate polymorphism: classes Dog, Cat, and Bird with speak(), a shared list, and one loop. Then, in a short comment or print, name the pattern this demonstrates.",
+            "acceptableSubstrings": [
+              "class Dog",
+              "class Cat",
+              "class Bird",
+              "for animal in animals",
+              "polymorphism"
+            ],
+            "modelAnswer": "class Dog:\n    def speak(self):\n        print(\"Woof!\")\n\n\nclass Cat:\n    def speak(self):\n        print(\"Meow!\")\n\n\nclass Bird:\n    def speak(self):\n        print(\"Chirp!\")\n\n\nanimals = [Dog(), Cat(), Bird()]\n\nfor animal in animals:\n    animal.speak()\n\nprint(\"This is polymorphism: one action, many forms.\")"
+          },
+          "observationOptions": {
+            "question": "In your own words, one action, many forms is called...",
+            "options": [
+              "Polymorphism",
+              "Serialization",
+              "Repeating"
+            ],
+            "answerIndex": 0,
+            "hint": "The single word Priya wrote across the finished page."
+          },
+          "mcqs": [
+            {
+              "question": "Which statement best describes polymorphism?",
+              "options": [
+                "One class can only have one behavior.",
+                "The same method or interface can have different behavior for different objects.",
+                "Every object must use exactly the same implementation."
+              ],
+              "answerIndex": 1,
+              "hint": "Think: one action, many forms."
+            },
+            {
+              "question": "Which sentence best defines polymorphism?",
+              "options": [
+                "The same method or interface can behave differently for different objects",
+                "Every object must use identical code",
+                "One class may only have one method"
+              ],
+              "answerIndex": 0,
+              "hint": "One action, many forms."
+            },
+            {
+              "question": "Why is polymorphism useful when new kinds of devices keep getting added?",
+              "options": [
+                "New objects join using the same interface without rewriting existing code",
+                "It makes the remote heavier",
+                "It stops new devices from working"
+              ],
+              "answerIndex": 0,
+              "hint": "Remember the remote and the zoo loop."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

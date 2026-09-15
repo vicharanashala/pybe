@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Postman's Route — Learning Exception Handling</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="route-trail" id="routeTrail"></div>
+
+<main id="app">
+
+  <!-- STOP 0: TITLE -->
+  <section class="stage stage-title active" data-stage="0">
+    <div class="postmark-bg" aria-hidden="true"></div>
+    <div class="title-inner">
+      <p class="eyebrow">A PyBe Story Module</p>
+      <h1>The Postman's Route</h1>
+      <p class="subtitle">Every day, Ramesh delivers 40 letters. Most days go fine.<br>Some days, something goes wrong at a specific door.<br>This is a story about what a good postman — and good code — does next.</p>
+      <button class="btn-primary" data-action="next">Begin the round <span class="arrow">→</span></button>
+      <p class="concept-tag">Concept: Exception Handling · try / except / finally / raise</p>
+    </div>
+  </section>
+
+  <!-- STOP 1: THE NORMAL DELIVERY (happy path) -->
+  <section class="stage" data-stage="1">
+    <div class="stage-header">
+      <span class="stop-number">Stop 1</span>
+      <h2>An ordinary delivery</h2>
+    </div>
+    <div class="story-panel">
+      <p>Ramesh reaches <strong>14 Lotus Lane</strong>. Gate's open. Letterbox is right there. He slips the letter in, marks it delivered, and moves on.</p>
+      <div class="route-visual" id="visual1"></div>
+      <p class="reflect-prompt">Nothing unusual happened here. In code, we'd call this the <em>path we hope for, every time</em>.</p>
+    </div>
+    <div class="code-reveal">
+      <div class="code-label">What this looks like in Python</div>
+      <pre><code>try:
+    deliver_letter("14 Lotus Lane")
+    mark_delivered("14 Lotus Lane")</code></pre>
+      <p class="code-note">The <code>try</code> block is Ramesh just... doing his job. No problems expected — yet.</p>
+    </div>
+    <button class="btn-primary" data-action="next">Next stop <span class="arrow">→</span></button>
+  </section>
+
+  <!-- STOP 2: LOCKED GATE (one specific except) -->
+  <section class="stage" data-stage="2">
+    <div class="stage-header">
+      <span class="stop-number">Stop 2</span>
+      <h2>A locked gate</h2>
+    </div>
+    <div class="story-panel">
+      <p>At <strong>27 Banyan Road</strong>, the gate is padlocked. No one's home. Ramesh doesn't panic, and he doesn't just leave. He knows exactly what to do for <em>this specific</em> problem: slide the letter under the gap, note it as "left at gate."</p>
+      <div class="route-visual" id="visual2"></div>
+      <div class="quiz-inline" data-quiz="q1">
+        <p class="quiz-q">What should code do when it hits a problem it <em>already expects and knows how to handle</em>?</p>
+        <div class="quiz-options">
+          <button data-correct="false">Stop the whole program immediately</button>
+          <button data-correct="true">Catch that specific problem and respond to it</button>
+          <button data-correct="false">Ignore it and hope it doesn't happen again</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+    </div>
+    <div class="code-reveal locked">
+      <div class="code-label">What this looks like in Python</div>
+      <pre><code>try:
+    deliver_letter("27 Banyan Road")
+except GateLockedError:
+    leave_at_gate("27 Banyan Road")</code></pre>
+      <p class="code-note"><code>except</code> catches one <em>named</em> kind of problem — a locked gate — and gives Ramesh a specific, ready plan for it.</p>
+    </div>
+    <button class="btn-primary" data-action="next" disabled>Next stop <span class="arrow">→</span></button>
+  </section>
+
+  <!-- STOP 3: WRONG ADDRESS (multiple except) -->
+  <section class="stage" data-stage="3">
+    <div class="stage-header">
+      <span class="stop-number">Stop 3</span>
+      <h2>Two different doors, two different problems</h2>
+    </div>
+    <div class="story-panel">
+      <p>At <strong>9 Peepal Street</strong>, the house number doesn't exist anymore — renumbered last year. Different problem, different plan: he checks his revised list and redirects to <strong>9B</strong>.</p>
+      <p>A locked gate and a wrong address aren't the same problem. They need <em>different</em> responses — and Ramesh's brain (like good code) handles each one on its own terms.</p>
+      <div class="route-visual" id="visual3"></div>
+    </div>
+    <div class="code-reveal">
+      <div class="code-label">What this looks like in Python</div>
+      <pre><code>try:
+    deliver_letter("9 Peepal Street")
+except GateLockedError:
+    leave_at_gate("9 Peepal Street")
+except AddressNotFoundError:
+    redirect_to_updated_address("9 Peepal Street")</code></pre>
+      <p class="code-note">Multiple <code>except</code> blocks let one <code>try</code> handle several <em>different, specific</em> kinds of trouble — each with its own fix.</p>
+    </div>
+    <button class="btn-primary" data-action="next">Next stop <span class="arrow">→</span></button>
+  </section>
+
+  <!-- STOP 4: END OF DAY LOG (finally) -->
+  <section class="stage" data-stage="4">
+    <div class="stage-header">
+      <span class="stop-number">Stop 4</span>
+      <h2>The logbook, no matter what</h2>
+    </div>
+    <div class="story-panel">
+      <p>Good day or bad, easy street or a locked gate — at the end of every single stop, Ramesh writes the time in his logbook. <strong>Always.</strong> Whether the letter got delivered, redirected, or left at a gate, the log entry happens no matter which of those was true.</p>
+      <div class="route-visual" id="visual4"></div>
+      <div class="quiz-inline" data-quiz="q2">
+        <p class="quiz-q">What Python keyword runs code <em>no matter what happened</em> — success or failure?</p>
+        <div class="quiz-options">
+          <button data-correct="false">except</button>
+          <button data-correct="false">raise</button>
+          <button data-correct="true">finally</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+    </div>
+    <div class="code-reveal locked">
+      <div class="code-label">What this looks like in Python</div>
+      <pre><code>try:
+    deliver_letter("27 Banyan Road")
+except GateLockedError:
+    leave_at_gate("27 Banyan Road")
+finally:
+    log_timestamp("27 Banyan Road")</code></pre>
+      <p class="code-note"><code>finally</code> always runs — whether the <code>try</code> succeeded or an <code>except</code> caught something.</p>
+    </div>
+    <button class="btn-primary" data-action="next" disabled>Next stop <span class="arrow">→</span></button>
+  </section>
+
+  <!-- STOP 5: RAISE -->
+  <section class="stage" data-stage="5">
+    <div class="stage-header">
+      <span class="stop-number">Stop 5</span>
+      <h2>When Ramesh refuses to guess</h2>
+    </div>
+    <div class="story-panel">
+      <p>At the last stop, the address on the envelope is smudged into nonsense — not a locked gate, not a known renumbering, just <em>unreadable</em>. Ramesh doesn't invent an answer. He flags it and sends it back to the sorting office with a clear note: <strong>"cannot deliver — address unreadable."</strong></p>
+      <p>Sometimes the right move for code isn't to quietly patch things up. It's to <em>stop</em> and say exactly what's wrong, loudly, so a human can look at it.</p>
+      <div class="route-visual" id="visual5"></div>
+    </div>
+    <div class="code-reveal">
+      <div class="code-label">What this looks like in Python</div>
+      <pre><code>def deliver_letter(address):
+    if not is_readable(address):
+        raise ValueError("Address unreadable — cannot deliver")
+    ...</code></pre>
+      <p class="code-note"><code>raise</code> deliberately signals a problem <em>outward</em> — this is not something to quietly work around.</p>
+    </div>
+    <button class="btn-primary" data-action="next">See the full round <span class="arrow">→</span></button>
+  </section>
+
+  <!-- STOP 6: FULL PICTURE + FINAL QUIZ -->
+  <section class="stage" data-stage="6">
+    <div class="stage-header">
+      <span class="stop-number">Stop 6</span>
+      <h2>The whole route, in code</h2>
+    </div>
+    <div class="story-panel">
+      <p>Here's Ramesh's entire stop, start to finish — the plan for the expected, the safety net for the specific, the log that always runs, and the honest refusal when something can't be guessed.</p>
+    </div>
+    <div class="code-reveal full">
+      <div class="code-label">The complete pattern</div>
+      <pre><code>def handle_stop(address):
+    try:
+        if not is_readable(address):
+            raise ValueError("Address unreadable — cannot deliver")
+        deliver_letter(address)
+        mark_delivered(address)
+    except GateLockedError:
+        leave_at_gate(address)
+    except AddressNotFoundError:
+        redirect_to_updated_address(address)
+    finally:
+        log_timestamp(address)</code></pre>
+    </div>
+    <div class="final-quiz" id="finalQuiz">
+      <h3>Quick check</h3>
+      <div class="quiz-inline" data-quiz="fq1">
+        <p class="quiz-q">1. If a letter delivers with no problems, does <code>finally</code> still run?</p>
+        <div class="quiz-options">
+          <button data-correct="true">Yes — always</button>
+          <button data-correct="false">No — only after an except runs</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+      <div class="quiz-inline" data-quiz="fq2">
+        <p class="quiz-q">2. Why does Ramesh use two separate <code>except</code> blocks instead of one?</p>
+        <div class="quiz-options">
+          <button data-correct="false">Python requires at least two</button>
+          <button data-correct="true">A locked gate and a wrong address need different responses</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+      <div class="quiz-inline" data-quiz="fq3">
+        <p class="quiz-q">3. When should code use <code>raise</code> instead of quietly handling a problem?</p>
+        <div class="quiz-options">
+          <button data-correct="true">When the problem is too uncertain to safely guess at</button>
+          <button data-correct="false">Every single time something goes wrong</button>
+        </div>
+        <p class="quiz-feedback"></p>
+      </div>
+    </div>
+    <div class="completion-panel" id="completionPanel">
+      <p class="completion-msg">Round complete. Ramesh handled the expected, planned for the specific, logged everything, and stayed honest about what he couldn't guess.</p>
+      <button class="btn-primary" data-action="restart">Walk the route again</button>
+    </div>
+  </section>
+
+</main>
+
+<script src="js/story.js"></script>
+</body>
+</html>
