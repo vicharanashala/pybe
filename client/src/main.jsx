@@ -1,5 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { createRoot } from 'react-dom/client';
+import React, {
+  useEffect,
+  useMemo,
+  useState
+} from 'react';
+
+import {
+  createRoot
+} from 'react-dom/client';
+
 import {
   Brain,
   ChartNoAxesCombined,
@@ -13,132 +21,387 @@ import {
   Send,
   Sparkles
 } from 'lucide-react';
+
 import './styles.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  'http://localhost:5000/api';
 
 async function api(path, options) {
-  const response = await fetch(`${API_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
-    ...options
-  });
-  if (!response.ok) throw new Error(await response.text());
+  const response = await fetch(
+    `${API_URL}${path}`,
+    {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      ...options
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      await response.text()
+    );
+  }
+
   return response.json();
 }
 
 function App() {
-  const [scenarios, setScenarios] = useState([]);
-  const [selected, setSelected] = useState(null);
-  const [sessions, setSessions] = useState([]);
-  const [analytics, setAnalytics] = useState(null);
-  const [roadmap, setRoadmap] = useState([]);
-  const [filters, setFilters] = useState({ q: '', difficulty: '', concept: '' });
-  const [form, setForm] = useState({ learnerName: 'Guest learner', reasoning: '', promptText: '', reflection: '' });
-  const [activeResult, setActiveResult] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [submitting, setSubmitting] = useState(false);
+  const [scenarios, setScenarios] =
+    useState([]);
 
-  const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
+  const [selected, setSelected] =
+    useState(null);
+
+  const [sessions, setSessions] =
+    useState([]);
+
+  const [analytics, setAnalytics] =
+    useState(null);
+
+  const [roadmap, setRoadmap] =
+    useState([]);
+
+  const [filters, setFilters] =
+    useState({
+      q: '',
+      difficulty: '',
+      concept: ''
+    });
+
+  const [form, setForm] =
+    useState({
+      learnerName: 'Guest learner',
+      reasoning: '',
+      promptText: '',
+      reflection: ''
+    });
+
+  const [activeResult, setActiveResult] =
+    useState(null);
+
+  const [loading, setLoading] =
+    useState(true);
+
+  const [loadError, setLoadError] =
+    useState(null);
+
+  const [submitting, setSubmitting] =
+    useState(false);
+
+  const concepts = useMemo(
+    () =>
+      [
+        ...new Set(
+          scenarios.flatMap(
+            (scenario) =>
+              scenario.concepts || []
+          )
+        )
+      ].sort(),
+    [scenarios]
+  );
 
   async function refresh() {
-    const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
-    const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
-      api(`/scenarios?${params}`),
-      api('/sessions'),
-      api('/analytics'),
-      api('/roadmap')
-    ]);
-    setScenarios(scenarioData);
-    setSessions(sessionData);
-    setAnalytics(analyticsData);
-    setRoadmap(roadmapData);
-    setSelected((current) => current || scenarioData[0] || null);
-    setLoading(false);
+    const params =
+      new URLSearchParams(
+        Object.entries(filters).filter(
+          ([, value]) => value
+        )
+      );
+
+    try {
+      const [
+        scenarioData,
+        sessionData,
+        analyticsData,
+        roadmapData
+      ] = await Promise.all([
+        api(`/scenarios?${params}`),
+        api('/sessions'),
+        api('/analytics'),
+        api('/roadmap')
+      ]);
+
+      setScenarios(scenarioData);
+      setSessions(sessionData);
+      setAnalytics(analyticsData);
+      setRoadmap(roadmapData);
+
+      setSelected(
+        (current) =>
+          current ||
+          scenarioData[0] ||
+          null
+      );
+
+      setLoadError(null);
+    } catch (error) {
+      console.error(
+        'PyBe API loading failed:',
+        error
+      );
+
+      setLoadError(
+        error.message ||
+        'Unable to connect to PyBe API'
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
-    refresh().catch(console.error);
-  }, [filters.q, filters.difficulty, filters.concept]);
+    setLoading(true);
+    refresh();
+  }, [
+    filters.q,
+    filters.difficulty,
+    filters.concept
+  ]);
 
   async function submitSession(event) {
     event.preventDefault();
-    if (!selected || !form.reasoning.trim()) return;
+
+    if (
+      !selected ||
+      !form.reasoning.trim()
+    ) {
+      return;
+    }
+
     setSubmitting(true);
+    setLoadError(null);
+
     try {
-      const result = await api('/sessions', {
-        method: 'POST',
-        body: JSON.stringify({ ...form, scenarioId: selected._id })
-      });
+      const result =
+        await api('/sessions', {
+          method: 'POST',
+          body: JSON.stringify({
+            ...form,
+            scenarioId:
+              selected._id
+          })
+        });
+
       setActiveResult(result);
-      setForm({ ...form, reasoning: '', promptText: '', reflection: '' });
+
+      setForm({
+        ...form,
+        reasoning: '',
+        promptText: '',
+        reflection: ''
+      });
+
       await refresh();
+    } catch (error) {
+      console.error(
+        'Session submission failed:',
+        error
+      );
+
+      setLoadError(
+        error.message ||
+        'Unable to submit session'
+      );
     } finally {
       setSubmitting(false);
     }
   }
 
-  if (loading) return <main className="loading">Loading PyBe...</main>;
+  if (loading) {
+    return (
+      <main className="loading">
+        Loading PyBe...
+      </main>
+    );
+  }
+
+  if (loadError) {
+    return (
+      <main className="loading">
+        <h2>
+          Unable to load PyBe
+        </h2>
+
+        <p>{loadError}</p>
+
+        <p>
+          Make sure the backend is
+          running on port 5000.
+        </p>
+
+        <button
+          className="primary"
+          onClick={() => {
+            setLoadError(null);
+            setLoading(true);
+            refresh();
+          }}
+        >
+          Retry
+        </button>
+      </main>
+    );
+  }
 
   return (
     <main className="app-shell">
       <aside className="sidebar">
         <div className="brand">
           <Brain size={30} />
+
           <div>
-            <strong>PyBe</strong>
-            <span>Scenario-first Python</span>
+            <strong>
+              PyBe
+            </strong>
+
+            <span>
+              Scenario-first Python
+            </span>
           </div>
         </div>
 
         <label className="search">
           <Search size={18} />
+
           <input
             value={filters.q}
-            onChange={(event) => setFilters({ ...filters, q: event.target.value })}
+            onChange={(event) =>
+              setFilters({
+                ...filters,
+                q: event.target.value
+              })
+            }
             placeholder="Search scenarios"
           />
         </label>
 
-        <select value={filters.difficulty} onChange={(event) => setFilters({ ...filters, difficulty: event.target.value })}>
-          <option value="">All levels</option>
-          <option>Beginner</option>
-          <option>Explorer</option>
-          <option>Builder</option>
+        <select
+          value={filters.difficulty}
+          onChange={(event) =>
+            setFilters({
+              ...filters,
+              difficulty:
+                event.target.value
+            })
+          }
+        >
+          <option value="">
+            All levels
+          </option>
+
+          <option>
+            Beginner
+          </option>
+
+          <option>
+            Explorer
+          </option>
+
+          <option>
+            Builder
+          </option>
         </select>
 
-        <select value={filters.concept} onChange={(event) => setFilters({ ...filters, concept: event.target.value })}>
-          <option value="">All concepts</option>
-          {concepts.map((concept) => <option key={concept}>{concept}</option>)}
+        <select
+          value={filters.concept}
+          onChange={(event) =>
+            setFilters({
+              ...filters,
+              concept:
+                event.target.value
+            })
+          }
+        >
+          <option value="">
+            All concepts
+          </option>
+
+          {concepts.map(
+            (concept) => (
+              <option
+                key={concept}
+              >
+                {concept}
+              </option>
+            )
+          )}
         </select>
 
         <div className="scenario-list">
-          {scenarios.map((scenario) => (
-            <button
-              key={scenario._id}
-              className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
-              onClick={() => {
-                setSelected(scenario);
-                setActiveResult(null);
-              }}
-            >
-              <span>{scenario.difficulty}</span>
-              <strong>{scenario.title}</strong>
-              <small>{scenario.concepts.join(' / ')}</small>
-            </button>
-          ))}
+          {scenarios.map(
+            (scenario) => (
+              <button
+                key={scenario._id}
+                className={
+                  selected?._id ===
+                  scenario._id
+                    ? 'scenario active'
+                    : 'scenario'
+                }
+                onClick={() => {
+                  setSelected(
+                    scenario
+                  );
+                  setActiveResult(null);
+                }}
+              >
+                <span>
+                  {scenario.difficulty}
+                </span>
+
+                <strong>
+                  {scenario.title}
+                </strong>
+
+                <small>
+                  {scenario.concepts.join(
+                    ' / '
+                  )}
+                </small>
+              </button>
+            )
+          )}
         </div>
       </aside>
 
       <section className="workspace">
         <header className="hero">
           <div>
-            <p>AI-native learning journey</p>
-            <h1>Learn Python by reasoning through real situations first.</h1>
+            <p>
+              AI-native learning journey
+            </p>
+
+            <h1>
+              Learn Python by reasoning
+              through real situations first.
+            </h1>
           </div>
+
           <div className="hero-stats">
-            <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
-            <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
-            <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
+            <span>
+              {analytics?.scenarioCount || 0}
+              <small>
+                Scenarios
+              </small>
+            </span>
+
+            <span>
+              {analytics?.sessionCount || 0}
+              <small>
+                Sessions
+              </small>
+            </span>
+
+            <span>
+              {analytics?.averagePromptScore || 0}
+              <small>
+                Prompt score
+              </small>
+            </span>
           </div>
         </header>
 
@@ -146,40 +409,90 @@ function App() {
           <section className="panel learning-panel">
             <div className="section-title">
               <Compass size={20} />
-              <h2>{selected?.title}</h2>
+
+              <h2>
+                {selected?.title}
+              </h2>
             </div>
-            <p className="context">{selected?.context}</p>
+
+            <p className="context">
+              {selected?.context}
+            </p>
+
             <div className="objective-row">
-              {selected?.objectives.map((item) => <span key={item}>{item}</span>)}
+              {selected?.objectives.map(
+                (item) => (
+                  <span key={item}>
+                    {item}
+                  </span>
+                )
+              )}
             </div>
-            <form onSubmit={submitSession} className="learning-form">
+
+            <form
+              onSubmit={submitSession}
+              className="learning-form"
+            >
               <label>
                 Your reasoning
+
                 <textarea
                   required
                   value={form.reasoning}
-                  onChange={(event) => setForm({ ...form, reasoning: event.target.value })}
-                  placeholder={selected?.prompt}
+                  onChange={(event) =>
+                    setForm({
+                      ...form,
+                      reasoning:
+                        event.target.value
+                    })
+                  }
+                  placeholder={
+                    selected?.prompt
+                  }
                 />
               </label>
+
               <label>
                 Prompt you would give an AI mentor
+
                 <textarea
                   value={form.promptText}
-                  onChange={(event) => setForm({ ...form, promptText: event.target.value })}
+                  onChange={(event) =>
+                    setForm({
+                      ...form,
+                      promptText:
+                        event.target.value
+                    })
+                  }
                   placeholder="Explain my approach step by step, then show the Python concept and code..."
                 />
               </label>
+
               <label>
                 Reflection
+
                 <textarea
                   value={form.reflection}
-                  onChange={(event) => setForm({ ...form, reflection: event.target.value })}
+                  onChange={(event) =>
+                    setForm({
+                      ...form,
+                      reflection:
+                        event.target.value
+                    })
+                  }
                   placeholder="What did you notice about your thinking?"
                 />
               </label>
-              <button className="primary" disabled={submitting}>
-                <Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}
+
+              <button
+                className="primary"
+                disabled={submitting}
+              >
+                <Send size={18} />
+
+                {submitting
+                  ? 'Mapping...'
+                  : 'Map My Reasoning'}
               </button>
             </form>
           </section>
@@ -187,24 +500,67 @@ function App() {
           <section className="panel result-panel">
             <div className="section-title">
               <Sparkles size={20} />
-              <h2>AI Mentor Output</h2>
+
+              <h2>
+                AI Mentor Output
+              </h2>
             </div>
-            {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
+
+            {!activeResult ? (
+              <EmptyResult />
+            ) : (
+              <Result
+                result={activeResult}
+              />
+            )}
           </section>
         </div>
 
         <section className="dashboard">
           <div className="panel">
-            <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Learner Analytics</h2></div>
-            <Analytics analytics={analytics} />
+            <div className="section-title">
+              <ChartNoAxesCombined
+                size={20}
+              />
+
+              <h2>
+                Learner Analytics
+              </h2>
+            </div>
+
+            <Analytics
+              analytics={analytics}
+            />
           </div>
+
           <div className="panel">
-            <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
-            <Roadmap roadmap={roadmap} />
+            <div className="section-title">
+              <Route size={20} />
+
+              <h2>
+                Roadmap
+              </h2>
+            </div>
+
+            <Roadmap
+              roadmap={roadmap}
+            />
           </div>
+
           <div className="panel">
-            <div className="section-title"><MessageSquareText size={20} /><h2>Recent Sessions</h2></div>
-            <SessionList sessions={sessions} />
+            <div className="section-title">
+              <MessageSquareText
+                size={20}
+              />
+
+              <h2>
+                Recent Sessions
+              </h2>
+            </div>
+
+            <SessionList
+              sessions={sessions}
+            />
           </div>
         </section>
       </section>
@@ -216,88 +572,386 @@ function EmptyResult() {
   return (
     <div className="empty">
       <Lightbulb size={38} />
-      <p>Submit reasoning to see abstraction mapping, Python code, prompt feedback, and misconception signals.</p>
+
+      <p>
+        Submit reasoning to see
+        abstraction mapping, Python code,
+        prompt feedback, misconception
+        signals, and adaptive AI mentoring.
+      </p>
     </div>
   );
 }
 
 function Result({ result }) {
+  const mentorResponse =
+    result.mentorResponse || '';
+
+  const sections = [
+    {
+      key: 'UNDERSTOOD:',
+      title: 'What you understood'
+    },
+    {
+      key: 'GAP:',
+      title: 'Your learning gap'
+    },
+    {
+      key: 'PYTHON CONNECTION:',
+      title: 'Python connection'
+    },
+    {
+      key: 'HISTORY CONNECTION:',
+      title: 'Your learning history'
+    },
+    {
+      key: 'LEARNER PROFILE INSIGHT:',
+      title: 'Your progress'
+    },
+    {
+      key: 'NEXT QUESTION:',
+      title: '🎯 Next question'
+    }
+  ];
+
+  function getMentorSection(key) {
+    const start =
+      mentorResponse.indexOf(key);
+
+    if (start === -1) {
+      return '';
+    }
+
+    const contentStart =
+      start + key.length;
+
+    const nextSection =
+      sections
+        .map((section) =>
+          mentorResponse.indexOf(
+            section.key,
+            contentStart
+          )
+        )
+        .filter(
+          (index) => index !== -1
+        )
+        .sort((a, b) => a - b)[0];
+
+    return mentorResponse
+      .slice(
+        contentStart,
+        nextSection || undefined
+      )
+      .trim();
+  }
+
   return (
     <div className="result-stack">
-      <div className="score"><span>{result.promptScore}</span><small>Prompt maturity</small></div>
+      <div className="score">
+        <span>
+          {result.promptScore}
+        </span>
+
+        <small>
+          Prompt maturity
+        </small>
+      </div>
+
       <div>
-        {result.abstractionMap.map((item) => (
-          <article className="mapping" key={item.pattern}>
-            <strong>{item.pattern}</strong>
-            <span>{item.pythonConcept}</span>
-            <p>{item.explanation}</p>
-          </article>
-        ))}
+        {result.abstractionMap.map(
+          (item) => (
+            <article
+              className="mapping"
+              key={item.pattern}
+            >
+              <strong>
+                {item.pattern}
+              </strong>
+
+              <span>
+                {item.pythonConcept}
+              </span>
+
+              <p>
+                {item.explanation}
+              </p>
+            </article>
+          )
+        )}
       </div>
+
       <div className="code-block">
-        <div><Code2 size={18} /> Generated Python</div>
-        <pre>{result.generatedCode}</pre>
-        <p>{result.codeExplanation}</p>
+        <div>
+          <Code2 size={18} />
+          Generated Python
+        </div>
+
+        <pre>
+          {result.generatedCode}
+        </pre>
+
+        <p>
+          {result.codeExplanation}
+        </p>
       </div>
+
       <ul className="feedback">
-        {result.promptFeedback.map((item) => <li key={item}>{item}</li>)}
+        {result.promptFeedback.map(
+          (item) => (
+            <li key={item}>
+              {item}
+            </li>
+          )
+        )}
       </ul>
+
       {result.misconceptions.length > 0 && (
         <div className="note">
-          <strong>Misconception watch</strong>
-          {result.misconceptions.map((item) => <p key={item}>{item}</p>)}
+          <strong>
+            Misconception watch
+          </strong>
+
+          {result.misconceptions.map(
+            (item) => (
+              <p key={item}>
+                {item}
+              </p>
+            )
+          )}
+        </div>
+      )}
+
+      {result.mentorResponse && (
+        <div className="mentor-response">
+          <div className="section-title">
+            <Sparkles size={18} />
+
+            <h3>
+              Gemini Mentor
+            </h3>
+          </div>
+
+          <div className="mentor-sections">
+            {sections.map(
+              (section) => {
+                const content =
+                  getMentorSection(
+                    section.key
+                  );
+
+                if (!content) {
+                  return null;
+                }
+
+                return (
+                  <article
+                    key={section.key}
+                    className={
+                      section.key ===
+                      'NEXT QUESTION:'
+                        ? 'mentor-section next-question'
+                        : 'mentor-section'
+                    }
+                  >
+                    <h4>
+                      {section.title}
+                    </h4>
+
+                    <p>
+                      {content}
+                    </p>
+                  </article>
+                );
+              }
+            )}
+          </div>
+        </div>
+      )}
+
+      {result.mentorContext
+        ?.adaptiveStrategy && (
+        <div className="adaptive-card">
+          <strong>
+            Mentoring Strategy
+          </strong>
+
+          <p>
+            <b>
+              Mode:
+            </b>{' '}
+            {
+              result.mentorContext
+                .adaptiveStrategy
+                .mode
+            }
+          </p>
+
+          <p>
+            {
+              result.mentorContext
+                .adaptiveStrategy
+                .instruction ||
+              result.mentorContext
+                .adaptiveStrategy
+                .reason
+            }
+          </p>
+        </div>
+      )}
+
+      {result.mentorContext
+        ?.adaptiveDifficulty && (
+        <div className="adaptive-card">
+          <strong>
+            Adaptive Difficulty
+          </strong>
+
+          <p>
+            <b>
+              Level:
+            </b>{' '}
+            {
+              result.mentorContext
+                .adaptiveDifficulty
+                .level
+            }
+          </p>
+
+          <p>
+            {
+              result.mentorContext
+                .adaptiveDifficulty
+                .reason
+            }
+          </p>
         </div>
       )}
     </div>
   );
 }
 
-function Analytics({ analytics }) {
-  const concepts = Object.entries(analytics?.conceptCounts || {});
+function Analytics({
+  analytics
+}) {
+  const concepts =
+    Object.entries(
+      analytics?.conceptCounts || {}
+    );
+
   return (
     <div className="analytics-list">
-      {concepts.length ? concepts.map(([name, count]) => (
-        <div key={name}>
-          <span>{name}</span>
-          <meter min="0" max="10" value={count}></meter>
-          <strong>{count}</strong>
-        </div>
-      )) : <p>No learning sessions yet.</p>}
+      {concepts.length
+        ? concepts.map(
+            ([name, count]) => (
+              <div key={name}>
+                <span>
+                  {name}
+                </span>
+
+                <meter
+                  min="0"
+                  max="10"
+                  value={count}
+                />
+
+                <strong>
+                  {count}
+                </strong>
+              </div>
+            )
+          )
+        : (
+          <p>
+            No learning sessions yet.
+          </p>
+        )}
     </div>
   );
 }
 
-function Roadmap({ roadmap }) {
+function Roadmap({
+  roadmap
+}) {
   return (
     <div className="roadmap">
-      {roadmap.map((phase) => (
-        <article key={phase.phase}>
-          <strong>{phase.phase}</strong>
-          <div>
-            <h3>{phase.title}</h3>
-            <p>{phase.summary}</p>
-            <small>{phase.items.join(' / ')}</small>
-          </div>
-        </article>
-      ))}
+      {roadmap.map(
+        (phase) => (
+          <article
+            key={phase.phase}
+          >
+            <strong>
+              {phase.phase}
+            </strong>
+
+            <div>
+              <h3>
+                {phase.title}
+              </h3>
+
+              <p>
+                {phase.summary}
+              </p>
+
+              <small>
+                {phase.items.join(
+                  ' / '
+                )}
+              </small>
+            </div>
+          </article>
+        )
+      )}
     </div>
   );
 }
 
-function SessionList({ sessions }) {
+function SessionList({
+  sessions
+}) {
   return (
     <div className="sessions">
-      {sessions.length ? sessions.slice(0, 6).map((session) => (
-        <article key={session._id}>
-          <Play size={16} />
-          <div>
-            <strong>{session.scenario?.title}</strong>
-            <span>{session.masterySignals.join(' / ')}</span>
-          </div>
-        </article>
-      )) : <p>No sessions yet.</p>}
+      {sessions.length
+        ? sessions
+            .slice(0, 6)
+            .map(
+              (session) => (
+                <article
+                  key={session._id}
+                >
+                  <Play size={16} />
+
+                  <div>
+                    <strong>
+                      {
+                        session
+                          .scenario
+                          ?.title
+                      }
+                    </strong>
+
+                    <span>
+                      {
+                        session
+                          .masterySignals
+                          .join(' / ')
+                      }
+                    </span>
+                  </div>
+                </article>
+              )
+            )
+        : (
+          <p>
+            No sessions yet.
+          </p>
+        )}
     </div>
   );
 }
 
-createRoot(document.getElementById('root')).render(<App />);
+createRoot(
+  document.getElementById('root')
+).render(
+  <App />
+);
