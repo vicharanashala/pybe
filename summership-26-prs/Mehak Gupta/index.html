@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>The Lost Library of Python</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="aurora aurora-one"></div>
+  <div class="aurora aurora-two"></div>
+  <div class="stars"></div>
+  <div class="dust"></div>
+  <div class="library-glow"></div>
+  <div class="book-spine spine-one">PY</div>
+  <div class="book-spine spine-two">CODE</div>
+  <div class="book-spine spine-three">LOGIC</div>
+
+  <header class="hero">
+    <nav class="nav">
+      <div class="brand">
+        <span class="brand-mark">🐍</span>
+        <span class="brand-word">PYTHON</span>
+        <span class="brand-sub">THE LOST LIBRARY</span>
+      </div>
+      <div class="xp-pill">✦ XP <span id="xp">0</span></div>
+    </nav>
+    <div class="hero-layout">
+      <div class="hero-content">
+        <div class="book-icon">📖</div>
+        <p class="eyebrow">A STORY-DRIVEN PYTHON ADVENTURE</p>
+        <h1>The Lost Library <span>of Python</span></h1>
+        <p class="hero-text">A forgotten library has lost the words that make Python come alive. Follow the shelves from your first keyword to powerful ideas, then solve a new set of code puzzles on every visit.</p>
+        <div class="hero-buttons">
+          <button class="primary-btn" id="startBtn">Enter the Library →</button>
+          <span class="hero-note">37 keywords • Story-led learning • Fresh puzzle variations</span>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="assets/library.svg" alt="Illustration of a magical Python library">
+        <div class="floating-orb orb-one">if</div>
+        <div class="floating-orb orb-two">def</div>
+        <div class="floating-orb orb-three">for</div>
+      </div>
+    </div>
+  </header>
+
+  <main id="quest">
+    <section class="story section">
+      <div class="section-heading">
+        <span class="chapter">CHAPTER 01</span>
+        <h2>The Library Awakens</h2>
+        <p>Every keyword is a key. Every line of code is a clue.</p>
+      </div>
+      <div class="story-card">
+        <div class="story-image">
+          <img src="assets/library.svg" alt="Magical library">
+        </div>
+        <div class="story-copy">
+          <p>Alex pushed open an ancient wooden door. Blue-green light shimmered across hundreds of forgotten books.</p>
+          <p>One book opened by itself. On its pages were glowing words: <code>if</code>, <code>else</code>, <code>for</code>, <code>def</code>...</p>
+          <div class="quote">“These are not ordinary words,” whispered the librarian. “They are <strong>Python Keywords</strong>.”</div>
+          <p>Your mission is to recover the lost keywords. The final chamber will ask you to <strong>rebuild the logic of Python code step by step.</strong></p>
+          <button class="secondary-btn next-btn" data-target="concept">Continue the Quest ↓</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="concept section" id="concept">
+      <div class="section-heading">
+        <span class="chapter">CHAPTER 02</span>
+        <h2>What Is a Keyword?</h2>
+        <p>Before opening the books, learn what makes a Python keyword special.</p>
+      </div>
+      <div class="concept-grid">
+        <div class="concept-box">
+          <div class="mini-icon">🔐</div>
+          <h3>Reserved Words</h3>
+          <p>Keywords already have a special meaning in Python and are used to build the language's syntax.</p>
+        </div>
+        <div class="concept-box">
+          <div class="mini-icon">🚫</div>
+          <h3>Not Normal Names</h3>
+          <p>You cannot normally use a keyword as an ordinary variable name.</p>
+          <pre><code>if = 10  # ❌</code></pre>
+        </div>
+        <div class="concept-box">
+          <div class="mini-icon">🗝️</div>
+          <h3>They Guide Python</h3>
+          <p>Keywords help express decisions, loops, functions, logic, imports, exceptions, classes and more.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="keywords section">
+      <div class="section-heading">
+        <span class="chapter">CHAPTER 03</span>
+        <h2>Recover the Lost Keywords</h2>
+        <p>Follow the shelves in a beginner-friendly learning order. Open each card to read the explanation and inspect the code.</p>
+      </div>
+      <div class="keyword-filter" id="keywordFilter"></div>
+      <div class="keyword-grid" id="keywordGrid"></div>
+      <div class="discovery-bar">
+        <span>📚 Keywords discovered</span>
+        <strong><span id="discovered">0</span> / <span id="totalKeywords">0</span></strong>
+      </div>
+    </section>
+
+    <section class="quiz section" id="quiz">
+      <div class="section-heading">
+        <span class="chapter">FINAL CHAMBER</span>
+        <h2>The Keyword Puzzle Chamber</h2>
+        <p>Solve 5 fresh questions selected randomly from all 37 Python keywords every time you enter the chamber.</p>
+      </div>
+      <div class="puzzle-card">
+        <div class="puzzle-top">
+          <span id="puzzleCount">Keyword 1 / 37</span>
+          <span>⭐ <span id="score">0</span> points</span>
+        </div>
+        <div class="puzzle-story">
+          <span class="puzzle-icon" id="puzzleIcon">🧩</span>
+          <div>
+            <strong id="puzzleTitle">The Locked Gate</strong>
+            <p id="puzzleMission"></p>
+          </div>
+        </div>
+        <div class="code-panel">
+          <div class="code-label">PYTHON CODE</div>
+          <pre id="puzzleCode"></pre>
+        </div>
+        <div class="steps-heading">
+          <h3>🧩 Rebuild the execution path</h3>
+          <p>Drag the cards into Step 1 → Step 2 → Step 3 → ... order. Think like Python: what happens first?</p>
+        </div>
+        <div id="stepPuzzle" class="step-puzzle"></div>
+        <div class="puzzle-actions">
+          <button id="checkPuzzle" class="primary-btn">Check Puzzle ✓</button>
+          <button id="resetPuzzle" class="secondary-btn">Shuffle ↻</button>
+          <button id="showSolution" class="solution-btn">💡 Show Solution</button>
+        </div>
+        <p id="puzzleFeedback" class="feedback"></p>
+        <div id="solutionPanel" class="solution-panel hidden">
+          <div class="solution-title">💡 Solution</div>
+          <p id="solutionIntro"></p>
+          <ol id="solutionSteps"></ol>
+        </div>
+        <button id="nextPuzzle" class="primary-btn hidden">Next Puzzle →</button>
+      </div>
+    </section>
+
+    <section class="result section hidden" id="result">
+      <div class="result-card">
+        <img src="assets/badge.svg" alt="Python Keyword Guardian badge">
+        <span class="chapter">LIBRARY RESTORED</span>
+        <h2 id="resultTitle">Python Keyword Guardian</h2>
+        <p id="resultText"></p>
+        <div class="result-stats">
+          <div><strong id="finalScore">0</strong><span>Points</span></div>
+          <div><strong id="finalXp">0</strong><span>XP</span></div>
+          <div><strong id="finalDiscovered">0</strong><span>Keywords</span></div>
+        </div>
+        <button class="primary-btn" onclick="location.reload()">Play Again ↻</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>🐍 The Lost Library of Python • Open a book, learn a keyword, solve a clue.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
