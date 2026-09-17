@@ -1,7 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
-  Brain,
   ChartNoAxesCombined,
   Code2,
   Compass,
@@ -9,11 +8,12 @@ import {
   MessageSquareText,
   Play,
   Route,
-  Search,
   Send,
   Sparkles
 } from 'lucide-react';
 import './styles.css';
+import LandingPage from './LandingPage';
+import WorldExplorer from './WorldExplorer';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -37,8 +37,7 @@ function App() {
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-
-  const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
+  const [activeTab, setActiveTab] = useState('landing');
 
   async function refresh() {
     const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
@@ -80,135 +79,95 @@ function App() {
   if (loading) return <main className="loading">Loading PyBe...</main>;
 
   return (
-    <main className="app-shell">
-      <aside className="sidebar">
-        <div className="brand">
-          <Brain size={30} />
-          <div>
-            <strong>PyBe</strong>
-            <span>Scenario-first Python</span>
-          </div>
-        </div>
-
-        <label className="search">
-          <Search size={18} />
-          <input
-            value={filters.q}
-            onChange={(event) => setFilters({ ...filters, q: event.target.value })}
-            placeholder="Search scenarios"
-          />
-        </label>
-
-        <select value={filters.difficulty} onChange={(event) => setFilters({ ...filters, difficulty: event.target.value })}>
-          <option value="">All levels</option>
-          <option>Beginner</option>
-          <option>Explorer</option>
-          <option>Builder</option>
-        </select>
-
-        <select value={filters.concept} onChange={(event) => setFilters({ ...filters, concept: event.target.value })}>
-          <option value="">All concepts</option>
-          {concepts.map((concept) => <option key={concept}>{concept}</option>)}
-        </select>
-
-        <div className="scenario-list">
-          {scenarios.map((scenario) => (
-            <button
-              key={scenario._id}
-              className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
-              onClick={() => {
-                setSelected(scenario);
-                setActiveResult(null);
-              }}
-            >
-              <span>{scenario.difficulty}</span>
-              <strong>{scenario.title}</strong>
-              <small>{scenario.concepts.join(' / ')}</small>
-            </button>
-          ))}
-        </div>
-      </aside>
-
-      <section className="workspace">
-        <header className="hero">
-          <div>
-            <p>AI-native learning journey</p>
-            <h1>Learn Python by reasoning through real situations first.</h1>
-          </div>
-          <div className="hero-stats">
-            <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
-            <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
-            <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
-          </div>
-        </header>
-
-        <div className="main-grid">
-          <section className="panel learning-panel">
-            <div className="section-title">
-              <Compass size={20} />
-              <h2>{selected?.title}</h2>
+    <div className="app">
+      <main className="main">
+      {activeTab === 'landing' ? (
+        <LandingPage onStartExploring={() => setActiveTab('world')} />
+      ) : activeTab === 'world' ? (
+        <WorldExplorer onBackToDashboard={() => setActiveTab('landing')} />
+      ) : (
+        <section className="workspace">
+          <header className="hero">
+            <div>
+              <p>AI-native learning journey</p>
+              <h1>Learn Python by reasoning through real situations first.</h1>
             </div>
-            <p className="context">{selected?.context}</p>
-            <div className="objective-row">
-              {selected?.objectives.map((item) => <span key={item}>{item}</span>)}
+            <div className="hero-stats">
+              <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
+              <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
+              <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
             </div>
-            <form onSubmit={submitSession} className="learning-form">
-              <label>
-                Your reasoning
-                <textarea
-                  required
-                  value={form.reasoning}
-                  onChange={(event) => setForm({ ...form, reasoning: event.target.value })}
-                  placeholder={selected?.prompt}
-                />
-              </label>
-              <label>
-                Prompt you would give an AI mentor
-                <textarea
-                  value={form.promptText}
-                  onChange={(event) => setForm({ ...form, promptText: event.target.value })}
-                  placeholder="Explain my approach step by step, then show the Python concept and code..."
-                />
-              </label>
-              <label>
-                Reflection
-                <textarea
-                  value={form.reflection}
-                  onChange={(event) => setForm({ ...form, reflection: event.target.value })}
-                  placeholder="What did you notice about your thinking?"
-                />
-              </label>
-              <button className="primary" disabled={submitting}>
-                <Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}
-              </button>
-            </form>
+          </header>
+
+          <div className="main-grid">
+            <section className="panel learning-panel">
+              <div className="section-title">
+                <Compass size={20} />
+                <h2>{selected?.title}</h2>
+              </div>
+              <p className="context">{selected?.context}</p>
+              <div className="objective-row">
+                {selected?.objectives.map((item) => <span key={item}>{item}</span>)}
+              </div>
+              <form onSubmit={submitSession} className="learning-form">
+                <label>
+                  Your reasoning
+                  <textarea
+                    required
+                    value={form.reasoning}
+                    onChange={(event) => setForm({ ...form, reasoning: event.target.value })}
+                    placeholder={selected?.prompt}
+                  />
+                </label>
+                <label>
+                  Prompt you would give an AI mentor
+                  <textarea
+                    value={form.promptText}
+                    onChange={(event) => setForm({ ...form, promptText: event.target.value })}
+                    placeholder="Explain my approach step by step, then show the Python concept and code..."
+                  />
+                </label>
+                <label>
+                  Reflection
+                  <textarea
+                    value={form.reflection}
+                    onChange={(event) => setForm({ ...form, reflection: event.target.value })}
+                    placeholder="What did you notice about your thinking?"
+                  />
+                </label>
+                <button className="primary" disabled={submitting}>
+                  <Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}
+                </button>
+              </form>
+            </section>
+
+            <section className="panel result-panel">
+              <div className="section-title">
+                <Sparkles size={20} />
+                <h2>AI Mentor Output</h2>
+              </div>
+              {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
+            </section>
+          </div>
+
+          <section className="dashboard">
+            <div className="panel">
+              <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Learner Analytics</h2></div>
+              <Analytics analytics={analytics} />
+            </div>
+            <div className="panel">
+              <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
+              <Roadmap roadmap={roadmap} />
+            </div>
+            <div className="panel">
+              <div className="section-title"><MessageSquareText size={20} /><h2>Recent Sessions</h2></div>
+              <SessionList sessions={sessions} />
+            </div>
           </section>
-
-          <section className="panel result-panel">
-            <div className="section-title">
-              <Sparkles size={20} />
-              <h2>AI Mentor Output</h2>
-            </div>
-            {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
-          </section>
-        </div>
-
-        <section className="dashboard">
-          <div className="panel">
-            <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Learner Analytics</h2></div>
-            <Analytics analytics={analytics} />
-          </div>
-          <div className="panel">
-            <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
-            <Roadmap roadmap={roadmap} />
-          </div>
-          <div className="panel">
-            <div className="section-title"><MessageSquareText size={20} /><h2>Recent Sessions</h2></div>
-            <SessionList sessions={sessions} />
-          </div>
         </section>
-      </section>
-    </main>
+      )}
+      </main>
+    </div>
   );
 }
 
