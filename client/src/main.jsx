@@ -1,7 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
-  Brain,
   ChartNoAxesCombined,
   Code2,
   Compass,
@@ -9,7 +8,6 @@ import {
   MessageSquareText,
   Play,
   Route,
-  Search,
   Send,
   Sparkles,
   Rocket,
@@ -20,6 +18,8 @@ import {
 import CodeEditor from './components/CodeEditor';
 import LearningPath from './components/LearningPath';
 import './styles.css';
+import LandingPage from './LandingPage';
+import WorldExplorer from './WorldExplorer';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
@@ -44,10 +44,6 @@ function App() {
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [showCodeEditor, setShowCodeEditor] = useState(false);
-  const [currentCode, setCurrentCode] = useState('');
-  const [activeTab, setActiveTab] = useState('learn');
-  const [nlpResult, setNlpResult] = useState(null);
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
@@ -241,27 +237,6 @@ function App() {
           </div>
         </div>
 
-        <div className="sidebar-nav">
-          <button 
-            className={`nav-btn ${activeTab === 'learn' ? 'active' : ''}`}
-            onClick={() => setActiveTab('learn')}
-          >
-            <BookOpen size={16} /> Learn
-          </button>
-          <button 
-            className={`nav-btn ${activeTab === 'path' ? 'active' : ''}`}
-            onClick={() => setActiveTab('path')}
-          >
-            <Rocket size={16} /> Learning Path
-          </button>
-          <button 
-            className={`nav-btn ${activeTab === 'code' ? 'active' : ''}`}
-            onClick={() => setActiveTab('code')}
-          >
-            <Code2 size={16} /> Code Editor
-          </button>
-        </div>
-
         <label className="search">
           <Search size={18} />
           <input
@@ -288,7 +263,10 @@ function App() {
             <button
               key={scenario._id}
               className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
-              onClick={() => handleScenarioSelect(scenario)}
+              onClick={() => {
+                setSelected(scenario);
+                setActiveResult(null);
+              }}
             >
               <span>{scenario.difficulty}</span>
               <strong>{scenario.title}</strong>
@@ -311,139 +289,57 @@ function App() {
           </div>
         </header>
 
-        {activeTab === 'learn' && (
-          <div className="main-grid">
-            <section className="panel learning-panel">
-              <div className="section-title">
-                <Compass size={20} />
-                <h2>{selected?.title}</h2>
-              </div>
-              <p className="context">{selected?.context}</p>
-              <div className="objective-row">
-                {selected?.objectives.map((item) => <span key={item}>{item}</span>)}
-              </div>
-              
-              {/* NLP Actions */}
-              <div className="nlp-actions">
-                <button 
-                  className="btn-convert-code"
-                  onClick={handleConvertReasoning}
-                  disabled={!form.reasoning.trim()}
-                >
-                  <Zap size={16} /> Generate Python Code
-                </button>
-                <button 
-                  className="btn-extract-concepts"
-                  onClick={handleExtractConcepts}
-                  disabled={!form.reasoning.trim()}
-                >
-                  <Target size={16} /> Extract Concepts
-                </button>
-                <button 
-                  className="btn-generate-context"
-                  onClick={handleGenerateCodeWithContext}
-                  disabled={!form.reasoning.trim()}
-                >
-                  <Sparkles size={16} /> Generate with Context
-                </button>
-              </div>
-              
-              {/* Learning Form - Uses /sessions */}
-              <form onSubmit={submitSession} className="learning-form">
-                <label>
-                  Your reasoning
-                  <textarea
-                    required
-                    value={form.reasoning}
-                    onChange={(event) => setForm({ ...form, reasoning: event.target.value })}
-                    placeholder={selected?.prompt}
-                  />
-                </label>
-                <label>
-                  Prompt you would give an AI mentor
-                  <textarea
-                    value={form.promptText}
-                    onChange={(event) => setForm({ ...form, promptText: event.target.value })}
-                    placeholder="Explain my approach step by step, then show the Python concept and code..."
-                  />
-                </label>
-                <label>
-                  Reflection
-                  <textarea
-                    value={form.reflection}
-                    onChange={(event) => setForm({ ...form, reflection: event.target.value })}
-                    placeholder="What did you notice about your thinking?"
-                  />
-                </label>
-                <button className="primary" disabled={submitting}>
-                  <Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}
-                </button>
-              </form>
-
-              {/* NLP Result Display */}
-              {nlpResult && (
-                <div className="nlp-result">
-                  <h4>🤖 NLP Analysis</h4>
-                  <div className="nlp-details">
-                    <p><strong>Detected Concepts:</strong> {nlpResult.concepts?.join(', ') || 'None'}</p>
-                    <p><strong>Explanation:</strong> {nlpResult.explanation}</p>
-                  </div>
-                </div>
-              )}
-            </section>
-
-            <section className="panel result-panel">
-              <div className="section-title">
-                <Sparkles size={20} />
-                <h2>AI Mentor Output</h2>
-              </div>
-              {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
-            </section>
-          </div>
-        )}
-
-       // In main.jsx, update the Learning Path tab section
-
-{activeTab === 'path' && (
-  <div className="learning-path-container">
-    <LearningPath 
-      onScenarioSelect={handleScenarioSelect}
-      key={selected?._id} // Add key to force re-render
-    />
-  </div>
-)}
-        {activeTab === 'code' && (
-          <div className="code-editor-container">
-            <div className="panel">
-              <div className="section-title">
-                <Code2 size={20} />
-                <h2>Python Code Editor</h2>
-                <div className="editor-actions-right">
-                  <button 
-                    className="btn-validate-code"
-                    onClick={() => handleValidateCode(currentCode)}
-                  >
-                    ✅ Validate
-                  </button>
-                  <button 
-                    className="btn-close-editor"
-                    onClick={() => setActiveTab('learn')}
-                  >
-                    ✕ Close
-                  </button>
-                </div>
-              </div>
-              <CodeEditor
-                initialCode={currentCode || '# Write your Python code here'}
-                onSave={handleCodeSave}
-                onCodeChange={setCurrentCode}
-                scenarioId={selected?._id}
-              />
+        <div className="main-grid">
+          <section className="panel learning-panel">
+            <div className="section-title">
+              <Compass size={20} />
+              <h2>{selected?.title}</h2>
             </div>
-          </div>
-        )}
+            <p className="context">{selected?.context}</p>
+            <div className="objective-row">
+              {selected?.objectives.map((item) => <span key={item}>{item}</span>)}
+            </div>
+            <form onSubmit={submitSession} className="learning-form">
+              <label>
+                Your reasoning
+                <textarea
+                  required
+                  value={form.reasoning}
+                  onChange={(event) => setForm({ ...form, reasoning: event.target.value })}
+                  placeholder={selected?.prompt}
+                />
+              </label>
+              <label>
+                Prompt you would give an AI mentor
+                <textarea
+                  value={form.promptText}
+                  onChange={(event) => setForm({ ...form, promptText: event.target.value })}
+                  placeholder="Explain my approach step by step, then show the Python concept and code..."
+                />
+              </label>
+              <label>
+                Reflection
+                <textarea
+                  value={form.reflection}
+                  onChange={(event) => setForm({ ...form, reflection: event.target.value })}
+                  placeholder="What did you notice about your thinking?"
+                />
+              </label>
+              <button className="primary" disabled={submitting}>
+                <Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}
+              </button>
+            </form>
+          </section>
 
-        {/* Dashboard Section - Always Visible */}
+          <section className="panel result-panel">
+            <div className="section-title">
+              <Sparkles size={20} />
+              <h2>AI Mentor Output</h2>
+            </div>
+            {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
+          </section>
+        </div>
+
         <section className="dashboard">
           <div className="panel">
             <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Learner Analytics</h2></div>
