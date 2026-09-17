@@ -1,0 +1,1873 @@
+[
+  {
+    "id": "thirsty-crow",
+    "title": "The Thirsty Crow",
+    "moral": "Little by little, a wise mind finds a way.",
+    "concept": "Variables",
+    "conceptSlug": "variables",
+    "difficulty": "Beginner",
+    "icon": "crow",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "On a hot summer afternoon, a thirsty crow flew over a dusty village looking for water. The ponds were dry and the wells were empty.",
+      "At last it spotted a clay pot in a garden. There was a little water at the bottom, but the crow's beak could not reach it.",
+      "The clever crow had an idea. It picked up a pebble and dropped it in, and the water rose a tiny bit. Again and again it dropped pebbles, keeping a careful count in its mind.",
+      "Little by little the water climbed up. When it finally reached the crow's beak, the crow drank happily and flew away. It had remembered the count and let it grow."
+    ],
+    "riddle": {
+      "question": "The crow must remember how many pebbles it has dropped, because that number grows with every single drop. What is the one thing it needs to keep track of, and update, as it works?",
+      "options": [
+        "The colour of the pebbles",
+        "A growing number the crow remembers and updates",
+        "The shape of the pot",
+        "The time of day"
+      ],
+      "correctIndex": 1,
+      "explanation": "The crow keeps a single growing count in its mind. In Python we call that a variable - a named box that stores a value and can be updated. Every pebble drop is a small update to that count."
+    },
+    "conceptReveal": {
+      "title": "Variables: named boxes for values",
+      "summary": "A variable gives a name to a piece of information so you can remember it now and change it later.",
+      "codeExample": "pebbles = 0            # the crow starts with none\npebbles = pebbles + 1  # first drop\npebbles = pebbles + 1  # second drop\nprint(pebbles)         # 2",
+      "points": [
+        "A variable has a name and a value.",
+        "Use = to put a value into the box. This is assignment, not 'equals'.",
+        "You can read the old value, change it, and store it back.",
+        "Values can be numbers (int), text (str), or True/False (bool)."
+      ]
+    },
+    "microLesson": {
+      "headline": "One concept, three small ideas",
+      "paragraphs": [
+        "Like the crow, a program stores information in named boxes called variables. water_level = 0 creates a box named water_level holding the value 0.",
+        "When the crow drops a pebble, the value changes: water_level = water_level + 1 takes the current value, adds 1, and stores it back. This is why the right side is read first.",
+        "Variables can hold different kinds of values: whole numbers like 7 (int), text like \"crow\" (str), and yes/no like True (bool)."
+      ],
+      "keyPoints": [
+        "Assignment x = 5 reads the right side first, then stores it in x.",
+        "You can update a value: x = x + 1.",
+        "Name variables to describe what they store: pebbles, water_level, crow_name."
+      ]
+    },
+    "challenge": {
+      "title": "Fill the pot: track the pebbles",
+      "instruction": "The crow drops pebbles into the pot. Use variables to (1) store the crow's name as text, (2) start the water level at zero, (3) drop four pebbles one at a time, and (4) print the final water level. Finish the starter code.",
+      "starterCode": "# 1. Store the crow's name\ncrow_name = \"Kaali\"\n\n# 2. Start the water level at zero\nwater_level = 0\n\n# 3. Drop four pebbles, one at a time\nwater_level = water_level + 1\nwater_level = water_level + 1\nwater_level = water_level + 1\nwater_level = water_level + 1\n\n# 4. Print how high the water has risen\nprint(water_level)",
+      "hint": "Each drop is one line: water_level = water_level + 1",
+      "check": {
+        "type": "output-equals",
+        "expected": "4",
+        "message": "The water rose four times, so the final water level should be 4."
+      }
+    },
+    "project": {
+      "title": "The Village Water Tank",
+      "brief": "Build a small program for the village. A water tank starts with 10 litres. Three of the crow's friends each add 3 litres. Create the variable tank_water, add 3 litres three times, and print the final amount.",
+      "starterCode": "# The tank starts with 10 litres\ntank_water = 10\n\n# Three friends each add 3 litres\ntank_water = tank_water + 3\ntank_water = tank_water + 3\ntank_water = tank_water + 3\n\nprint(tank_water)",
+      "successHint": "Expected output: 19",
+      "check": {
+        "type": "output-equals",
+        "expected": "19",
+        "message": "10 + 3 + 3 + 3 = 19 litres in the tank."
+      }
+    }
+  },
+  {
+    "id": "milkmaid-pail",
+    "title": "The Milkmaid and Her Pail",
+    "moral": "Dream of the plan, but keep your feet on the ground.",
+    "concept": "Variables",
+    "conceptSlug": "variables",
+    "difficulty": "Beginner",
+    "icon": "milkmaid",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A village milkmaid named Meera balanced a pail of fresh milk on her head and walked carefully toward the market. Every step had to be steady, or the milk would spill.",
+      "As she walked, she began to dream. \"When I sell this milk I will have money,\" she thought. \"With that money I will buy a basket of eggs, and every egg will hatch a chick.\"",
+      "\"My chicks will grow into hens, and each hen will lay more eggs. Count them with me - one, two, three, fifty! Soon I will have a flock of fifty birds to sell for a handsome price.\"",
+      "Meera nodded so eagerly while counting her unborn chicks that the pail slipped from her head and the milk spilled across the road. \"Do not count your chicks before they hatch,\" laughed the village elder."
+    ],
+    "riddle": {
+      "question": "Meera keeps a running total that grows at every step - milk to money, money to eggs, eggs to chicks, chicks to hens. What is the Python idea that lets her store a number and update it again and again?",
+      "options": [
+        "A variable - a named box holding a value she can change",
+        "A single print statement that never changes",
+        "A decision with if and else",
+        "A fixed number that can never be rewritten"
+      ],
+      "correctIndex": 0,
+      "explanation": "Meera's growing total is exactly a variable. She starts with a value, then updates it step by step: coins = coins + 5, chicks = chicks + 1. The named box keeps only the newest value."
+    },
+    "conceptReveal": {
+      "title": "Variables: named boxes that grow",
+      "summary": "A variable stores one value under a name, and you can update that value as your story unfolds.",
+      "codeExample": "chicks = 2          # Meera starts with two\nchicks = chicks + 1  # a chick hatches\nchicks = chicks + 1  # another hatches\nprint(chicks)        # 4",
+      "points": [
+        "A variable has a name and a value.",
+        "Use = to put a value into the box. This is assignment, not 'equals'.",
+        "Reading the old value, adding, and storing it back is an update.",
+        "Updates can grow a value: coins = coins + 5."
+      ]
+    },
+    "microLesson": {
+      "headline": "One box, many updates",
+      "paragraphs": [
+        "Like Meera's count of chicks, a program stores a running total in a named box called a variable. chicks = 2 creates the box and puts 2 inside.",
+        "When one more chick hatches, the value changes: chicks = chicks + 1 reads the current value, adds 1, and stores the new total back into the same box.",
+        "Repeat the update and the box grows steadily. Start the box with 0 and you can build any total you like - eggs, coins, hens, or pebbles."
+      ],
+      "keyPoints": [
+        "Assignment x = 5 reads the right side first, then stores it in x.",
+        "You can update a value: x = x + 1.",
+        "A variable holds only the newest value you assigned."
+      ]
+    },
+    "challenge": {
+      "title": "Count the chicks",
+      "instruction": "Meera starts with 2 chicks. Three of her hens each hatch one more chick. Update the chicks variable three times, then print the final count.",
+      "starterCode": "# Meera starts with two chicks\nchicks = 2\n\n# Three hens each hatch one chick\nchicks = chicks + 1\nchicks = chicks + 1\nchicks = chicks + 1\n\n# Print the final count\nprint(chicks)",
+      "hint": "Each hatch is one line: chicks = chicks + 1",
+      "check": {
+        "type": "output-equals",
+        "expected": "5",
+        "message": "2 + 1 + 1 + 1 = 5 chicks."
+      }
+    },
+    "project": {
+      "title": "The Market Ledger",
+      "brief": "Meera sells milk from 4 pots, and each pot earns 5 coins. Track her earnings: start coins at 0, add 5 four times, and print the total.",
+      "starterCode": "# Meera starts with no coins\ncoins = 0\n\n# Each pot earns 5 coins\ncoins = coins + 5\ncoins = coins + 5\ncoins = coins + 5\ncoins = coins + 5\n\nprint(coins)",
+      "successHint": "Expected output: 20",
+      "check": {
+        "type": "output-equals",
+        "expected": "20",
+        "message": "4 pots x 5 coins = 20 coins."
+      }
+    }
+  },
+  {
+    "id": "dog-reflection",
+    "title": "The Dog and His Reflection",
+    "moral": "Be content with what you have; greed can cost you everything.",
+    "concept": "Variables",
+    "conceptSlug": "variables",
+    "difficulty": "Beginner",
+    "icon": "dog",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A hungry dog trotted home carrying a juicy bone it had found beside the river. It gripped the bone tightly, planning to enjoy it in the shade of its favourite tree.",
+      "Crossing a narrow wooden bridge, it glanced down at the calm water. There, in the reflection, it saw another dog - one that seemed to be holding an even bigger bone.",
+      "\"That bone looks bigger than mine,\" the greedy dog growled. \"I want it!\" It opened its mouth to bark at the reflection, and in that instant its own bone splashed into the river and sank.",
+      "The dog stared as its treasure disappeared and the reflection faded away. It padded home with nothing, having lost a real bone for a shadow it could never keep."
+    ],
+    "riddle": {
+      "question": "The dog starts with one bone, reaches for a second, and ends with none. The value it was holding changed completely. What does this teach us about the value stored in a variable?",
+      "options": [
+        "A variable can change - a new assignment replaces the old value",
+        "A variable can only ever hold text",
+        "A variable cannot be read after it is created",
+        "A variable always holds the same value forever"
+      ],
+      "correctIndex": 0,
+      "explanation": "A variable is a box you can rewrite. The dog's bone count starts at 1, and the greedy mistake turns it to 0 - the same named box now holds a different value. That is what makes variables so powerful, and why we must be careful."
+    },
+    "conceptReveal": {
+      "title": "Variables: values that can be rewritten",
+      "summary": "The value in a variable is not fixed. Assignment replaces the old value with the new one.",
+      "codeExample": "bones = 1    # found one bone\nbones = 0    # dropped it in the river\nprint(bones) # 0",
+      "points": [
+        "A variable has a name and a value.",
+        "Assigning again overwrites the old value.",
+        "The value can grow, shrink, or change type.",
+        "Reading a variable gives you its newest value."
+      ]
+    },
+    "microLesson": {
+      "headline": "Rewrite the box",
+      "paragraphs": [
+        "A variable is a named box, and the box can be emptied and refilled. bones = 1 puts the value 1 into the box named bones.",
+        "When the dog loses the bone, the program writes bones = 0. The old 1 is gone - the same box now holds 0. This overwriting is how a variable changes over time.",
+        "You can build on the newest value too: bones = bones + 2 reads whatever is inside, adds 2, and stores the fresh total back."
+      ],
+      "keyPoints": [
+        "Assignment x = 5 stores a value; the next x = 8 overwrites it.",
+        "You can update a value: x = x + 1.",
+        "Only the newest value is remembered - the old one is gone."
+      ]
+    },
+    "challenge": {
+      "title": "Keep or lose the bone",
+      "instruction": "The dog finds one bone, then loses it in the river. Assign bones = 1, overwrite it to 0 and print. Later the dog finds two fresh bones, so update bones by adding 2 and print again.",
+      "starterCode": "# The dog finds one bone\nbones = 1\n\n# It loses the bone in the river\nbones = 0\nprint(bones)\n\n# Later it finds two fresh bones\nbones = bones + 2\nprint(bones)",
+      "hint": "Assignment replaces the old value: bones = 0 overwrites the 1.",
+      "check": {
+        "type": "output-equals",
+        "expected": "0\n2",
+        "message": "First the value is 0, then the two fresh bones make it 2."
+      }
+    },
+    "project": {
+      "title": "The Riverbank Counter",
+      "brief": "Help the pond keeper count the fish in the river. Start count at 0, two fish swim in (add 2), one swims away (subtract 1), then three more arrive (add 3). Print the final count.",
+      "starterCode": "# The pond keeper starts the count at zero\ncount = 0\n\n# Two fish swim in\ncount = count + 2\n\n# One swims away\ncount = count - 1\n\n# Three more arrive\ncount = count + 3\n\nprint(count)",
+      "successHint": "Expected output: 4",
+      "check": {
+        "type": "output-equals",
+        "expected": "4",
+        "message": "0 + 2 - 1 + 3 = 4 fish."
+      }
+    }
+  },
+  {
+    "id": "elephant-dog",
+    "title": "The Elephant and the Dog",
+    "moral": "True friendship is a bond that nothing can take away.",
+    "concept": "Variables",
+    "conceptSlug": "variables",
+    "difficulty": "Beginner",
+    "icon": "elephdog",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A great elephant lived alone near a village. He was gentle but huge, and all the smaller animals kept away from him, leaving him lonely and sad.",
+      "One day a tiny stray dog wandered into the village. Seeing the elephant, she trotted up and lay down in his shadow. \"May I stay here?\" she asked. \"The sun is very hot.\"",
+      "The elephant was overjoyed. \"Stay as long as you like,\" he said. From that day the two were inseparable - the dog slept by the elephant's side and the elephant never let the stray dog go hungry.",
+      "But a jealous man lured the dog away with sweet food and harmed her. When the elephant found her gone he cried out in grief. A wise old woman found the bones and told the elephant, \"Your friend loved you, and your love for her will never be forgotten.\" The elephant bowed his head and remembered every moment of joy they had shared."
+    ],
+    "riddle": {
+      "question": "The elephant's feelings change across the story - lonely, then joyful, then deeply sad. A program can track each feeling with a name and a value. What is this idea?",
+      "options": [
+        "A loop that repeats the same action",
+        "A decision made with if and else",
+        "A variable - a named box that holds a changing state",
+        "A list that stores many items in order"
+      ],
+      "correctIndex": 2,
+      "explanation": "Each emotion the elephant feels - loneliness, joy, grief - is a state that can be stored in a variable. The variable's value changes as the story moves forward, just like the elephant's mood."
+    },
+    "conceptReveal": {
+      "title": "Variables: storing and updating a state",
+      "summary": "A variable can represent a changing state - like an emotion, a count, or a yes/no flag - that is updated as events unfold.",
+      "codeExample": "are_friends = False    # elephant is alone\nhappiness = 1           # very low\nare_friends = True      # the dog arrives\nhappiness = 8           # they are inseparable",
+      "points": [
+        "A variable can store a True / False flag (a boolean) to represent a state.",
+        "You can overwrite the old value at any time: are_friends = True.",
+        "Multiple variables can describe one situation from different angles.",
+        "Reading a variable always gives you the newest value."
+      ]
+    },
+    "microLesson": {
+      "headline": "State that changes with the story",
+      "paragraphs": [
+        "The elephant's loneliness, joy, and grief are states that change as events unfold. Each state can live in a named variable, like happiness or are_friends.",
+        "When the dog arrives, the program writes are_friends = True. The old False is overwritten - the same box now reflects a new reality.",
+        "You can use several variables together to tell a richer story: one for friendship, one for happiness, one for how many friends there are."
+      ],
+      "keyPoints": [
+        "A boolean variable holds True or False: is_friends = True.",
+        "You can update any variable at any time with a new assignment.",
+        "Multiple named variables together describe a full state.",
+        "Reading a variable always returns its most recent value."
+      ]
+    },
+    "challenge": {
+      "title": "Track the elephant's journey",
+      "instruction": "The elephant starts alone and sad. The dog arrives and they become friends. Then the dog is lost. Track the elephant's state with two variables: a boolean is_friends (True or False) and a number happiness (low when sad, high when joyful). Finish the starter code.",
+      "starterCode": "# The elephant is alone and unhappy\nis_friends = False\nhappiness = 1\n\n# The dog arrives - update the state\nis_friends = True\nhappiness = 8\n\n# They spend days together\nis_friends = True\nhappiness = 10\n\n# The dog is lost\nis_friends = False\nhappiness = 0\nprint(happiness)\nprint(is_friends)",
+      "hint": "Assigning again overwrites the old value in the same variable.",
+      "check": {
+        "type": "output-equals",
+        "expected": "0\nFalse",
+        "message": "After losing the dog the elephant's happiness drops to 0 and is_friends becomes False."
+      }
+    },
+    "project": {
+      "title": "The Elephant's Memory",
+      "brief": "The wise woman says the elephant remembers every joyful day with the dog. Track the memories: start days_together at 0, add 3 joyful days, then add 2 more. Print the final count, and the elephant's name as a string.",
+      "starterCode": "# The wise woman remembers the friendship\nname = \"Bhola\"\ndays_together = 0\n\n# Three joyful days pass\ndays_together = days_together + 3\n\n# Two more joyful days\ndays_together = days_together + 2\n\nprint(days_together)\nprint(name)",
+      "successHint": "Expected output: 5, then Bhola",
+      "check": {
+        "type": "output-equals",
+        "expected": "5\nBhola",
+        "message": "0 + 3 + 2 = 5 days together, and the elephant's name is Bhola."
+      }
+    }
+  },
+  {
+    "id": "blue-jackal",
+    "title": "The Blue Jackal",
+    "moral": "What you truly are cannot be hidden forever.",
+    "concept": "Variables",
+    "conceptSlug": "variables",
+    "difficulty": "Beginner",
+    "icon": "jackal",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A scrawny jackal slunk through the village at dusk, hungry and afraid. Every animal chased him away - the dogs barked, the goats kicked, and even the crows pecked at his tail.",
+      "Desperate for shelter he crept into a dyer's workshop and fell into a great vat of blue dye. When he clambered out, his entire body was brilliant blue from nose to tail.",
+      "The other animals froze in terror. \"What creature is this?\" they whispered. \"Surely a god has come down to us!\" They bowed low and offered the blue jackal the best food and a place to rest.",
+      "The jackal loved his new life and called himself King of the Animals. But one moonlit night he heard real jackals howling in the distance and answered with a howl of his own. The animals recognised the voice at once. 'He is no god - he is just a jackal!' they cried, and chased him away. The blue faded, and the jackal was alone again."
+    ],
+    "riddle": {
+      "question": "The jackal looks like a god because he is blue, but he is really just a jackal. What does the blue colour remind us of in Python?",
+      "options": [
+        "A variable whose stored value can be changed",
+        "A loop that runs forever",
+        "A list that holds many items",
+        "A function that returns a result"
+      ],
+      "correctIndex": 0,
+      "explanation": "The blue dye is like assigning a new value to a variable. The name stays the same - it is still a jackal - but the value the animals see (blue) has changed. Variables let us swap one value for another."
+    },
+    "conceptReveal": {
+      "title": "Variables: swap one value for another",
+      "summary": "Assigning a new value to a variable overwrites the old one. The name is constant; the value can change at any time.",
+      "codeExample": "colour = \"brown\"\ncolour = \"blue\"\nprint(colour)   # blue",
+      "points": [
+        "A variable holds one value at a time.",
+        "Assigning again replaces the old value completely.",
+        "The variable name stays the same - only the value changes.",
+        "You can overwrite a variable as many times as you like."
+      ]
+    },
+    "microLesson": {
+      "headline": "Same name, different value",
+      "paragraphs": [
+        "The jackal's name never changes, but his colour does. In Python, a variable works the same way: the name stays fixed, but the value inside can be swapped out.",
+        "First colour = \"brown\" stores the original colour. Then colour = \"blue\" overwrites it - the old value is gone and the box holds the new one.",
+        "You can chain as many overwrites as you like: colour = \"blue\", colour = \"red\", colour = \"gold\". Only the most recent assignment matters."
+      ],
+      "keyPoints": [
+        "colour = \"brown\" stores a string value.",
+        "colour = \"blue\" overwrites the old value.",
+        "Only the newest value is remembered.",
+        "The name stays the same across every assignment."
+      ]
+    },
+    "challenge": {
+      "title": "The jackal's changing coat",
+      "instruction": "Track the jackal's appearance. Start with colour = \"brown\", then overwrite it with \"blue\" and print. He loses the dye and returns to brown, so overwrite colour again and print the final value.",
+      "starterCode": "# The jackal before the dye\ncolour = \"brown\"\n\n# He falls into the vat of blue dye\ncolour = \"blue\"\nprint(colour)\n\n# The dye fades overnight\ncolour = \"brown\"\nprint(colour)",
+      "hint": "Assigning a new value to colour replaces the old one.",
+      "check": {
+        "type": "output-equals",
+        "expected": "blue\nbrown",
+        "message": "First the jackal is blue, then the dye fades and he is brown again."
+      }
+    },
+    "project": {
+      "title": "The Chameleon's Wardrobe",
+      "brief": "A chameleon changes colour three times: start at \"green\", overwrite to \"red\", then to \"gold\". Print the colour after each change so you can see the sequence.",
+      "starterCode": "# The chameleon's first colour\nshade = \"green\"\nprint(shade)\n\n# It changes to red\nshade = \"red\"\nprint(shade)\n\n# Finally it turns gold\nshade = \"gold\"\nprint(shade)",
+      "successHint": "Expected output: green, red, gold (each on its own line)",
+      "check": {
+        "type": "output-equals",
+        "expected": "green\nred\ngold",
+        "message": "Three overwrites, three prints, three different colours."
+      }
+    }
+  },
+  {
+    "id": "monkey-crocodile",
+    "title": "The Monkey and the Crocodile",
+    "moral": "A friend who cannot be trusted must be judged by his choices.",
+    "concept": "Conditionals",
+    "conceptSlug": "conditionals",
+    "difficulty": "Beginner",
+    "icon": "monkey",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "On the banks of a great river lived a monkey and a crocodile who became fast friends. The monkey ate sweet mangoes and always shared them with the crocodile.",
+      "One day the crocodile's wife grew greedy. 'Bring me the monkey's heart, I must taste it!' she demanded. Ashamed, the crocodile agreed and offered the monkey a ride across the river.",
+      "Midstream, the crocodile confessed his terrible plan. The monkey thought fast and said, 'I left my heart in the tree! Row back and I will fetch it.'",
+      "The foolish crocodile rowed back, and the monkey sprang to the safety of the tree. 'A friend must be judged by his choices,' called the monkey, 'and your choice was a dangerous one!'"
+    ],
+    "riddle": {
+      "question": "The monkey must decide whether to trust the crocodile's offer before stepping onto his back. What kind of thinking does the monkey need here?",
+      "options": [
+        "Repeating the same action many times",
+        "Choosing one path based on a condition or warning",
+        "Remembering a growing count",
+        "Looking up a value by name"
+      ],
+      "correctIndex": 1,
+      "explanation": "The monkey weighs a condition - is it safe? - and then picks one of two actions. In Python this is an if/else decision, a conditional."
+    },
+    "conceptReveal": {
+      "title": "Conditionals: decisions with if / else",
+      "summary": "Programs make choices by checking a condition and running one of two blocks of code.",
+      "codeExample": "river_is_risky = True\n\nif river_is_risky:\n    print(\"Stay in the tree\")\nelse:\n    print(\"Climb on the crocodile\")",
+      "points": [
+        "if checks a condition that is True or False.",
+        "Only one block runs: the if block, or the else block.",
+        "Indentation (4 spaces) tells Python which lines belong to each block.",
+        "You can add more branches with elif."
+      ]
+    },
+    "microLesson": {
+      "headline": "Three ingredients of a decision",
+      "paragraphs": [
+        "Every decision needs a condition - a question that is either True or False, like 'is the river risky?'.",
+        "If the condition is True, Python runs the indented lines under if. Otherwise it runs the lines under else. Only one block ever runs.",
+        "Real programs chain decisions with elif ('else if') for more than two branches, like choosing mango, banana, or nothing."
+      ],
+      "keyPoints": [
+        "Conditions compare values: ==, !=, >, <, >=, <=.",
+        "if runs when True; else catches everything else.",
+        "Indent the lines inside each block by 4 spaces."
+      ]
+    },
+    "challenge": {
+      "title": "The dangerous crossing",
+      "instruction": "The monkey checks the river before crossing. If it is raining, print \"Stay in the tree\". Otherwise print \"Climb on the crocodile\". The variable is_raining is already set - write the if/else to decide.",
+      "starterCode": "# The river is dangerous today\nis_raining = True\n\n# Decide: stay or cross?\nif is_raining:\n    print(\"Stay in the tree\")\nelse:\n    print(\"Climb on the crocodile\")",
+      "hint": "An if block runs when its condition is True. Here is_raining is True.",
+      "check": {
+        "type": "output-equals",
+        "expected": "Stay in the tree",
+        "message": "Since it is raining, the monkey stays safely in the tree."
+      }
+    },
+    "project": {
+      "title": "The Mango Picker",
+      "brief": "Help the monkey pick ripe mangoes. If a mango's ripeness is 8 or more, print \"Ripe mango\". Otherwise print \"Not ripe yet\". Try changing ripeness to test both branches.",
+      "starterCode": "ripeness = 9\n\nif ripeness >= 8:\n    print(\"Ripe mango\")\nelse:\n    print(\"Not ripe yet\")",
+      "successHint": "Expected output: Ripe mango",
+      "check": {
+        "type": "output-equals",
+        "expected": "Ripe mango",
+        "message": "9 is greater than or equal to 8, so the mango is ripe."
+      }
+    }
+  },
+  {
+    "id": "heron-crab",
+    "title": "The Heron and the Crab",
+    "moral": "Believe what you see, not only what you are told.",
+    "concept": "Conditionals",
+    "conceptSlug": "conditionals",
+    "difficulty": "Beginner",
+    "icon": "heron",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A wise old heron lived beside a quiet pond full of fish and one slow, careful crab. The heron was too old to catch fish by speed, so he thought of a trick.",
+      "'Dear friends,' he said one morning, 'I have heard that a hunter is coming to drain the pond. I know a secret pond high in the hills where you will be safe. I will carry you there one by one.'",
+      "The fish trusted the heron and climbed onto his beak. One by one he flew to the secret pond - which was not a pond at all, but the top of a tall tree where he ate every last fish.",
+      "The crab watched the fish leave and never return. 'Carry me too,' he said, climbing onto the heron's back. Halfway up the crab saw the bones of his friends scattered below. 'You are no saviour,' he said, and snapped the heron's neck with his strong claws. Then he crawled safely back to the pond."
+    ],
+    "riddle": {
+      "question": "The crab notices that every fish who left with the heron has disappeared. He sees the bones below and must decide instantly: trust the heron or fight back. What is the crab really doing?",
+      "options": [
+        "Repeating one action over and over",
+        "Checking a condition and choosing a response",
+        "Counting the fish in the pond",
+        "Storing a name in a variable"
+      ],
+      "correctIndex": 1,
+      "explanation": "The crab gathers information - fish missing, bones visible - and uses it to decide: if the heron is lying, fight back; otherwise, trust him. Checking a condition and acting on it is exactly what an if/else statement does."
+    },
+    "conceptReveal": {
+      "title": "Conditionals: decide based on evidence",
+      "summary": "An if/else statement lets a program look at the facts and choose a path. True goes one way, False goes the other.",
+      "codeExample": "fish_missing = 3\nbones_visible = True\n\nif bones_visible:\n    print(\"Danger! Fight back!\")\nelse:\n    print(\"Trust the heron\")",
+      "points": [
+        "A condition is a question: bones_visible == True or fish_missing > 0.",
+        "if runs its block when the condition is True.",
+        "else runs its block when the condition is False.",
+        "Only one block ever runs - never both."
+      ]
+    },
+    "microLesson": {
+      "headline": "Gather evidence, then choose",
+      "paragraphs": [
+        "The crab did not decide blindly. He watched what happened to the fish and looked for proof before choosing. A program does the same: gather information in variables, then ask a question.",
+        "If the condition is True, Python runs the lines under if. If it is False, it runs the lines under else. Only one path is taken.",
+        "You can combine conditions with and and or to make smarter decisions: if bones_visible and fish_missing > 0."
+      ],
+      "keyPoints": [
+        "if condition: runs when the condition is True.",
+        "else: runs when the condition is False.",
+        "Combine checks with and / or for richer decisions.",
+        "Indent every line inside a block by 4 spaces."
+      ]
+    },
+    "challenge": {
+      "title": "The crab's decision",
+      "instruction": "The crab sees fish bones near the heron's tree. If bones_visible is True, print \"Snap the neck!\". Otherwise print \"Trust the heron\". Write the if/else using the variable bones_visible.",
+      "starterCode": "# The crab sees bones near the heron's tree\nbones_visible = True\n\n# Should he trust the heron?\nif bones_visible:\n    print(\"Snap the neck!\")\nelse:\n    print(\"Trust the heron\")",
+      "hint": "bones_visible is True, so the if block runs.",
+      "check": {
+        "type": "output-equals",
+        "expected": "Snap the neck!",
+        "message": "The bones prove the heron is lying, so the crab fights back."
+      }
+    },
+    "project": {
+      "title": "The Pond Watcher",
+      "brief": "Help the crab count the fish. Start fish_count at 5. After each fish leaves with the heron, subtract 1. If fish_count drops to 2 or below, print \"Time to escape!\". Otherwise print \"Still safe\".",
+      "starterCode": "# The pond starts with five fish\nfish_count = 5\n\n# One fish leaves\nfish_count = fish_count - 1\n\n# Another fish leaves\nfish_count = fish_count - 1\n\n# Check if it is time to escape\nif fish_count <= 2:\n    print(\"Time to escape!\")\nelse:\n    print(\"Still safe\")",
+      "successHint": "Expected output: Still safe",
+      "check": {
+        "type": "output-equals",
+        "expected": "Still safe",
+        "message": "5 - 1 - 1 = 3 fish remain, which is above 2, so the crab stays safe for now."
+      }
+    }
+  },
+  {
+    "id": "brahmin-goat",
+    "title": "The Brahmin and the Goat",
+    "moral": "Listen to those who know, and let the rest pass by.",
+    "concept": "Conditionals",
+    "conceptSlug": "conditionals",
+    "difficulty": "Beginner",
+    "icon": "brahmin",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A poor Brahmin received a fat goat as a gift and hoisted it onto his shoulders to carry home. Along the road he met a clever woman who cried, 'Brahmin! Why do you carry a dog on your shoulders? That is inauspicious!'",
+      "The Brahmin looked at the goat and said firmly, 'This is a goat, not a dog.' But a little farther on a man called out, 'Hey Brahmin, you are carrying a pig! Put it down before it dirties your clothes.' The Brahmin shook his head. 'It is a goat.'",
+      "Then a third person laughed and said, 'Fool, that is a donkey you are lugging about!' The Brahmin began to doubt himself. He set the goat down and stared at it, confused.",
+      "A wise old man walking by saw the trouble and said, 'Do not listen to every voice on the road. Ask yourself: what do you know it to be? If it looks like a goat, walks like a goat, and bleats like a goat, then it is a goat.' The Brahmin nodded, picked up his goat, and walked on."
+    ],
+    "riddle": {
+      "question": "The Brahmin hears three different claims about the animal on his shoulders. He must check each claim one by one and decide which is true. What Python idea matches this chain of checks?",
+      "options": [
+        "A single assignment that never changes",
+        "A loop that repeats the same action",
+        "A chain of if / elif / else that checks each condition in turn",
+        "A list that stores many values"
+      ],
+      "correctIndex": 2,
+      "explanation": "Each claim is a condition: is it a dog? a pig? a donkey? The Brahmin tests them one after another until one matches. In Python this is an if/elif/else chain - each elif checks a new possibility."
+    },
+    "conceptReveal": {
+      "title": "elif: more than two branches",
+      "summary": "When a decision has more than two options, elif lets you check several conditions one after another. The first True branch runs; the rest are skipped.",
+      "codeExample": "animal = \"goat\"\n\nif animal == \"dog\":\n    print(\"Inauspicious!\")\nelif animal == \"pig\":\n    print(\"Dirty!\")\nelif animal == \"donkey\":\n    print(\"Foolish!\")\nelse:\n    print(\"It is a goat.\")",
+      "points": [
+        "elif adds extra branches between if and else.",
+        "Only the first True branch runs; the rest are skipped.",
+        "You can have as many elif branches as you need.",
+        "The else at the end catches anything that did not match."
+      ]
+    },
+    "microLesson": {
+      "headline": "Check one, then the next, then the next",
+      "paragraphs": [
+        "The Brahmin does not decide after hearing the first voice. He listens to all three, checks each claim against what he knows, and only then makes up his mind. An if/elif/else chain works the same way.",
+        "if checks the first condition. If it is False, Python moves to the first elif and checks that. If that is also False, it tries the next elif, and so on.",
+        "The moment a condition is True, Python runs its block and skips the rest. The final else is a safety net for when none of the conditions match."
+      ],
+      "keyPoints": [
+        "if / elif / else checks conditions in order.",
+        "Only the first matching branch runs.",
+        "Add as many elif branches as you need.",
+        "else catches everything the earlier branches missed."
+      ]
+    },
+    "challenge": {
+      "title": "What is on the Brahmin's shoulders?",
+      "instruction": "The Brahmin meets three people, each claiming the animal is something different. Use an if/elif/else chain to check: if animal is \"dog\", print \"Inauspicious!\". If it is \"pig\", print \"Dirty!\". If it is \"donkey\", print \"Foolish!\". Otherwise print \"It is a goat.\".",
+      "starterCode": "# What does the Brahmin carry?\nanimal = \"goat\"\n\nif animal == \"dog\":\n    print(\"Inauspicious!\")\nelif animal == \"pig\":\n    print(\"Dirty!\")\nelif animal == \"donkey\":\n    print(\"Foolish!\")\nelse:\n    print(\"It is a goat.\")",
+      "hint": "animal is \"goat\", which does not match any of the first three conditions, so the else block runs.",
+      "check": {
+        "type": "output-equals",
+        "expected": "It is a goat.",
+        "message": "The animal is a goat, so none of the first three conditions match and the else block runs."
+      }
+    },
+    "project": {
+      "title": "The Road of Voices",
+      "brief": "Help the Brahmin check each claim. Write an if/elif/else chain: if claim is \"dog\" print \"No!\", elif claim is \"pig\" print \"No!\", elif claim is \"donkey\" print \"No!\", else print \"Yes, it is a goat!\". Try changing claim to test each branch.",
+      "starterCode": "claim = \"pig\"\n\nif claim == \"dog\":\n    print(\"No!\")\nelif claim == \"pig\":\n    print(\"No!\")\nelif claim == \"donkey\":\n    print(\"No!\")\nelse:\n    print(\"Yes, it is a goat!\")",
+      "successHint": "Expected output: No!",
+      "check": {
+        "type": "output-equals",
+        "expected": "No!",
+        "message": "The claim is \"pig\", which matches the second elif, so \"No!\" is printed."
+      }
+    }
+  },
+  {
+    "id": "monkey-king",
+    "title": "The Great Monkey King",
+    "moral": "Never ignore the signs of a changing world.",
+    "concept": "Conditionals",
+    "conceptSlug": "conditionals",
+    "difficulty": "Beginner",
+    "icon": "monkeyking",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A great monkey king led his troop of a hundred monkeys through a dangerous forest. One winter they found a mango grove beside a wide, still lake, and the monkey king tasted the fruit and declared it safe.",
+      "The troop gorged on sweet mangoes and fell asleep in the warm sun by the water's edge. But the monkey king stayed awake, watching the lake. He noticed the water creeping higher - warm snowmelt from the mountains was flowing in.",
+      "He shook his troop awake. 'The water is rising! We must move to higher ground at once!' But the monkeys were sleepy and full. 'Just a little longer,' they mumbled, and rolled over.",
+      "By morning the lake had swallowed the grove. Only the monkey king, clinging to the highest branch, survived. He wept for his friends and swore he would never again ignore the signs of a changing world."
+    ],
+    "riddle": {
+      "question": "The monkey king watches three things - the water level, the season, and whether his troop is awake - to decide what to do. What Python idea lets him check many conditions and choose the right action?",
+      "options": [
+        "A single print statement",
+        "A variable that holds a number",
+        "An if / elif / else chain that checks each condition",
+        "A loop that runs forever"
+      ],
+      "correctIndex": 2,
+      "explanation": "The monkey king gathers several facts and checks them in order: is the water rising? is it winter? is the troop sleeping? Each condition leads to a different action. An if/elif/else chain lets a program make exactly this kind of multi-condition decision."
+    },
+    "conceptReveal": {
+      "title": "elif: many conditions, one choice",
+      "summary": "When the right action depends on several different facts, elif lets you test them in order and act on the first one that is true.",
+      "codeExample": "water_rising = True\nseason = \"winter\"\n\nif season == \"summer\":\n    print(\"Stay by the lake\")\nelif water_rising and season == \"winter\":\n    print(\"Move to higher ground!\")\nelse:\n    print(\"Keep watching\")",
+      "points": [
+        "elif lets you test a second condition when the first was False.",
+        "Combine conditions with and: water_rising and season == \"winter\".",
+        "The first True branch runs; the rest are skipped.",
+        "You can chain as many elif branches as you need."
+      ]
+    },
+    "microLesson": {
+      "headline": "Read the signs, then decide",
+      "paragraphs": [
+        "The monkey king does not act on a single fact. He watches the water, remembers the season, and notices his troop's state. Only when several signs point to danger does he decide to act.",
+        "An if/elif/else chain works the same way. The first condition is checked first; if it is False, the program moves to the next elif and checks that, and so on.",
+        "You can combine conditions with and and or to make smarter checks: if water_rising and season == 'winter' tests two facts at once."
+      ],
+      "keyPoints": [
+        "elif tests a new condition when the previous one was False.",
+        "and combines two conditions: both must be True.",
+        "or lets either condition being True trigger the branch.",
+        "The first matching branch runs; the rest are skipped."
+      ]
+    },
+    "challenge": {
+      "title": "The monkey king's warning",
+      "instruction": "The monkey king checks three things. If season is \"summer\", print \"Stay by the lake\". Elif water_rising is True, print \"Move to higher ground!\". Otherwise print \"Keep watching\". Write the if/elif/else chain.",
+      "starterCode": "# The monkey king reads the signs\nseason = \"winter\"\nwater_rising = True\n\nif season == \"summer\":\n    print(\"Stay by the lake\")\nelif water_rising:\n    print(\"Move to higher ground!\")\nelse:\n    print(\"Keep watching\")",
+      "hint": "season is \"winter\", not \"summer\", so the first condition is False. Then water_rising is checked.",
+      "check": {
+        "type": "output-equals",
+        "expected": "Move to higher ground!",
+        "message": "Season is winter (not summer), but water_rising is True, so the elif branch runs."
+      }
+    },
+    "project": {
+      "title": "The Rising Lake",
+      "brief": "Track the lake's water level through three time periods. Start at 2. Add 1, then add 2. At each step, check: if level is 5 or more, print \"Danger!\". Elif level is 3, print \"Watch closely\". Otherwise print \"All calm\".",
+      "starterCode": "# The lake starts at a safe level\nlevel = 2\nprint(\"All calm\")\n\n# Snowmelt trickles in\nlevel = level + 1\nif level >= 5:\n    print(\"Danger!\")\nelif level == 3:\n    print(\"Watch closely\")\nelse:\n    print(\"All calm\")\n\n# More snowmelt arrives\nlevel = level + 2\nif level >= 5:\n    print(\"Danger!\")\nelif level == 3:\n    print(\"Watch closely\")\nelse:\n    print(\"All calm\")",
+      "successHint": "Expected output: All calm, Watch closely, Danger!",
+      "check": {
+        "type": "output-equals",
+        "expected": "All calm\nWatch closely\nDanger!",
+        "message": "Level 2 prints All calm, level 3 prints Watch closely, level 5 prints Danger!"
+      }
+    }
+  },
+  {
+    "id": "crow-snake",
+    "title": "The Crow and the Snake",
+    "moral": "When strength is not enough, let cleverness lead.",
+    "concept": "Conditionals",
+    "conceptSlug": "conditionals",
+    "difficulty": "Beginner",
+    "icon": "crowsnake",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A crow and her mate built a cosy nest in a great banyan tree. In a hollow at the foot of the same tree lived a black cobra, silent and greedy.",
+      "Every time the crow laid eggs, the cobra waited until the parents flew out, then slithered up and swallowed them. The heartbroken parents tried to guard the nest day and night, but they were far too weak to fight such a serpent.",
+      "So the mother crow studied the situation and chose a different move. One morning she snatched a golden chain from a queen bathing at the lake, then flew low and slow over the cobra's hollow with the servants chasing and shouting behind her.",
+      "Above the hole she let the chain drop in. 'Dig! The thief went into that hollow!' cried the servants, and as they dug, out came the snake - and they finished him at once. From that day the crows raised their chicks in peace."
+    ],
+    "riddle": {
+      "question": "The mother crow weighs three possible moves - guarding the nest, fighting the snake, or luring the humans - and picks the one that fits what she sees. What Python idea matches this kind of choice?",
+      "options": [
+        "Repeating one action many times",
+        "Storing a value in a variable",
+        "Checking each situation in turn and acting on the first that fits",
+        "Printing the same message every time"
+      ],
+      "correctIndex": 2,
+      "explanation": "The crow does not act blindly. She checks each possibility in order - can I win? should I guard? is a trick better? - and acts on the first situation that holds true. That is exactly how an if/elif/else chain chooses an action."
+    },
+    "conceptReveal": {
+      "title": "Strategy: pick the action that fits",
+      "summary": "A program can weigh several situations and choose a matching action. The if/elif/else chain checks conditions in order and runs the first block that fits.",
+      "codeExample": "snake_location = \"hole\"   # \"tree\", \"hole\" or \"away\"\n\nif snake_location == \"tree\":\n    print(\"Flap and peck!\")\nelif snake_location == \"hole\":\n    print(\"Drop the necklace in!\")\nelse:\n    print(\"Rest easy\")",
+      "points": [
+        "Each branch handles one situation: tree, hole, or away.",
+        "Python checks the branches top to bottom and runs only the first match.",
+        "The else block is the fallback when no condition fits.",
+        "Order matters - put the most specific check first."
+      ]
+    },
+    "microLesson": {
+      "headline": "Read the situation, choose the move",
+      "paragraphs": [
+        "The mother crow never rushed. She looked at where the snake was, how strong she was, and what tools she had - then picked a plan to match. Programs do this with chains of conditions.",
+        "if tests the first situation. If it is False, elif tests the next one, and the next, until something fits. Only the matching block runs.",
+        "A good strategy lists its checks from most specific to most general, so the smartest plan is chosen before the fallback."
+      ],
+      "keyPoints": [
+        "Check conditions from most specific to most general.",
+        "Only the first True branch runs; the rest are skipped.",
+        "else is the safe fallback plan.",
+        "Combine facts with and / or when a plan needs two things at once."
+      ]
+    },
+    "challenge": {
+      "title": "Choose the crow's move",
+      "instruction": "The mother crow watches where the snake is. If snake_location is \"tree\", print \"Flap and peck!\". Elif it is \"hole\", print \"Drop the necklace in!\". Otherwise print \"Rest easy\". Finish the if/elif/else chain.",
+      "starterCode": "# Where is the snake right now?\nsnake_location = \"hole\"\n\n# Pick the best move\nif snake_location == \"tree\":\n    print(\"Flap and peck!\")\nelif snake_location == \"hole\":\n    print(\"Drop the necklace in!\")\nelse:\n    print(\"Rest easy\")",
+      "hint": "snake_location is \"hole\", which does not match the first check but does match the elif.",
+      "check": {
+        "type": "output-equals",
+        "expected": "Drop the necklace in!",
+        "message": "The snake hides in its hole, so the clever trick is the right move."
+      }
+    },
+    "project": {
+      "title": "The Crow's Plan Book",
+      "brief": "Help the crow plan three days. Each day has two facts: snake_nearby and eggs_ready. Write an if/elif/else for each day: if snake_nearby is True print \"Lure the humans!\", elif eggs_ready is True print \"Sit on the eggs\", otherwise print \"Collect twigs\".",
+      "starterCode": "# Day 1: no snake nearby, eggs are ready\nsnake_nearby = False\neggs_ready = True\n\nif snake_nearby:\n    print(\"Lure the humans!\")\nelif eggs_ready:\n    print(\"Sit on the eggs\")\nelse:\n    print(\"Collect twigs\")\n\n# Day 2: the snake comes near, eggs are ready\nsnake_nearby = True\neggs_ready = True\n\nif snake_nearby:\n    print(\"Lure the humans!\")\nelif eggs_ready:\n    print(\"Sit on the eggs\")\nelse:\n    print(\"Collect twigs\")\n\n# Day 3: no snake and no eggs yet\nsnake_nearby = False\neggs_ready = False\n\nif snake_nearby:\n    print(\"Lure the humans!\")\nelif eggs_ready:\n    print(\"Sit on the eggs\")\nelse:\n    print(\"Collect twigs\")",
+      "successHint": "Expected output: Sit on the eggs, Lure the humans!, Collect twigs (each on its own line)",
+      "check": {
+        "type": "output-equals",
+        "expected": "Sit on the eggs\nLure the humans!\nCollect twigs",
+        "message": "Day 1 hatches safely, Day 2 needs the trick, Day 3 is quiet twig duty."
+      }
+    }
+  },
+  {
+    "id": "tortoise-hare",
+    "title": "The Tortoise and the Hare",
+    "moral": "Slow and steady wins the race.",
+    "concept": "Loops",
+    "conceptSlug": "loops",
+    "difficulty": "Beginner",
+    "icon": "tortoise",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "The hare laughed at the tortoise for being slow. 'Let us race,' said the tortoise calmly. 'I accept!' the hare chuckled, and they began.",
+      "In a flash the hare shot ahead. It grew so confident that it lay down under a tree for a nap, sure it would still win.",
+      "The tortoise did not hurry. It simply kept walking - step after step, lap after lap, never stopping, never giving up.",
+      "When the hare woke, the tortoise was already near the finish line. 'Slow and steady wins the race,' said the tortoise, and crossed first."
+    ],
+    "riddle": {
+      "question": "The tortoise wins by doing the same simple thing - walking - over and over in a steady rhythm. What is the pattern of its action?",
+      "options": [
+        "One decision, then stop",
+        "The same step repeated many times in order",
+        "Storing a single growing number",
+        "Choosing between two friends"
+      ],
+      "correctIndex": 1,
+      "explanation": "The tortoise repeats one action again and again. Python expresses repetition with a loop - for or while - so you never write the same line over and over."
+    },
+    "conceptReveal": {
+      "title": "Loops: repeat without repeating yourself",
+      "summary": "A loop runs a block of code many times, so one line of code can do the work of a hundred.",
+      "codeExample": "for lap in range(1, 6):\n    print(\"Lap\", lap, \"- keep going!\")",
+      "points": [
+        "for runs the indented block once for each value.",
+        "range(1, 6) gives 1, 2, 3, 4, 5 (up to, but not including, 6).",
+        "while repeats as long as a condition stays True.",
+        "Loops keep code short and remove repetition errors."
+      ]
+    },
+    "microLesson": {
+      "headline": "Two loops, one idea",
+      "paragraphs": [
+        "A for loop walks through a sequence - like a list of laps or a range of numbers - running its block once per item.",
+        "A while loop keeps going as long as its condition is True, just like the tortoise keeps walking until it reaches the finish line.",
+        "Whatever you repeat, the body (the indented lines) holds the action, and the loop header holds the pattern."
+      ],
+      "keyPoints": [
+        "for x in range(...): repeats a fixed number of times.",
+        "while condition: repeats until the condition becomes False.",
+        "Always indent the body by 4 spaces.",
+        "Make sure while loops can end - no infinite walks!"
+      ]
+    },
+    "challenge": {
+      "title": "Every lap counts",
+      "instruction": "Use a for loop with range(1, 6) to print each lap number, one per line. The tortoise takes exactly five laps.",
+      "starterCode": "# The tortoise takes five steady laps\nfor lap in range(1, 6):\n    print(lap)",
+      "hint": "range(1, 6) starts at 1 and stops before 6.",
+      "check": {
+        "type": "output-equals",
+        "expected": "1\n2\n3\n4\n5",
+        "message": "Five lap numbers, one per line, from 1 to 5."
+      }
+    },
+    "project": {
+      "title": "The Steady Walker",
+      "brief": "The tortoise walks 5 laps. Use a while loop: start laps_done at 0, add 1 on each round, and print the lap number until laps_done reaches 5. Then print \"Finished!\".",
+      "starterCode": "laps_done = 0\n\nwhile laps_done < 5:\n    laps_done = laps_done + 1\n    print(laps_done)\n\nprint(\"Finished!\")",
+      "successHint": "Expected output: 1, 2, 3, 4, 5, then Finished! (each on its own line)",
+      "check": {
+        "type": "output-equals",
+        "expected": "1\n2\n3\n4\n5\nFinished!",
+        "message": "Five laps printed, then the finish message."
+      }
+    }
+  },
+  {
+    "id": "banyan-deer",
+    "title": "The Banyan Deer",
+    "moral": "One brave, kind choice can end a cycle of suffering.",
+    "concept": "Loops",
+    "conceptSlug": "loops",
+    "difficulty": "Beginner",
+    "icon": "banyandeer",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "Long ago, two herds of deer grazed beside the fields of Benares - one led by the wise golden Banyan Deer, the other by the proud Branch Deer. The king of men, craving venison for his table, ordered hunters to snare the groves every single day.",
+      "So the two kings made a pact, and a quiet routine was born: each morning the lots were drawn, and whichever deer was chosen walked calmly to the killing block while the rest grazed in peace. Day after day the same ritual repeated, fair and orderly, like clockwork.",
+      "One morning the lot fell upon a pregnant doe of the Branch herd. She begged to wait until her fawn was born, but her own king refused. Without a word the Banyan Deer rose, walked to the block, and laid his golden neck upon it in her place.",
+      "The hunter dropped his knife in wonder. He freed the golden deer, then every deer he had caught, and told the king everything. Moved at last, the king decreed that no deer of the groves would ever be harmed again - and so the daily walk ended, never to repeat."
+    ],
+    "riddle": {
+      "question": "Every morning the herds drew lots, one chosen deer walked to the block, and the next morning the very same steps began again - until the day the king's decree changed everything. What Python idea matches this pattern?",
+      "options": [
+        "Repeating the same routine again and again until a condition finally changes",
+        "Choosing between two different actions just once",
+        "Storing all the deer names in a single value",
+        "Printing one message and stopping immediately"
+      ],
+      "correctIndex": 0,
+      "explanation": "The pact ran like a while loop: the same block of steps executed day after day while a condition held true ('the rule stands'), and it stopped only when something made that condition false."
+    },
+    "conceptReveal": {
+      "title": "Repeat until the condition changes",
+      "summary": "A while loop performs the same block of steps again and again as long as its condition stays True. The moment the condition becomes False, the loop ends.",
+      "codeExample": "rule_stands = True\nday = 1\n\nwhile rule_stands:\n    print(\"Day\", day, \"- lots drawn\")\n    day = day + 1\n    if day == 7:\n        rule_stands = False",
+      "points": [
+        "The condition is checked before every repetition.",
+        "If it is True, the whole block runs once more.",
+        "Something inside the loop must change - here, day grows until it hits 7.",
+        "When the condition turns False, the loop exits and the program continues."
+      ]
+    },
+    "microLesson": {
+      "headline": "Same routine, day after day",
+      "paragraphs": [
+        "The herds' pact was a loop you could set your watch by: draw lots, chosen deer walks, everyone else rests. Nobody wrote those steps twice - the routine simply repeated.",
+        "In Python, a while loop keeps running its indented block while its condition remains True. It is perfect when you cannot know in advance how many repetitions you need.",
+        "But watch the exit: unless something inside the loop nudges the condition toward False - a counter growing, a flag flipping - the routine would run forever, like a pact no king ever ended."
+      ],
+      "keyPoints": [
+        "while repeats as long as its condition is True.",
+        "for suits a known count; while suits 'repeat until something changes'.",
+        "Update a counter or flag inside the loop so it can end.",
+        "Code after the loop runs only once the loop has finished."
+      ]
+    },
+    "challenge": {
+      "title": "Draw the daily lots",
+      "instruction": "The pact ran for five days before the king heard of it. Use a for loop with range(1, 6) to print \"Day X - lots drawn\" for each of the five days. Afterwards print \"The hunter lowers his knife\".",
+      "starterCode": "# Five mornings of the same quiet routine\nfor day in range(1, 6):\n    print(\"Day\", day, \"- lots drawn\")\n\nprint(\"The hunter lowers his knife\")",
+      "hint": "Inside the loop, print combines text, the day number, and more text - commas keep them on one line.",
+      "check": {
+        "type": "output-equals",
+        "expected": "Day 1 - lots drawn\nDay 2 - lots drawn\nDay 3 - lots drawn\nDay 4 - lots drawn\nDay 5 - lots drawn\nThe hunter lowers his knife",
+        "message": "Five identical mornings printed by one small loop."
+      }
+    },
+    "project": {
+      "title": "End the Cycle",
+      "brief": "Retell the ending with a sentinel loop. Start rule_stands as True and day at 1. While rule_stands is True, print \"Day X : one deer walks to the block\" and increase day by 1. When day reaches 7, set rule_stands to False. After the loop, print \"The king spares both herds\".",
+      "starterCode": "# The routine repeats while the old rule stands\nrule_stands = True\nday = 1\n\nwhile rule_stands:\n    print(\"Day\", day, \": one deer walks to the block\")\n    day = day + 1\n    if day == 7:\n        rule_stands = False\n\nprint(\"The king spares both herds\")",
+      "successHint": "Expected output: six 'Day X' lines, then 'The king spares both herds'",
+      "check": {
+        "type": "output-equals",
+        "expected": "Day 1 : one deer walks to the block\nDay 2 : one deer walks to the block\nDay 3 : one deer walks to the block\nDay 4 : one deer walks to the block\nDay 5 : one deer walks to the block\nDay 6 : one deer walks to the block\nThe king spares both herds",
+        "message": "Six dawns of the old routine, then the decree that ends it forever."
+      }
+    }
+  },
+  {
+    "id": "ant-dove",
+    "title": "The Ant and the Dove",
+    "moral": "Kindness given always finds its way back.",
+    "concept": "Loops",
+    "conceptSlug": "loops",
+    "difficulty": "Beginner",
+    "icon": "antdove",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A dove had built her nest on a branch that leaned over a cool stream. One parched afternoon, a little ant went down to the water to drink - and slipped in. The current gripped her at once, and every tiny kick only seemed to pull her further from the shore.",
+      "The dove saw the struggle and plucked a wide leaf, letting it fall right beside the drowning ant. Step by patient step the ant hauled herself up the leaf, rested as it drifted, and climbed off safely onto the muddy bank.",
+      "Days later the ant looked up to see a hunter below the dove's branch, aiming his sticky lime-twigs straight at her friend. The ant could not scare him away in one leap - so she began to climb: one step up his sandal, another up his ankle, again and again, until she reached his bare hand.",
+      "There she gave one sharp nibble! The hunter cried out and dropped his twigs, the dove heard the commotion and flew safely off - and the smallest of friends had returned the greatest of favours."
+    ],
+    "riddle": {
+      "question": "The drowning ant could not reach shore in one jump, and she could not climb the hunter in one hop - each rescue happened through small steps repeated until the goal was reached. What Python idea matches this?",
+      "options": [
+        "Choosing between two actions just once",
+        "Storing a single value and never changing it",
+        "Repeating small steps over and over until the desired outcome is reached",
+        "Printing one message and stopping immediately"
+      ],
+      "correctIndex": 2,
+      "explanation": "Both rescues ran like a loop: the same little step repeated, with progress counted each time, until the condition 'goal reached' finally became true and the loop ended."
+    },
+    "conceptReveal": {
+      "title": "Repeat step by step until you arrive",
+      "summary": "A loop repeats the same small action, counting progress as it goes, and stops once the desired outcome is reached.",
+      "codeExample": "step = 0\n\nwhile step < 3:\n    step = step + 1\n    print(\"Step\", step, \"- closer to shore\")\n\nprint(\"Safe!\")",
+      "points": [
+        "Each pass through the loop is one small step toward the goal.",
+        "The condition is checked before every repetition.",
+        "A counter grows inside the loop so it knows when to stop.",
+        "When the outcome is achieved, the loop ends and the program continues after it."
+      ]
+    },
+    "microLesson": {
+      "headline": "Little steps, repeated, get there",
+      "paragraphs": [
+        "No single kick could carry the ant to shore, and no single hop could scale the hunter - but a step repeated is a journey. Loops turn tiny actions into great rescues.",
+        "In Python you set up a counter, check a condition, do one step of work, and let the loop wheel around again. Each pass brings the goal measurably closer.",
+        "The dove's kindness also worked this way: spot trouble, drop help, watch, repeat when needed. Programs are happiest doing exactly this kind of patient, watchful repetition."
+      ],
+      "keyPoints": [
+        "Loops break big goals into many identical small steps.",
+        "while checks the goal condition before every pass.",
+        "Update the counter inside the loop or it never finishes.",
+        "Code after the loop runs once the outcome is achieved."
+      ]
+    },
+    "challenge": {
+      "title": "Cross the stream",
+      "instruction": "The stranded ant crosses the floating leaf in exactly four steps. Use a for loop with range(1, 5) to print \"Step X across the leaf\" for each step. Afterwards print \"Safe on the riverbank!\".",
+      "starterCode": "# Four patient steps bring the ant ashore\nfor step in range(1, 5):\n    print(\"Step\", step, \"across the leaf\")\n\nprint(\"Safe on the riverbank!\")",
+      "hint": "range(1, 5) gives 1, 2, 3, 4 - one number for each step.",
+      "check": {
+        "type": "output-equals",
+        "expected": "Step 1 across the leaf\nStep 2 across the leaf\nStep 3 across the leaf\nStep 4 across the leaf\nSafe on the riverbank!",
+        "message": "Four printed steps carried the ant from mid-stream to safety."
+      }
+    },
+    "project": {
+      "title": "Up the Hunter's Arm",
+      "brief": "Rescue the dove! Start steps_taken at 0. While steps_taken is less than 6, increase it by 1 and print \"Climb N\" (with N the current count). When the loop ends, print \"Nibble! The hunter cries out and the dove flies free.\".",
+      "starterCode": "# Small climbs, repeated, save a friend\nsteps_taken = 0\n\nwhile steps_taken < 6:\n    steps_taken = steps_taken + 1\n    print(\"Climb\", steps_taken)\n\nprint(\"Nibble! The hunter cries out and the dove flies free.\")",
+      "successHint": "Expected output: Climb 1 through Climb 6, then the rescue message",
+      "check": {
+        "type": "output-equals",
+        "expected": "Climb 1\nClimb 2\nClimb 3\nClimb 4\nClimb 5\nClimb 6\nNibble! The hunter cries out and the dove flies free.",
+        "message": "Six steady climbs, one decisive bite - repetition saved the day."
+      }
+    }
+  },
+  {
+    "id": "golden-goose",
+    "title": "The Golden Goose",
+    "moral": "Patience gathers gold; greed scatters it.",
+    "concept": "Loops",
+    "conceptSlug": "loops",
+    "difficulty": "Beginner",
+    "icon": "goldgoose",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "Long ago the Bodhisatta lived as a goose whose feathers shone like beaten gold. Flying over a poor hut one day, he saw a widow and her two daughters struggling for their daily bread, and his heart filled with pity.",
+      "From that day a gentle routine began: each week the golden goose would return to the hut's roof and leave behind one single feather. The mother sold it at the market, and week after week, coin by coin, the little family climbed out of misery.",
+      "But comfort bred greed. 'Why wait for one feather at a time?' the mother grumbled. 'If I pluck them all today, tomorrow we shall be rich!' And when the goose came on his usual round, she seized him and stripped every feather from his body.",
+      "Yet feathers plucked in greed are not gold - they turned plain white as straw. The goose, unharmed and patient, waited until his wings grew strong again, then flew away, never passing that roof again. The weekly visits had ended, and no gold ever returned."
+    ],
+    "riddle": {
+      "question": "The goose's gift was not one event but a rhythm: every week he returned, every week one feather was sold, and the coins slowly grew. What Python idea matches a process that repeats once for each passing period of time?",
+      "options": [
+        "Repeating the same action once for each period of time as it passes",
+        "Making one choice between two actions",
+        "Storing all the coins in a single value that never changes",
+        "Printing a message exactly once"
+      ],
+      "correctIndex": 0,
+      "explanation": "The weekly visit is a loop where each pass stands for one period of time: the same small process runs again and again, and what it produces can be counted up as time goes by."
+    },
+    "conceptReveal": {
+      "title": "Repetition across time",
+      "summary": "A loop can model a recurring process: each pass of the loop represents one tick of time, and values updated inside it accumulate as the weeks go by.",
+      "codeExample": "coins = 0\n\nfor week in range(1, 5):\n    print(\"Week\", week, \"- one feather sold\")\n    coins = coins + 1\n\nprint(coins, \"coins gathered\")",
+      "points": [
+        "Each pass of the loop stands for one period of time - here, a week.",
+        "The body runs fresh every pass, just as the goose returns each visit.",
+        "A variable updated inside the loop accumulates what time adds up.",
+        "The loop ends when the planned span is finished - or when the pattern is broken."
+      ]
+    },
+    "microLesson": {
+      "headline": "Again and again, across time",
+      "paragraphs": [
+        "One feather could never feed a family at once, but one feather every week could. Repetition over time is how small gifts become great fortunes - in stories and in programs alike.",
+        "Python loops walk through such schedules naturally: let the loop variable count weeks, run the same steps each pass, and keep totals in variables you update along the way.",
+        "Remember the mother's mistake too. A pattern that repeats only works while its condition holds - break the cycle too soon, or greedily force it, and the gold stops coming."
+      ],
+      "keyPoints": [
+        "Use loops to repeat a process once per period of time.",
+        "range() acts like a calendar of planned repeats.",
+        "Accumulate results in a variable updated inside the loop.",
+        "The loop ends when its span finishes or its condition breaks."
+      ]
+    },
+    "challenge": {
+      "title": "Three visits of gold",
+      "instruction": "The golden goose returns for three weeks before the mother's greed begins. Use a for loop with range(1, 4) to print \"Visit X - one golden feather\" for each visit.",
+      "starterCode": "# The gentle weekly rhythm\nfor week in range(1, 4):\n    print(\"Visit\", week, \"- one golden feather\")",
+      "hint": "range(1, 4) counts 1, 2, 3 - three visits, three feathers.",
+      "check": {
+        "type": "output-equals",
+        "expected": "Visit 1 - one golden feather\nVisit 2 - one golden feather\nVisit 3 - one golden feather",
+        "message": "Three patient visits, printed by one small loop."
+      }
+    },
+    "project": {
+      "title": "Market Weeks",
+      "brief": "Track the family's fortune over six weeks. Start coins and week both at 0. While week is less than 6, increase week by 1, add 1 to coins, and print \"Week X : one golden feather sold\". After the loop ends, print the total with \"6 silver coins in the jar\" (use the coins variable, not a fixed number).",
+      "starterCode": "# Coin by coin, the fortune grows\ncoins = 0\nweek = 0\n\nwhile week < 6:\n    week = week + 1\n    coins = coins + 1\n    print(\"Week\", week, \": one golden feather sold\")\n\nprint(coins, \"silver coins in the jar\")",
+      "successHint": "Expected output: six 'Week X' lines, then '6 silver coins in the jar'",
+      "check": {
+        "type": "output-equals",
+        "expected": "Week 1 : one golden feather sold\nWeek 2 : one golden feather sold\nWeek 3 : one golden feather sold\nWeek 4 : one golden feather sold\nWeek 5 : one golden feather sold\nWeek 6 : one golden feather sold\n6 silver coins in the jar",
+        "message": "Six weeks of patience, counted up into six shining coins."
+      }
+    }
+  },
+  {
+    "id": "monkey-wedge",
+    "title": "The Monkey and the Wedge",
+    "moral": "Don't tug at what you don't understand.",
+    "concept": "Loops",
+    "conceptSlug": "loops",
+    "difficulty": "Beginner",
+    "icon": "monkeywedge",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A merchant's caravan halted in the forest at noon, and the woodcutters left a great log half split, its two halves held apart only by a wooden wedge. Nearby, a troop of monkeys came swinging down to play among the carts.",
+      "One young monkey could not take his eyes off that wedge. What a strange wooden tongue, he thought, keeping the mighty log open! He settled astride the log, gripped the wedge in both hands, and began to tug - gently at first, then harder.",
+      "Pull followed pull, each one loosening the wedge a little more, while the monkey checked again and again whether it still held firm. At last one mighty tug set it completely free - and the moment it slipped out, the heavy halves sprang shut with a snap.",
+      "The poor monkey's tail was caught fast beneath them. There he hung until the woodcutters returned, chattering lessons he would never forget: every pull had been his own, and the very last pull was the one that ended everything."
+    ],
+    "riddle": {
+      "question": "The monkey tugged again and again while the wedge held firm - and the instant it no longer held, the pulling stopped. Which Python statement works exactly this way?",
+      "options": [
+        "A for loop that always runs a fixed number of times",
+        "A single if choice made once",
+        "A while loop: its block repeats while a condition is True, and stops the moment the condition becomes False",
+        "A variable declaration"
+      ],
+      "correctIndex": 2,
+      "explanation": "while wedge_holds: keep pulling. Each pass re-tests the condition; when something inside the loop makes it False, the repetition ends right there."
+    },
+    "conceptReveal": {
+      "title": "Repeat while it holds",
+      "summary": "A while loop tests its condition before every pass. While the condition is True the block repeats; when it turns False the loop stops instantly and the program moves on.",
+      "codeExample": "wedge_holds = True\npulls = 0\n\nwhile wedge_holds:\n    pulls = pulls + 1\n    print(\"Pull\", pulls)\n    if pulls == 3:\n        wedge_holds = False\n\nprint(\"The loop has ended\")",
+      "points": [
+        "The stopping condition is checked before every single pass.",
+        "While it stays True, the whole block runs once more.",
+        "Something inside the loop must push the condition toward False.",
+        "The moment the test fails, Python jumps past the loop - no extra pass."
+      ]
+    },
+    "microLesson": {
+      "headline": "Every pull asks: does it still hold?",
+      "paragraphs": [
+        "The monkey never decided to stop pulling - the wedge did. A while loop works the same way: you write the repeating action once, and the condition alone decides how many times it runs.",
+        "Before each pass Python asks the yes/no question. Yes means run the block again; No means leave the loop immediately and continue below it.",
+        "That is why loops need an ending built inside - a counter climbing, a flag flipping. Without one, the question never turns to No, and the monkey tugs forever."
+      ],
+      "keyPoints": [
+        "while = 'keep doing this while the answer is True'.",
+        "The condition flips False through work done inside the loop.",
+        "Stopping conditions prevent infinite loops.",
+        "Statements after the loop run only once the condition has failed."
+      ]
+    },
+    "challenge": {
+      "title": "Keep tugging",
+      "instruction": "Simulate the monkey's pulls. Start wedge_holds as True and tugs at 0. While wedge_holds is True, add 1 to tugs, print \"Tug X\", and when tugs reaches 4 set wedge_holds to False. After the loop, print \"The wedge pops out!\".",
+      "starterCode": "# Pulls repeat while the wedge holds firm\nwedge_holds = True\ntugs = 0\n\nwhile wedge_holds:\n    tugs = tugs + 1\n    print(\"Tug\", tugs)\n    if tugs == 4:\n        wedge_holds = False\n\nprint(\"The wedge pops out!\")",
+      "hint": "The flag flip happens inside the loop - that is what lets while wedge_holds ever end.",
+      "check": {
+        "type": "output-equals",
+        "expected": "Tug 1\nTug 2\nTug 3\nTug 4\nThe wedge pops out!",
+        "message": "Four pulls while the flag held true, then the loop stopped exactly on cue."
+      }
+    },
+    "project": {
+      "title": "The Wedge Comes Loose",
+      "brief": "Flip the logic: this time repeat while the wedge is NOT yet loose. Start wedge_loose as False and pulls at 0. While not wedge_loose, add 1 to pulls, print \"Pull X - the wedge shifts\" (X is the pull number), and set wedge_loose to True once pulls reaches 6. After the loop, print \"SNAP! The log springs shut.\".",
+      "starterCode": "# Repeat until the wedge is free\nwedge_loose = False\npulls = 0\n\nwhile not wedge_loose:\n    pulls = pulls + 1\n    print(\"Pull\", pulls, \"- the wedge shifts\")\n    if pulls == 6:\n        wedge_loose = True\n\nprint(\"SNAP! The log springs shut.\")",
+      "successHint": "Expected output: six 'Pull X' lines, then the snap message",
+      "check": {
+        "type": "output-equals",
+        "expected": "Pull 1 - the wedge shifts\nPull 2 - the wedge shifts\nPull 3 - the wedge shifts\nPull 4 - the wedge shifts\nPull 5 - the wedge shifts\nPull 6 - the wedge shifts\nSNAP! The log springs shut.",
+        "message": "Six pulls under a negated stopping condition, then the snap that ends the story."
+      }
+    }
+  },
+  {
+    "id": "elephant-blind-men",
+    "title": "The Elephant and the Blind Men",
+    "moral": "Put the pieces together to see the whole.",
+    "concept": "Lists",
+    "conceptSlug": "lists",
+    "difficulty": "Beginner",
+    "icon": "elephant",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "In a village, six blind men heard that an elephant had arrived. They had never seen one, and each went to feel it with his hands.",
+      "The first touched the side and cried, 'It is a wall!' The second felt the tusk and said, 'No, it is a spear!' The third touched the ear: 'It is a fan!'",
+      "The fourth grasped the leg - 'It is a tree!' The fifth caught the tail - 'It is a rope!' The sixth touched the trunk - 'It is a snake!'",
+      "They argued loudly until a wise elder said, 'Each of you touched a different part. If you put your six ideas together, in order, you will begin to see the whole elephant.'"
+    ],
+    "riddle": {
+      "question": "Each man's description is one piece of the elephant. How should the six descriptions be kept together so they can be looked at in order?",
+      "options": [
+        "In a single number",
+        "In a collection that keeps items in order",
+        "In one yes/no choice",
+        "By making a decision"
+      ],
+      "correctIndex": 1,
+      "explanation": "Six related values in a fixed order fit naturally in a list. Each position has an index, and you can grab any item by its position."
+    },
+    "conceptReveal": {
+      "title": "Lists: ordered collections with positions",
+      "summary": "A list keeps many related values together in order, and you reach each one by its index.",
+      "codeExample": "parts = [\"wall\", \"spear\", \"fan\", \"tree\", \"rope\", \"snake\"]\nprint(parts[0])   # wall   (first position)\nprint(parts[-1])  # snake  (last position)",
+      "points": [
+        "Square brackets [ ] create a list; commas separate items.",
+        "Indices start at 0, so parts[0] is the first item.",
+        "Negative indices count from the end: parts[-1] is the last item.",
+        "len(parts) tells you how many items are in the list."
+      ]
+    },
+    "microLesson": {
+      "headline": "Positions, not names",
+      "paragraphs": [
+        "A list is one variable that holds many values in a set order - like the six blind men's answers lined up in a row.",
+        "Each item has an index. The first item is at index 0, the second at 1, and so on. Python also lets you count backwards: parts[-1] is the last item.",
+        "You can change items, add new ones with append(), and loop over the whole list easily."
+      ],
+      "keyPoints": [
+        "items = [a, b, c] creates a list.",
+        "First item: items[0]. Last item: items[-1].",
+        "len(items) gives the number of items.",
+        "Loop through with: for item in items:"
+      ]
+    },
+    "challenge": {
+      "title": "The six views of the elephant",
+      "instruction": "Store the six descriptions in a list, then print the first (index 0) and the last (index -1), one per line.",
+      "starterCode": "parts = [\"wall\", \"spear\", \"fan\", \"tree\", \"rope\", \"snake\"]\n\n# Print the first and the last description\nprint(parts[0])\nprint(parts[-1])",
+      "hint": "The first item is at index 0, the last at index -1.",
+      "check": {
+        "type": "output-equals",
+        "expected": "wall\nsnake",
+        "message": "The first view is 'wall' and the last view is 'snake'."
+      }
+    },
+    "project": {
+      "title": "Elephant Notes",
+      "brief": "Create a list called notes with three strings: \"trunk\", \"tail\", \"tusk\". Then print how many notes there are using len(), and print the last note.",
+      "starterCode": "notes = [\"trunk\", \"tail\", \"tusk\"]\n\n# How many notes are there?\nprint(len(notes))\n\n# What is the last note?\nprint(notes[-1])",
+      "successHint": "Expected output: 3, then tusk",
+      "check": {
+        "type": "output-equals",
+        "expected": "3\ntusk",
+        "message": "There are three notes, and the last one is 'tusk'."
+      }
+    }
+  },
+  {
+    "id": "crows-owls",
+    "title": "The Crows and the Owls",
+    "moral": "Wisdom can slip through any door.",
+    "concept": "Lists",
+    "conceptSlug": "lists",
+    "difficulty": "Beginner",
+    "icon": "crowowls",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "For years the crows and the owls were bitter enemies. From a hidden cave fortress the owl king swooped out night after night, and each morning the crow kingdom woke to find more names missing from its once-great flock.",
+      "So the crow council met. One minister said flee, another said make peace - and both plans were struck from the table. Only wise Meghavarna remained, offering a daring stratagem: let the flock attack him as a traitor and abandon him beside the owls' own cave.",
+      "Beaten and left for dead, he was found by the owl sentries - and soon the enemy's little band had a surprising new member. Inside the cave Meghavarna studied every passage, won the owl king's trust, and waited. One day he slipped out and returned carrying burning twigs in his beak.",
+      "Dropping the flames at the cave mouth, he sealed the owls inside their fortress forever. The crows rebuilt their flock feather by feather until every lost name was restored - proof that a kingdom, like any true collection, is defined not by staying the same but by how wisely it changes."
+    ],
+    "riddle": {
+      "question": "Through the whole war the crow kingdom kept its name, yet its contents never stopped changing - members were lost, a stranger joined the owls' cave, plans were added and struck off. What Python structure behaves like that?",
+      "options": [
+        "A value fixed forever, which can never gain or lose anything",
+        "A collection that keeps its order while items are added, replaced, and removed",
+        "A single number counting the crows",
+        "One yes/no decision"
+      ],
+      "correctIndex": 1,
+      "explanation": "Lists are collections whose contents can change: append() adds a member, index assignment replaces one, remove() takes one away - while the list itself keeps its identity and order."
+    },
+    "conceptReveal": {
+      "title": "Lists that grow and shrink",
+      "summary": "A list is not a sealed box. Its contents can be added to, updated in place, and removed - while the same variable keeps holding the collection.",
+      "codeExample": "flock = [\"crow king\", \"scout\"]\nflock.append(\"Meghavarna\")   # a new member joins\nflock[1] = \"decoy\"           # an old role is replaced\nflock.remove(\"decoy\")       # a member departs\nprint(flock)",
+      "points": [
+        "append() adds an item to the end of an existing list.",
+        "Assigning to an index updates one slot in place: flock[0] = \"new name\".",
+        "remove() deletes the first item that matches the given value.",
+        "The variable still points to the same list - only its contents changed."
+      ]
+    },
+    "microLesson": {
+      "headline": "A nest that changes, a name that stays",
+      "paragraphs": [
+        "Night after night the crow kingdom changed - members fell, plans were dropped, an enemy slipped into the owl cave - yet everyone still called it the crow kingdom. One name, ever-changing contents.",
+        "Python lists work the same way. The variable keeps pointing at the collection while your calls reshape what is inside: append() welcomes newcomers, assignment swaps roles, remove() says farewell.",
+        "Collections like this are called mutable - changeable in place. It is exactly what made Meghavarna's trick possible: the owls assumed their group was fixed, but one careful addition undid them all."
+      ],
+      "keyPoints": [
+        "Lists are mutable: their contents change without making a new list.",
+        "append() adds; remove() deletes the first matching item.",
+        "Index assignment updates a single slot: items[1] = \"new\".",
+        "len() always reports the current size, whatever just changed."
+      ]
+    },
+    "challenge": {
+      "title": "Choosing a Plan",
+      "instruction": "The crow council starts with three plans: \"flee\", \"make peace\", and \"the stratagem\". Use remove() to strike off \"flee\", print the list, then strike off \"make peace\" and print again.",
+      "starterCode": "# Strike off the weak plans\ncouncil = [\"flee\", \"make peace\", \"the stratagem\"]\n\ncouncil.remove(\"flee\")\nprint(council)\n\ncouncil.remove(\"make peace\")\nprint(council)",
+      "hint": "remove() deletes the first item equal to the value you pass in.",
+      "check": {
+        "type": "output-equals",
+        "expected": "['make peace', 'the stratagem']\n['the stratagem']",
+        "message": "Two weak plans struck off - only the stratagem remains on the table."
+      }
+    },
+    "project": {
+      "title": "Inside the Owl Cave",
+      "brief": "Track how the owls' little band changes. Start with cave = [\"owl king\", \"owl guards\"]. Append \"Meghavarna\" and print the list. Then update the second slot with cave[1] = \"trapped owls\" and print again. Finally remove \"trapped owls\" and print one last time.",
+      "starterCode": "# The enemy's roster, reshaped by one visitor\ncave = [\"owl king\", \"owl guards\"]\n\n# A surprising new member joins\ncave.append(\"Meghavarna\")\nprint(cave)\n\n# The fire changes everything\ncave[1] = \"trapped owls\"\nprint(cave)\n\n# And then they are gone\ncave.remove(\"trapped owls\")\nprint(cave)",
+      "successHint": "Expected output: the list after appending, after updating, and after removing",
+      "check": {
+        "type": "output-equals",
+        "expected": "['owl king', 'owl guards', 'Meghavarna']\n['owl king', 'trapped owls', 'Meghavarna']\n['owl king', 'Meghavarna']",
+        "message": "Added, updated, removed - the cave's contents told the whole war."
+      }
+    }
+  },
+  {
+    "id": "five-friends",
+    "title": "The Dove, Crow, Mouse, Tortoise and Deer",
+    "moral": "True friends are each other's strength.",
+    "concept": "Lists",
+    "conceptSlug": "lists",
+    "difficulty": "Beginner",
+    "icon": "fivefriends",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "When a hunter's net swept down upon a flock of doves, their king Chitragriva gave a wise command: not one bird struggled alone. Flapping as one, the whole flock lifted the net into the sky and carried it to the mouse Hiranyaka, who gnawed every cord until all were free.",
+      "From that day a friendship grew - dove and mouse, then the crow Lightwing with his watchful eyes, then the deer with his swift hooves, and at last the tortoise, slow but steadfast. Five very different creatures, each with his own gift, bound together in one band.",
+      "When the deer stepped into a hunter's snare, the friends proved what a band can do: the crow circled high to keep watch, the deer held still while the mouse's sharp teeth worked strand after strand of the rope - each member called upon for exactly the help he alone could give.",
+      "And when the tortoise was carried off by hunters, the deer lay still pretending death while the crow pecked at him, drawing the hunter away - and the mouse chewed open the bag that held their friend. One by one, name by name, the five stood together against every snare."
+    ],
+    "riddle": {
+      "question": "Five very different friends - dove, crow, mouse, tortoise, deer - each needed by name, yet always kept together as one band. What Python structure keeps them together and lets you call on any one of them, or visit them all in turn?",
+      "options": [
+        "Five separate variables that never meet",
+        "A single number counting the friends",
+        "A list holding all five, where each is reached by index and visited one by one in a loop",
+        "One yes/no decision"
+      ],
+      "correctIndex": 2,
+      "explanation": "A list stores related characters together in order: friends[0] calls on the first directly, and a loop like 'for friend in friends:' visits every member in turn - exactly how the five friends worked."
+    },
+    "conceptReveal": {
+      "title": "Friends in a row: lists meet loops",
+      "summary": "Lists hold many related values in order, indices reach any single element, and loops process every element - the three working best side by side.",
+      "codeExample": "friends = [\"dove\", \"crow\", \"mouse\", \"tortoise\", \"deer\"]\n\nprint(friends[0])     # the first friend\nprint(friends[-1])    # the last friend\n\nfor friend in friends:   # visit every friend\n    print(friend)",
+      "points": [
+        "One list keeps all five related characters together, in order.",
+        "An index reaches one friend directly: friends[0] or friends[-1].",
+        "for friend in friends: visits each element without needing positions.",
+        "range(len(friends)) pairs each position number with its element."
+      ]
+    },
+    "microLesson": {
+      "headline": "Five names, one list, many rescues",
+      "paragraphs": [
+        "Keeping five separate variables would be like five friends wandering the forest apart - easy to lose one, hard to gather them quickly. A list keeps the whole band in one place, in order.",
+        "Need one friend? Call by index: friends[2] brings the mouse. Need everyone? Let a loop walk the list from start to end, doing the same favour for each.",
+        "That pairing - store together, reach singly, process in bulk - is why lists and loops are inseparable companions in Python, just as the five friends were inseparable in the forest."
+      ],
+      "keyPoints": [
+        "Related values belong together in one ordered list.",
+        "Index access reaches exactly one element: friends[i].",
+        "A for loop processes every element without repeating code.",
+        "range(len(items)) gives both the position and the element."
+      ]
+    },
+    "challenge": {
+      "title": "Roll Call of Friends",
+      "instruction": "The five friends stand in order: \"dove\", \"crow\", \"mouse\", \"tortoise\", \"deer\". Store them in a list called friends. Then use range(len(friends)) to print each position and name on its own line, formatted like \"0 - dove\".",
+      "starterCode": "# The whole band, one by one\nfriends = [\"dove\", \"crow\", \"mouse\", \"tortoise\", \"deer\"]\n\nfor i in range(len(friends)):\n    print(i, \"-\", friends[i])",
+      "hint": "range(len(friends)) produces 0, 1, 2, 3, 4 - one position per friend; use friends[i] inside the loop.",
+      "check": {
+        "type": "output-equals",
+        "expected": "0 - dove\n1 - crow\n2 - mouse\n3 - tortoise\n4 - deer",
+        "message": "Every friend called by position - the roll call runs itself."
+      }
+    },
+    "project": {
+      "title": "Each Friend's Rescue Role",
+      "brief": "In the great rescue, each friend had a part. Create two parallel lists: friends = [\"dove\", \"crow\", \"mouse\", \"tortoise\", \"deer\"] and roles = [\"spots danger\", \"scouts the sky\", \"gnaws the ropes\", \"waits in water\", \"lures the hunters\"]. Loop over the positions and print each pair on one line, separated by a space (for example: mouse gnaws the ropes).",
+      "starterCode": "# Every member has exactly one gift to give\nfriends = [\"dove\", \"crow\", \"mouse\", \"tortoise\", \"deer\"]\nroles = [\"spots danger\", \"scouts the sky\", \"gnaws the ropes\", \"waits in water\", \"lures the hunters\"]\n\nfor i in range(len(friends)):\n    print(friends[i], roles[i])",
+      "successHint": "Expected output: five lines, each pairing a friend with their role",
+      "check": {
+        "type": "output-equals",
+        "expected": "dove spots danger\ncrow scouts the sky\nmouse gnaws the ropes\ntortoise waits in water\ndeer lures the hunters",
+        "message": "Two lists, one loop - each friend matched to the role only they could play."
+      }
+    }
+  },
+  {
+    "id": "elephant-caravan",
+    "title": "The Elephant Caravan",
+    "moral": "Wisdom walks in the right order.",
+    "concept": "Lists",
+    "conceptSlug": "lists",
+    "difficulty": "Beginner",
+    "icon": "elecaravan",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A merchant company preparing to cross the great wilderness sought out an ancient elephant as their guide, for he alone knew the desert's rhythm: rest through the burning day, march beneath the stars, and drink only at water holes tested in their proper turn.",
+      "The old elephant formed his column with care. The strongest young bull walked first, testing the path for soft sand and lions; behind him came the mothers with their calves, sheltered in the very middle of the line; and the mightiest elders closed the rear, trunks raised against every threat.",
+      "Not far behind travelled a second caravan, whose proud young leader scoffed at such ceremony. His elephants marched in whatever order they happened to start - calves straggling at the edges, no scout ahead - and at noon he led them straight to the first water hole without waiting, where lurking beasts lay in wait.",
+      "The wise column reached the far city whole and unharmed, every member exactly where wisdom had placed him. Same animals, same desert - but the caravan that honoured its order survived, while the one that scattered its sequence never arrived at all."
+    ],
+    "riddle": {
+      "question": "Both caravans had the same kinds of elephants, yet one arrived safely and one did not - because who marched first, middle, and last mattered more than anything else. What does this teach us about Python lists?",
+      "options": [
+        "That lists scramble themselves to stay balanced",
+        "That a list keeps its items in an exact sequence, and processing follows that stored order",
+        "That every item in a list behaves identically wherever it sits",
+        "That order only matters for numbers"
+      ],
+      "correctIndex": 1,
+      "explanation": "A list preserves position: index 0 truly comes first, and loops walk the sequence front to back. Reorder the same items and you get a different journey entirely."
+    },
+    "conceptReveal": {
+      "title": "Order is information",
+      "summary": "Beyond its contents, a list carries meaning in the arrangement itself: the same items in a different order tell a different story.",
+      "codeExample": "march = [\"lead bull\", \"calves\", \"rear guard\"]\n\nprint(march[0])     # the scout goes first\nmarch.reverse()\nprint(march)        # now the calves march first - peril!\n\nmarch.insert(1, \"water master\")\nprint(march)        # slotted exactly where needed",
+      "points": [
+        "Lists keep items in the exact order they are placed.",
+        "The same items reordered make a different sequence with different results.",
+        "insert(position, item) adds an element at a chosen spot.",
+        "reverse() flips a list in place; loops always follow whatever order is stored."
+      ]
+    },
+    "microLesson": {
+      "headline": "Same members, different order, different fate",
+      "paragraphs": [
+        "The wise caravan was not safer because it had different elephants - it was safer because each one stood in his right place. In ordered collections, position itself carries meaning.",
+        "Python lists remember sequence faithfully: whatever you append lands at the end, whatever you insert lands exactly where you aim it, and every loop visits elements front to back.",
+        "So before you process a list, ask the caravan leader's question: is this the right order? If not, tools like reverse(), sort(), and insert() can set the column straight before the journey begins."
+      ],
+      "keyPoints": [
+        "Position matters: friends[0] and friends[-1] are different travellers.",
+        "insert(i, x) places an item precisely within the sequence.",
+        "reverse() and sort() change the stored order itself.",
+        "Loops process elements in stored order - fix the order before you loop."
+      ]
+    },
+    "challenge": {
+      "title": "Fix the Marching Order",
+      "instruction": "The herd lines up, but the mothers with calves arrive late! Start with caravan = [\"lead bull\", \"young bulls\", \"rear guard\"]. Insert \"mothers and calves\" at index 1 so they march safely in the middle, then print the caravan.",
+      "starterCode": "# Everyone in their proper place\ncaravan = [\"lead bull\", \"young bulls\", \"rear guard\"]\n\ncaravan.insert(1, \"mothers and calves\")\nprint(caravan)",
+      "hint": "insert(1, ...) slides everyone from index 1 onward one place back to make room.",
+      "check": {
+        "type": "output-equals",
+        "expected": "['lead bull', 'mothers and calves', 'young bulls', 'rear guard']",
+        "message": "The calves now travel shielded in the middle of the column."
+      }
+    },
+    "project": {
+      "title": "The Safe Crossing",
+      "brief": "Store the caravan's journey in order: route = [\"test the water hole\", \"drink quickly\", \"cross the plain at night\", \"rest through the heat\"]. Loop over the positions and print each as \"Stage X - <step>\" (X starting at 1). Afterwards print \"First:\" with route[0] and \"Last:\" with route[-1].",
+      "starterCode": "# The sequence is the survival plan\nroute = [\"test the water hole\", \"drink quickly\", \"cross the plain at night\", \"rest through the heat\"]\n\nfor i in range(len(route)):\n    print(\"Stage\", i + 1, \"-\", route[i])\n\nprint(\"First:\", route[0])\nprint(\"Last:\", route[-1])",
+      "successHint": "Expected output: four numbered stages, then the First and Last lines",
+      "check": {
+        "type": "output-equals",
+        "expected": "Stage 1 - test the water hole\nStage 2 - drink quickly\nStage 3 - cross the plain at night\nStage 4 - rest through the heat\nFirst: test the water hole\nLast: rest through the heat",
+        "message": "Every stage in its stored order - that discipline carried the caravan through."
+      }
+    }
+  },
+  {
+    "id": "wise-quail",
+    "title": "The Wise Quail",
+    "moral": "Unity lifts what strength alone cannot.",
+    "concept": "Lists",
+    "conceptSlug": "lists",
+    "difficulty": "Beginner",
+    "icon": "wisequail",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "In a forest clearing a fowler spread his great net over the ground where quails came to feed, and day after day he gathered up whatever birds he had snared. At last the flock chose a wise quail as their king, and he taught them a single clever plan.",
+      "When the net fell, every quail was to slip her head through a mesh hole at once, then beat her wings together and rise as one. So it happened: net after net was lifted clean off the earth and carried away to a thorn bush while the fowler shook his empty hands.",
+      "But the flock grew careless in good fortune. One morning a feeding quail trod upon another's head, sharp words flew, and soon the whole company was split into squabbling singles, each sure she alone was right.",
+      "Down came the next net - and there was no rising together. Each bird struggled by herself, tangled deeper, and the fowler carried the entire quarrelling flock away in his basket, wondering how easily a band that soared as one had forgotten how to be counted together."
+    ],
+    "riddle": {
+      "question": "The wise quail never spoke of birds one by one - she always spoke of the flock: how many were present, and how each must act with all the rest. Which Python structure keeps a whole flock under one name, counts it, and visits every member?",
+      "options": [
+        "One separate variable per bird",
+        "A single yes/no choice",
+        "A list holding the entire flock - counted with len() and visited with a loop",
+        "One large number"
+      ],
+      "correctIndex": 2,
+      "explanation": "A list stores the whole group under one name: len(birds) tells you how many are present, and a for loop gives every bird her turn to act - just as the flock rose together."
+    },
+    "conceptReveal": {
+      "title": "One flock, one list",
+      "summary": "Store a whole group in one list, measure it with len(), and let a loop give every member the same instruction.",
+      "codeExample": "birds = [\"quail1\", \"quail2\", \"quail3\"]\n\nprint(len(birds))          # 3 - the flock, counted\n\nfor bird in birds:         # every bird takes part\n    print(bird, \"lifts the net\")",
+      "points": [
+        "One list keeps an entire group together under a single name.",
+        "len(birds) reports how many members are in the group right now.",
+        "for bird in birds: repeats the same action once per member.",
+        "Adding or losing members changes len() automatically - no recounting by hand."
+      ]
+    },
+    "microLesson": {
+      "headline": "Many wings, one name",
+      "paragraphs": [
+        "No single quail was stronger than the net - but the flock was. Python lists work the same way: individual values become one group that you can command as a whole.",
+        "len() is your roll call, answering 'how many are with us?' at any instant. A loop is your command to march: every element receives the same instruction, one after another.",
+        "And remember the quarrel: the list itself never broke - the birds simply stopped acting like one collection. Keep your data grouped, and your group stays powerful."
+      ],
+      "keyPoints": [
+        "Lists turn many values into one manageable group.",
+        "len() counts members instantly, however often they change.",
+        "Iteration gives every member the same turn.",
+        "Grouped data enables group actions - the heart of the quails' trick."
+      ]
+    },
+    "challenge": {
+      "title": "Count the Flock",
+      "instruction": "Seven quails gather to feed: store them in a list called birds using the names \"quail1\" through \"quail7\". Print how many birds are in the flock using len().",
+      "starterCode": "# The whole flock, gathered in one place\nbirds = [\"quail1\", \"quail2\", \"quail3\", \"quail4\", \"quail5\", \"quail6\", \"quail7\"]\n\nprint(len(birds))",
+      "hint": "len() takes the list inside its parentheses and returns the number of items.",
+      "check": {
+        "type": "output-equals",
+        "expected": "7",
+        "message": "Seven quails, counted instantly - the flock is ready."
+      }
+    },
+    "project": {
+      "title": "Lift the Net Together",
+      "brief": "Five quails face the falling net: start from birds = [\"quail1\", \"quail2\", \"quail3\", \"quail4\", \"quail5\"]. Loop over the flock and print each bird followed by \"lifts the net\" (separated by a space). After the loop, print how many flew using the pattern \"<len> birds fly as one\" - build it with len(birds), not a fixed number.",
+      "starterCode": "# Every wing beats as one\nbirds = [\"quail1\", \"quail2\", \"quail3\", \"quail4\", \"quail5\"]\n\nfor bird in birds:\n    print(bird, \"lifts the net\")\n\nprint(len(birds), \"birds fly as one\")",
+      "successHint": "Expected output: five 'lifts the net' lines, then '5 birds fly as one'",
+      "check": {
+        "type": "output-equals",
+        "expected": "quail1 lifts the net\nquail2 lifts the net\nquail3 lifts the net\nquail4 lifts the net\nquail5 lifts the net\n5 birds fly as one",
+        "message": "Each bird did her part, and the flock rose as one - net and all."
+      }
+    }
+  },
+  {
+    "id": "lion-mouse",
+    "title": "The Lion and the Mouse",
+    "moral": "Small helpers can do great work.",
+    "concept": "Functions",
+    "conceptSlug": "functions",
+    "difficulty": "Beginner",
+    "icon": "lion",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A lion lay sleeping in the forest when a little mouse ran right over his nose and woke him. The lion caught the mouse and raised a paw to crush it.",
+      "'Please let me go,' squeaked the mouse. 'One day I may save you.' The lion laughed at such a tiny promise, but he let the mouse go.",
+      "Days later, hunters trapped the lion in a strong net. The lion's roars echoed through the forest, but no one came - no one except the little mouse.",
+      "The mouse gnawed the ropes, one by one, until the lion was free. 'You laughed at my size,' said the mouse, 'but small helpers can do great work.'"
+    ],
+    "riddle": {
+      "question": "The mouse does one small, useful job - gnawing ropes to free a friend. If a friend got stuck tomorrow, the mouse would do the same job again. How could the lion 'ask' for that help each time without retelling the whole story?",
+      "options": [
+        "With a reusable helper that takes a task and returns a result",
+        "By repeating one print statement many times",
+        "By making a single decision",
+        "By storing every word in one string"
+      ],
+      "correctIndex": 0,
+      "explanation": "A function packages a useful action so it can be used again with different inputs. Give it what it needs, it does the job, and it returns the result."
+    },
+    "conceptReveal": {
+      "title": "Functions: reusable helpers",
+      "summary": "A function is a named, reusable block of code. It takes inputs, does a job, and returns a result.",
+      "codeExample": "def gnaw(ropes):\n    freed = ropes - 1\n    return freed\n\nprint(gnaw(3))  # 2",
+      "points": [
+        "def names a function; its body runs only when the function is called.",
+        "Parameters receive the inputs: def gnaw(ropes).",
+        "return hands a result back to the caller.",
+        "Call it as many times as you like: gnaw(5), gnaw(2)..."
+      ]
+    },
+    "microLesson": {
+      "headline": "Ask, work, return",
+      "paragraphs": [
+        "A function is like the mouse's talent for gnawing: one action that can be reused whenever a friend is stuck. Define it once with def, then call it by name.",
+        "Inputs arrive as parameters - the values you pass in the parentheses. The body does the work, and return sends the result back out.",
+        "Once a function exists, the lion never needs the details again: just call gnaw(rope_count) and trust the helper."
+      ],
+      "keyPoints": [
+        "def name(inputs): defines the function.",
+        "Parameters are placeholders for the inputs.",
+        "return gives the result back to the caller.",
+        "Call it with name(input) to use it."
+      ]
+    },
+    "challenge": {
+      "title": "The rope chewer",
+      "instruction": "Finish the gnaw function so it returns ropes + 1 (the mouse chews one extra strand to be sure). Then call gnaw(3) and print the result.",
+      "starterCode": "def gnaw(ropes):\n    return ropes + 1\n\n# Call the helper and print the result\nfreed_ropes = gnaw(3)\nprint(freed_ropes)",
+      "hint": "The function should return ropes + 1.",
+      "check": {
+        "type": "output-equals",
+        "expected": "4",
+        "message": "gnaw(3) returns 3 + 1 = 4, which is printed."
+      }
+    },
+    "project": {
+      "title": "Lion's Rescue Kit",
+      "brief": "Write a function rescue(ropes) that returns the message \"Freed from N ropes!\" using an f-string, where N is the number passed in. Then call rescue(5) and print it.",
+      "starterCode": "def rescue(ropes):\n    return f\"Freed from {ropes} ropes!\"\n\nprint(rescue(5))",
+      "successHint": "Expected output: Freed from 5 ropes!",
+      "check": {
+        "type": "output-equals",
+        "expected": "Freed from 5 ropes!",
+        "message": "The helper returns a message with the number of ropes."
+      }
+    }
+  },
+  {
+    "id": "tortoise-geese",
+    "title": "The Tortoise and the Geese",
+    "moral": "Silence can be the safest seat.",
+    "concept": "Functions",
+    "conceptSlug": "functions",
+    "difficulty": "Beginner",
+    "icon": "tortgeese",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "When the lake where tortoise Kambugriva lived began to dry, his two dear goose friends offered to carry him through the sky to a water that never failed. He could not fly - but the geese knew one flight that worked for any traveller who trusted them.",
+      "Their plan was simple and reusable: a strong stick held between their beaks at both ends, and the passenger biting firmly onto the middle. One rule came with the ride - whatever you hear below, keep your mouth shut until you land.",
+      "Up they rose. Over a village below, folk pointed in wonder - 'Look! Two geese carrying a great wheel!' Kambugriva seethed. A wheel? He was a TORTOISE! The same flight that had carried him perfectly now ended in an instant: he opened his mouth to argue, lost his grip, and fell.",
+      "The geese flew on with heavy hearts, for their flight had never failed before. It had carried any quiet passenger over any distance; only its one condition had been broken - proof that even the finest reusable action depends on how it is used."
+    ],
+    "riddle": {
+      "question": "The geese's flight was one single plan that worked for any traveller - tortoise today, perhaps a mouse tomorrow - needing only the passenger's name filled in each time. What Python idea matches this?",
+      "options": [
+        "Writing out the whole rescue again from scratch for every animal",
+        "A function defined once, whose parameter receives a different argument on every call",
+        "A value fixed forever inside one variable",
+        "A single yes/no decision"
+      ],
+      "correctIndex": 1,
+      "explanation": "def carry(traveller): names the action once; the parameter traveller is a placeholder that each call fills in - carry('tortoise'), carry('mouse') - so one definition serves endless different inputs."
+    },
+    "conceptReveal": {
+      "title": "Define once, fly many times",
+      "summary": "A function packages an action behind a name, with parameters as empty seats. Every call fills those seats with new arguments while the steps stay exactly the same.",
+      "codeExample": "def carry_overhead(traveller):\n    print(traveller, \"bites the stick\")\n    print(\"The geese grip the ends and rise\")\n\ncarry_overhead(\"the tortoise\")\ncarry_overhead(\"the mouse\")",
+      "points": [
+        "def names the reusable action and lists its parameters.",
+        "Parameters are placeholders; arguments are the real values supplied per call.",
+        "Each call runs the identical steps with fresh inputs.",
+        "Change the definition once, and every future call benefits."
+      ]
+    },
+    "microLesson": {
+      "headline": "Same flight, different passenger",
+      "paragraphs": [
+        "The geese did not invent a new way to travel for each friend - they owned one flight and welcomed whoever bit the stick. Functions give Python programs this same economy: write the action once, reuse it forever.",
+        "The parameter is the empty middle of the stick - carry_overhead(traveller) - waiting for whoever comes. Each call passes an argument, and the body runs with that value slotted into place.",
+        "And like the tortoise's one rule, functions come with expectations: pass sensible arguments, respect what the function assumes, and it will serve you faithfully call after call."
+      ],
+      "keyPoints": [
+        "def packages an action behind a name for unlimited reuse.",
+        "Parameters are placeholders written at definition time.",
+        "Arguments are the actual inputs passed at call time.",
+        "One good definition can serve many different callers."
+      ]
+    },
+    "challenge": {
+      "title": "Board the Stick",
+      "instruction": "Write a function carry(name) that prints \"<name> bites the stick\" (with name replaced by the input). Then call it once with \"Kambugriva\" and print nothing else.",
+      "starterCode": "# One flight, ready for any passenger\ndef carry(name):\n    print(name, \"bites the stick\")\n\n# The tortoise boards first\ncarry(\"Kambugriva\")",
+      "hint": "Inside the function, use the parameter name as if it were an ordinary variable; commas in print join pieces with spaces.",
+      "check": {
+        "type": "output-equals",
+        "expected": "Kambugriva bites the stick",
+        "message": "One definition, one call, one passenger safely aboard."
+      }
+    },
+    "project": {
+      "title": "The Sky Ferry",
+      "brief": "Turn the geese's flight into a reusable service. Write a function fly_with(passenger) that prints \"The geese lift <passenger>\". Call it three times - with \"the tortoise\", \"the hare\", and \"the jackal\" - then print \"One action, many travellers\" after all three flights.",
+      "starterCode": "# The reusable sky ferry\ndef fly_with(passenger):\n    print(\"The geese lift\", passenger)\n\nfly_with(\"the tortoise\")\nfly_with(\"the hare\")\nfly_with(\"the jackal\")\n\nprint(\"One action, many travellers\")",
+      "successHint": "Expected output: three lift lines, then the closing line",
+      "check": {
+        "type": "output-equals",
+        "expected": "The geese lift the tortoise\nThe geese lift the hare\nThe geese lift the jackal\nOne action, many travellers",
+        "message": "Three calls, three passengers, one unchanged definition."
+      }
+    }
+  },
+  {
+    "id": "ruru-deer",
+    "title": "The Ruru Deer",
+    "moral": "Gratitude is worth more than gold.",
+    "concept": "Functions",
+    "conceptSlug": "functions",
+    "difficulty": "Beginner",
+    "icon": "rurudeer",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "When great floods swept the river valley, a merchant found himself whirled downstream, crying for any help at all. From the forest came the golden deer Ruru, who plunged into the torrent, bore the struggling man upon his back, and set him safely on the bank.",
+      "The grateful merchant asked what reward he could give. 'Only this,' said Ruru, 'tell no one where I dwell, for kings hunt golden deer.' The man swore it and walked home - carrying with him the one payment the deer had asked.",
+      "Soon after, the queen dreamed of a deer who spoke with wisdom, and the king promised gold to anyone who could find such a wonder. The merchant heard the offer - and forgot everything the river had carried away. He led the huntsmen straight to Ruru's glade, pocketing his reward while the nets closed round.",
+      "But when the king beheld the golden deer, Ruru did not flee - he spoke. He told of the flood, of the rescue upon his back, and of the man whose greed outweighed his oath. Astonished by a deer who answered so wisely, the king lowered every weapon, spared the deer, and let his own judgement fall upon the faithless man instead."
+    ],
+    "riddle": {
+      "question": "Ruru took something in - a drowning man clinging to his back - and gave something back - a life set safe upon the shore; later he took the king's questions in and returned wise answers. What Python mechanism works exactly this way?",
+      "options": [
+        "A variable that keeps only one value forever",
+        "A function that receives inputs through parameters and hands back a result with return",
+        "A loop that repeats without ever finishing",
+        "Two unrelated programs running apart"
+      ],
+      "correctIndex": 1,
+      "explanation": "Parameters carry information INTO a function, its body works with them, and return sends a result back OUT - information in, useful answer out, ready for the caller to use."
+    },
+    "conceptReveal": {
+      "title": "In through parameters, out through return",
+      "summary": "A function takes information in through its parameters, works with it, and sends a finished result back with return - a complete conversation between caller and helper.",
+      "codeExample": "def rescue(traveller):\n    return traveller + \" is safe on the bank\"\n\nmessage = rescue(\"the merchant\")\nprint(message)",
+      "points": [
+        "Arguments supply the inputs; parameters receive them at call time.",
+        "The body treats parameters like ordinary variables while it works.",
+        "return hands exactly one result back to wherever the call was made.",
+        "A returned value can be stored in a variable, printed, or passed onward."
+      ]
+    },
+    "microLesson": {
+      "headline": "Questions in, answers out",
+      "paragraphs": [
+        "Every rescue Ruru made followed one shape: someone came in over his back, and someone stepped out onto solid ground. Functions have the same shape - values arrive through parameters, a finished result departs through return.",
+        "The keyword return does more than end the function: it delivers the outcome to whoever called, so the answer can be stored in a variable, printed, or fed into another helper.",
+        "And because the result depends on the inputs, one definition can answer endless different calls - just as Ruru's wisdom fitted whatever question the king brought before him."
+      ],
+      "keyPoints": [
+        "Inputs flow in as parameters; outcomes flow out via return.",
+        "return sends one value back and ends the call.",
+        "Store returned results in variables to reuse them.",
+        "Same definition, different arguments, fitting answers each time."
+      ]
+    },
+    "challenge": {
+      "title": "Carry Him Ashore",
+      "instruction": "Write a function rescue(swimmer) that returns the string \"<swimmer> reaches the shore\" (with swimmer replaced by the input). Call it with \"the drowning man\" and print what comes back.",
+      "starterCode": "# In goes a swimmer; out comes safety\ndef rescue(swimmer):\n    return swimmer + \" reaches the shore\"\n\nmessage = rescue(\"the drowning man\")\nprint(message)",
+      "hint": "Build the sentence with the parameter plus a string literal joined by +, then return it.",
+      "check": {
+        "type": "output-equals",
+        "expected": "the drowning man reaches the shore",
+        "message": "Information went in through the parameter; a finished answer came back."
+      }
+    },
+    "project": {
+      "title": "The King's Questions",
+      "brief": "The king questions the golden deer. Write a function answer(question) that returns \"Ruru\" when asked \"name\", returns \"Spare all deer\" when asked \"wish\", and returns \"Ask me another\" for anything else. Print the reply to \"name\", then to \"wish\".",
+      "starterCode": "# One wise helper, many possible answers\ndef answer(question):\n    if question == \"name\":\n        return \"Ruru\"\n    if question == \"wish\":\n        return \"Spare all deer\"\n    return \"Ask me another\"\n\nprint(answer(\"name\"))\nprint(answer(\"wish\"))",
+      "successHint": "Expected output: Ruru, then Spare all deer",
+      "check": {
+        "type": "output-equals",
+        "expected": "Ruru\nSpare all deer",
+        "message": "Each question passed in drew exactly the right answer back out."
+      }
+    }
+  },
+  {
+    "id": "jackal-drum",
+    "title": "The Jackal and the Drum",
+    "moral": "Investigation turns terror into understanding.",
+    "concept": "Functions",
+    "conceptSlug": "functions",
+    "difficulty": "Beginner",
+    "icon": "jackaldrum",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A starving jackal wandered onto an old battlefield as evening fell - and froze. BOOM! A deep thunder rolled across the clearing again and again. Every hair on his back cried run, but hunger pinned him in place between fear and need.",
+      "So instead of bolting, he gave himself a method: watch first, creep second, touch last. From a safe distance he studied the sound until he saw its secret - a low branch, swinging in the wind, striking a great drum hung in a treetop.",
+      "Step by patient step he closed in while the boom rolled overhead. A paw tapped the drumhead: soft, slack, harmless. One quick tear and the 'monster' lay open - just hollow wood and stretched skin, with no demon inside, and beside it a fallen shield and enough food for days.",
+      "The jackal dined like a king that night, and carried away something greater than the meal: a method. Whatever thundered next - drum, storm, or shouting men - he could walk the same circle of watch, approach, test, conclude, and let the mystery explain itself."
+    ],
+    "riddle": {
+      "question": "The jackal did not invent a new plan for every frightening noise - he used one method each time: observe the clues, test a possibility, then conclude. What Python idea packages such a repeatable process?",
+      "options": [
+        "Retyping every step from scratch for each new mystery",
+        "A function that wraps the whole procedure once, ready to be called with any new mystery",
+        "A single value stored forever",
+        "A choice made without looking"
+      ],
+      "correctIndex": 1,
+      "explanation": "def investigate(mystery): stores the entire observe-test-conclude procedure under one name. Whenever a new mystery appears, one call hands it over as an argument and the familiar steps run again."
+    },
+    "conceptReveal": {
+      "title": "A method you can call",
+      "summary": "Wrap a whole procedure - observing clues, testing, concluding - into a single named function, then reuse it on every new problem by passing the new subject as an argument.",
+      "codeExample": "def investigate(mystery):\n    print(\"Watching\", mystery, \"from cover\")\n    return \"Explained: \" + mystery\n\nprint(investigate(\"the booming drum\"))",
+      "points": [
+        "One def can hold an entire multi-step procedure.",
+        "The parameter names whatever subject the procedure studies this time.",
+        "Calling the function reruns the exact same steps on new material.",
+        "Returning the verdict lets the caller keep a record of each result."
+      ]
+    },
+    "microLesson": {
+      "headline": "Courage is a procedure",
+      "paragraphs": [
+        "What saved the jackal was not bravery in general but a specific, repeatable sequence: watch, approach, test, conclude. Once discovered, that sequence could face any mystery the forest offered.",
+        "Programmers do the same with functions: the first hard problem teaches you a process; you wrap the process in a definition; after that, solving similar problems costs one short call each.",
+        "Notice the shape, too - information goes in (which mystery?) and a verdict comes out (what is it?). Procedures that take input and give output are the strongest kind to wrap in a function."
+      ],
+      "keyPoints": [
+        "Procedures worth repeating belong inside a function.",
+        "Parameters carry the current case into the shared steps.",
+        "Return values hand back each investigation's conclusion.",
+        "Reuse turns yesterday's courage into today's routine."
+      ]
+    },
+    "challenge": {
+      "title": "Approach the Drum",
+      "instruction": "Write a function investigate(mystery) that prints \"Creep toward <mystery>\" and then returns \"<mystery> is only wood and skin\". Call it with \"the great drum\", store the result, and print it.",
+      "starterCode": "# The jackal's method, wrapped up\ndef investigate(mystery):\n    print(\"Creep toward\", mystery)\n    return mystery + \" is only wood and skin\"\n\nverdict = investigate(\"the great drum\")\nprint(verdict)",
+      "hint": "Do both jobs in order: print the creeping line first, then return the verdict built from the parameter.",
+      "check": {
+        "type": "output-equals",
+        "expected": "Creep toward the great drum\nthe great drum is only wood and skin",
+        "message": "Two steps in, one verdict out - the method already works."
+      }
+    },
+    "project": {
+      "title": "Every Mystery, One Method",
+      "brief": "Reuse the jackal's method across the battlefield. Write investigate(mystery) so it returns \"<mystery>: observed, tested, explained\". Call it for \"the booming drum\", then for \"the fallen helmet\", printing each verdict, and finish by printing \"One method, every mystery\".",
+      "starterCode": "# The same circle of steps, every time\ndef investigate(mystery):\n    return mystery + \": observed, tested, explained\"\n\nprint(investigate(\"the booming drum\"))\nprint(investigate(\"the fallen helmet\"))\n\nprint(\"One method, every mystery\")",
+      "successHint": "Expected output: two verdict lines, then the closing line",
+      "check": {
+        "type": "output-equals",
+        "expected": "the booming drum: observed, tested, explained\nthe fallen helmet: observed, tested, explained\nOne method, every mystery",
+        "message": "Two calls, two verdicts, one unchanged procedure."
+      }
+    }
+  },
+  {
+    "id": "sparrow-elephant",
+    "title": "The Sparrow and the Elephant",
+    "moral": "Many small deeds can do what strength cannot.",
+    "concept": "Functions",
+    "conceptSlug": "functions",
+    "difficulty": "Beginner",
+    "icon": "sparreleph",
+    "xp": 60,
+    "projectXp": 40,
+    "fable": [
+      "A sparrow pair had built their nest on a leafy branch beside the river, and there their eggs lay warm beneath them. One scorching afternoon a wild elephant, mad with heat, came crashing to the shade - and rammed the tree until the whole branch snapped, nest and eggs crushed beneath him.",
+      "The sparrow's mate wept over her broken home, but her tears turned to resolve. 'Strength is not mine,' she said, 'but friends are.' Word went out, and the helpers gathered: the woodpecker with his iron beak, the bee with her buzzing guile, and the old frog who knew every hollow of the shore.",
+      "'I will blind him,' said the woodpecker, and at noon he struck again and again at the giant's brow until dark rings ringed his eyes. 'I will lead him,' hummed the bee, circling closer and closer until the maddened elephant staggered after her sound, straight toward the lake.",
+      "There by the deep dry pit the frog waited, croaking from its very edge. Thirsty and half-blind, the elephant charged gladly at the watery song - and thundered down into the abyss. Each friend had given one small action; strung together, those actions had felled a giant."
+    ],
+    "riddle": {
+      "question": "No single friend could fight the elephant, yet the plan worked because each friend owned one clear action - blind, lure, croak - and the actions ran one after another. How does Python build big tasks this way?",
+      "options": [
+        "By writing one enormous block of code that never changes",
+        "By breaking the big problem into small named functions - each doing one job - and calling them in order",
+        "By copying the same instructions everywhere by hand",
+        "By hoping the problem solves itself"
+      ],
+      "correctIndex": 1,
+      "explanation": "Decomposition: split the giant task into small single-purpose functions - strike(), lure(), croak() - then call them in sequence so separate little actions combine into one grand plan."
+    },
+    "conceptReveal": {
+      "title": "Small functions, one big plan",
+      "summary": "A large problem becomes manageable when each piece is wrapped in its own small function and a few lines call them in order - teamwork between definitions.",
+      "codeExample": "def strike():\n    print(\"The woodpecker blinds the giant\")\n\ndef lure():\n    print(\"The bee leads him toward the lake\")\n\n# The whole plan, three lines long\nstrike()\nlure()\nprint(\"The frog croaks from the pit\")",
+      "points": [
+        "Give every helper its own small function with one clear job.",
+        "Names like strike() and lure() make the plan readable at a glance.",
+        "Calling functions in order runs the coordinated plan top to bottom.",
+        "Fix or improve one helper without rewriting the others."
+      ]
+    },
+    "microLesson": {
+      "headline": "Divide the giant",
+      "paragraphs": [
+        "The sparrow could never push an elephant - so she never tried. She divided the impossible into possible pieces and handed each piece to a specialist. Programs grow the same way.",
+        "In Python, each piece becomes a function with a name that says what it does. The main plan shrinks to a short list of calls, reading almost like the story itself.",
+        "And like the friends, small functions stay independent: if the lure ever fails, you repair lure() alone while strike() keeps working. Division of labour is also division of risk."
+      ],
+      "keyPoints": [
+        "Decompose: one big task, several small single-job functions.",
+        "Call the helpers in order to perform the full plan.",
+        "Well-named functions make plans self-explanatory.",
+        "Isolated functions are easier to fix, test, and reuse."
+      ]
+    },
+    "challenge": {
+      "title": "The First Helper Answers",
+      "instruction": "Write a function peck(target) that prints \"The woodpecker strikes <target>\" (with target filled in). Call it with \"the giant's brow\".",
+      "starterCode": "# One friend, one job\ndef peck(target):\n    print(\"The woodpecker strikes\", target)\n\npeck(\"the giant's brow\")",
+      "hint": "The comma inside print adds one space between the words automatically.",
+      "check": {
+        "type": "output-equals",
+        "expected": "The woodpecker strikes the giant's brow",
+        "message": "One helper defined, one action delivered."
+      }
+    },
+    "project": {
+      "title": "The Plan Against the Elephant",
+      "brief": "Build the whole rescue plan from small functions. Define three functions with no parameters: strike() printing \"The woodpecker blinds the giant\", lure() printing \"The bee leads him to the lake\", and croak() printing \"The frog croaks from the pit\". Then call them in that order, and finally print \"Together the small have won\".",
+      "starterCode": "# Three helpers, one plan\ndef strike():\n    print(\"The woodpecker blinds the giant\")\n\ndef lure():\n    print(\"The bee leads him to the lake\")\n\ndef croak():\n    print(\"The frog croaks from the pit\")\n\nstrike()\nlure()\ncroak()\nprint(\"Together the small have won\")",
+      "successHint": "Expected output: three action lines in order, then the victory line",
+      "check": {
+        "type": "output-equals",
+        "expected": "The woodpecker blinds the giant\nThe bee leads him to the lake\nThe frog croaks from the pit\nTogether the small have won",
+        "message": "Three small functions, called in order - a giant has fallen."
+      }
+    }
+  }
+]

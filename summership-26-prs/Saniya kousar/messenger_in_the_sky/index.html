@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Royal Messengers of Oakhaven | Interactive Python Chronicle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold-bright: #ffd166;
+    --gold-main: #f0c876;
+    --gold-dark: #b8862d;
+    --gold-glow: rgba(240, 200, 118, 0.35);
+    --crimson: #e63946;
+    --teal-river: #2ec4b6;
+    --bg-dark: #080a10;
+    --card-bg: rgba(14, 18, 28, 0.88);
+    --border-gold: rgba(240, 200, 118, 0.28);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg-dark);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    color: #f1edeb;
+    user-select: none;
+  }
+
+  .app {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+    overflow: hidden;
+  }
+  .slide.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Top Bar */
+  .top-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background: linear-gradient(180deg, rgba(8,10,16,0.92) 0%, rgba(8,10,16,0) 100%);
+    pointer-events: auto;
+    gap: 12px;
+  }
+  .story-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .title-icon {
+    font-size: 20px;
+    filter: drop-shadow(0 0 8px rgba(255,209,102,0.6));
+  }
+  .title-text {
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--gold-main);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+  }
+
+  /* Chapter Selector Nav */
+  .chapter-nav-wrap {
+    display: flex;
+    align-items: center;
+    background: rgba(14, 18, 28, 0.8);
+    border: 1px solid var(--border-gold);
+    border-radius: 24px;
+    padding: 3px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    overflow-x: auto;
+  }
+  .chapter-pill {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: none;
+    background: transparent;
+    color: #c9c1b3;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+  }
+  .chapter-pill:hover {
+    color: #fff;
+  }
+  .chapter-pill.active {
+    background: linear-gradient(135deg, rgba(240, 200, 118, 0.25), rgba(184, 134, 45, 0.4));
+    border: 1px solid var(--gold-main);
+    color: var(--gold-bright);
+    box-shadow: 0 2px 10px rgba(240, 200, 118, 0.25);
+  }
+
+  .top-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .top-pill-btn {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: rgba(20, 26, 40, 0.7);
+    border: 1px solid var(--border-gold);
+    color: #e5dfd3;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .top-pill-btn:hover {
+    background: rgba(240, 200, 118, 0.18);
+    border-color: var(--gold-main);
+    color: var(--gold-bright);
+    transform: translateY(-1px);
+  }
+  .top-pill-btn.active {
+    background: linear-gradient(135deg, rgba(240, 200, 118, 0.25), rgba(184, 134, 45, 0.35));
+    border-color: var(--gold-main);
+    color: var(--gold-bright);
+  }
+
+  /* =========================================================
+     SLIDE 1: STORY SCENE
+     ========================================================= */
+  #slide-story {
+    background: #080a10;
+  }
+
+  .bg-stage {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+  .bg-layer {
+    position: absolute;
+    inset: -30px;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transform: scale(1);
+    transition: opacity 1.1s cubic-bezier(0.4, 0, 0.2, 1), transform 14s cubic-bezier(0.1, 0, 0.2, 1);
+    filter: brightness(0.92) contrast(1.05);
+    pointer-events: none;
+  }
+  .bg-layer.active {
+    opacity: 1;
+    transform: scale(1.06) translate(4px, -6px);
+  }
+
+  /* Cinematic Overlays */
+  .vignette-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(8,10,16,0.12) 0%, rgba(8,10,16,0.55) 75%, rgba(6,8,12,0.88) 100%);
+    pointer-events: none;
+    z-index: 10;
+  }
+  .cinematic-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(8,10,16,0.4) 0%, transparent 25%, transparent 60%, rgba(8,10,16,0.85) 85%, #080a10 100%);
+    pointer-events: none;
+    z-index: 11;
+  }
+  .particles-canvas {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 12;
+  }
+
+  .scene-location-tag {
+    position: absolute;
+    top: 76px;
+    left: 28px;
+    z-index: 25;
+    background: rgba(14, 18, 28, 0.75);
+    border: 1px solid rgba(240, 200, 118, 0.3);
+    padding: 5px 14px;
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    transition: opacity 0.5s ease;
+  }
+  .scene-loc-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold-bright);
+    box-shadow: 0 0 10px var(--gold-bright);
+  }
+  .scene-loc-text {
+    font-family: 'Cinzel', serif;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--gold-main);
+    text-transform: uppercase;
+  }
+
+  /* Dialogue Theater */
+  .dialogue-theater {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1040px, 94vw);
+    z-index: 40;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dialogue-box {
+    position: relative;
+    background: linear-gradient(170deg, rgba(20, 24, 38, 0.94) 0%, rgba(11, 14, 22, 0.96) 100%);
+    border: 2px solid var(--border-gold);
+    border-radius: 20px;
+    padding: 20px 28px;
+    box-shadow: 0 20px 50px -10px rgba(0,0,0,0.85), 0 0 30px -10px var(--gold-glow);
+    backdrop-filter: blur(16px);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 20px;
+    align-items: center;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .dialogue-box:hover {
+    border-color: rgba(240, 200, 118, 0.5);
+  }
+  .dialogue-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 40px;
+    right: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-main), transparent);
+    opacity: 0.7;
+  }
+
+  .speaker-portrait-wrap {
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .speaker-avatar-frame {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--gold-main);
+    box-shadow: 0 0 20px rgba(240, 200, 118, 0.35);
+    background: #141724;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .speaker-emblem {
+    font-size: 34px;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+  }
+  .speaker-crest-badge {
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold-dark));
+    border: 2px solid #0e121c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  }
+
+  .dialogue-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .speaker-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .speaker-header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .speaker-name {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--gold-bright);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  }
+  .speaker-role {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 3px 9px;
+    border-radius: 12px;
+    background: rgba(240, 200, 118, 0.12);
+    border: 1px solid rgba(240, 200, 118, 0.25);
+    color: #e5dfd3;
+  }
+  .dialogue-counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(240, 200, 118, 0.7);
+    background: rgba(0,0,0,0.3);
+    padding: 3px 9px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .dialogue-text-wrap {
+    min-height: 54px;
+    display: flex;
+    align-items: flex-start;
+  }
+  .dialogue-text {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 17.5px;
+    line-height: 1.55;
+    color: #f7f3ec;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+  }
+  .dialogue-text em {
+    color: var(--gold-bright);
+    font-style: italic;
+  }
+  .dialogue-text code {
+    font-family: 'JetBrains Mono', monospace;
+    color: #ffd166;
+    background: rgba(0,0,0,0.4);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(240,200,118,0.25);
+  }
+  .typing-cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.1em;
+    background: var(--gold-bright);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blinkCursor 0.8s infinite;
+  }
+  @keyframes blinkCursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+  .dialogue-nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(14, 18, 28, 0.85);
+    border: 1px solid rgba(240, 200, 118, 0.2);
+    border-radius: 16px;
+    padding: 8px 16px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 25px -6px rgba(0,0,0,0.6);
+  }
+
+  .progress-stepper {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .step-dot {
+    width: 24px;
+    height: 7px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.18);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+  }
+  .step-dot:hover {
+    background: rgba(240, 200, 118, 0.5);
+  }
+  .step-dot.active {
+    background: linear-gradient(90deg, var(--gold-bright), var(--gold-dark));
+    width: 36px;
+    box-shadow: 0 0 10px var(--gold-glow);
+  }
+  .step-dot.completed {
+    background: rgba(240, 200, 118, 0.4);
+  }
+
+  .nav-buttons-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-btn {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    outline: none;
+    border: 1px solid transparent;
+  }
+  .nav-btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #e5dfd3;
+  }
+  .nav-btn-secondary:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+  }
+  .nav-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none !important;
+  }
+
+  .nav-btn-primary {
+    background: linear-gradient(135deg, #f0c876 0%, #d8a94a 50%, #b8862d 100%);
+    color: #1a1206;
+    font-weight: 800;
+    border: 1px solid #ffe9a8;
+    box-shadow: 0 4px 18px rgba(216, 169, 74, 0.45);
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(240, 200, 118, 0.65);
+  }
+  .nav-btn-primary:active {
+    transform: translateY(0);
+  }
+  .nav-btn-primary.pulse-glow {
+    animation: buttonPulse 2.4s infinite;
+  }
+  @keyframes buttonPulse {
+    0%, 100% { box-shadow: 0 4px 18px rgba(216, 169, 74, 0.45); }
+    50% { box-shadow: 0 4px 28px rgba(255, 209, 102, 0.85), 0 0 12px rgba(255,209,102,0.5); }
+  }
+
+  .nav-btn-story-finish {
+    background: linear-gradient(135deg, #7c5cff 0%, #5b3bd6 100%);
+    color: #ffffff;
+    border: 1px solid #b7a9ff;
+    box-shadow: 0 4px 20px rgba(124, 92, 255, 0.55);
+  }
+  .nav-btn-story-finish:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(124, 92, 255, 0.8);
+  }
+
+  .key-hint {
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(0,0,0,0.35);
+    padding: 2px 5px;
+    border-radius: 5px;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: inherit;
+    margin-left: 2px;
+  }
+
+  /* =========================================================
+     SLIDE 2: THE PYTHON CONNECTION
+     ========================================================= */
+  #slide-python {
+    background: radial-gradient(ellipse at 30% 0%, #22183c 0%, #0d0a18 70%, #06050c 100%);
+  }
+  .py-wrap {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 68px 24px 20px;
+  }
+  .py-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 32px;
+    width: min(1220px, 100%);
+    max-height: calc(100vh - 86px);
+    align-items: center;
+  }
+  @media (max-width: 960px) {
+    .py-grid {
+      grid-template-columns: 1fr;
+      overflow-y: auto;
+      max-height: calc(100vh - 106px);
+    }
+  }
+
+  .py-artwork-card {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(240, 200, 118, 0.3);
+    box-shadow: 0 25px 60px -15px rgba(0,0,0,0.8), 0 0 40px -10px rgba(157, 140, 255, 0.25);
+    background: #110d22;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .py-artwork-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.96);
+  }
+  .py-artwork-badge {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    right: 14px;
+    background: rgba(14, 10, 26, 0.88);
+    border: 1px solid rgba(240, 200, 118, 0.3);
+    border-radius: 12px;
+    padding: 9px 14px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .py-artwork-badge b {
+    font-family: 'Cinzel', serif;
+    font-size: 12.5px;
+    color: var(--gold-main);
+  }
+  .py-artwork-badge span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #ffd166;
+  }
+
+  .py-panel {
+    background: linear-gradient(155deg, rgba(28, 20, 48, 0.95) 0%, rgba(16, 11, 30, 0.98) 100%);
+    border: 1px solid rgba(216, 169, 74, 0.32);
+    border-radius: 18px;
+    padding: 26px 32px;
+    box-shadow: 0 30px 70px -20px rgba(0,0,0,0.8);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .py-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: #9d8cff;
+    text-transform: uppercase;
+  }
+  .py-panel h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(20px, 2.3vw, 27px);
+    color: var(--gold-main);
+    line-height: 1.25;
+  }
+  .py-panel p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #e2dbd0;
+  }
+
+  .analogy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 2px 0;
+  }
+  .analogy-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(216, 169, 74, 0.2);
+    border-radius: 12px;
+    padding: 9px 11px;
+    font-size: 11.5px;
+    color: #cfc6e8;
+    transition: all 0.2s ease;
+  }
+  .analogy-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: var(--gold-main);
+    transform: translateY(-2px);
+  }
+  .analogy-tag {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 12.5px;
+    color: var(--gold-main);
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .analogy-target {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: #ffd166;
+    font-weight: 700;
+  }
+
+  .code-sandbox-wrap {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(216, 169, 74, 0.3);
+    background: #0c0916;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  }
+  .code-sandbox-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    background: rgba(216, 169, 74, 0.08);
+    border-bottom: 1px solid rgba(216, 169, 74, 0.15);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: #b7a9d6;
+  }
+  .preset-buttons {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .preset-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 7px;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(216,169,74,0.25);
+    color: #e5dfd3;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .preset-btn:hover {
+    background: rgba(240, 200, 118, 0.2);
+    color: var(--gold-bright);
+  }
+  .preset-btn.btn-error-style {
+    border-color: rgba(230, 57, 70, 0.5);
+    color: #ff9999;
+  }
+  .preset-btn.btn-error-style:hover {
+    background: rgba(230, 57, 70, 0.25);
+    color: #fff;
+  }
+
+  textarea.code-editor {
+    width: 100%;
+    min-height: 85px;
+    resize: vertical;
+    background: #090612;
+    color: #f5eed9;
+    border: none;
+    outline: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.55;
+    padding: 12px 14px;
+    white-space: pre;
+    tab-size: 4;
+  }
+
+  .code-sandbox-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 14px;
+    border-top: 1px solid rgba(216, 169, 74, 0.12);
+    background: rgba(14, 10, 24, 0.8);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .code-actions-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .run-pigeon-btn {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: #1a1206;
+    background: linear-gradient(180deg, #f0c876, #d8a94a);
+    border: 1px solid #ffe8a3;
+    padding: 7px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 14px rgba(216, 169, 74, 0.35);
+  }
+  .run-pigeon-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(240, 200, 118, 0.55);
+  }
+  .run-pigeon-btn:disabled {
+    opacity: 0.5;
+    cursor: wait;
+  }
+  .run-status-hint {
+    font-size: 11.5px;
+    color: #9d8cff;
+    font-style: italic;
+  }
+
+  .next-chapter-action-btn {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #7c5cff, #5b3bd6);
+    border: 1px solid #b7a9ff;
+    padding: 6px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 3px 12px rgba(124, 92, 255, 0.4);
+    transition: all 0.2s ease;
+  }
+  .next-chapter-action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 18px rgba(124, 92, 255, 0.7);
+  }
+
+  .console-output {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.55;
+    padding: 0 14px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    background: #05040a;
+    border-top: 1px solid rgba(216, 169, 74, 0.15);
+  }
+  .console-output.show {
+    max-height: 170px;
+    padding: 10px 14px 12px;
+    overflow-y: auto;
+  }
+  .console-output .stdout { color: #bfe8c8; white-space: pre-wrap; }
+  .console-output .stderr { color: #ff9999; white-space: pre-wrap; font-weight: 500; }
+  .console-output .label { font-size: 10px; letter-spacing: 0.1em; color: var(--gold-main); margin-bottom: 4px; }
+  .console-output .error-banner {
+    background: rgba(230, 57, 70, 0.18);
+    border-left: 3px solid #e63946;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    color: #ffcccc;
+    border-radius: 4px;
+  }
+
+  @media (max-width: 768px) {
+    .top-bar { padding: 0 10px; height: 56px; }
+    .title-text { display: none; }
+    .dialogue-theater { bottom: 10px; width: 96vw; }
+    .dialogue-box {
+      grid-template-columns: 52px 1fr;
+      padding: 12px 14px;
+      gap: 10px;
+    }
+    .speaker-portrait-wrap, .speaker-avatar-frame { width: 52px; height: 52px; }
+    .speaker-emblem { font-size: 22px; }
+    .dialogue-text { font-size: 14.5px; }
+    .scene-location-tag { top: 62px; left: 12px; }
+    .analogy-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+
+  <!-- Top Global Header & Controls -->
+  <header class="top-bar">
+    <div class="story-title">
+      <span class="title-icon">🕊️</span>
+      <div class="title-text" id="globalHeaderTitle">The Royal Messengers of Oakhaven</div>
+    </div>
+
+    <!-- Chapter Switcher (4 Parts) -->
+    <nav class="chapter-nav-wrap">
+      <button class="chapter-pill active" id="ch1Pill" data-chapter="1">
+        <span>Part 1:</span> The Messenger
+      </button>
+      <button class="chapter-pill" id="ch2Pill" data-chapter="2">
+        <span>Part 2:</span> Endless Flock
+      </button>
+      <button class="chapter-pill" id="ch3Pill" data-chapter="3">
+        <span>Part 3:</span> Clumsy Mistake
+      </button>
+      <button class="chapter-pill" id="ch4Pill" data-chapter="4">
+        <span>Part 4:</span> Instant Scroll
+      </button>
+    </nav>
+
+    <!-- Top Controls -->
+    <div class="top-controls">
+      <button class="top-pill-btn" id="soundToggleBtn" title="Toggle Sound Effects">
+        <span id="soundIcon">🔊</span> <span id="soundText">Sound</span>
+      </button>
+      <button class="top-pill-btn" id="autoPlayToggleBtn" title="Toggle Auto-Advancing Dialogues">
+        <span>⏩</span> <span id="autoPlayText">Auto</span>
+      </button>
+      <button class="top-pill-btn" id="slideSwitchBtn" title="Toggle Story vs Python Connection">
+        <span id="slideSwitchIcon">📜</span> <span id="slideSwitchText">Python Connection</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       SLIDE 1: CINEMATIC STORY SCENE
+       ============================================================ -->
+  <section class="slide active" id="slide-story">
+    <div class="bg-stage" id="bgStage">
+      <!-- Part 1 Backgrounds -->
+      <div class="bg-layer active" id="bg-0" style="background-image: url('./assets/oakhaven_king_throne.jpg');"></div>
+      <div class="bg-layer" id="bg-1" style="background-image: url('./assets/misty_mountains_border.jpg');"></div>
+      <div class="bg-layer" id="bg-2" style="background-image: url('./assets/keeper_carrier_pigeon.jpg');"></div>
+      <div class="bg-layer" id="bg-3" style="background-image: url('./assets/pigeon_flying_peaks.jpg');"></div>
+      <div class="bg-layer" id="bg-4" style="background-image: url('./assets/riverbend_king_scene.jpg');"></div>
+      <div class="bg-layer" id="bg-5" style="background-image: url('./assets/oakhaven_king_throne.jpg');"></div>
+      <div class="bg-layer" id="bg-6" style="background-image: url('./assets/python_print_pigeon.jpg');"></div>
+
+      <!-- Part 2 Backgrounds -->
+      <div class="bg-layer" id="bg-p2-0" style="background-image: url('./assets/aviary_king_worried.jpg');"></div>
+      <div class="bg-layer" id="bg-p2-1" style="background-image: url('./assets/aviary_king_worried.jpg');"></div>
+      <div class="bg-layer" id="bg-p2-2" style="background-image: url('./assets/aviary_king_worried.jpg');"></div>
+      <div class="bg-layer" id="bg-p2-3" style="background-image: url('./assets/massive_pigeon_flock.jpg');"></div>
+      <div class="bg-layer" id="bg-p2-4" style="background-image: url('./assets/multiple_pigeon_dispatch.jpg');"></div>
+      <div class="bg-layer" id="bg-p2-5" style="background-image: url('./assets/multiple_pigeon_dispatch.jpg');"></div>
+      <div class="bg-layer" id="bg-p2-6" style="background-image: url('./assets/endless_code_flock.jpg');"></div>
+
+      <!-- Part 3 Backgrounds -->
+      <div class="bg-layer" id="bg-p3-0" style="background-image: url('./assets/king_rushing_mistake.jpg');"></div>
+      <div class="bg-layer" id="bg-p3-1" style="background-image: url('./assets/king_rushing_mistake.jpg');"></div>
+      <div class="bg-layer" id="bg-p3-2" style="background-image: url('./assets/scroll_falling_sky.jpg');"></div>
+      <div class="bg-layer" id="bg-p3-3" style="background-image: url('./assets/scroll_falling_sky.jpg');"></div>
+      <div class="bg-layer" id="bg-p3-4" style="background-image: url('./assets/riverbend_empty_pigeon.jpg');"></div>
+      <div class="bg-layer" id="bg-p3-5" style="background-image: url('./assets/aviary_king_worried.jpg');"></div>
+      <div class="bg-layer" id="bg-p3-6" style="background-image: url('./assets/king_rushing_mistake.jpg');"></div>
+
+      <!-- Part 4 Backgrounds (using your provided images) -->
+      <div class="bg-layer" id="bg-p4-0" style="background-image: url('./assets/king_throne_direct.jpg');"></div>
+      <div class="bg-layer" id="bg-p4-1" style="background-image: url('./assets/royal_vault_ram.jpg');"></div>
+      <div class="bg-layer" id="bg-p4-2" style="background-image: url('./assets/flight_pouch_buffer.jpg');"></div>
+      <div class="bg-layer" id="bg-p4-3" style="background-image: url('./assets/magic_mirror_display.jpg');"></div>
+      <div class="bg-layer" id="bg-p4-4" style="background-image: url('./assets/magic_mirror_display.jpg');"></div>
+    </div>
+
+    <div class="vignette-overlay"></div>
+    <div class="cinematic-scrim"></div>
+    <canvas class="particles-canvas" id="particlesCanvas"></canvas>
+
+    <div class="scene-location-tag" id="sceneLocationTag">
+      <div class="scene-loc-dot"></div>
+      <div class="scene-loc-text" id="sceneLocationText">The Great Hall of Oakhaven</div>
+    </div>
+
+    <!-- Cinematic Dialogue Theater -->
+    <div class="dialogue-theater">
+      <div class="dialogue-box" id="dialogueBox" title="Click to advance or complete text">
+        <div class="speaker-portrait-wrap">
+          <div class="speaker-avatar-frame" id="speakerAvatarFrame">
+            <span class="speaker-emblem" id="speakerEmblem">👑</span>
+          </div>
+          <div class="speaker-crest-badge" id="speakerCrestBadge">⚜️</div>
+        </div>
+
+        <div class="dialogue-content">
+          <div class="speaker-meta">
+            <div class="speaker-header-left">
+              <div class="speaker-name" id="speakerName">Narrator</div>
+              <div class="speaker-role" id="speakerRole">Chronicles of the Realm</div>
+            </div>
+            <div class="dialogue-counter" id="dialogueCounter">Beat 1 of 7</div>
+          </div>
+
+          <div class="dialogue-text-wrap">
+            <p class="dialogue-text" id="dialogueText"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dialogue-nav-bar">
+        <div class="progress-stepper" id="progressStepper"></div>
+
+        <div class="nav-buttons-group">
+          <button class="nav-btn nav-btn-secondary" id="replayStoryBtn" title="Restart this chapter">
+            <span>↺</span> Replay
+          </button>
+
+          <button class="nav-btn nav-btn-secondary" id="prevDialogueBtn" title="Previous Dialogue (←)">
+            <span>◀</span> Prev <span class="key-hint">←</span>
+          </button>
+
+          <button class="nav-btn nav-btn-primary pulse-glow" id="nextDialogueBtn" title="Next Dialogue (Space / Enter / →)">
+            <span id="nextBtnLabel">Next Dialogue</span> <span>▶</span> <span class="key-hint">Space</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 2: THE PYTHON CONNECTION
+       ============================================================ -->
+  <section class="slide" id="slide-python">
+    <div class="py-wrap">
+      <div class="py-grid">
+        <div class="py-artwork-card">
+          <img class="py-artwork-img" id="pyArtworkImg" src="./assets/python_print_pigeon.jpg" alt="Python Messenger Concept">
+          <div class="py-artwork-badge">
+            <b id="pyArtworkTitle">The Royal Messenger in Action</b>
+            <span id="pyArtworkTag">print("Hello World")</span>
+          </div>
+        </div>
+
+        <div class="py-panel">
+          <div class="py-eyebrow" id="pyEyebrow">The Python Connection &middot; Chapter 1</div>
+          <h2 id="pyHeading">Meet <code>print()</code> &mdash; The Royal Pigeon of Your Code</h2>
+          <p id="pyDescText">
+            Your Python program is just like the <strong>Kingdom of Oakhaven</strong>: it computes brilliant truths inside digital memory.
+          </p>
+
+          <div class="analogy-grid" id="analogyGrid"></div>
+
+          <p id="pySubDescText"></p>
+
+          <div class="code-sandbox-wrap">
+            <div class="code-sandbox-header">
+              <span id="codeBoxTitle">PYTHON 3 REPL &bull; IN-BROWSER</span>
+              <div class="preset-buttons" id="presetButtonsWrap"></div>
+            </div>
+            <textarea class="code-editor" id="codeEditor" spellcheck="false"></textarea>
+            <div class="code-sandbox-actions">
+              <div class="code-actions-left">
+                <button class="run-pigeon-btn" id="runCodeBtn">
+                  <span>Send the Pigeon</span> <span>🕊️</span>
+                </button>
+                <span class="run-status-hint" id="runStatusHint">Edit the code, then dispatch the pigeon</span>
+              </div>
+              <button class="next-chapter-action-btn" id="chapterSwitchActionBtn">
+                <span id="chapterSwitchActionText">Continue to Part 2 ➔</span>
+              </button>
+            </div>
+            <div class="console-output" id="consoleOutput"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ==========================================================================
+   AUDIO SYNTHESIS SYSTEM
+   ========================================================================== */
+class SoundEffects {
+  constructor() {
+    this.ctx = null;
+    this.muted = false;
+  }
+  init() {
+    if (!this.ctx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) this.ctx = new AudioCtx();
+    }
+  }
+  typeClick() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600 + Math.random() * 200, this.ctx.currentTime);
+      gain.gain.setValueAtTime(0.012, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.035);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.035);
+    } catch(e) {}
+  }
+  dialogueAdvance() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(440, now);
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.12);
+      gain.gain.setValueAtTime(0.05, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(now + 0.14);
+    } catch(e) {}
+  }
+  royalChime() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, i) => {
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        const startTime = this.ctx.currentTime + i * 0.08;
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, startTime);
+        gain.gain.setValueAtTime(0.045, startTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.6);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(startTime);
+        osc.stop(startTime + 0.6);
+      });
+    } catch(e) {}
+  }
+  silverWhistle() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1600, now);
+      osc.frequency.exponentialRampToValueAtTime(2400, now + 0.18);
+      osc.frequency.exponentialRampToValueAtTime(1800, now + 0.45);
+      gain.gain.setValueAtTime(0.06, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(now + 0.5);
+    } catch(e) {}
+  }
+  windGust() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(180, now);
+      osc.frequency.exponentialRampToValueAtTime(320, now + 0.3);
+      osc.frequency.exponentialRampToValueAtTime(120, now + 0.7);
+      gain.gain.setValueAtTime(0.05, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.75);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(now + 0.75);
+    } catch(e) {}
+  }
+  errorBuzz() {
+    if (this.muted) return;
+    this.init();
+    if (!this.ctx) return;
+    try {
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(150, now);
+      osc.frequency.setValueAtTime(120, now + 0.15);
+      gain.gain.setValueAtTime(0.07, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start();
+      osc.stop(now + 0.35);
+    } catch(e) {}
+  }
+}
+const sfx = new SoundEffects();
+
+/* ==========================================================================
+   STORY DIALOGUE DATA (PARTS 1-4)
+   ========================================================================== */
+const STORY_DATA = {
+  1: {
+    title: "Part 1: The Messenger in the Sky",
+    beats: [
+      {
+        bgId: "bg-0",
+        location: "The Great Hall of Oakhaven",
+        speaker: "Narrator",
+        role: "Chronicles of the Realm",
+        emblem: "🏰",
+        crest: "📜",
+        text: "In the golden Kingdom of Oakhaven, brilliant scholars unlocked the deepest secrets of the stars and invented wondrous tools &mdash; yet all that wisdom remained locked within castle walls, completely hidden from the rest of the world."
+      },
+      {
+        bgId: "bg-1",
+        location: "The Misty Mountain Border",
+        speaker: "Narrator",
+        role: "The Mountain Pass",
+        emblem: "🏔️",
+        crest: "🌫️",
+        text: "Across the jagged, fog-drenched mountains lay the Kingdom of Riverbend. Day after day, its people gathered at the border river, gazing up at the impassable peaks &mdash; yearning to share in what Oakhaven knew, but with no way across."
+      },
+      {
+        bgId: "bg-2",
+        location: "The Royal Aviary Ramparts",
+        speaker: "Keeper of the Birds",
+        role: "Master Falconer of Oakhaven",
+        emblem: "🦅",
+        crest: "🪶",
+        text: "“Fear not, Your Majesty! I have raised and trained the swiftest messenger pigeons in the realm. No mountain is too steep, no fog too thick &mdash; they can carry our written words straight over the sky to Riverbend!”"
+      },
+      {
+        bgId: "bg-3",
+        location: "High Above the Snowy Peaks",
+        speaker: "Narrator",
+        role: "Flight of the Messenger",
+        emblem: "🕊️",
+        crest: "✨",
+        text: "With a gentle release, the royal messenger took to the sky! Bearing a sealed parchment scroll tied with golden ribbon, the brave pigeon soared above the storm clouds, bridging the eternal divide that no person could cross on foot."
+      },
+      {
+        bgId: "bg-4",
+        location: "Castle Terrace of Riverbend",
+        speaker: "King of Riverbend",
+        role: "Sovereign of the River Lands",
+        emblem: "👑",
+        crest: "🌊",
+        text: "“Look to the heavens! A messenger from the sky! Unroll the royal scroll at once &mdash; our neighbors in Oakhaven have found a way to share their knowledge with us!”"
+      },
+      {
+        bgId: "bg-5",
+        location: "The Throne of Oakhaven",
+        speaker: "King of Oakhaven",
+        role: "Sovereign of Oakhaven",
+        emblem: "👑",
+        crest: "⚜️",
+        text: "“A grand triumph! From this sunrise forward, whenever our scholars discover a new truth, we shall not let it stay trapped in silence. We shall dispatch our royal messenger into the sky at once!”"
+      },
+      {
+        bgId: "bg-6",
+        location: "The Grand Library & Beyond",
+        speaker: "The Royal Chronicler",
+        role: "The Digital Awakening",
+        emblem: "📖",
+        crest: "🔮",
+        text: "And so, the messenger connected two distant worlds. In programming, your code faces this exact challenge &mdash; holding calculations in silence until you call upon Python's own royal messenger: the <em>print()</em> function!"
+      }
+    ],
+    pyInfo: {
+      eyebrow: "The Python Connection &middot; Chapter 1",
+      heading: "Meet <code>print()</code> &mdash; The Royal Pigeon of Your Code",
+      desc: "Your Python program is just like the <strong>Kingdom of Oakhaven</strong>: it computes brilliant truths and calculates hidden numbers inside digital memory. But without a messenger, your screen stays completely blank &mdash; just like <strong>Riverbend</strong> waiting across the mountains.",
+      subDesc: "Just like the royal pigeons, <code>print()</code> is a <em>built-in</em> function &mdash; living right inside Python the instant you run it. Simply call its name with your message inside parentheses!",
+      artworkSrc: "./assets/python_print_pigeon.jpg",
+      artworkTitle: "The Royal Messenger in Action",
+      artworkTag: 'print("Hello World")',
+      analogy: [
+        { tag: "🏰 Oakhaven", target: "Your Python Code", text: "Calculates data hidden in computer memory" },
+        { tag: "🕊️ The Pigeon", target: "print() Function", text: "Built-in messenger carrying data to the outside" },
+        { tag: "🌊 Riverbend", target: "Your Screen", text: "Receives and displays the delivered message" }
+      ],
+      presets: {
+        1: { name: "Greeting", code: 'print("Good morning, Kingdom of Riverbend!")' },
+        2: { name: "Secret Math", code: `# Royal Astronomer's Calculation\nstars_cataloged = 1420\nnew_discoveries = 38\ntotal = stars_cataloged + new_discoveries\n\nprint("Royal Celestial Report:")\nprint("Total stars recorded:", total)` },
+        3: { name: "Royal Scroll", code: `# Sealed Royal Dispatch\nrecipient = "King of Riverbend"\nmessenger = "Swiftwing the Pigeon"\n\nprint(f"To: His Majesty the {recipient}")\nprint(f"Delivered across the mountains by: {messenger}")\nprint("Message: Our granaries are full, and peace is sealed!")` }
+      },
+      nextActionText: "Continue to Part 2: The Endless Flock ➔"
+    }
+  },
+
+  2: {
+    title: "Part 2: The Endless Flock",
+    beats: [
+      {
+        bgId: "bg-p2-0",
+        location: "Inside Oakhaven's Royal Aviary",
+        speaker: "Narrator",
+        role: "The Gathering Storm of Knowledge",
+        emblem: "🏰",
+        crest: "📜",
+        text: "Inside Oakhaven's stone aviary tower, the King watched the Keeper prepare another message. But despite the joy of their first crossing, a deep worry shadowed the King's face as he glanced at stacks of unfinished parchment."
+      },
+      {
+        bgId: "bg-p2-1",
+        location: "The Royal Aviary",
+        speaker: "King of Oakhaven",
+        role: "Sovereign of Oakhaven",
+        emblem: "👑",
+        crest: "⚜️",
+        text: "Worried, the King whispered, “This is magnificent, Keeper. But we have so many secrets, stories, and astronomical numbers to send! How long will it take to train more birds? A single pigeon will grow tired, and building a flock from scratch takes years!”"
+      },
+      {
+        bgId: "bg-p2-2",
+        location: "The Royal Aviary",
+        speaker: "Keeper of the Birds",
+        role: "Master Falconer of Oakhaven",
+        emblem: "🦅",
+        crest: "🪶",
+        text: "The Keeper laughed softly. “Your Majesty, you do not understand the magic of these birds. You do not need to build, feed, or spend a single day training them. They are fully grown, fully trained, and an <em>endless supply</em> waits in the skies.”"
+      },
+      {
+        bgId: "bg-p2-3",
+        location: "Oakhaven Castle Ramparts",
+        speaker: "Narrator",
+        role: "The Whistle of the Sky",
+        emblem: "🕊️",
+        crest: "✨",
+        text: "The Keeper drew a silver whistle and whistled loudly. A massive cloud of hundreds of pigeons swooped down from the clouds, gracefully landing and lining every stone parapet and battlement along the castle walls!"
+      },
+      {
+        bgId: "bg-p2-4",
+        location: "The Battlements",
+        speaker: "Narrator",
+        role: "Rapid Dispatch",
+        emblem: "📜",
+        crest: "⚡",
+        text: "He handed a message to the first pigeon, and it flew away. A second later, he handed a different message to a second pigeon. Then a third, a fourth, and a fifth! Each bird caught the wind without a second's hesitation."
+      },
+      {
+        bgId: "bg-p2-5",
+        location: "The Battlements",
+        speaker: "King of Oakhaven",
+        role: "Sovereign of Oakhaven",
+        emblem: "👑",
+        crest: "⚜️",
+        text: "“Incredible! No matter how many messages I write, there is always another pigeon ready! They never grow tired, they never run out, and we may send them as many times as our hearts desire!”"
+      },
+      {
+        bgId: "bg-p2-6",
+        location: "The Terrace Overlooking the Realm",
+        speaker: "The Royal Chronicler",
+        role: "The Python Revelation",
+        emblem: "📖",
+        crest: "🕊️",
+        text: "In Python, this is exactly how <code>print()</code> works! You never have to teach the computer how to show text, nor build <code>print()</code> from scratch. It is a <em>built-in function</em> &mdash; ready to send an endless flock of messages whenever you desire!"
+      }
+    ],
+    pyInfo: {
+      eyebrow: "The Python Connection &middot; Chapter 2",
+      heading: "The Endless Flock &mdash; Built-in & Infinitely Reusable",
+      desc: "In Python, you never have to write complex low-level code to teach your machine how to display characters. As a <strong>built-in function</strong>, Python provides <code>print()</code> instantly and completely free the millisecond your program starts.",
+      subDesc: "Furthermore, you can use <code>print()</code> as many times as you want in a single program. Whether sending one greeting, five rapid dispatches, or looping through a million lines of celestial data &mdash; the endless flock is ready!",
+      artworkSrc: "./assets/endless_code_flock.jpg",
+      artworkTitle: "The Endless Sky of Dispatches",
+      artworkTag: "for bird in flock: print(bird)",
+      analogy: [
+        { tag: "⚡ Zero Setup", target: "Built-In Function", text: "Already fully trained; no need to build or import" },
+        { tag: "🕊️ Endless Flock", target: "Infinite print() Calls", text: "Use it 1 time, 5 times, or millions of times in loops" },
+        { tag: "📜 Rapid Delivery", target: "Sequential Lines", text: "Each print() delivers another message in order" }
+      ],
+      presets: {
+        1: { name: "5 Messages", code: `# Rapid dispatch: 5 messages in a row!\nprint("Pigeon 1: Good morning, Riverbend!")\nprint("Pigeon 2: The mountain pass remains peaceful.")\nprint("Pigeon 3: Our astronomers counted 1,458 stars.")\nprint("Pigeon 4: The granaries are filled for winter.")\nprint("Pigeon 5: Peace is forever sealed between our realms!")` },
+        2: { name: "Flock Loop", code: `# Summoning the endless flock with a Python loop!\nprint("The Keeper whistles... the endless flock descends!")\n\nfor bird_number in range(1, 6):\n    print(f"🕊️ Dispatch #{bird_number} is flying across the snowy peaks!")\n\nprint("All dispatches successfully received by Riverbend!")` },
+        3: { name: "Royal Ledger", code: `# Printing complex numbers & secrets without tiring\nsecrets = [("Stars Mapped", 1420), ("New Inventions", 38), ("Allied Castles", 12)]\n\nprint("=== ROYAL OAKHAVEN LEDGER ===")\nfor name, count in secrets:\n    print(f"• {name}: {count}")\nprint("End of dispatch. The pigeons rest atop the river towers.")` }
+      },
+      nextActionText: "Continue to Part 3: The Coder's Clumsy Mistake ➔"
+    }
+  },
+
+  3: {
+    title: "Part 3: The Coder's Clumsy Mistake",
+    beats: [
+      {
+        bgId: "bg-p3-0",
+        location: "The King's Private Tower Study",
+        speaker: "Narrator",
+        role: "The Frantic Rush",
+        emblem: "🏰",
+        crest: "📜",
+        text: "With an endless flock of pigeons now at his command, the King of Oakhaven began writing messages faster and faster. But in his extreme haste, he became dangerously careless."
+      },
+      {
+        bgId: "bg-p3-1",
+        location: "The Writing Desk",
+        speaker: "Narrator",
+        role: "The Naked Paper",
+        emblem: "✍️",
+        crest: "⚠️",
+        text: "He wanted to send the word <em>Hello</em> to Riverbend. He grabbed a fresh sheet of paper, but instead of rolling it into a protective leather scroll, he left it completely open and vulnerable."
+      },
+      {
+        bgId: "bg-p3-2",
+        location: "The Tower Balcony Window",
+        speaker: "Narrator",
+        role: "The Careless Launch",
+        emblem: "💨",
+        crest: "🌪️",
+        text: "Then, without even fastening the paper inside the pigeon's little leather backpack, he threw both the naked sheet and the startled bird out the stone window at the exact same moment!"
+      },
+      {
+        bgId: "bg-p3-3",
+        location: "The Mountain Chasm Gorge",
+        speaker: "Narrator",
+        role: "Catastrophe in the Wind",
+        emblem: "🏔️",
+        crest: "💥",
+        text: "Naturally, absolute chaos followed! The howling mountain gale ripped the open paper to shreds. The torn fragments tumbled down into the rocky abyss below, while the pigeon flew across with completely bare feet!"
+      },
+      {
+        bgId: "bg-p3-4",
+        location: "Castle Terrace of Riverbend",
+        speaker: "King of Riverbend",
+        role: "Perplexed Monarch",
+        emblem: "👑",
+        crest: "❓",
+        text: "The King of Riverbend looked at the bare, empty bird in total confusion. “A carrier bird with empty claws?! What message was Oakhaven trying to send? There is nothing here!”"
+      },
+      {
+        bgId: "bg-p3-5",
+        location: "The Royal Aviary",
+        speaker: "Keeper of the Birds",
+        role: "Master Falconer of Oakhaven",
+        emblem: "🦅",
+        crest: "🪶",
+        text: "The Keeper hurried to the King. “Your Majesty, cargo requires two layers of safety: the <em>rolled scroll</em> shields the message from the winds, and the <em>leather backpack</em> locks it to the bird!”"
+      },
+      {
+        bgId: "bg-p3-6",
+        location: "The Chronicler's Desk",
+        speaker: "The Royal Chronicler",
+        role: "The Two Safeguards of Python",
+        emblem: "📖",
+        crest: "🛡️",
+        text: "In Python, this is exactly what happens when you write <code>print Hello</code>! The Quotes <code>\"\"</code> are the protective scroll, and the Parentheses <code>()</code> are the backpack. Forget either, and Python panics with a <strong>SyntaxError</strong>!"
+      }
+    ],
+    pyInfo: {
+      eyebrow: "The Python Connection &middot; Chapter 3",
+      heading: "The Clumsy Mistake &mdash; Quotes, Parentheses & SyntaxError",
+      desc: "In Python, sending text to the screen requires <strong>two layers of protection</strong>: Quotes <code>\"\"</code> to wrap your words into a String literal, and Parentheses <code>()</code> to securely pack that cargo onto the <code>print</code> function.",
+      subDesc: "If you leave out either layer, Python halts immediately, refuses to send the bird, and flashes a <strong>SyntaxError</strong> or <strong>NameError</strong> on your screen! Test the broken cargo below, then fix it:",
+      artworkSrc: "./assets/king_rushing_mistake.jpg",
+      artworkTitle: "The Careless Launch at the Window",
+      artworkTag: 'print("Hello")',
+      analogy: [
+        { tag: "📜 Quotes \" \"", target: "The Protective Scroll", text: "Wraps text as a literal String so Python doesn't look for a variable chest" },
+        { tag: "🎒 Parentheses ( )", target: "The Pigeon's Backpack", text: "Securely locks the cargo onto print() so it doesn't plummet into the canyon" },
+        { tag: "💥 SyntaxError", target: "The Shredded Paper", text: "Python's panic alarm when cargo is launched improperly" }
+      ],
+      presets: {
+        1: { name: "❌ Both Missing", code: `# ❌ Clumsy Mistake: No scroll (quotes) and no backpack (parentheses)\nprint Hello`, isError: true },
+        2: { name: "⚠️ Missing Quotes", code: `# ⚠️ Missing scroll: Python searches for a variable storage box named Hello!\nprint(Hello)`, isError: true },
+        3: { name: "✅ Perfect Fix", code: `# ✅ The Fix: Rolled in quotes and locked inside parentheses!\nprint("Hello")` },
+        4: { name: "👑 Full Royal Greeting", code: `# ✅ Both safeguards active: Cargo arrives intact!\nprint("Hello, Kingdom of Riverbend!")\nprint("Our royal message arrived with cargo safely locked!")` }
+      },
+      nextActionText: "Continue to Part 4: The Instant Scroll ➔"
+    }
+  },
+
+  /* ==========================================================
+     PART 4: THE INSTANT SCROLL AND THE ROYAL DELIVERY
+     ========================================================== */
+  4: {
+    title: "Part 4: The Instant Scroll and the Royal Delivery",
+    beats: [
+      {
+        bgId: "bg-p4-0",
+        location: "The King's Private Study",
+        speaker: "Narrator",
+        role: "A Fresh Start",
+        emblem: "🏰",
+        crest: "📜",
+        text: "With his past mistakes fixed, the King was eager to try again. This time, he didn't want to look up secret numbers in the castle vaults. He just wanted to send a simple, direct greeting to the neighboring kingdom: the word <em>Hello</em>."
+      },
+      {
+        bgId: "bg-p4-1",
+        location: "The Royal Aviary Ramparts",
+        speaker: "Keeper of the Birds",
+        role: "Master Falconer of Oakhaven",
+        emblem: "🦅",
+        crest: "🪶",
+        text: "The Royal Keeper of the Birds smiled as he prepped the pigeon. “Watch closely, Your Majesty,” the Keeper said. “When you send a direct message, your royal pigeon follows three simple steps to get the words onto the screen: <em>Bypassing the Vault</em>, <em>Loading the Flight Pouch</em>, and <em>Flushing to the Mirror</em>.”"
+      },
+      {
+        bgId: "bg-p4-1",
+        location: "Step 1: Bypassing the Vault",
+        speaker: "Narrator",
+        role: "The Direct Cargo",
+        emblem: "🔑",
+        crest: "⚡",
+        text: "Because the King wrote the exact words onto the paper and wrapped it in a protective leather scroll, the pigeon did not waste any time. It did not fly down into the deep, dark castle vaults to hunt through hidden storage boxes. It didn't look for any labels. The bird knew this wasn't a secret code or a vault container &mdash; it was the actual message! The pigeon immediately gripped the characters <em>H-e-l-l-o</em> as its ready-to-go cargo and waited by the window."
+      },
+      {
+        bgId: "bg-p4-1",
+        location: "Step 1: Bypassing the Vault",
+        speaker: "The Royal Chronicler",
+        role: "The Python Connection",
+        emblem: "📖",
+        crest: "🔮",
+        text: "In Python, wrapping text inside quotation marks <code>\"\"</code> creates what programmers call a <strong>String Literal</strong>. The quotes tell Python: “This is a direct, literal message. Do not waste time looking for a variable name inside the computer's memory (RAM).” Python skips the memory search entirely and grabs the text instantly."
+      },
+      {
+        bgId: "bg-p4-2",
+        location: "Step 2: Loading the Flight Pouch",
+        speaker: "Narrator",
+        role: "The Buffer Pouch",
+        emblem: "🎒",
+        crest: "📦",
+        text: "Before taking off, the pigeon didn't just let the letters loose in the wind. It carefully packed the characters &mdash; <em>H-e-l-l-o</em> &mdash; one by one into its leather Flight Pouch. This pouch acted like a tiny, temporary waiting line. The letters sat neatly side-by-side like droplets of fresh ink, keeping the message perfectly grouped together so no single letter would get lost during the long flight over the mountains."
+      },
+      {
+        bgId: "bg-p4-2",
+        location: "Step 2: Loading the Flight Pouch",
+        speaker: "The Royal Chronicler",
+        role: "The Python Connection",
+        emblem: "📖",
+        crest: "🔮",
+        text: "In the computer world, this pouch is called the <strong>Output Buffer</strong>. Sending text to your screen one single letter at a time takes a lot of processing work. To save energy, Python temporarily stores your characters neatly inside a hidden memory line-up (the buffer), holding them together until the full message is ready to be sent."
+      },
+      {
+        bgId: "bg-p4-3",
+        location: "Step 3: Flushing to the Mirror",
+        speaker: "Narrator",
+        role: "The Magic Mirror",
+        emblem: "🪞",
+        crest: "✨",
+        text: "The moment the message was fully packed, the Keeper whistled loudly. The pigeon launched out the window, soared across the foggy mountains, and landed at the public square of the other kingdom. There sat a giant, glowing Magic Mirror. The pigeon landed on top and emptied its pouch into the mirror's slot. The citizens couldn't see inside Oakhaven's castle, but as the pouch was emptied, the mirror read the ink characters and instantly painted <em>Hello</em> in bright, glowing lights for everyone to see!"
+      },
+      {
+        bgId: "bg-p4-4",
+        location: "Step 3: Flushing to the Mirror",
+        speaker: "The Royal Chronicler",
+        role: "The Python Connection",
+        emblem: "📖",
+        crest: "🔮",
+        text: "This is the final act of the <code>print()</code> function. When the command finishes packing your data, it <strong>flushes</strong> (empties) the buffer. It pushes the stored characters straight to your <strong>User Console</strong> (the terminal screen). The console reads the data and lights up the pixels on your monitor so you can easily read the text."
+      },
+      {
+        bgId: "bg-p4-4",
+        location: "The Royal Aviary",
+        speaker: "The Royal Chronicler",
+        role: "The Next Lesson",
+        emblem: "📖",
+        crest: "🕊️",
+        text: "Now that you know how the pigeon handles direct text, would you like to see how it handles a mixed delivery &mdash; like combining a text scroll and a vault box (variable) together in the same flight?"
+      }
+    ],
+    pyInfo: {
+      eyebrow: "The Python Connection &middot; Chapter 4",
+      heading: "The Instant Scroll &mdash; String Literals, Buffers & Flushing",
+      desc: "In Python, when you write <code>print(\"Hello\")</code>, the interpreter follows three precise steps: it recognizes the quoted text as a <strong>String Literal</strong> (bypassing the variable vault), stores the characters in a temporary <strong>Output Buffer</strong>, and finally <strong>Flushes</strong> the buffer to the console screen.",
+      subDesc: "This efficient pipeline ensures your messages are delivered quickly and completely. Try running the code below to see the pigeon's journey in action!",
+      artworkSrc: "./assets/magic_mirror_display.jpg",
+      artworkTitle: "The Magic Mirror of Riverbend",
+      artworkTag: 'print("Hello")',
+      analogy: [
+        { tag: "🔑 String Literal", target: "Bypassing the Vault", text: "Quotes tell Python it's direct text, not a variable lookup" },
+        { tag: "🎒 Output Buffer", target: "The Flight Pouch", text: "Characters are packed together temporarily before sending" },
+        { tag: "🪞 Flush to Console", target: "The Magic Mirror", text: "Buffer empties and text appears on your screen instantly" }
+      ],
+      presets: {
+        1: { name: "Direct Hello", code: `# Step 1: Bypassing the Vault (String Literal)\n# Step 2: Loading the Flight Pouch (Buffer)\n# Step 3: Flushing to the Mirror (Console)\nprint("Hello")` },
+        2: { name: "Multi-Step", code: `# Three messages, three flights\nprint("Hello")  # First pigeon\nprint("Riverbend!")  # Second pigeon\nprint("Message delivered!")  # Third pigeon` },
+        3: { name: "Vault vs Direct", code: `# Direct literal (bypasses vault)\nprint("Direct message from the King!")\n\n# Variable lookup (searches the vault)\nsecret = "Vault message retrieved!"\nprint(secret)` }
+      },
+      nextActionText: "↺ Back to Part 1: The Messenger in the Sky"
+    }
+  }
+};
+
+/* ==========================================================================
+   STATE & ENGINE CONTROLLER
+   ========================================================================== */
+let currentChapter = 1;
+let currentBeat = 0;
+let isTyping = false;
+let typewriterTimer = null;
+let currentFullText = "";
+let autoPlayInterval = null;
+let activeSlideIndex = 0;
+
+// DOM Elements
+const bgLayers = document.querySelectorAll('.bg-layer');
+const globalHeaderTitle = document.getElementById('globalHeaderTitle');
+const ch1Pill = document.getElementById('ch1Pill');
+const ch2Pill = document.getElementById('ch2Pill');
+const ch3Pill = document.getElementById('ch3Pill');
+const ch4Pill = document.getElementById('ch4Pill');
+
+const sceneLocationTag = document.getElementById('sceneLocationTag');
+const sceneLocationText = document.getElementById('sceneLocationText');
+const speakerNameEl = document.getElementById('speakerName');
+const speakerRoleEl = document.getElementById('speakerRole');
+const speakerEmblemEl = document.getElementById('speakerEmblem');
+const speakerCrestEl = document.getElementById('speakerCrestBadge');
+const dialogueTextEl = document.getElementById('dialogueText');
+const dialogueCounterEl = document.getElementById('dialogueCounter');
+const progressStepperEl = document.getElementById('progressStepper');
+const prevDialogueBtn = document.getElementById('prevDialogueBtn');
+const nextDialogueBtn = document.getElementById('nextDialogueBtn');
+const nextBtnLabel = document.getElementById('nextBtnLabel');
+const replayStoryBtn = document.getElementById('replayStoryBtn');
+const dialogueBox = document.getElementById('dialogueBox');
+
+const slideStory = document.getElementById('slide-story');
+const slidePython = document.getElementById('slide-python');
+const slideSwitchBtn = document.getElementById('slideSwitchBtn');
+const slideSwitchText = document.getElementById('slideSwitchText');
+const slideSwitchIcon = document.getElementById('slideSwitchIcon');
+
+const pyArtworkImg = document.getElementById('pyArtworkImg');
+const pyArtworkTitle = document.getElementById('pyArtworkTitle');
+const pyArtworkTag = document.getElementById('pyArtworkTag');
+const pyEyebrow = document.getElementById('pyEyebrow');
+const pyHeading = document.getElementById('pyHeading');
+const pyDescText = document.getElementById('pyDescText');
+const pySubDescText = document.getElementById('pySubDescText');
+const analogyGrid = document.getElementById('analogyGrid');
+const presetButtonsWrap = document.getElementById('presetButtonsWrap');
+const codeEditor = document.getElementById('codeEditor');
+const runCodeBtn = document.getElementById('runCodeBtn');
+const consoleOutput = document.getElementById('consoleOutput');
+const runStatusHint = document.getElementById('runStatusHint');
+const chapterSwitchActionBtn = document.getElementById('chapterSwitchActionBtn');
+const chapterSwitchActionText = document.getElementById('chapterSwitchActionText');
+
+const soundToggleBtn = document.getElementById('soundToggleBtn');
+const soundIcon = document.getElementById('soundIcon');
+const autoPlayToggleBtn = document.getElementById('autoPlayToggleBtn');
+const autoPlayText = document.getElementById('autoPlayText');
+
+/* ==========================================================================
+   CHAPTER SWITCHING
+   ========================================================================== */
+function setChapter(chapterNum, targetBeat = 0) {
+  currentChapter = chapterNum;
+  ch1Pill.classList.toggle('active', chapterNum === 1);
+  ch2Pill.classList.toggle('active', chapterNum === 2);
+  ch3Pill.classList.toggle('active', chapterNum === 3);
+  ch4Pill.classList.toggle('active', chapterNum === 4);
+  globalHeaderTitle.textContent = STORY_DATA[chapterNum].title;
+
+  initProgressStepper();
+  setupPythonSlide();
+  renderBeat(targetBeat);
+}
+
+ch1Pill.addEventListener('click', () => { if (currentChapter !== 1) { sfx.dialogueAdvance(); setChapter(1, 0); } });
+ch2Pill.addEventListener('click', () => { if (currentChapter !== 2) { sfx.dialogueAdvance(); setChapter(2, 0); } });
+ch3Pill.addEventListener('click', () => { if (currentChapter !== 3) { sfx.dialogueAdvance(); setChapter(3, 0); } });
+ch4Pill.addEventListener('click', () => { if (currentChapter !== 4) { sfx.dialogueAdvance(); setChapter(4, 0); } });
+
+/* ==========================================================================
+   PROGRESS STEPPER
+   ========================================================================== */
+function initProgressStepper() {
+  progressStepperEl.innerHTML = '';
+  const beats = STORY_DATA[currentChapter].beats;
+  beats.forEach((beat, idx) => {
+    const dot = document.createElement('div');
+    dot.className = 'step-dot' + (idx === 0 ? ' active' : '');
+    dot.title = `Scene ${idx + 1}: ${beat.location}`;
+    dot.addEventListener('click', () => { jumpToBeat(idx); });
+    progressStepperEl.appendChild(dot);
+  });
+}
+
+/* ==========================================================================
+   BACKGROUND UPDATER
+   ========================================================================== */
+function updateSceneBackground(bgId) {
+  bgLayers.forEach((layer) => {
+    if (layer.id === bgId) layer.classList.add('active');
+    else layer.classList.remove('active');
+  });
+}
+
+/* ==========================================================================
+   TYPEWRITER ENGINE
+   ========================================================================== */
+function typeDialogue(htmlContent) {
+  if (typewriterTimer) clearInterval(typewriterTimer);
+  isTyping = true;
+  dialogueTextEl.innerHTML = '';
+  currentFullText = htmlContent;
+
+  const tokens = [];
+  let inTag = false;
+  let currentToken = '';
+
+  for (let i = 0; i < htmlContent.length; i++) {
+    const char = htmlContent[i];
+    if (char === '<') {
+      if (currentToken) tokens.push(currentToken);
+      currentToken = '<';
+      inTag = true;
+    } else if (char === '>') {
+      currentToken += '>';
+      tokens.push(currentToken);
+      currentToken = '';
+      inTag = false;
+    } else {
+      currentToken += char;
+      if (!inTag && (char === ' ' || i === htmlContent.length - 1)) {
+        tokens.push(currentToken);
+        currentToken = '';
+      }
+    }
+  }
+  if (currentToken) tokens.push(currentToken);
+
+  let tokenIndex = 0;
+  dialogueTextEl.innerHTML = '<span class="typing-cursor"></span>';
+
+  typewriterTimer = setInterval(() => {
+    if (tokenIndex < tokens.length) {
+      const cursor = dialogueTextEl.querySelector('.typing-cursor');
+      if (cursor) cursor.remove();
+      dialogueTextEl.innerHTML += tokens[tokenIndex];
+      dialogueTextEl.innerHTML += '<span class="typing-cursor"></span>';
+      tokenIndex++;
+      if (tokenIndex % 2 === 0) sfx.typeClick();
+    } else {
+      completeTyping();
+    }
+  }, 26);
+}
+
+function completeTyping() {
+  if (typewriterTimer) clearInterval(typewriterTimer);
+  isTyping = false;
+  dialogueTextEl.innerHTML = currentFullText;
+  const cursor = dialogueTextEl.querySelector('.typing-cursor');
+  if (cursor) cursor.remove();
+}
+
+/* ==========================================================================
+   RENDER BEAT
+   ========================================================================== */
+function renderBeat(index) {
+  currentBeat = index;
+  const chapterData = STORY_DATA[currentChapter];
+  const data = chapterData.beats[index];
+
+  // Audio cues
+  if (currentChapter === 2 && index === 3) sfx.silverWhistle();
+  else if (currentChapter === 3 && (index === 2 || index === 3)) sfx.windGust();
+  else if (currentChapter === 4 && index === 7) sfx.royalChime();
+
+  updateSceneBackground(data.bgId);
+  sceneLocationText.textContent = data.location;
+
+  speakerNameEl.textContent = data.speaker;
+  speakerRoleEl.textContent = data.role;
+  speakerEmblemEl.textContent = data.emblem;
+  speakerCrestEl.textContent = data.crest;
+  dialogueCounterEl.textContent = `Scene ${index + 1} of ${chapterData.beats.length}`;
+
+  const dots = progressStepperEl.querySelectorAll('.step-dot');
+  dots.forEach((dot, idx) => {
+    dot.classList.toggle('active', idx === index);
+    dot.classList.toggle('completed', idx < index);
+  });
+
+  prevDialogueBtn.disabled = (index === 0);
+
+  if (index === chapterData.beats.length - 1) {
+    nextBtnLabel.textContent = "Explore Python Connection";
+    nextDialogueBtn.classList.remove('nav-btn-primary');
+    nextDialogueBtn.classList.add('nav-btn-story-finish');
+    sfx.royalChime();
+  } else {
+    nextBtnLabel.textContent = "Next Dialogue";
+    nextDialogueBtn.classList.remove('nav-btn-story-finish');
+    nextDialogueBtn.classList.add('nav-btn-primary');
+  }
+
+  typeDialogue(data.text);
+}
+
+function nextDialogue() {
+  if (isTyping) { completeTyping(); return; }
+  const maxBeats = STORY_DATA[currentChapter].beats.length;
+  if (currentBeat < maxBeats - 1) {
+    sfx.dialogueAdvance();
+    renderBeat(currentBeat + 1);
+  } else {
+    showSlide(1);
+    sfx.royalChime();
+  }
+}
+
+function prevDialogue() {
+  if (isTyping) completeTyping();
+  if (currentBeat > 0) {
+    sfx.dialogueAdvance();
+    renderBeat(currentBeat - 1);
+  }
+}
+
+function jumpToBeat(index) {
+  const maxBeats = STORY_DATA[currentChapter].beats.length;
+  if (index >= 0 && index < maxBeats) {
+    sfx.dialogueAdvance();
+    renderBeat(index);
+  }
+}
+
+/* ==========================================================================
+   SLIDE SWITCHER
+   ========================================================================== */
+function showSlide(index) {
+  activeSlideIndex = index;
+  if (index === 0) {
+    slideStory.classList.add('active');
+    slidePython.classList.remove('active');
+    slideSwitchText.textContent = "Python Connection";
+    slideSwitchIcon.textContent = "📜";
+  } else {
+    slideStory.classList.remove('active');
+    slidePython.classList.add('active');
+    slideSwitchText.textContent = "Back to Story";
+    slideSwitchIcon.textContent = "🏰";
+    stopAutoPlay();
+  }
+}
+
+/* ==========================================================================
+   PYTHON SLIDE CONFIGURATION
+   ========================================================================== */
+function setupPythonSlide() {
+  const py = STORY_DATA[currentChapter].pyInfo;
+
+  pyArtworkImg.src = py.artworkSrc;
+  pyArtworkTitle.textContent = py.artworkTitle;
+  pyArtworkTag.textContent = py.artworkTag;
+  pyEyebrow.innerHTML = py.eyebrow;
+  pyHeading.innerHTML = py.heading;
+  pyDescText.innerHTML = py.desc;
+  pySubDescText.innerHTML = py.subDesc;
+
+  analogyGrid.innerHTML = '';
+  py.analogy.forEach((card, i) => {
+    const cardEl = document.createElement('div');
+    cardEl.className = 'analogy-card';
+    if (i === 1) {
+      cardEl.style.borderColor = 'rgba(255, 209, 102, 0.4)';
+      cardEl.style.background = 'rgba(240, 200, 118, 0.06)';
+    } else if (card.tag.includes("💥")) {
+      cardEl.style.borderColor = 'rgba(230, 57, 70, 0.4)';
+      cardEl.style.background = 'rgba(230, 57, 70, 0.06)';
+    }
+    cardEl.innerHTML = `
+      <span class="analogy-tag">${card.tag}</span>
+      <span class="analogy-target">${card.target}</span>
+      <div>${card.text}</div>
+    `;
+    analogyGrid.appendChild(cardEl);
+  });
+
+  presetButtonsWrap.innerHTML = '';
+  Object.keys(py.presets).forEach((key) => {
+    const item = py.presets[key];
+    const btn = document.createElement('button');
+    btn.className = 'preset-btn' + (item.isError ? ' btn-error-style' : '');
+    btn.textContent = item.name;
+    btn.addEventListener('click', () => {
+      codeEditor.value = item.code;
+      sfx.dialogueAdvance();
+    });
+    presetButtonsWrap.appendChild(btn);
+  });
+
+  codeEditor.value = py.presets[1].code;
+  chapterSwitchActionText.textContent = py.nextActionText;
+}
+
+chapterSwitchActionBtn.addEventListener('click', () => {
+  sfx.royalChime();
+  if (currentChapter === 1) setChapter(2, 0);
+  else if (currentChapter === 2) setChapter(3, 0);
+  else if (currentChapter === 3) setChapter(4, 0);
+  else setChapter(1, 0);
+  showSlide(0);
+});
+
+/* ==========================================================================
+   AUTO-PLAY
+   ========================================================================== */
+function toggleAutoPlay() {
+  if (autoPlayInterval) stopAutoPlay();
+  else startAutoPlay();
+}
+function startAutoPlay() {
+  autoPlayToggleBtn.classList.add('active');
+  autoPlayText.textContent = "Pause";
+  autoPlayInterval = setInterval(() => {
+    if (activeSlideIndex === 0) {
+      const maxBeats = STORY_DATA[currentChapter].beats.length;
+      if (currentBeat < maxBeats - 1) nextDialogue();
+      else stopAutoPlay();
+    }
+  }, 4800);
+}
+function stopAutoPlay() {
+  if (autoPlayInterval) {
+    clearInterval(autoPlayInterval);
+    autoPlayInterval = null;
+  }
+  autoPlayToggleBtn.classList.remove('active');
+  autoPlayText.textContent = "Auto";
+}
+
+soundToggleBtn.addEventListener('click', () => {
+  sfx.muted = !sfx.muted;
+  soundIcon.textContent = sfx.muted ? "🔇" : "🔊";
+  soundToggleBtn.classList.toggle('active', !sfx.muted);
+});
+
+/* ==========================================================================
+   EVENT LISTENERS
+   ========================================================================== */
+nextDialogueBtn.addEventListener('click', nextDialogue);
+prevDialogueBtn.addEventListener('click', prevDialogue);
+replayStoryBtn.addEventListener('click', () => {
+  sfx.dialogueAdvance();
+  renderBeat(0);
+});
+dialogueBox.addEventListener('click', () => {
+  if (isTyping) completeTyping();
+  else nextDialogue();
+});
+autoPlayToggleBtn.addEventListener('click', toggleAutoPlay);
+slideSwitchBtn.addEventListener('click', () => {
+  showSlide(activeSlideIndex === 0 ? 1 : 0);
+});
+
+window.addEventListener('keydown', (e) => {
+  if (document.activeElement === codeEditor) return;
+  if (activeSlideIndex === 0) {
+    if (e.code === 'Space' || e.code === 'ArrowRight' || e.code === 'Enter') {
+      e.preventDefault();
+      nextDialogue();
+    } else if (e.code === 'ArrowLeft') {
+      e.preventDefault();
+      prevDialogue();
+    }
+  }
+});
+
+/* ==========================================================================
+   PARTICLES
+   ========================================================================== */
+(function initParticles() {
+  const canvas = document.getElementById('particlesCanvas');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  const particles = [];
+  const count = 35;
+
+  function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  for (let i = 0; i < count; i++) {
+    particles.push({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 2.2 + 0.8,
+      speedX: (Math.random() - 0.5) * 0.4,
+      speedY: -Math.random() * 0.6 - 0.2,
+      opacity: Math.random() * 0.5 + 0.2,
+      fadeSpeed: Math.random() * 0.008 + 0.002
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    for (let p of particles) {
+      p.x += p.speedX;
+      p.y += p.speedY;
+      p.opacity += p.fadeSpeed;
+      if (p.opacity > 0.7 || p.opacity < 0.1) p.fadeSpeed = -p.fadeSpeed;
+
+      if (p.y < -10) { p.y = height + 10; p.x = Math.random() * width; }
+      if (p.x < -10) p.x = width + 10;
+      if (p.x > width + 10) p.x = -10;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 220, 140, ${Math.max(0, p.opacity)})`;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = 'rgba(255, 209, 102, 0.6)';
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ==========================================================================
+   PYODIDE RUNNER
+   ========================================================================== */
+let pyodidePromise = null;
+
+function getPyodide() {
+  if (pyodidePromise) return pyodidePromise;
+  pyodidePromise = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = "https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js";
+    s.onload = async () => {
+      try { resolve(await loadPyodide()); }
+      catch (err) { reject(err); }
+    };
+    s.onerror = () => reject(new Error("Network error loading Pyodide WebAssembly"));
+    document.head.appendChild(s);
+  });
+  return pyodidePromise;
+}
+
+function appendConsole(text, cls) {
+  const line = document.createElement('div');
+  line.className = cls;
+  line.textContent = text;
+  consoleOutput.appendChild(line);
+  consoleOutput.scrollTop = consoleOutput.scrollHeight;
+}
+
+async function executePythonCode() {
+  const code = codeEditor.value;
+  runCodeBtn.disabled = true;
+  runCodeBtn.innerHTML = '<span>Checking Cargo&hellip;</span> <span>⏳</span>';
+  consoleOutput.classList.add('show');
+  consoleOutput.innerHTML = '<div class="label">🕊️ INSPECTING CARGO & DISPATCHING PIGEON&hellip;</div>';
+
+  sfx.dialogueAdvance();
+
+  try {
+    const py = await getPyodide();
+    consoleOutput.innerHTML = '';
+
+    let hasOutput = false;
+    py.setStdout({
+      batched: (msg) => {
+        hasOutput = true;
+        appendConsole(msg, 'stdout');
+      }
+    });
+    py.setStderr({
+      batched: (msg) => {
+        hasOutput = true;
+        appendConsole(msg, 'stderr');
+      }
+    });
+
+    await py.runPythonAsync(code);
+
+    if (!hasOutput) {
+      appendConsole("(The pigeon flew across, but print() produced no text — the scroll was blank!)", "stdout");
+    }
+    sfx.royalChime();
+    runStatusHint.textContent = "Cargo delivered intact to Riverbend!";
+  } catch (err) {
+    sfx.errorBuzz();
+    const errMsg = String(err.message || err);
+    let bannerTitle = "💥 DISASTER IN THE GORGE!";
+    let advice = "";
+
+    if (errMsg.includes("SyntaxError")) {
+      bannerTitle = "💥 SYNTAX ERROR: NO BACKPACK (PARENTESES) DETECTED!";
+      advice = "The message fell into the canyon! In Python 3, you must put parentheses () around the message: print(\"...\")";
+    } else if (errMsg.includes("NameError")) {
+      bannerTitle = "⚠️ NAME ERROR: NO PROTECTIVE SCROLL (QUOTES) DETECTED!";
+      advice = "Python looked for a variable storage box with that name and found nothing! Wrap your literal text in quotes: print(\"...\")";
+    }
+
+    consoleOutput.innerHTML = `
+      <div class="error-banner">
+        <strong>${bannerTitle}</strong>
+        <div style="margin-top:4px; font-size:11.5px;">${advice}</div>
+      </div>
+      <div class="stderr">${errMsg}</div>
+    `;
+    runStatusHint.textContent = "The pigeon failed its flight! Inspect the error.";
+  } finally {
+    runCodeBtn.disabled = false;
+    runCodeBtn.innerHTML = '<span>Send the Pigeon</span> <span>🕊️</span>';
+  }
+}
+
+runCodeBtn.addEventListener('click', executePythonCode);
+
+/* ==========================================================================
+   INITIALIZATION
+   ========================================================================== */
+setChapter(1, 0);
+</script>
+</body>
+</html>

@@ -9,8 +9,14 @@ import {
   Play,
   Route,
   Send,
-  Sparkles
+  Sparkles,
+  Rocket,
+  Target,
+  BookOpen,
+  Zap
 } from 'lucide-react';
+import CodeEditor from './components/CodeEditor';
+import LearningPath from './components/LearningPath';
 import './styles.css';
 import LandingPage from './LandingPage';
 import WorldExplorer from './WorldExplorer';
@@ -32,33 +38,43 @@ function App() {
   const [sessions, setSessions] = useState([]);
   const [analytics, setAnalytics] = useState(null);
   const [roadmap, setRoadmap] = useState([]);
+  const [learningPath, setLearningPath] = useState(null);
   const [filters, setFilters] = useState({ q: '', difficulty: '', concept: '' });
   const [form, setForm] = useState({ learnerName: 'Guest learner', reasoning: '', promptText: '', reflection: '' });
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [activeTab, setActiveTab] = useState('landing');
+
+  const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
   async function refresh() {
     const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
-    const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
-      api(`/scenarios?${params}`),
-      api('/sessions'),
-      api('/analytics'),
-      api('/roadmap')
-    ]);
-    setScenarios(scenarioData);
-    setSessions(sessionData);
-    setAnalytics(analyticsData);
-    setRoadmap(roadmapData);
-    setSelected((current) => current || scenarioData[0] || null);
-    setLoading(false);
+    try {
+      const [scenarioData, sessionData, analyticsData, roadmapData, pathData] = await Promise.all([
+        api(`/scenarios?${params}`),
+        api('/sessions'),
+        api('/analytics'),
+        api('/roadmap'),
+        api('/learning-path').catch(() => null) // Changed from /analytics/learning-path
+      ]);
+      setScenarios(scenarioData);
+      setSessions(sessionData);
+      setAnalytics(analyticsData);
+      setRoadmap(roadmapData);
+      setLearningPath(pathData);
+      setSelected((current) => current || scenarioData[0] || null);
+    } catch (error) {
+      console.error('Refresh error:', error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
     refresh().catch(console.error);
   }, [filters.q, filters.difficulty, filters.concept]);
 
+  // EXISTING: Submit learning session (uses /sessions)
   async function submitSession(event) {
     event.preventDefault();
     if (!selected || !form.reasoning.trim()) return;
@@ -76,98 +92,270 @@ function App() {
     }
   }
 
+  const handleScenarioSelect = (scenario) => {
+    setSelected(scenario);
+    setActiveResult(null);
+    setNlpResult(null);
+    // Generate initial code
+    const initialCode = `# Scenario: ${scenario.title}\n# Difficulty: ${scenario.difficulty}\n# Concepts: ${scenario.concepts?.join(', ') || 'N/A'}\n\ndef solve():\n    # TODO: Implement your solution here\n    pass\n\n# Call your function\nsolver = solve()`;
+    setCurrentCode(initialCode);
+  };
+
+  const handleCodeSave = async (code) => {
+    try {
+      const response = await api('/sessions/save-code', {
+        method: 'POST',
+        body: JSON.stringify({ code, scenarioId: selected?._id })
+      });
+      alert('✅ Code saved successfully!');
+    } catch (error) {
+      console.error('Save error:', error);
+      alert('❌ Failed to save code');
+    }
+  };
+
+  // NEW: NLP - Convert reasoning to Python code (uses /nlp)
+  const handleConvertReasoning = async () => {
+    if (!form.reasoning.trim()) {
+      alert('Please enter your reasoning first');
+      return;
+    }
+    
+    try {
+      const result = await api('/nlp/convert-reasoning', {
+        method: 'POST',
+        body: JSON.stringify({ 
+          reasoning: form.reasoning, 
+          scenarioId: selected?._id 
+        })
+      });
+      
+      if (result.success) {
+        setNlpResult(result);
+        setCurrentCode(result.pythonCode);
+        setShowCodeEditor(true);
+        setActiveTab('code');
+        
+        if (activeResult) {
+          setActiveResult({
+            ...activeResult,
+            generatedCode: result.pythonCode,
+            codeExplanation: result.explanation
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Conversion error:', error);
+      alert('Failed to convert reasoning to code');
+    }
+  };
+
+  // NEW: NLP - Extract concepts from reasoning
+  const handleExtractConcepts = async () => {
+    if (!form.reasoning.trim()) {
+      alert('Please enter your reasoning first');
+      return;
+    }
+    
+    try {
+      const result = await api('/nlp/extract-concepts', {
+        method: 'POST',
+        body: JSON.stringify({ 
+          reasoning: form.reasoning
+        })
+      });
+      
+      if (result.success) {
+        alert(`📚 Detected Concepts:\n${result.concepts.join('\n')}`);
+      }
+    } catch (error) {
+      console.error('Extract concepts error:', error);
+      alert('Failed to extract concepts');
+    }
+  };
+
+  // NEW: NLP - Validate code
+  const handleValidateCode = async (code) => {
+    try {
+      const result = await api('/nlp/validate-code', {
+        method: 'POST',
+        body: JSON.stringify({ code })
+      });
+      
+      if (result.success) {
+        alert('✅ Code is valid!');
+      } else {
+        alert(`❌ Validation errors:\n${result.errors.join('\n')}`);
+      }
+      return result;
+    } catch (error) {
+      console.error('Validation error:', error);
+      return { success: false, errors: ['Validation failed'] };
+    }
+  };
+
+  // NEW: NLP - Generate code with context
+  const handleGenerateCodeWithContext = async () => {
+    if (!form.reasoning.trim()) {
+      alert('Please enter your reasoning first');
+      return;
+    }
+    
+    try {
+      const context = selected?.context || '';
+      const result = await api('/nlp/generate-code', {
+        method: 'POST',
+        body: JSON.stringify({ 
+          reasoning: form.reasoning,
+          scenarioId: selected?._id,
+          context: context
+        })
+      });
+      
+      if (result.success) {
+        setNlpResult(result);
+        setCurrentCode(result.pythonCode);
+        setShowCodeEditor(true);
+        setActiveTab('code');
+      }
+    } catch (error) {
+      console.error('Generate code error:', error);
+      alert('Failed to generate code with context');
+    }
+  };
+
   if (loading) return <main className="loading">Loading PyBe...</main>;
 
   return (
-    <div className="app">
-      <main className="main">
-      {activeTab === 'landing' ? (
-        <LandingPage onStartExploring={() => setActiveTab('world')} />
-      ) : activeTab === 'world' ? (
-        <WorldExplorer onBackToDashboard={() => setActiveTab('landing')} />
-      ) : (
-        <section className="workspace">
-          <header className="hero">
-            <div>
-              <p>AI-native learning journey</p>
-              <h1>Learn Python by reasoning through real situations first.</h1>
-            </div>
-            <div className="hero-stats">
-              <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
-              <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
-              <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
-            </div>
-          </header>
-
-          <div className="main-grid">
-            <section className="panel learning-panel">
-              <div className="section-title">
-                <Compass size={20} />
-                <h2>{selected?.title}</h2>
-              </div>
-              <p className="context">{selected?.context}</p>
-              <div className="objective-row">
-                {selected?.objectives.map((item) => <span key={item}>{item}</span>)}
-              </div>
-              <form onSubmit={submitSession} className="learning-form">
-                <label>
-                  Your reasoning
-                  <textarea
-                    required
-                    value={form.reasoning}
-                    onChange={(event) => setForm({ ...form, reasoning: event.target.value })}
-                    placeholder={selected?.prompt}
-                  />
-                </label>
-                <label>
-                  Prompt you would give an AI mentor
-                  <textarea
-                    value={form.promptText}
-                    onChange={(event) => setForm({ ...form, promptText: event.target.value })}
-                    placeholder="Explain my approach step by step, then show the Python concept and code..."
-                  />
-                </label>
-                <label>
-                  Reflection
-                  <textarea
-                    value={form.reflection}
-                    onChange={(event) => setForm({ ...form, reflection: event.target.value })}
-                    placeholder="What did you notice about your thinking?"
-                  />
-                </label>
-                <button className="primary" disabled={submitting}>
-                  <Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}
-                </button>
-              </form>
-            </section>
-
-            <section className="panel result-panel">
-              <div className="section-title">
-                <Sparkles size={20} />
-                <h2>AI Mentor Output</h2>
-              </div>
-              {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
-            </section>
+    <main className="app-shell">
+      <aside className="sidebar">
+        <div className="brand">
+          <Brain size={30} />
+          <div>
+            <strong>PyBe</strong>
+            <span>Scenario-first Python</span>
           </div>
+        </div>
 
-          <section className="dashboard">
-            <div className="panel">
-              <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Learner Analytics</h2></div>
-              <Analytics analytics={analytics} />
+        <label className="search">
+          <Search size={18} />
+          <input
+            value={filters.q}
+            onChange={(event) => setFilters({ ...filters, q: event.target.value })}
+            placeholder="Search scenarios"
+          />
+        </label>
+
+        <select value={filters.difficulty} onChange={(event) => setFilters({ ...filters, difficulty: event.target.value })}>
+          <option value="">All levels</option>
+          <option>Beginner</option>
+          <option>Explorer</option>
+          <option>Builder</option>
+        </select>
+
+        <select value={filters.concept} onChange={(event) => setFilters({ ...filters, concept: event.target.value })}>
+          <option value="">All concepts</option>
+          {concepts.map((concept) => <option key={concept}>{concept}</option>)}
+        </select>
+
+        <div className="scenario-list">
+          {scenarios.map((scenario) => (
+            <button
+              key={scenario._id}
+              className={selected?._id === scenario._id ? 'scenario active' : 'scenario'}
+              onClick={() => {
+                setSelected(scenario);
+                setActiveResult(null);
+              }}
+            >
+              <span>{scenario.difficulty}</span>
+              <strong>{scenario.title}</strong>
+              <small>{scenario.concepts.join(' / ')}</small>
+            </button>
+          ))}
+        </div>
+      </aside>
+
+      <section className="workspace">
+        <header className="hero">
+          <div>
+            <p>AI-native learning journey</p>
+            <h1>Learn Python by reasoning through real situations first.</h1>
+          </div>
+          <div className="hero-stats">
+            <span>{analytics?.scenarioCount || 0}<small>Scenarios</small></span>
+            <span>{analytics?.sessionCount || 0}<small>Sessions</small></span>
+            <span>{analytics?.averagePromptScore || 0}<small>Prompt score</small></span>
+          </div>
+        </header>
+
+        <div className="main-grid">
+          <section className="panel learning-panel">
+            <div className="section-title">
+              <Compass size={20} />
+              <h2>{selected?.title}</h2>
             </div>
-            <div className="panel">
-              <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
-              <Roadmap roadmap={roadmap} />
+            <p className="context">{selected?.context}</p>
+            <div className="objective-row">
+              {selected?.objectives.map((item) => <span key={item}>{item}</span>)}
             </div>
-            <div className="panel">
-              <div className="section-title"><MessageSquareText size={20} /><h2>Recent Sessions</h2></div>
-              <SessionList sessions={sessions} />
-            </div>
+            <form onSubmit={submitSession} className="learning-form">
+              <label>
+                Your reasoning
+                <textarea
+                  required
+                  value={form.reasoning}
+                  onChange={(event) => setForm({ ...form, reasoning: event.target.value })}
+                  placeholder={selected?.prompt}
+                />
+              </label>
+              <label>
+                Prompt you would give an AI mentor
+                <textarea
+                  value={form.promptText}
+                  onChange={(event) => setForm({ ...form, promptText: event.target.value })}
+                  placeholder="Explain my approach step by step, then show the Python concept and code..."
+                />
+              </label>
+              <label>
+                Reflection
+                <textarea
+                  value={form.reflection}
+                  onChange={(event) => setForm({ ...form, reflection: event.target.value })}
+                  placeholder="What did you notice about your thinking?"
+                />
+              </label>
+              <button className="primary" disabled={submitting}>
+                <Send size={18} />{submitting ? 'Mapping...' : 'Map My Reasoning'}
+              </button>
+            </form>
           </section>
+
+          <section className="panel result-panel">
+            <div className="section-title">
+              <Sparkles size={20} />
+              <h2>AI Mentor Output</h2>
+            </div>
+            {!activeResult ? <EmptyResult /> : <Result result={activeResult} />}
+          </section>
+        </div>
+
+        <section className="dashboard">
+          <div className="panel">
+            <div className="section-title"><ChartNoAxesCombined size={20} /><h2>Learner Analytics</h2></div>
+            <Analytics analytics={analytics} />
+          </div>
+          <div className="panel">
+            <div className="section-title"><Route size={20} /><h2>Roadmap</h2></div>
+            <Roadmap roadmap={roadmap} />
+          </div>
+          <div className="panel">
+            <div className="section-title"><MessageSquareText size={20} /><h2>Recent Sessions</h2></div>
+            <SessionList sessions={sessions} />
+          </div>
         </section>
-      )}
-      </main>
-    </div>
+      </section>
+    </main>
   );
 }
 
@@ -251,7 +439,7 @@ function SessionList({ sessions }) {
           <Play size={16} />
           <div>
             <strong>{session.scenario?.title}</strong>
-            <span>{session.masterySignals.join(' / ')}</span>
+            <span>{session.masterySignals?.join(' / ') || 'In progress'}</span>
           </div>
         </article>
       )) : <p>No sessions yet.</p>}
