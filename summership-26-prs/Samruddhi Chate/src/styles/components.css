@@ -1,0 +1,765 @@
+/* ==========================================================================
+   Scene illustration — the main visual, one per screen.
+   ========================================================================== */
+.scene-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  max-height: 300px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 100%);
+  box-shadow: var(--shadow-card);
+}
+
+.scene-sun {
+  position: absolute;
+  top: 9%;
+  right: 10%;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--sun);
+  box-shadow: 0 0 0 8px rgba(242, 182, 87, 0.22);
+}
+
+.scene-ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34%;
+  background: var(--ground);
+  border-top: 3px solid var(--ground-line);
+}
+
+.scene-ground::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10px;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--ground-line) 0,
+    var(--ground-line) 14px,
+    transparent 14px,
+    transparent 30px
+  );
+}
+
+.scene-booth {
+  position: absolute;
+  right: 13%;
+  bottom: 34%;
+  width: 15%;
+  height: 30%;
+  background: var(--booth);
+  border-radius: 6px 6px 0 0;
+}
+
+.scene-booth::before {
+  content: "";
+  position: absolute;
+  left: -12%;
+  right: -12%;
+  bottom: 100%;
+  height: 14px;
+  background: var(--booth-roof);
+  border-radius: 4px;
+}
+
+.scene-gate-post {
+  position: absolute;
+  right: 24%;
+  bottom: 34%;
+  width: 5px;
+  height: 22%;
+  background: var(--ink);
+  border-radius: 3px;
+}
+
+.scene-gate-arm {
+  position: absolute;
+  right: 24.6%;
+  bottom: calc(34% + 16%);
+  width: 22%;
+  height: 6px;
+  border-radius: 3px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--danger) 0,
+    var(--danger) 10px,
+    #fff 10px,
+    #fff 20px
+  );
+  transform-origin: right center;
+  transition: transform 480ms cubic-bezier(0.34, 1.4, 0.64, 1);
+  transform: rotate(0deg);
+}
+
+.scene-gate-arm.is-open {
+  transform: rotate(-72deg);
+}
+
+.scene-gate-light {
+  position: absolute;
+  right: 22.5%;
+  bottom: calc(34% + 24%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--danger);
+  transition: background 200ms ease;
+}
+
+.scene-gate-light.is-go {
+  background: var(--accent);
+}
+
+.scene-car {
+  position: absolute;
+  bottom: 35%;
+  transform: translateX(-50%);
+  transition: left 900ms cubic-bezier(0.45, 0.05, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scene-car-plate {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 1px 5px;
+  border-radius: 4px;
+  color: var(--ink);
+  margin-bottom: 3px;
+  white-space: nowrap;
+}
+
+.scene-car-body {
+  width: 46px;
+  height: 20px;
+  background: var(--car-body);
+  border-radius: 9px 9px 5px 5px;
+  position: relative;
+}
+
+.scene-car-body::before {
+  content: "";
+  position: absolute;
+  top: -9px;
+  left: 8px;
+  right: 8px;
+  height: 11px;
+  background: var(--car-body);
+  border-radius: 7px 7px 0 0;
+}
+
+.scene-car-body::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 11px;
+  right: 11px;
+  height: 6px;
+  background: var(--car-window);
+  border-radius: 4px 4px 0 0;
+}
+
+.scene-car-wheels {
+  position: absolute;
+  bottom: -4px;
+  left: 6px;
+  right: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.scene-car-wheels span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wheel);
+}
+
+.scene-mia {
+  position: absolute;
+  left: 9%;
+  bottom: 34%;
+  width: 34px;
+  height: 58px;
+}
+
+.scene-mia-head {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--mia-skin);
+  margin: 0 auto;
+  position: relative;
+}
+
+.scene-mia-head::after {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: 4px;
+  right: 4px;
+  height: 10px;
+  background: var(--mia-hair);
+  border-radius: 8px 8px 0 0;
+}
+
+.scene-mia-body {
+  width: 30px;
+  height: 30px;
+  background: var(--mia-dress);
+  border-radius: 12px 12px 4px 4px;
+  margin: -2px auto 0;
+}
+
+.scene-lightbulb {
+  position: absolute;
+  left: 9%;
+  bottom: 78%;
+  transform: translateX(-20%);
+  font-size: 22px;
+  opacity: 0;
+}
+
+.scene-lightbulb.is-visible {
+  animation: bulb-pop 480ms ease forwards;
+}
+
+@keyframes bulb-pop {
+  0% {
+    opacity: 0;
+    transform: translateX(-20%) translateY(6px) scale(0.6);
+  }
+  70% {
+    opacity: 1;
+    transform: translateX(-20%) translateY(-2px) scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-20%) translateY(0) scale(1);
+  }
+}
+
+.scene-bubble {
+  position: absolute;
+  left: 6%;
+  bottom: 80%;
+  max-width: 62%;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 8px 12px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  box-shadow: var(--shadow-card);
+  animation: bubble-in 260ms ease both;
+}
+
+.scene-bubble::after {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 100%;
+  border: 7px solid transparent;
+  border-top-color: var(--paper);
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scene-decision-badge {
+  position: absolute;
+  right: 6%;
+  top: 8%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 700;
+  animation: bubble-in 260ms ease both;
+}
+
+.scene-decision-badge.is-granted {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.scene-decision-badge.is-denied {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.scene-cloud {
+  position: absolute;
+  top: 14%;
+  left: 8%;
+  width: 46px;
+  height: 16px;
+  background: #fff;
+  opacity: 0.75;
+  border-radius: 999px;
+  animation: cloud-drift 26s ease-in-out infinite;
+}
+
+.scene-cloud::before,
+.scene-cloud::after {
+  content: "";
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.scene-cloud::before {
+  width: 22px;
+  height: 22px;
+  top: -10px;
+  left: 4px;
+}
+
+.scene-cloud::after {
+  width: 16px;
+  height: 16px;
+  top: -7px;
+  left: 24px;
+}
+
+@keyframes cloud-drift {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(14px); }
+}
+
+.scene-tree {
+  position: absolute;
+  bottom: 34%;
+  width: 6px;
+  height: 26px;
+  background: #a9895f;
+  border-radius: 2px;
+  transform-origin: bottom center;
+  animation: tree-sway 6s ease-in-out infinite;
+}
+
+.scene-tree::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 34px;
+  background: #8fae6f;
+  border-radius: 50%;
+  box-shadow: -12px 6px 0 -4px #8fae6f, 12px 6px 0 -4px #9dbb7c;
+}
+
+.scene-tree.tree-a {
+  left: 3%;
+  animation-delay: 0.4s;
+}
+
+.scene-tree.tree-b {
+  left: 84%;
+  animation-delay: 1.6s;
+}
+
+@keyframes tree-sway {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(2deg); }
+}
+
+.scene-mia {
+  animation: mia-idle 3.6s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes mia-idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+.scene-car-wheels span {
+  animation: wheel-spin 500ms linear infinite;
+  animation-play-state: paused;
+}
+
+.scene-car.is-moving .scene-car-wheels span {
+  animation-play-state: running;
+}
+
+@keyframes wheel-spin {
+  from { box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.5); }
+  to { box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0); transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   Small counter / progress-dot row (used by hands-on "try it yourself" beats)
+   ========================================================================== */
+.tally-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.tally-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.tally-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 7px;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  transition: all 200ms ease;
+}
+
+.tally-dot.is-filled {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-dark);
+}
+
+/* ==========================================================================
+   Think-it-through — a short, accumulating list of questions
+   ========================================================================== */
+.think-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.think-header {
+  text-align: left;
+}
+
+.think-eyebrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--ink-faint);
+}
+
+.think-question-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-card);
+  text-align: left;
+  animation: bubble-in 280ms ease both;
+}
+
+.think-question-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bg-deep);
+  color: var(--ink-muted);
+  font-size: 12px;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+/* ==========================================================================
+   Discovery summary — "Nice work, here's what you found"
+   ========================================================================== */
+.discovery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+
+.discovery-card {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 18px 16px;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+
+.discovery-check {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.discovery-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+  font-size: 16px;
+}
+
+.discovery-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--accent-dark);
+  margin-bottom: 4px;
+}
+
+.discovery-value {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--ink);
+}
+.code-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  box-shadow: var(--shadow-card);
+  width: 100%;
+}
+
+.code-card pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.code-card .tok-highlight {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border-radius: 5px;
+  padding: 1px 3px;
+  font-weight: 600;
+}
+
+.code-card .tok-keyword {
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+.code-card .tok-string {
+  color: #a8672e;
+}
+
+.code-card-caption {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--ink-muted);
+}
+
+.code-card-caption strong {
+  color: var(--accent-dark);
+}
+
+/* ==========================================================================
+   Choice card
+   ========================================================================== */
+.choice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.choice-option {
+  text-align: left;
+  padding: 13px 16px;
+  border-radius: 14px;
+  border: 1.5px solid var(--line);
+  background: var(--paper);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  transition: border-color 120ms ease, background 120ms ease;
+}
+
+.choice-option:not(:disabled):hover {
+  border-color: var(--accent);
+}
+
+.choice-option.is-correct {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-weight: 600;
+}
+
+.choice-option.is-incorrect {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.choice-option:disabled {
+  cursor: default;
+}
+
+.choice-feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 500;
+  width: 100%;
+  animation: bubble-in 220ms ease both;
+}
+
+.choice-feedback.is-success {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.choice-feedback.is-error {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* ==========================================================================
+   Flow steps — vertical, appears one item at a time (return-value scenes)
+   ========================================================================== */
+.flow-steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.flow-step-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.flow-step-row.is-shown {
+  animation: bubble-in 320ms ease forwards;
+}
+
+.flow-step-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--paper);
+  border: 1.5px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.flow-step-pill.is-granted {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+}
+
+.flow-step-pill.is-denied {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.flow-step-arrow {
+  color: var(--ink-faint);
+  font-size: 14px;
+}
+
+/* ==========================================================================
+   Vehicle picker (argument / final scenes)
+   ========================================================================== */
+.vehicle-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.vehicle-chip {
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  transition: all 140ms ease;
+}
+
+.vehicle-chip:not(:disabled):hover {
+  border-color: var(--accent);
+}
+
+.vehicle-chip.is-selected {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}

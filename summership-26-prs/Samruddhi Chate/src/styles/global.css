@@ -1,0 +1,297 @@
+/* ==========================================================================
+   Design tokens — warm illustrated-storybook palette.
+   One accent (a natural green, like the parking gate's own signal light),
+   a warm cream page, soft muted secondary tones used only inside the
+   illustration itself.
+   ========================================================================== */
+:root {
+  --bg: #faf1e1;
+  --bg-deep: #f3e6cd;
+  --paper: #fffdf8;
+  --line: #e9dcc2;
+
+  --ink: #2e2a24;
+  --ink-muted: #6f6455;
+  --ink-faint: #a99d87;
+
+  --accent: #3e7a55;
+  --accent-dark: #2c5c3f;
+  --accent-soft: #e4efe2;
+
+  --danger: #b8593f;
+  --danger-soft: #f6e4dc;
+
+  --sky-top: #fdf1de;
+  --sky-bottom: #f6e2c4;
+  --sun: #f2b657;
+  --ground: #e7d3ac;
+  --ground-line: #d8bd8c;
+  --booth: #c97b52;
+  --booth-roof: #a85f3c;
+
+  --mia-skin: #e3ab7c;
+  --mia-hair: #4a3527;
+  --mia-dress: #6f93a3;
+
+  --car-body: #d97b4f;
+  --car-window: #f4e3c8;
+  --wheel: #35302a;
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+  --radius-md: 16px;
+  --radius-lg: 26px;
+  --shadow-card: 0 2px 4px rgba(46, 42, 36, 0.05), 0 16px 32px -20px rgba(46, 42, 36, 0.25);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+p,
+figure {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input {
+  font-family: inherit;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent-dark);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+.story-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(26px, 4.5vw, 36px);
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.story-text {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(17px, 2.6vw, 20px);
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 46ch;
+}
+
+.story-text-sm {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: var(--ink-muted);
+}
+
+.eyebrow-soft {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--accent-dark);
+}
+
+/* ==========================================================================
+   Page shell — one calm, centered column. No sidebars, no dashboards.
+   ========================================================================== */
+.story-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+}
+
+.story-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+}
+
+.story-back {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink-muted);
+  background: none;
+  border: none;
+  padding: 6px 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.story-back:hover {
+  color: var(--ink);
+}
+
+.story-back-spacer {
+  width: 64px;
+}
+
+.story-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px 64px;
+}
+
+.story-column {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  text-align: center;
+}
+
+.story-column.is-left {
+  text-align: left;
+  align-items: stretch;
+}
+
+@media (max-width: 560px) {
+  .story-topbar {
+    padding: 16px;
+  }
+  .story-main {
+    padding: 8px 16px 48px;
+  }
+  .story-column {
+    gap: 22px;
+  }
+}
+
+/* ==========================================================================
+   Progress dots — small, quiet, never dominant
+   ========================================================================== */
+.progress-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.progress-dot-item {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line);
+  transition: all 200ms ease;
+}
+
+.progress-dot-item.is-active {
+  background: var(--accent);
+  transform: scale(1.35);
+}
+
+.progress-dot-item.is-done {
+  background: var(--ink-faint);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  border: 1px solid transparent;
+  transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
+  min-height: 46px;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 10px 22px -12px rgba(62, 122, 85, 0.65);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: var(--accent-dark);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink-muted);
+  border-color: var(--line);
+}
+
+.btn-secondary:not(:disabled):hover {
+  color: var(--ink);
+  border-color: var(--ink-faint);
+}
