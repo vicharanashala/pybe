@@ -1,0 +1,496 @@
+/* Character Rigs, Dynamic Poses & Action Physics for Buddy's Magic Pet Shop */
+
+/* Dynamic Actor Wrapper on Stage */
+.stage-actor {
+  position: absolute;
+  bottom: 30px;
+  transition: left 0.75s cubic-bezier(0.25, 1, 0.5, 1),
+              bottom 0.75s cubic-bezier(0.25, 1, 0.5, 1),
+              transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.4s ease;
+  transform-origin: bottom center;
+  z-index: 20;
+}
+
+/* 🐶 Buddy Container & Poses */
+.buddy-actor {
+  width: 190px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.buddy-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.15));
+  transform-origin: bottom center;
+}
+
+/* 1. Walk Cycle */
+.buddy-action-walking .buddy-svg {
+  animation: buddyWalkBob 0.35s ease-in-out infinite alternate;
+}
+.buddy-action-walking .paw-front-left {
+  animation: pawWalkCycle 0.35s ease-in-out infinite alternate;
+  transform-origin: 90px 185px;
+}
+.buddy-action-walking .paw-front-right {
+  animation: pawWalkCycle 0.35s ease-in-out infinite alternate-reverse;
+  transform-origin: 130px 185px;
+}
+.buddy-action-walking .buddy-ear-left,
+.buddy-action-walking .buddy-ear-right {
+  animation: earFlapWalk 0.35s ease-in-out infinite alternate;
+}
+
+/* 2. Wave Paw */
+.buddy-action-waving .paw-front-right {
+  transform-origin: 130px 180px;
+  animation: pawWave 0.35s ease-in-out infinite alternate;
+}
+
+/* 3. Look Around (Head Tilt) */
+.buddy-action-looking-around .buddy-head {
+  transform-origin: 110px 90px;
+  animation: headLookAround 2.2s ease-in-out infinite;
+}
+
+/* 4. Shocked / Scared Reaction (Scene 3) */
+.buddy-action-shocked .buddy-svg {
+  animation: shockedJerk 0.4s ease-in-out infinite alternate;
+  filter: drop-shadow(0 14px 20px rgba(220, 38, 38, 0.4));
+}
+.buddy-action-shocked .buddy-tail {
+  transform-origin: 55px 145px;
+  transform: rotate(-50deg);
+}
+.buddy-action-shocked .buddy-ear-left {
+  transform-origin: 65px 70px;
+  transform: rotate(-25deg);
+}
+.buddy-action-shocked .buddy-ear-right {
+  transform-origin: 155px 70px;
+  transform: rotate(25deg);
+}
+
+/* 5. Dizzy Tummy Ache */
+.buddy-action-dizzy .buddy-svg {
+  animation: dizzyWobble 0.8s ease-in-out infinite;
+  filter: drop-shadow(0 8px 14px rgba(185, 28, 28, 0.3));
+}
+.buddy-action-dizzy .buddy-tail {
+  transform: rotate(-35deg);
+}
+
+/* 6. Eating & Chewing Treat */
+.buddy-action-eating .buddy-mouth-chew {
+  transform-origin: 110px 105px;
+  animation: mouthChew 0.25s ease-in-out infinite alternate;
+}
+.buddy-action-eating .buddy-head {
+  animation: chewHeadBob 0.25s ease-in-out infinite alternate;
+  transform-origin: 110px 90px;
+}
+
+/* 7. Sleeping (Curled Up with Zzz) */
+.buddy-action-sleeping .buddy-svg {
+  transform: scale(0.9, 0.8) translateY(18px);
+}
+
+/* 8. Jumping & Celebrating */
+.buddy-action-jumping .buddy-svg,
+.buddy-action-celebrating .buddy-svg {
+  animation: joyfulJump 0.6s ease-in-out infinite alternate;
+}
+
+/* 9. Idle Breathing */
+.buddy-action-idle .buddy-svg {
+  animation: idleBreathe 1.8s ease-in-out infinite alternate;
+}
+.buddy-action-idle .buddy-tail {
+  transform-origin: 55px 145px;
+  animation: tailWagSmooth 0.6s ease-in-out infinite alternate;
+}
+
+/* Keyframes for Buddy */
+@keyframes buddyWalkBob {
+  0% { transform: translateY(0) rotate(-2deg); }
+  100% { transform: translateY(-10px) rotate(2deg); }
+}
+
+@keyframes pawWalkCycle {
+  0% { transform: translateY(0) rotate(-20deg); }
+  100% { transform: translateY(-12px) rotate(25deg); }
+}
+
+@keyframes pawWave {
+  0% { transform: translateY(-24px) rotate(35deg); }
+  100% { transform: translateY(-34px) rotate(-15deg); }
+}
+
+@keyframes earFlapWalk {
+  0% { transform: rotate(-8deg); }
+  100% { transform: rotate(15deg); }
+}
+
+@keyframes headLookAround {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-14deg); }
+  75% { transform: rotate(14deg); }
+}
+
+@keyframes shockedJerk {
+  0% { transform: translateY(0) scale(1.02); }
+  100% { transform: translateY(-12px) scale(0.98); }
+}
+
+@keyframes dizzyWobble {
+  0%, 100% { transform: rotate(-8deg) translateY(0); }
+  50% { transform: rotate(8deg) translateY(6px); }
+}
+
+@keyframes mouthChew {
+  0% { transform: scaleY(0.7); }
+  100% { transform: scaleY(1.3); }
+}
+
+@keyframes chewHeadBob {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4px); }
+}
+
+@keyframes joyfulJump {
+  0% { transform: translateY(0) scale(1, 1); }
+  50% { transform: translateY(-32px) scale(0.95, 1.08) rotate(3deg); }
+  100% { transform: translateY(0) scale(1.05, 0.95); }
+}
+
+@keyframes idleBreathe {
+  0% { transform: translateY(0) scale(1, 1); }
+  100% { transform: translateY(-6px) scale(0.99, 1.02); }
+}
+
+@keyframes tailWagSmooth {
+  0% { transform: rotate(-22deg); }
+  100% { transform: rotate(32deg); }
+}
+
+/* 👩🏫 Teacher Luna Container & Poses */
+.luna-actor {
+  width: 170px;
+  height: 240px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.luna-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.12));
+  transform-origin: bottom center;
+}
+
+/* Luna Actions */
+.luna-action-walking .luna-svg {
+  animation: lunaWalk 0.4s ease-in-out infinite alternate;
+}
+
+.luna-action-waving .luna-arm-right {
+  transform-origin: 135px 120px;
+  animation: armWave 0.45s ease-in-out infinite alternate;
+}
+
+.luna-action-pointing .luna-arm-right {
+  transform-origin: 135px 120px;
+  transform: rotate(-40deg) translateY(-10px);
+}
+
+.luna-action-thinking .luna-arm-right {
+  transform-origin: 135px 120px;
+  transform: rotate(-95deg) translateY(-25px);
+}
+.luna-action-thinking .luna-head {
+  transform-origin: 90px 85px;
+  animation: thinkingTilt 1.8s ease-in-out infinite alternate;
+}
+
+.luna-action-shocked .luna-svg {
+  animation: lunaGasp 0.5s ease-in-out infinite alternate;
+}
+
+.luna-action-celebrating .luna-svg {
+  animation: lunaCheer 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes lunaWalk {
+  0% { transform: translateY(0) rotate(-2deg); }
+  100% { transform: translateY(-8px) rotate(2deg); }
+}
+
+@keyframes armWave {
+  0% { transform: rotate(-10deg); }
+  100% { transform: rotate(35deg); }
+}
+
+@keyframes thinkingTilt {
+  0% { transform: rotate(-6deg); }
+  100% { transform: rotate(6deg); }
+}
+
+@keyframes lunaGasp {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-8px) scale(1.04); }
+}
+
+@keyframes lunaCheer {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-16px) rotate(2deg); }
+}
+
+/* 🔒 Capsule Hero Container & Poses */
+.capsule-actor {
+  width: 150px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.capsule-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 14px 22px rgba(59, 130, 246, 0.35));
+  transform-origin: center;
+}
+
+.capsule-action-flying .capsule-svg {
+  animation: capsuleFlySwoop 1.2s ease-in-out infinite alternate;
+}
+
+.capsule-action-spinning .capsule-svg {
+  animation: capsuleSpin360 0.8s ease-in-out;
+}
+
+.capsule-action-bouncing .capsule-svg {
+  animation: capsuleDoubleBounce 0.5s ease-in-out infinite alternate;
+}
+
+.capsule-action-protecting .capsule-lock {
+  animation: lockRadiate 1s ease-in-out infinite alternate;
+}
+
+@keyframes capsuleFlySwoop {
+  0% { transform: translateY(0) rotate(-6deg); }
+  100% { transform: translateY(-20px) rotate(8deg); }
+}
+
+@keyframes capsuleSpin360 {
+  0% { transform: rotate(0deg) scale(0.7); }
+  50% { transform: rotate(180deg) scale(1.15); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes capsuleDoubleBounce {
+  0% { transform: translateY(0) scale(1, 1); }
+  50% { transform: translateY(-28px) scale(0.9, 1.15); }
+  100% { transform: translateY(0) scale(1.1, 0.9); }
+}
+
+@keyframes lockRadiate {
+  0% { transform: scale(1); filter: drop-shadow(0 0 6px #F59E0B); }
+  100% { transform: scale(1.25); filter: drop-shadow(0 0 18px #FDE047); }
+}
+
+/* Interactive Thrown Props (Bone, Tennis Ball, Candies, Blanket) */
+.flying-prop {
+  position: absolute;
+  font-size: 2.5rem;
+  z-index: 35;
+  transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+}
+
+.flying-prop.eating {
+  animation: shrinkIntoMouth 0.3s ease-in forwards;
+}
+
+@keyframes shrinkIntoMouth {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(0.1); opacity: 0; }
+}
+
+/* Shop Door Animation (Scene 1) */
+.shop-door-frame {
+  position: absolute;
+  left: 30px;
+  bottom: 0;
+  width: 90px;
+  height: 180px;
+  border: 5px solid #78350F;
+  border-bottom: none;
+  background: #FEF3C7;
+  border-top-left-radius: 45px;
+  border-top-right-radius: 45px;
+  perspective: 600px;
+  z-index: 12;
+}
+
+.shop-door-panel {
+  width: 100%;
+  height: 100%;
+  background: #B45309;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  transform-origin: left center;
+  transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 12px;
+}
+
+.shop-door-panel.open {
+  transform: rotateY(-85deg);
+}
+
+.door-knob {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #FDE047;
+  border: 2px solid #D97706;
+}
+
+/* Floating Code Bubble / Tamper Event Banner (Scene 3) */
+.tamper-event-box {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.95);
+  border: 3px solid #EF4444;
+  border-radius: 20px;
+  padding: 12px 22px;
+  box-shadow: 0 12px 28px rgba(239, 68, 68, 0.35);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: alertPulse 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes alertPulse {
+  0% { transform: translateX(-50%) scale(0.97); }
+  100% { transform: translateX(-50%) scale(1.03); }
+}
+
+/* Encapsulation Capsule Diagram (Scene 6) */
+.encapsulation-stage-diagram {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 240px;
+  border: 4px dashed #3B82F6;
+  border-radius: 40px;
+  background: radial-gradient(circle, rgba(147, 197, 253, 0.4) 0%, rgba(59, 130, 246, 0.1) 70%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  z-index: 15;
+  animation: diagramFloat 3s ease-in-out infinite alternate;
+}
+
+@keyframes diagramFloat {
+  0% { transform: translate(-50%, -50%) scale(0.98); }
+  100% { transform: translate(-50%, -50%) scale(1.02); }
+}
+
+/* ==========================================================================
+   Hero Academy Character Classes (Nova, Zippy, Ember, Shieldy)
+   ========================================================================== */
+
+.nova-actor {
+  width: 175px;
+  height: 245px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.nova-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 12px 20px rgba(14, 165, 233, 0.35));
+  transform-origin: bottom center;
+  animation: novaIdleBob 2.8s ease-in-out infinite alternate;
+}
+
+.zippy-actor {
+  width: 155px;
+  height: 215px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.zippy-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 12px 20px rgba(250, 204, 21, 0.45));
+  transform-origin: bottom center;
+  animation: zippyIdleBouncy 0.45s ease-in-out infinite alternate;
+}
+
+.ember-actor {
+  width: 155px;
+  height: 215px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.ember-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 12px 20px rgba(239, 68, 68, 0.45));
+  transform-origin: bottom center;
+  animation: emberHoverFloat 1.8s ease-in-out infinite alternate;
+}
+
+.shieldy-actor {
+  width: 165px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.shieldy-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 12px 20px rgba(16, 185, 129, 0.45));
+  transform-origin: bottom center;
+  animation: shieldyHeroicBreath 2.2s ease-in-out infinite alternate;
+}
+

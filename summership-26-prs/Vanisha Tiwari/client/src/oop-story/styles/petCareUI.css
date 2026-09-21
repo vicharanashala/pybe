@@ -1,0 +1,410 @@
+/* Pet Care Interactive UI, Magic Code Scrolls, MCQs & Graduation Certificate */
+
+/* 📜 Magic Code Scroll */
+.magic-scroll-container {
+  background: #FFFBEB;
+  border: 4px solid #FDE68A;
+  border-radius: 24px;
+  padding: 16px 20px;
+  box-shadow: 0 10px 24px rgba(245, 158, 11, 0.12);
+  margin-top: 10px;
+  position: relative;
+}
+
+.magic-scroll-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.magic-scroll-title {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #B45309;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.code-box-styled {
+  background: #1E293B;
+  color: #F8FAFC;
+  border-radius: 16px;
+  padding: 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+.code-box-styled pre {
+  margin: 0;
+}
+
+.magic-scroll-explanation {
+  margin-top: 10px;
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1rem;
+  color: #92400E;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 🦴 Interactive Pet Care Station (Scene 9) */
+.pet-care-station {
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 18px;
+  border: 3px solid #BAE6FD;
+  box-shadow: 0 10px 24px rgba(56, 189, 248, 0.15);
+  margin-top: 12px;
+}
+
+.pet-care-title {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0369A1;
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.pet-care-actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.btn-care-action {
+  background: #F0F9FF;
+  border: 3px solid #7DD3FC;
+  border-radius: 20px;
+  padding: 14px 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-care-action:hover {
+  transform: translateY(-4px) scale(1.05);
+  background: #E0F2FE;
+  border-color: #0284C7;
+  box-shadow: 0 8px 18px rgba(2, 132, 199, 0.2);
+}
+
+.care-icon {
+  font-size: 2.2rem;
+}
+
+.care-label {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0369A1;
+}
+
+.care-effect {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #059669;
+  background: #DCFCE7;
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+/* 🎯 In-Story MCQ Modal & Story Choice (Scene 6) */
+.story-choice-container {
+  background: #FFFFFF;
+  border-radius: 28px;
+  padding: 22px;
+  border: 4px solid #FDE047;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
+  margin-top: 12px;
+}
+
+.story-choice-q {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #92400E;
+  margin-bottom: 14px;
+}
+
+.story-choice-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-story-option {
+  background: #F8FAFC;
+  border: 3px solid #E2E8F0;
+  border-radius: 18px;
+  padding: 14px 18px;
+  text-align: left;
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-story-option:hover {
+  border-color: #F59E0B;
+  background: #FFFBEB;
+  transform: translateX(6px);
+}
+
+.btn-story-option.correct {
+  border-color: #22C55E;
+  background: #DCFCE7;
+  color: #15803D;
+  font-weight: 700;
+}
+
+.btn-story-option.incorrect {
+  border-color: #EF4444;
+  background: #FEE2E2;
+  color: #B91C1C;
+}
+
+.choice-feedback-banner {
+  margin-top: 14px;
+  padding: 12px 18px;
+  border-radius: 16px;
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.choice-feedback-banner.success {
+  background: #DCFCE7;
+  color: #15803D;
+  border: 2px solid #86EFAC;
+}
+
+.choice-feedback-banner.try-again {
+  background: #FEF3C7;
+  color: #B45309;
+  border: 2px solid #FCD34D;
+}
+
+/* 🧩 Guided Code Challenge (Scene 11) */
+.challenge-box {
+  background: #F8FAFC;
+  border: 3px solid #CBD5E1;
+  border-radius: 24px;
+  padding: 20px;
+  margin-top: 12px;
+}
+
+.challenge-step {
+  margin-bottom: 16px;
+}
+
+.challenge-step-title {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1E293B;
+  margin-bottom: 8px;
+}
+
+.challenge-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.btn-tile {
+  background: #FFFFFF;
+  border: 2px solid #94A3B8;
+  border-radius: 14px;
+  padding: 8px 16px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0F172A;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-tile:hover {
+  border-color: #3B82F6;
+  background: #EFF6FF;
+}
+
+.btn-tile.selected {
+  background: #3B82F6;
+  color: #FFFFFF;
+  border-color: #1D4ED8;
+}
+
+.btn-tile.correct {
+  background: #22C55E;
+  color: #FFFFFF;
+  border-color: #15803D;
+}
+
+/* 🎓 Final Quiz (Scene 12) */
+.quiz-card {
+  background: #FFFFFF;
+  border-radius: 28px;
+  padding: 24px;
+  border: 4px solid #A7F3D0;
+  box-shadow: 0 16px 36px rgba(16, 185, 129, 0.15);
+  margin-top: 12px;
+}
+
+.quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.quiz-counter {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #059669;
+  background: #D1FAE5;
+  padding: 4px 14px;
+  border-radius: 999px;
+}
+
+/* 🏆 Graduation Celebration & Certificate (Scene 13) */
+.graduation-container {
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 50%, #FDE68A 100%);
+  border: 6px solid #F59E0B;
+  border-radius: 32px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(245, 158, 11, 0.25);
+  margin-top: 12px;
+}
+
+.certificate-frame {
+  background: #FFFFFF;
+  border: 4px double #D97706;
+  border-radius: 20px;
+  padding: 24px;
+  margin: 16px 0;
+  box-shadow: inset 0 0 16px rgba(245, 158, 11, 0.15);
+}
+
+.cert-title {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #B45309;
+  margin: 0 0 6px 0;
+}
+
+.cert-subtitle {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  color: #475569;
+  margin-bottom: 16px;
+}
+
+.cert-name-input {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1E293B;
+  border: none;
+  border-bottom: 3px dashed #F59E0B;
+  background: transparent;
+  text-align: center;
+  width: 80%;
+  max-width: 360px;
+  outline: none;
+  padding: 4px 0;
+  margin-bottom: 14px;
+}
+
+.cert-name-input:focus {
+  border-bottom-style: solid;
+}
+
+.cert-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 12px;
+}
+
+.cert-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #92400E;
+}
+
+/* Scene Stepper Bar */
+.scene-stepper-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 999px;
+  border: 2px solid #E2E8F0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.btn-step-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid #CBD5E1;
+  background: #FFFFFF;
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #64748B;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-step-dot:hover {
+  transform: scale(1.2);
+  border-color: #F59E0B;
+  color: #D97706;
+}
+
+.btn-step-dot.active {
+  background: #F59E0B;
+  border-color: #D97706;
+  color: #FFFFFF;
+  transform: scale(1.25);
+  box-shadow: 0 4px 10px rgba(245, 158, 11, 0.35);
+}
+
+.btn-step-dot.completed {
+  background: #22C55E;
+  border-color: #15803D;
+  color: #FFFFFF;
+}

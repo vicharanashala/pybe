@@ -1,7 +1,11 @@
 {
   "scenarios": [
     {
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "_id": "ed0b5d99-307f-4d22-a13c-c4e0d24c5e1d",
+=======
       "_id": "feb06025-b690-4413-8cc9-cfa4d00c15c8",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Bag Weight Label",
       "difficulty": "Beginner",
       "concepts": [
@@ -16,11 +20,19 @@
       ],
       "sampleReasoning": "I only need to remember the bag weight, so I would store it with a clear name.",
       "effectivenessScore": 96,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.498Z",
+      "updatedAt": "2026-09-10T17:14:45.498Z"
+    },
+    {
+      "_id": "b49055cc-43c3-4834-87f6-c80f5f067fdf",
+=======
       "createdAt": "2026-08-23T08:37:58.637Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "bbf096f2-1856-45b0-bd89-cc7fe675d4a9",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Rainy Day Choice",
       "difficulty": "Beginner",
       "concepts": [
@@ -35,11 +47,19 @@
       ],
       "sampleReasoning": "If it is raining, carry an umbrella. Otherwise, leave it at home.",
       "effectivenessScore": 95,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "41e270d7-f93a-4319-b247-03bfe4f07c05",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "a899c147-5849-4c95-9689-cce0c78d49f6",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Two Snack Prices",
       "difficulty": "Beginner",
       "concepts": [
@@ -55,11 +75,19 @@
       ],
       "sampleReasoning": "I would keep the two prices separately and add them to get the total.",
       "effectivenessScore": 94,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "716a4e03-ee86-4323-8394-693fb69a750d",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "1cd4d204-f0a3-4991-b12f-c6b179febce3",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Greeting by Name",
       "difficulty": "Beginner",
       "concepts": [
@@ -75,11 +103,19 @@
       ],
       "sampleReasoning": "The computer should store the learner name and place it inside a greeting sentence.",
       "effectivenessScore": 93,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "51d85f1d-fab0-4e58-b4c2-8ba31a4dfc56",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "215367ef-a2c8-470b-a07b-9d84d2e8100f",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Pass Mark Check",
       "difficulty": "Beginner",
       "concepts": [
@@ -95,11 +131,19 @@
       ],
       "sampleReasoning": "I would compare the score with the pass mark and decide pass if it is high enough.",
       "effectivenessScore": 92,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "75f61789-7784-433a-a864-9cdeb8f6abab",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "7835b8e7-495c-46c1-94a3-d8ae96d6e366",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Pocket Money Left",
       "difficulty": "Beginner",
       "concepts": [
@@ -115,11 +159,19 @@
       ],
       "sampleReasoning": "Start with the original money, subtract the spent amount, and store what remains.",
       "effectivenessScore": 91,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "58383138-801c-409d-9405-0cfbf758ad2d",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "f105469c-542f-4b47-a67f-0c44d85c8195",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Favorite Color List",
       "difficulty": "Beginner",
       "concepts": [
@@ -134,11 +186,19 @@
       ],
       "sampleReasoning": "Since all values are colors, I would keep them together in one list.",
       "effectivenessScore": 90,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "af708cf2-a829-4a7e-9f6a-4f6abc9c9826",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "389dc9a0-7757-41ce-9942-154cff0861e7",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "First Item in a Bag",
       "difficulty": "Beginner",
       "concepts": [
@@ -154,11 +214,19 @@
       ],
       "sampleReasoning": "The first item is based on its position in the ordered group.",
       "effectivenessScore": 89,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "59d0cbc9-2452-44f1-b41e-072bbca0315a",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "2a87f538-e980-429c-80dc-0c877d8c5461",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Attendance Count",
       "difficulty": "Beginner",
       "concepts": [
@@ -174,11 +242,19 @@
       ],
       "sampleReasoning": "I would count how many names are in the present-students list.",
       "effectivenessScore": 88,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "b4356db7-eca5-4ec8-a1fc-dde9db177276",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "4d42cbf3-7c37-4bfe-ab25-7ad9a4341ac8",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Temperature Message",
       "difficulty": "Beginner",
       "concepts": [
@@ -194,11 +270,19 @@
       ],
       "sampleReasoning": "If the temperature is above the threshold, show Hot; otherwise show Comfortable.",
       "effectivenessScore": 87,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "4adadb0b-42a2-483d-9e91-06c9007e127e",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "30ce821f-64a2-4430-a655-2f820faa6ee6",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Water Bottle Reminder",
       "difficulty": "Explorer",
       "concepts": [
@@ -213,11 +297,19 @@
       ],
       "sampleReasoning": "For every break, show the same water reminder.",
       "effectivenessScore": 96,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "9d6bdf38-4f99-49b8-a87a-4e53ec41e83e",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "974b0cdf-bf96-4334-a745-3e132da0c97b",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Find the Longest Pencil",
       "difficulty": "Explorer",
       "concepts": [
@@ -233,11 +325,19 @@
       ],
       "sampleReasoning": "Start with one pencil as the longest, then compare each next pencil against it.",
       "effectivenessScore": 95,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "b2139967-30dd-4fa5-8703-395175bd48b4",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "e1599b2a-4184-4e43-bef2-9f4293f3850f",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Clean Chore Checklist",
       "difficulty": "Explorer",
       "concepts": [
@@ -253,11 +353,19 @@
       ],
       "sampleReasoning": "Put chores in a list and handle each chore one by one.",
       "effectivenessScore": 94,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "b0c26b60-4010-4eed-98b2-02a1f46d70fb",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "6e09e019-c546-4939-bede-329d8948034a",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Movie Age Filter",
       "difficulty": "Explorer",
       "concepts": [
@@ -273,11 +381,19 @@
       ],
       "sampleReasoning": "For each movie, keep it only if the learner age is at least the minimum age.",
       "effectivenessScore": 93,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "0697cf43-1fa9-4815-a294-f091ba862d7e",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "3d734746-a66e-4abb-9e67-9e6101b9b1c9",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Classroom Supply Lookup",
       "difficulty": "Explorer",
       "concepts": [
@@ -292,11 +408,19 @@
       ],
       "sampleReasoning": "Each supply has a count, so I would store supply names as keys with counts as values.",
       "effectivenessScore": 92,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "34a0809a-27dc-44dc-81c4-2f9744bcb8b7",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "8ecf2ca9-8499-4a84-97dc-7c005414427e",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Bus Stop Search",
       "difficulty": "Explorer",
       "concepts": [
@@ -312,11 +436,19 @@
       ],
       "sampleReasoning": "Look at each stop and compare it with the stop I want.",
       "effectivenessScore": 91,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "f5aeba63-62c8-41cd-befa-21cc7f6b946d",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "cab9a2d7-2046-4510-b5cc-6956b9048d7e",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Average Practice Score",
       "difficulty": "Explorer",
       "concepts": [
@@ -332,11 +464,19 @@
       ],
       "sampleReasoning": "Find the total of all scores, count how many scores there are, then divide.",
       "effectivenessScore": 90,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "e049ecee-e332-40a8-885b-70fadcdb73f1",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "af0e886d-0553-4608-a7cc-fc040f68ff33",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Separate Even Roll Numbers",
       "difficulty": "Explorer",
       "concepts": [
@@ -352,11 +492,19 @@
       ],
       "sampleReasoning": "A roll number is even if dividing by two leaves no remainder.",
       "effectivenessScore": 89,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "9758541f-2686-4c10-8fc6-157aec6844e2",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "be9df63b-9b79-430e-a1a7-be0e078155d6",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Capitalize Name Tags",
       "difficulty": "Explorer",
       "concepts": [
@@ -372,11 +520,19 @@
       ],
       "sampleReasoning": "For each name, convert it to title case before printing the tag.",
       "effectivenessScore": 88,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "5a34b75a-eed9-4286-8792-d28736732699",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "5218f3d2-1dc4-4383-be02-54dc12a34b36",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Find Missing Homework",
       "difficulty": "Explorer",
       "concepts": [
@@ -392,11 +548,19 @@
       ],
       "sampleReasoning": "Take everyone in the class and remove the students who submitted.",
       "effectivenessScore": 87,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "2a4b95fe-7a47-4581-b3a3-a9fe440b9b6b",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "e8575f9d-c2cc-41c9-86b9-00536df3e83a",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Reusable Discount Rule",
       "difficulty": "Builder",
       "concepts": [
@@ -412,11 +576,19 @@
       ],
       "sampleReasoning": "The helper needs the bill amount and should return the final price after applying the rule.",
       "effectivenessScore": 96,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "db87807b-e10c-48af-9008-373635b11bdf",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "2ec05441-ee5c-4650-bc0f-11cc30797202",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Mini Quiz Checker",
       "difficulty": "Builder",
       "concepts": [
@@ -432,11 +604,19 @@
       ],
       "sampleReasoning": "Compare the learner answer with the correct answer and return whether they match.",
       "effectivenessScore": 95,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "f8e44bbf-cfbe-4d7f-942a-d11d9d928ec5",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "705daf35-f2f4-4e2b-a6df-327df9f1d1cc",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Step Counter Function",
       "difficulty": "Builder",
       "concepts": [
@@ -452,11 +632,19 @@
       ],
       "sampleReasoning": "The function should take step counts, add them, and give back the total.",
       "effectivenessScore": 94,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "fb26e859-0ee5-4884-aa48-086f75b06eea",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "7452fa41-0605-4d50-b2cf-12056542de69",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Safe Username Maker",
       "difficulty": "Builder",
       "concepts": [
@@ -472,11 +660,19 @@
       ],
       "sampleReasoning": "Make the name lowercase and remove spaces so it can be used as a username.",
       "effectivenessScore": 93,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "30073e43-5961-487b-82c0-e25019a15e1a",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "68c46610-6a94-49ee-b0ac-50144b19e270",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Retry Until Valid",
       "difficulty": "Builder",
       "concepts": [
@@ -492,11 +688,19 @@
       ],
       "sampleReasoning": "Keep asking while the number is not positive, then stop once it is valid.",
       "effectivenessScore": 92,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "574365cc-c669-46bc-93ae-db756a981968",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "1678b6d2-8406-41af-ab98-bc1d1ee9039f",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Simple Score Report",
       "difficulty": "Builder",
       "concepts": [
@@ -512,11 +716,19 @@
       ],
       "sampleReasoning": "Return a dictionary with the learner name and score as labeled values.",
       "effectivenessScore": 91,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "938c39b1-0cf0-44f0-9bd0-767db7adc404",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "0e289a7c-3c0d-44bd-b4a6-fc912e6371ef",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Task Status Updater",
       "difficulty": "Builder",
       "concepts": [
@@ -532,11 +744,19 @@
       ],
       "sampleReasoning": "Find the task by name and change its status from pending to done.",
       "effectivenessScore": 90,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "80e6f1ad-dc9d-495e-bca3-f3be8f68ab95",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "8fe13927-a3ee-4a5f-90e1-60a9c54d3c46",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Small Receipt Builder",
       "difficulty": "Builder",
       "concepts": [
@@ -552,11 +772,19 @@
       ],
       "sampleReasoning": "Combine the item name and price into one clear sentence.",
       "effectivenessScore": 89,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "8096b667-19e9-45d6-93ae-4f3d123f0eee",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "17985649-cae9-4d3a-babd-a516d1a3093d",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Choose Next Scenario",
       "difficulty": "Builder",
       "concepts": [
@@ -572,11 +800,19 @@
       ],
       "sampleReasoning": "If the score is high choose harder, if low choose easier, otherwise stay similar.",
       "effectivenessScore": 88,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "8ebb482a-aa7e-4a64-8316-6f7d5515ee09",
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
     },
     {
       "_id": "3b447be1-5cc7-4861-b733-5fd4c060570e",
+>>>>>>> upstream/main:server/src/data/db.json
       "title": "Reflection Keyword Finder",
       "difficulty": "Builder",
       "concepts": [
@@ -592,8 +828,35 @@
       ],
       "sampleReasoning": "Look for words like confused or stuck and flag the reflection if they appear.",
       "effectivenessScore": 87,
+<<<<<<< HEAD:summership-26-prs/Vanisha Tiwari/server/src/data/db.json
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+    },
+    {
+      "_id": "d330b1bf-8f29-48e8-b541-e59cba0f934b",
+      "title": "Buddy's Magic Pet Shop: OOP Encapsulation",
+      "difficulty": "Builder",
+      "concepts": [
+        "oop",
+        "encapsulation",
+        "properties",
+        "validation"
+      ],
+      "context": "In Buddy's Magic Pet Shop, Buddy the puppy has vital health and happiness stats that must not be corrupted by negative medicine, illegal tampering, or direct variable overwriting.",
+      "prompt": "How would you use private variables (__health, __happiness) and validated property setters/getters so only safe care methods can modify puppy stats?",
+      "objectives": [
+        "Protect internal state with double underscores (__health)",
+        "Provide safe gatekeepers using @property and @setter with bounds checks (0-100)",
+        "Expose domain methods (heal, feed, play, nap) preserving class invariants"
+      ],
+      "sampleReasoning": "Encapsulate health and happiness with private attributes and @property decorators so outside code cannot assign invalid negative values or bypass business logic.",
+      "effectivenessScore": 98,
+      "createdAt": "2026-09-10T17:14:45.520Z",
+      "updatedAt": "2026-09-10T17:14:45.520Z"
+=======
       "createdAt": "2026-08-23T08:37:58.638Z",
       "updatedAt": "2026-08-23T08:37:58.638Z"
+>>>>>>> upstream/main:server/src/data/db.json
     }
   ],
   "sessions": [

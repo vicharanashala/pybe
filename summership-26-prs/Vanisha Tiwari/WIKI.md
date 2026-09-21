@@ -15,15 +15,22 @@ The project is designed to demonstrate a proof-of-concept for a Python learning 
 - Scenario browser with difficulty, concept, and search filters
 - Interactive learning sessions with conversational prompts
 - Reasoning support, abstraction mapping, prompt scoring, and reflection capture
+- **🎭 Interactive OOP Story Lab**:
+  - **Buddy's Magic Pet Shop**: 4-part animated storyline explaining OOP Encapsulation with interactive pet care, tamper defense, and graduation ceremony
+  - **Hero Academy**: Multi-character superhero training ground explaining OOP Inheritance, parent classes, and custom hero builders
+  - **Pyodide WebAssembly Python Engine**: Real-time in-browser Python execution with live feedback
+  - **Companion Python Test Suite**: Automated unit tests and reference scripts in `python_reference/`
 - Dashboard with progress, prompt maturity, concept mastery, and misconceptions
 - Roadmap visualization for staged product development
 - Local JSON file storage with seedable sample data
 
 ## Technology Stack
-- Frontend: React + Vite
+- Frontend: React + Vite + Lucide icons + Canvas Confetti
+- In-Browser Python: Pyodide (WebAssembly)
 - Backend: Node.js + Express
 - Data storage: Local JSON files (`server/src/data/db.json`)
-- UI: Plain CSS
+- Python Reference: Pure Python 3 + `unittest`
+- UI: Plain CSS (Responsive rigs & modern dark/light themes)
 
 ## Getting Started
 ### Prerequisites

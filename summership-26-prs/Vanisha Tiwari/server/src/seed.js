@@ -302,6 +302,20 @@ const scenarios = [
     objectives: ['Choose keywords', 'Search text', 'Return support signal'],
     sampleReasoning: 'Look for words like confused or stuck and flag the reflection if they appear.',
     effectivenessScore: 87
+  },
+  {
+    title: "Buddy's Magic Pet Shop: OOP Encapsulation",
+    difficulty: 'Builder',
+    concepts: ['oop', 'encapsulation', 'properties', 'validation'],
+    context: "In Buddy's Magic Pet Shop, Buddy the puppy has vital health and happiness stats that must not be corrupted by negative medicine, illegal tampering, or direct variable overwriting.",
+    prompt: "How would you use private variables (__health, __happiness) and validated property setters/getters so only safe care methods can modify puppy stats?",
+    objectives: [
+      'Protect internal state with double underscores (__health)',
+      'Provide safe gatekeepers using @property and @setter with bounds checks (0-100)',
+      'Expose domain methods (heal, feed, play, nap) preserving class invariants'
+    ],
+    sampleReasoning: 'Encapsulate health and happiness with private attributes and @property decorators so outside code cannot assign invalid negative values or bypass business logic.',
+    effectivenessScore: 98
   }
 ];
 
