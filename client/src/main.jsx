@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useMemo } from 'react';
 import { createRoot } from 'react-dom/client';
 import {
+  Brain,
   ChartNoAxesCombined,
   Code2,
   Compass,
@@ -8,6 +9,7 @@ import {
   MessageSquareText,
   Play,
   Route,
+  Search,
   Send,
   Sparkles,
   Rocket,
@@ -33,6 +35,7 @@ async function api(path, options) {
 }
 
 function App() {
+  const [activePage, setActivePage] = useState('landing'); // 'landing', 'explorer', 'learningPath'
   const [scenarios, setScenarios] = useState([]);
   const [selected, setSelected] = useState(null);
   const [sessions, setSessions] = useState([]);
@@ -224,7 +227,17 @@ function App() {
     }
   };
 
-  if (loading) return <main className="loading">Loading PyBe...</main>;
+  if (activePage === 'landing') {
+  return <LandingPage onStartExploring={() => setActivePage('world')} />;
+}
+
+if (activePage === 'world') {
+  return <WorldExplorer onBackToDashboard={() => setActivePage('landing')} />;
+}
+
+if (loading) {
+  return <main className="loading">Loading PyBe...</main>;
+}
 
   return (
     <main className="app-shell">

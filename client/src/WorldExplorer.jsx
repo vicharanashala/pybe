@@ -7,6 +7,7 @@ import {
   FlaskConical,
   CircleDot,
   TreePine,
+  ArrowLeft,
   ArrowRight,
   CheckCircle2,
   X,
@@ -1118,6 +1119,7 @@ export default function WorldExplorer({ onBackToDashboard }) {
             className="back-dashboard-btn"
             onClick={onBackToDashboard}
           >
+            <ArrowLeft size={20} /> 
             ← Back to Dashboard
           </button>
 
@@ -1167,6 +1169,7 @@ export default function WorldExplorer({ onBackToDashboard }) {
             className="back-domain-btn"
             onClick={() => setActiveDomain(null)}
           >
+            <ArrowLeft size={20} /> 
             ← Back to Learning Domains
           </button>
 

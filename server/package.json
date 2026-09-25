@@ -16,7 +16,7 @@
     "express": "^4.18.2",
     "morgan": "^1.11.0",
     "natural": "^6.10.4",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "eslint": "^8.47.0",
