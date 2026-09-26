@@ -46,10 +46,10 @@ The inner loop starts again from the beginning every time the outer one advances
 
 **1. Find it in the story.** Which part of the story is the inner loop?
 
-- A) The burrows one elephant passes over during a single crossing
-- B) The herd of elephants
-- C) The mouse king going to the elephant king
-- D) The lake the elephants were walking to
+- A) The herd of elephants
+- B) The burrows one elephant passes over during a single crossing
+- C) The lake the elephants were walking to
+- D) The mouse king going to the elephant king
 
 **2. Read the Python.** Which version prints every elephant-and-burrow pair?
 
@@ -87,15 +87,15 @@ The inner loop starts again from the beginning every time the outer one advances
 
 **3. Somewhere new.** A different situation: you have 2,000 customers and 5,000 orders, and for each customer you loop through every order to find theirs. It works on ten test rows and times out in production. Why?
 
-- A) The work is 2,000 × 5,000 — ten million comparisons, not seven thousand
+- A) The two loops should be combined into one loop with an `and`
 - B) Production hardware is slower than your machine
-- C) 5,000 orders is simply too much data for Python
-- D) The two loops should be combined into one loop with an `and`
+- C) The work is 2,000 × 5,000 — ten million comparisons, not seven thousand
+- D) 5,000 orders is simply too much data for Python
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. It runs all the way through, and then it runs all the way through again for the next elephant.
+1. **B** — Right. It runs all the way through, and then it runs all the way through again for the next elephant.
 2. **A** — Yes. The inner loop runs in full for each pass of the outer one, which gives every combination.
-3. **A** — Yes. Nested loops multiply. Ten test rows hid it because 10 × 10 is nothing; the real numbers are the product.
+3. **C** — Yes. Nested loops multiply. Ten test rows hid it because 10 × 10 is nothing; the real numbers are the product.
 
 </details>

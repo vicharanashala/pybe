@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#141c39"/>
+  <rect x="0" y="408" width="800" height="192" fill="#5a5a34"/>
+  <rect x="0" y="286" width="800" height="96" fill="#2a4a68"/>
+<g transform="translate(180,392) scale(0.9)">
+  <ellipse cx="0" cy="0" rx="38" ry="16" fill="#8a7648"/>
+  <ellipse cx="0" cy="-3" rx="13" ry="7" fill="#141c39"/>
+</g>
+<g transform="translate(560,374) scale(1.0,1.0)">
+  <path d="M -34 34 Q -46 -6 -22 -30 L 22 -30 Q 46 -6 34 34 Z" fill="#96907f"/>
+  <circle cx="0" cy="-46" r="28" fill="#96907f"/>
+  <path d="M -26 -62 l -4 -30 l 26 16 Z M 26 -62 l 4 -30 l -26 16 Z" fill="#96907f"/>
+  <path d="M -14 -48 q 5 6 0 10 M 14 -48 q -5 6 0 10" stroke="#141c39"
+        stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 32 30 Q 62 26 58 -8" stroke="#96907f" stroke-width="11"
+        fill="none" stroke-linecap="round"/>
+  <ellipse cx="0" cy="34" rx="36" ry="7" fill="#96907f"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">he had told them so himself</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#1e2a52"/>
+
+  <rect x="0" y="0" width="800" height="116" fill="#3a4a7d"/><rect x="0" y="116" width="242" height="484" fill="#6f6553"/><rect x="558" y="116" width="242" height="484" fill="#6f6553"/><rect x="242" y="116" width="316" height="484" fill="#141c39"/><path d="M 242 168 L 558 168" stroke="#6f6553" stroke-width="2" opacity="0.22"/><path d="M 242 220 L 558 220" stroke="#6f6553" stroke-width="2" opacity="0.22"/><path d="M 242 272 L 558 272" stroke="#6f6553" stroke-width="2" opacity="0.22"/><path d="M 242 324 L 558 324" stroke="#6f6553" stroke-width="2" opacity="0.22"/><path d="M 242 376 L 558 376" stroke="#6f6553" stroke-width="2" opacity="0.22"/><path d="M 242 428 L 558 428" stroke="#6f6553" stroke-width="2" opacity="0.22"/><rect x="242" y="470" width="316" height="130" fill="#35705e" opacity="0.85"/><circle cx="330" cy="332" r="4" fill="#c98a14" opacity="0.7"/><circle cx="392" cy="296" r="4" fill="#c98a14" opacity="0.7"/><circle cx="460" cy="342" r="4" fill="#c98a14" opacity="0.7"/><circle cx="352" cy="254" r="4" fill="#c98a14" opacity="0.7"/><circle cx="450" cy="258" r="4" fill="#c98a14" opacity="0.7"/>
+<g transform="translate(400,452) scale(0.95,0.95)">
+  <ellipse cx="0" cy="0" rx="42" ry="27" fill="#4a7c3f"/>
+  <path d="M -40 -8 Q -20 -40 2 -34 Q 26 -40 44 -10 Z" fill="#4a7c3f"/>
+  <circle cx="-16" cy="-34" r="12" fill="#4a7c3f"/>
+  <circle cx="18" cy="-34" r="12" fill="#4a7c3f"/>
+  <circle cx="-16" cy="-36" r="5" fill="#f3eddc"/>
+  <circle cx="18" cy="-36" r="5" fill="#f3eddc"/>
+  <circle cx="-16" cy="-36" r="2.4" fill="#141c39"/>
+  <circle cx="18" cy="-36" r="2.4" fill="#141c39"/>
+  <path d="M -14 -4 Q 2 6 16 -4" stroke="#141c39" stroke-width="2.5"
+        fill="none" opacity="0.45"/>
+  <path d="M -36 14 Q -60 20 -56 40 L -32 32 Z" fill="#4a7c3f"/>
+  <path d="M 36 14 Q 60 20 56 40 L 32 32 Z" fill="#4a7c3f"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">back to counting insects</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

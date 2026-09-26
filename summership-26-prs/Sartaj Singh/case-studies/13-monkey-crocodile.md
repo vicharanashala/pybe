@@ -52,10 +52,10 @@ Everything under `try:` is the crossing. The `raise` is the confession. `except 
 
 **1. Find it in the story.** Which part of the story is the `except` block?
 
-- A) The monkey's answer about leaving his heart in the tree
-- B) The crocodile telling him midstream
-- C) The ride across the river
-- D) The wife asking for the heart
+- A) The crocodile telling him midstream
+- B) The monkey's answer about leaving his heart in the tree
+- C) The wife asking for the heart
+- D) The ride across the river
 
 **2. Read the Python.** Which version survives a missing file *and* tells you what went wrong?
 
@@ -64,20 +64,11 @@ Everything under `try:` is the crossing. The `raise` is the confession. `except 
   ```python
   try:
       f = open("data.txt")
-  except FileNotFoundError as e:
-      print("no file:", e)
+  except FileNotFoundError:
+      raise
   ```
 
 - B)
-
-  ```python
-  try:
-      f = open("data.txt")
-  except:
-      pass
-  ```
-
-- C)
 
   ```python
   if open("data.txt"):
@@ -86,26 +77,35 @@ Everything under `try:` is the crossing. The `raise` is the confession. `except 
       print("no file")
   ```
 
+- C)
+
+  ```python
+  try:
+      f = open("data.txt")
+  except FileNotFoundError as e:
+      print("no file:", e)
+  ```
+
 - D)
 
   ```python
   try:
       f = open("data.txt")
-  except FileNotFoundError:
-      raise
+  except:
+      pass
   ```
 
 **3. Somewhere new.** A different situation: your app calls a payment API over the network. It usually works. Occasionally the network times out. Where does the try block go?
 
-- A) Around the API call itself, catching the timeout, with a retry or a clear message for the user
-- B) Around the whole function, catching everything, so nothing can ever crash
-- C) Nowhere — check the network connection first with an `if`
-- D) Around the call, catching `Exception`, then carrying on as though the payment succeeded
+- A) Around the call, catching `Exception`, then carrying on as though the payment succeeded
+- B) Nowhere — check the network connection first with an `if`
+- C) Around the API call itself, catching the timeout, with a retry or a clear message for the user
+- D) Around the whole function, catching everything, so nothing can ever crash
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. It is the prepared response that runs instead of the disaster, and it was thought of before it was needed.
-2. **A** — Yes. One specific exception, caught by name, with the detail kept and reported.
-3. **A** — Yes. Wrap the part that can fail for reasons outside your program, and handle the specific failure you expect.
+1. **B** — Right. It is the prepared response that runs instead of the disaster, and it was thought of before it was needed.
+2. **C** — Yes. One specific exception, caught by name, with the detail kept and reported.
+3. **C** — Yes. Wrap the part that can fail for reasons outside your program, and handle the specific failure you expect.
 
 </details>

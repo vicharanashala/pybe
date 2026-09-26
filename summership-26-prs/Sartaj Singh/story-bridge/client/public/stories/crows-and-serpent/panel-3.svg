@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#3f4a7a"/>
+
+  <rect x="0" y="408" width="800" height="192" fill="#35705e" opacity="0.7"/><path d="M 0 430 q 40 -12 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0" stroke="#e7dfc6" stroke-width="2.5" fill="none" opacity="0.26"/><path d="M 0 464 q 40 -12 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0" stroke="#e7dfc6" stroke-width="2.5" fill="none" opacity="0.26"/><path d="M 0 498 q 40 -12 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0" stroke="#e7dfc6" stroke-width="2.5" fill="none" opacity="0.26"/>
+<g transform="translate(300,220) scale(1.0,1.0)">
+  <ellipse cx="0" cy="0" rx="46" ry="28" fill="#241e19"/>
+  <path d="M -30 -8 Q 5 -34 40 -12 Q 10 -6 -30 -8 Z" fill="#241e19" opacity="0.75"/>
+  <circle cx="38" cy="-22" r="19" fill="#241e19"/>
+  <path d="M 54 -24 L 78 -18 L 54 -13 Z" fill="#c98a14"/>
+  <circle cx="44" cy="-27" r="3.2" fill="#f3eddc"/>
+  <path d="M -44 4 Q -68 12 -78 2" stroke="#241e19" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M -8 26 L -10 46 M 12 26 L 14 46" stroke="#241e19" stroke-width="4.5" stroke-linecap="round"/>
+</g>
+<g transform="translate(392,238) scale(1.0)">
+  <path d="M -34 -20 Q 0 36 34 -20" stroke="#c98a14" stroke-width="4" fill="none"/>
+  <circle cx="-34" cy="-20" r="5" fill="#c98a14"/>
+  <circle cx="-22" cy="4" r="5" fill="#c98a14"/>
+  <circle cx="0" cy="13" r="6.5" fill="#c98a14"/>
+  <circle cx="22" cy="4" r="5" fill="#c98a14"/>
+  <circle cx="34" cy="-20" r="5" fill="#c98a14"/>
+</g>
+<g transform="translate(664,430) scale(0.8)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#f3eddc"/>
+  <circle cx="0" cy="-32" r="18" fill="#f3eddc"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q -30 -18 -52 -12" stroke="#f3eddc" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">let them see you take it</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

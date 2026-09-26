@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#1e2a52"/>
+  <rect x="0" y="408" width="800" height="192" fill="#3f5a34"/>
+
+<g transform="translate(120,524) scale(0.6)">
+  <path d="M -26 0 L -18 -152 L 18 -152 L 26 0 Z" fill="#5e3624"/>
+
+  <ellipse cx="0" cy="-186" rx="196" ry="86" fill="#2f5a44"/>
+  <ellipse cx="-118" cy="-152" rx="96" ry="52" fill="#2f5a44"/>
+  <ellipse cx="122" cy="-150" rx="92" ry="50" fill="#2f5a44"/>
+  <ellipse cx="0" cy="-232" rx="120" ry="56" fill="#2f5a44" opacity="0.88"/>
+
+</g>
+<g transform="translate(722,502) scale(0.55)">
+  <path d="M -26 0 L -18 -152 L 18 -152 L 26 0 Z" fill="#5e3624"/>
+
+  <ellipse cx="0" cy="-186" rx="196" ry="86" fill="#2f5a44"/>
+  <ellipse cx="-118" cy="-152" rx="96" ry="52" fill="#2f5a44"/>
+  <ellipse cx="122" cy="-150" rx="92" ry="50" fill="#2f5a44"/>
+  <ellipse cx="0" cy="-232" rx="120" ry="56" fill="#2f5a44" opacity="0.88"/>
+
+</g>
+<g transform="translate(400,400) scale(0.95,0.95)">
+  <ellipse cx="0" cy="0" rx="66" ry="34" fill="#a9764a"/>
+  <path d="M 46 -20 Q 76 -36 82 -66" stroke="#a9764a" stroke-width="17"
+        fill="none" stroke-linecap="round"/>
+  <circle cx="86" cy="-76" r="17" fill="#a9764a"/>
+  <path d="M 98 -80 L 118 -74 L 98 -70 Z" fill="#a9764a"/>
+  <path d="M 78 -92 L 70 -126 M 78 -92 L 92 -118 M 92 -118 L 84 -140 M 92 -118 L 110 -134"
+        stroke="#a9764a" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <circle cx="92" cy="-80" r="3" fill="#141c39"/>
+  <path d="M -60 -12 Q -86 -22 -90 -44" stroke="#a9764a" stroke-width="7"
+        fill="none" stroke-linecap="round"/>
+  <path d="M -40 30 L -44 78 M -12 32 L -14 80 M 18 32 L 20 80 M 44 26 L 48 76"
+        stroke="#a9764a" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="-20" cy="-8" r="4" fill="#f3eddc" opacity="0.45"/>
+  <circle cx="10" cy="-14" r="4" fill="#f3eddc" opacity="0.45"/>
+  <circle cx="-2" cy="8" r="4" fill="#f3eddc" opacity="0.45"/>
+</g><path d="M 250 258 L 232 478" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 276 258 L 258 478" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 302 258 L 284 478" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 328 258 L 310 478" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 354 258 L 336 478" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 380 258 L 362 478" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 406 258 L 388 478" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 432 258 L 414 478" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 458 258 L 440 478" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 484 258 L 466 478" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 510 258 L 492 478" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 536 258 L 518 478" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 250 258 L 550 248" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 250 284 L 550 274" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 250 310 L 550 300" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 250 336 L 550 326" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 250 362 L 550 352" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 250 388 L 550 378" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 250 414 L 550 404" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 250 440 L 550 430" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><path d="M 250 466 L 550 456" stroke="#e7dfc6" stroke-width="2.5" opacity="0.5"/><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">it ran into a hunter's net</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

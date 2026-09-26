@@ -1,0 +1,42 @@
+/* The page around Story Bridge. Everything inside it is styled by stories/stories.css. */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #e7dfc6;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-bar {
+  display: flex;
+  align-items: center;
+  background: #141c39;
+  padding: 0 1.5rem;
+  flex: 0 0 auto;
+}
+
+.app-name {
+  font-family: 'Karla', system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.9rem 1.1rem;
+  color: #c98a14;
+  border-bottom: 2px solid #c98a14;
+}

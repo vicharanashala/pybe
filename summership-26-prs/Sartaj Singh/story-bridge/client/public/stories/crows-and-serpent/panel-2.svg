@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#1e2a52"/>
+  <rect x="0" y="408" width="800" height="192" fill="#3f5a34"/>
+
+<g transform="translate(664,540) scale(0.72)">
+  <path d="M -26 0 L -18 -152 L 18 -152 L 26 0 Z" fill="#5e3624"/>
+
+  <ellipse cx="0" cy="-186" rx="196" ry="86" fill="#2f5a44"/>
+  <ellipse cx="-118" cy="-152" rx="96" ry="52" fill="#2f5a44"/>
+  <ellipse cx="122" cy="-150" rx="92" ry="50" fill="#2f5a44"/>
+  <ellipse cx="0" cy="-232" rx="120" ry="56" fill="#2f5a44" opacity="0.88"/>
+
+</g>
+<g transform="translate(500,442) scale(0.8,0.8)">
+  <ellipse cx="0" cy="0" rx="78" ry="40" fill="#8a6a45"/>
+  <path d="M -74 -6 Q -122 -30 -136 -66 Q -104 -44 -80 -30 Z" fill="#8a6a45"/>
+  <path d="M 58 -18 Q 92 -30 104 -58 L 118 -30 Q 126 -14 108 -6 L 74 2 Z" fill="#8a6a45"/>
+  <path d="M 96 -56 L 88 -92 L 112 -68 Z" fill="#8a6a45"/>
+  <path d="M 116 -54 L 122 -88 L 134 -58 Z" fill="#8a6a45"/>
+  <path d="M 108 -6 L 140 -2 L 138 8 L 106 6 Z" fill="#8a6a45"/>
+  <circle cx="112" cy="-40" r="4" fill="#141c39"/>
+  <path d="M -44 34 L -48 74 M -14 36 L -16 74 M 20 36 L 22 74 M 50 30 L 54 72"
+        stroke="#8a6a45" stroke-width="11" stroke-linecap="round"/>
+</g>
+<g transform="translate(180,420) scale(0.8,0.8)">
+  <ellipse cx="0" cy="0" rx="46" ry="28" fill="#241e19"/>
+  <path d="M -30 -8 Q 5 -34 40 -12 Q 10 -6 -30 -8 Z" fill="#241e19" opacity="0.75"/>
+  <circle cx="38" cy="-22" r="19" fill="#241e19"/>
+  <path d="M 54 -24 L 78 -18 L 54 -13 Z" fill="#c98a14"/>
+  <circle cx="44" cy="-27" r="3.2" fill="#f3eddc"/>
+  <path d="M -44 4 Q -68 12 -78 2" stroke="#241e19" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M -8 26 L -10 46 M 12 26 L 14 46" stroke="#241e19" stroke-width="4.5" stroke-linecap="round"/>
+</g>
+<g transform="translate(302,438) scale(0.8,0.8)">
+  <ellipse cx="0" cy="0" rx="46" ry="28" fill="#241e19"/>
+  <path d="M -30 -8 Q 5 -34 40 -12 Q 10 -6 -30 -8 Z" fill="#241e19" opacity="0.75"/>
+  <circle cx="38" cy="-22" r="19" fill="#241e19"/>
+  <path d="M 54 -24 L 78 -18 L 54 -13 Z" fill="#c98a14"/>
+  <circle cx="44" cy="-27" r="3.2" fill="#f3eddc"/>
+  <path d="M -44 4 Q -68 12 -78 2" stroke="#241e19" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M -8 26 L -10 46 M 12 26 L 14 46" stroke="#241e19" stroke-width="4.5" stroke-linecap="round"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">the jackal thought about it</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

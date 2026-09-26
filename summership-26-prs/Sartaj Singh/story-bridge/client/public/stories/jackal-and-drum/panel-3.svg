@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#1e2a52"/>
+  <rect x="0" y="408" width="800" height="192" fill="#4a4529"/>
+
+<g transform="translate(150,380) scale(0.8)">
+  <path d="M -26 0 L -18 -152 L 18 -152 L 26 0 Z" fill="#5e3624"/>
+
+  <ellipse cx="0" cy="-186" rx="196" ry="86" fill="#3f5a3a"/>
+  <ellipse cx="-118" cy="-152" rx="96" ry="52" fill="#3f5a3a"/>
+  <ellipse cx="122" cy="-150" rx="92" ry="50" fill="#3f5a3a"/>
+  <ellipse cx="0" cy="-232" rx="120" ry="56" fill="#3f5a3a" opacity="0.88"/>
+
+</g>
+<g transform="translate(300,369) scale(1.0)">
+  <path d="M -54 -46 Q -70 0 -54 46 L 54 46 Q 70 0 54 -46 Z" fill="#7a5c33"/>
+  <ellipse cx="0" cy="-46" rx="54" ry="15" fill="#f3eddc"/>
+  <ellipse cx="0" cy="-46" rx="54" ry="15" fill="none" stroke="#b33f35" stroke-width="4"/>
+  <path d="M -62 -28 L 62 -28 M -68 2 L 68 2 M -60 32 L 60 32" stroke="#b33f35"
+        stroke-width="4" opacity="0.7"/>
+</g><path d="M 210 250 Q 262 296 288 330" stroke="#6f5a33" stroke-width="8" fill="none" stroke-linecap="round"/><g transform="translate(372,340) scale(0.7,0.7)"><path d="M 0 -26 Q 30 0 0 26" stroke="#b33f35" stroke-width="5.0" fill="none" opacity="0.85"/><path d="M 0 -46 Q 52 0 0 46" stroke="#b33f35" stroke-width="4.3" fill="none" opacity="0.63"/></g>
+<g transform="translate(560,372) scale(-0.72,0.72)">
+  <ellipse cx="0" cy="0" rx="78" ry="40" fill="#8a6a45"/>
+  <path d="M -74 -6 Q -122 -30 -136 -66 Q -104 -44 -80 -30 Z" fill="#8a6a45"/>
+  <path d="M 58 -18 Q 92 -30 104 -58 L 118 -30 Q 126 -14 108 -6 L 74 2 Z" fill="#8a6a45"/>
+  <path d="M 96 -56 L 88 -92 L 112 -68 Z" fill="#8a6a45"/>
+  <path d="M 116 -54 L 122 -88 L 134 -58 Z" fill="#8a6a45"/>
+  <path d="M 108 -6 L 140 -2 L 138 8 L 106 6 Z" fill="#8a6a45"/>
+  <circle cx="112" cy="-40" r="4" fill="#141c39"/>
+  <path d="M -44 34 L -48 74 M -14 36 L -16 74 M 20 36 L 22 74 M 50 30 L 54 72"
+        stroke="#8a6a45" stroke-width="11" stroke-linecap="round"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">a branch, and a skin stretched over wood</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

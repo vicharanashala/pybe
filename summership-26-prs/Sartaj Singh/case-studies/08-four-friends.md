@@ -51,9 +51,9 @@ gnaw("sack")                    # the second, same function
 **1. Find it in the story.** What corresponds to *defining* a function, as opposed to calling one?
 
 - A) The mouse being able to gnaw, before anyone has asked it to
-- B) The crow flying off to fetch the mouse
+- B) The four animals being friends
 - C) The deer stepping out of the net
-- D) The four animals being friends
+- D) The crow flying off to fetch the mouse
 
 **2. Read the Python.** The mouse frees the deer from a net, then the tortoise from a sack. Which code says that?
 
@@ -70,6 +70,16 @@ gnaw("sack")                    # the second, same function
 - B)
 
   ```python
+  def gnaw(trap):
+      ...
+  
+  gnaw
+  gnaw
+  ```
+
+- C)
+
+  ```python
   def gnaw_net():
       ...
   
@@ -78,16 +88,6 @@ gnaw("sack")                    # the second, same function
   
   gnaw_net()
   gnaw_sack()
-  ```
-
-- C)
-
-  ```python
-  def gnaw(trap):
-      ...
-  
-  gnaw
-  gnaw
   ```
 
 - D)
@@ -102,15 +102,15 @@ gnaw("sack")                    # the second, same function
 
 **3. Somewhere new.** A different situation: three screens in your app each format a price as ₹1,234.50, and each one has its own copy of the same three lines. What does the mouse suggest?
 
-- A) One `format_price(amount)` function, called from all three screens
+- A) A variable holding the formatted price, shared between the screens
 - B) Copy the three lines again when you build the fourth screen
-- C) A variable holding the formatted price, shared between the screens
+- C) One `format_price(amount)` function, called from all three screens
 - D) Nothing — three lines is too short to be worth a function
 
 <details><summary>Answer key</summary>
 
 1. **A** — Right. The skill exists and is written down. Nothing happens until something asks for it.
 2. **A** — Yes. One definition, two calls, the trap passed in as a parameter. Nothing is rewritten.
-3. **A** — Yes. Write the steps once and call them wherever needed. When the format changes, it changes in exactly one place.
+3. **C** — Yes. Write the steps once and call them wherever needed. When the format changes, it changes in exactly one place.
 
 </details>

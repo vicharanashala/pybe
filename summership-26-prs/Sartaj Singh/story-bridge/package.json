@@ -1,0 +1,15 @@
+{
+  "name": "story-bridge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Folk tales and real incidents as a way into Python concepts.",
+  "scripts": {
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "dev": "concurrently -n api,web \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "start": "npm run start --prefix server",
+    "misconceptions": "node tools/misconceptions.js"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

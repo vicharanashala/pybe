@@ -1,0 +1,6 @@
+{
+  "ext": "js,mjs,cjs,json",
+  "ignore": [
+    "src/data/storyProgress.json"
+  ]
+}

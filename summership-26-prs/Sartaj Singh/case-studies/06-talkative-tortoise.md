@@ -51,9 +51,9 @@ Read `and` as *both*, and read the `else` as the ground. Python also stops early
 
 **1. Find it in the story.** The geese gave the tortoise two conditions. What joins them?
 
-- A) `and` — both had to hold at every moment
-- B) `or` — either one was enough
-- C) `not` — it only had to avoid one thing
+- A) `not` — it only had to avoid one thing
+- B) `and` — both had to hold at every moment
+- C) `or` — either one was enough
 - D) Nothing — they were separate rules, checked at different times
 
 **2. Read the Python.** Which expression describes when the tortoise is safe?
@@ -61,7 +61,7 @@ Read `and` as *both*, and read the `else` as the ground. Python also stops early
 - A)
 
   ```python
-  if holding_stick and mouth_shut:
+  if holding_stick and not mouth_shut:
       print("still flying")
   ```
 
@@ -75,28 +75,28 @@ Read `and` as *both*, and read the `else` as the ground. Python also stops early
 - C)
 
   ```python
-  if holding_stick and not mouth_shut:
+  if holding_stick and mouth_shut == False:
       print("still flying")
   ```
 
 - D)
 
   ```python
-  if holding_stick and mouth_shut == False:
+  if holding_stick and mouth_shut:
       print("still flying")
   ```
 
 **3. Somewhere new.** A different situation: a door should unlock only when the badge is valid and the time is within office hours. A colleague writes `if badge_valid or in_office_hours:`. What happens?
 
-- A) It opens for a valid badge at midnight, and for anyone at all during office hours
+- A) It raises an error, because two conditions must be joined with `and`
 - B) It never opens, because `or` requires neither condition
 - C) It behaves correctly — `and` and `or` are interchangeable here
-- D) It raises an error, because two conditions must be joined with `and`
+- D) It opens for a valid badge at midnight, and for anyone at all during office hours
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. Either one failing ends the flight, which is exactly what `and` means.
-2. **A** — Yes. Both parts true, or the else branch runs.
-3. **A** — Yes. `or` needs only one part to hold, so each condition alone becomes sufficient. That is two separate holes, not one.
+1. **B** — Right. Either one failing ends the flight, which is exactly what `and` means.
+2. **D** — Yes. Both parts true, or the else branch runs.
+3. **D** — Yes. `or` needs only one part to hold, so each condition alone becomes sufficient. That is two separate holes, not one.
 
 </details>

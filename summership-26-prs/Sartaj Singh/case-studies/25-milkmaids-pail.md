@@ -48,29 +48,29 @@ The middle line is the point of the whole story. The write has happened, the pro
 
 **1. Find it in the story.** Which part of the story is the stretch where the data exists but is not yet safe?
 
-- A) The walk to market with the pail on her head
+- A) The plans about eggs and birds and the dress
 - B) The milk being poured into the pail that morning
-- C) The plans about eggs and birds and the dress
+- C) The walk to market with the pail on her head
 - D) The toss of the head
 
 **2. Read the Python.** f = open("out.txt", "w") then f.write("hello"), and the program is killed before anything else runs. What is in out.txt?
 
-- A) Nothing — the file exists and is empty
-- B) "hello", because write() puts it on the disk straight away
-- C) The file does not exist, because it was never closed
-- D) "hello" but with no newline, which makes it unreadable
+- A) The file does not exist, because it was never closed
+- B) Nothing — the file exists and is empty
+- C) "hello" but with no newline, which makes it unreadable
+- D) "hello", because write() puts it on the disk straight away
 
 **3. Somewhere new.** A service appends to a log file with f.write() and keeps the handle open for its whole run. While it is running you watch the log, and the newest lines are missing — then a batch of them all appears at once. What is going on?
 
-- A) The lines are sitting in the write buffer and only reach the file when it is closed or the buffer fills
-- B) The service is writing to a different path than the one being watched
-- C) The tool watching the file cannot show lines written after it started
-- D) The service is writing faster than the disk accepts, so lines are dropped
+- A) The service is writing to a different path than the one being watched
+- B) The tool watching the file cannot show lines written after it started
+- C) The service is writing faster than the disk accepts, so lines are dropped
+- D) The lines are sitting in the write buffer and only reach the file when it is closed or the buffer fills
 
 <details><summary>Answer key</summary>
 
-1. **A** — The milk is real and it is hers for the whole walk, and it is in the one place that cannot survive a stumble. That is the gap between write() and close(), where the bytes are in memory and not on the disk.
-2. **A** — open(..., "w") creates and empties the file immediately, but write() only fills a buffer in memory. Without a close or a flush, those characters never reach the disk, so an empty file is left behind by code that never failed.
-3. **A** — The all-at-once arrival is the tell: that is the buffer flushing when it fills. The service is honestly writing every line, and every line spends time on the milkmaid's head before it lands.
+1. **C** — The milk is real and it is hers for the whole walk, and it is in the one place that cannot survive a stumble. That is the gap between write() and close(), where the bytes are in memory and not on the disk.
+2. **B** — open(..., "w") creates and empties the file immediately, but write() only fills a buffer in memory. Without a close or a flush, those characters never reach the disk, so an empty file is left behind by code that never failed.
+3. **D** — The all-at-once arrival is the tell: that is the buffer flushing when it fills. The service is honestly writing every line, and every line spends time on the milkmaid's head before it lands.
 
 </details>

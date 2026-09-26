@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#141c39"/>
+  <rect x="0" y="408" width="800" height="192" fill="#3a3020"/>
+  <rect x="199" y="122" width="14" height="10" fill="#c98a14"/><path d="M 206 130 L 206 242" stroke="#e7dfc6" stroke-width="3" stroke-linecap="round"/>
+<g transform="translate(206,302) scale(0.55)">
+  <path d="M -34 -110 L -38 -76 Q -92 -20 -84 44
+           Q -76 90 0 90 Q 76 90 84 44
+           Q 92 -20 38 -76 L 34 -110 Z"
+        fill="#8d5a3c"/>
+  <path d="M -34 -110 L -38 -76 Q -92 -20 -84 44
+           Q -76 90 0 90 L 0 -110 Z"
+        fill="#7a4a30"/>
+  <ellipse cx="0" cy="-110" rx="34" ry="10" fill="#5e3624"/>
+  <ellipse cx="0" cy="-110" rx="26" ry="7" fill="#141c39"/>
+  <clipPath id="potclip2063020">
+    <path d="M -30 -110 Q -80 -18 -74 44
+             Q -68 84 0 84 Q 68 84 74 44
+             Q 80 -18 30 -110 Z"/>
+  </clipPath>
+  <g clip-path="url(#potclip2063020)">
+    <rect x="-90" y="90.0" width="180" height="10.0" fill="#35705e" opacity="0.85"/>
+    <rect x="-90" y="90.0" width="180" height="5" fill="#e7dfc6" opacity="0.6"/>
+
+  </g>
+  <path d="M -60 -50 Q -66 30 -58 60"
+        stroke="#c98a14" stroke-width="2" fill="none" opacity="0.35"/>
+</g><ellipse cx="540" cy="236" rx="234" ry="126" fill="#3a4a7d" opacity="0.42"/>
+<g transform="translate(690,288) scale(0.46)">
+  <rect x="-58" y="-68" width="116" height="68" fill="#8a6a45"/>
+  <path d="M -78 -68 L 0 -126 L 78 -68 Z" fill="#6f5a33"/>
+  <rect x="-15" y="-38" width="30" height="38" fill="#141c39"/>
+</g>
+<g transform="translate(470,268) scale(0.8)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#d8c9a0"/>
+  <circle cx="0" cy="-32" r="18" fill="#d8c9a0"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q 30 -18 52 -12" stroke="#d8c9a0" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g>
+<g transform="translate(576,288) scale(0.46)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#f3eddc"/>
+  <circle cx="0" cy="-32" r="18" fill="#f3eddc"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q -30 -18 -52 -12" stroke="#f3eddc" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g><circle cx="352" cy="418" r="8" fill="#3a4a7d" opacity="0.45"/><circle cx="382" cy="382" r="12" fill="#3a4a7d" opacity="0.45"/><g transform="rotate(-78,300,500)">
+<g transform="translate(300,500) scale(0.9)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#f3eddc"/>
+  <circle cx="0" cy="-32" r="18" fill="#f3eddc"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q 30 -18 52 -12" stroke="#f3eddc" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g></g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">and then a son, running underfoot</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

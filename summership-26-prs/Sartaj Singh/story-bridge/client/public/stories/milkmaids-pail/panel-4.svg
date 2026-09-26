@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#1e2a52"/>
+  <rect x="0" y="408" width="800" height="192" fill="#7d6a3e"/>
+
+<g transform="translate(300,339) scale(1.0)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#f3eddc"/>
+  <circle cx="0" cy="-32" r="18" fill="#f3eddc"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q -30 -18 -52 -12" stroke="#f3eddc" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g>
+<g transform="translate(470,392) scale(1.0) rotate(-72)">
+  <path d="M -34 -32 L -27 30 L 27 30 L 34 -32 Z" fill="#a8a49b"/>
+
+  <ellipse cx="0" cy="-32" rx="34" ry="8" fill="none" stroke="#a8a49b" stroke-width="5"/>
+  <path d="M -33 -34 Q 0 -60 33 -34" stroke="#a8a49b" stroke-width="4" fill="none"/>
+</g><ellipse cx="520" cy="414" rx="96" ry="18" fill="#f3eddc" opacity="0.9"/><ellipse cx="600" cy="420" rx="34" ry="9" fill="#f3eddc" opacity="0.75"/><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">it had only ever been in the pail</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

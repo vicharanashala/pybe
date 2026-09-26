@@ -50,29 +50,29 @@ The first block is the ministers asking him to take the word back, and Python re
 
 **1. Find it in the story.** Which part of the story is the thing that cannot be changed once it is made?
 
-- A) The sentence the king spoke to the sage
-- B) The ministers' request that he take it back
-- C) The second sentence he spoke afterwards
-- D) The coin moving in and out of the treasury
+- A) The coin moving in and out of the treasury
+- B) The second sentence he spoke afterwards
+- C) The sentence the king spoke to the sage
+- D) The ministers' request that he take it back
 
 **2. Read the Python.** word = ("the kingdom", "the treasury"). Which line records the added promise and leaves word exactly as it was?
 
-- A) spoken_again = word + ("and I will serve",)
-- B) word[2] = "and I will serve"
-- C) word.append("and I will serve")
+- A) word.append("and I will serve")
+- B) spoken_again = word + ("and I will serve",)
+- C) word[2] = "and I will serve"
 - D) spoken_again = word + "and I will serve"
 
 **3. Somewhere new.** A shop records each completed order as order = ("ORD-7741", "2026-08-01", ["socks", "lamp"]). Which one of these runs without raising an error?
 
-- A) order[2].append("kettle")
-- B) order[0] = "ORD-7742"
-- C) order.append("kettle")
-- D) order[2] = ["socks", "lamp", "kettle"]
+- A) order.append("kettle")
+- B) order[2] = ["socks", "lamp", "kettle"]
+- C) order[0] = "ORD-7742"
+- D) order[2].append("kettle")
 
 <details><summary>Answer key</summary>
 
-1. **A** — It is settled the moment it leaves him, and everything afterwards has to work around it rather than inside it. That is exactly what a tuple is — a value that is finished when it is built.
-2. **A** — Adding two tuples builds a third and leaves both originals untouched. word still holds its two items afterwards — the first sentence, standing where it was.
-3. **A** — The tuple fixes which three objects the order holds; it does not freeze the list sitting in the third slot. Appending changes that list while the order itself is untouched — the treasury behind the walls that were named.
+1. **C** — It is settled the moment it leaves him, and everything afterwards has to work around it rather than inside it. That is exactly what a tuple is — a value that is finished when it is built.
+2. **B** — Adding two tuples builds a third and leaves both originals untouched. word still holds its two items afterwards — the first sentence, standing where it was.
+3. **D** — The tuple fixes which three objects the order holds; it does not freeze the list sitting in the third slot. Appending changes that list while the order itself is untouched — the treasury behind the walls that were named.
 
 </details>

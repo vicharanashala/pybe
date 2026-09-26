@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#1e2a52"/>
+  <rect x="0" y="408" width="800" height="192" fill="#3f5a34"/>
+  <ellipse cx="400" cy="502" rx="300" ry="56" fill="#35705e" opacity="0.7"/>
+<g transform="translate(196,400) scale(0.72,0.72)">
+  <ellipse cx="0" cy="0" rx="66" ry="34" fill="#a9764a"/>
+  <path d="M 46 -20 Q 76 -36 82 -66" stroke="#a9764a" stroke-width="17"
+        fill="none" stroke-linecap="round"/>
+  <circle cx="86" cy="-76" r="17" fill="#a9764a"/>
+  <path d="M 98 -80 L 118 -74 L 98 -70 Z" fill="#a9764a"/>
+  <path d="M 78 -92 L 70 -126 M 78 -92 L 92 -118 M 92 -118 L 84 -140 M 92 -118 L 110 -134"
+        stroke="#a9764a" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <circle cx="92" cy="-80" r="3" fill="#141c39"/>
+  <path d="M -60 -12 Q -86 -22 -90 -44" stroke="#a9764a" stroke-width="7"
+        fill="none" stroke-linecap="round"/>
+  <path d="M -40 30 L -44 78 M -12 32 L -14 80 M 18 32 L 20 80 M 44 26 L 48 76"
+        stroke="#a9764a" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="-20" cy="-8" r="4" fill="#f3eddc" opacity="0.45"/>
+  <circle cx="10" cy="-14" r="4" fill="#f3eddc" opacity="0.45"/>
+  <circle cx="-2" cy="8" r="4" fill="#f3eddc" opacity="0.45"/>
+</g>
+<g transform="translate(432,300) scale(0.8,0.8)">
+  <ellipse cx="0" cy="0" rx="46" ry="28" fill="#241e19"/>
+  <path d="M -30 -8 Q 5 -34 40 -12 Q 10 -6 -30 -8 Z" fill="#241e19" opacity="0.75"/>
+  <circle cx="38" cy="-22" r="19" fill="#241e19"/>
+  <path d="M 54 -24 L 78 -18 L 54 -13 Z" fill="#c98a14"/>
+  <circle cx="44" cy="-27" r="3.2" fill="#f3eddc"/>
+  <path d="M -44 4 Q -68 12 -78 2" stroke="#241e19" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M -8 26 L -10 46 M 12 26 L 14 46" stroke="#241e19" stroke-width="4.5" stroke-linecap="round"/>
+</g>
+<g transform="translate(560,430) scale(0.9,0.9)">
+  <ellipse cx="0" cy="0" rx="30" ry="20" fill="#8a7f72"/>
+  <circle cx="26" cy="-8" r="14" fill="#8a7f72"/>
+  <circle cx="15" cy="-23" r="10" fill="#8a7f72"/>
+  <path d="M 39 -6 L 54 -3 L 39 1 Z" fill="#8a7f72"/>
+  <circle cx="33" cy="-12" r="2.4" fill="#141c39"/>
+  <path d="M -28 -4 Q -62 -12 -68 -34" stroke="#8a7f72" stroke-width="4"
+        fill="none" stroke-linecap="round"/>
+  <path d="M -12 18 L -14 32 M 10 16 L 12 32" stroke="#8a7f72" stroke-width="6"
+        stroke-linecap="round"/>
+</g>
+<g transform="translate(684,442) scale(0.8,0.8)">
+  <path d="M -56 6 Q -50 -46 0 -46 Q 50 -46 56 6 Z" fill="#4a6b3f"/>
+  <path d="M -56 6 Q 0 22 56 6 L 56 13 Q 0 29 -56 13 Z" fill="#8a7f5c"/>
+  <path d="M -28 -40 L -24 4 M 0 -46 L 0 6 M 28 -40 L 24 4"
+        stroke="#141c39" stroke-width="2" opacity="0.32" fill="none"/>
+  <circle cx="70" cy="-6" r="15" fill="#8a7f5c"/>
+  <circle cx="76" cy="-10" r="2.8" fill="#141c39"/>
+  <path d="M -40 14 L -42 30 M -12 16 L -14 32 M 16 16 L 18 32 M 42 14 L 44 30"
+        stroke="#8a7f5c" stroke-width="9" stroke-linecap="round"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">one skill each, and four of them</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

@@ -49,10 +49,10 @@ print(int(disguise) + 1)   # 6   <- wash off the dye first
 
 **1. Find it in the story.** In the story, what plays the role of type() — the thing that reveals what a value really is?
 
-- A) The howl
-- B) The indigo dye
-- C) The tiger bowing
-- D) The dyer's yard
+- A) The tiger bowing
+- B) The dyer's yard
+- C) The indigo dye
+- D) The howl
 
 **2. Read the Python.** A program runs `age = input("Your age: ")` and the user types 21. What does `age + 1` do?
 
@@ -63,15 +63,15 @@ print(int(disguise) + 1)   # 6   <- wash off the dye first
 
 **3. Somewhere new.** A form collects a price as "49.99" and a quantity as "3", both from input(). You need the total. What has to happen first?
 
-- A) Cast each one to a number — float("49.99") and int("3") — then multiply
-- B) Multiply them directly, since they both contain digits
+- A) Multiply them directly, since they both contain digits
+- B) Cast each one to a number — float("49.99") and int("3") — then multiply
 - C) Use int() on both, since money is a number
 - D) Nothing — Python converts automatically when it sees multiplication
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. It is the moment the underlying nature is exposed, regardless of appearance.
+1. **D** — Right. It is the moment the underlying nature is exposed, regardless of appearance.
 2. **A** — Correct. input() always returns a string. It looks like a number on screen, but it howls like a string.
-3. **A** — Yes. Wash off the dye before you use the value. The cast produces new values of the right types.
+3. **B** — Yes. Wash off the dye before you use the value. The cast produces new values of the right types.
 
 </details>

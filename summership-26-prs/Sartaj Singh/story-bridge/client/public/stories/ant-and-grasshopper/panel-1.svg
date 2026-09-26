@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#3a4a7d"/>
+  <rect x="0" y="408" width="800" height="192" fill="#6f7c3e"/>
+  <line x1="668" y1="96" x2="668" y2="16" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(0,668,96)"/><line x1="668" y1="96" x2="668" y2="16" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(30,668,96)"/><line x1="668" y1="96" x2="668" y2="16" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(60,668,96)"/><line x1="668" y1="96" x2="668" y2="16" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(90,668,96)"/><line x1="668" y1="96" x2="668" y2="16" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(120,668,96)"/><line x1="668" y1="96" x2="668" y2="16" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(150,668,96)"/><line x1="668" y1="96" x2="668" y2="16" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(180,668,96)"/><line x1="668" y1="96" x2="668" y2="16" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(210,668,96)"/><line x1="668" y1="96" x2="668" y2="16" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(240,668,96)"/><line x1="668" y1="96" x2="668" y2="16" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(270,668,96)"/><line x1="668" y1="96" x2="668" y2="16" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(300,668,96)"/><line x1="668" y1="96" x2="668" y2="16" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(330,668,96)"/><circle cx="668" cy="96" r="54" fill="#c98a14" opacity="0.9"/><path d="M 90 415 L 84 344" stroke="#7f9a46" stroke-width="5" stroke-linecap="round"/><ellipse cx="84" cy="340" rx="7" ry="11" fill="#c98a14"/><path d="M 136 415 L 130 344" stroke="#7f9a46" stroke-width="5" stroke-linecap="round"/><ellipse cx="130" cy="340" rx="7" ry="11" fill="#c98a14"/><path d="M 182 415 L 176 344" stroke="#7f9a46" stroke-width="5" stroke-linecap="round"/><ellipse cx="176" cy="340" rx="7" ry="11" fill="#c98a14"/><path d="M 228 415 L 222 344" stroke="#7f9a46" stroke-width="5" stroke-linecap="round"/><ellipse cx="222" cy="340" rx="7" ry="11" fill="#c98a14"/><path d="M 274 415 L 268 344" stroke="#7f9a46" stroke-width="5" stroke-linecap="round"/><ellipse cx="268" cy="340" rx="7" ry="11" fill="#c98a14"/><path d="M 320 415 L 314 344" stroke="#7f9a46" stroke-width="5" stroke-linecap="round"/><ellipse cx="314" cy="340" rx="7" ry="11" fill="#c98a14"/>
+<g transform="translate(474,408) scale(1.0)">
+  <path d="M -66 4 Q -70 66 0 68 Q 70 66 66 4 Z" fill="#241e19"/>
+  <ellipse cx="-42" cy="46" rx="8" ry="6" fill="#c98a14"/><ellipse cx="-21" cy="46" rx="8" ry="6" fill="#c98a14"/><ellipse cx="0" cy="46" rx="8" ry="6" fill="#c98a14"/><ellipse cx="21" cy="46" rx="8" ry="6" fill="#c98a14"/>
+  <ellipse cx="0" cy="-6" rx="82" ry="16" fill="#6f6553"/>
+  <ellipse cx="0" cy="-12" rx="76" ry="12" fill="#7d7261"/>
+</g>
+<g transform="translate(348,380) scale(0.9,0.9)">
+  <ellipse cx="-34" cy="0" rx="22" ry="17" fill="#241e19"/>
+  <ellipse cx="-2" cy="-2" rx="13" ry="11" fill="#241e19"/>
+  <circle cx="24" cy="-6" r="14" fill="#241e19"/>
+  <path d="M 32 -18 L 46 -36 M 38 -12 L 56 -22" stroke="#241e19"
+        stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M -26 14 L -34 34 M -6 14 L -4 36 M 12 12 L 22 34" stroke="#241e19"
+        stroke-width="4" stroke-linecap="round"/>
+</g>
+<g transform="translate(668,381) scale(-0.9,0.9)">
+  <ellipse cx="-8" cy="0" rx="42" ry="15" fill="#6f8a3a"/>
+  <ellipse cx="-14" cy="-7" rx="34" ry="10" fill="#87a44e"/>
+  <circle cx="34" cy="-6" r="13" fill="#6f8a3a"/>
+  <circle cx="39" cy="-9" r="3" fill="#141c39"/>
+  <path d="M 42 -16 L 60 -34 M 44 -12 L 64 -24" stroke="#6f8a3a"
+        stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M -18 8 Q -48 -14 -30 -32 Q -22 -6 -6 10 Z" fill="#6f8a3a"/>
+  <path d="M -30 14 L -44 34 M 2 14 L 8 34" stroke="#6f8a3a"
+        stroke-width="4" stroke-linecap="round"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">out and back, all season</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

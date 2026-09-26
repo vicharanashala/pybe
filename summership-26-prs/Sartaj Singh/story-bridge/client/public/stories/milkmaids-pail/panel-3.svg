@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#3a4a7d"/>
+  <rect x="0" y="408" width="800" height="192" fill="#7d6a3e"/>
+
+<g transform="translate(88,336) scale(0.3)">
+  <rect x="-58" y="-68" width="116" height="68" fill="#8a6a45"/>
+  <path d="M -78 -68 L 0 -126 L 78 -68 Z" fill="#6f5a33"/>
+  <rect x="-15" y="-38" width="30" height="38" fill="#141c39"/>
+</g><path d="M 150 404 L 760 404" stroke="#6b5a32" stroke-width="3" opacity="0.6" stroke-dasharray="26 20"/>
+<g transform="translate(470,339) scale(1.0)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#f3eddc"/>
+  <circle cx="0" cy="-32" r="18" fill="#f3eddc"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q 30 -18 52 -12" stroke="#f3eddc" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g>
+<g transform="translate(470,259) scale(1.0)">
+  <path d="M -34 -32 L -27 30 L 27 30 L 34 -32 Z" fill="#a8a49b"/>
+  <ellipse cx="0" cy="-30" rx="31" ry="7" fill="#f3eddc"/>
+  <ellipse cx="0" cy="-32" rx="34" ry="8" fill="none" stroke="#a8a49b" stroke-width="5"/>
+  <path d="M -33 -34 Q 0 -60 33 -34" stroke="#a8a49b" stroke-width="4" fill="none"/>
+</g><path d="M 442 262 Q 470 246 498 262" stroke="#c98a14" stroke-width="3" fill="none" stroke-dasharray="6 5"/><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">balanced, and not held</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

@@ -54,10 +54,10 @@ print(caps[0])              # the seller's own   <- his hit the ground first
 
 **1. Find it in the story.** A monkey lifts one cap off the top of the stack. Which list operation is that?
 
-- A) `.pop()` — it removes an item and hands it back
-- B) `.append()` — it adds an item
+- A) `.append()` — it adds an item
+- B) Indexing with `caps[0]`
 - C) `len()` — it counts the items
-- D) Indexing with `caps[0]`
+- D) `.pop()` — it removes an item and hands it back
 
 **2. Read the Python.** The seller wants to print how many caps he has left, then add one more to the bundle. Which lines do that?
 
@@ -71,35 +71,35 @@ print(caps[0])              # the seller's own   <- his hit the ground first
 - B)
 
   ```python
-  print(caps.count())
-  caps.add("red")
-  ```
-
-- C)
-
-  ```python
   print(len(caps))
   caps.pop("red")
   ```
 
-- D)
+- C)
 
   ```python
   print(caps.length)
   caps += "red"
   ```
 
+- D)
+
+  ```python
+  print(caps.count())
+  caps.add("red")
+  ```
+
 **3. Somewhere new.** A different situation: you are holding the queue of people waiting at a clinic. People join at the back and are called from the front. Which pair of operations models that?
 
-- A) `queue.append(name)` to join, `queue.pop(0)` to call the next
-- B) `queue.append(name)` to join, `queue.pop()` to call the next
-- C) `queue.add(name)` to join, `queue.first()` to call the next
-- D) A dictionary keyed by each person's name
+- A) `queue.append(name)` to join, `queue.pop()` to call the next
+- B) `queue.add(name)` to join, `queue.first()` to call the next
+- C) A dictionary keyed by each person's name
+- D) `queue.append(name)` to join, `queue.pop(0)` to call the next
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. The cap leaves the bundle and ends up in the monkey's hands. Both halves matter: removed, and returned.
+1. **D** — Right. The cap leaves the bundle and ends up in the monkey's hands. Both halves matter: removed, and returned.
 2. **A** — Yes. `len()` counts what is there; `append()` puts one on the end.
-3. **A** — Yes. Append adds at the end, `pop(0)` takes from the front. Order is the whole point of a queue, and a list keeps order.
+3. **D** — Yes. Append adds at the end, `pop(0)` takes from the front. Order is the whole point of a queue, and a list keeps order.
 
 </details>

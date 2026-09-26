@@ -53,10 +53,10 @@ The try block holds one line, so when it fails there is no question about which 
 
 **1. Find it in the story.** Which part of the story is reading the exception rather than merely surviving it?
 
-- A) Walking into the thicket to find the drum
-- B) Hearing the sound come out of the thicket
+- A) Finding nothing inside the drum to eat
+- B) Walking into the thicket to find the drum
 - C) The urge to be somewhere else
-- D) Finding nothing inside the drum to eat
+- D) Hearing the sound come out of the thicket
 
 **2. Read the Python.** Some rows in a file cannot be read as numbers. Which version lets you find out which ones?
 
@@ -74,8 +74,8 @@ The try block holds one line, so when it fails there is no question about which 
   ```python
   try:
       total += int(row)
-  except ValueError:
-      pass
+  except:
+      print("skipped")
   ```
 
 - C)
@@ -92,21 +92,21 @@ The try block holds one line, so when it fails there is no question about which 
   ```python
   try:
       total += int(row)
-  except:
-      print("skipped")
+  except ValueError:
+      pass
   ```
 
 **3. Somewhere new.** A nightly job reads two hundred config files. It finishes successfully every night, but a few settings never take effect. The log line for each failure reads "could not load config, skipping". Where is the real problem?
 
-- A) The handler catches the error but never records which file failed or what was wrong with it
-- B) The job should not be catching the error at all, so that it crashes on the first bad file
-- C) The job needs to be run more often so the failures are noticed sooner
-- D) The config files should be validated before the job starts
+- A) The job should not be catching the error at all, so that it crashes on the first bad file
+- B) The handler catches the error but never records which file failed or what was wrong with it
+- C) The config files should be validated before the job starts
+- D) The job needs to be run more often so the failures are noticed sooner
 
 <details><summary>Answer key</summary>
 
-1. **A** — He ends the afternoon holding the actual cause instead of a memory of the noise. That is what binding an exception and reading its message gets you — the specific fact, not just the fact that something happened.
+1. **B** — He ends the afternoon holding the actual cause instead of a memory of the noise. That is what binding an exception and reading its message gets you — the specific fact, not just the fact that something happened.
 2. **A** — as e binds the exception, and printing it names the exact text that could not be converted. The try block holds one line, so there is no doubt about what failed either.
-3. **A** — The job is reporting the noise and discarding the drum. Bind the exception and log the filename with str(e), and the same run that hides the fault becomes the run that names it.
+3. **B** — The job is reporting the noise and discarding the drum. Bind the exception and log the filename with str(e), and the same run that hides the fault becomes the run that names it.
 
 </details>

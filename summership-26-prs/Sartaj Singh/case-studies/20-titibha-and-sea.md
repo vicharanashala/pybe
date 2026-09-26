@@ -49,10 +49,10 @@ The test at the top is the right shape: it looks at the water every time round i
 
 **1. Find it in the story.** Which part of the story is the reason her loop never ends?
 
-- A) The tide filling in behind her every time
-- B) Carrying one beakful up the beach
-- C) Looking at the water each time she came back
-- D) The other birds coming to join her
+- A) Looking at the water each time she came back
+- B) The other birds coming to join her
+- C) The tide filling in behind her every time
+- D) Carrying one beakful up the beach
 
 **2. Read the Python.** sea starts at 1000. Which of these loops actually ends?
 
@@ -75,27 +75,27 @@ The test at the top is the right shape: it looks at the water every time round i
 
   ```python
   while sea > 0:
-      beakfuls = beakfuls + 1
+      sea = sea + 1
   ```
 
 - D)
 
   ```python
   while sea > 0:
-      sea = sea + 1
+      beakfuls = beakfuls + 1
   ```
 
 **3. Somewhere new.** A script clears out a download folder: while count_files(folder) > 0, delete the oldest file. It runs on a machine where a camera saves a new photo into that same folder about once a second, and deleting one file takes about a second. What happens?
 
-- A) It never finishes, even though the body really does delete a file on every pass
-- B) It finishes as soon as the folder is empty, because the condition is rechecked every pass
-- C) It raises an error when a new file appears part-way through the loop
+- A) It raises an error when a new file appears part-way through the loop
+- B) It never finishes, even though the body really does delete a file on every pass
+- C) It finishes as soon as the folder is empty, because the condition is rechecked every pass
 - D) It deletes one file and stops, because the condition was only true once
 
 <details><summary>Answer key</summary>
 
-1. **A** — The body ran and it did remove water, and the tide put back exactly as much. The test at the top asks whether there is still sea, and after every pass there still is. A loop ends only when something drives its condition toward false.
+1. **C** — The body ran and it did remove water, and the tide put back exactly as much. The test at the top asks whether there is still sea, and after every pass there still is. A loop ends only when something drives its condition toward false.
 2. **A** — Every pass leaves sea strictly smaller than it was, so the test is driven toward false and eventually reaches it. This is the crow, whose water really does rise and stay risen.
-3. **A** — One file out, about one file in. The count is tested every pass and never reaches zero, so the loop runs until something stops it from outside — the tide, with a camera instead of a sea.
+3. **B** — One file out, about one file in. The count is tested every pass and never reaches zero, so the loop runs until something stops it from outside — the tide, with a camera instead of a sea.
 
 </details>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#141c39"/>
+  <rect x="0" y="408" width="800" height="192" fill="#3a3020"/>
+  <rect x="199" y="122" width="14" height="10" fill="#c98a14"/><path d="M 206 132 L 208 198" stroke="#e7dfc6" stroke-width="3" opacity="0.55"/><ellipse cx="286" cy="482" rx="172" ry="34" fill="#f3eddc" opacity="0.75"/><path d="M 156 462 q 26 -30 56 -14 L 198 472 Z" fill="#8d5a3c"/><path d="M 336 490 q 30 -26 58 -6 L 356 500 Z" fill="#7a4a30"/><path d="M 246 508 l 34 -16 l 14 18 Z" fill="#8d5a3c"/><g transform="rotate(-78,596,458)">
+<g transform="translate(596,458) scale(0.9)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#f3eddc"/>
+  <circle cx="0" cy="-32" r="18" fill="#f3eddc"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q -30 -18 -52 -12" stroke="#f3eddc" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g></g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">everything had been standing on it</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

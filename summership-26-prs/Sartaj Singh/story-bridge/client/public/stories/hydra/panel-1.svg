@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#141c39"/>
+  <rect x="0" y="408" width="800" height="192" fill="#2b3a2f"/>
+  <path d="M 0 430 q 40 -12 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0" stroke="#2a4a52" stroke-width="2.5" fill="none" opacity="0.35"/><path d="M 0 460 q 40 -12 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0" stroke="#2a4a52" stroke-width="2.5" fill="none" opacity="0.35"/><path d="M 0 490 q 40 -12 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0" stroke="#2a4a52" stroke-width="2.5" fill="none" opacity="0.35"/>
+<g transform="translate(470,386) scale(0.82,0.82)">
+  <path d="M -51 -22 Q -150 -97 -218 -167" stroke="#2f5a52" stroke-width="14" fill="none" stroke-linecap="round"/><ellipse cx="-218" cy="-167" rx="17" ry="12" fill="#2f5a52"/><circle cx="-210" cy="-170" r="3" fill="#141c39"/><path d="M -38 -22 Q -112 -95 -163 -163" stroke="#2f5a52" stroke-width="14" fill="none" stroke-linecap="round"/><ellipse cx="-163" cy="-163" rx="17" ry="12" fill="#2f5a52"/><circle cx="-156" cy="-166" r="3" fill="#141c39"/><path d="M -26 -22 Q -75 -93 -109 -160" stroke="#2f5a52" stroke-width="14" fill="none" stroke-linecap="round"/><ellipse cx="-109" cy="-160" rx="17" ry="12" fill="#2f5a52"/><circle cx="-102" cy="-162" r="3" fill="#141c39"/><path d="M -13 -22 Q -38 -90 -54 -156" stroke="#2f5a52" stroke-width="14" fill="none" stroke-linecap="round"/><ellipse cx="-54" cy="-156" rx="17" ry="12" fill="#2f5a52"/><circle cx="-47" cy="-159" r="3" fill="#141c39"/><path d="M 0 -22 Q 0 -88 0 -152" stroke="#2f5a52" stroke-width="14" fill="none" stroke-linecap="round"/><ellipse cx="0" cy="-152" rx="17" ry="12" fill="#2f5a52"/><circle cx="7" cy="-155" r="3" fill="#141c39"/><path d="M 13 -22 Q 38 -90 54 -156" stroke="#2f5a52" stroke-width="14" fill="none" stroke-linecap="round"/><ellipse cx="54" cy="-156" rx="17" ry="12" fill="#2f5a52"/><circle cx="61" cy="-159" r="3" fill="#141c39"/><path d="M 26 -22 Q 75 -93 109 -160" stroke="#2f5a52" stroke-width="14" fill="none" stroke-linecap="round"/><ellipse cx="109" cy="-160" rx="17" ry="12" fill="#2f5a52"/><circle cx="116" cy="-162" r="3" fill="#141c39"/><path d="M 38 -22 Q 112 -95 163 -163" stroke="#2f5a52" stroke-width="14" fill="none" stroke-linecap="round"/><ellipse cx="163" cy="-163" rx="17" ry="12" fill="#2f5a52"/><circle cx="170" cy="-166" r="3" fill="#141c39"/><path d="M 51 -22 Q 150 -97 218 -167" stroke="#2f5a52" stroke-width="14" fill="none" stroke-linecap="round"/><ellipse cx="218" cy="-167" rx="17" ry="12" fill="#2f5a52"/><circle cx="224" cy="-170" r="3" fill="#141c39"/>
+  <ellipse cx="0" cy="0" rx="120" ry="46" fill="#2f5a52"/>
+</g>
+<g transform="translate(112,339) scale(1.0)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#f3eddc"/>
+  <circle cx="0" cy="-32" r="18" fill="#f3eddc"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q 30 -18 52 -12" stroke="#f3eddc" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g><path d="M 168 302 L 214 244" stroke="#e7dfc6" stroke-width="7" stroke-linecap="round"/><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">nine, and the first one came off easily</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

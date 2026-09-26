@@ -57,10 +57,10 @@ The loop is counting positions while the list is losing them. Trace the first bl
 
 **1. Find it in the story.** What does the wedge correspond to?
 
-- A) The list keeping its shape while the loop runs through it
-- B) The loop's condition
+- A) The loop's condition
+- B) The carpenters
 - C) The item being removed
-- D) The carpenters
+- D) The list keeping its shape while the loop runs through it
 
 **2. Read the Python.** `animals = ["monkey", "monkey", "crow"]`. What does this leave behind?
 
@@ -71,7 +71,7 @@ The loop is counting positions while the list is losing them. Trace the first bl
       if animal == "monkey":
           animals.remove(animal)
   
-  # leaves ['monkey', 'crow']
+  # raises IndexError
   ```
 
 - B)
@@ -91,7 +91,7 @@ The loop is counting positions while the list is losing them. Trace the first bl
       if animal == "monkey":
           animals.remove(animal)
   
-  # raises IndexError
+  # leaves ['monkey', 'crow']
   ```
 
 - D)
@@ -107,14 +107,14 @@ The loop is counting positions while the list is losing them. Trace the first bl
 **3. Somewhere new.** A different situation: you loop over a dictionary of sessions and delete the expired ones inside the loop. Python raises `RuntimeError: dictionary changed size during iteration`. What is the fix?
 
 - A) Loop over a copy of the keys — `for sid in list(sessions):` — and delete from the original
-- B) Catch the RuntimeError and carry on
+- B) Nothing — dictionaries are unordered, so removing from them mid-loop is safe
 - C) Use a `while` loop instead, since only `for` has this restriction
-- D) Nothing — dictionaries are unordered, so removing from them mid-loop is safe
+- D) Catch the RuntimeError and carry on
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. The loop depends on the length and the positions staying put. The wedge is that assumption, and the monkey removes it.
-2. **A** — Right. Removing index 0 slides everything down; the loop moves to index 1 and steps straight over the second monkey. No error, wrong answer.
+1. **D** — Right. The loop depends on the length and the positions staying put. The wedge is that assumption, and the monkey removes it.
+2. **C** — Right. Removing index 0 slides everything down; the loop moves to index 1 and steps straight over the second monkey. No error, wrong answer.
 3. **A** — Yes. The copy is a stable thing to walk; the original is then free to change. Same fix as the log: do not remove what you are standing on.
 
 </details>

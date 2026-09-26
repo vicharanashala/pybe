@@ -47,28 +47,28 @@ add_flesh looks like it builds something and hands it back. It does hand somethi
 
 **1. Find it in the story.** Which part of the story is the call that succeeds and should not have been made?
 
-- A) Putting breath into the finished shape
-- B) Arranging the bones into order
+- A) Arranging the bones into order
+- B) Four men setting out to look for work
 - C) Climbing the tree
-- D) Four men setting out to look for work
+- D) Putting breath into the finished shape
 
 **2. Read the Python.** mine = ["skull", "ribs"], then result = add_flesh(mine), where add_flesh appends to the list it is given. What does mine hold afterwards?
 
 - A) ['skull', 'ribs', 'hide'] — the same list the function changed
 - B) ['skull', 'ribs'] — the function worked on its own copy
-- C) It raises an error, because a function cannot change its argument
-- D) None — because .append() returns None
+- C) None — because .append() returns None
+- D) It raises an error, because a function cannot change its argument
 
 **3. Somewhere new.** A helper def tidy(names): names.sort(); return names is called to print a sorted guest list for a report. Afterwards the seating plan, built from the same list, has come out in the wrong order. Why?
 
 - A) sort() reorders the list in place, so the helper rearranged the caller's own list
-- B) return names hands back a copy, so the original could not have changed
-- C) The report and the seating plan were generated in the wrong order
-- D) sort() returns None, so nothing was ever assigned
+- B) sort() returns None, so nothing was ever assigned
+- C) return names hands back a copy, so the original could not have changed
+- D) The report and the seating plan were generated in the wrong order
 
 <details><summary>Answer key</summary>
 
-1. **A** — It did exactly what it promised, on the first attempt. That is what makes it dangerous — a call that fails is a call you notice, and this one worked.
+1. **D** — It did exactly what it promised, on the first attempt. That is what makes it dangerous — a call that fails is a call you notice, and this one worked.
 2. **A** — Passing a list hands over the list itself, not a copy, so appending inside the function is appending to yours. result is mine is True — the two names point at one object.
 3. **A** — The helper was handed the list itself, and sort() rewrites it where it sits. The report got what it wanted and the seating plan quietly inherited the damage — the same bones, altered by a call that looked read-only.
 

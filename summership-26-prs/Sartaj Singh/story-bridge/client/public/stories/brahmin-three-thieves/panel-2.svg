@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#1e2a52"/>
+  <rect x="0" y="408" width="800" height="192" fill="#6b5a34"/>
+
+<g transform="translate(96,480) scale(0.5)">
+  <path d="M -26 0 L -18 -152 L 18 -152 L 26 0 Z" fill="#5e3624"/>
+
+  <ellipse cx="0" cy="-186" rx="196" ry="86" fill="#2f5a44"/>
+  <ellipse cx="-118" cy="-152" rx="96" ry="52" fill="#2f5a44"/>
+  <ellipse cx="122" cy="-150" rx="92" ry="50" fill="#2f5a44"/>
+  <ellipse cx="0" cy="-232" rx="120" ry="56" fill="#2f5a44" opacity="0.88"/>
+
+</g>
+<g transform="translate(330,440) scale(1.0)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#f3eddc"/>
+  <circle cx="0" cy="-32" r="18" fill="#f3eddc"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q 30 -18 52 -12" stroke="#f3eddc" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g>
+<g transform="translate(350,392) scale(0.55,0.55)">
+  <ellipse cx="0" cy="0" rx="54" ry="30" fill="#d8c9a0"/>
+  <path d="M -50 -14 L -76 -30 L -70 -6 Z" fill="#d8c9a0"/>
+  <circle cx="52" cy="-24" r="21" fill="#d8c9a0"/>
+  <path d="M 66 -14 L 88 -10 L 66 -4 Z" fill="#d8c9a0"/>
+  <path d="M 46 -42 Q 34 -70 52 -78" stroke="#d8c9a0" stroke-width="7"
+        fill="none" stroke-linecap="round"/>
+  <path d="M 60 -42 Q 54 -72 72 -76" stroke="#d8c9a0" stroke-width="7"
+        fill="none" stroke-linecap="round"/>
+  <path d="M 58 -4 L 62 14" stroke="#d8c9a0" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="58" cy="-30" r="3.2" fill="#141c39"/>
+  <path d="M -34 26 L -36 66 M -6 28 L -8 68 M 22 28 L 24 68 M 44 24 L 46 64"
+        stroke="#d8c9a0" stroke-width="9" stroke-linecap="round"/>
+</g>
+<g transform="translate(600,442) scale(0.9)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#7b6a4e"/>
+  <circle cx="0" cy="-32" r="18" fill="#7b6a4e"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q -30 -18 -52 -12" stroke="#7b6a4e" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g><text x="560" y="316" text-anchor="end" fill="#c98a14" font-family="IBM Plex Mono, monospace" font-size="19">"why a dog?"</text><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">the first thief</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#3a4a7d"/>
+  <rect x="0" y="408" width="800" height="192" fill="#6b5432"/>
+
+<g transform="translate(178,353) scale(1.0)">
+  <rect x="-64" y="-52" width="128" height="96" rx="5" fill="#6f6553"/>
+  <rect x="-72" y="-64" width="144" height="14" rx="4" fill="#7d7261"/>
+  <rect x="-76" y="44" width="152" height="18" rx="4" fill="#5d5449"/>
+  <rect x="-46" y="-30" width="92" height="7" rx="3" fill="#141c39" opacity="0.5"/><rect x="-46" y="-8" width="92" height="7" rx="3" fill="#141c39" opacity="0.5"/><rect x="-46" y="14" width="92" height="7" rx="3" fill="#141c39" opacity="0.5"/>
+</g>
+<g transform="translate(330,370) scale(0.72)">
+  <rect x="-64" y="-52" width="128" height="96" rx="5" fill="#8a7f6d"/>
+  <rect x="-72" y="-64" width="144" height="14" rx="4" fill="#7d7261"/>
+  <rect x="-76" y="44" width="152" height="18" rx="4" fill="#5d5449"/>
+  <rect x="-46" y="-30" width="92" height="7" rx="3" fill="#141c39" opacity="0.5"/>
+</g>
+<g transform="translate(620,381) scale(0.62)">
+  <rect x="-74" y="-52" width="148" height="86" rx="6" fill="#6f5a33"/>
+  <rect x="-80" y="-62" width="160" height="16" rx="5" fill="#7a6339"/>
+  <circle cx="-52" cy="-4" r="10" fill="#c98a14"/><circle cx="-26" cy="-4" r="10" fill="#c98a14"/>
+  <rect x="-74" y="26" width="148" height="8" fill="#5b4a2b"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">the words held; the store did not</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

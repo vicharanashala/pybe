@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#141c39"/>
+  <rect x="0" y="408" width="800" height="192" fill="#1e3226"/>
+  <circle cx="660" cy="120" r="46" fill="#f3eddc" opacity="0.9"/><circle cx="644" cy="112" r="46" fill="#141c39"/>
+<g transform="translate(340,360) scale(0.95,0.95)">
+  <ellipse cx="0" cy="0" rx="78" ry="40" fill="#3f6fd8"/>
+  <path d="M -74 -6 Q -122 -30 -136 -66 Q -104 -44 -80 -30 Z" fill="#3f6fd8"/>
+  <path d="M 58 -18 Q 92 -30 104 -58 L 118 -30 Q 126 -14 108 -6 L 74 2 Z" fill="#3f6fd8"/>
+  <path d="M 96 -56 L 88 -92 L 112 -68 Z" fill="#3f6fd8"/>
+  <path d="M 116 -54 L 122 -88 L 134 -58 Z" fill="#3f6fd8"/>
+  <path d="M 108 -6 L 140 -2 L 138 8 L 106 6 Z" fill="#3f6fd8"/>
+  <circle cx="112" cy="-40" r="4" fill="#141c39"/>
+  <path d="M -44 34 L -48 74 M -14 36 L -16 74 M 20 36 L 22 74 M 50 30 L 54 72"
+        stroke="#3f6fd8" stroke-width="11" stroke-linecap="round"/>
+</g><path d="M 470 270 q 22 -22 0 -44 M 496 276 q 34 -32 0 -64" stroke="#c98a14" stroke-width="3" fill="none" opacity="0.85"/><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">the howl gave it away</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

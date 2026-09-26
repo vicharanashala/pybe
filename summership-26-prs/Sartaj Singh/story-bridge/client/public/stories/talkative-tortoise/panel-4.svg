@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#141c39"/>
+  <rect x="0" y="408" width="800" height="192" fill="#2f4a34"/>
+  <circle cx="660" cy="118" r="44" fill="#f3eddc" opacity="0.9"/><circle cx="643" cy="109" r="44" fill="#141c39"/>
+<g transform="translate(200,200) scale(0.85,0.85)">
+  <ellipse cx="0" cy="0" rx="48" ry="26" fill="#f3eddc"/>
+  <path d="M -34 -6 Q 2 -32 38 -10 Q 4 -2 -34 -6 Z" fill="#f3eddc" opacity="0.65"/>
+  <path d="M 30 -14 Q 52 -32 50 -56" stroke="#f3eddc" stroke-width="15"
+        fill="none" stroke-linecap="round"/>
+  <circle cx="50" cy="-62" r="13" fill="#f3eddc"/>
+  <path d="M 60 -64 L 82 -60 L 60 -55 Z" fill="#c98a14"/>
+  <circle cx="54" cy="-66" r="2.8" fill="#141c39"/>
+  <path d="M -46 6 Q -68 12 -76 4" stroke="#f3eddc" stroke-width="8"
+        fill="none" stroke-linecap="round"/>
+</g>
+<g transform="translate(600,200) scale(-0.85,0.85)">
+  <ellipse cx="0" cy="0" rx="48" ry="26" fill="#f3eddc"/>
+  <path d="M -34 -6 Q 2 -32 38 -10 Q 4 -2 -34 -6 Z" fill="#f3eddc" opacity="0.65"/>
+  <path d="M 30 -14 Q 52 -32 50 -56" stroke="#f3eddc" stroke-width="15"
+        fill="none" stroke-linecap="round"/>
+  <circle cx="50" cy="-62" r="13" fill="#f3eddc"/>
+  <path d="M 60 -64 L 82 -60 L 60 -55 Z" fill="#c98a14"/>
+  <circle cx="54" cy="-66" r="2.8" fill="#141c39"/>
+  <path d="M -46 6 Q -68 12 -76 4" stroke="#f3eddc" stroke-width="8"
+        fill="none" stroke-linecap="round"/>
+</g><path d="M 268 149 L 532 149" stroke="#7a5c33" stroke-width="8" stroke-linecap="round"/><path d="M 392 206 q 12 24 -6 46 M 420 212 q 14 28 -6 52" stroke="#e7dfc6" stroke-width="3" fill="none" opacity="0.5"/>
+<g transform="translate(360,462) scale(0.8)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#d8c9a0"/>
+  <circle cx="0" cy="-32" r="18" fill="#d8c9a0"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q 30 -18 52 -12" stroke="#d8c9a0" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g>
+<g transform="translate(474,466) scale(0.8)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#f3eddc"/>
+  <circle cx="0" cy="-32" r="18" fill="#f3eddc"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q -30 -18 -52 -12" stroke="#f3eddc" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">it opened its mouth</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

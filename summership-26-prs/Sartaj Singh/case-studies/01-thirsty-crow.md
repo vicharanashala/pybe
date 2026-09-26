@@ -44,24 +44,24 @@ Read the `while` line as the crow's rule, not as syntax: *as long as the water i
 
 **1. Find it in the story.** In the crow's story, which moment is the loop condition?
 
-- A) Checking whether the water is still out of reach
-- B) Dropping a pebble into the pot
+- A) Drinking the water at the end
+- B) Checking whether the water is still out of reach
 - C) Finding the pot at the edge of the village
-- D) Drinking the water at the end
+- D) Dropping a pebble into the pot
 
 **2. Read the Python.** Which loop matches what the crow actually did?
 
 - A)
 
   ```python
-  while water_level < beak_reach:
+  for pebble in range(400):
       water_level += 3
   ```
 
 - B)
 
   ```python
-  for pebble in range(400):
+  while water_level < beak_reach:
       water_level += 3
   ```
 
@@ -81,15 +81,15 @@ Read the `while` line as the crow's rule, not as syntax: *as long as the water i
 
 **3. Somewhere new.** A different situation: you are filling a bucket from a slow tap. You do not know how long it will take — you just keep the tap running until the bucket is full. Which construct fits?
 
-- A) A while loop, because the stopping point is a condition rather than a count
+- A) A single if statement checking whether the bucket is full
 - B) A for loop over range(60), because filling a bucket takes about a minute
-- C) A single if statement checking whether the bucket is full
-- D) No loop is needed — just set the bucket to full
+- C) No loop is needed — just set the bucket to full
+- D) A while loop, because the stopping point is a condition rather than a count
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. The condition is the test that runs before every repetition and decides whether there is another one.
-2. **A** — Yes. The crow repeats while the water is below its reach, and each repetition raises the water.
-3. **A** — Exactly the crow's shape: repeat an action while something is not yet true. The number of repetitions is unknown until it happens.
+1. **B** — Right. The condition is the test that runs before every repetition and decides whether there is another one.
+2. **B** — Yes. The crow repeats while the water is below its reach, and each repetition raises the water.
+3. **D** — Exactly the crow's shape: repeat an action while something is not yet true. The number of repetitions is unknown until it happens.
 
 </details>

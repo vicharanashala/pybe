@@ -47,10 +47,10 @@ print(wall_to_wall)             # NameError: name 'wall_to_wall' is not defined
 
 **1. Find it in the story.** What does the inside of the well correspond to?
 
-- A) A function's local scope — names that exist only while it is running
-- B) The whole program
-- C) A single variable
-- D) A comment at the top of the file
+- A) A single variable
+- B) A comment at the top of the file
+- C) The whole program
+- D) A function's local scope — names that exist only while it is running
 
 **2. Read the Python.** What happens when this runs?
 
@@ -90,7 +90,7 @@ print(wall_to_wall)             # NameError: name 'wall_to_wall' is not defined
   well()
   print(depth)
   
-  # raises NameError on the first print
+  # prints nothing; both lines are skipped
   ```
 
 - D)
@@ -103,20 +103,20 @@ print(wall_to_wall)             # NameError: name 'wall_to_wall' is not defined
   well()
   print(depth)
   
-  # prints nothing; both lines are skipped
+  # raises NameError on the first print
   ```
 
 **3. Somewhere new.** A different situation: you write a function that reads a config file and sets `api_key` inside it. Code at the bottom of the file then uses `api_key` and crashes with NameError. Why?
 
-- A) The function created `api_key` in its own local scope, so it never existed outside
-- B) The config file was empty, so `api_key` was never assigned
-- C) You must declare `api_key` at the top of the file before any function can use it
-- D) Functions cannot create variables, only read them
+- A) Functions cannot create variables, only read them
+- B) You must declare `api_key` at the top of the file before any function can use it
+- C) The function created `api_key` in its own local scope, so it never existed outside
+- D) The config file was empty, so `api_key` was never assigned
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. The well is a world with its own names, created when you enter it and gone when you leave.
+1. **D** — Right. The well is a world with its own names, created when you enter it and gone when you leave.
 2. **A** — Right. `depth` exists only while `well()` is running. Outside it, that name was never created.
-3. **A** — Yes. Assigning inside a function makes a local name. To get the value out, `return` it and bind it to a name outside.
+3. **C** — Yes. Assigning inside a function makes a local name. To get the value out, `return` it and bind it to a name outside.
 
 </details>

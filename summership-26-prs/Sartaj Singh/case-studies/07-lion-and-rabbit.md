@@ -47,14 +47,29 @@ print("the forest is quiet")
 
 **1. Find it in the story.** What is the loop variable in the arrangement the animals made?
 
-- A) The animal whose turn it is that day
-- B) The list of all the animals in the forest
-- C) The lion
-- D) The number of days that pass
+- A) The number of days that pass
+- B) The lion
+- C) The animal whose turn it is that day
+- D) The list of all the animals in the forest
 
 **2. Read the Python.** Which loop matches the arrangement, including the way it ended?
 
 - A)
+
+  ```python
+  while animals:
+      eaten(animals.pop())
+  ```
+
+- B)
+
+  ```python
+  for i in range(len(animals)):
+      eaten(animals[i])
+      break
+  ```
+
+- C)
 
   ```python
   for animal in animals:
@@ -63,14 +78,7 @@ print("the forest is quiet")
           break
   ```
 
-- B)
-
-  ```python
-  while animals:
-      eaten(animals.pop())
-  ```
-
-- C)
+- D)
 
   ```python
   for animal in animals:
@@ -79,25 +87,17 @@ print("the forest is quiet")
       eaten(animal)
   ```
 
-- D)
-
-  ```python
-  for i in range(len(animals)):
-      eaten(animals[i])
-      break
-  ```
-
 **3. Somewhere new.** A different situation: you are searching a list of orders for the first one over ₹10,000. Once you have it, the rest do not matter. What belongs in the loop?
 
-- A) `break`, the moment the first match is found
-- B) `continue`, to move past the orders that are too small
-- C) Nothing — let the loop finish and keep the last match
-- D) `return` — a loop cannot be stopped any other way
+- A) Nothing — let the loop finish and keep the last match
+- B) `return` — a loop cannot be stopped any other way
+- C) `continue`, to move past the orders that are too small
+- D) `break`, the moment the first match is found
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. Each repetition binds one item out of the sequence to a name, and the body works with that one.
-2. **A** — Yes. One item at a time out of a known sequence, stopped early by a condition inside the body.
-3. **A** — Yes. The work is done and every remaining item is wasted effort — the same shape as the rabbit. The sequence had more in it, and none of it mattered.
+1. **C** — Right. Each repetition binds one item out of the sequence to a name, and the body works with that one.
+2. **C** — Yes. One item at a time out of a known sequence, stopped early by a condition inside the body.
+3. **D** — Yes. The work is done and every remaining item is wasted effort — the same shape as the rabbit. The sequence had more in it, and none of it mattered.
 
 </details>

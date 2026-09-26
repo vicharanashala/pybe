@@ -48,10 +48,10 @@ The two walks differ by one character. range(1, len(donkeys)) starts at the seco
 
 **1. Find it in the story.** Nasruddin's count is wrong in the same way an off-by-one error is wrong. Which part of the story is the item that falls outside the boundary of the count?
 
-- A) The donkey he is sitting on
-- B) The nine donkeys walking ahead of him
+- A) Walking the rest of the way to his gate
+- B) The donkey he is sitting on
 - C) Buying ten donkeys at the spring fair
-- D) Walking the rest of the way to his gate
+- D) The nine donkeys walking ahead of him
 
 **2. Read the Python.** Ten donkeys are in donkeys. Which snippet counts all ten?
 
@@ -74,15 +74,15 @@ The two walks differ by one character. range(1, len(donkeys)) starts at the seco
 - C)
 
   ```python
-  counted = 0
-  for i in range(len(donkeys) - 1):
-      counted += 1
+  counted = donkeys.length
   ```
 
 - D)
 
   ```python
-  counted = donkeys.length
+  counted = 0
+  for i in range(len(donkeys) - 1):
+      counted += 1
   ```
 
 **3. Somewhere new.** A school prints name badges. There are thirty names in students, and the code is:
@@ -94,15 +94,15 @@ for i in range(1, len(students)):
 
 Thirty pupils arrive and one has no badge. Which one?
 
-- A) The first pupil in students
-- B) The last pupil in students
-- C) A pupil somewhere in the middle
-- D) None of them — all thirty get a badge
+- A) None of them — all thirty get a badge
+- B) The first pupil in students
+- C) The last pupil in students
+- D) A pupil somewhere in the middle
 
 <details><summary>Answer key</summary>
 
-1. **A** — It is in the group he paid for and it is never in the number he says. That is exactly what an off-by-one error drops — an item that belongs to the collection but sits outside the stretch the count walks.
+1. **B** — It is in the group he paid for and it is never in the number he says. That is exactly what an off-by-one error drops — an item that belongs to the collection but sits outside the stretch the count walks.
 2. **A** — range(len(donkeys)) produces 0 through 9 — ten positions, every animal reached. This is Nasruddin standing on the ground.
-3. **A** — range(1, 30) starts at position 1, and the first name sits at position 0. It is the saddle again — the name is in the collection, and the walk begins just past it.
+3. **B** — range(1, 30) starts at position 1, and the first name sits at position 0. It is the saddle again — the name is in the collection, and the walk begins just past it.
 
 </details>

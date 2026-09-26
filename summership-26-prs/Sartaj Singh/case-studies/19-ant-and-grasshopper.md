@@ -54,9 +54,9 @@ build_index is the summer. The first loop calls it on every order, which is the 
 
 **1. Find it in the story.** Which part of the story is the work done once so that all the later work is free?
 
-- A) The ant carrying seed to the hole all summer
-- B) The ant going down to the hole in December
-- C) The grasshopper's hour of searching each day
+- A) The ant going down to the hole in December
+- B) The grasshopper's hour of searching each day
+- C) The ant carrying seed to the hole all summer
 - D) The hole under the flat stone
 
 **2. Read the Python.** rows never changes while the orders are processed. Which version pays for the index once?
@@ -64,16 +64,15 @@ build_index is the summer. The first loop calls it on every order, which is the 
 - A)
 
   ```python
-  index = build_index(rows)
   for item, qty in orders:
-      total += index[item] * qty
+      total += build_index(rows)[item] * qty
   ```
 
 - B)
 
   ```python
+  index = build_index(rows)
   for item, qty in orders:
-      index = build_index(rows)
       total += index[item] * qty
   ```
 
@@ -81,28 +80,29 @@ build_index is the summer. The first loop calls it on every order, which is the 
 
   ```python
   for item, qty in orders:
-      total += build_index(rows)[item] * qty
+      total += index[item] * qty
+  index = build_index(rows)
   ```
 
 - D)
 
   ```python
   for item, qty in orders:
+      index = build_index(rows)
       total += index[item] * qty
-  index = build_index(rows)
   ```
 
 **3. Somewhere new.** A page lists 500 comments and shows each commenter's display name. The 500 comments were written by only 40 different people. Which arrangement is the ant's?
 
 - A) Fetch all 40 people once before the loop into a dict keyed by id, then look each name up inside the loop
-- B) Fetch the commenter from the database inside the loop, once per comment
-- C) Fetch all 40 people from the database inside the loop, once per comment
-- D) Re-fetch all 500 comments inside the loop each time a name is needed
+- B) Re-fetch all 500 comments inside the loop each time a name is needed
+- C) Fetch the commenter from the database inside the loop, once per comment
+- D) Fetch all 40 people from the database inside the loop, once per comment
 
 <details><summary>Answer key</summary>
 
-1. **A** — It is one long stretch of work, paid in a season when there was room for it, and it is what makes every December trip cost nothing. That is precomputation — the same total work, moved to a moment when it is cheap.
-2. **A** — The expensive call sits above the loop, so it happens once no matter how many orders arrive. Inside the loop there is only a lookup, which is the December trip to the stone.
+1. **C** — It is one long stretch of work, paid in a season when there was room for it, and it is what makes every December trip cost nothing. That is precomputation — the same total work, moved to a moment when it is cheap.
+2. **B** — The expensive call sits above the loop, so it happens once no matter how many orders arrive. Inside the loop there is only a lookup, which is the December trip to the stone.
 3. **A** — One trip pays for all 500 rows, and everything inside the loop is a lookup. The number of comments can grow without the expensive part growing with it — the hole under the stone, filled once.
 
 </details>

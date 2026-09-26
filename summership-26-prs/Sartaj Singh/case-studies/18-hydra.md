@@ -46,10 +46,10 @@ clear is called on a creature, and the first thing it asks is whether there is a
 
 **1. Find it in the story.** Which moment in the story is the base case — the point where the work stops handing itself on?
 
-- A) Looking at the marsh and finding no heads left
+- A) Heracles wading into the marsh at the start
 - B) Putting the torch to the cut neck
-- C) Two heads growing back from the first stump
-- D) Heracles wading into the marsh at the start
+- C) Looking at the marsh and finding no heads left
+- D) Two heads growing back from the first stump
 
 **2. Read the Python.** Which version clears a nine-headed creature and actually stops?
 
@@ -59,26 +59,10 @@ clear is called on a creature, and the first thing it asks is whether there is a
   def clear(heads):
       if heads == 0:
           return 0
-      return 1 + clear(heads - 1)
-  ```
-
-- B)
-
-  ```python
-  def clear(heads):
-      return 1 + clear(heads - 1)
-  ```
-
-- C)
-
-  ```python
-  def clear(heads):
-      if heads == 0:
-          return 0
       return 1 + clear(heads)
   ```
 
-- D)
+- B)
 
   ```python
   def clear(heads):
@@ -87,17 +71,33 @@ clear is called on a creature, and the first thing it asks is whether there is a
       return 1 + clear(heads - 2)
   ```
 
+- C)
+
+  ```python
+  def clear(heads):
+      if heads == 0:
+          return 0
+      return 1 + clear(heads - 1)
+  ```
+
+- D)
+
+  ```python
+  def clear(heads):
+      return 1 + clear(heads - 1)
+  ```
+
 **3. Somewhere new.** You are counting every file in a folder, including the files inside its sub-folders, and their sub-folders, all the way down. Which part of that job is the base case?
 
-- A) Reaching a folder that has no sub-folders inside it
-- B) Counting the files sitting directly in the current folder
+- A) Counting the files sitting directly in the current folder
+- B) Reaching a folder that has no sub-folders inside it
 - C) Opening a sub-folder and counting inside it
 - D) Reaching a folder containing a shortcut that points back to itself
 
 <details><summary>Answer key</summary>
 
-1. **A** — It is the one look that ends with nothing being handed on. Every other step passes a smaller creature to the next round; this one has nothing to pass, so the chain stops here.
-2. **A** — There is a branch that does not call again, and every call that does hands on a strictly smaller number. Nine reaches zero in nine steps, and the chain unwinds.
-3. **A** — There is nothing left to descend into, so that call returns instead of handing the job on. It is the empty marsh — the one place the chain has no smaller version of itself to pass along.
+1. **C** — It is the one look that ends with nothing being handed on. Every other step passes a smaller creature to the next round; this one has nothing to pass, so the chain stops here.
+2. **C** — There is a branch that does not call again, and every call that does hands on a strictly smaller number. Nine reaches zero in nine steps, and the chain unwinds.
+3. **B** — There is nothing left to descend into, so that call returns instead of handing the job on. It is the empty marsh — the one place the chain has no smaller version of itself to pass along.
 
 </details>

@@ -50,10 +50,10 @@ Read `=` as *point this name at that value*, not as *these two are equal*. Each 
 
 **1. Find it in the story.** In the story, what plays the role of the variable name?
 
-- A) The word people use for the animal — "goat", then "dog"
-- B) The animal on the Brahmin's shoulders
-- C) The Brahmin himself
-- D) The road to the village
+- A) The Brahmin himself
+- B) The word people use for the animal — "goat", then "dog"
+- C) The road to the village
+- D) The animal on the Brahmin's shoulders
 
 **2. Read the Python.** What does this print?
 
@@ -74,7 +74,7 @@ Read `=` as *point this name at that value*, not as *these two are equal*. Each 
   animal = "dog"
   print(animal)
   
-  # prints: goat
+  # raises NameError: animal was defined twice
   ```
 
 - C)
@@ -84,7 +84,7 @@ Read `=` as *point this name at that value*, not as *these two are equal*. Each 
   animal = "dog"
   print(animal)
   
-  # prints: goat dog
+  # prints: goat
   ```
 
 - D)
@@ -94,20 +94,20 @@ Read `=` as *point this name at that value*, not as *these two are equal*. Each 
   animal = "dog"
   print(animal)
   
-  # raises NameError: animal was defined twice
+  # prints: goat dog
   ```
 
 **3. Somewhere new.** A different situation: you are tracking a running score. You write `score = 0`, then on a later line `score + 10`, then `print(score)`. What prints?
 
-- A) 0 — `score + 10` computes a value and never binds it to anything
-- B) 10 — Python updates score with the addition
+- A) 10 — Python updates score with the addition
+- B) An error, because the line has no effect
 - C) 10 — `+` modifies the variable in place
-- D) An error, because the line has no effect
+- D) 0 — `score + 10` computes a value and never binds it to anything
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. It is the label being moved around. The creature underneath it is a separate thing entirely.
+1. **B** — Right. It is the label being moved around. The creature underneath it is a separate thing entirely.
 2. **A** — Right. The second line repoints the name. Only the most recent binding survives.
-3. **A** — Yes. Addition produces a result; only `=` attaches it to a name. Without `score = score + 10` the result is worked out and dropped.
+3. **D** — Yes. Addition produces a result; only `=` attaches it to a name. Without `score = score + 10` the result is worked out and dropped.
 
 </details>

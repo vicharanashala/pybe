@@ -52,29 +52,29 @@ for part, description in elephant.items():
 
 **1. Find it in the story.** Which part of the story is the key, and which is the value?
 
-- A) The body part touched is the key; the description given is the value
+- A) Each man is a key and the elephant is the value
 - B) The description is the key; the body part is the value
-- C) Each man is a key and the elephant is the value
-- D) There are no keys — it is just a list of six descriptions
+- C) There are no keys — it is just a list of six descriptions
+- D) The body part touched is the key; the description given is the value
 
 **2. Read the Python.** Nobody in the story touched the elephant's eye. What does `elephant["eye"]` do?
 
-- A) Raises a KeyError, because that key was never stored
-- B) Returns None, since the key is missing
-- C) Returns an empty string
-- D) Adds "eye" to the dictionary with no value
+- A) Adds "eye" to the dictionary with no value
+- B) Returns an empty string
+- C) Returns None, since the key is missing
+- D) Raises a KeyError, because that key was never stored
 
 **3. Somewhere new.** You are storing the capital city of each Indian state so you can look up any state by name. List or dictionary?
 
-- A) A dictionary, because each capital belongs to a specific state you will look it up by
-- B) A list, because there are many states and lists hold many things
-- C) Two lists kept in the same order, one of states and one of capitals
+- A) Two lists kept in the same order, one of states and one of capitals
+- B) A dictionary, because each capital belongs to a specific state you will look it up by
+- C) A list, because there are many states and lists hold many things
 - D) A dictionary with the capitals as keys
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. You look things up by the part — that is what makes it the key.
-2. **A** — Correct. Square brackets demand an answer, and there is none to give.
-3. **A** — Yes. When one piece of data identifies another, that identifier is a key — same shape as part-to-description.
+1. **D** — Right. You look things up by the part — that is what makes it the key.
+2. **D** — Correct. Square brackets demand an answer, and there is none to give.
+3. **B** — Yes. When one piece of data identifies another, that identifier is a key — same shape as part-to-description.
 
 </details>

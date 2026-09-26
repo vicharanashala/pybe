@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#1e2a52"/>
+  <rect x="0" y="408" width="800" height="192" fill="#5e4a2e"/>
+
+<g transform="translate(96,300) scale(0.62)">
+  <rect x="-58" y="-68" width="116" height="68" fill="#8a6a45"/>
+  <path d="M -78 -68 L 0 -126 L 78 -68 Z" fill="#6f5a33"/>
+  <rect x="-15" y="-38" width="30" height="38" fill="#141c39"/>
+</g>
+<g transform="translate(700,381) scale(0.62)">
+  <rect x="-74" y="-52" width="148" height="86" rx="6" fill="#6f5a33"/>
+  <rect x="-80" y="-62" width="160" height="16" rx="5" fill="#7a6339"/>
+  <circle cx="-52" cy="-4" r="10" fill="#c98a14"/><circle cx="-26" cy="-4" r="10" fill="#c98a14"/><circle cx="0" cy="-4" r="10" fill="#c98a14"/><circle cx="26" cy="-4" r="10" fill="#c98a14"/><circle cx="52" cy="-4" r="10" fill="#c98a14"/><circle cx="-52" cy="-28" r="10" fill="#c98a14"/><circle cx="-26" cy="-28" r="10" fill="#c98a14"/><circle cx="0" cy="-28" r="10" fill="#c98a14"/>
+  <rect x="-74" y="26" width="148" height="8" fill="#5b4a2b"/>
+</g>
+<g transform="translate(566,353) scale(1.0)">
+  <rect x="-64" y="-52" width="128" height="96" rx="5" fill="#6f6553"/>
+  <rect x="-72" y="-64" width="144" height="14" rx="4" fill="#7d7261"/>
+  <rect x="-76" y="44" width="152" height="18" rx="4" fill="#5d5449"/>
+  <rect x="-46" y="-30" width="92" height="7" rx="3" fill="#141c39" opacity="0.5"/><rect x="-46" y="-8" width="92" height="7" rx="3" fill="#141c39" opacity="0.5"/><rect x="-46" y="14" width="92" height="7" rx="3" fill="#141c39" opacity="0.5"/>
+</g>
+<g transform="translate(250,339) scale(1.0)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#f3eddc"/>
+  <circle cx="0" cy="-32" r="18" fill="#f3eddc"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q 30 -18 52 -12" stroke="#f3eddc" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g>
+<g transform="translate(392,350) scale(0.85)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#c9b98d"/>
+  <circle cx="0" cy="-32" r="18" fill="#c9b98d"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q -30 -18 -52 -12" stroke="#c9b98d" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">whatever you name is yours</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

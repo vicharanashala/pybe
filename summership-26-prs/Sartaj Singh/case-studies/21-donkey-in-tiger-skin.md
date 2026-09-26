@@ -47,29 +47,29 @@ The first two lines are the disguise: the screen shows the same character either
 
 **1. Find it in the story.** Which moment in the story is the moment the real type is revealed?
 
-- A) The bray
-- B) The tiger skin going on
-- C) The villagers staying behind their doors
+- A) The villagers staying behind their doors
+- B) The bray
+- C) The tiger skin going on
 - D) The sticks
 
 **2. Read the Python.** values = ["10", "9", "100"] was read from a file. Which line gives the true largest number?
 
-- A) max(int(v) for v in values)
-- B) max(values)
+- A) int(max(values))
+- B) max(int(v) for v in values)
 - C) max(values, key=len)
-- D) int(max(values))
+- D) max(values)
 
 **3. Somewhere new.** A spreadsheet of exam scores is exported and read back in. The report sorts the column and prints the top score as 9, when several pupils clearly scored higher. Nothing raised an error. What happened?
 
-- A) The scores are strings, so they were compared one character at a time
+- A) sorted() always needs key=int, even for numbers
 - B) The scores are numbers, but sorted() returned them in reverse order
 - C) The scores are floats and lost precision on the way out of the file
-- D) sorted() always needs key=int, even for numbers
+- D) The scores are strings, so they were compared one character at a time
 
 <details><summary>Answer key</summary>
 
-1. **A** — It is the one thing the skin could not do for him. An operation that only his actual kind can perform is exactly what type() is — it makes the value state what it is rather than what it resembles.
-2. **A** — Each value is converted before anything is compared, so the comparison is between numbers. This returns 100.
-3. **A** — Text out of a spreadsheet arrives as text. "9" sorts after "100" because the first character decides it, and no line ever asked what type it was holding — the skin, all the way to the report.
+1. **B** — It is the one thing the skin could not do for him. An operation that only his actual kind can perform is exactly what type() is — it makes the value state what it is rather than what it resembles.
+2. **B** — Each value is converted before anything is compared, so the comparison is between numbers. This returns 100.
+3. **D** — Text out of a spreadsheet arrives as text. "9" sorts after "100" because the first character decides it, and no line ever asked what type it was holding — the skin, all the way to the report.
 
 </details>

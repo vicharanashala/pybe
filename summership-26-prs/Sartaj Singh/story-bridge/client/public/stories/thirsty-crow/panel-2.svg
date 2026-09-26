@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#1e2a52"/>
+  <rect x="0" y="408" width="800" height="192" fill="#7d5c38"/>
+
+<g transform="translate(500,330) scale(1.0)">
+  <path d="M -34 -110 L -38 -76 Q -92 -20 -84 44
+           Q -76 90 0 90 Q 76 90 84 44
+           Q 92 -20 38 -76 L 34 -110 Z"
+        fill="#8d5a3c"/>
+  <path d="M -34 -110 L -38 -76 Q -92 -20 -84 44
+           Q -76 90 0 90 L 0 -110 Z"
+        fill="#7a4a30"/>
+  <ellipse cx="0" cy="-110" rx="34" ry="10" fill="#5e3624"/>
+  <ellipse cx="0" cy="-110" rx="26" ry="7" fill="#141c39"/>
+  <clipPath id="potclip5003300">
+    <path d="M -30 -110 Q -80 -18 -74 44
+             Q -68 84 0 84 Q 68 84 74 44
+             Q 80 -18 30 -110 Z"/>
+  </clipPath>
+  <g clip-path="url(#potclip5003300)">
+    <rect x="-90" y="51.6" width="180" height="48.4" fill="#35705e" opacity="0.85"/>
+    <rect x="-90" y="51.6" width="180" height="5" fill="#e7dfc6" opacity="0.6"/>
+
+  </g>
+  <path d="M -60 -50 Q -66 30 -58 60"
+        stroke="#c98a14" stroke-width="2" fill="none" opacity="0.35"/>
+</g>
+<g transform="translate(215,240) scale(1.0,1.0)">
+  <ellipse cx="0" cy="0" rx="46" ry="28" fill="#241e19"/>
+  <path d="M -30 -8 Q 5 -34 40 -12 Q 10 -6 -30 -8 Z" fill="#241e19" opacity="0.75"/>
+  <circle cx="38" cy="-22" r="19" fill="#241e19"/>
+  <path d="M 54 -24 L 78 -18 L 54 -13 Z" fill="#c98a14"/>
+  <circle cx="44" cy="-27" r="3.2" fill="#f3eddc"/>
+  <path d="M -44 4 Q -68 12 -78 2" stroke="#241e19" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M -8 26 L -10 46 M 12 26 L 14 46" stroke="#241e19" stroke-width="4.5" stroke-linecap="round"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">too far down to reach</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

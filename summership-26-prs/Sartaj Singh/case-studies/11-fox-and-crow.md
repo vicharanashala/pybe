@@ -51,10 +51,10 @@ Two checks, not one. The `try` asks whether the value is the right *kind* of thi
 
 **1. Find it in the story.** Which part of the story is the missing validation check?
 
-- A) The question the crow never asked about who was speaking, and why
+- A) The crow flying up into the tree
 - B) The fox's speech
 - C) The cheese falling
-- D) The crow flying up into the tree
+- D) The question the crow never asked about who was speaking, and why
 
 **2. Read the Python.** A form asks for an age. Which version is actually validated?
 
@@ -99,15 +99,15 @@ Two checks, not one. The `try` asks whether the value is the right *kind* of thi
 
 **3. Somewhere new.** A different situation: your API receives a JSON order with `quantity: 1000000`. The field is present and is an integer. What still has to happen before you use it?
 
-- A) A range check — it is well formed and still not a value you should act on
+- A) Wrap the whole request handler in a try/except
 - B) Nothing — it parsed as an integer, so it is valid
 - C) Convert it to a string so it cannot be used in arithmetic
-- D) Wrap the whole request handler in a try/except
+- D) A range check — it is well formed and still not a value you should act on
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. One check between the input arriving and it being acted on. That is what validation is.
+1. **D** — Right. One check between the input arriving and it being acted on. That is what validation is.
 2. **A** — Yes. First whether it is a number at all, then whether it is a number that makes sense here.
-3. **A** — Yes. Schema validation says the shape is right. Whether a million of something is a sane order is a separate question, and only your code knows the answer.
+3. **D** — Yes. Schema validation says the shape is right. Whether a million of something is a sane order is a separate question, and only your code knows the answer.
 
 </details>

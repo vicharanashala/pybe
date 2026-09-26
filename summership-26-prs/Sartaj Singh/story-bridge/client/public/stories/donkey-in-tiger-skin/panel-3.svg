@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#141c39"/>
+  <rect x="0" y="408" width="800" height="192" fill="#3d4a2e"/>
+  <circle cx="690" cy="108" r="38" fill="#f3eddc" opacity="0.9"/><circle cx="673" cy="99" r="38" fill="#141c39"/>
+<g transform="translate(160,384) scale(0.4,0.4)">
+  <ellipse cx="0" cy="0" rx="70" ry="38" fill="#7d6e5a"/>
+  <path d="M -66 -12 Q -92 -6 -96 26 L -87 27 Q -83 4 -62 2 Z" fill="#7d6e5a"/>
+  <path d="M 44 -20 Q 76 -38 84 -72 L 108 -68 Q 118 -38 94 -18 L 62 2 Z" fill="#7d6e5a"/>
+  <ellipse cx="100" cy="-78" rx="16" ry="26" fill="#7d6e5a"/>
+  <ellipse cx="104" cy="-99" rx="13" ry="11" fill="#6e6152"/>
+  <path d="M 86 -96 Q 80 -136 90 -147 Q 99 -132 96 -98 Z" fill="#7d6e5a"/>
+  <path d="M 108 -97 Q 115 -137 125 -144 Q 129 -127 118 -95 Z" fill="#7d6e5a"/>
+  <circle cx="108" cy="-84" r="4" fill="#141c39"/>
+  <path d="M 68 -44 Q 82 -68 92 -92" stroke="#5f5446" stroke-width="8"
+        fill="none" stroke-linecap="round"/>
+  <path d="M -40 30 L -44 76 M -12 34 L -14 78 M 18 34 L 20 78 M 44 26 L 48 74"
+        stroke="#7d6e5a" stroke-width="12" stroke-linecap="round"/>
+</g>
+<g transform="translate(470,376) scale(-0.62,0.62)">
+  <ellipse cx="0" cy="0" rx="70" ry="38" fill="#8d7d66"/>
+  <path d="M -66 -12 Q -92 -6 -96 26 L -87 27 Q -83 4 -62 2 Z" fill="#8d7d66"/>
+  <path d="M 44 -20 Q 76 -38 84 -72 L 108 -68 Q 118 -38 94 -18 L 62 2 Z" fill="#8d7d66"/>
+  <ellipse cx="100" cy="-78" rx="16" ry="26" fill="#8d7d66"/>
+  <ellipse cx="104" cy="-99" rx="13" ry="11" fill="#6e6152"/>
+  <path d="M 86 -96 Q 80 -136 90 -147 Q 99 -132 96 -98 Z" fill="#8d7d66"/>
+  <path d="M 108 -97 Q 115 -137 125 -144 Q 129 -127 118 -95 Z" fill="#8d7d66"/>
+  <circle cx="108" cy="-84" r="4" fill="#141c39"/>
+  <path d="M 68 -44 Q 82 -68 92 -92" stroke="#5f5446" stroke-width="8"
+        fill="none" stroke-linecap="round"/>
+  <path d="M -40 30 L -44 76 M -12 34 L -14 78 M 18 34 L 20 78 M 44 26 L 48 74"
+        stroke="#8d7d66" stroke-width="12" stroke-linecap="round"/>
+</g>
+<g transform="translate(470,366) scale(-0.62,0.62)">
+  <path d="M -86 -34 Q 0 -54 86 -34 L 92 28 Q 0 50 -92 28 Z" fill="#c8862f"/>
+  <path d="M -58 -32 q 7 32 0 62" stroke="#241e19" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M -32 -32 q 7 32 0 62" stroke="#241e19" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M -6 -32 q 7 32 0 62" stroke="#241e19" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 20 -32 q 7 32 0 62" stroke="#241e19" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 46 -32 q 7 32 0 62" stroke="#241e19" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M 72 -32 q 7 32 0 62" stroke="#241e19" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <circle cx="104" cy="-20" r="26" fill="#c8862f"/>
+  <path d="M 88 -42 l 10 -16 l 12 12 Z M 118 -42 l 12 -14 l 8 16 Z" fill="#c8862f"/>
+  <circle cx="97" cy="-24" r="3.5" fill="#141c39"/>
+  <circle cx="113" cy="-24" r="3.5" fill="#141c39"/>
+</g><g transform="translate(372,330) scale(-1.0,1.0)"><path d="M 0 -26 Q 30 0 0 26" stroke="#b33f35" stroke-width="5.0" fill="none" opacity="0.85"/><path d="M 0 -46 Q 52 0 0 46" stroke="#b33f35" stroke-width="4.3" fill="none" opacity="0.63"/><path d="M 0 -66 Q 74 0 0 66" stroke="#b33f35" stroke-width="3.6" fill="none" opacity="0.41"/></g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">and then he answered</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

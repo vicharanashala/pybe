@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#3f4a7a"/>
+  <rect x="0" y="408" width="800" height="192" fill="#7a6a3e"/>
+
+<g transform="translate(560,500) scale(0.95)">
+  <path d="M -26 0 L -18 -152 L 18 -152 L 26 0 Z" fill="#5e3624"/>
+  <path d="M -148 -150 L -143 -4" stroke="#5e3624" stroke-width="5" opacity="0.65"/><path d="M -98 -150 L -93 -4" stroke="#5e3624" stroke-width="5" opacity="0.65"/><path d="M -54 -150 L -49 -4" stroke="#5e3624" stroke-width="5" opacity="0.65"/><path d="M 62 -150 L 67 -4" stroke="#5e3624" stroke-width="5" opacity="0.65"/><path d="M 108 -150 L 113 -4" stroke="#5e3624" stroke-width="5" opacity="0.65"/><path d="M 150 -150 L 155 -4" stroke="#5e3624" stroke-width="5" opacity="0.65"/>
+  <ellipse cx="0" cy="-186" rx="196" ry="86" fill="#2f5a44"/>
+  <ellipse cx="-118" cy="-152" rx="96" ry="52" fill="#2f5a44"/>
+  <ellipse cx="122" cy="-150" rx="92" ry="50" fill="#2f5a44"/>
+  <ellipse cx="0" cy="-232" rx="120" ry="56" fill="#2f5a44" opacity="0.88"/>
+
+</g><g transform="rotate(-78,220,470)">
+<g transform="translate(220,470) scale(0.95)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#f3eddc"/>
+  <circle cx="0" cy="-32" r="18" fill="#f3eddc"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q 30 -18 52 -12" stroke="#f3eddc" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g></g>
+<g transform="translate(348,496) scale(0.85)">
+  <ellipse cx="0" cy="7" rx="52" ry="14" fill="#c9b98d"/>
+  <ellipse cx="0" cy="0" rx="40" ry="10" fill="#b33f35" opacity="0.95"/><ellipse cx="0" cy="-13" rx="39" ry="10" fill="#b33f35" opacity="0.90"/><ellipse cx="0" cy="-26" rx="38" ry="10" fill="#b33f35" opacity="0.85"/><ellipse cx="0" cy="-39" rx="37" ry="10" fill="#b33f35" opacity="0.80"/><ellipse cx="0" cy="-52" rx="36" ry="10" fill="#b33f35" opacity="0.75"/><ellipse cx="0" cy="-65" rx="35" ry="10" fill="#b33f35" opacity="0.70"/>
+</g><line x1="96" y1="112" x2="96" y2="40" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(0,96,112)"/><line x1="96" y1="112" x2="96" y2="40" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(30,96,112)"/><line x1="96" y1="112" x2="96" y2="40" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(60,96,112)"/><line x1="96" y1="112" x2="96" y2="40" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(90,96,112)"/><line x1="96" y1="112" x2="96" y2="40" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(120,96,112)"/><line x1="96" y1="112" x2="96" y2="40" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(150,96,112)"/><line x1="96" y1="112" x2="96" y2="40" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(180,96,112)"/><line x1="96" y1="112" x2="96" y2="40" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(210,96,112)"/><line x1="96" y1="112" x2="96" y2="40" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(240,96,112)"/><line x1="96" y1="112" x2="96" y2="40" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(270,96,112)"/><line x1="96" y1="112" x2="96" y2="40" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(300,96,112)"/><line x1="96" y1="112" x2="96" y2="40" stroke="#c98a14" stroke-width="3" opacity="0.5" transform="rotate(330,96,112)"/><circle cx="96" cy="112" r="46" fill="#c98a14" opacity="0.9"/><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">the hottest part of the afternoon</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

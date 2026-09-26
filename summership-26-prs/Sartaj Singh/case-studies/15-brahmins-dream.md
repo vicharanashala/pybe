@@ -52,24 +52,24 @@ print(recovered)      # ['goats', 'cattle', 'a house', 'a son']
 
 **1. Find it in the story.** What does the pot hanging on the nail correspond to?
 
-- A) Data that exists only in memory while the program is running
-- B) A file saved to disk
-- C) A variable name
-- D) His plans for the goats and the cattle
+- A) A variable name
+- B) His plans for the goats and the cattle
+- C) Data that exists only in memory while the program is running
+- D) A file saved to disk
 
 **2. Read the Python.** You want to add a line to an existing log file without destroying what is in it. Which is right?
 
 - A)
 
   ```python
-  with open("log.txt", "a") as f:
+  with open("log.txt", "w") as f:
       f.write("one more line\n")
   ```
 
 - B)
 
   ```python
-  with open("log.txt", "w") as f:
+  with open("log.txt", "r") as f:
       f.write("one more line\n")
   ```
 
@@ -83,21 +83,21 @@ print(recovered)      # ['goats', 'cattle', 'a house', 'a son']
 - D)
 
   ```python
-  with open("log.txt", "r") as f:
+  with open("log.txt", "a") as f:
       f.write("one more line\n")
   ```
 
 **3. Somewhere new.** A different situation: a shopping cart is held in a Python list on the server. A deploy restarts the process and every cart in progress vanishes. What was the mistake?
 
-- A) Treating memory as storage — the carts were never written anywhere that outlives the process
-- B) Deploying during business hours
-- C) Not using a server with more memory
+- A) Deploying during business hours
+- B) Not using a server with more memory
+- C) Treating memory as storage — the carts were never written anywhere that outlives the process
 - D) Not wrapping the deploy in a try/except
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. Reachable, useful, and gone the moment the process stops. Nothing outside it holds a copy.
-2. **A** — Yes. `"a"` appends, and `with` closes the file even if something fails partway through.
-3. **A** — Yes. A restart is not an accident to be prevented; it is a thing that will happen. Anything that must survive it has to be written down.
+1. **C** — Right. Reachable, useful, and gone the moment the process stops. Nothing outside it holds a copy.
+2. **D** — Yes. `"a"` appends, and `with` closes the file even if something fails partway through.
+3. **C** — Yes. A restart is not an accident to be prevented; it is a thing that will happen. Anything that must survive it has to be written down.
 
 </details>

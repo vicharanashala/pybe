@@ -50,29 +50,29 @@ print(mean([3, 1, 4, 1, 5]))     # 2.8
 
 **1. Find it in the story.** In the story, what plays the role of an import statement?
 
-- A) The jackal's advice — the thing that puts the guards within reach
-- B) The guards killing the serpent
+- A) The guards killing the serpent
+- B) The necklace
 - C) The crows attacking the serpent themselves
-- D) The necklace
+- D) The jackal's advice — the thing that puts the guards within reach
 
 **2. Read the Python.** Which line lets you write `sqrt(144)` with no `math.` in front of it?
 
-- A) from math import sqrt
-- B) import math
-- C) import sqrt from math
-- D) include math.sqrt
+- A) import math
+- B) import sqrt from math
+- C) include math.sqrt
+- D) from math import sqrt
 
 **3. Somewhere new.** A different situation: you need to generate a secure random password. You could write your own shuffling logic in about thirty lines. What should you do?
 
-- A) Use the `secrets` module from the standard library
-- B) Write the thirty lines — fewer dependencies is always safer
+- A) Copy a snippet from the first search result and move on
+- B) Use the `secrets` module from the standard library
 - C) Use `random.choice()`, since `random` is already imported in that file
-- D) Copy a snippet from the first search result and move on
+- D) Write the thirty lines — fewer dependencies is always safer
 
 <details><summary>Answer key</summary>
 
-1. **A** — Right. It does not create the capability. It connects the crows to one that already existed.
-2. **A** — Yes. This brings the one name directly into your file, so you call it unqualified.
-3. **A** — Yes. It is already written, and for anything security-shaped its authors have considered attacks you have not. Thirty lines of your own is thirty lines of new risk.
+1. **D** — Right. It does not create the capability. It connects the crows to one that already existed.
+2. **D** — Yes. This brings the one name directly into your file, so you call it unqualified.
+3. **B** — Yes. It is already written, and for anything security-shaped its authors have considered attacks you have not. Thirty lines of your own is thirty lines of new risk.
 
 </details>

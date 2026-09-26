@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#1e2a52"/>
+  <rect x="0" y="408" width="800" height="192" fill="#3f5a34"/>
+
+<g transform="translate(560,380) scale(0.9,0.9)">
+  <ellipse cx="0" cy="0" rx="86" ry="44" fill="#b8873f"/>
+  <path d="M -80 -10 Q -128 -34 -142 -72 Q -110 -46 -84 -34 Z" fill="#b8873f"/>
+  <circle cx="78" cy="-40" r="44" fill="#8a5a1e"/>
+  <circle cx="80" cy="-40" r="28" fill="#b8873f"/>
+  <path d="M 104 -34 L 126 -30 L 104 -24 Z" fill="#b8873f"/>
+  <circle cx="90" cy="-46" r="3.4" fill="#141c39"/>
+  <circle cx="70" cy="-46" r="3.4" fill="#141c39"/>
+  <path d="M -50 38 L -54 84 M -16 40 L -18 86 M 22 40 L 24 86 M 56 34 L 60 82"
+        stroke="#b8873f" stroke-width="13" stroke-linecap="round"/>
+</g>
+<g transform="translate(200,466) scale(0.95,0.95)">
+  <ellipse cx="0" cy="0" rx="34" ry="24" fill="#cfc3a4"/>
+  <circle cx="30" cy="-24" r="17" fill="#cfc3a4"/>
+  <path d="M 26 -40 Q 20 -78 30 -82 Q 39 -76 34 -40 Z" fill="#cfc3a4"/>
+  <path d="M 40 -40 Q 43 -76 53 -76 Q 57 -68 46 -38 Z" fill="#cfc3a4"/>
+  <circle cx="38" cy="-28" r="2.8" fill="#141c39"/>
+  <circle cx="-34" cy="2" r="10" fill="#cfc3a4" opacity="0.85"/>
+  <path d="M -14 20 L -16 40 M 12 20 L 14 40" stroke="#cfc3a4" stroke-width="7"
+        stroke-linecap="round"/>
+</g><text x="120" y="300" fill="#c98a14" font-family="IBM Plex Mono, monospace" font-size="19">"there is another lion"</text><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">late, and sorry about it</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

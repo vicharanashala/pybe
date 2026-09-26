@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#5a3a58"/>
+  <rect x="0" y="408" width="800" height="192" fill="#3d3020"/>
+  <line x1="120" y1="470" x2="120" y2="382" stroke="#b33f35" stroke-width="3" opacity="0.5" transform="rotate(0,120,470)"/><line x1="120" y1="470" x2="120" y2="382" stroke="#b33f35" stroke-width="3" opacity="0.5" transform="rotate(30,120,470)"/><line x1="120" y1="470" x2="120" y2="382" stroke="#b33f35" stroke-width="3" opacity="0.5" transform="rotate(60,120,470)"/><line x1="120" y1="470" x2="120" y2="382" stroke="#b33f35" stroke-width="3" opacity="0.5" transform="rotate(90,120,470)"/><line x1="120" y1="470" x2="120" y2="382" stroke="#b33f35" stroke-width="3" opacity="0.5" transform="rotate(120,120,470)"/><line x1="120" y1="470" x2="120" y2="382" stroke="#b33f35" stroke-width="3" opacity="0.5" transform="rotate(150,120,470)"/><line x1="120" y1="470" x2="120" y2="382" stroke="#b33f35" stroke-width="3" opacity="0.5" transform="rotate(180,120,470)"/><line x1="120" y1="470" x2="120" y2="382" stroke="#b33f35" stroke-width="3" opacity="0.5" transform="rotate(210,120,470)"/><line x1="120" y1="470" x2="120" y2="382" stroke="#b33f35" stroke-width="3" opacity="0.5" transform="rotate(240,120,470)"/><line x1="120" y1="470" x2="120" y2="382" stroke="#b33f35" stroke-width="3" opacity="0.5" transform="rotate(270,120,470)"/><line x1="120" y1="470" x2="120" y2="382" stroke="#b33f35" stroke-width="3" opacity="0.5" transform="rotate(300,120,470)"/><line x1="120" y1="470" x2="120" y2="382" stroke="#b33f35" stroke-width="3" opacity="0.5" transform="rotate(330,120,470)"/><circle cx="120" cy="470" r="62" fill="#b33f35" opacity="0.9"/>
+<g transform="translate(470,290) scale(0.78)">
+  <ellipse cx="0" cy="0" rx="150" ry="102" fill="#6c7a94"/>
+  <circle cx="-146" cy="-34" r="72" fill="#6c7a94"/>
+  <path d="M -108 -78 Q -46 -110 -34 -46 Q -52 -8 -104 -22 Z" fill="#6c7a94" opacity="0.72"/>
+  <path d="M -196 -6 Q -228 74 -196 124 Q -172 150 -156 122 Q -180 84 -166 24 Z" fill="#6c7a94"/>
+  <path d="M -178 34 Q -218 62 -232 44" stroke="#f3eddc" stroke-width="13"
+        fill="none" stroke-linecap="round"/>
+  <circle cx="-160" cy="-46" r="6" fill="#141c39"/>
+  <path d="M -96 84 L -100 172 M -22 96 L -24 176 M 62 94 L 66 174 M 122 76 L 128 166"
+        stroke="#6c7a94" stroke-width="40" stroke-linecap="round"/>
+  <path d="M 148 -22 Q 186 -6 178 46" stroke="#6c7a94" stroke-width="9"
+        fill="none" stroke-linecap="round"/>
+</g>
+<g transform="translate(150,400) scale(0.85)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#d8c9a0"/>
+  <circle cx="0" cy="-32" r="18" fill="#d8c9a0"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q 30 -18 52 -12" stroke="#d8c9a0" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g>
+<g transform="translate(760,396) scale(0.85)">
+  <path d="M -26 76 L -14 -6 Q 0 -20 14 -6 L 26 76 Z" fill="#f3eddc"/>
+  <circle cx="0" cy="-32" r="18" fill="#f3eddc"/>
+  <path d="M -6 -38 Q 0 -44 6 -38" stroke="#241e19" stroke-width="2.5" fill="none"/>
+  <path d="M 10 -4 Q -30 -18 -52 -12" stroke="#f3eddc" stroke-width="10"
+        fill="none" stroke-linecap="round"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">and none of them wrong</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

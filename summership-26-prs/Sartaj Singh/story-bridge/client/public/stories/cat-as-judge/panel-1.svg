@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#1e2a52"/>
+  <rect x="0" y="408" width="800" height="192" fill="#6b6a3e"/>
+
+<g transform="translate(470,392) scale(0.9)">
+  <ellipse cx="0" cy="0" rx="38" ry="16" fill="#8a7648"/>
+  <ellipse cx="0" cy="-3" rx="13" ry="7" fill="#141c39"/>
+</g>
+<g transform="translate(250,470) scale(0.9,0.9)">
+  <ellipse cx="0" cy="0" rx="34" ry="24" fill="#b8935a"/>
+  <path d="M -30 -8 Q -58 -22 -66 -44 Q -44 -30 -26 -22 Z" fill="#b8935a"/>
+  <circle cx="28" cy="-26" r="16" fill="#b8935a"/>
+  <path d="M 42 -30 L 80 -23 L 42 -16 Z" fill="#c98a14"/>
+  <circle cx="33" cy="-31" r="3.5" fill="#141c39"/>
+  <path d="M -8 22 L -12 54 M 12 22 L 16 54" stroke="#c98a14"
+        stroke-width="5" stroke-linecap="round"/>
+  <path d="M -22 54 L -4 54 M 8 54 L 26 54" stroke="#c98a14"
+        stroke-width="5" stroke-linecap="round"/>
+</g>
+<g transform="translate(360,392) scale(0.9,0.9)">
+  <ellipse cx="0" cy="0" rx="34" ry="24" fill="#cfc3a4"/>
+  <circle cx="30" cy="-24" r="17" fill="#cfc3a4"/>
+  <path d="M 26 -40 Q 20 -78 30 -82 Q 39 -76 34 -40 Z" fill="#cfc3a4"/>
+  <path d="M 40 -40 Q 43 -76 53 -76 Q 57 -68 46 -38 Z" fill="#cfc3a4"/>
+  <circle cx="38" cy="-28" r="2.8" fill="#141c39"/>
+  <circle cx="-34" cy="2" r="10" fill="#cfc3a4" opacity="0.85"/>
+  <path d="M -14 20 L -16 40 M 12 20 L 14 40" stroke="#cfc3a4" stroke-width="7"
+        stroke-linecap="round"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#e7dfc6" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">both of them were sure</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>

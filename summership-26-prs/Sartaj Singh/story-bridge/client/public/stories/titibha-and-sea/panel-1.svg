@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img">
+  <rect width="800" height="600" fill="#3a4a7d"/>
+
+  <rect x="0" y="300" width="800" height="130" fill="#2a4a68"/><path d="M 0 330 q 40 -12 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0" stroke="#e7dfc6" stroke-width="2.5" fill="none" opacity="0.2"/><path d="M 0 360 q 40 -12 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0" stroke="#e7dfc6" stroke-width="2.5" fill="none" opacity="0.2"/><path d="M 0 390 q 40 -12 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0 t 80 0" stroke="#e7dfc6" stroke-width="2.5" fill="none" opacity="0.2"/><rect x="0" y="430" width="800" height="170" fill="#c9b98d"/><ellipse cx="470" cy="502" rx="62" ry="20" fill="#a8956d"/><ellipse cx="470" cy="500" rx="44" ry="12" fill="#b5a479"/>
+<g transform="translate(268,470) scale(1.0,1.0)">
+  <ellipse cx="0" cy="0" rx="34" ry="24" fill="#b8935a"/>
+  <path d="M -30 -8 Q -58 -22 -66 -44 Q -44 -30 -26 -22 Z" fill="#b8935a"/>
+  <circle cx="28" cy="-26" r="16" fill="#b8935a"/>
+  <path d="M 42 -30 L 80 -23 L 42 -16 Z" fill="#c98a14"/>
+  <circle cx="33" cy="-31" r="3.5" fill="#141c39"/>
+  <path d="M -8 22 L -12 54 M 12 22 L 16 54" stroke="#c98a14"
+        stroke-width="5" stroke-linecap="round"/>
+  <path d="M -22 54 L -4 54 M 8 54 L 26 54" stroke="#c98a14"
+        stroke-width="5" stroke-linecap="round"/>
+</g><text x="400.0" y="554" text-anchor="middle" fill="#5a4a2e" opacity="0.68" font-family="IBM Plex Mono, monospace" font-size="19" letter-spacing="2.5">the nest had been above the tideline</text>
+  <rect x="8" y="8" width="784" height="584" fill="none" stroke="#c98a14" stroke-width="1.5" opacity="0.5"/>
+  <rect x="15" y="15" width="770" height="570" fill="none" stroke="#c98a14" stroke-width="0.75" opacity="0.3"/>
+</svg>
