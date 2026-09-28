@@ -144,7 +144,7 @@ TRANSLATION FORMATTING RULES:
 - KEYWORD ARGS & METHODS: Explicitly state argument names and method names. NEVER summarize method intents.
 - FOR LOOPS: Must be a single sentence (e.g., "Loop variable j through the Python range up to 5 (exclusive):").
 
-<examples>
+### Examples
 Python: names = ['alice', 'bob']
 English: Set variable names to a list containing the items 'alice', 'bob'
 
@@ -159,27 +159,33 @@ English: a slice of list words from index 1 to 5 (do not specify the step size)
 
 Python: for item in data[2:]:
 English: Loop variable item through a slice of list data from index 2 to the end (do not specify the step size):
-</examples>
+
+Python: return result
+English: Return the value result
+### End Examples
 
 Code to translate:
 \`\`\`python
 ${code}
 \`\`\`
 
-Translation (strictly no markdown blocks, do not hallucinate extra lines):`;
+Provide the raw English translation for the code above according to the exact rules. Do not output markdown blocks, backticks, or any introductory text.`;
 
   try {
     const completion = await groq.chat.completions.create({
-      messages: [{ role: 'system', content: prompt }],
-      model: 'llama-3.1-8b-instant',
+      messages: [
+        { role: 'system', content: 'You are a strict, literal code translator.' },
+        { role: 'user', content: prompt }
+      ],
+      model: 'openai/gpt-oss-120b',
       temperature: 0.2,
-      max_tokens: 500,
+      max_tokens: 1500,
     });
-    
+
     return completion.choices[0]?.message?.content?.trim() || 'Could not translate code.';
   } catch (err) {
-    console.error('Groq Translation Error:', err);
-    return 'Failed to connect to the translation service.';
+    console.error('Translation error:', err);
+    return `Translation Failed: ${err.message}`;
   }
 }
 

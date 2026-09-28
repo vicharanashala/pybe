@@ -1,0 +1,1398 @@
+/* ==========================================================================
+   PyFarm styles.
+
+   Plain CSS with a `pf-` prefix on every class and every token scoped to
+   .pf-root, which is the convention the PyBe submissions use and what lets this
+   module drop into another client without colliding with its styles.
+
+   The palette is a warm daylight farm: cream paper, leaf green, marigold, and a
+   dark slate for code. Contrast on body text and on every control is at or above
+   WCAG AA.
+   ========================================================================== */
+
+.pf-root {
+  --pf-ink: #21301f;
+  --pf-ink-soft: #55635a;
+  --pf-ink-faint: #5c6a61;
+  --pf-surface: #f7f2e6;
+  --pf-panel: #ffffff;
+  --pf-panel-warm: #fdf9f0;
+  --pf-line: #e2d9c4;
+  --pf-line-strong: #cdc0a4;
+
+  --pf-leaf: #2f7d4f;
+  --pf-leaf-deep: #22603b;
+  --pf-leaf-wash: #e6f2ea;
+  --pf-marigold: #e2951b;
+  --pf-marigold-ink: #8a5a0c;
+  --pf-marigold-wash: #fdf1dc;
+  --pf-sky: #3d8fbe;
+  --pf-sky-wash: #e6f1f8;
+  --pf-soil: #8b6540;
+
+  --pf-pass: #276b43;
+  --pf-pass-wash: #e6f2ea;
+  --pf-fail: #b0472f;
+  --pf-fail-wash: #fbeae5;
+  --pf-warn: #8a5a0c;
+  --pf-warn-wash: #fdf1dc;
+
+  --pf-code-bg: #1d2822;
+  --pf-code-ink: #e8eee9;
+
+  --pf-radius: 14px;
+  --pf-radius-sm: 9px;
+  --pf-shadow: 0 1px 2px rgba(33, 48, 31, 0.06), 0 8px 24px rgba(33, 48, 31, 0.07);
+  --pf-shadow-lift: 0 2px 4px rgba(33, 48, 31, 0.08), 0 14px 34px rgba(33, 48, 31, 0.12);
+
+  --pf-font: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --pf-mono: ui-monospace, 'SFMono-Regular', 'Cascadia Code', 'Consolas', monospace;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--pf-surface);
+  color: var(--pf-ink);
+  font-family: var(--pf-font);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* A single, consistent focus ring on everything interactive. */
+.pf-root :focus-visible {
+  outline: 3px solid var(--pf-sky);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.pf-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================== header ============================== */
+
+.pf-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 14px 24px;
+  background: rgba(247, 242, 230, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--pf-line);
+}
+
+.pf-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-right: auto;
+}
+
+.pf-brand-mark {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.pf-brand-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--pf-leaf-deep);
+}
+
+.pf-stats {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+}
+
+.pf-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  padding: 6px 13px;
+  background: var(--pf-panel);
+  border: 1px solid var(--pf-line);
+  border-radius: 999px;
+  box-shadow: var(--pf-shadow);
+}
+
+.pf-stat dt {
+  margin: 0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--pf-ink-soft);
+}
+
+.pf-stat dd {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--pf-ink);
+}
+
+/* ============================== buttons ============================== */
+
+.pf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+  transition: transform 0.14s ease, box-shadow 0.14s ease, background 0.14s ease;
+}
+
+.pf-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.pf-btn-primary {
+  background: var(--pf-leaf);
+  color: #ffffff;
+  box-shadow: var(--pf-shadow);
+}
+
+.pf-btn-primary:hover:not(:disabled) {
+  background: var(--pf-leaf-deep);
+  transform: translateY(-1px);
+  box-shadow: var(--pf-shadow-lift);
+}
+
+.pf-btn-ghost {
+  background: var(--pf-panel);
+  border-color: var(--pf-line-strong);
+  color: var(--pf-ink);
+}
+
+.pf-btn-ghost:hover:not(:disabled) {
+  background: var(--pf-panel-warm);
+  border-color: var(--pf-leaf);
+  color: var(--pf-leaf-deep);
+}
+
+.pf-btn-chip {
+  padding: 7px 14px;
+  font-size: 0.88rem;
+  background: var(--pf-panel);
+  border-color: var(--pf-line-strong);
+  color: var(--pf-ink-soft);
+}
+
+.pf-btn-chip.is-active {
+  background: var(--pf-leaf-wash);
+  border-color: var(--pf-leaf);
+  color: var(--pf-leaf-deep);
+}
+
+.pf-btn-continue {
+  margin-top: 18px;
+  align-self: flex-start;
+}
+
+/* ============================== layout ============================== */
+
+.pf-main {
+  flex: 1;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 26px 24px 44px;
+}
+
+.pf-footer {
+  padding: 20px 24px 30px;
+  border-top: 1px solid var(--pf-line);
+  text-align: center;
+}
+
+.pf-footer p {
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--pf-ink-soft);
+}
+
+.pf-eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--pf-marigold-ink);
+}
+
+/* ========================== chapter select ========================== */
+
+.pf-select-intro {
+  max-width: 62ch;
+  margin-bottom: 30px;
+}
+
+.pf-select-intro h1 {
+  margin: 0 0 12px;
+  font-size: clamp(1.7rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.pf-select-sub {
+  margin: 0 0 16px;
+  font-size: 1.05rem;
+  color: var(--pf-ink-soft);
+}
+
+.pf-select-progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 7px 15px;
+  background: var(--pf-marigold-wash);
+  border: 1px solid #efd39b;
+  border-radius: 999px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--pf-warn);
+}
+
+.pf-select-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(272px, 1fr));
+  gap: 18px;
+  margin: 0 0 26px;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-chapter-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 9px;
+  width: 100%;
+  height: 100%;
+  padding: 22px;
+  text-align: left;
+  background: var(--pf-panel);
+  border: 1px solid var(--pf-line);
+  border-radius: var(--pf-radius);
+  box-shadow: var(--pf-shadow);
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+button.pf-chapter-card:hover:not(:disabled) {
+  transform: translateY(-3px);
+  border-color: var(--pf-leaf);
+  box-shadow: var(--pf-shadow-lift);
+}
+
+.pf-chapter-card.is-locked {
+  cursor: not-allowed;
+  background: var(--pf-panel-warm);
+  color: var(--pf-ink-faint);
+}
+
+.pf-chapter-card.is-done {
+  border-color: var(--pf-leaf);
+  border-left-width: 5px;
+}
+
+.pf-chapter-card-future {
+  border-style: dashed;
+  background: transparent;
+  box-shadow: none;
+  color: var(--pf-ink-faint);
+}
+
+.pf-chapter-num {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--pf-ink-soft);
+}
+
+.pf-chapter-title {
+  font-size: 1.28rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.pf-chapter-tagline {
+  font-size: 0.94rem;
+  color: var(--pf-ink-soft);
+}
+
+.pf-chapter-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 10px;
+  font-size: 0.86rem;
+  font-weight: 650;
+  color: var(--pf-ink-soft);
+}
+
+.pf-concept-chip {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 3px 11px;
+  background: var(--pf-sky-wash);
+  border: 1px solid #bcd9ea;
+  border-radius: 999px;
+  font-family: var(--pf-mono);
+  font-size: 0.79rem;
+  font-weight: 600;
+  white-space: nowrap;
+  color: #1c5f85;
+  vertical-align: middle;
+}
+
+.pf-reset {
+  font-size: 0.88rem;
+}
+
+/* ========================= chapter progress ========================= */
+
+.pf-stages {
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.pf-stages ol {
+  display: flex;
+  gap: 6px;
+  min-width: max-content;
+  margin: 0;
+  padding: 0 0 4px;
+  list-style: none;
+}
+
+.pf-stage-dot {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 13px 6px 7px;
+  background: var(--pf-panel);
+  border: 1px solid var(--pf-line);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  color: var(--pf-ink-faint);
+}
+
+.pf-stage-num {
+  display: grid;
+  place-items: center;
+  width: 21px;
+  height: 21px;
+  background: var(--pf-line);
+  border-radius: 50%;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--pf-ink-soft);
+}
+
+.pf-stage-dot.is-done {
+  border-color: #b7d8c3;
+  color: var(--pf-leaf-deep);
+}
+
+.pf-stage-dot.is-done .pf-stage-num {
+  background: var(--pf-leaf-wash);
+  color: var(--pf-leaf-deep);
+}
+
+.pf-stage-dot.is-current {
+  background: var(--pf-leaf);
+  border-color: var(--pf-leaf);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* Darkening rather than lightening the badge: a white wash over the green left
+   white-on-badge at about 3.1:1, below AA for text this small. */
+.pf-stage-dot.is-current .pf-stage-num {
+  background: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+}
+
+/* ============================ two columns ============================
+   Farm first in the DOM, so the narrow-screen order falls out as
+   farm -> story -> editor -> run -> result with no reordering. */
+
+.pf-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.pf-layout-farm {
+  position: sticky;
+  top: 84px;
+}
+
+.pf-panel {
+  display: flex;
+  flex-direction: column;
+  padding: 26px;
+  background: var(--pf-panel);
+  border: 1px solid var(--pf-line);
+  border-radius: var(--pf-radius);
+  box-shadow: var(--pf-shadow);
+}
+
+.pf-panel h2 {
+  margin: 0 0 12px;
+  font-size: 1.4rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+/* =============================== farm =============================== */
+
+.pf-farm {
+  position: relative;
+  padding: 12px 12px 14px;
+  background: var(--pf-panel);
+  border: 1px solid var(--pf-line);
+  border-radius: var(--pf-radius);
+  box-shadow: var(--pf-shadow);
+}
+
+.pf-farm-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--pf-radius-sm);
+  overflow: hidden;
+}
+
+.pf-farm-maya {
+  position: absolute;
+  bottom: 42px;
+  left: 8%;
+  pointer-events: none;
+}
+
+.pf-farm-weather {
+  margin: 10px 0 0;
+  text-align: center;
+  font-weight: 700;
+  color: var(--pf-ink-soft);
+}
+
+.pf-scene-label {
+  font-family: var(--pf-font);
+  font-size: 13px;
+  font-weight: 700;
+  fill: #22301f;
+  paint-order: stroke;
+  stroke: rgba(255, 255, 255, 0.85);
+  stroke-width: 4px;
+  stroke-linejoin: round;
+}
+
+.pf-delta {
+  font-family: var(--pf-font);
+  font-size: 19px;
+  font-weight: 800;
+  fill: var(--pf-leaf-deep);
+  paint-order: stroke;
+  stroke: #ffffff;
+  stroke-width: 4px;
+  stroke-linejoin: round;
+  animation: pf-float 2.6s ease-out forwards;
+}
+
+.pf-tank-fill {
+  transition: y 0.7s cubic-bezier(0.22, 0.8, 0.3, 1), height 0.7s cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+.pf-crop {
+  transition: transform 0.5s ease;
+  transform-box: fill-box;
+  transform-origin: bottom center;
+}
+
+.pf-crop-lush {
+  animation: pf-grow 0.7s cubic-bezier(0.2, 1.3, 0.4, 1);
+}
+
+/* The highlight after a successful run: a ring the eye is drawn to, plus a
+   scale pulse. Both are decoration — the value beside it is the real signal. */
+.pf-pulse {
+  animation: pf-pulse 1.3s ease-in-out 2;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.pf-raindrops {
+  animation: pf-rain 0.9s linear infinite;
+}
+
+.pf-maya-sparks {
+  animation: pf-twinkle 1.4s ease-in-out infinite;
+}
+
+.pf-maya-think {
+  animation: pf-bob 2s ease-in-out infinite;
+}
+
+.pf-scenario-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.pf-scenario-switch-label {
+  width: 100%;
+  font-size: 0.84rem;
+  font-weight: 650;
+  color: var(--pf-ink-soft);
+}
+
+@keyframes pf-pulse {
+  0%, 100% { transform: scale(1); filter: none; }
+  50% { transform: scale(1.09); filter: drop-shadow(0 0 10px rgba(226, 149, 27, 0.85)); }
+}
+
+@keyframes pf-float {
+  0% { opacity: 0; transform: translateY(6px); }
+  22% { opacity: 1; transform: translateY(-2px); }
+  100% { opacity: 0; transform: translateY(-26px); }
+}
+
+@keyframes pf-grow {
+  0% { transform: scaleY(0.55); }
+  100% { transform: scaleY(1); }
+}
+
+@keyframes pf-rain {
+  from { transform: translate(0, -14px); }
+  to { transform: translate(-4px, 14px); }
+}
+
+@keyframes pf-twinkle {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+@keyframes pf-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* ============================ story beats ============================ */
+
+.pf-story-line {
+  margin: 0 0 12px;
+  color: var(--pf-ink-soft);
+}
+
+.pf-note {
+  margin: 4px 0 18px;
+  padding: 16px 18px;
+  background: var(--pf-marigold-wash);
+  border: 1px solid #efd39b;
+  border-left: 5px solid var(--pf-marigold);
+  border-radius: var(--pf-radius-sm);
+}
+
+.pf-note blockquote {
+  margin: 0 0 7px;
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #6d4c11;
+}
+
+.pf-note figcaption {
+  font-size: 0.8rem;
+  color: var(--pf-warn);
+}
+
+.pf-dialogue {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.pf-dialogue > svg {
+  flex: none;
+}
+
+.pf-bubble {
+  position: relative;
+  flex: 1;
+  margin: 0;
+  padding: 14px 17px;
+  background: var(--pf-leaf-wash);
+  border: 1px solid #bfdcca;
+  border-radius: var(--pf-radius-sm);
+}
+
+.pf-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: 15px;
+  left: -7px;
+  width: 12px;
+  height: 12px;
+  background: var(--pf-leaf-wash);
+  border-left: 1px solid #bfdcca;
+  border-bottom: 1px solid #bfdcca;
+  transform: rotate(45deg);
+}
+
+.pf-bubble p {
+  margin: 0 0 5px;
+  font-size: 1.04rem;
+  color: #1f4a32;
+}
+
+.pf-bubble cite {
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--pf-leaf);
+}
+
+.pf-tally {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  gap: 10px;
+  margin: 16px 0 18px;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-tally li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 13px 10px;
+  background: var(--pf-panel-warm);
+  border: 1px solid var(--pf-line);
+  border-radius: var(--pf-radius-sm);
+}
+
+.pf-tally-icon {
+  font-size: 1.4rem;
+  line-height: 1.2;
+}
+
+.pf-tally-label {
+  font-size: 0.76rem;
+  font-weight: 650;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--pf-ink-faint);
+}
+
+.pf-tally-value {
+  font-size: 1.2rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.pf-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.pf-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 14px 17px;
+  text-align: left;
+  background: var(--pf-panel);
+  border: 1px solid var(--pf-line-strong);
+  border-radius: var(--pf-radius-sm);
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.14s ease, background 0.14s ease, transform 0.14s ease;
+}
+
+/* Excluding the answered states keeps hover from out-specifying them — a
+   selected wrong answer must not sit there wearing the hover border. */
+.pf-choice:not(.pf-choice-right):not(.pf-choice-wrong):hover {
+  border-color: var(--pf-leaf);
+  background: var(--pf-panel-warm);
+  transform: translateX(2px);
+}
+
+.pf-choice-mark {
+  flex: none;
+  font-weight: 800;
+  color: var(--pf-ink-faint);
+}
+
+.pf-choice-right {
+  border-color: var(--pf-pass);
+  border-left-width: 5px;
+  background: var(--pf-pass-wash);
+}
+
+.pf-choice-right .pf-choice-mark {
+  color: var(--pf-pass);
+}
+
+.pf-choice-wrong {
+  border-color: var(--pf-fail);
+  border-left-width: 5px;
+  background: var(--pf-fail-wash);
+}
+
+.pf-choice-wrong .pf-choice-mark {
+  color: var(--pf-fail);
+}
+
+.pf-code-caption {
+  margin: 8px 0 4px;
+  font-size: 0.9rem;
+  color: var(--pf-ink-faint);
+}
+
+.pf-explain {
+  margin: 14px 0 18px;
+  padding: 0;
+  list-style: none;
+  counter-reset: pf-step;
+}
+
+.pf-explain li {
+  position: relative;
+  margin-bottom: 14px;
+  padding-left: 38px;
+  counter-increment: pf-step;
+}
+
+.pf-explain li::before {
+  content: counter(pf-step);
+  position: absolute;
+  top: 3px;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  background: var(--pf-leaf-wash);
+  border: 1px solid #bfdcca;
+  border-radius: 50%;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--pf-leaf-deep);
+}
+
+.pf-explain li p {
+  margin: 7px 0 0;
+  font-size: 0.96rem;
+  color: var(--pf-ink-soft);
+}
+
+.pf-callout {
+  display: flex;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding: 14px 17px;
+  background: var(--pf-warn-wash);
+  border: 1px solid #efd39b;
+  border-left: 5px solid var(--pf-marigold);
+  border-radius: var(--pf-radius-sm);
+  font-size: 0.95rem;
+  color: #6d4c11;
+}
+
+/* =============================== code =============================== */
+
+.pf-code {
+  margin: 0;
+  padding: 15px 17px;
+  overflow-x: auto;
+  background: var(--pf-code-bg);
+  border-radius: var(--pf-radius-sm);
+  font-family: var(--pf-mono);
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--pf-code-ink);
+  tab-size: 4;
+}
+
+.pf-code-feature {
+  font-size: 1rem;
+  box-shadow: var(--pf-shadow);
+}
+
+.pf-code-inline {
+  display: inline-block;
+  padding: 7px 12px;
+  font-size: 0.89rem;
+}
+
+.pf-tok-kw {
+  color: #f2a8d8;
+  font-weight: 600;
+}
+
+.pf-tok-str {
+  color: #a8dc9a;
+}
+
+.pf-tok-com {
+  color: #92a79b;
+  font-style: italic;
+}
+
+/* ============================= challenge ============================= */
+
+.pf-challenge-head {
+  margin-bottom: 16px;
+}
+
+.pf-challenge-objective {
+  margin: 0;
+  color: var(--pf-ink-soft);
+}
+
+.pf-editor-wrap {
+  overflow: hidden;
+  background: var(--pf-code-bg);
+  border-radius: var(--pf-radius-sm);
+  box-shadow: var(--pf-shadow);
+}
+
+.pf-editor-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 8px 14px;
+  background: #16201b;
+  color: #9fb3a7;
+  font-size: 0.76rem;
+}
+
+.pf-editor-file {
+  font-family: var(--pf-mono);
+  font-weight: 600;
+}
+
+.pf-editor-tip {
+  color: #7e9488;
+}
+
+.pf-editor {
+  display: block;
+  width: 100%;
+  padding: 15px 17px;
+  background: transparent;
+  border: 0;
+  resize: vertical;
+  font-family: var(--pf-mono);
+  font-size: 0.97rem;
+  line-height: 1.7;
+  color: var(--pf-code-ink);
+  tab-size: 4;
+}
+
+.pf-editor:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--pf-sky);
+}
+
+.pf-challenge-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.pf-hints-exhausted {
+  font-size: 0.86rem;
+  color: var(--pf-ink-faint);
+}
+
+.pf-runtime-note {
+  margin: 14px 0 0;
+  padding: 11px 15px;
+  background: var(--pf-sky-wash);
+  border: 1px solid #bcd9ea;
+  border-radius: var(--pf-radius-sm);
+  font-size: 0.9rem;
+  color: #1c5f85;
+}
+
+.pf-hints {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-hints li {
+  margin-bottom: 8px;
+  padding: 12px 15px;
+  background: var(--pf-marigold-wash);
+  border: 1px solid #efd39b;
+  border-left: 5px solid var(--pf-marigold);
+  border-radius: var(--pf-radius-sm);
+  font-size: 0.95rem;
+  color: #6d4c11;
+}
+
+.pf-hint-index {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--pf-warn);
+}
+
+/* Verdicts always pair a colour with an icon and a word, so the outcome is
+   never carried by colour alone. */
+.pf-feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 16px 0 0;
+  padding: 15px 17px;
+  border: 1px solid;
+  border-left-width: 5px;
+  border-radius: var(--pf-radius-sm);
+}
+
+.pf-feedback > span[aria-hidden] {
+  flex: none;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.pf-feedback strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.pf-feedback p {
+  margin: 0;
+  font-size: 0.96rem;
+}
+
+.pf-feedback-pass {
+  background: var(--pf-pass-wash);
+  border-color: var(--pf-pass);
+  color: #1c4f31;
+}
+
+.pf-feedback-fail {
+  background: var(--pf-fail-wash);
+  border-color: var(--pf-fail);
+  color: #7d2f1c;
+}
+
+.pf-feedback-error {
+  background: var(--pf-warn-wash);
+  border-color: var(--pf-marigold);
+  color: #6d4c11;
+}
+
+.pf-feedback-note {
+  margin-top: 8px !important;
+  padding-top: 8px;
+  border-top: 1px dashed currentColor;
+  opacity: 0.85;
+  font-size: 0.9rem !important;
+}
+
+.pf-outcomes {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pf-outcome {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-wrap: wrap;
+  padding: 11px 15px;
+  margin-bottom: 7px;
+  background: var(--pf-panel-warm);
+  border: 1px solid var(--pf-line);
+  border-radius: var(--pf-radius-sm);
+  font-size: 0.92rem;
+}
+
+.pf-outcome-icon {
+  font-size: 1.15rem;
+}
+
+.pf-outcome-label {
+  font-weight: 650;
+}
+
+.pf-outcome-result {
+  margin-left: auto;
+  font-family: var(--pf-mono);
+  font-size: 0.84rem;
+  color: var(--pf-ink-soft);
+}
+
+.pf-output {
+  margin-top: 12px;
+  padding: 11px 15px;
+  background: var(--pf-panel-warm);
+  border: 1px solid var(--pf-line);
+  border-radius: var(--pf-radius-sm);
+  font-size: 0.9rem;
+}
+
+.pf-output summary {
+  cursor: pointer;
+  font-weight: 650;
+}
+
+.pf-output pre {
+  margin: 10px 0 0;
+  padding: 11px 13px;
+  overflow-x: auto;
+  background: var(--pf-code-bg);
+  border-radius: 7px;
+  font-family: var(--pf-mono);
+  font-size: 0.88rem;
+  color: var(--pf-code-ink);
+}
+
+/* ============================== reward ============================== */
+
+.pf-complete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.pf-complete h2 {
+  margin-bottom: 14px;
+}
+
+.pf-complete .pf-dialogue {
+  align-self: stretch;
+  text-align: left;
+}
+
+.pf-reward {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 6px;
+  padding: 10px 24px;
+  background: var(--pf-marigold-wash);
+  border: 1px solid #efd39b;
+  border-radius: 999px;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--pf-warn);
+}
+
+.pf-reward-total {
+  margin: 0 0 6px;
+  font-size: 0.92rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--pf-ink-soft);
+}
+
+.pf-unlock {
+  margin: 6px 0 20px;
+  padding: 12px 18px;
+  background: var(--pf-leaf-wash);
+  border: 1px solid #bfdcca;
+  border-radius: var(--pf-radius-sm);
+  font-weight: 650;
+  color: #1f4a32;
+}
+
+.pf-complete-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ============================ responsive ============================ */
+
+@media (max-width: 1000px) {
+  .pf-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* Sticky would pin the farm over the editor on a single column. */
+  .pf-layout-farm {
+    position: static;
+  }
+
+  .pf-farm-maya {
+    left: 5%;
+    bottom: 34px;
+  }
+}
+
+@media (max-width: 620px) {
+  .pf-root {
+    font-size: 15px;
+  }
+
+  .pf-main {
+    padding: 18px 15px 34px;
+  }
+
+  .pf-header {
+    padding: 11px 15px;
+  }
+
+  .pf-stats {
+    order: 3;
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .pf-panel {
+    padding: 19px 17px;
+  }
+
+  .pf-farm-maya {
+    width: 78px;
+  }
+
+  .pf-farm-maya svg {
+    width: 78px;
+    height: auto;
+  }
+
+  .pf-challenge-actions .pf-btn {
+    flex: 1 1 auto;
+  }
+}
+
+/* Every animation here is decoration on top of a value or a word that is
+   already legible without it, so removing them costs no information. */
+@media (prefers-reduced-motion: reduce) {
+  .pf-root *,
+  .pf-root *::before,
+  .pf-root *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ======================== fill in the blanks ========================
+   The scaffolded route into the code challenge: the program's shape is
+   given, and each gap is a labelled radio group. */
+
+.pf-mode-switch {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.pf-code-template {
+  min-height: 132px;
+  white-space: pre-wrap;
+}
+
+/* The gap sitting inside the code, showing either the chosen snippet or a
+   numbered prompt pointing at the picker that fills it. */
+.pf-slot {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 1px 9px;
+  border-radius: 6px;
+  background: rgba(226, 149, 27, 0.16);
+  border: 1px dashed var(--pf-marigold);
+  color: #f4d79a;
+  font-family: var(--pf-mono);
+  vertical-align: baseline;
+}
+
+.pf-slot.is-filled {
+  background: rgba(79, 163, 209, 0.16);
+  border-style: solid;
+  border-color: #6fb6dd;
+  color: #cbe8f7;
+}
+
+.pf-slot-empty {
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.pf-slot-num {
+  display: inline-grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--pf-marigold);
+  color: #3a2604;
+  font-family: var(--pf-font);
+  font-size: 0.68rem;
+  font-weight: 800;
+}
+
+.pf-slot-pickers {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.pf-slot-picker {
+  margin: 0;
+  padding: 14px 16px 15px;
+  background: var(--pf-panel-warm);
+  border: 1px solid var(--pf-line);
+  border-radius: var(--pf-radius-sm);
+}
+
+.pf-slot-picker legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 7px;
+  margin-left: -7px;
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.pf-slot-picker legend .pf-slot-num {
+  font-size: 0.72rem;
+  width: 19px;
+  height: 19px;
+}
+
+.pf-slot-help {
+  margin: 6px 0 11px;
+  font-size: 0.87rem;
+  color: var(--pf-ink-soft);
+}
+
+.pf-slot-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* A real radio input, visually a chip: keyboard users get arrow-key movement
+   within the group, which a row of buttons would not give them. */
+.pf-slot-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 13px;
+  background: var(--pf-panel);
+  border: 1px solid var(--pf-line-strong);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.14s ease, background 0.14s ease, transform 0.14s ease;
+}
+
+.pf-slot-option:hover:not(.is-chosen) {
+  border-color: var(--pf-leaf);
+  transform: translateY(-1px);
+}
+
+.pf-slot-option code {
+  font-family: var(--pf-mono);
+  font-size: 0.87rem;
+  color: var(--pf-ink);
+}
+
+.pf-slot-option input {
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  flex: none;
+  accent-color: var(--pf-leaf);
+}
+
+.pf-slot-option:has(input:focus-visible) {
+  outline: 3px solid var(--pf-sky);
+  outline-offset: 2px;
+}
+
+/* Chosen state carries a solid border and a tinted ground as well as the
+   radio's own dot, so it does not rest on colour alone. */
+.pf-slot-option.is-chosen {
+  background: var(--pf-leaf-wash);
+  border-color: var(--pf-leaf);
+  border-width: 2px;
+  padding: 7px 12px;
+}
+
+.pf-slot-option.is-chosen code {
+  color: var(--pf-leaf-deep);
+  font-weight: 600;
+}
+
+.pf-slot-picker:disabled .pf-slot-option {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.pf-assembled {
+  margin-top: 14px;
+}
+
+@media (max-width: 620px) {
+  .pf-slot-options {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pf-slot-option {
+    justify-content: flex-start;
+  }
+}

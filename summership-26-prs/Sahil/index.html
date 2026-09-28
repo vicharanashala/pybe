@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>Translation, Compilers & Interpreters · PyBe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="scene-bg" aria-hidden="true">
+        <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#6fcdf2" />
+                    <stop offset="55%" stop-color="#bdeeff" />
+                    <stop offset="100%" stop-color="#e6f6ff" />
+                </linearGradient>
+                <radialGradient id="ufoDome" cx="35%" cy="30%" r="75%">
+                    <stop offset="0%" stop-color="#ff8a9a" />
+                    <stop offset="100%" stop-color="#e2495a" />
+                </radialGradient>
+                <linearGradient id="ufoBody" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#a48cf5" />
+                    <stop offset="100%" stop-color="#6b4fe0" />
+                </linearGradient>
+            </defs>
+
+            <rect x="0" y="0" width="1440" height="900" fill="url(#skyGrad)" />
+
+            <!-- clouds -->
+            <g fill="#ffffff" opacity="0.9">
+                <ellipse cx="190" cy="95" rx="70" ry="26" />
+                <ellipse cx="240" cy="80" rx="50" ry="22" />
+                <ellipse cx="150" cy="85" rx="45" ry="20" />
+                <ellipse cx="670" cy="60" rx="55" ry="20" />
+                <ellipse cx="712" cy="48" rx="38" ry="16" />
+                <ellipse cx="1090" cy="640" rx="65" ry="24" />
+                <ellipse cx="1140" cy="625" rx="46" ry="20" />
+            </g>
+
+            <!-- birds -->
+            <g stroke="#4d5570" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.5">
+                <path d="M420,140 q9,-11 18,0 q9,-11 18,0" />
+                <path d="M470,110 q7,-9 14,0 q7,-9 14,0" />
+                <path d="M60,60 q7,-9 14,0 q7,-9 14,0" />
+            </g>
+
+            <!-- little planets, space touch -->
+            <g opacity="0.8">
+                <circle cx="330" cy="120" r="10" fill="#f2b33d" stroke="#16213e" stroke-width="2" />
+                <ellipse cx="330" cy="120" rx="17" ry="4.5" fill="none" stroke="#16213e" stroke-width="1.6"
+                    opacity="0.6" transform="rotate(-16 330 120)" />
+                <circle cx="960" cy="90" r="7" fill="#e2495a" stroke="#16213e" stroke-width="1.8" />
+            </g>
+
+            <!-- UFO -->
+            <g transform="translate(1180,150)" stroke="#16213e" stroke-width="2.4" stroke-linejoin="round">
+                <ellipse cx="0" cy="8" rx="20" ry="70" fill="#c9a6ff" opacity="0.22" stroke="none" />
+                <ellipse cx="0" cy="2" rx="118" ry="32" fill="url(#ufoBody)" />
+                <ellipse cx="0" cy="-8" rx="92" ry="22" fill="#8b6fef" />
+                <path d="M-42,-16 a42,38 0 0 1 84,0 Z" fill="url(#ufoDome)" />
+                <ellipse cx="0" cy="-16" rx="20" ry="9" fill="#ffffff" opacity="0.35" stroke="none" />
+                <ellipse cx="0" cy="4" rx="40" ry="11" fill="#c084fc" opacity="0.9" />
+                <g fill="#e9d5ff">
+                    <circle cx="-70" cy="8" r="5" />
+                    <circle cx="-42" cy="16" r="5" />
+                    <circle cx="-14" cy="19" r="5" />
+                    <circle cx="14" cy="19" r="5" />
+                    <circle cx="42" cy="16" r="5" />
+                    <circle cx="70" cy="8" r="5" />
+                </g>
+            </g>
+
+            <!-- little alien peeking out of the UFO -->
+            <g transform="translate(1180,118)">
+                <ellipse cx="0" cy="10" rx="13" ry="15" fill="#8ee6a8" />
+                <ellipse cx="-5" cy="6" rx="4.5" ry="5.5" fill="#ffffff" />
+                <ellipse cx="6" cy="6" rx="4.5" ry="5.5" fill="#ffffff" />
+                <circle cx="-5" cy="7" r="2" fill="#1f6b41" />
+                <circle cx="6" cy="7" r="2" fill="#1f6b41" />
+            </g>
+
+            <!-- distant hills -->
+            <path
+                d="M0,620 L180,500 L340,580 L520,470 L700,560 L900,480 L1080,570 L1260,500 L1440,580 L1440,900 L0,900 Z"
+                fill="#3fae74" opacity="0.35" />
+
+            <!-- palm tree cluster: far left -->
+            <g transform="translate(70,300)">
+                <path d="M0,600 C-8,470 22,380 -6,300" stroke="#a9764a" stroke-width="16" fill="none"
+                    stroke-linecap="round" />
+                <g fill="#2c8a58">
+                    <path d="M-6,300 C-90,280 -140,220 -170,175 C-100,185 -30,225 -6,300 Z" />
+                    <path d="M-6,300 C80,265 130,195 150,150 C90,175 30,225 -6,300 Z" />
+                    <path d="M-6,300 C-45,240 -70,175 -55,130 C0,165 15,235 -6,300 Z" />
+                    <path d="M-6,300 C35,245 55,180 40,130 C-5,165 -20,235 -6,300 Z" />
+                </g>
+                <circle cx="-14" cy="305" r="9" fill="#8a6440" />
+                <circle cx="4" cy="310" r="8" fill="#a9764a" />
+            </g>
+
+            <!-- palm tree cluster: left-mid, taller -->
+            <g transform="translate(190,220)">
+                <path d="M0,680 C10,520 -25,410 5,320" stroke="#c9a06a" stroke-width="19" fill="none"
+                    stroke-linecap="round" />
+                <g fill="#3fae74">
+                    <path d="M5,320 C-85,300 -140,235 -172,185 C-95,195 -25,240 5,320 Z" />
+                    <path d="M5,320 C95,282 150,205 172,155 C105,182 40,240 5,320 Z" />
+                    <path d="M5,320 C-40,255 -68,182 -50,130 C8,168 25,245 5,320 Z" />
+                    <path d="M5,320 C45,260 62,188 45,132 C-8,168 -22,245 5,320 Z" />
+                    <path d="M5,320 C-15,230 12,150 5,95 C50,150 40,240 5,320 Z" />
+                </g>
+                <circle cx="-5" cy="326" r="10" fill="#a9764a" />
+                <circle cx="16" cy="332" r="9" fill="#8a6440" />
+            </g>
+
+            <!-- palm tree cluster: far right -->
+            <g transform="translate(1370,300) scale(-1,1)">
+                <path d="M0,600 C-8,470 22,380 -6,300" stroke="#a9764a" stroke-width="16" fill="none"
+                    stroke-linecap="round" />
+                <g fill="#2c8a58">
+                    <path d="M-6,300 C-90,280 -140,220 -170,175 C-100,185 -30,225 -6,300 Z" />
+                    <path d="M-6,300 C80,265 130,195 150,150 C90,175 30,225 -6,300 Z" />
+                    <path d="M-6,300 C-45,240 -70,175 -55,130 C0,165 15,235 -6,300 Z" />
+                </g>
+                <circle cx="-14" cy="305" r="9" fill="#8a6440" />
+            </g>
+
+            <!-- rolling foreground hills / bushes -->
+            <path
+                d="M0,780 C140,730 240,770 360,730 C480,690 580,750 700,715 C820,680 920,740 1040,705 C1160,670 1280,725 1440,690 L1440,900 L0,900 Z"
+                fill="#2c8a58" opacity="0.9" />
+            <path
+                d="M0,840 C130,800 230,830 350,800 C470,770 570,825 690,795 C810,765 910,820 1030,790 C1150,760 1270,810 1440,780 L1440,900 L0,900 Z"
+                fill="#1f6b41" />
+
+            <!-- winding path -->
+            <path d="M760,900 C750,800 690,720 730,630 C760,560 700,500 730,430" stroke="#eee2c6" stroke-width="95"
+                fill="none" stroke-linecap="round" opacity="0.95" />
+            <path d="M760,900 C750,800 690,720 730,630 C760,560 700,500 730,430" stroke="#dfd0a8" stroke-width="95"
+                fill="none" stroke-linecap="round" opacity="0.35" stroke-dasharray="1 30" />
+
+            <!-- bush clumps flanking the path -->
+            <g opacity="0.95">
+                <ellipse cx="10" cy="900" rx="180" ry="140" fill="#2c8a58" transform="rotate(-10 10 900)" />
+                <ellipse cx="90" cy="880" rx="120" ry="95" fill="#1f6b41" transform="rotate(14 90 880)" />
+            </g>
+            <g opacity="0.95">
+                <ellipse cx="1430" cy="900" rx="190" ry="145" fill="#2c8a58" transform="rotate(10 1430 900)" />
+                <ellipse cx="1350" cy="875" rx="120" ry="95" fill="#1f6b41" transform="rotate(-14 1350 875)" />
+            </g>
+
+            <!-- HERO: human and alien standing side-by-side -->
+            <ellipse cx="720" cy="880" rx="230" ry="24" fill="#12331f" opacity="0.3" />
+            <g transform="translate(560,610) scale(2.2)" stroke="#16213e" stroke-width="3" stroke-linejoin="round"
+                stroke-linecap="round">
+                <!-- Human -->
+                <!-- legs -->
+                <path d="M25,100 L25,159" stroke="#1e3a8a" stroke-width="12" stroke-linecap="round" />
+                <path d="M55,100 L55,159" stroke="#1e3a8a" stroke-width="12" stroke-linecap="round" />
+                <!-- body -->
+                <rect x="15" y="40" width="50" height="65" rx="12" fill="#3b82f6" />
+                <!-- arms -->
+                <path d="M15,50 L-10,90" stroke="#fcd34d" stroke-width="10" stroke-linecap="round" />
+                <path d="M65,50 L95,65" stroke="#fcd34d" stroke-width="10" stroke-linecap="round" />
+                <!-- head -->
+                <circle cx="40" cy="15" r="22" fill="#fcd34d" />
+                <!-- eyes -->
+                <circle cx="32" cy="10" r="3.5" fill="#16213e" />
+                <circle cx="52" cy="10" r="3.5" fill="#16213e" />
+                <!-- mouth -->
+                <path d="M28,24 Q40,34 52,24" fill="none" stroke="#16213e" stroke-width="2.5" stroke-linecap="round" />
+
+                <!-- Alien -->
+                <!-- legs -->
+                <path d="M125,100 L125,159" stroke="#8b6fef" stroke-width="10" stroke-linecap="round" />
+                <path d="M145,100 L145,159" stroke="#8b6fef" stroke-width="10" stroke-linecap="round" />
+                <!-- body -->
+                <ellipse cx="135" cy="70" rx="22" ry="32" fill="#8b6fef" />
+                <!-- arms -->
+                <path d="M113,60 L95,65" stroke="#8b6fef" stroke-width="7" stroke-linecap="round" />
+                <path d="M157,60 L180,85" stroke="#8b6fef" stroke-width="7" stroke-linecap="round" />
+                <!-- head -->
+                <ellipse cx="135" cy="25" rx="28" ry="22" fill="#8b6fef" />
+                <!-- eyes -->
+                <ellipse cx="120" cy="20" rx="6.5" ry="9" fill="#16213e" />
+                <ellipse cx="150" cy="20" rx="6.5" ry="9" fill="#16213e" />
+                <circle cx="117" cy="16" r="2.5" fill="#fff" />
+                <circle cx="147" cy="16" r="2.5" fill="#fff" />
+            </g>
+        </svg>
+    </div>
+
+    <div class="photo-bg" aria-hidden="true"></div>
+
+    <div class="topbar">
+        <div class="brand"><span class="brand-dot"></span>PyBe</div>
+    </div>
+
+    <main>
+
+        <!-- OVERALL INTRO -->
+        <section class="page page--active" id="pg-intro" data-gated="false">
+            <div class="scene scene-duo">
+                <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle class="tw" cx="20" cy="20" r="1.6" fill="#fff" />
+                    <circle class="tw" cx="40" cy="14" r="1.2" fill="#fff" />
+                    <circle class="tw" cx="120" cy="18" r="1.6" fill="#fff" />
+                    <circle class="tw" cx="130" cy="35" r="1.1" fill="#fff" />
+                    <circle class="tw" cx="15" cy="45" r="1.2" fill="#fff" />
+                    <circle cx="126" cy="52" r="8" fill="#f2b33d" opacity="0.9" />
+                    <ellipse cx="126" cy="52" rx="13" ry="3.2" fill="none" stroke="#f2b33d" stroke-width="1.6"
+                        opacity="0.7" transform="rotate(-18 126 52)" />
+                    <path d="M10,138 q3,-10 6,0" stroke="#1f6b41" stroke-width="2" fill="none" stroke-linecap="round" />
+                    <path d="M18,140 q3,-9 6,0" stroke="#1f6b41" stroke-width="2" fill="none" stroke-linecap="round" />
+                    <path d="M126,140 q3,-9 6,0" stroke="#1f6b41" stroke-width="2" fill="none" stroke-linecap="round" />
+                    <path d="M134,138 q3,-10 6,0" stroke="#1f6b41" stroke-width="2" fill="none"
+                        stroke-linecap="round" />
+                    <path d="M32,120 Q22,112 30,100 Q40,104 42,116 Z" fill="#2c8a58" />
+                    <ellipse cx="55" cy="110" rx="23" ry="18" fill="#3fae74" stroke="#1f6b41" stroke-width="2" />
+                    <ellipse cx="55" cy="116" rx="13" ry="9" fill="#c9f0d6" opacity="0.85" />
+                    <polygon points="42,94 46,84 50,94" fill="#2c8a58" />
+                    <polygon points="52,90 56,79 60,90" fill="#2c8a58" />
+                    <polygon points="62,92 66,82 70,92" fill="#2c8a58" />
+                    <circle cx="78" cy="92" r="13" fill="#3fae74" stroke="#1f6b41" stroke-width="2" />
+                    <circle cx="88" cy="96" r="5.5" fill="#3fae74" stroke="#1f6b41" stroke-width="1.5" />
+                    <circle cx="82" cy="88" r="4.2" fill="#fff" />
+                    <circle cx="83.5" cy="88" r="2" fill="#2b2a45" />
+                    <path d="M76,98 q4,3 8,0" stroke="#1f6b41" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                    <ellipse cx="45" cy="126" rx="7" ry="5" fill="#2c8a58" />
+                    <ellipse cx="65" cy="126" rx="7" ry="5" fill="#2c8a58" />
+                    <line x1="103" y1="80" x2="103" y2="68" stroke="#5236a8" stroke-width="2" stroke-linecap="round" />
+                    <circle cx="103" cy="66" r="3.4" fill="#f2b33d" />
+                    <path d="M103,80 C90,80 88,98 92,112 C95,122 111,122 114,112 C118,98 116,80 103,80 Z" fill="#8b6fef"
+                        stroke="#5236a8" stroke-width="2" />
+                    <ellipse cx="97" cy="92" rx="5.5" ry="6.5" fill="#fff" />
+                    <ellipse cx="109" cy="92" rx="5.5" ry="6.5" fill="#fff" />
+                    <circle cx="98" cy="93" r="2.4" fill="#2b2a45" />
+                    <circle cx="110" cy="93" r="2.4" fill="#2b2a45" />
+                    <path d="M92,105 q11,6 22,0" stroke="#5236a8" stroke-width="1.6" fill="none"
+                        stroke-linecap="round" />
+                    <path d="M90,100 q-10,-4 -14,4" stroke="#8b6fef" stroke-width="4" fill="none"
+                        stroke-linecap="round" />
+                    <circle cx="75" cy="102" r="4" fill="#8b6fef" stroke="#5236a8" stroke-width="1.6" />
+                    <ellipse cx="98" cy="122" rx="5" ry="4" fill="#8b6fef" />
+                    <ellipse cx="108" cy="122" rx="5" ry="4" fill="#8b6fef" />
+                </svg>
+            </div>
+            <h1 class="title-big">Translation, Compilers &amp; Interpreters</h1>
+            <p class="subtitle">One Human. One Alien. Big ideas!</p>
+            <button class="big-btn" id="btnStart">Start the Story 🚀</button>
+        </section>
+
+
+
+        <!-- ============ CHAPTER 1: TRANSLATION ============ -->
+
+        <section class="page" id="pg-story1">
+            <div class="strip">
+                <div class="strip-item">🧑👋</div><span class="strip-arrow">➡</span>
+                <div class="strip-item">👽❓</div><span class="strip-arrow">➡</span>
+                <div class="strip-item">👽💬</div><span class="strip-arrow">➡</span>
+                <div class="strip-item">🧑❓</div>
+            </div>
+            <p class="story-text">A spaceship landed! An Alien stepped out. The Human said "Hello!" — but the Alien
+                just stared. It spoke back in strange words. Nobody could understand!</p>
+        </section>
+
+        <section class="page" id="pg-q1" data-gated="true">
+            <p class="q-text">Why can't the Human and Alien understand each other? 🤔</p>
+            <div class="q-options"></div>
+            <p class="q-feedback"></p>
+        </section>
+
+        <section class="page" id="pg-q2" data-gated="true">
+            <p class="q-text">What could help the Human and Alien understand each other? 🧐</p>
+            <div class="q-options"></div>
+            <p class="q-feedback"></p>
+        </section>
+
+        <section class="page" id="pg-puzzle1" data-gated="true">
+            <p class="puzzle-prompt">🧩 The Human wants to send a message. What should come between them?</p>
+            <p class="puzzle-hint">Tap the blocks below to place them.</p>
+            <div class="tray"></div>
+            <div class="slots"></div>
+            <p class="puzzle-feedback"></p>
+        </section>
+
+        <section class="page" id="pg-story2">
+            <div class="strip">
+                <div class="strip-item">🧑💡</div><span class="strip-arrow">➡</span>
+                <div class="strip-item">🔄✨</div><span class="strip-arrow">➡</span>
+                <div class="strip-item">👽😊</div>
+            </div>
+            <p class="story-text">The Human found a magic gadget that knew both languages! It said, "Come see the
+                river!" The gadget translated it — and the Alien understood at once. 🎉</p>
+        </section>
+
+        <section class="page" id="pg-q3" data-gated="true">
+            <p class="q-text">What is the translator actually doing? 🔄</p>
+            <div class="q-options"></div>
+            <p class="q-feedback"></p>
+        </section>
+
+        <section class="page" id="pg-puzzle2" data-gated="true">
+            <p class="puzzle-prompt">🧩 Show how the Human's message reaches the Alien.</p>
+            <p class="puzzle-hint">Tap the blocks below to place them.</p>
+            <div class="tray"></div>
+            <div class="slots"></div>
+            <p class="puzzle-feedback"></p>
+        </section>
+
+        <section class="page" id="pg-connect">
+            <div class="scene scene-duo">
+                <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle class="tw" cx="20" cy="20" r="1.6" fill="#fff" />
+                    <circle class="tw" cx="40" cy="14" r="1.2" fill="#fff" />
+                    <circle class="tw" cx="120" cy="18" r="1.6" fill="#fff" />
+                    <circle class="tw" cx="130" cy="35" r="1.1" fill="#fff" />
+                    <circle class="tw" cx="15" cy="45" r="1.2" fill="#fff" />
+                    <circle cx="126" cy="52" r="8" fill="#f2b33d" opacity="0.9" />
+                    <ellipse cx="126" cy="52" rx="13" ry="3.2" fill="none" stroke="#f2b33d" stroke-width="1.6"
+                        opacity="0.7" transform="rotate(-18 126 52)" />
+                    <path d="M10,138 q3,-10 6,0" stroke="#1f6b41" stroke-width="2" fill="none" stroke-linecap="round" />
+                    <path d="M18,140 q3,-9 6,0" stroke="#1f6b41" stroke-width="2" fill="none" stroke-linecap="round" />
+                    <path d="M126,140 q3,-9 6,0" stroke="#1f6b41" stroke-width="2" fill="none" stroke-linecap="round" />
+                    <path d="M134,138 q3,-10 6,0" stroke="#1f6b41" stroke-width="2" fill="none"
+                        stroke-linecap="round" />
+                    <path d="M32,120 Q22,112 30,100 Q40,104 42,116 Z" fill="#2c8a58" />
+                    <ellipse cx="55" cy="110" rx="23" ry="18" fill="#3fae74" stroke="#1f6b41" stroke-width="2" />
+                    <ellipse cx="55" cy="116" rx="13" ry="9" fill="#c9f0d6" opacity="0.85" />
+                    <polygon points="42,94 46,84 50,94" fill="#2c8a58" />
+                    <polygon points="52,90 56,79 60,90" fill="#2c8a58" />
+                    <polygon points="62,92 66,82 70,92" fill="#2c8a58" />
+                    <circle cx="78" cy="92" r="13" fill="#3fae74" stroke="#1f6b41" stroke-width="2" />
+                    <circle cx="88" cy="96" r="5.5" fill="#3fae74" stroke="#1f6b41" stroke-width="1.5" />
+                    <circle cx="82" cy="88" r="4.2" fill="#fff" />
+                    <circle cx="83.5" cy="88" r="2" fill="#2b2a45" />
+                    <path d="M76,98 q4,3 8,0" stroke="#1f6b41" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                    <ellipse cx="45" cy="126" rx="7" ry="5" fill="#2c8a58" />
+                    <ellipse cx="65" cy="126" rx="7" ry="5" fill="#2c8a58" />
+                    <line x1="103" y1="80" x2="103" y2="68" stroke="#5236a8" stroke-width="2" stroke-linecap="round" />
+                    <circle cx="103" cy="66" r="3.4" fill="#f2b33d" />
+                    <path d="M103,80 C90,80 88,98 92,112 C95,122 111,122 114,112 C118,98 116,80 103,80 Z" fill="#8b6fef"
+                        stroke="#5236a8" stroke-width="2" />
+                    <ellipse cx="97" cy="92" rx="5.5" ry="6.5" fill="#fff" />
+                    <ellipse cx="109" cy="92" rx="5.5" ry="6.5" fill="#fff" />
+                    <circle cx="98" cy="93" r="2.4" fill="#2b2a45" />
+                    <circle cx="110" cy="93" r="2.4" fill="#2b2a45" />
+                    <path d="M92,105 q11,6 22,0" stroke="#5236a8" stroke-width="1.6" fill="none"
+                        stroke-linecap="round" />
+                    <path d="M90,100 q-10,-4 -14,4" stroke="#8b6fef" stroke-width="4" fill="none"
+                        stroke-linecap="round" />
+                    <circle cx="75" cy="102" r="4" fill="#8b6fef" stroke="#5236a8" stroke-width="1.6" />
+                    <ellipse cx="98" cy="122" rx="5" ry="4" fill="#8b6fef" />
+                    <ellipse cx="108" cy="122" rx="5" ry="4" fill="#8b6fef" />
+                </svg>
+            </div>
+            <p class="story-text">Now imagine: the Human is a programmer, and the Alien is a computer! Computers use
+                <strong>two</strong> kinds of translators too.
+            </p>
+            <div class="pairs">
+                <div class="pair-card"><span class="pa">🧑 Human</span><span class="pair-arrow">➡️</span><span
+                        class="pb">Programmer 🧑‍💻</span></div>
+                <div class="pair-card"><span class="pa">🗣️ Human's language</span><span
+                        class="pair-arrow">➡️</span><span class="pb">Python 🐍</span></div>
+                <div class="pair-card"><span class="pa">💬 Human's message</span><span class="pair-arrow">➡️</span><span
+                        class="pb">Python code 📝</span></div>
+                <div class="pair-card"><span class="pa">🔄 Translator</span><span class="pair-arrow">➡️</span><span
+                        class="pb">Compiler or Interpreter 🔄⚡</span></div>
+                <div class="pair-card"><span class="pa">👽 Alien</span><span class="pair-arrow">➡️</span><span
+                        class="pb">Computer 💻</span></div>
+                <div class="pair-card"><span class="pa">👾 Alien's language</span><span
+                        class="pair-arrow">➡️</span><span class="pb">A form the computer can use ⚙️</span></div>
+            </div>
+        </section>
+
+        <!-- ============ WAY 1: COMPILER ============ -->
+
+        <section class="page" id="pg-compiler">
+            <p class="eyebrow">Way 1: Compiler 📜</p>
+            <div class="scene">🔄📜</div>
+            <p class="story-text">A <strong>compiler</strong> is the translator who wants the whole story first. It
+                reads the whole program, then translates all of it at once.</p>
+            <div class="diagram" id="diagramCompiler"></div>
+            <p class="line-text">First it translates everything — that's the <strong>implementation</strong>. Then the
+                computer runs it — that's the <strong>execution</strong>. 🎉</p>
+        </section>
+
+        <!-- ============ WAY 2: INTERPRETER ============ -->
+
+        <section class="page" id="pg-interpreter">
+            <p class="eyebrow">Way 2: Interpreter ⚡</p>
+            <div class="scene">🔄⚡</div>
+            <p class="story-text">An <strong>interpreter</strong> is the translator who works one line at a time. It
+                translates one instruction, and the computer runs it right away.</p>
+            <div class="diagram" id="diagramInterpreter"></div>
+            <p class="line-text">Translating (<strong>implementation</strong>) and running (<strong>execution</strong>)
+                happen together, step by step. ⚡</p>
+        </section>
+
+        <!-- ============ GRAND FINALE ============ -->
+
+        <section class="page" id="pg-end">
+            <div class="scene scene-duo">
+                <svg viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <circle class="tw" cx="20" cy="20" r="1.6" fill="#fff" />
+                    <circle class="tw" cx="40" cy="14" r="1.2" fill="#fff" />
+                    <circle class="tw" cx="120" cy="18" r="1.6" fill="#fff" />
+                    <circle class="tw" cx="130" cy="35" r="1.1" fill="#fff" />
+                    <circle class="tw" cx="15" cy="45" r="1.2" fill="#fff" />
+                    <circle cx="126" cy="52" r="8" fill="#f2b33d" opacity="0.9" />
+                    <ellipse cx="126" cy="52" rx="13" ry="3.2" fill="none" stroke="#f2b33d" stroke-width="1.6"
+                        opacity="0.7" transform="rotate(-18 126 52)" />
+                    <path d="M10,138 q3,-10 6,0" stroke="#1f6b41" stroke-width="2" fill="none" stroke-linecap="round" />
+                    <path d="M18,140 q3,-9 6,0" stroke="#1f6b41" stroke-width="2" fill="none" stroke-linecap="round" />
+                    <path d="M126,140 q3,-9 6,0" stroke="#1f6b41" stroke-width="2" fill="none" stroke-linecap="round" />
+                    <path d="M134,138 q3,-10 6,0" stroke="#1f6b41" stroke-width="2" fill="none"
+                        stroke-linecap="round" />
+                    <path d="M32,120 Q22,112 30,100 Q40,104 42,116 Z" fill="#2c8a58" />
+                    <ellipse cx="55" cy="110" rx="23" ry="18" fill="#3fae74" stroke="#1f6b41" stroke-width="2" />
+                    <ellipse cx="55" cy="116" rx="13" ry="9" fill="#c9f0d6" opacity="0.85" />
+                    <polygon points="42,94 46,84 50,94" fill="#2c8a58" />
+                    <polygon points="52,90 56,79 60,90" fill="#2c8a58" />
+                    <polygon points="62,92 66,82 70,92" fill="#2c8a58" />
+                    <circle cx="78" cy="92" r="13" fill="#3fae74" stroke="#1f6b41" stroke-width="2" />
+                    <circle cx="88" cy="96" r="5.5" fill="#3fae74" stroke="#1f6b41" stroke-width="1.5" />
+                    <circle cx="82" cy="88" r="4.2" fill="#fff" />
+                    <circle cx="83.5" cy="88" r="2" fill="#2b2a45" />
+                    <path d="M76,98 q4,3 8,0" stroke="#1f6b41" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                    <ellipse cx="45" cy="126" rx="7" ry="5" fill="#2c8a58" />
+                    <ellipse cx="65" cy="126" rx="7" ry="5" fill="#2c8a58" />
+                    <line x1="103" y1="80" x2="103" y2="68" stroke="#5236a8" stroke-width="2" stroke-linecap="round" />
+                    <circle cx="103" cy="66" r="3.4" fill="#f2b33d" />
+                    <path d="M103,80 C90,80 88,98 92,112 C95,122 111,122 114,112 C118,98 116,80 103,80 Z" fill="#8b6fef"
+                        stroke="#5236a8" stroke-width="2" />
+                    <ellipse cx="97" cy="92" rx="5.5" ry="6.5" fill="#fff" />
+                    <ellipse cx="109" cy="92" rx="5.5" ry="6.5" fill="#fff" />
+                    <circle cx="98" cy="93" r="2.4" fill="#2b2a45" />
+                    <circle cx="110" cy="93" r="2.4" fill="#2b2a45" />
+                    <path d="M92,105 q11,6 22,0" stroke="#5236a8" stroke-width="1.6" fill="none"
+                        stroke-linecap="round" />
+                    <path d="M90,100 q-10,-4 -14,4" stroke="#8b6fef" stroke-width="4" fill="none"
+                        stroke-linecap="round" />
+                    <circle cx="75" cy="102" r="4" fill="#8b6fef" stroke="#5236a8" stroke-width="1.6" />
+                    <ellipse cx="98" cy="122" rx="5" ry="4" fill="#8b6fef" />
+                    <ellipse cx="108" cy="122" rx="5" ry="4" fill="#8b6fef" />
+                </svg>
+            </div>
+            <h1 class="title-big">You Solved It All! 🎉🏆</h1>
+            <p class="story-text" style="margin-top:4px;">A translator helps two languages understand each other.<br>A
+                compiler translates everything, then runs it.<br>An interpreter translates and runs, one step at a time.
+            </p>
+            <button class="big-btn ghost" id="btnRestart">Play Again 🔄</button>
+        </section>
+
+    </main>
+
+    <div class="navbar">
+        <button class="nav-btn" id="navBack">⬅ Back</button>
+        <div class="nav-mid">
+            <div class="nav-count" id="navCount">1 / 12</div>
+            <div class="nav-progress">
+                <div class="nav-progress-fill" id="navProgressFill"></div>
+            </div>
+        </div>
+        <button class="nav-btn" id="navNext">Next ➡</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

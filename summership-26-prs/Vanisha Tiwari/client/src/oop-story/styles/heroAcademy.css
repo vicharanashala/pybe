@@ -1,0 +1,980 @@
+/* ==========================================================================
+   HERO ACADEMY — Visual Theme & Stage Styles (Case Study 2: Inheritance)
+   ========================================================================== */
+
+/* App Root for Hero Academy Adventure */
+.hero-academy-root {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(180deg, #0B1120 0%, #1E1B4B 45%, #0F172A 85%, #020617 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Nunito', sans-serif;
+  color: #F8FAFC;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+/* Futuristic App Header */
+.hero-academy-header {
+  width: 100%;
+  max-width: 1100px;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 40;
+}
+
+.hero-brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  padding: 8px 20px;
+  border-radius: 999px;
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.25), inset 0 0 10px rgba(56, 189, 248, 0.15);
+  border: 2px solid #38BDF8;
+}
+
+.hero-brand-title {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #38BDF8;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
+}
+
+.hero-brand-subtitle {
+  font-size: 0.85rem;
+  color: #CBD5E1;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   2D Superhero Training Ground Stage
+   ========================================================================== */
+
+.hero-stage {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.5), inset 0 0 40px rgba(14, 165, 233, 0.15);
+  border: 3px solid rgba(56, 189, 248, 0.4);
+  background: #090D16;
+  margin-bottom: 16px;
+}
+
+/* Stage Themes */
+.hero-stage.theme-academy-gates {
+  background: radial-gradient(circle at 50% 30%, #1E1B4B 0%, #0F172A 60%, #020617 100%);
+}
+
+.hero-stage.theme-training-arena {
+  background: radial-gradient(circle at 50% 20%, #1E293B 0%, #0F172A 70%, #030712 100%);
+}
+
+.hero-stage.theme-blueprint-deck {
+  background: radial-gradient(circle at 50% 15%, #172554 0%, #0B1120 75%, #020617 100%);
+}
+
+.hero-stage.theme-power-lab {
+  background: radial-gradient(circle at 50% 30%, #2E1065 0%, #0F172A 65%, #020617 100%);
+}
+
+.hero-stage.theme-grand-hall {
+  background: radial-gradient(circle at 50% 25%, #431407 0%, #1E1B4B 50%, #020617 100%);
+}
+
+/* Sci-Fi Grid Floor Layer */
+.hero-stage-floor {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 110px;
+  background: linear-gradient(180deg, rgba(14, 165, 233, 0.1) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border-top: 2px solid rgba(56, 189, 248, 0.5);
+  perspective: 400px;
+}
+
+.hero-floor-grid {
+  width: 100%;
+  height: 100%;
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(56, 189, 248, 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(56, 189, 248, 0.2) 1px, transparent 1px);
+  transform: rotateX(55deg);
+  transform-origin: bottom center;
+}
+
+/* Futuristic Academy Blast Doors */
+.academy-blast-doors {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.door-left, .door-right {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+  border: 3px solid #38BDF8;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.door-left { left: 0; border-right: none; transform: translateX(0); }
+.door-right { right: 0; border-left: none; transform: translateX(0); }
+
+.door-left.open { transform: translateX(-102%); }
+.door-right.open { transform: translateX(102%); }
+
+.door-crest {
+  font-size: 3rem;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 14px rgba(56, 189, 248, 0.8));
+}
+
+/* Floating Sci-fi Hologram Pillars */
+.holo-pillar {
+  position: absolute;
+  bottom: 0;
+  width: 30px;
+  height: 240px;
+  background: linear-gradient(180deg, rgba(56, 189, 248, 0.4) 0%, transparent 100%);
+  border-left: 2px solid rgba(56, 189, 248, 0.6);
+  border-right: 2px solid rgba(56, 189, 248, 0.6);
+  pointer-events: none;
+}
+.pillar-left { left: 24px; }
+.pillar-right { right: 24px; }
+
+/* ==========================================================================
+   Parent Class Floating Badge & Energy Streams
+   ========================================================================== */
+
+.hero-base-parent-container {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 25;
+}
+
+.hero-base-parent-card {
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(14px);
+  border: 2px solid #F59E0B;
+  border-radius: 18px;
+  padding: 10px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.4), inset 0 0 14px rgba(245, 158, 11, 0.2);
+  animation: floatSubtle 4s ease-in-out infinite;
+}
+
+@keyframes floatSubtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.parent-badge-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.parent-badge-crown {
+  font-size: 1.5rem;
+}
+
+.parent-badge-tag {
+  font-family: 'Fredoka', cursive;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  color: #FBBF24;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.parent-badge-name {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.parent-features-grid {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.parent-feature-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(30, 41, 59, 0.85);
+  border: 1.5px solid rgba(245, 158, 11, 0.6);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  color: #FEF08A;
+  transition: all 0.3s ease;
+}
+
+.parent-feature-pill.method {
+  border-color: #38BDF8;
+  color: #BAE6FD;
+}
+
+.parent-feature-pill.active-glow {
+  background: #F59E0B;
+  color: #0F172A;
+  font-weight: 700;
+  box-shadow: 0 0 16px #F59E0B;
+  transform: scale(1.08);
+}
+
+.parent-inheritance-flow-hint {
+  font-size: 0.78rem;
+  color: #93C5FD;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* Inheritance SVG Conduit Tree */
+.inheritance-tree-svg {
+  width: 100%;
+  height: 120px;
+  margin-top: -6px;
+  pointer-events: none;
+  overflow: visible;
+}
+
+@keyframes streamMove {
+  from { stroke-dashoffset: 28; }
+  to { stroke-dashoffset: 0; }
+}
+
+.beam-stream {
+  animation: streamMove 0.8s linear infinite;
+}
+
+@keyframes dataPulseAnim {
+  0% { transform: translateY(0); opacity: 0.2; }
+  50% { opacity: 1; transform: scale(1.3); }
+  100% { transform: translateY(50px); opacity: 0; }
+}
+
+.data-pulse {
+  animation: dataPulseAnim 1.4s ease-in-out infinite;
+}
+.pulse-2 { animation-delay: 0.4s; }
+.pulse-3 { animation-delay: 0.8s; }
+
+/* ==========================================================================
+   Character Rig Badges & Actors
+   ========================================================================== */
+
+.hero-stat-badge {
+  position: absolute;
+  top: -46px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.hero-stat-badge.speed-theme {
+  background: rgba(14, 165, 233, 0.9);
+  border: 1.5px solid #FDE047;
+}
+
+.hero-stat-badge.fire-theme {
+  background: rgba(220, 38, 38, 0.9);
+  border: 1.5px solid #FB923C;
+}
+
+.hero-stat-badge.shield-theme {
+  background: rgba(5, 150, 105, 0.9);
+  border: 1.5px solid #6EE7B7;
+}
+
+.hero-badge-icon {
+  font-size: 1.1rem;
+}
+
+.hero-badge-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-badge-name {
+  font-family: 'Fredoka', cursive;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.hero-hp-bar {
+  width: 50px;
+  height: 5px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.hero-hp-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* Zippy Special Effects */
+.zippy-speed-trail {
+  position: absolute;
+  top: 40px;
+  left: -40px;
+  width: 100px;
+  height: 80px;
+  pointer-events: none;
+}
+
+.speed-line {
+  position: absolute;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #FDE047);
+  border-radius: 999px;
+  animation: speedLineAnim 0.3s linear infinite;
+}
+.speed-line-1 { top: 15px; width: 60px; left: -10px; }
+.speed-line-2 { top: 40px; width: 80px; left: -25px; animation-delay: 0.1s; }
+.speed-line-3 { top: 65px; width: 50px; left: -15px; animation-delay: 0.2s; }
+
+@keyframes speedLineAnim {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(-30px); opacity: 0; }
+}
+
+/* Ember Particle Sparks */
+.ember-particles {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.ember-spark {
+  position: absolute;
+  font-size: 14px;
+  animation: floatSpark 1.6s ease-in-out infinite alternate;
+}
+.spark-1 { top: 10px; left: 10px; animation-delay: 0.2s; }
+.spark-2 { top: 30px; right: 8px; animation-delay: 0.5s; }
+.spark-3 { top: 70px; left: 15px; animation-delay: 0.8s; }
+
+@keyframes floatSpark {
+  0% { transform: translateY(0) scale(0.8); opacity: 0.4; }
+  100% { transform: translateY(-16px) scale(1.2); opacity: 1; }
+}
+
+/* Shieldy Hexagonal Energy Barrier */
+.shield-energy-dome {
+  position: absolute;
+  top: 10px;
+  right: -30px;
+  width: 130px;
+  height: 130px;
+  pointer-events: none;
+  animation: pulseHex 1.2s ease-in-out infinite alternate;
+}
+
+.energy-hex {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 3px solid #34D399;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(52, 211, 153, 0.7);
+  opacity: 0.75;
+}
+
+@keyframes pulseHex {
+  0% { transform: scale(0.95); opacity: 0.5; }
+  100% { transform: scale(1.05); opacity: 0.9; }
+}
+
+/* ==========================================================================
+   Character Rig Sizing, SVG Rendering & Animations
+   ========================================================================== */
+
+.hero-stage-actor {
+  position: absolute;
+  transition: left 0.75s cubic-bezier(0.25, 1, 0.5, 1),
+              bottom 0.75s cubic-bezier(0.25, 1, 0.5, 1),
+              opacity 0.4s ease;
+  transform-origin: bottom center;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* 1. 🧑🏫 Professor Nova Container & Animations */
+.nova-actor {
+  width: 175px;
+  height: 245px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.nova-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 12px 20px rgba(14, 165, 233, 0.35));
+  transform-origin: bottom center;
+  animation: novaIdleBob 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes novaIdleBob {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(0.5deg); }
+  100% { transform: translateY(0) rotate(-0.5deg); }
+}
+
+.nova-action-waving .nova-arm-right {
+  transform-origin: 125px 140px;
+  animation: novaArmWave 0.4s ease-in-out infinite alternate;
+}
+
+@keyframes novaArmWave {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(18deg); }
+}
+
+.nova-action-typing .nova-arm-right {
+  animation: novaTypingMotion 0.25s ease-in-out infinite alternate;
+}
+
+@keyframes novaTypingMotion {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-6px); }
+}
+
+.nova-action-thinking .nova-head {
+  transform-origin: 90px 85px;
+  animation: novaHeadTilt 2s ease-in-out infinite alternate;
+}
+
+@keyframes novaHeadTilt {
+  0% { transform: rotate(-4deg); }
+  100% { transform: rotate(6deg); }
+}
+
+.nova-action-frustrated .nova-svg {
+  animation: novaFrustratedJitter 0.25s ease-in-out infinite alternate;
+}
+
+@keyframes novaFrustratedJitter {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-5px) scale(0.98); }
+}
+
+.nova-action-eureka .nova-svg,
+.nova-action-celebrating .nova-svg {
+  animation: novaCelebrateBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+}
+
+@keyframes novaCelebrateBounce {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-16px); }
+}
+
+/* 2. ⚡ Zippy (Speed Hero) Container & Animations */
+.zippy-actor {
+  width: 155px;
+  height: 215px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.zippy-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 12px 20px rgba(250, 204, 21, 0.45));
+  transform-origin: bottom center;
+  animation: zippyIdleBouncy 0.45s ease-in-out infinite alternate;
+}
+
+@keyframes zippyIdleBouncy {
+  0% { transform: translateY(0) scale(1, 1); }
+  100% { transform: translateY(-6px) scale(0.98, 1.03); }
+}
+
+.zippy-action-running .zippy-svg {
+  animation: zippySprintCycle 0.2s linear infinite alternate;
+}
+
+@keyframes zippySprintCycle {
+  0% { transform: translateY(0) rotate(-6deg) scale(1.04, 0.96); }
+  100% { transform: translateY(-12px) rotate(6deg) scale(0.96, 1.04); }
+}
+
+.zippy-action-running .zippy-legs {
+  animation: zippyLegsRun 0.15s linear infinite alternate;
+  transform-origin: 80px 140px;
+}
+
+@keyframes zippyLegsRun {
+  0% { transform: skewX(-12deg); }
+  100% { transform: skewX(12deg); }
+}
+
+.zippy-action-waving .zippy-arm-right {
+  transform-origin: 110px 102px;
+  animation: zippyFastWave 0.25s ease-in-out infinite alternate;
+}
+
+@keyframes zippyFastWave {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(22deg); }
+}
+
+.zippy-action-celebrating .zippy-svg {
+  animation: heroCelebrateJump 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+}
+
+.zippy-action-shocked .zippy-svg {
+  animation: heroShockShake 0.2s ease-in-out infinite alternate;
+}
+
+@keyframes heroShockShake {
+  0% { transform: translate(-3px, 0); }
+  100% { transform: translate(3px, -4px); }
+}
+
+/* 3. 🔥 Ember (Fire Hero) Container & Animations */
+.ember-actor {
+  width: 155px;
+  height: 215px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.ember-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 12px 20px rgba(239, 68, 68, 0.45));
+  transform-origin: bottom center;
+  animation: emberHoverFloat 1.8s ease-in-out infinite alternate;
+}
+
+@keyframes emberHoverFloat {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(-2px); }
+}
+
+.ember-action-fire-blast .ember-svg {
+  animation: emberBlastPulse 0.35s ease-in-out infinite alternate;
+}
+
+@keyframes emberBlastPulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 20px #F97316); }
+  100% { transform: scale(1.08); filter: drop-shadow(0 0 35px #EF4444); }
+}
+
+.ember-action-waving .ember-arm-right {
+  transform-origin: 110px 102px;
+  animation: emberWaveMotion 0.45s ease-in-out infinite alternate;
+}
+
+@keyframes emberWaveMotion {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(18deg); }
+}
+
+.ember-action-celebrating .ember-svg {
+  animation: heroCelebrateJump 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+}
+
+/* 4. 🛡️ Shieldy (Defense Hero) Container & Animations */
+.shieldy-actor {
+  width: 165px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.shieldy-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 12px 20px rgba(16, 185, 129, 0.45));
+  transform-origin: bottom center;
+  animation: shieldyHeroicBreath 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes shieldyHeroicBreath {
+  0% { transform: scale(1, 1); }
+  100% { transform: scale(1.02, 0.98); }
+}
+
+.shieldy-action-shield-block .shieldy-svg {
+  animation: shieldBlockHold 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes shieldBlockHold {
+  0% { transform: scale(1.02); filter: drop-shadow(0 0 24px #34D399); }
+  100% { transform: scale(1.06); filter: drop-shadow(0 0 38px #10B981); }
+}
+
+.shieldy-action-flexing .shieldy-svg {
+  animation: shieldyFlexJolt 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes shieldyFlexJolt {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px) scale(1.04); }
+}
+
+.shieldy-action-stomping .shieldy-legs {
+  animation: shieldyStompLeg 0.4s ease-in-out infinite alternate;
+  transform-origin: 80px 140px;
+}
+
+@keyframes shieldyStompLeg {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-8deg); }
+}
+
+.shieldy-action-celebrating .shieldy-svg {
+  animation: heroCelebrateJump 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+}
+
+/* Universal Hero Jump */
+@keyframes heroCelebrateJump {
+  0% { transform: translateY(0) scale(1, 1); }
+  100% { transform: translateY(-20px) scale(1.05, 0.95); }
+}
+
+/* Tamper Event / Code Warning Banner (Episode 4) */
+.hero-tamper-box {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(220, 38, 38, 0.9);
+  backdrop-filter: blur(10px);
+  border: 2px solid #FCA5A5;
+  border-radius: 16px;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 30;
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.6);
+  animation: alertPulse 1s ease-in-out infinite alternate;
+}
+
+@keyframes alertPulse {
+  0% { transform: translateX(-50%) scale(0.98); }
+  100% { transform: translateX(-50%) scale(1.02); }
+}
+
+/* ==========================================================================
+   Interactive Hero Mission Power Dispatcher (Episode 9)
+   ========================================================================== */
+
+.hero-mission-panel {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.9);
+  border: 2px solid #38BDF8;
+  border-radius: 20px;
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+}
+
+.mission-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mission-title {
+  font-family: 'Fredoka', cursive;
+  font-size: 1.25rem;
+  color: #38BDF8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.hero-selector-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-hero-select {
+  background: rgba(30, 41, 59, 0.85);
+  border: 2px solid #475569;
+  border-radius: 14px;
+  padding: 10px 18px;
+  font-family: 'Fredoka', cursive;
+  font-size: 1.05rem;
+  color: #F8FAFC;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+
+.btn-hero-select:hover {
+  transform: translateY(-2px);
+  border-color: #38BDF8;
+}
+
+.btn-hero-select.selected {
+  background: #0284C7;
+  border-color: #38BDF8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.6);
+  transform: scale(1.04);
+}
+
+.hero-action-buttons-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-hero-action {
+  flex: 1;
+  min-width: 240px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-family: 'Fredoka', cursive;
+  transition: all 0.25s ease;
+}
+
+.btn-hero-action.inherited {
+  background: linear-gradient(135deg, #78350F 0%, #B45309 100%);
+  border: 2px solid #F59E0B;
+  color: #FEF3C7;
+}
+
+.btn-hero-action.special {
+  background: linear-gradient(135deg, #1E1B4B 0%, #4338CA 100%);
+  border: 2px solid #818CF8;
+  color: #EEF2FF;
+}
+
+.btn-hero-action:hover {
+  transform: translateY(-3px);
+  filter: brightness(1.15);
+}
+
+.action-type-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+.action-code-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Hero Creator Lab & Diploma (Episode 12)
+   ========================================================================== */
+
+.hero-creator-card {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.95);
+  border: 3px solid #F59E0B;
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 0 34px rgba(245, 158, 11, 0.3);
+}
+
+.creator-inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 640px) {
+  .creator-inputs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.creator-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.creator-label {
+  font-family: 'Fredoka', cursive;
+  font-size: 0.95rem;
+  color: #FBBF24;
+}
+
+.creator-text-input {
+  background: #1E293B;
+  border: 2px solid #475569;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  color: #FFFFFF;
+  outline: none;
+}
+
+.creator-text-input:focus {
+  border-color: #38BDF8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+}
+
+.hero-diploma-frame {
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+  border: 6px double #D97706;
+  border-radius: 20px;
+  padding: 28px;
+  color: #78350F;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.diploma-title {
+  font-family: 'Fredoka', cursive;
+  font-size: 1.8rem;
+  color: #B45309;
+  margin: 0 0 6px 0;
+}
+
+/* ==========================================================================
+   Top Adventure Selector Hub
+   ========================================================================== */
+
+.adventure-hub-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(10px);
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-case-study-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-family: 'Fredoka', cursive;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #94A3B8;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-case-study-tab:hover {
+  color: #F8FAFC;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-case-study-tab.active-cs1 {
+  background: #D97706;
+  color: #FFFFFF;
+  box-shadow: 0 0 12px rgba(217, 119, 6, 0.6);
+}
+
+.btn-case-study-tab.active-cs2 {
+  background: #0284C7;
+  color: #FFFFFF;
+  box-shadow: 0 0 12px rgba(2, 132, 199, 0.6);
+}
+
+.btn-case-study-tab.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

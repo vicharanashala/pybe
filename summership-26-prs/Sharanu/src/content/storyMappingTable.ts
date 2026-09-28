@@ -1,0 +1,3 @@
+// storyMappingTable
+// TODO: implement
+export {};

@@ -1,0 +1,205 @@
+{
+  "sessions": [],
+  "notes": [
+    {
+      "_id": "641f9377-15e5-4dad-9b42-bb49d4ffc6cc",
+      "sagaId": "inheritance",
+      "act": 1,
+      "actName": "The Pattern",
+      "text": "In Act 1, we discovered how generalization / base class works. Several different things can share the same core traits. When they do, we group them under one shared label. In Python, that label becomes a class, the foundation every member builds on.",
+      "createdAt": "2026-09-08T12:48:59.695Z"
+    },
+    {
+      "_id": "f4087858-f888-4474-91b9-b6ade5843dac",
+      "sagaId": "inheritance",
+      "act": 2,
+      "actName": "The Eagle's Secret",
+      "text": "In Act 2, we discovered how child class / is-a relationship works. A child keeps every trait of the shared group automatically. Then it adds its own special ability on top. In Python, class Eagle(Animal): says “Eagle IS-A Animal”.",
+      "createdAt": "2026-09-08T12:51:24.595Z"
+    },
+    {
+      "_id": "acc8bd23-056f-453c-8add-c31bc2db394a",
+      "sagaId": "inheritance",
+      "act": 1,
+      "actName": "The Pattern",
+      "text": "In Act 1, we discovered how generalization / base class works. Several different things can share the same core traits. When they do, we group them under one shared label. In Python, that label becomes a class, the foundation every member builds on.",
+      "createdAt": "2026-09-08T12:54:11.211Z"
+    },
+    {
+      "_id": "c2c1244f-6101-4ace-9b8c-6268a0adb926",
+      "sagaId": "inheritance",
+      "act": 1,
+      "actName": "The Pattern",
+      "text": "In Act 1, we discovered how generalization / base class works. Several different things can share the same core traits. When they do, we group them under one shared label. In Python, that label becomes a class, the foundation every member builds on.",
+      "createdAt": "2026-09-08T12:55:13.264Z"
+    },
+    {
+      "_id": "171bba26-5d8e-4db2-b1bd-d27e4c8cef07",
+      "sagaId": "polymorphism",
+      "act": 1,
+      "actName": "The Same Request",
+      "text": "In Act 1, we discovered how same action / different behavior works. One request was given to three different objects. Each object responded in its own way. Same action → different behavior.",
+      "createdAt": "2026-09-08T13:02:11.881Z"
+    },
+    {
+      "_id": "16fc7902-1c48-42fb-9be2-502ac732f5b6",
+      "sagaId": "inheritance",
+      "act": 1,
+      "actName": "The Pattern",
+      "text": "In Act 1, we discovered how generalization / base class works. Several different things can share the same core traits. When they do, we group them under one shared label. In Python, that label becomes a class, the foundation every member builds on.",
+      "createdAt": "2026-09-08T13:10:25.028Z"
+    },
+    {
+      "_id": "8bea07eb-cbc4-41ea-9b6b-4c8663ad5aac",
+      "sagaId": "inheritance",
+      "act": 1,
+      "actName": "The Pattern",
+      "text": "In Act 1, we discovered how generalization / base class works. Several different things can share the same core traits. When they do, we group them under one shared label. In Python, that label becomes a class, the foundation every member builds on.",
+      "createdAt": "2026-09-10T11:34:36.726Z"
+    },
+    {
+      "_id": "655a5ae2-bb07-4d9e-93c8-1a9ed0aadb48",
+      "sagaId": "inheritance",
+      "act": 2,
+      "actName": "The Eagle's Secret",
+      "text": "In Act 2, we discovered how child class / is-a relationship works. A child keeps every trait of the shared group automatically. Then it adds its own special ability on top. In Python, class Eagle(Animal): says “Eagle IS-A Animal”.",
+      "createdAt": "2026-09-10T11:35:24.884Z"
+    },
+    {
+      "_id": "8ca1438a-14af-4cf2-b736-af49c5ad0ae4",
+      "sagaId": "inheritance",
+      "act": 1,
+      "actName": "The Pattern",
+      "text": "In Act 1, we discovered how generalization / base class works. Several different things can share the same core traits. When they do, we group them under one shared label. In Python, that label becomes a class, the foundation every member builds on.",
+      "createdAt": "2026-09-10T11:36:44.200Z"
+    },
+    {
+      "_id": "621d06a8-5f72-484d-963f-c793291cb3be",
+      "sagaId": "inheritance",
+      "act": 2,
+      "actName": "The Eagle's Secret",
+      "text": "In Act 2, we discovered how child class / is-a relationship works. A child keeps every trait of the shared group automatically. Then it adds its own special ability on top. In Python, class Eagle(Animal): says “Eagle IS-A Animal”.",
+      "createdAt": "2026-09-10T11:37:25.179Z"
+    },
+    {
+      "_id": "1825b606-a2cb-4eb5-b03b-88bc2b750388",
+      "sagaId": "inheritance",
+      "act": 3,
+      "actName": "The Word",
+      "text": "In Act 3, we discovered how the name: inheritance works. When one type automatically receives all the traits of another and adds its own, it is called Inheritance. Animal is the parent, Eagle is the child. Parent = shared foundation. Child = foundation + its own additions.",
+      "createdAt": "2026-09-10T11:38:00.209Z"
+    },
+    {
+      "_id": "bdbca742-1219-4b9d-82f0-98e398608fd4",
+      "sagaId": "inheritance",
+      "act": 4,
+      "actName": "First Code",
+      "text": "In Act 4, we discovered how class eagle(animal): in python works. class Eagle(Animal): means Eagle is a specialization of Animal. The parent class holds the shared traits. The eagle automatically gets everything Animal defines, and adds its own fly().",
+      "createdAt": "2026-09-10T11:38:29.130Z"
+    },
+    {
+      "_id": "3af193d6-4401-41ab-ba78-1d5c9a5fe5cf",
+      "sagaId": "inheritance",
+      "act": 1,
+      "actName": "The Pattern",
+      "text": "In Act 1, we discovered how generalization / base class works. Several different things can share the same core traits. When they do, we group them under one shared label. In Python, that label becomes a class, the foundation every member builds on.",
+      "createdAt": "2026-09-10T11:51:49.559Z"
+    },
+    {
+      "_id": "077cc7de-7cdd-45d7-8b35-346eb74e2fad",
+      "sagaId": "inheritance",
+      "act": 1,
+      "actName": "The Pattern",
+      "text": "In Act 1, we discovered how generalization / base class works. Several different things can share the same core traits. When they do, we group them under one shared label. In Python, that label becomes a class, the foundation every member builds on.",
+      "createdAt": "2026-09-10T12:02:14.748Z"
+    },
+    {
+      "_id": "8e870e98-abab-42ba-b666-9fa63ee0fdca",
+      "sagaId": "inheritance",
+      "act": 2,
+      "actName": "The Eagle's Secret",
+      "text": "In Act 2, we discovered how child class / is-a relationship works. A child keeps every trait of the shared group automatically. Then it adds its own special ability on top. In Python, class Eagle(Animal): says “Eagle IS-A Animal”.",
+      "createdAt": "2026-09-10T12:02:44.817Z"
+    },
+    {
+      "_id": "0a0ba894-4812-4654-a0d4-80c777857452",
+      "sagaId": "inheritance",
+      "act": 3,
+      "actName": "The Word",
+      "text": "In Act 3, we discovered how the name: inheritance works. When one type automatically receives all the traits of another and adds its own, it is called Inheritance. Animal is the parent, Eagle is the child. Parent = shared foundation. Child = foundation + its own additions.",
+      "createdAt": "2026-09-10T12:03:43.754Z"
+    },
+    {
+      "_id": "b2cd2846-9ffb-4de6-9a05-33631f5cd16a",
+      "sagaId": "inheritance",
+      "act": 4,
+      "actName": "First Code",
+      "text": "In Act 4, we discovered how class eagle(animal): in python works. class Eagle(Animal): means Eagle is a specialization of Animal. The parent class holds the shared traits. The eagle automatically gets everything Animal defines, and adds its own fly().",
+      "createdAt": "2026-09-10T12:04:18.627Z"
+    },
+    {
+      "_id": "e74c4124-a86f-48d9-94df-47a652107633",
+      "sagaId": "inheritance",
+      "act": 1,
+      "actName": "The Pattern",
+      "text": "In Act 1, we discovered how generalization / base class works. Several different things can share the same core traits. When they do, we group them under one shared label. In Python, that label becomes a class, the foundation every member builds on.",
+      "createdAt": "2026-09-10T12:07:01.401Z"
+    },
+    {
+      "_id": "57af8dc7-ceff-48fd-b7fe-76faed090441",
+      "sagaId": "inheritance",
+      "act": 2,
+      "actName": "The Eagle's Secret",
+      "text": "In Act 2, we discovered how child class / is-a relationship works. A child keeps every trait of the shared group automatically. Then it adds its own special ability on top. In Python, class Eagle(Animal): says “Eagle IS-A Animal”.",
+      "createdAt": "2026-09-10T12:08:17.372Z"
+    },
+    {
+      "_id": "213aeb3d-68b2-4a25-887c-5b9f0119732b",
+      "sagaId": "inheritance",
+      "act": 3,
+      "actName": "The Word",
+      "text": "In Act 3, we discovered how the name: inheritance works. When one type automatically receives all the traits of another and adds its own, it is called Inheritance. Animal is the parent, Eagle is the child. Parent = shared foundation. Child = foundation + its own additions.",
+      "createdAt": "2026-09-10T12:08:47.268Z"
+    },
+    {
+      "_id": "bbb23188-ddfb-4572-b108-f46c0188225b",
+      "sagaId": "inheritance",
+      "act": 4,
+      "actName": "First Code",
+      "text": "In Act 4, we discovered how class eagle(animal): in python works. class Eagle(Animal): means Eagle is a specialization of Animal. The parent class holds the shared traits. The eagle automatically gets everything Animal defines, and adds its own fly().",
+      "createdAt": "2026-09-10T12:09:35.086Z"
+    },
+    {
+      "_id": "7422cd59-2dab-46cc-9fcb-b71654ac8f1e",
+      "sagaId": "inheritance",
+      "act": 1,
+      "actName": "The Pattern",
+      "text": "In Act 1, we discovered how generalization / base class works. Several different things can share the same core traits. When they do, we group them under one shared label. In Python, that label becomes a class, the foundation every member builds on.",
+      "createdAt": "2026-09-10T12:16:01.164Z"
+    },
+    {
+      "_id": "33956b88-60e3-409a-86e6-cdcef53c7733",
+      "sagaId": "inheritance",
+      "act": 2,
+      "actName": "The Eagle's Secret",
+      "text": "In Act 2, we discovered how child class / is-a relationship works. A child keeps every trait of the shared group automatically. Then it adds its own special ability on top. In Python, class Eagle(Animal): says “Eagle IS-A Animal”.",
+      "createdAt": "2026-09-10T12:16:22.644Z"
+    },
+    {
+      "_id": "90149a66-82b4-41a5-b338-60bfa74d5a1b",
+      "sagaId": "inheritance",
+      "act": 3,
+      "actName": "The Word",
+      "text": "In Act 3, we discovered how the name: inheritance works. When one type automatically receives all the traits of another and adds its own, it is called Inheritance. Animal is the parent, Eagle is the child. Parent = shared foundation. Child = foundation + its own additions.",
+      "createdAt": "2026-09-10T12:16:50.163Z"
+    },
+    {
+      "_id": "7d443a0a-6764-480c-b606-53ef5e5f4dcf",
+      "sagaId": "inheritance",
+      "act": 4,
+      "actName": "First Code",
+      "text": "In Act 4, we discovered how class eagle(animal): in python works. class Eagle(Animal): means Eagle is a specialization of Animal. The parent class holds the shared traits. The eagle automatically gets everything Animal defines, and adds its own fly().",
+      "createdAt": "2026-09-10T12:17:12.950Z"
+    }
+  ]
+}

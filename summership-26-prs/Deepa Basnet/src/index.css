@@ -1,0 +1,12 @@
+/* Page-level reset only. Everything that belongs to the feature itself lives in
+   pyfarm.css, scoped under .pf-root, so PyFarm can be dropped into another PyBe
+   client without this file coming along. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}

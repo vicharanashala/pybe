@@ -1,0 +1,30 @@
+/* App.css */
+
+/* 1. Subtle, continuous shine across the glass surface */
+@keyframes shine {
+  100% {
+    left: 125%;
+  }
+}
+
+/* 2. Pulsating border glow used while actively typing */
+@keyframes border-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 15px 1px rgba(198, 168, 125, 0.4); /* gold-400 */
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 25px 3px rgba(198, 168, 125, 0.7); /* gold-400 */
+  }
+}
+
+/* 3. Utility classes for Tailwind to use */
+.animate-shine {
+  animation: shine 1.5s infinite;
+}
+
+.animate-border-pulse {
+  animation: border-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

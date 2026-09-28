@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapter 2 — Reading Files | Python File Handling</title>
+  <meta name="description" content="Learn Python file reading methods through Rahul's spice log story." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <span class="brand-icon">🍳</span>
+      <div>
+        <strong>Rahul's Kitchen Lab</strong>
+        <span>Python File Handling Case Study</span>
+      </div>
+    </a>
+    <nav class="chapter-nav" aria-label="Chapters">
+      <a href="chapter1.html">Ch. 1</a>
+      <a href="chapter2.html" class="active">Ch. 2</a>
+      <a href="quiz.html">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-badge">Chapter 2 · Reading</div>
+      <h1>Back to the Pantry</h1>
+      <p class="hero-sub">Reading isn't creating — it's collecting what's already been kept safe.</p>
+      <div class="hero-divider"></div>
+    </section>
+
+    <article class="panel">
+      <div class="chapter-label">The Read Concept</div>
+      <h2>The Spice Is Still There</h2>
+
+      <div class="story-text">
+        <p>One or two weeks later, someone orders a recipe that needs the same spice. But this time Rahul doesn't panic — he knows the spice is safely stored in the pantry. He just walks over, finds the jar he labeled weeks ago, and it's still there, still exactly right.</p>
+        <p>That's exactly what the <code>open()</code> function in read mode does — it doesn't make anything new, just goes back for something already saved. Reading isn't about creating new data; it's collecting data that's already been kept safe.</p>
+      </div>
+
+      <div class="callout warning">
+        <strong>One rule:</strong> the file must already exist. Python won't create it, won't guess, won't fill in blanks — it just expects the file to be there and lets you start reading from the beginning.
+      </div>
+    </article>
+
+    <article class="panel">
+      <h2>The Nine-Hundred-Page Log</h2>
+      <div class="story-text">
+        <p>The chef assigns Rahul one more task: find every spice formula the kitchen has ever written. All the spice blends are written in a single log which has nine hundred pages. Rahul thought of bringing the whole log all at once. But here's the twist — when he brings the whole log, the counter is a mess. He cannot find anything, and no real work can be done.</p>
+        <p>The problem was never reading the pages. It was <strong>carrying too much all at once</strong>.</p>
+        <p>Same thing happens in Python. You can load a whole file into RAM in one go. Fine for a small file. But for something huge, like a 2 GB log file, the program just crashes with a <code>MemoryError</code>. And the fix isn't a bigger computer — it's reading it smarter.</p>
+      </div>
+    </article>
+
+    <article class="panel">
+      <h2>Four Ways to Bring Pages to the Counter</h2>
+      <p class="story-text">By midnight, Rahul works out four ways to bring pages from the pantry to his counter — and each one matches a real Python reading method. Click each strategy to expand it.</p>
+
+      <div class="method-cards">
+        <div class="method-card">
+          <button type="button" class="method-card-header" aria-expanded="false">
+            <span><span class="emoji">📦</span> Carry the whole carton at once</span>
+            <span>▼</span>
+          </button>
+          <div class="method-card-body">
+            <p><code>f.read()</code> — reads the entire file into one big string. Fine for small files, risky for huge ones, since it uses memory equal to the file's whole size.</p>
+            <pre>contents = f.read()
+print(contents)</pre>
+          </div>
+        </div>
+
+        <div class="method-card">
+          <button type="button" class="method-card-header" aria-expanded="false">
+            <span><span class="emoji">🤲</span> Carry a fixed armful</span>
+            <span>▼</span>
+          </button>
+          <div class="method-card-body">
+            <p><code>f.read(n)</code> — reads exactly <em>n</em> characters, then stops, remembering where to pick up next time.</p>
+            <pre>chunk = f.read(100)   # first 100 characters
+more  = f.read(100)   # next 100 characters</pre>
+          </div>
+        </div>
+
+        <div class="method-card">
+          <button type="button" class="method-card-header" aria-expanded="false">
+            <span><span class="emoji">📄</span> Pick up one sheet at a time</span>
+            <span>▼</span>
+          </button>
+          <div class="method-card-body">
+            <p><code>f.readline()</code> — reads one line at a time. An empty string means there's nothing left — that's how you know the file has ended.</p>
+            <pre>line = f.readline()
+while line != "":
+    print(line)
+    line = f.readline()</pre>
+          </div>
+        </div>
+
+        <div class="method-card">
+          <button type="button" class="method-card-header" aria-expanded="false">
+            <span><span class="emoji">🔄</span> Pages handed one by one, forever</span>
+            <span>▼</span>
+          </button>
+          <div class="method-card-body">
+            <p><code>for line in f:</code> — reads the file line by line, using barely any memory no matter how big the file is. This is the safest, most common way to read large text files.</p>
+            <pre>for line in f:
+    print(line.strip())</pre>
+          </div>
+        </div>
+      </div>
+
+      <table class="method-table">
+        <thead>
+          <tr>
+            <th>Kitchen Strategy</th>
+            <th>Python Method</th>
+            <th>Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Whole carton</td>
+            <td><code>f.read()</code></td>
+            <td>Small files only</td>
+          </tr>
+          <tr>
+            <td>Fixed armful</td>
+            <td><code>f.read(n)</code></td>
+            <td>Controlled chunk sizes</td>
+          </tr>
+          <tr>
+            <td>One sheet</td>
+            <td><code>f.readline()</code></td>
+            <td>Line-by-line with manual loop</td>
+          </tr>
+          <tr>
+            <td>Endless pages</td>
+            <td><code>for line in f:</code></td>
+            <td>Large files — safest choice</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout tip">
+        <strong>Chef's tip:</strong> For a 900-page log (or any huge file), always prefer <code>for line in f:</code>. Your counter — RAM — stays clean and usable.
+      </div>
+    </article>
+
+    <nav class="page-nav" aria-label="Page navigation">
+      <a href="chapter1.html">← Chapter 1</a>
+      <span class="progress">Chapter 2 of 2</span>
+      <a href="quiz.html" class="primary">Take the Quiz →</a>
+    </nav>
+  </main>
+
+  <script>
+    document.querySelectorAll('.method-card-header').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var card = btn.closest('.method-card');
+        var isOpen = card.classList.contains('open');
+        document.querySelectorAll('.method-card').forEach(function (c) {
+          c.classList.remove('open');
+          c.querySelector('.method-card-header').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          card.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

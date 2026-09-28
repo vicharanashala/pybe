@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  background: #0A0F1D;
+  color: #F7F4EB;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(18, 26, 44, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(242, 193, 92, 0.25);
+  border-radius: 4px;
+  border: 1px solid rgba(242, 193, 92, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(242, 193, 92, 0.45);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(1deg); }
+}
+
+@keyframes pulseAura {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shine-sweep {
+  0% { transform: translateX(-160%) skewX(-20deg); }
+  100% { transform: translateX(260%) skewX(-20deg); }
+}
+
+/* Text reveal animations (Left-to-Right reveal) */
+@keyframes textSlideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-32px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes textSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-right {
+  animation: textSlideRight 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slide-up {
+  animation: textSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Animation Stagger Delays */
+.delay-1 { animation-delay: 0.08s; }
+.delay-2 { animation-delay: 0.16s; }
+.delay-3 { animation-delay: 0.24s; }
+.delay-4 { animation-delay: 0.32s; }
+.delay-5 { animation-delay: 0.40s; }
+.delay-6 { animation-delay: 0.48s; }
+
+@layer components {
+  .font-display {
+    font-family: 'Cinzel', serif;
+  }
+
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #FFE29F 0%, #F2C15C 50%, #C49132 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-vermilion-gradient {
+    background: linear-gradient(135deg, #FF9C7B 0%, #D96B43 50%, #9E3E1C 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glass-card {
+    background: rgba(18, 26, 44, 0.45);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(242, 193, 92, 0.22);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card-strong {
+    background: rgba(10, 15, 29, 0.72);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(242, 193, 92, 0.32);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .shine-card {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .shine-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(242, 193, 92, 0.35),
+      transparent
+    );
+    transform: translateX(-160%) skewX(-20deg);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .shine-card:hover::before,
+  .shine-card:active::before {
+    animation: shine-sweep 0.85s ease forwards;
+  }
+
+  .shine-card:hover {
+    border-color: rgba(242, 193, 92, 0.65);
+    box-shadow: 0 0 32px rgba(242, 193, 92, 0.25), 0 12px 36px rgba(0, 0, 0, 0.5);
+    transform: translateY(-3px);
+  }
+
+  .gold-aura {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(242, 193, 92, 0.25) 0%, rgba(242, 193, 92, 0) 70%);
+    pointer-events: none;
+    animation: pulseAura 4s ease-in-out infinite;
+  }
+}

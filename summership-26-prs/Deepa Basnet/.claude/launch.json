@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "pyfarm",
+      "//": "Calls Vite's entry through node directly rather than `npm run dev`. Going via npm relies on npm prepending node_modules/.bin to PATH, which did not happen when the launcher spawned it and failed with \"'vite' is not recognized\". node is on PATH (npm needs it), so this is deterministic.",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["node_modules/vite/bin/vite.js", "--port", "5199", "--strictPort"],
+      "port": 5199
+    }
+  ]
+}

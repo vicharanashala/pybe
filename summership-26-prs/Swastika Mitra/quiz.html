@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz — Python File Handling | Rahul's Kitchen Lab</title>
+  <meta name="description" content="Test your knowledge of Python file handling with interactive MCQs." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <span class="brand-icon">🍳</span>
+      <div>
+        <strong>Rahul's Kitchen Lab</strong>
+        <span>Python File Handling Case Study</span>
+      </div>
+    </a>
+    <nav class="chapter-nav" aria-label="Chapters">
+      <a href="chapter1.html">Ch. 1</a>
+      <a href="chapter2.html">Ch. 2</a>
+      <a href="quiz.html" class="active">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-badge">Final Check</div>
+      <h1>Pantry Knowledge Quiz</h1>
+      <p class="hero-sub">Eight questions on storage, reading, and Rahul's kitchen wisdom.</p>
+      <div class="hero-divider"></div>
+    </section>
+
+    <p class="quiz-intro">Pick an answer for each question. You'll get instant feedback and a final rank when you're done.</p>
+
+    <div class="mcq-scoreboard">
+      <div class="mcq-stat"><span>Score</span><strong id="score-display">0 / 8</strong></div>
+      <div class="mcq-stat"><span>Streak</span><strong id="streak-display">0 🔥</strong></div>
+      <div class="mcq-progress">
+        <div class="mcq-progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <div id="verdict-area"></div>
+    <div id="quiz-container"></div>
+
+    <nav class="page-nav" aria-label="Page navigation">
+      <a href="chapter2.html">← Back to Chapter 2</a>
+      <span class="progress">Quiz</span>
+      <a href="index.html">Start Over →</a>
+    </nav>
+  </main>
+
+  <script>
+    var MCQS = [
+      {
+        id: 'q1',
+        question: 'In Rahul\'s kitchen analogy, what does the kitchen counter represent?',
+        options: ['Disk (secondary storage)', 'RAM (primary storage)', 'A Python file', 'The CPU'],
+        correct: 1,
+        explanation: 'The counter is wiped every night — just like RAM, which is cleared when the program ends.'
+      },
+      {
+        id: 'q2',
+        question: 'What happens to data stored only in RAM when a Python program closes?',
+        options: ['It is automatically saved to disk', 'It is copied to a backup file', 'It is wiped and lost', 'It stays until the computer restarts'],
+        correct: 2,
+        explanation: 'RAM is temporary. Without writing to a file on disk, data vanishes when the program ends.'
+      },
+      {
+        id: 'q3',
+        question: 'Moving a labeled jar to the pantry is most like which Python operations?',
+        options: ['print() and input()', 'open() and write()', 'import and return', 'len() and type()'],
+        correct: 1,
+        explanation: 'open() and write() take data from RAM and persist it to disk — like putting a jar in the pantry.'
+      },
+      {
+        id: 'q4',
+        question: 'Why does the disk deliver data in blocks (e.g. 4096 bytes) instead of one byte at a time?',
+        options: ['Python requires exactly 4096 bytes per read', 'It is more efficient — one trip for a whole jar, then pinches from the buffer', 'RAM can only store multiples of 4096', 'Files on disk are always exactly 4096 bytes long'],
+        correct: 1,
+        explanation: 'Disks fetch whole blocks into a RAM buffer, like Rahul bringing the whole cumin jar to the counter at once.'
+      },
+      {
+        id: 'q5',
+        question: 'What does open("spice-mix.txt", "r") do before any reading happens?',
+        options: ['Reads the entire file into a string', 'Creates the file if it does not exist', 'Sets up a connection to the file on disk', 'Prints the file contents'],
+        correct: 2,
+        explanation: 'open() in read mode locates the file and returns a file object — no data is read yet.'
+      },
+      {
+        id: 'q6',
+        question: 'What happens if you try to open a file in read mode ("r") that does not exist?',
+        options: ['Python creates an empty file', 'Python fills it with placeholder text', 'Python raises an error — the file must already exist', 'Python waits until the file appears'],
+        correct: 2,
+        explanation: 'Read mode never creates files. Python expects the file to already be on disk.'
+      },
+      {
+        id: 'q7',
+        question: 'Why might f.read() on a 2 GB log file cause a MemoryError?',
+        options: ['The file is corrupted', 'It tries to load the entire file into RAM at once', 'Read mode is not allowed on large files', 'f.read() only works on files under 1 KB'],
+        correct: 1,
+        explanation: 'f.read() loads everything into one string — like carrying all 900 pages to the counter at once.'
+      },
+      {
+        id: 'q8',
+        question: 'Which method is the safest for reading a very large text file line by line with minimal memory?',
+        options: ['f.read()', 'f.read(4096)', 'f.readline() in a while loop', 'for line in f:'],
+        correct: 3,
+        explanation: 'for line in f: reads one line at a time using very little memory — the recommended approach for huge files.'
+      }
+    ];
+
+    var score = 0;
+    var streak = 0;
+    var bestStreak = 0;
+    var answered = {};
+
+    function renderQuiz() {
+      var container = document.getElementById('quiz-container');
+      container.innerHTML = MCQS.map(function (mcq) {
+        var chosen = answered[mcq.id];
+        var isAnswered = chosen !== undefined;
+        var isCorrect = chosen === mcq.correct;
+
+        return '<div class="mcq-card' + (isAnswered ? (isCorrect ? ' is-solved' : ' is-mistaken') : '') + '" id="mcq-' + mcq.id + '">' +
+          '<div class="mcq-stamp">' + (isAnswered ? (isCorrect ? 'CORRECT' : 'WRONG') : '') + '</div>' +
+          '<p class="mcq-question">' + mcq.question + '</p>' +
+          '<div class="mcq-options">' +
+          mcq.options.map(function (opt, i) {
+            var cls = 'mcq-option';
+            if (isAnswered && i === mcq.correct) cls += ' correct';
+            if (isAnswered && i === chosen && chosen !== mcq.correct) cls += ' incorrect';
+            return '<button type="button" class="' + cls + '" data-mcq="' + mcq.id + '" data-index="' + i + '"' + (isAnswered ? ' disabled' : '') + '>' +
+              '<span class="mcq-letter">' + String.fromCharCode(65 + i) + '</span>' +
+              '<span>' + opt + '</span></button>';
+          }).join('') +
+          '</div>' +
+          (isAnswered ? '<div class="mcq-feedback ' + (isCorrect ? 'is-correct' : 'is-incorrect') + '">' +
+            (isCorrect ? '✅ Correct — ' : '❌ Not quite — ') + mcq.explanation + '</div>' : '') +
+          '</div>';
+      }).join('');
+
+      document.querySelectorAll('.mcq-option').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var mcqId = btn.dataset.mcq;
+          if (answered[mcqId] !== undefined) return;
+
+          var chosen = Number(btn.dataset.index);
+          var mcq = MCQS.find(function (m) { return m.id === mcqId; });
+          answered[mcqId] = chosen;
+
+          if (chosen === mcq.correct) {
+            score++;
+            streak++;
+            bestStreak = Math.max(bestStreak, streak);
+          } else {
+            streak = 0;
+          }
+
+          updateScoreboard();
+          renderQuiz();
+          renderVerdict();
+        });
+      });
+    }
+
+    function updateScoreboard() {
+      var count = Object.keys(answered).length;
+      document.getElementById('score-display').textContent = score + ' / ' + MCQS.length;
+      document.getElementById('streak-display').textContent = streak + ' 🔥';
+      document.getElementById('progress-fill').style.width = (count / MCQS.length * 100) + '%';
+    }
+
+    function renderVerdict() {
+      var area = document.getElementById('verdict-area');
+      if (Object.keys(answered).length < MCQS.length) {
+        area.innerHTML = '';
+        return;
+      }
+
+      var pct = Math.round((score / MCQS.length) * 100);
+      var rank, verdict;
+      if (pct === 100) {
+        rank = 'Head Chef';
+        verdict = 'Perfect score! You know the pantry inside and out — RAM, disk, and every reading method.';
+      } else if (pct >= 75) {
+        rank = 'Sous Chef';
+        verdict = 'Strong instincts. Review the one or two you missed and you\'re kitchen-ready.';
+      } else if (pct >= 50) {
+        rank = 'Line Cook';
+        verdict = 'You\'re getting there — revisit the chapters and try again.';
+      } else {
+        rank = 'Kitchen Helper';
+        verdict = 'The spice formulas need more study. Head back to Chapter 1 and work through the story again.';
+      }
+
+      area.innerHTML = '<div class="mcq-verdict">' +
+        '<div class="verdict-score">' + score + ' / ' + MCQS.length + '</div>' +
+        '<div class="verdict-rank">"' + rank + '"</div>' +
+        '<p>' + verdict + '<br>Best streak: <strong>' + bestStreak + ' 🔥</strong></p>' +
+        '<button type="button" id="retry-btn">Try Again ↺</button></div>';
+
+      document.getElementById('retry-btn').addEventListener('click', function () {
+        score = 0;
+        streak = 0;
+        bestStreak = 0;
+        answered = {};
+        updateScoreboard();
+        renderQuiz();
+        renderVerdict();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    renderQuiz();
+    updateScoreboard();
+  </script>
+</body>
+</html>

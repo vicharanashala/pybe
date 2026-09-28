@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maple Heights</title>
+  <meta name="description" content="An interactive, story-based learning platform for Python list operations. Manage an apartment building and discover Python through play.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+
+  <!-- ── Welcome Screen ───────────────────────────────────── -->
+  <div id="welcome-screen">
+    <div class="welcome-inner">
+      <div class="welcome-badge">🏢 Official Appointment</div>
+      <div style="font-size: 72px; margin-bottom: 12px; filter: drop-shadow(0 4px 12px rgba(245,158,11,0.3));">🏡🍁✨</div>
+      <h1 class="welcome-title">Welcome to <span>Maple Heights!</span></h1>
+      <p class="welcome-story">
+        Welcome to Maple Heights! As the new Building Manager, your job is to take care of the residents and handle emergencies.<br><br>
+        Your management system is powered by <strong>Python</strong>, but don't worry about the code yet. Just focus on keeping the building running!
+      </p>
+      <button class="btn btn-primary welcome-btn" id="btn-start" style="font-size:16px; padding:14px 32px;">
+        Start Your First Shift →
+      </button>
+    </div>
+  </div>
+
+  <div id="app">
+
+    <!-- ── Header ─────────────────────────────────────────── -->
+    <header id="app-header">
+      <div class="header-left">
+        <span class="header-logo">🏢</span>
+        <div>
+          <h1 class="header-title">Maple Heights</h1>
+          <p class="header-sub">Manager's Dashboard</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <button id="btn-inspect-toggle" class="btn btn-secondary inspect-toggle">🔍 Inspect Mode: OFF</button>
+        <div id="case-progress" class="case-progress"></div>
+      </div>
+    </header>
+
+    <!-- ── Main ───────────────────────────────────────────── -->
+    <main id="app-main">
+      <div class="panels">
+
+        <!-- Building Panel -->
+        <section class="panel panel-building" id="building-panel">
+          <div class="panel-header">
+            <span class="panel-icon">🏘️</span>
+            <h2 class="panel-title">The Building</h2>
+            <span class="panel-meta" id="building-meta"></span>
+          </div>
+          <div id="building-grid" class="building-grid"></div>
+          <div id="special-zone" class="special-zone hidden"></div>
+        </section>
+
+        <!-- Register Panel -->
+        <section class="panel panel-register" id="register-panel">
+          <div class="panel-header">
+            <span class="panel-icon">📋</span>
+            <h2 class="panel-title">Tenant Register</h2>
+          </div>
+          <div id="register-content" class="register-content"></div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- ── Narrator Bar (Bottom Hints) ──────────────────────── -->
+    <footer id="narrator-bar" class="narrator-bar">
+      <div class="narrator-story" id="narrator-story"></div>
+      <div class="narrator-actions" id="narrator-actions"></div>
+    </footer>
+
+    <!-- ── Centered Story Modal ───────────────────────────── -->
+    <div id="story-modal-overlay" class="story-modal-overlay hidden">
+      <div class="story-modal-backdrop"></div>
+      <div class="story-modal-card">
+        <div class="story-modal-content">
+          <div class="story-modal-avatar" id="story-modal-avatar">👤</div>
+          <div class="story-modal-speech">
+            <div class="story-modal-speaker" id="story-modal-speaker">Character Name</div>
+            <div class="story-modal-text" id="story-modal-text">Dialogue goes here...</div>
+          </div>
+        </div>
+        <div class="story-modal-footer">
+          <button class="btn btn-primary" id="story-modal-btn">Let's go!</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Reveal Overlay ─────────────────────────────────── -->
+    <div id="reveal-overlay" class="reveal-overlay hidden">
+      <div class="reveal-backdrop" id="reveal-backdrop"></div>
+      <div class="reveal-card" id="reveal-card"></div>
+    </div>
+
+    <!-- ── Toast Container ───────────────────────────────── -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  </div>
+
+  <!-- ── Inspector Tooltip ──────────────────────────────── -->
+  <div id="inspector-tooltip" class="inspector-tooltip hidden"></div>
+
+  <script src="src/state.js"></script>
+  <script src="src/components/building.js"></script>
+  <script src="src/components/register.js"></script>
+  <script src="src/components/narrator.js"></script>
+  <script src="src/components/reveal.js"></script>
+  <script src="src/components/inspector.js"></script>
+  <script src="src/cases/case1.js"></script>
+  <script src="src/cases/case2.js"></script>
+  <script src="src/cases/case3.js"></script>
+  <script src="src/cases/case4.js"></script>
+  <script src="src/cases/case5.js"></script>
+  <script src="src/cases/case6.js"></script>
+  <script src="src/cases/case7.js"></script>
+  <script src="src/cases/case8.js"></script>
+  <script src="src/main.js"></script>
+</body>
+</html>

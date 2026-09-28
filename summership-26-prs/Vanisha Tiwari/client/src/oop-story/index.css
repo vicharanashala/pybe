@@ -1,0 +1,82 @@
+/* ==========================================================================
+   BUDDY'S MAGIC PET SHOP — CARTOON DESIGN SYSTEM & BASE STYLES
+   ========================================================================== */
+
+:root {
+  /* Cheerful Cartoon Color Palette */
+  --sky-blue: #38BDF8;
+  --sky-light: #E0F2FE;
+  --sun-yellow: #FDE047;
+  --amber-gold: #F59E0B;
+  --grass-green: #22C55E;
+  --grass-light: #DCFCE7;
+  --puppy-pink: #F472B6;
+  --puppy-pink-light: #FCE7F3;
+  --text-dark: #1E293B;
+  --text-muted: #64748B;
+  --card-bg: #FFFFFF;
+
+  /* Typography */
+  --font-display: 'Fredoka', cursive, sans-serif;
+  --font-body: 'Nunito', system-ui, sans-serif;
+  --font-code: 'JetBrains Mono', monospace;
+
+  /* Radius & Shadows */
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-full: 999px;
+  --shadow-cartoon: 0 10px 25px rgba(0, 0, 0, 0.08);
+  --shadow-bouncy: 0 14px 28px rgba(245, 158, 11, 0.2);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #BAE6FD;
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--text-dark);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+button {
+  font-family: var(--font-display);
+}
+
+code, pre {
+  font-family: var(--font-code);
+}
+
+/* Friendly Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #E0F2FE;
+}
+::-webkit-scrollbar-thumb {
+  background: #FCD34D;
+  border-radius: 999px;
+  border: 2px solid #E0F2FE;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F59E0B;
+}

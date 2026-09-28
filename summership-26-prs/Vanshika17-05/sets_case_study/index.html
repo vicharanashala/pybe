@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>IPL Auction War-Room — The Mystery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blaze-red: #ff4757;
+  --blaze-red-soft: rgba(255, 71, 87, 0.6);
+  --storm-blue: #1e90ff;
+  --neon-glow: rgba(255, 71, 87, 0.15);
+  --bg-dark: #08080a;
+  --text-main: #f1f2f6;
+  --text-muted: #a4b0be;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+  position: relative;
+}
+.bg-layer {
+  position: fixed; top: -10%; left: -10%; width: 120%; height: 120%;
+  background: url('images/bg.png') no-repeat center center;
+  background-size: cover;
+  filter: blur(6px) brightness(0.3);
+  z-index: -2;
+}
+.cursor-shine {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle 600px at var(--x, 50%) var(--y, 50%), rgba(255, 71, 87, 0.1), transparent 40%);
+  z-index: -1;
+  transition: background 0.05s linear;
+}
+.wrap { max-width: 950px; margin: 0 auto; padding: 40px 20px; }
+
+/* War-Room Glassmorphism */
+.glassmorphism {
+  background: rgba(10, 10, 15, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+  border-radius: 16px;
+}
+.tilt-card {
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform-style: preserve-3d;
+  position: relative; border-radius: 12px;
+  background: rgba(20, 20, 25, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 71, 87, 0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+.tilt-card:hover {
+  border: 1px solid var(--blaze-red-soft);
+  box-shadow: 0 8px 30px var(--neon-glow), inset 0 0 15px rgba(255, 71, 87, 0.05);
+}
+.tilt-card.storm { border-color: rgba(30, 144, 255, 0.2); }
+.tilt-card.storm:hover { border-color: rgba(30, 144, 255, 0.6); box-shadow: 0 8px 30px rgba(30,144,255,0.2); }
+
+.screen { display: none; text-align: left; padding: 40px; }
+.screen.active { display: block; animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.hero-pybe { font-size: 3.5rem; font-weight: 900; letter-spacing: 6px; font-family: 'Space Mono', monospace; color: var(--blaze-red); text-shadow: 0 0 20px var(--neon-glow); text-align: center; margin-bottom: 15px; text-transform: uppercase; }
+.eyebrow { color: var(--blaze-red); font-weight: 900; letter-spacing: 2px; text-transform: uppercase; font-size: 1.1rem; margin-bottom: 8px; }
+.headline { font-size: 3rem; font-weight: 900; margin-bottom: 15px; line-height: 1.1; text-transform: uppercase; }
+.headline span { color: var(--blaze-red); }
+.story { font-size: 1.35rem; font-weight: 500; margin-bottom: 25px; color: #ced6e0; line-height: 1.5; }
+.story p { margin-bottom: 15px; }
+.quote { font-style: italic; color: #fff; border-left: 4px solid var(--blaze-red); padding-left: 15px; margin: 15px 0; font-size: 1.15rem; font-weight: 600; }
+
+.badge-row { display: flex; justify-content: center; gap: 10px; margin: 25px 0; flex-wrap: wrap; }
+.mini-badge { background: rgba(255, 255, 255, 0.05); padding: 4px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 700; border: 1px solid rgba(255,255,255,0.1); text-transform: uppercase; letter-spacing: 1px;}
+
+/* Split Layout for Images on the Right */
+.split-layout { display: flex; flex-direction: column; gap: 30px; align-items: center; }
+@media(min-width: 768px) {
+  .split-layout { flex-direction: row; align-items: stretch; justify-content: space-between; }
+  .split-text { flex: 1.5; display: flex; flex-direction: column; justify-content: center; }
+  .split-img { flex: 1; display: flex; align-items: center; justify-content: center; }
+}
+
+.story-img-container { width: 100%; max-width: 400px; padding: 6px; background: rgba(0,0,0,0.4); border: 1px solid #333; margin: 0 auto; }
+.story-img { width: 100%; display: block; opacity: 0.9; }
+
+#progress-track { width: 100%; height: 4px; background: rgba(255,255,255,0.1); margin-bottom: 15px; }
+#progress-fill { height: 100%; background: var(--blaze-red); width: 0%; transition: width 0.3s ease; }
+#ball-counter { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); letter-spacing: 2px; text-align: center; margin-bottom: 30px; text-transform: uppercase; }
+
+.btn {
+  background: var(--blaze-red);
+  color: #fff; padding: 18px 36px; border-radius: 6px; border: none;
+  font-size: 1.1rem; font-weight: 900; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
+  transition: all 0.2s ease; display: inline-block; margin-top: 15px;
+}
+.btn:hover:not(:disabled) { background: #ff6b81; box-shadow: 0 0 20px rgba(255, 71, 87, 0.6); transform: translateY(-3px); }
+.btn:disabled { opacity: 0.3; cursor: not-allowed; transform:none; box-shadow: none; }
+.btn-storm { background: var(--storm-blue); }
+.btn-storm:hover:not(:disabled) { background: #70a1ff; box-shadow: 0 0 20px rgba(30, 144, 255, 0.6); }
+
+/* Dashboard UI */
+.dashboard-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 30px; }
+@media(min-width: 768px) { .dashboard-grid { grid-template-columns: 1fr 1fr; } }
+.board-widget { padding: 20px; text-align: left; min-height: 180px; display: flex; flex-direction: column; }
+.board-label { font-weight: 900; margin-bottom: 15px; font-size: 1.1rem; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+.lbl-blaze { color: var(--blaze-red); }
+.lbl-storm { color: var(--storm-blue); }
+.lbl-league { color: #2ed573; }
+.board-content { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.player-card {
+  background: rgba(17, 17, 17, 0.8); color: #fff; font-weight: 700; padding: 12px 16px; border-radius: 6px;
+  border-left: 4px solid #555; font-size: 1.05rem; display: flex; justify-content: space-between;
+  animation: slideIn 0.3s ease-out; font-family: 'Space Mono', monospace;
+}
+.player-card.blz { border-left-color: var(--blaze-red); }
+.player-card.stm { border-left-color: var(--storm-blue); }
+.player-card.lgu { border-left-color: #2ed573; }
+.player-card.dup { animation: flashRed 0.5s ease; }
+@keyframes slideIn { from { transform: translateX(-10px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+@keyframes flashRed { 0%, 100% { background: rgba(17,17,17,0.8); } 50% { background: rgba(255, 71, 87, 0.8); color:#fff; } }
+.empty-msg { color: var(--text-muted); font-style: italic; font-size: 1rem; margin-top: 10px; }
+
+.card-area { padding: 20px; margin-bottom: 15px; text-align: left; }
+
+.opt {
+  display: block; width: 100%; padding: 16px; margin-bottom: 12px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+  color: #fff; font-size: 1.1rem; font-weight: 600; border-radius: 6px;
+  cursor: pointer; transition: all 0.2s; font-family: inherit; text-align: left;
+}
+.opt:hover:not(:disabled) { background: rgba(255,255,255,0.08); border-color: var(--blaze-red); }
+.opt:disabled { cursor: not-allowed; opacity: 0.5; }
+.opt.correct { background: rgba(46, 204, 113, 0.1); border-color: #2ecc71; color: #2ecc71; }
+.opt.wrong { background: rgba(255, 71, 87, 0.1); border-color: var(--blaze-red); color: var(--blaze-red); }
+
+.feedback { margin-top: 15px; padding: 18px; font-weight: 600; font-size: 1.25rem; text-align: left; border-left: 4px solid #333; background: rgba(0,0,0,0.4); animation: fadeUp 0.3s ease; line-height: 1.5; }
+.feedback.good { border-left-color: #2ecc71; color: #f1f2f6; }
+.clue-tag { font-size: 0.85rem; text-transform: uppercase; font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; color: #7bed9f; display: flex; align-items: center; gap: 6px; }
+
+/* Code Map */
+.code-map { padding: 25px; text-align: left; }
+.map-row { display: flex; align-items: center; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.05); gap: 15px; }
+.map-row:last-child { border-bottom: none; }
+.map-l { flex: 1; font-weight: 700; font-size: 1.15rem; color: #ced6e0; }
+.map-arrow { color: var(--blaze-red); font-weight: 900; font-size: 1.5rem; }
+.map-r { flex: 1; font-family: 'Space Mono', monospace; background: #000; padding: 12px; color: #ff6b81; font-size: 1.15rem; border: 1px solid #222; }
+</style>
+</head>
+<body>
+<div class="bg-layer"></div>
+<div class="cursor-shine"></div>
+
+<div class="wrap">
+  <div id="progress-track"><div id="progress-fill"></div></div>
+  <div id="ball-counter">PHASE <span id="ball-num">0</span> / 14</div>
+
+  <!-- SCREEN 0 -->
+  <div class="screen glassmorphism active" id="s0" style="text-align: center;">
+    <div class="hero-pybe">PYBE</div>
+    <div class="headline">IPL Auction<br/><span>War-Room</span></div>
+    <div class="story" style="text-align: center;">
+      <p>Welcome to the War-Room.</p>
+      <p>Two rival teams—<strong>Team Blaze</strong> and <strong>Team Storm</strong>—are building their player wishlists in a highly advanced digital system.</p>
+    </div>
+    <button class="btn" onclick="nextScreen(1)">ENTER THE WAR-ROOM</button>
+  </div>
+
+  <!-- SCREEN 1 -->
+  <div class="screen glassmorphism" id="s1">
+    <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+      <div class="board-widget tilt-card">
+        <div class="board-label lbl-blaze">Team Blaze Auction Board</div>
+        <div class="board-content" id="al1"><div class="empty-msg">Waiting for scout input...</div></div>
+      </div>
+    </div>
+    <div class="eyebrow">THE BLANK BOARD</div>
+    <h1 class="headline">First <span>Player</span></h1>
+    <div class="story">
+      <p>The Team Boss opens the blank computer board. Right now, it is completely empty.</p>
+      <p>Let's add our best player, Virat, to the board.</p>
+    </div>
+    <button class="btn" onclick="doAddVirat()">Add Player</button>
+  </div>
+
+  <!-- SCREEN 2 -->
+  <div class="screen glassmorphism" id="s2">
+    <div class="split-layout">
+      <div class="split-text">
+        <div class="eyebrow">SYSTEM RULE</div>
+        <h1 class="headline">A Big <span>Mistake</span></h1>
+        <div class="story">
+          <p>Everyone is nervous. A worker makes a mistake. He accidentally clicks twice and adds Virat's name a second time.</p>
+          <p>Will the computer break? Will it show two Virats? Click the button to see what happens.</p>
+        </div>
+        <div class="card-area tilt-card">
+          <button class="btn" id="dupBtn" onclick="doAddDuplicate()">Add Virat Again</button>
+          <div id="fb1" style="display:none;" class="feedback good"><div class="clue-tag">SYSTEM ALERT</div>Virat's card flashed, but it didn't duplicate! <strong>The system automatically rejects duplicates.</strong> A player can only exist ONCE.</div>
+          <br><button class="btn btn-storm" id="btn1" style="display:none;" onclick="nextScreen(3)">Proceed</button>
+        </div>
+      </div>
+      <div class="split-img">
+        <div class="story-img-container tilt-card"><img src="images/duplicate.png" class="story-img" alt="Duplicate Warning"/></div>
+      </div>
+    </div>
+    <div class="dashboard-grid" style="grid-template-columns: 1fr; margin-top:20px;">
+      <div class="board-widget tilt-card">
+        <div class="board-label lbl-blaze">Team Blaze Auction Board</div>
+        <div class="board-content" id="al2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 3 -->
+  <div class="screen glassmorphism" id="s3">
+    <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+      <div class="board-widget tilt-card">
+        <div class="board-label lbl-blaze">Team Blaze Auction Board</div>
+        <div class="board-content" id="al3"></div>
+      </div>
+    </div>
+    <div class="eyebrow">EMERGENCY UPDATE</div>
+    <h1 class="headline">The <span>Injury</span></h1>
+    <div class="story">
+      <p>Bad news! Virat hurt his ankle. The Boss says: "Remove him from the board right now!"</p>
+    </div>
+    <div class="card-area tilt-card">
+      <button class="btn" id="rmBtn" onclick="doRemove()">Remove Virat</button>
+      <div id="fb2" style="display:none;" class="feedback good"><div class="clue-tag">DATA REMOVED</div>Virat has been successfully removed. The board is clear.</div>
+      <br><button class="btn btn-storm" id="btn2" style="display:none;" onclick="nextScreen(4)">Proceed</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 4 -->
+  <div class="screen glassmorphism" id="s4">
+    <div class="dashboard-grid">
+      <div class="board-widget tilt-card">
+        <div class="board-label lbl-blaze">Blaze Board</div>
+        <div class="board-content" id="al4_blaze"></div>
+      </div>
+      <div class="board-widget tilt-card storm">
+        <div class="board-label lbl-storm">Storm Board</div>
+        <div class="board-content" id="al4_storm"><div class="empty-msg">Classified...</div></div>
+      </div>
+    </div>
+    <div class="eyebrow">BUILDING THE WAR-ROOM</div>
+    <h1 class="headline">The Rival's <span>Secret</span></h1>
+    <div class="story">
+      <p>Later, Team Blaze adds three top players: <strong>Rohit</strong>, <strong>Dhoni</strong>, and <strong>Surya</strong>.</p>
+      <p>Also, we hacked into the other team's computer. We can now see their secret board!</p>
+    </div>
+    <div class="card-area tilt-card">
+      <button class="btn" id="popBtn" onclick="doPopulate()">Show Both Boards</button>
+      <div id="fb3" style="display:none;" class="feedback good"><div class="clue-tag">SYSTEM ONLINE</div>Both boards are full and visible. Notice that the players aren't numbered in any specific order—they are just a pool of names!</div>
+      <br><button class="btn btn-storm" id="btn3" style="display:none;" onclick="nextScreen(5)">Proceed</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 5 -->
+  <div class="screen glassmorphism" id="s5">
+    <div class="split-layout">
+      <div class="split-text">
+        <div class="eyebrow">STRATEGY 1</div>
+        <h1 class="headline">The Big <span>Fight</span></h1>
+        <div class="story">
+          <p>Team Storm has a lot of money to spend.</p>
+          <p>The Boss says: "Compare the boards! Find out which players BOTH teams want."</p>
+        </div>
+        <div class="card-area tilt-card">
+          <button class="btn" id="intBtn" onclick="doIntersect()">Find Same Players</button>
+          <div id="fb4" style="display:none;" class="feedback good"><div class="clue-tag">OVERLAP FOUND</div>Rohit and Virat! The computer only kept the players that are on BOTH boards.</div>
+          <br><button class="btn btn-storm" id="btn4" style="display:none;" onclick="nextScreen(6)">Proceed</button>
+        </div>
+      </div>
+      <div class="split-img">
+        <div class="story-img-container tilt-card"><img src="images/intersection.png" class="story-img" alt="Intersection Clash"/></div>
+      </div>
+    </div>
+    <div class="dashboard-grid" style="grid-template-columns: 1fr; margin-top:20px;">
+      <div class="board-widget tilt-card">
+        <div class="board-label" style="color:#ff9f43;">The Bidding War</div>
+        <div class="board-content" id="al5"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 6 -->
+  <div class="screen glassmorphism" id="s6">
+    <div class="split-layout">
+      <div class="split-text">
+        <div class="eyebrow">STRATEGY 2</div>
+        <h1 class="headline">The Master <span>Pool</span></h1>
+        <div class="story">
+          <p>The phone rings. It is the big IPL Boss. He wants one master pool of EVERY player from both teams.</p>
+          <p>We need to combine the boards perfectly. No double names allowed.</p>
+        </div>
+        <div class="card-area tilt-card">
+          <button class="btn" id="uniBtn" onclick="doUnion()">Combine Boards</button>
+          <div id="fb5" style="display:none;" class="feedback good"><div class="clue-tag">DATA MERGED</div>Notice how Rohit and Virat are only shown ONCE! The computer combined everything but did not allow any duplicate names.</div>
+          <br><button class="btn btn-storm" id="btn5" style="display:none;" onclick="nextScreen(7)">Proceed</button>
+        </div>
+      </div>
+      <div class="split-img">
+        <div class="story-img-container tilt-card"><img src="images/union.png" class="story-img" alt="Union Pool"/></div>
+      </div>
+    </div>
+    <div class="dashboard-grid" style="grid-template-columns: 1fr; margin-top:20px;">
+      <div class="board-widget tilt-card" style="border-color:#2ed573;">
+        <div class="board-label lbl-league">Total League Prospects</div>
+        <div class="board-content" id="al6"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 7 -->
+  <div class="screen glassmorphism" id="s7">
+    <div class="dashboard-grid" style="grid-template-columns: 1fr;">
+      <div class="board-widget tilt-card">
+        <div class="board-label lbl-blaze">The Hidden Gems</div>
+        <div class="board-content" id="al7"></div>
+      </div>
+    </div>
+    <div class="eyebrow">STRATEGY 3</div>
+    <h1 class="headline">The Hidden <span>Player</span></h1>
+    <div class="story">
+      <p>Team Blaze wants to be smart. We need to find the players that only WE know about.</p>
+      <p>The Boss says: "Subtract their board from ours. Show me the players that Team Storm forgot."</p>
+    </div>
+    <div class="card-area tilt-card">
+      <button class="btn" id="diffBtn" onclick="doDifference()">Find Our Unique Players</button>
+      <div id="fb6" style="display:none;" class="feedback good"><div class="clue-tag">STRATEGY UNLOCKED</div>Dhoni and Surya! The computer subtracted Team Storm's board away from our board, leaving only your unique players.</div>
+      <br><button class="btn btn-storm" id="btn6" style="display:none;" onclick="nextScreen(8)">Proceed</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 8 -->
+  <div class="screen glassmorphism" id="s8">
+    <div class="split-layout">
+      <div class="split-text">
+        <div class="eyebrow">FINAL CHALLENGE</div>
+        <h1 class="headline">Time Is <span>Running Out</span></h1>
+        <div class="story">
+          <p>It is Auction Day. The Boss says on stage: "Bumrah is ready to be picked."</p>
+          <p>You have exactly 3 seconds to check if Bumrah is on your board. You search. The answer comes back <strong>instantly</strong>.</p>
+          <p>No waiting. How did the computer do everything—removing duplicates, combining, and searching—so fast?</p>
+        </div>
+        <button class="btn btn-storm" onclick="nextScreen(9)">See The Secret</button>
+      </div>
+      <div class="split-img">
+        <div class="story-img-container tilt-card"><img src="images/speed.png" class="story-img" alt="Draft Clock"/></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN 9 -->
+  <div class="screen glassmorphism" id="s9" style="text-align: center;">
+    <div class="eyebrow">SURPRISE</div>
+    <h1 class="headline">You Just Learned <span>Python Sets!</span></h1>
+    <div class="story" style="text-align: center; max-width: 800px; margin: 0 auto;">
+      <p>Surprise! You didn't just play a game. You just learned a great coding tool: <strong>The Python Set</strong>.</p>
+      <p>Sets use a smart trick called <strong>Hash Tables</strong>. They don't search line-by-line. They just know exactly where the data is. This is why they are so fast.</p>
+    </div>
+    <button class="btn" style="margin-top:40px;" onclick="nextScreen(10)">See The Code</button>
+  </div>
+
+  <!-- SCREEN 10 -->
+  <div class="screen glassmorphism" id="s10">
+    <div class="eyebrow">THE REVEAL</div>
+    <h1 class="headline">The Code <span>Playbook</span></h1>
+    <div class="story"><p>Here is how the simple actions you just did connect to real Python Code:</p></div>
+    <div class="code-map tilt-card">
+      <div class="map-row"><div class="map-l">Create an empty board</div><div class="map-arrow">→</div><div class="map-r">board = set()</div></div>
+      <div class="map-row"><div class="map-l">Add a player</div><div class="map-arrow">→</div><div class="map-r">board.add("Virat")</div></div>
+      <div class="map-row"><div class="map-l">Find Same Players (Intersection)</div><div class="map-arrow">→</div><div class="map-r">blaze & storm</div></div>
+      <div class="map-row"><div class="map-l">Combine Boards (Union)</div><div class="map-arrow">→</div><div class="map-r">blaze | storm</div></div>
+      <div class="map-row"><div class="map-l">Find Unique Players (Difference)</div><div class="map-arrow">→</div><div class="map-r">blaze - storm</div></div>
+      <div class="map-row"><div class="map-l">Instant Speed Search</div><div class="map-arrow">→</div><div class="map-r">if "Bumrah" in board:</div></div>
+    </div>
+    <button class="btn btn-storm" style="margin-top:30px;" onclick="nextScreen(11)">Take The Quiz!</button>
+  </div>
+
+  <!-- SCREEN 11 -->
+  <div class="screen glassmorphism" id="s11">
+    <div class="eyebrow">QUIZ — 1 of 3</div>
+    <h1 class="headline">The <span>Rule</span></h1>
+    <div class="story"><p>You try to add a player to the board, but he is already on the board. What does a Python Set do?</p></div>
+    <div class="card-area tilt-card">
+      <button class="opt" onclick="checkQuiz(this, false, 'q1')">It adds him again so you have two of him.</button>
+      <button class="opt" onclick="checkQuiz(this, true, 'q1')">It ignores the second add. Sets never allow duplicates.</button>
+      <button class="opt" onclick="checkQuiz(this, false, 'q1')">It crashes the computer.</button>
+      <div id="fb-q1" style="display:none;"></div>
+      <button class="btn btn-storm" id="btn-q1" style="display:none;" onclick="nextScreen(12)">Next Question</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 12 -->
+  <div class="screen glassmorphism" id="s12">
+    <div class="eyebrow">QUIZ — 2 of 3</div>
+    <h1 class="headline">The <span>Order</span></h1>
+    <div class="story"><p>You add Rohit, Dhoni, and Surya to the board. When you look at the board, which one is "number 1"?</p></div>
+    <div class="card-area tilt-card">
+      <button class="opt" onclick="checkQuiz(this, false, 'q2')">Rohit, because he was added first.</button>
+      <button class="opt" onclick="checkQuiz(this, true, 'q2')">Sets do not have order or numbers. They are just a pool of items.</button>
+      <button class="opt" onclick="checkQuiz(this, false, 'q2')">It puts them in alphabetical order.</button>
+      <div id="fb-q2" style="display:none;"></div>
+      <button class="btn btn-storm" id="btn-q2" style="display:none;" onclick="nextScreen(13)">Next Question</button>
+    </div>
+  </div>
+  
+  <!-- SCREEN 13 -->
+  <div class="screen glassmorphism" id="s13">
+    <div class="eyebrow">QUIZ — 3 of 3</div>
+    <h1 class="headline">The <span>Speed</span></h1>
+    <div class="story"><p>Why do we use a Set to search for a player instead of a slow search loop?</p></div>
+    <div class="card-area tilt-card">
+      <button class="opt" onclick="checkQuiz(this, true, 'q3')">Because Sets use a smart trick (Hash Tables) to find things instantly.</button>
+      <button class="opt" onclick="checkQuiz(this, false, 'q3')">Because Sets look better on the screen.</button>
+      <div id="fb-q3" style="display:none;"></div>
+      <button class="btn btn-storm" id="btn-q3" style="display:none;" onclick="nextScreen(14)">Finish Draft!</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 14 -->
+  <div class="screen glassmorphism" id="s14">
+    <div class="split-layout">
+      <div class="split-text">
+        <div class="eyebrow" style="margin-bottom:10px">AUCTION COMPLETE</div>
+        <div class="headline" style="font-size:clamp(2rem,5vw,2.8rem)">Team <span>Boss</span></div>
+        <p class="story">You successfully managed the IPL Auction War-Room and learned Python Sets without even trying!</p>
+        <button class="btn btn-storm" onclick="resetStory()">Play Again</button>
+      </div>
+      <div class="split-img">
+        <div class="story-img-container tilt-card"><img src="images/trophy.png" class="story-img" alt="Award"/></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let currentScreen = 0;
+const totalScreens = 14;
+
+let blazeSet = new Set();
+let stormSet = new Set(["Rohit", "Virat", "Bumrah", "Hardik"]);
+
+document.addEventListener('mousemove', (e) => {
+  const shine = document.querySelector('.cursor-shine');
+  if(shine) {
+    shine.style.setProperty('--x', e.clientX + 'px');
+    shine.style.setProperty('--y', e.clientY + 'px');
+  }
+});
+
+document.querySelectorAll('.tilt-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -4;
+    const rotateY = ((x - centerX) / centerX) * 4;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+    card.style.transition = 'none';
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+    card.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  });
+});
+
+function renderBoard(targetId, setToRender, themeCls) {
+  const container = document.getElementById(targetId);
+  if(!container) return;
+  if(setToRender.size === 0) {
+    container.innerHTML = '<div class="empty-msg">No players on the board.</div>';
+    return;
+  }
+  let html = '';
+  setToRender.forEach(item => {
+    html += `<div class="player-card ${themeCls}"><span>${item}</span><span>ACTIVE</span></div>`;
+  });
+  container.innerHTML = html;
+}
+
+function renderDuplicate(targetId, setToRender, dupItem, themeCls) {
+  const container = document.getElementById(targetId);
+  let html = '';
+  setToRender.forEach(item => {
+    let extraCls = (item === dupItem) ? 'dup' : '';
+    let status = (item === dupItem) ? 'REJECTED' : 'ACTIVE';
+    html += `<div class="player-card ${themeCls} ${extraCls}"><span>${item}</span><span>${status}</span></div>`;
+  });
+  container.innerHTML = html;
+}
+
+function nextScreen(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('s' + n).classList.add('active');
+  currentScreen = n;
+  document.getElementById('ball-num').innerText = Math.min(currentScreen, totalScreens);
+  document.getElementById('progress-fill').style.width = (currentScreen / totalScreens) * 100 + '%';
+  window.scrollTo(0,0);
+  
+  if(n === 1) renderBoard('al1', blazeSet, 'blz');
+  if(n === 2) renderBoard('al2', blazeSet, 'blz');
+  if(n === 3) renderBoard('al3', blazeSet, 'blz');
+}
+
+function resetStory() {
+  blazeSet = new Set();
+  document.querySelectorAll('.opt').forEach(btn => { btn.className='opt'; btn.disabled=false; });
+  document.querySelectorAll('.feedback').forEach(el => el.style.display='none');
+  document.querySelectorAll('[id^=btn]').forEach(el => el.style.display='none');
+  
+  document.getElementById('dupBtn').disabled = false;
+  document.getElementById('rmBtn').disabled = false;
+  document.getElementById('popBtn').disabled = false;
+  document.getElementById('intBtn').disabled = false;
+  document.getElementById('uniBtn').disabled = false;
+  document.getElementById('diffBtn').disabled = false;
+  
+  nextScreen(0);
+}
+
+function doAddVirat() {
+  blazeSet.add("Virat");
+  nextScreen(2);
+}
+
+function doAddDuplicate() {
+  renderDuplicate('al2', blazeSet, "Virat", 'blz');
+  const btn = document.getElementById('dupBtn');
+  btn.disabled = true;
+  
+  const fb = document.getElementById('fb1');
+  fb.style.display = 'block';
+  document.getElementById('btn1').style.display = 'inline-block';
+}
+
+function doRemove() {
+  blazeSet.delete("Virat");
+  renderBoard('al3', blazeSet, 'blz');
+  const btn = document.getElementById('rmBtn');
+  btn.disabled = true;
+  document.getElementById('fb2').style.display = 'block';
+  document.getElementById('btn2').style.display = 'inline-block';
+}
+
+function doPopulate() {
+  blazeSet.add("Rohit");
+  blazeSet.add("Dhoni");
+  blazeSet.add("Surya");
+  blazeSet.add("Virat"); 
+  
+  renderBoard('al4_blaze', blazeSet, 'blz');
+  renderBoard('al4_storm', stormSet, 'stm');
+  
+  const btn = document.getElementById('popBtn');
+  btn.disabled = true;
+  document.getElementById('fb3').style.display = 'block';
+  document.getElementById('btn3').style.display = 'inline-block';
+}
+
+function doIntersect() {
+  const intersectSet = new Set([...blazeSet].filter(x => stormSet.has(x)));
+  renderBoard('al5', intersectSet, 'blz');
+  
+  const btn = document.getElementById('intBtn');
+  btn.disabled = true;
+  document.getElementById('fb4').style.display = 'block';
+  document.getElementById('btn4').style.display = 'inline-block';
+}
+
+function doUnion() {
+  const unionSet = new Set([...blazeSet, ...stormSet]);
+  renderBoard('al6', unionSet, 'lgu');
+  
+  const btn = document.getElementById('uniBtn');
+  btn.disabled = true;
+  document.getElementById('fb5').style.display = 'block';
+  document.getElementById('btn5').style.display = 'inline-block';
+}
+
+function doDifference() {
+  const diffSet = new Set([...blazeSet].filter(x => !stormSet.has(x)));
+  renderBoard('al7', diffSet, 'blz');
+  
+  const btn = document.getElementById('diffBtn');
+  btn.disabled = true;
+  document.getElementById('fb6').style.display = 'block';
+  document.getElementById('btn6').style.display = 'inline-block';
+}
+
+function checkQuiz(btn, isCorrect, q) {
+  const p = btn.parentElement;
+  p.querySelectorAll('.opt').forEach(b => b.disabled = true);
+  btn.classList.add(isCorrect ? 'correct' : 'wrong');
+  const fb = document.getElementById('fb-' + q);
+  fb.className = 'feedback ' + (isCorrect ? 'good' : 'think');
+  
+  if (q==='q1') fb.innerHTML = isCorrect ? "Correct! Sets NEVER allow duplicate names." : "Wrong. Sets completely reject duplicate names.";
+  if (q==='q2') fb.innerHTML = isCorrect ? "Correct! Sets are just a pool of items with no order." : "Wrong. Sets have no order or numbers at all.";
+  if (q==='q3') fb.innerHTML = isCorrect ? "Correct! Hash tables make Sets incredibly fast." : "Wrong. Sets use Hash Tables to make searching instant.";
+  
+  fb.style.display = 'block';
+  document.getElementById('btn-' + q).style.display = 'inline-block';
+}
+</script>
+</body>
+</html>

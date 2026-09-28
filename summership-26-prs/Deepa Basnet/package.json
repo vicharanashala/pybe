@@ -1,0 +1,24 @@
+{
+  "name": "pyfarm",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "PyFarm — story-driven Python learning for PyBe. MVP: Chapter 1 (Variables) and Chapter 2 (if/else).",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "verify:python": "node scripts/verify-python.mjs"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.7",
+    "vitest": "^2.1.8"
+  }
+}

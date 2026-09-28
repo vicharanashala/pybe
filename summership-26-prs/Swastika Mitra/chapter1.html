@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chapter 1 — The Vanishing Spice | Python File Handling</title>
+  <meta name="description" content="Learn primary and secondary storage through Rahul's kitchen story." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="brand">
+      <span class="brand-icon">🍳</span>
+      <div>
+        <strong>Rahul's Kitchen Lab</strong>
+        <span>Python File Handling Case Study</span>
+      </div>
+    </a>
+    <nav class="chapter-nav" aria-label="Chapters">
+      <a href="chapter1.html" class="active">Ch. 1</a>
+      <a href="chapter2.html">Ch. 2</a>
+      <a href="quiz.html">Quiz</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-badge">Chapter 1 · Storage</div>
+      <h1>The Vanishing Spice Formula</h1>
+      <p class="hero-sub">Why data disappears when your program ends — and how files save the day.</p>
+      <div class="hero-divider"></div>
+    </section>
+
+    <article class="panel">
+      <div class="chapter-label">Primary &amp; Secondary Storage</div>
+      <h2>The Counter Gets Wiped Every Night</h2>
+
+      <div class="story-text">
+        <p>Rahul, a cook, invents a great spice formula one day and leaves it on the kitchen counter, planning to use it later. But every night the counter gets cleaned, and the next morning Rahul is shocked to find it completely gone — no trace left.</p>
+        <p>The chef explains: <em>"The counter is only for things you're using right now; it gets wiped every night. If you want something to survive, it has to go in a jar, get a label, and move to the pantry — the one place that never gets cleared."</em></p>
+        <p>This maps directly to how Python handles data. The counter is <strong>RAM</strong> — it's fast and the program's variables live here while it runs, but the moment the program ends, everything is wiped, just like the counter at closing time. The pantry is the <strong>disk</strong> — slower, but nothing disappears when the program stops. The labeled jar is a <strong>file</strong> — data saved under a name so it can be found again later. And moving the jar to the pantry is exactly what <code>open()</code> and <code>write()</code> do — they take data sitting in RAM and save it permanently to disk. If we skip that step, the data simply vanishes when the program closes.</p>
+      </div>
+
+      <div class="callout insight">
+        <strong>Why is RAM faster?</strong> RAM is built for speed and sits right next to the CPU with no physical parts to move. Disk stores more but has to travel further and often move physical parts to fetch data.
+      </div>
+
+      <p class="analogy-hint">Click each kitchen item to reveal its Python equivalent ↓</p>
+      <div class="analogy-grid" id="analogy-grid">
+        <div class="analogy-card" data-python="RAM (Primary Storage)" tabindex="0" role="button" aria-label="Reveal Python term">
+          <div class="kitchen">🪑</div>
+          <div class="kitchen-label">Kitchen Counter</div>
+          <div class="python-label">?</div>
+        </div>
+        <div class="analogy-card" data-python="Disk (Secondary Storage)" tabindex="0" role="button">
+          <div class="kitchen">🏺</div>
+          <div class="kitchen-label">Pantry</div>
+          <div class="python-label">?</div>
+        </div>
+        <div class="analogy-card" data-python="File" tabindex="0" role="button">
+          <div class="kitchen">🫙</div>
+          <div class="kitchen-label">Labeled Jar</div>
+          <div class="python-label">?</div>
+        </div>
+        <div class="analogy-card" data-python="open() + write()" tabindex="0" role="button">
+          <div class="kitchen">📦</div>
+          <div class="kitchen-label">Move Jar to Pantry</div>
+          <div class="python-label">?</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="panel">
+      <h2>One Trip for the Whole Jar</h2>
+      <div class="story-text">
+        <p>Rahul needs cumin, and the jar on the counter is empty. So he doesn't walk to the pantry for just one pinch — that'd be silly, one trip for one pinch. Instead, he grabs the whole jar in one go, brings it back to the counter, and then just takes 1–2 pinches from it as he cooks, so no more trips needed for a while.</p>
+        <p>That's exactly how disks behave. When the program needs data and it's not already sitting in RAM, the disk doesn't hand over a single byte — it hands over a whole <strong>block</strong> (usually 4096 bytes) in one trip, like Rahul's whole jar. That block sits in a <strong>buffer</strong> in RAM, and your program just "pinches" bytes from it as needed, fast, with no extra trips — until the buffer runs dry and it's time to fetch the next block.</p>
+      </div>
+    </article>
+
+    <article class="panel">
+      <h2>From Pantry to Counter — Step by Step</h2>
+      <p class="story-text">Follow each step to see what happens when Python reads a file from disk into memory.</p>
+
+      <div class="code-walkthrough" id="code-walkthrough">
+        <div class="code-step active" data-step="0">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <code>f = open("spice-mix.txt", "r")</code>
+            <p>Asks the operating system to locate the file on disk and give Python a file object, opened in <strong>"r"</strong> (read) mode. Nothing has been read yet — this just sets up the connection.</p>
+          </div>
+        </div>
+        <div class="code-step" data-step="1">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <code>contents = f.read()</code>
+            <p>Actually pulls the file's contents from disk into memory, returning it as a single string. This is the expensive disk-to-RAM step.</p>
+          </div>
+        </div>
+        <div class="code-step" data-step="2">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <code>print(contents)</code>
+            <p>Just prints the string; it's already in RAM, so this part is fast and has nothing to do with the disk anymore.</p>
+          </div>
+        </div>
+        <div class="code-step" data-step="3">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <code>f.close()</code>
+            <p>Tells the OS you're done with the file, so it can free the resource. If you skip this, the file handle stays open longer than needed — which can cause issues like data not being fully written (in write mode) or hitting the OS's limit on open files.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="walkthrough-controls">
+        <button type="button" id="step-prev" disabled>← Previous</button>
+        <button type="button" id="step-next" class="primary">Next Step →</button>
+      </div>
+    </article>
+
+    <nav class="page-nav" aria-label="Page navigation">
+      <a href="index.html">← Home</a>
+      <span class="progress">Chapter 1 of 2</span>
+      <a href="chapter2.html" class="primary">Chapter 2 →</a>
+    </nav>
+  </main>
+
+  <script>
+    document.querySelectorAll('.analogy-card').forEach(function (card) {
+      function reveal() {
+        if (card.classList.contains('revealed')) return;
+        card.classList.add('revealed');
+        card.querySelector('.python-label').textContent = card.dataset.python;
+      }
+      card.addEventListener('click', reveal);
+      card.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); reveal(); }
+      });
+    });
+
+    (function () {
+      var steps = document.querySelectorAll('.code-step');
+      var current = 0;
+      var prevBtn = document.getElementById('step-prev');
+      var nextBtn = document.getElementById('step-next');
+
+      function updateSteps() {
+        steps.forEach(function (step, i) {
+          step.classList.remove('active', 'done');
+          if (i < current) step.classList.add('done');
+          if (i === current) step.classList.add('active');
+        });
+        prevBtn.disabled = current === 0;
+        nextBtn.textContent = current === steps.length - 1 ? 'Done ✓' : 'Next Step →';
+      }
+
+      prevBtn.addEventListener('click', function () {
+        if (current > 0) { current--; updateSteps(); }
+      });
+      nextBtn.addEventListener('click', function () {
+        if (current < steps.length - 1) { current++; updateSteps(); }
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+/* ------------------------------------------------------------------
+   Traffic System — cinematic story styles
+   Tweak the tokens below to change colors, typography and panel size.
+------------------------------------------------------------------- */
+:root {
+  --ink: #f4efe6;
+  --ink-dim: #c9c2b6;
+  --accent: #e8b04b;
+  --signal: #ff4d3d;
+  --panel-bg: rgba(10, 12, 16, 0.66);
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --panel-max: 1100px;
+  --panel-radius: 4px;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --fade: 900ms;
+}
+
+* { box-sizing: border-box; }
+
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: #06070a;
+  color: var(--ink);
+  font-family: var(--font-body);
+  overflow: hidden;
+}
+
+/* ---------- background layers ---------- */
+.stage { position: fixed; inset: 0; z-index: 0; }
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity var(--fade) ease, transform 14s linear;
+}
+.bg.is-active { opacity: 1; transform: scale(1.1); }
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, rgba(4, 5, 8, 0.94) 0%, rgba(4, 5, 8, 0.55) 38%, rgba(4, 5, 8, 0.18) 62%, rgba(4, 5, 8, 0.5) 100%),
+    radial-gradient(120% 80% at 50% 40%, transparent 30%, rgba(0, 0, 0, 0.55) 100%);
+}
+
+/* ---------- layout ---------- */
+.shell {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.2rem clamp(1.2rem, 5vw, 4.5rem) 1.6rem;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.chapter { color: var(--accent); }
+
+/* ---------- narration panel ---------- */
+.panel {
+  width: 100%;
+  max-width: var(--panel-max);
+  margin: 0 auto 1.2rem;
+  padding: clamp(1.4rem, 3vw, 2.4rem) clamp(1.4rem, 3vw, 2.6rem);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--panel-radius);
+  backdrop-filter: blur(14px) saturate(120%);
+  box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.9);
+  transition: opacity 480ms ease, transform 480ms ease;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.panel.is-out { opacity: 0; transform: translateY(14px); }
+
+.panel-title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 3.2vw, 2.3rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.panel-body p {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1rem, 1.25vw, 1.12rem);
+  line-height: 1.75;
+  font-weight: 300;
+  color: var(--ink);
+  animation: rise 700ms ease both;
+}
+.panel-body p:last-child { margin-bottom: 0; }
+.panel-body p:nth-child(2) { animation-delay: 90ms; }
+.panel-body p:nth-child(3) { animation-delay: 180ms; }
+.panel-body p:nth-child(4) { animation-delay: 270ms; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.panel-body strong {
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.01em;
+}
+.panel-body em { font-style: normal; color: var(--signal); font-weight: 500; }
+
+/* ---------- reveal blocks ---------- */
+.block {
+  margin-top: 1.4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--panel-border);
+}
+.block h2 {
+  margin: 0 0 0.8rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  font-weight: 500;
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  padding: 0.34rem 0.7rem;
+  border: 1px solid rgba(255, 77, 61, 0.5);
+  border-radius: 2px;
+  background: rgba(255, 77, 61, 0.1);
+}
+.chip.chip-id {
+  border-color: rgba(232, 176, 75, 0.5);
+  background: rgba(232, 176, 75, 0.1);
+}
+
+.rules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.35rem 2rem; }
+.rules div { font-family: var(--font-mono); font-size: 0.88rem; color: var(--ink-dim); }
+.ok::before { content: "✓ "; color: #6fd08c; }
+.no::before { content: "✗ "; color: var(--signal); }
+
+.examples { display: grid; gap: 0.3rem; font-family: var(--font-mono); font-size: 0.9rem; }
+.examples span { color: var(--ink-dim); }
+.examples b { color: var(--ink); font-weight: 500; }
+
+.compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.6rem 1.2rem; align-items: center; }
+.compare .head {
+  font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-dim);
+}
+.compare .arrow { color: var(--accent); font-family: var(--font-mono); }
+.compare .left { color: var(--ink); }
+.compare .right { font-family: var(--font-mono); color: var(--accent); }
+
+/* ---------- controls ---------- */
+.controls { display: flex; gap: 0.6rem; margin-top: 1.6rem; }
+
+.btn {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.72rem 1.5rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease, opacity 200ms ease;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #14100a;
+  border: 1px solid var(--accent);
+  font-weight: 500;
+}
+.btn-primary:hover { background: #f3c368; }
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-dim);
+  border: 1px solid var(--panel-border);
+}
+.btn-ghost:hover { color: var(--ink); }
+.btn[hidden] { display: none; }
+
+/* ---------- progress ---------- */
+.progress { height: 2px; background: rgba(255, 255, 255, 0.12); }
+.progress span {
+  display: block; height: 100%; width: 0;
+  background: var(--accent);
+  transition: width 500ms ease;
+}
+
+.reveal-image {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 55vh;
+  height: auto;
+  object-fit: contain;
+  margin: 0 auto;
+}

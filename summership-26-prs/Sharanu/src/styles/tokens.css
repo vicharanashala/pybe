@@ -1,0 +1,16 @@
+:root {
+  --color-bg: #0A0F1D;
+  --color-panel: #121A2C;
+  --color-gold: #F2C15C;
+  --color-gold-glow: rgba(242, 193, 92, 0.25);
+  --color-vermilion: #D96B43;
+  --color-vermilion-glow: rgba(217, 107, 67, 0.25);
+  --color-text: #F7F4EB;
+  --color-text-soft: #E2DACB;
+  --color-muted: #94A1B8;
+  --color-[#7FBF9E]: #7FBF9E;
+  --color-[#7FBF9E]-glow: rgba(127, 191, 158, 0.25);
+  --color-line: #222E46;
+  --font-display: "Cinzel", "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+}

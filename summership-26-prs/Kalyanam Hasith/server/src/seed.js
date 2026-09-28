@@ -555,8 +555,8 @@ const debugChallenges = [
       "strings"
     ],
     "context": "Write a function to find the last index of a substring within a given string.",
-    "buggyCode": "# Goal: Find the last index of a substring\ndef last_index(main_str, sub_str):\n  for i in range(len(main_str) - len(sub_str), -1, -1):\n    if main_str[i:i + len(sub_str)] == sub_str:\n      return i\n  return -1\n# Test cases:\ntest_case_setup\nprint(last_index(\"hello\", \"ll\"))\nprint(last_index(\"abc\", \"xyz\"))",
-    "solutionCode": "# Goal: Find the last index of a substring\ndef last_index(main_str, sub_str):\n  return max((i for i in range(len(main_str) - len(sub_str), -1, -1) if main_str[i:i + len(sub_str)] == sub_str), default=-1)\n# Test cases:\ntest_case_setup\nprint(last_index(\"hello\", \"ll\"))\nprint(last_index(\"abc\", \"xyz\"))",
+    "buggyCode": "# Goal: Find the last index of a substring\ndef last_index(main_str, sub_str):\n  for i in range(len(main_str) - len(sub_str), -2, -1):\n    if main_str[i:i + len(sub_str)] == sub_str:\n      return i\n  return -1\n# Test cases:\ntest_case_setup = None\nprint(last_index(\"hello\", \"ll\"))\nprint(last_index(\"abc\", \"xyz\"))",
+    "solutionCode": "# Goal: Find the last index of a substring\ndef last_index(main_str, sub_str):\n  return max((i for i in range(len(main_str) - len(sub_str), -2, -1) if main_str[i:i + len(sub_str)] == sub_str), default=-1)\n# Test cases:\ntest_case_setup = None\nprint(last_index(\"hello\", \"ll\"))\nprint(last_index(\"abc\", \"xyz\"))",
     "expectedLogic": [
       "1. Initialize a generator expression to find the indices where the substring matches.",
       "2. Use the max function with a default value of -1 to find the last index.",
@@ -1149,7 +1149,7 @@ const debugChallenges = [
     ],
     "context": "As a music streaming service user, you want to add songs to your favorites list based on your ratings. However, you need to ensure that you don't add the same song multiple times.",
     "buggyCode": "# Goal: Add song to favorites list if it has a higher rating than the existing favorite\nsongs = {'Song A': 5, 'Song B': 4}\nnew_song = {'Song C': 6}\ndef add_song_to_favorites(songs, new_song):\n  for song, rating in new_song.items():\n    if song in songs and rating > songs[song]:\n      songs[song] = rating\n  return songs\nsongs = add_song_to_favorites(songs, new_song)\nprint(songs)",
-    "solutionCode": "# Goal: Add song to favorites list if it has a higher rating than the existing favorite\nsongs = {'Song A': 5, 'Song B': 4}\nnew_song = {'Song C': 6}\ndef add_song_to_favorites(songs, new_song):\n  for song, rating in new_song.items():\n    if song in songs and rating > songs[song]:\n      songs[song] = rating\n  return songs\nsongs = add_song_to_favorites(songs, new_song)\nprint(songs)",
+    "solutionCode": "# Goal: Add song to favorites list if it has a higher rating than the existing favorite\nsongs = {'Song A': 5, 'Song B': 4}\nnew_song = {'Song C': 6}\ndef add_song_to_favorites(songs, new_song):\n  for song, rating in new_song.items():\n    if song not in songs or rating > songs[song]:\n      songs[song] = rating\n  return songs\nsongs = add_song_to_favorites(songs, new_song)\nprint(songs)",
     "expectedLogic": [
       "Iterate over the new_song dictionary to access its items (song, rating).",
       "For each song in new_song, check if it's already in songs.",
@@ -1166,7 +1166,7 @@ const debugChallenges = [
       "What if the rating is the same as the existing rating?",
       "Check the initial ratings and new song ratings carefully."
     ],
-    "bugExplanation": "The bug is in the line where the rating is updated. If the rating is the same as the existing rating, it should not be updated.",
+    "bugExplanation": "The original code fails to add songs that are not already in the favorites list because of the `song in songs` condition. The fix allows the song to be added if it is not in the list OR if its rating is higher.",
     "testCases": [
       {
         "setupCode": "",
@@ -1739,8 +1739,8 @@ const debugChallenges = [
       "functions"
     ],
     "context": "You're building a simple calculator that takes in two numbers and an operator. The calculator should return the result of the operation.",
-    "buggyCode": "\ndef calculate(num1, num2, operator):\n  if operator == '+':\n    return num1 + num2\n  elif operator == '-':\n    return num1 - num2\n  elif operator == '*':\n    return num1 * num2\n  elif operator == '/':\n    return num1 / num2\n  else:\n    return None\n\nprint(calculate(10, 2, '+'))\nprint(calculate(10, 2, '-'))\nprint(calculate(10, 2, '*'))\nprint(calculate(10, 2, '/'))\nprint(calculate(10, 2, '^'))\n      ",
-    "solutionCode": "\ndef calculate(num1, num2, operator):\n  if operator == '+':\n    return num1 + num2\n  elif operator == '-':\n    return num1 - num2\n  elif operator == '*':\n    return num1 * num2\n  elif operator == '/':\n    return num1 / num2\n  else:\n    raise ValueError('Invalid operator')\n\nprint(calculate(10, 2, '+'))\nprint(calculate(10, 2, '-'))\nprint(calculate(10, 2, '*'))\nprint(calculate(10, 2, '/'))\ntry:\n    print(calculate(10, 2, '^'))\nexcept ValueError as e:\n    print(e)\n      ",
+    "buggyCode": "\ndef calculate(num1, num2, operator):\n  if operator == '+':\n    return num1 + num2\n  elif operator == '-':\n    return num1 - num2\n  elif operator == '*':\n    return num1 * num2\n  elif operator == '/':\n    return num1 / num2\n  else:\n    return None\n\nprint(calculate(num1=10, num2=2, operator='+'))\nprint(calculate(num1=10, num2=2, operator='-'))\nprint(calculate(num1=10, num2=2, operator='*'))\nprint(calculate(num1=10, num2=2, operator='/'))\nprint(calculate(num1=10, num2=2, operator='^'))\n      ",
+    "solutionCode": "\ndef calculate(num1, num2, operator):\n  if operator == '+':\n    return num1 + num2\n  elif operator == '-':\n    return num1 - num2\n  elif operator == '*':\n    return num1 * num2\n  elif operator == '/':\n    return num1 / num2\n  else:\n    raise ValueError('Invalid operator')\n\nprint(calculate(num1=10, num2=2, operator='+'))\nprint(calculate(num1=10, num2=2, operator='-'))\nprint(calculate(num1=10, num2=2, operator='*'))\nprint(calculate(num1=10, num2=2, operator='/'))\ntry:\n    print(calculate(num1=10, num2=2, operator='^'))\nexcept ValueError as e:\n    print(e)\n      ",
     "expectedLogic": [
       "1. The function `calculate` takes in three parameters: `num1`, `num2`, and `operator`.",
       "2. The function checks the value of `operator` to determine which operation to perform.",
@@ -1761,23 +1761,7 @@ const debugChallenges = [
     "testCases": [
       {
         "setupCode": "",
-        "expectedOutput": "12"
-      },
-      {
-        "setupCode": "",
-        "expectedOutput": "8"
-      },
-      {
-        "setupCode": "",
-        "expectedOutput": "20"
-      },
-      {
-        "setupCode": "",
-        "expectedOutput": "5.0"
-      },
-      {
-        "setupCode": "",
-        "expectedOutput": "Invalid operator"
+        "expectedOutput": "12\n8\n20\n5.0\nInvalid operator"
       }
     ]
   },

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Traffic System — A Story About Rules and Names</title>
+    <meta
+      name="description"
+      content="A short cinematic story about evening traffic, reserved signals and road names — and the Python ideas hiding inside it."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Two stacked layers so backgrounds can crossfade -->
+    <div class="stage">
+      <div class="bg bg-a is-active"></div>
+      <div class="bg bg-b"></div>
+      <div class="vignette"></div>
+    </div>
+
+    <main class="shell">
+      <header class="topbar">
+        <span class="chapter" id="chapter">Act I — The Drive Home</span>
+        <span class="counter" id="counter">01 / 16</span>
+      </header>
+
+      <section class="panel" id="panel">
+        <h1 class="panel-title" id="title">Evening Traffic</h1>
+        <div class="panel-body" id="body"></div>
+
+        <div class="controls">
+          <button class="btn btn-ghost" id="prev" type="button">Back</button>
+          <button class="btn btn-primary" id="next" type="button">Continue</button>
+        </div>
+      </section>
+
+      <div class="progress"><span id="progressFill"></span></div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
