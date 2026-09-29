@@ -20,7 +20,7 @@ import {
 import CodeEditor from './components/CodeEditor';
 import LearningPath from './components/LearningPath';
 import './styles.css';
-import LandingPage from './LandingPage';
+
 import WorldExplorer from './WorldExplorer';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -35,7 +35,7 @@ async function api(path, options) {
 }
 
 function App() {
-  const [activePage, setActivePage] = useState('landing'); // 'landing', 'explorer', 'learningPath'
+  const [activePage, setActivePage] = useState('world'); // 'landing', 'explorer', 'learningPath'
   const [scenarios, setScenarios] = useState([]);
   const [selected, setSelected] = useState(null);
   const [sessions, setSessions] = useState([]);
@@ -227,12 +227,9 @@ function App() {
     }
   };
 
-  if (activePage === 'landing') {
-  return <LandingPage onStartExploring={() => setActivePage('world')} />;
-}
 
 if (activePage === 'world') {
-  return <WorldExplorer onBackToDashboard={() => setActivePage('landing')} />;
+  return <WorldExplorer onBackToDashboard={() => {}} />;
 }
 
 if (loading) {
