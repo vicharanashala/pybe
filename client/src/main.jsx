@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import CodeEditor from './components/CodeEditor';
 import LearningPath from './components/LearningPath';
+import WorldExplorer from './WorldExplorer';
 import './styles.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
@@ -551,4 +552,4 @@ function SessionList({ sessions }) {
   );
 }
 
-createRoot(document.getElementById('root')).render(<App />);
+createRoot(document.getElementById('root')).render(<WorldExplorer />);
