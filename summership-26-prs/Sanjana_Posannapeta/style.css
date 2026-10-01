@@ -1,0 +1,1428 @@
+/* Modern CSS Design System for Train Python Scope Presentation */
+
+:root {
+    /* Color Palette */
+    --bg-dark: hsl(222, 47%, 11%);
+    --bg-card: hsla(222, 47%, 16%, 0.7);
+    --bg-card-hover: hsla(222, 47%, 20%, 0.85);
+    --border-color: hsla(217, 30%, 30%, 0.5);
+    --border-glow: hsla(217, 100%, 60%, 0.3);
+    
+    /* Scopes Color Coding */
+    --color-train: hsl(45, 100%, 55%);      /* Global */
+    --color-coach: hsl(180, 70%, 50%);      /* Enclosing */
+    --color-passenger: hsl(280, 75%, 65%);  /* Local */
+    --color-railway: hsl(150, 70%, 45%);    /* Built-in */
+    
+    /* Text Colors */
+    --text-main: hsl(210, 40%, 96%);
+    --text-muted: hsl(215, 25%, 70%);
+    
+    /* Accents */
+    --accent: hsl(217, 91%, 60%);
+    --accent-glow: hsla(217, 91%, 60%, 0.4);
+    --success: hsl(142, 70%, 45%);
+    --error: hsl(350, 80%, 55%);
+    
+    /* Shadows & Effects */
+    --shadow-premium: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    --glass-blur: blur(12px);
+    
+    /* Fonts */
+    --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-code: 'Fira Code', monospace;
+}
+
+/* Reset & Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Header & Journey Tracker */
+.journey-header {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(180, var(--bg-dark) 0%, transparent 100%);
+    z-index: 10;
+}
+
+.progress-container {
+    width: 90%;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.track-line {
+    flex-grow: 1;
+    height: 6px;
+    background: hsla(217, 30%, 20%, 0.8);
+    border-radius: 3px;
+    position: relative;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.track-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--color-coach));
+    border-radius: 3px;
+    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.train-cursor {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+.slide-indicator {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-muted);
+    min-width: 60px;
+    text-align: right;
+}
+
+/* Presentation Container & Slide Management */
+.presentation-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    width: 90%;
+    max-width: 960px;
+    opacity: 0;
+    transform: scale(0.97) translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slide.active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+    position: relative;
+}
+
+.slide-content {
+    background: var(--bg-card);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 100%;
+    box-shadow: var(--shadow-premium);
+}
+
+/* Titles and Typography */
+.slide-title {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(135deg, #fff 40%, var(--text-muted));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.slide-subtitle {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.text-accent {
+    color: var(--accent);
+}
+
+.text-highlight {
+    font-weight: 600;
+    color: var(--color-passenger);
+}
+
+/* Buttons */
+.btn {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+.btn-primary:hover {
+    background: hsl(217, 100%, 65%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.btn-accent {
+    background: var(--color-train);
+    color: hsl(222, 47%, 10%);
+    box-shadow: 0 4px 14px rgba(255, 191, 0, 0.3);
+}
+
+.btn-accent:hover {
+    background: hsl(45, 100%, 65%);
+    transform: translateY(-2px);
+}
+
+/* Bottom Navigation Controls */
+.journey-controls {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(0, var(--bg-dark) 0%, transparent 100%);
+    z-index: 10;
+}
+
+.nav-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: var(--bg-card-hover);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ---------------------------------------------------- */
+/* Slide Specific Layouts & Components */
+/* ---------------------------------------------------- */
+
+/* Slide 01: Train Illustration */
+.train-illustration-container {
+    background: hsla(222, 47%, 8%, 0.6);
+    border: 1px dashed var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+
+.train-id-board {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-heading);
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: var(--color-train);
+}
+
+.train-visual {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    overflow-x: auto;
+    padding: 1rem 0;
+}
+
+.train-engine {
+    background: linear-gradient(135deg, var(--color-train), hsl(45, 100%, 40%));
+    color: #000;
+    padding: 1.25rem;
+    border-radius: 8px 30px 8px 8px;
+    font-weight: 800;
+    min-width: 120px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(255, 191, 0, 0.4);
+}
+
+.train-coaches {
+    display: flex;
+    gap: 8px;
+}
+
+.coach-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.coach-btn:hover {
+    border-color: var(--color-coach);
+    transform: scale(1.05);
+}
+
+.coach-btn.active-coach {
+    background: var(--color-coach);
+    color: #000;
+    border-color: var(--color-coach);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+/* Slide 02: Ticket Layout */
+.ticket-container {
+    background: radial-gradient(circle at 10% 50%, transparent 15px, hsl(38, 90%, 96%) 16px),
+                radial-gradient(circle at 90% 50%, transparent 15px, hsl(38, 90%, 96%) 16px);
+    background-size: 100% 100%;
+    color: #1e1b18;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    margin-bottom: 2rem;
+    font-family: var(--font-heading);
+}
+
+.ticket-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px dashed #d1c7bd;
+    padding-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.ticket-body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+}
+
+.ticket-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field-label {
+    font-size: 0.8rem;
+    color: #7c7267;
+    margin-bottom: 0.25rem;
+}
+
+.field-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1e1b18;
+}
+
+.clickable-field {
+    border: 2px solid transparent;
+    border-radius: 8px;
+    padding: 0.25rem 0.5rem;
+    margin: -0.25rem -0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clickable-field:hover {
+    background: hsla(38, 90%, 90%, 1);
+    border-color: var(--accent);
+}
+
+.ticket-barcode {
+    font-family: monospace;
+    font-size: 1.2rem;
+    text-align: center;
+    letter-spacing: 2px;
+    color: #4a4238;
+}
+
+.zoom-preview-box {
+    background: hsla(222, 47%, 8%, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.preview-highlight {
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* Slide 03: Welcome to Coach */
+.coach-layout-card {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+}
+
+.coach-header-label {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-coach);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.berth-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.berth-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.seat-berth {
+    background: hsla(222, 47%, 10%, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem 0.5rem;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.seat-berth:hover {
+    border-color: var(--color-coach);
+    transform: scale(1.05);
+}
+
+.seat-berth.target-seat {
+    background: var(--color-passenger);
+    color: #000;
+    border-color: var(--color-passenger);
+    animation: pulseGlow 2s infinite;
+}
+
+.berth-aisle {
+    background: hsla(217, 30%, 15%, 0.5);
+    padding: 0.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    border-radius: 4px;
+    border: 1px dashed var(--border-color);
+}
+
+/* Slide 04: Passenger Card */
+.passenger-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.passenger-avatar-box {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 20px;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.passenger-avatar-box:hover {
+    border-color: var(--color-passenger);
+    transform: translateY(-5px);
+}
+
+.avatar-glow {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: var(--color-passenger);
+    opacity: 0.1;
+    filter: blur(30px);
+}
+
+.avatar-face {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+}
+
+.avatar-name {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+.passenger-details-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    width: 320px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.passenger-details-card.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.card-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.card-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.card-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 0.5rem;
+}
+
+/* Slide 05: Testing Grid & Questions */
+.testing-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .testing-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.questions-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.question-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 1.25rem;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.question-btn:hover {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+}
+
+.question-btn.active {
+    border-color: var(--accent);
+    background: hsla(217, 91%, 60%, 0.15);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.path-visualizer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: hsla(222, 47%, 8%, 0.6);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.visualizer-level {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.level-badge {
+    font-family: var(--font-heading);
+    font-weight: 700;
+}
+
+.level-vars {
+    font-family: var(--font-code);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.path-arrow {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin: 4px 0;
+    transition: all 0.3s ease;
+}
+
+.visualizer-level.highlight-search {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+}
+
+.visualizer-level.highlight-match {
+    border-color: var(--success);
+    background: hsla(142, 70%, 45%, 0.1);
+    box-shadow: 0 0 15px rgba(22, 163, 74, 0.3);
+}
+
+.visualizer-level.highlight-match .level-badge {
+    color: var(--success);
+}
+
+.answer-dialog-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* Slide 06: Searchlight */
+.searchlight-container {
+    position: relative;
+    background: #070b13;
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2.5rem;
+    overflow: hidden;
+}
+
+.searchlight-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.searchlight-block {
+    background: rgba(17, 24, 39, 0.9);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.block-label {
+    font-family: var(--font-heading);
+    font-weight: 700;
+}
+
+.block-status {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.beam-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 191, 0, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+    opacity: 0;
+    transition: all 0.5s ease;
+    z-index: 1;
+}
+
+/* Slide 07: Closed Compartment / Drag Game */
+.drag-game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.passenger-compartment-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    gap: 1.5rem;
+}
+
+.passenger-compartment-card {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    width: 220px;
+    text-align: center;
+}
+
+.card-detail-item {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    font-family: var(--font-code);
+    font-weight: 700;
+}
+
+.draggable-item {
+    cursor: grab;
+    background: linear-gradient(135deg, var(--color-passenger), hsl(280, 75%, 50%));
+    color: #000;
+    border-color: transparent;
+    box-shadow: 0 4px 10px rgba(168, 85, 247, 0.2);
+}
+
+.draggable-item:active {
+    cursor: grabbing;
+}
+
+.compartment-barrier {
+    background: hsla(350, 80%, 55%, 0.15);
+    border: 1px dashed var(--error);
+    color: var(--error);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.compartment-feedback-box {
+    background: hsla(222, 47%, 8%, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Shake Animation for Rejection */
+.shake-animation {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+/* Slide 08: Zooming Out Stack */
+.zoom-hierarchy-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.zoom-stack-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.zoom-stack-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+.zoom-stack-header {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.zoom-stack-body {
+    max-height: 0;
+    overflow: hidden;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    transition: max-height 0.3s ease, margin-top 0.3s ease;
+}
+
+.zoom-stack-item.expanded {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.zoom-stack-item.expanded .zoom-stack-body {
+    max-height: 80px;
+    margin-top: 0.5rem;
+}
+
+.revelation-banner {
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+}
+
+.revelation-banner h3 {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-train);
+}
+
+/* Slide 09: Drag & Drop Challenge */
+.challenge-game-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .challenge-game-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cards-source {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: hsla(222, 47%, 8%, 0.6);
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    min-height: 200px;
+}
+
+.challenge-card {
+    background: var(--bg-card-hover);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    cursor: grab;
+    user-select: none;
+    transition: all 0.2s ease;
+}
+
+.challenge-card:active {
+    cursor: grabbing;
+}
+
+.zones-target {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.drop-target-zone {
+    background: var(--bg-card);
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.2s ease;
+}
+
+.drop-target-zone.dragover {
+    border-color: var(--accent);
+    background: hsla(217, 91%, 60%, 0.05);
+}
+
+.zone-badge {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.9rem;
+    min-width: 110px;
+}
+
+#zone-train .zone-badge { color: var(--color-train); }
+#zone-coach .zone-badge { color: var(--color-coach); }
+#zone-passenger .zone-badge { color: var(--color-passenger); }
+
+.zone-contents {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    flex-grow: 1;
+}
+
+.game-feedback-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Slide 10: The Railway Rule */
+.railway-rule-card {
+    background: var(--bg-card);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+}
+
+.rule-box {
+    margin-bottom: 2rem;
+}
+
+.rule-statement {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    line-height: 1.5;
+    font-weight: 700;
+    text-align: center;
+    color: var(--color-train);
+}
+
+.rule-search-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.search-path-node {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.node-label {
+    font-weight: 700;
+}
+
+.node-status {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.node-status.green { color: var(--success); }
+.node-status.yellow { color: var(--color-coach); }
+.node-status.red { color: var(--color-train); }
+
+.search-path-arrow {
+    font-size: 1.5rem;
+    color: var(--text-muted);
+}
+
+.pulse-text {
+    text-align: center;
+    font-weight: 600;
+    color: var(--accent);
+    animation: heartbeat 2.5s infinite;
+}
+
+/* Slide 11: Morph Container */
+.morph-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .morph-container {
+        grid-template-columns: 1fr;
+    }
+    .morph-middle {
+        text-align: center;
+    }
+}
+
+.morph-side {
+    background: hsla(222, 47%, 8%, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.morph-box {
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 1.5rem 1rem;
+    margin: 8px 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.train-box {
+    border-color: var(--color-train);
+    background: rgba(255, 191, 0, 0.03);
+}
+
+.coach-box {
+    border-color: var(--color-coach);
+    background: rgba(0, 255, 255, 0.03);
+}
+
+.passenger-box {
+    border-color: var(--color-passenger);
+    background: rgba(168, 85, 247, 0.03);
+    min-height: 40px;
+}
+
+.morph-box-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.85rem;
+    position: absolute;
+    top: -8px;
+    left: 10px;
+    background: #0d1222;
+    padding: 0 4px;
+}
+
+.train-box > .morph-box-title { color: var(--color-train); }
+.coach-box > .morph-box-title { color: var(--color-coach); }
+.passenger-box > .morph-box-title { color: var(--color-passenger); }
+
+/* Python Code block code styling */
+pre {
+    background: #0d1222;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.25rem;
+    overflow-x: auto;
+}
+
+code {
+    font-family: var(--font-code);
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.keyword { color: hsl(340, 80%, 65%); }
+.defname { color: hsl(200, 85%, 65%); }
+.number { color: hsl(40, 80%, 60%); }
+.string { color: hsl(95, 70%, 60%); }
+.comment { color: var(--text-muted); font-style: italic; }
+
+/* Slide 12: Scope Reveal / Comparison Table */
+.definition-card {
+    background: hsla(217, 91%, 60%, 0.1);
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.def-text {
+    font-size: 1.3rem;
+    line-height: 1.5;
+}
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.mapping-table-wrapper {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.mapping-table-wrapper h3 {
+    font-family: var(--font-heading);
+    margin-bottom: 1rem;
+}
+
+.mapping-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.mapping-table th, .mapping-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.mapping-table th {
+    font-family: var(--font-heading);
+    color: var(--text-muted);
+}
+
+.scope-hierarchy-tree {
+    background: hsla(222, 47%, 8%, 0.6);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tree-node {
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1rem;
+    position: relative;
+    width: 100%;
+    margin: 8px 0;
+}
+
+.tree-badge {
+    position: absolute;
+    top: -8px;
+    left: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0 4px;
+    background: #0b0f19;
+}
+
+.global-tree { border-color: var(--color-train); }
+.global-tree > .tree-badge { color: var(--color-train); }
+
+.enclosing-tree { border-color: var(--color-coach); margin-top: 1rem; }
+.enclosing-tree > .tree-badge { color: var(--color-coach); }
+
+.local-tree { border-color: var(--color-passenger); margin-top: 1rem; }
+.local-tree > .tree-badge { color: var(--color-passenger); }
+
+/* Slide 13: LEGB Ladder */
+.legb-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 1fr;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .legb-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+.legb-code-panel {
+    font-size: 0.85rem;
+}
+
+.legb-interactive-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.legb-interactive-panel h4 {
+    font-family: var(--font-heading);
+    margin-bottom: 0.5rem;
+}
+
+.legb-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    font-family: var(--font-code);
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.legb-btn:hover {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+}
+
+.legb-btn.selected {
+    border-color: var(--accent);
+    background: hsla(217, 91%, 60%, 0.15);
+}
+
+.legb-ladder {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ladder-step {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    opacity: 0.6;
+}
+
+.ladder-letter {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.25rem;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+}
+
+.ladder-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+#step-l .ladder-letter { background: rgba(168, 85, 247, 0.15); color: var(--color-passenger); }
+#step-e .ladder-letter { background: rgba(0, 255, 255, 0.15); color: var(--color-coach); }
+#step-g .ladder-letter { background: rgba(255, 191, 0, 0.15); color: var(--color-train); }
+#step-b .ladder-letter { background: rgba(34, 197, 94, 0.15); color: var(--color-railway); }
+
+.ladder-step.active-search {
+    opacity: 1;
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--accent-glow);
+    transform: translateX(5px);
+}
+
+.ladder-step.resolved-match {
+    opacity: 1;
+    border-color: var(--success);
+    background: hsla(142, 70%, 45%, 0.1);
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+    transform: translateX(5px);
+}
+
+.legb-status-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+    text-align: center;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Slide 14: Q&A recap styles */
+.learning-outcomes-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+    .learning-outcomes-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.outcome-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.outcome-card h3 {
+    font-family: var(--font-heading);
+    color: var(--color-coach);
+    margin-bottom: 0.75rem;
+}
+
+.recap-question-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.recap-question-box h3 {
+    font-family: var(--font-heading);
+    margin-bottom: 0.5rem;
+}
+
+.recap-question {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.recap-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.recap-opt-btn {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.recap-opt-btn:hover {
+    border-color: var(--accent);
+    background: var(--bg-card-hover);
+}
+
+.recap-opt-btn.correct {
+    border-color: var(--success);
+    background: hsla(142, 70%, 45%, 0.15);
+    color: #fff;
+}
+
+.recap-opt-btn.incorrect {
+    border-color: var(--error);
+    background: hsla(350, 80%, 55%, 0.15);
+    color: #fff;
+}
+
+.recap-feedback {
+    margin-top: 1rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Animations */
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 5px var(--color-passenger); }
+    50% { box-shadow: 0 0 20px var(--color-passenger); }
+    100% { box-shadow: 0 0 5px var(--color-passenger); }
+}
+
+/* Utilities */
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+.text-center { text-align: center; }
+.text-accent { color: var(--accent); }
