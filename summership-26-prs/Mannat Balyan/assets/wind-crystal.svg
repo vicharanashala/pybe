@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 140" width="120" height="140">
+  <defs>
+    <linearGradient id="crystalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a5f3fc"/>
+      <stop offset="40%" stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer glow -->
+  <ellipse cx="60" cy="70" rx="50" ry="60" fill="#2dd4bf" opacity="0.15"/>
+  
+  <!-- Crystal facets -->
+  <g filter="url(#glow)">
+    <!-- Main body -->
+    <polygon points="60,10 95,50 80,120 40,120 25,50" fill="url(#crystalGrad)" stroke="#67e8f9" stroke-width="1.5"/>
+    
+    <!-- Left facet -->
+    <polygon points="60,10 25,50 40,120 60,100" fill="#22d3ee" opacity="0.6"/>
+    
+    <!-- Right facet -->
+    <polygon points="60,10 95,50 80,120 60,100" fill="#0ea5e9" opacity="0.5"/>
+    
+    <!-- Top highlight -->
+    <polygon points="60,10 75,40 60,55 45,40" fill="url(#shine)"/>
+    
+    <!-- Center shine line -->
+    <line x1="60" y1="25" x2="60" y2="95" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+  </g>
+  
+  <!-- Sparkles -->
+  <circle cx="30" cy="35" r="2.5" fill="#ffffff" opacity="0.8"/>
+  <circle cx="90" cy="45" r="2" fill="#ffffff" opacity="0.7"/>
+  <circle cx="70" cy="25" r="1.5" fill="#ffffff" opacity="0.9"/>
+  <circle cx="45" cy="110" r="2" fill="#a5f3fc" opacity="0.6"/>
+</svg>

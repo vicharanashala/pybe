@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <defs>
+    <linearGradient id="badgeBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="inner" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <filter id="badgeGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Outer ring -->
+  <circle cx="80" cy="80" r="72" fill="url(#badgeBg)" filter="url(#badgeGlow)"/>
+  <circle cx="80" cy="80" r="64" fill="url(#inner)"/>
+  <circle cx="80" cy="80" r="58" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Wings / wind -->
+  <path d="M30 80 Q50 50 70 75 Q55 70 40 90 Z" fill="#38bdf8" opacity="0.9"/>
+  <path d="M130 80 Q110 50 90 75 Q105 70 120 90 Z" fill="#38bdf8" opacity="0.9"/>
+  
+  <!-- Crystal center -->
+  <polygon points="80,40 100,70 90,110 70,110 60,70" fill="#2dd4bf"/>
+  <polygon points="80,40 60,70 70,110 80,95" fill="#67e8f9" opacity="0.7"/>
+  <polygon points="80,40 100,70 90,110 80,95" fill="#0ea5e9" opacity="0.5"/>
+  
+  <!-- Star accents -->
+  <circle cx="80" cy="80" r="4" fill="#fbbf24"/>
+</svg>
