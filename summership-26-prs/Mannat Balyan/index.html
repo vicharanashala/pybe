@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Wind Crystal Chase • Python Loops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg">
+    <div class="aurora"></div>
+    <div class="stars"></div>
+  </div>
+
+  <!-- Top Progress -->
+  <div class="topbar">
+    <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="top-meta">
+      <span id="stageLabel">Start</span>
+      <span class="xp">✦ <span id="xpCount">0</span> XP</span>
+    </div>
+  </div>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="page active" id="hero">
+    <div class="hero-wrap">
+      <div class="hero-left">
+        <div class="pill">PYTHON LOOPS QUEST</div>
+        <h1>Master the Art of<br><span>Repeating Actions</span></h1>
+        <p class="lead">Captain Zephyr needs your help. The only way to collect enough Wind Crystals is by mastering <strong>for</strong> and <strong>while</strong> loops.</p>
+        
+        <div class="hero-features">
+          <div class="feat"><span>🌀</span> for & while</div>
+          <div class="feat"><span>🔢</span> range()</div>
+          <div class="feat"><span>⏭️</span> continue</div>
+          <div class="feat"><span>🛑</span> break</div>
+        </div>
+
+        <button class="btn-main" id="startBtn">Begin the Quest →</button>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-art">
+          <img src="assets/floating-island.svg" alt="Floating Island" class="island-img" />
+          <img src="assets/captain-zephyr.svg" alt="Captain Zephyr" class="captain-img" />
+          <img src="assets/wind-crystal.svg" alt="Wind Crystal" class="crystal-img c1" />
+          <img src="assets/wind-crystal.svg" alt="Wind Crystal" class="crystal-img c2" />
+          <img src="assets/wind-crystal.svg" alt="Wind Crystal" class="crystal-img c3" />
+          <img src="assets/wind-gust.svg" alt="Wind" class="wind-img" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== STORY ==================== -->
+  <section class="page" id="story">
+    <div class="content">
+      <div class="chapter">CHAPTER 01</div>
+      <h2>The Problem of Endless Work</h2>
+
+      <div class="story-stage">
+        <div class="story-visual">
+          <div class="big-avatar">
+            <img src="assets/captain-zephyr.svg" alt="Captain Zephyr" class="avatar-img" />
+          </div>
+          <div class="avatar-label">Captain Zephyr</div>
+        </div>
+
+        <div class="story-text">
+          <div class="bubble">
+            <p>Every day I fly to the floating islands to collect Wind Crystals.</p>
+          </div>
+          <div class="bubble highlight">
+            <p>But writing the same flying instructions <strong>again and again</strong> is exhausting and error-prone.</p>
+          </div>
+          <div class="bubble">
+            <p>There has to be a smarter way… a way to tell the computer:</p>
+            <p class="quote">“Do this action multiple times for me.”</p>
+          </div>
+          <div class="bubble final">
+            <p>That smarter way is called a <strong>Loop</strong>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="story-insight">
+        <div class="insight-icon">💡</div>
+        <div>
+          <strong>Key Insight</strong>
+          <p>Loops exist so humans don’t have to repeat themselves. The computer does the repetition.</p>
+        </div>
+      </div>
+
+      <button class="btn-main next" data-next="concepts">Learn the Tools →</button>
+    </div>
+  </section>
+
+  <!-- ==================== CONCEPTS ==================== -->
+  <section class="page" id="concepts">
+    <div class="content">
+      <div class="chapter">CHAPTER 02</div>
+      <h2>Your Loop Toolkit</h2>
+      <p class="sub">Five essential tools every Python explorer needs.</p>
+
+      <div class="toolkit">
+        <div class="tool">
+          <div class="tool-icon">🌀</div>
+          <h3>for</h3>
+          <p class="tag">Known count</p>
+          <p>Repeat a fixed number of times.</p>
+          <pre>for i in range(5):
+    collect()</pre>
+        </div>
+        <div class="tool">
+          <div class="tool-icon">♾️</div>
+          <h3>while</h3>
+          <p class="tag">Condition based</p>
+          <p>Repeat while a condition stays true.</p>
+          <pre>while energy > 0:
+    fly()</pre>
+        </div>
+        <div class="tool">
+          <div class="tool-icon">🔢</div>
+          <h3>range()</h3>
+          <p class="tag">Number maker</p>
+          <p>Creates sequences for for-loops.</p>
+          <pre>range(5) → 0 1 2 3 4</pre>
+        </div>
+        <div class="tool">
+          <div class="tool-icon">⏭️</div>
+          <h3>continue</h3>
+          <p class="tag">Skip once</p>
+          <p>Skip the rest of this turn only.</p>
+          <pre>if storm:
+    continue</pre>
+        </div>
+        <div class="tool">
+          <div class="tool-icon">🛑</div>
+          <h3>break</h3>
+          <p class="tag">Stop completely</p>
+          <p>Exit the loop immediately.</p>
+          <pre>if danger:
+    break</pre>
+        </div>
+      </div>
+
+      <button class="btn-main next" data-next="challenge1">Start Challenges →</button>
+    </div>
+  </section>
+
+  <!-- ==================== CHALLENGE 1 ==================== -->
+  <section class="page" id="challenge1">
+    <div class="content">
+      <div class="chapter">CHALLENGE 01</div>
+      <h2>Collect 5 Crystals</h2>
+      <p class="sub">Use a <code>for</code> loop with <code>range(5)</code>.</p>
+
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head">zephyr.py <div class="dots"><i></i><i></i><i></i></div></div>
+          <textarea id="code1">for i in range(5):
+    print("Crystal collected!")</textarea>
+          <div class="panel-actions">
+            <button class="btn-run" onclick="run1()">▶ Run</button>
+            <button class="btn-ghost" onclick="hint(1)">Hint</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">Output</div>
+          <div class="output" id="out1">Click Run to see the result…</div>
+          <div class="msg" id="msg1"></div>
+        </div>
+      </div>
+
+      <div class="crystals" id="crystals1"></div>
+      <button class="btn-main next hidden" id="n1" data-next="challenge2">Next Challenge →</button>
+    </div>
+  </section>
+
+  <!-- ==================== CHALLENGE 2 ==================== -->
+  <section class="page" id="challenge2">
+    <div class="content">
+      <div class="chapter">CHALLENGE 02</div>
+      <h2>Fly Until Energy Ends</h2>
+      <p class="sub">Use a <code>while</code> loop. Start with energy = 4.</p>
+
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head">energy.py <div class="dots"><i></i><i></i><i></i></div></div>
+          <textarea id="code2">energy = 4
+while energy > 0:
+    print(f"Flying… energy: {energy}")
+    energy -= 1
+print("Landed!")</textarea>
+          <div class="panel-actions">
+            <button class="btn-run" onclick="run2()">▶ Run</button>
+            <button class="btn-ghost" onclick="hint(2)">Hint</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">Output</div>
+          <div class="output" id="out2">Click Run…</div>
+          <div class="msg" id="msg2"></div>
+        </div>
+      </div>
+
+      <div class="energy-wrap">
+        <span>Energy</span>
+        <div class="energy-bar"><div class="energy-fill" id="energyFill"></div></div>
+      </div>
+      <button class="btn-main next hidden" id="n2" data-next="challenge3">Next →</button>
+    </div>
+  </section>
+
+  <!-- ==================== CHALLENGE 3 ==================== -->
+  <section class="page" id="challenge3">
+    <div class="content">
+      <div class="chapter">CHALLENGE 03</div>
+      <h2>Skip Storms, Stop at Danger</h2>
+      <p class="sub">Use <code>continue</code> and <code>break</code> correctly.</p>
+
+      <div class="split">
+        <div class="panel">
+          <div class="panel-head">navigate.py <div class="dots"><i></i><i></i><i></i></div></div>
+          <textarea id="code3">islands = ["clear","storm","clear","danger","clear"]
+
+for island in islands:
+    if island == "storm":
+        print("Skip storm")
+        continue
+    if island == "danger":
+        print("Danger! Stop")
+        break
+    print("Collect on", island)</textarea>
+          <div class="panel-actions">
+            <button class="btn-run" onclick="run3()">▶ Run</button>
+            <button class="btn-ghost" onclick="hint(3)">Hint</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head">Output</div>
+          <div class="output" id="out3">Click Run…</div>
+          <div class="msg" id="msg3"></div>
+        </div>
+      </div>
+      <button class="btn-main next hidden" id="n3" data-next="puzzle">Final Challenge →</button>
+    </div>
+  </section>
+
+  <!-- ==================== NEW PUZZLE (Click-to-Order) ==================== -->
+  <section class="page" id="puzzle">
+    <div class="content">
+      <div class="chapter">FINAL CHALLENGE</div>
+      <h2 id="puzzleTitle">Build the Correct Loop</h2>
+      <p class="sub" id="puzzleSub">Click the lines in the correct order.</p>
+
+      <div class="order-puzzle">
+        <div class="order-slots" id="slots"></div>
+        <div class="order-choices" id="choices"></div>
+      </div>
+
+      <div class="puzzle-btns">
+        <button class="btn-run" onclick="checkOrder()">Check Order ✓</button>
+        <button class="btn-ghost" onclick="resetOrder()">Reset</button>
+        <button class="btn-ghost" onclick="showSolution()">Show Solution</button>
+      </div>
+
+      <div class="solution hidden" id="solutionBox">
+        <strong>Correct Order:</strong>
+        <ol id="solList"></ol>
+      </div>
+
+      <div class="msg" id="msgPuzzle"></div>
+      <button class="btn-main next hidden" id="nPuzzle" data-next="result">Claim Badge →</button>
+    </div>
+  </section>
+
+  <!-- ==================== RESULT ==================== -->
+  <section class="page" id="result">
+    <div class="content result-box">
+      <div class="big-badge" id="finalBadge">
+        <img src="assets/badge-sky.svg" alt="Sky Badge" class="badge-img" />
+      </div>
+      <h2 id="resultTitle">Sky Glider</h2>
+      <p id="resultText">You mastered Python loops!</p>
+
+      <div class="stats">
+        <div><span id="fXp">0</span><small>XP</small></div>
+        <div><span id="fCh">0</span><small>Challenges</small></div>
+        <div><span id="fCr">0</span><small>Crystals</small></div>
+      </div>
+
+      <div class="badges" id="badges"></div>
+      <button class="btn-main" onclick="location.reload()">Fly Again</button>
+    </div>
+  </section>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>

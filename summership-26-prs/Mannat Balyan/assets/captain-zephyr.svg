@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" width="200" height="240">
+  <!-- Soft glow -->
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cape" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#0ea5e9"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fde68a"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="90" r="80" fill="url(#glow)"/>
+  
+  <!-- Cape / wind cloak -->
+  <path d="M55 130 Q30 160 40 200 Q70 180 100 190 Q130 180 160 200 Q170 160 145 130 Z" fill="url(#cape)" opacity="0.9"/>
+  <path d="M60 135 Q45 155 55 185 Q80 170 100 175 Q120 170 145 185 Q155 155 140 135" fill="#0ea5e9" opacity="0.6"/>
+  
+  <!-- Body / jacket -->
+  <ellipse cx="100" cy="155" rx="38" ry="45" fill="#0f766e"/>
+  <rect x="75" y="120" width="50" height="55" rx="12" fill="#134e4a"/>
+  
+  <!-- Scarf -->
+  <path d="M70 125 Q100 145 130 125 Q125 140 100 150 Q75 140 70 125" fill="#fbbf24"/>
+  
+  <!-- Head -->
+  <circle cx="100" cy="85" r="42" fill="url(#skin)"/>
+  
+  <!-- Pilot hat -->
+  <ellipse cx="100" cy="55" rx="48" ry="18" fill="#1e293b"/>
+  <path d="M55 55 Q100 30 145 55" fill="#334155"/>
+  <rect x="70" y="48" width="60" height="12" rx="4" fill="#0f172a"/>
+  <circle cx="100" cy="54" r="6" fill="#2dd4bf"/>
+  
+  <!-- Goggles -->
+  <ellipse cx="82" cy="82" rx="14" ry="11" fill="#0ea5e9" stroke="#1e293b" stroke-width="3"/>
+  <ellipse cx="118" cy="82" rx="14" ry="11" fill="#0ea5e9" stroke="#1e293b" stroke-width="3"/>
+  <rect x="94" y="78" width="12" height="6" rx="2" fill="#1e293b"/>
+  <circle cx="82" cy="82" r="6" fill="#e0f2fe" opacity="0.7"/>
+  <circle cx="118" cy="82" r="6" fill="#e0f2fe" opacity="0.7"/>
+  
+  <!-- Smile -->
+  <path d="M88 100 Q100 112 112 100" fill="none" stroke="#92400e" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Hair tuft -->
+  <path d="M85 45 Q90 25 100 40 Q110 25 115 45" fill="#1e293b"/>
+</svg>

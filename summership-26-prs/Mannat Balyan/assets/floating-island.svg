@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 180" width="280" height="180">
+  <defs>
+    <linearGradient id="islandTop" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="islandRock" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#78716c"/>
+      <stop offset="50%" stop-color="#57534e"/>
+      <stop offset="100%" stop-color="#292524"/>
+    </linearGradient>
+    <linearGradient id="waterfall" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#67e8f9" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0.1"/>
+    </linearGradient>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Floating shadow -->
+  <ellipse cx="140" cy="165" rx="90" ry="10" fill="#000" opacity="0.25"/>
+  
+  <!-- Waterfall -->
+  <path d="M175 95 Q185 120 180 160" stroke="url(#waterfall)" stroke-width="12" fill="none" opacity="0.7"/>
+  <path d="M185 100 Q195 125 190 160" stroke="url(#waterfall)" stroke-width="8" fill="none" opacity="0.5"/>
+  
+  <!-- Main rock body -->
+  <path d="M40 90 
+           Q50 70 80 75 
+           Q110 60 140 65 
+           Q180 55 210 70 
+           Q240 80 250 95 
+           Q255 110 240 120 
+           Q200 135 140 130 
+           Q80 135 50 120 
+           Q30 110 40 90 Z" 
+        fill="url(#islandRock)"/>
+  
+  <!-- Grass top -->
+  <path d="M45 90 
+           Q55 72 85 76 
+           Q115 62 140 67 
+           Q175 58 205 72 
+           Q235 82 245 95 
+           Q230 88 200 82 
+           Q160 70 140 75 
+           Q110 70 80 80 
+           Q55 85 45 90 Z" 
+        fill="url(#islandTop)"/>
+  
+  <!-- Small trees / bushes -->
+  <circle cx="90" cy="72" r="12" fill="#15803d"/>
+  <circle cx="100" cy="68" r="10" fill="#16a34a"/>
+  <rect x="96" y="75" width="5" height="12" fill="#78350f"/>
+  
+  <circle cx="175" cy="70" r="14" fill="#15803d"/>
+  <circle cx="185" cy="65" r="11" fill="#22c55e"/>
+  <rect x="180" y="75" width="5" height="14" fill="#78350f"/>
+  
+  <!-- Crystal on island -->
+  <g transform="translate(130, 40)" filter="url(#softGlow)">
+    <polygon points="15,0 28,18 22,45 8,45 2,18" fill="#2dd4bf" opacity="0.9"/>
+    <polygon points="15,0 2,18 8,45 15,35" fill="#67e8f9" opacity="0.6"/>
+    <polygon points="15,0 28,18 22,45 15,35" fill="#0ea5e9" opacity="0.5"/>
+  </g>
+  
+  <!-- Small floating rocks -->
+  <ellipse cx="55" cy="50" rx="12" ry="6" fill="#57534e" opacity="0.7"/>
+  <ellipse cx="230" cy="55" rx="10" ry="5" fill="#57534e" opacity="0.6"/>
+  <ellipse cx="70" cy="40" rx="8" ry="4" fill="#78716c" opacity="0.5"/>
+</svg>
