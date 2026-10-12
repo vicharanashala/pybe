@@ -1,0 +1,292 @@
+.ill {
+  position: absolute;
+  inset: 0;
+}
+
+.ill svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.ill-cloud {
+  animation: ill-cloud 30s ease-in-out infinite alternate;
+}
+
+.ill-cloud--2 {
+  animation-name: ill-cloud-2;
+  animation-duration: 36s;
+}
+
+.ill-moon-pulse {
+  animation: ill-moon-pulse 4.5s ease-in-out infinite alternate;
+}
+
+.ill-shimmer {
+  animation: ill-shimmer 4s ease-in-out infinite alternate;
+}
+
+.ill-shimmer--2 {
+  animation-delay: 1.1s;
+}
+
+.ill-shimmer--3 {
+  animation-delay: 2s;
+}
+
+.ill-ear {
+  animation: ill-ear 5s ease-in-out infinite alternate;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+.ill-ear--r {
+  animation-delay: 0.6s;
+}
+
+.ill-water-rise {
+  animation: ill-water-rise 6s ease-in-out infinite alternate;
+}
+
+.ill-pebble-fall {
+  animation: ill-pebble-fall 4.6s ease-in infinite;
+}
+
+.ill-sparkle {
+  animation: ill-sparkle 3s ease-in-out infinite alternate;
+}
+
+.ill-sparkle--2 {
+  animation-delay: 0.8s;
+}
+
+.ill-sparkle--3 {
+  animation-delay: 1.6s;
+}
+
+.ill-sun-glow {
+  animation: ill-sun-glow 5s ease-in-out infinite alternate;
+}
+
+.ill-walk {
+  animation: ill-walk 1.5s ease-in-out infinite alternate;
+}
+
+.ill-leg {
+  animation: ill-step 1.5s ease-in-out infinite alternate;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.ill-leg--fr,
+.ill-leg--bl {
+  animation-direction: alternate-reverse;
+}
+
+.ill-bfly-wing {
+  animation: ill-bfly-flap 0.55s ease-in-out infinite alternate;
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.ill-butterfly--1 {
+  animation: ill-butterfly-1 20s linear infinite;
+}
+
+.ill-butterfly--2 {
+  animation: ill-butterfly-2 24s linear infinite;
+  animation-delay: -8s;
+}
+
+.ill-leaf-fall {
+  animation: ill-leaf-fall 12s linear infinite;
+}
+
+.ill-leaf-fall--2 {
+  animation-delay: -6s;
+}
+
+@keyframes ill-ear {
+  from {
+    transform: rotate(-4deg);
+  }
+  to {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes ill-moon-pulse {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ill-cloud {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(28px);
+  }
+}
+
+@keyframes ill-cloud-2 {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-24px);
+  }
+}
+
+@keyframes ill-shimmer {
+  from {
+    opacity: 0.35;
+  }
+  to {
+    opacity: 0.75;
+  }
+}
+
+@keyframes ill-water-rise {
+  from {
+    transform: translateY(8px);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes ill-pebble-fall {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  60% {
+    transform: translate(0, 30px);
+    opacity: 1;
+  }
+  75% {
+    transform: translate(0, 30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 30px);
+    opacity: 0;
+  }
+}
+
+@keyframes ill-sparkle {
+  from {
+    opacity: 0.25;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes ill-sun-glow {
+  from {
+    opacity: 0.75;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ill-walk {
+  from {
+    transform: translateY(0) rotate(-0.5deg);
+  }
+  to {
+    transform: translateY(-6px) rotate(0.6deg);
+  }
+}
+
+@keyframes ill-step {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes ill-bfly-flap {
+  from {
+    transform: scaleX(0.35);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes ill-butterfly-1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(45px, -30px);
+  }
+  40% {
+    transform: translate(90px, 6px);
+  }
+  60% {
+    transform: translate(135px, -22px);
+  }
+  80% {
+    transform: translate(180px, 8px);
+  }
+  100% {
+    transform: translate(220px, -14px);
+  }
+}
+
+@keyframes ill-butterfly-2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-35px, -28px);
+  }
+  50% {
+    transform: translate(-70px, 8px);
+  }
+  75% {
+    transform: translate(-105px, -20px);
+  }
+  100% {
+    transform: translate(-140px, 4px);
+  }
+}
+
+@keyframes ill-leaf-fall {
+  0% {
+    transform: translate(0, -20px) rotate(0deg);
+  }
+  25% {
+    transform: translate(34px, 110px) rotate(70deg);
+  }
+  50% {
+    transform: translate(-24px, 240px) rotate(150deg);
+  }
+  75% {
+    transform: translate(30px, 370px) rotate(220deg);
+  }
+  100% {
+    transform: translate(-10px, 540px) rotate(300deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ill *,
+  .ill *::before,
+  .ill *::after {
+    animation: none !important;
+  }
+}
