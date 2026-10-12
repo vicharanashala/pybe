@@ -1,0 +1,23 @@
+{
+    "id":  "cs_026",
+    "title":  "Designing for csv",
+    "scenario":  "A team is dealing with csv, import, load. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "csv",
+                      "import",
+                      "load"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "modules",
+                      "csv",
+                      "import",
+                      "load"
+                  ],
+    "constructHint":  [
+                          "module",
+                          "import"
+                      ],
+    "jonassenType":  "design",
+    "level":  1
+}

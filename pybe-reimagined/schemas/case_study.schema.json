@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://pybe.dev/schemas/case_study.schema.json",
+  "title": "CaseStudy",
+  "description": "A Pybe case study — scenario first, constructs revealed later.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "scenario",
+    "hookWords",
+    "piagetStage",
+    "topicTags",
+    "constructHint",
+    "jonassenType",
+    "level"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^cs_[0-9]{3,}$",
+      "description": "Unique id, e.g. cs_001."
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 120
+    },
+    "scenario": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 2000,
+      "description": "The case scenario as presented to the learner. INV-PB-2."
+    },
+    "hookWords": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Short keywords used by the case-study generator (Phase 7)."
+    },
+    "piagetStage": {
+      "type": "string",
+      "enum": ["sensorimotor", "preoperational", "concrete", "formal"]
+    },
+    "topicTags": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "constructHint": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "Python constructs the learner is expected to discover."
+    },
+    "jonassenType": {
+      "type": "string",
+      "enum": [
+        "structured",
+        "design",
+        "dilemma",
+        "unstructured",
+        "story",
+        "performance",
+        "negotiation",
+        "rule-using",
+        "rule-induction",
+        "diagnosis",
+        "troubleshooting"
+      ]
+    },
+    "level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "practitionerNote": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 280,
+      "description": "Optional one- or two-sentence real-world anchor for the same construct."
+    }
+  }
+}

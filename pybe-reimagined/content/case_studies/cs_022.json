@@ -1,0 +1,24 @@
+{
+    "id":  "cs_022",
+    "title":  "Designing for csv",
+    "scenario":  "A team is dealing with csv, line, parse. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "csv",
+                      "line",
+                      "parse"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "strings",
+                      "csv",
+                      "line",
+                      "parse"
+                  ],
+    "constructHint":  [
+                          "str",
+                          "f-string",
+                          "slice"
+                      ],
+    "jonassenType":  "design",
+    "level":  1
+}

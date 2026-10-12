@@ -1,0 +1,23 @@
+{
+    "id":  "cs_006",
+    "title":  "Loose ends around rows",
+    "scenario":  "A team is dealing with rows, filter, where. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "rows",
+                      "filter",
+                      "where"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "data",
+                      "rows",
+                      "filter",
+                      "where"
+                  ],
+    "constructHint":  [
+                          "list",
+                          "dict"
+                      ],
+    "jonassenType":  "unstructured",
+    "level":  1
+}

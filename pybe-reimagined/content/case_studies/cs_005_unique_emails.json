@@ -1,0 +1,20 @@
+{
+    "id":  "cs_005",
+    "title":  "Unique Emails from a Signup List",
+    "scenario":  "A signup form received a thousand email addresses. Some are duplicates because the same person clicked submit twice. You want to keep exactly one copy of each address. What Python construct keeps items but ignores duplicates the moment you add them?",
+    "hookWords":  [
+                      "emails",
+                      "unique",
+                      "duplicates",
+                      "signup"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "sets"
+                  ],
+    "constructHint":  [
+                          "set"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

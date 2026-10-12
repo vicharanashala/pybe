@@ -1,0 +1,27 @@
+{
+    "id":  "cs_033",
+    "title":  "Counting Spirals on a Sunflower Head",
+    "scenario":  "You are a botanist in a field outside Bengaluru, leaning over a sunflower head. Two families of spirals meet at the centre: 34 spirals running clockwise and 55 running counter-clockwise. This is not a coincidence — the numbers 34 and 55 are consecutive Fibonacci numbers, and almost every sunflower in the world obeys this rule. Before you walk back to the lab, you want Python to print the first eight Fibonacci numbers so you can show a visiting school group why nature keeps returning to the same sequence. The first two numbers are 1 and 1; every number after that is the sum of the previous two. What Python construct lets you build up such a sequence step by step?",
+    "hookWords":  [
+                      "sunflower",
+                      "fibonacci",
+                      "spiral",
+                      "golden",
+                      "nature",
+                      "sequence"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "lists",
+                      "loops",
+                      "sequences",
+                      "mathematics"
+                  ],
+    "constructHint":  [
+                          "list",
+                          "while",
+                          "append"
+                      ],
+    "jonassenType":  "story",
+    "level":  1
+}

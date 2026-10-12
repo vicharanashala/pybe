@@ -1,0 +1,27 @@
+{
+    "id":  "cs_035",
+    "title":  "Stacking Diyas in a Triangle",
+    "scenario":  "It is the eve of Diwali. You have been asked by the housing society to lay out clay diyas (oil lamps) on the front steps in a perfect triangle: 1 diya on the top row, 3 on the next, 6 on the next, 10 on the next. The pattern is that each row has one more diya than the previous row, and the rows keep growing by one more each step. You need to know, before the trucks arrive, how many diyas to order for n rows. What Python construct lets you keep a running total as the rows grow?",
+    "hookWords":  [
+                      "diya",
+                      "diwali",
+                      "triangle",
+                      "rows",
+                      "festival",
+                      "accumulator"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "loops",
+                      "range",
+                      "arithmetic",
+                      "accumulator"
+                  ],
+    "constructHint":  [
+                          "for",
+                          "range",
+                          "sum"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

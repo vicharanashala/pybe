@@ -1,0 +1,23 @@
+{
+    "id":  "cs_010",
+    "title":  "Designing for guests",
+    "scenario":  "A team is dealing with guests, invite, duplicate. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "guests",
+                      "invite",
+                      "duplicate"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "sets",
+                      "guests",
+                      "invite",
+                      "duplicate"
+                  ],
+    "constructHint":  [
+                          "set",
+                          "for"
+                      ],
+    "jonassenType":  "design",
+    "level":  1
+}

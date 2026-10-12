@@ -1,0 +1,25 @@
+{
+    "id":  "cs_018",
+    "title":  "Loose ends around poll",
+    "scenario":  "A team is dealing with poll, temperature, readings. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "poll",
+                      "temperature",
+                      "readings"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "loops",
+                      "poll",
+                      "temperature",
+                      "readings"
+                  ],
+    "constructHint":  [
+                          "for",
+                          "range",
+                          "sum",
+                          "len"
+                      ],
+    "jonassenType":  "unstructured",
+    "level":  1
+}

@@ -1,0 +1,24 @@
+{
+    "id":  "cs_011",
+    "title":  "Designing for leaderboard",
+    "scenario":  "A team is dealing with leaderboard, scores, top. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "leaderboard",
+                      "scores",
+                      "top"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "lists",
+                      "leaderboard",
+                      "scores",
+                      "top"
+                  ],
+    "constructHint":  [
+                          "list",
+                          "for",
+                          "append"
+                      ],
+    "jonassenType":  "design",
+    "level":  1
+}

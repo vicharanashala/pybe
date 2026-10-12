@@ -1,0 +1,25 @@
+{
+    "id":  "cs_019",
+    "title":  "Fizzbuzz case study",
+    "scenario":  "A team is dealing with fizzbuzz, thirty, count. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "fizzbuzz",
+                      "thirty",
+                      "count"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "loops",
+                      "fizzbuzz",
+                      "thirty",
+                      "count"
+                  ],
+    "constructHint":  [
+                          "for",
+                          "range",
+                          "sum",
+                          "len"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

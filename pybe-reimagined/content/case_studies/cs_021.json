@@ -1,0 +1,24 @@
+{
+    "id":  "cs_021",
+    "title":  "Sentence case study",
+    "scenario":  "A team is dealing with sentence, word, count. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "sentence",
+                      "word",
+                      "count"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "strings",
+                      "sentence",
+                      "word",
+                      "count"
+                  ],
+    "constructHint":  [
+                          "str",
+                          "f-string",
+                          "slice"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

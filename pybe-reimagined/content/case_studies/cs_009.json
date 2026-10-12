@@ -1,0 +1,23 @@
+{
+    "id":  "cs_009",
+    "title":  "Logfile case study",
+    "scenario":  "A team is dealing with logfile, tail, lines. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "logfile",
+                      "tail",
+                      "lines"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "files",
+                      "logfile",
+                      "tail",
+                      "lines"
+                  ],
+    "constructHint":  [
+                          "open",
+                          "with"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

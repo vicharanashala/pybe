@@ -1,0 +1,23 @@
+{
+    "id":  "cs_027",
+    "title":  "Input case study",
+    "scenario":  "A team is dealing with input, parse, safe. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "input",
+                      "parse",
+                      "safe"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "errors",
+                      "input",
+                      "parse",
+                      "safe"
+                  ],
+    "constructHint":  [
+                          "try",
+                          "except"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

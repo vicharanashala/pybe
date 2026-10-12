@@ -1,0 +1,23 @@
+{
+    "id":  "cs_030",
+    "title":  "Emails case study",
+    "scenario":  "A team is dealing with emails, extract, pattern. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "emails",
+                      "extract",
+                      "pattern"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "regex",
+                      "emails",
+                      "extract",
+                      "pattern"
+                  ],
+    "constructHint":  [
+                          "re",
+                          "str"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

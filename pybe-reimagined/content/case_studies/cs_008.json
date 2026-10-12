@@ -1,0 +1,24 @@
+{
+    "id":  "cs_008",
+    "title":  "Shopping case study",
+    "scenario":  "A team is dealing with shopping, cart, items. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "shopping",
+                      "cart",
+                      "items"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "lists",
+                      "shopping",
+                      "cart",
+                      "items"
+                  ],
+    "constructHint":  [
+                          "list",
+                          "for",
+                          "append"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}

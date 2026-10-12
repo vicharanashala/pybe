@@ -1,0 +1,24 @@
+{
+    "id":  "cs_012",
+    "title":  "Class case study",
+    "scenario":  "A team is dealing with class, students, attendance. What Python construct helps make sense of it?",
+    "hookWords":  [
+                      "class",
+                      "students",
+                      "attendance"
+                  ],
+    "piagetStage":  "concrete",
+    "topicTags":  [
+                      "dicts",
+                      "class",
+                      "students",
+                      "attendance"
+                  ],
+    "constructHint":  [
+                          "dict",
+                          "for",
+                          "get"
+                      ],
+    "jonassenType":  "structured",
+    "level":  1
+}
