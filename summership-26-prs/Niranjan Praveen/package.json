@@ -1,0 +1,15 @@
+{
+  "name": "pybe-mern-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "installAll": "npm install --prefix server && npm install --prefix client",
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "seed": "npm run seed --prefix server",
+    "start": "npm run start --prefix server"
+  },
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "devDependencies": {}
+}
