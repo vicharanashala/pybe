@@ -36,28 +36,35 @@ function App() {
   const [form, setForm] = useState({ learnerName: 'Guest learner', reasoning: '', promptText: '', reflection: '' });
   const [activeResult, setActiveResult] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
   const concepts = useMemo(() => [...new Set(scenarios.flatMap((scenario) => scenario.concepts || []))].sort(), [scenarios]);
 
   async function refresh() {
-    const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
-    const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
-      api(`/scenarios?${params}`),
-      api('/sessions'),
-      api('/analytics'),
-      api('/roadmap')
-    ]);
-    setScenarios(scenarioData);
-    setSessions(sessionData);
-    setAnalytics(analyticsData);
-    setRoadmap(roadmapData);
-    setSelected((current) => current || scenarioData[0] || null);
-    setLoading(false);
+    setLoadError('');
+    try {
+      const params = new URLSearchParams(Object.entries(filters).filter(([, value]) => value));
+      const [scenarioData, sessionData, analyticsData, roadmapData] = await Promise.all([
+        api(`/scenarios?${params}`),
+        api('/sessions'),
+        api('/analytics'),
+        api('/roadmap')
+      ]);
+      setScenarios(scenarioData);
+      setSessions(sessionData);
+      setAnalytics(analyticsData);
+      setRoadmap(roadmapData);
+      setSelected((current) => current || scenarioData[0] || null);
+    } catch (error) {
+      setLoadError(error.message || 'Unable to reach the PyBe API.');
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
-    refresh().catch(console.error);
+    refresh();
   }, [filters.q, filters.difficulty, filters.concept]);
 
   async function submitSession(event) {
@@ -78,6 +85,16 @@ function App() {
   }
 
   if (loading) return <main className="loading">Loading PyBe...</main>;
+  if (loadError) {
+    return (
+      <main className="loading">
+        <div role="alert">
+          <p>Could not load PyBe data: {loadError}</p>
+          <button type="button" onClick={refresh}>Retry</button>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="app-shell">
