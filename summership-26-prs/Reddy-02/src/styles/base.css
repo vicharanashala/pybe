@@ -1,0 +1,227 @@
+/* ============================================================
+   DASARA DISCOVERY LAB — BASE STYLES
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--clr-text-primary);
+  background-color: var(--clr-bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Focus indicators ── */
+:focus-visible {
+  outline: 2px solid var(--clr-focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Text elements ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-ui);
+  font-weight: var(--weight-semi);
+  line-height: var(--leading-tight);
+  color: var(--clr-text-primary);
+}
+
+h1 { font-size: var(--text-4xl); }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+h6 { font-size: var(--text-md); }
+
+p {
+  color: var(--clr-text-secondary);
+  line-height: var(--leading-loose);
+}
+
+a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--clr-gold);
+}
+
+code, pre {
+  font-family: var(--font-code);
+  font-size: 0.9em;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  padding: var(--sp-3) var(--sp-6);
+  border-radius: var(--radius-full);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--clr-saffron);
+  color: var(--clr-charcoal);
+  border-color: var(--clr-saffron);
+}
+.btn-primary:hover {
+  background: #F0B55A;
+  box-shadow: var(--shadow-glow-saffron);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--clr-ivory-dim);
+  border-color: rgba(255,247,233,0.2);
+}
+.btn-secondary:hover {
+  border-color: var(--clr-saffron-dim);
+  color: var(--clr-ivory);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--clr-text-muted);
+  border-color: transparent;
+  padding-left: var(--sp-3);
+  padding-right: var(--sp-3);
+}
+.btn-ghost:hover {
+  color: var(--clr-text-secondary);
+  background: rgba(255,255,255,0.05);
+}
+
+.btn-sm {
+  font-size: var(--text-sm);
+  padding: var(--sp-2) var(--sp-4);
+}
+
+.btn-lg {
+  font-size: var(--text-lg);
+  padding: var(--sp-4) var(--sp-8);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Layout helpers ── */
+.container {
+  width: 100%;
+  max-width: var(--max-content);
+  margin-inline: auto;
+  padding-inline: var(--sp-6);
+}
+
+.container-wide {
+  width: 100%;
+  max-width: var(--max-wide);
+  margin-inline: auto;
+  padding-inline: var(--sp-6);
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: rgba(255,247,233,0.08);
+  border: none;
+}
+
+/* ── Visually hidden (screen readers) ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Story text ── */
+.story-text {
+  font-family: var(--font-story);
+  font-size: var(--text-md);
+  line-height: var(--leading-loose);
+  color: var(--clr-ivory-dim);
+}
+
+/* ── Scrollbar styling ── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--clr-maroon-light);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-saffron-dim);
+}
+
+/* ── Responsive typography ── */
+@media (max-width: 768px) {
+  h1 { font-size: var(--text-3xl); }
+  h2 { font-size: var(--text-2xl); }
+  h3 { font-size: var(--text-xl); }
+
+  .btn-lg {
+    font-size: var(--text-base);
+    padding: var(--sp-3) var(--sp-6);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: var(--text-2xl); }
+  h2 { font-size: var(--text-xl); }
+}

@@ -1,0 +1,192 @@
+/* ============================================================
+   DASARA DISCOVERY LAB — ANIMATION SYSTEM
+   Uses transform + opacity only; no expensive filters in loops
+   ============================================================ */
+
+/* ── Keyframes ── */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes lampGlow {
+  0%, 100% { opacity: 0.75; transform: scale(1);   }
+  50%       { opacity: 1;    transform: scale(1.05); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0);    }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes particleDrift {
+  0%   { transform: translateY(0)    translateX(0);    opacity: 0.7; }
+  100% { transform: translateY(-80px) translateX(20px); opacity: 0;  }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1;    }
+  50%       { opacity: 0.55; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg);   }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes successBurst {
+  0%   { transform: scale(0.8);  opacity: 0;   }
+  60%  { transform: scale(1.08); opacity: 1;   }
+  100% { transform: scale(1);    opacity: 1;   }
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0);  }
+  20%       { transform: translateX(-6px); }
+  40%       { transform: translateX(6px);  }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px);  }
+}
+
+@keyframes highlightLine {
+  0%   { background: rgba(232,166,74,0);    }
+  30%  { background: rgba(232,166,74,0.18); }
+  100% { background: rgba(232,166,74,0.10); }
+}
+
+@keyframes celebrationRise {
+  0%   { transform: translateY(0)   scale(1);   opacity: 1; }
+  100% { transform: translateY(-120px) scale(0.6); opacity: 0; }
+}
+
+/* ── Utility animation classes ── */
+
+.anim-fadeIn      { animation: fadeIn      var(--dur-normal) var(--ease-out) both; }
+.anim-fadeInUp    { animation: fadeInUp    var(--dur-slow)   var(--ease-out) both; }
+.anim-fadeInDown  { animation: fadeInDown  var(--dur-slow)   var(--ease-out) both; }
+.anim-scaleIn     { animation: scaleIn     var(--dur-slow)   var(--ease-bounce) both; }
+.anim-slideRight  { animation: slideInRight var(--dur-slow)  var(--ease-out) both; }
+.anim-slideLeft   { animation: slideInLeft  var(--dur-slow)  var(--ease-out) both; }
+.anim-float       { animation: float 3s var(--ease-in-out) infinite; }
+.anim-pulse       { animation: pulse 2s var(--ease-in-out) infinite; }
+.anim-spin        { animation: spin  1s var(--ease-linear)  infinite; }
+.anim-successBurst{ animation: successBurst var(--dur-slow) var(--ease-bounce) both; }
+.anim-errorShake  { animation: errorShake var(--dur-slow) var(--ease-in-out) both; }
+
+/* Staggered children */
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 80ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 160ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 320ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 400ms; }
+
+/* ── Lamp glow effect ── */
+.lamp-glow {
+  animation: lampGlow 2.5s var(--ease-in-out) infinite;
+}
+
+/* ── Particle system ── */
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--clr-gold);
+  animation: particleDrift var(--dur-slower) ease-out infinite;
+}
+
+/* ── Code line highlight ── */
+.code-line-active {
+  animation: highlightLine 0.4s var(--ease-out) both;
+}
+
+/* ── Scene transition wrapper ── */
+.scene-enter {
+  animation: fadeInUp var(--dur-scene) var(--ease-out) both;
+}
+
+.scene-exit {
+  animation: fadeIn var(--dur-normal) var(--ease-out) reverse both;
+}
+
+/* ── Reduced motion: strip all animations ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto   !important;
+  }
+}

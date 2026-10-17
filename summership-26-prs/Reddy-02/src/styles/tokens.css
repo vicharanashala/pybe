@@ -1,0 +1,125 @@
+/* ============================================================
+   DASARA DISCOVERY LAB — DESIGN TOKENS
+   Festival-inspired palette with Apple-influenced clarity
+   ============================================================ */
+
+:root {
+  /* ── Dasara colour palette ── */
+  --clr-maroon:        #35151D;   /* Midnight maroon — primary background */
+  --clr-maroon-mid:    #4A1F28;   /* Mid maroon for surfaces */
+  --clr-maroon-light:  #621E2A;   /* Lighter maroon for cards */
+  --clr-vermilion:     #B83A32;   /* Deep vermilion — danger / error accent */
+  --clr-vermilion-dim: #8C2B25;   /* Muted vermilion for hover states */
+  --clr-saffron:       #E8A64A;   /* Muted saffron — active / primary accent */
+  --clr-saffron-dim:   #C98A35;   /* Dimmer saffron for borders */
+  --clr-saffron-glow:  rgba(232,166,74,0.18);
+  --clr-gold:          #C8A45D;   /* Antique gold — headings, icons */
+  --clr-gold-dim:      #A8874A;   /* Dimmer gold */
+  --clr-ivory:         #FFF7E9;   /* Warm ivory — primary text on dark */
+  --clr-ivory-dim:     #EDE0C8;   /* Secondary text */
+  --clr-ivory-muted:   #C8B99A;   /* Tertiary / captions */
+  --clr-charcoal:      #24201F;   /* Charcoal — text on light surfaces */
+  --clr-green-muted:   #536B50;   /* Muted green — success states */
+  --clr-green-glow:    rgba(83,107,80,0.20);
+
+  /* Semantic aliases */
+  --clr-bg:            var(--clr-maroon);
+  --clr-surface:       var(--clr-maroon-mid);
+  --clr-surface-raise: var(--clr-maroon-light);
+  --clr-text-primary:  var(--clr-ivory);
+  --clr-text-secondary:var(--clr-ivory-dim);
+  --clr-text-muted:    var(--clr-ivory-muted);
+  --clr-accent:        var(--clr-saffron);
+  --clr-accent-alt:    var(--clr-gold);
+  --clr-success:       var(--clr-green-muted);
+  --clr-error:         var(--clr-vermilion);
+  --clr-focus:         var(--clr-saffron);
+
+  /* ── Typography ── */
+  --font-ui:    'Outfit', 'Inter', system-ui, sans-serif;
+  --font-story: 'Lora', 'Georgia', serif;
+  --font-code:  'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.875rem;  /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-md:   1.125rem;  /* 18px */
+  --text-lg:   1.25rem;   /* 20px */
+  --text-xl:   1.5rem;    /* 24px */
+  --text-2xl:  1.875rem;  /* 30px */
+  --text-3xl:  2.25rem;   /* 36px */
+  --text-4xl:  3rem;      /* 48px */
+  --text-5xl:  3.75rem;   /* 60px */
+
+  --weight-light:   300;
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semi:    600;
+  --weight-bold:    700;
+
+  --leading-tight:  1.2;
+  --leading-snug:   1.4;
+  --leading-normal: 1.6;
+  --leading-loose:  1.8;
+
+  /* ── Spacing ── */
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.25rem;
+  --sp-6:  1.5rem;
+  --sp-8:  2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+  --sp-16: 4rem;
+  --sp-20: 5rem;
+  --sp-24: 6rem;
+
+  /* ── Radii ── */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ── Elevation / shadows ── */
+  --shadow-sm:  0 1px 4px rgba(0,0,0,0.3);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.5);
+  --shadow-xl:  0 16px 48px rgba(0,0,0,0.6);
+  --shadow-glow-gold:    0 0 24px rgba(200,164,93,0.25);
+  --shadow-glow-saffron: 0 0 24px rgba(232,166,74,0.30);
+  --shadow-glow-success: 0 0 16px rgba(83,107,80,0.35);
+  --shadow-glow-error:   0 0 16px rgba(184,58,50,0.35);
+
+  /* ── Motion ── */
+  --dur-instant:  80ms;
+  --dur-fast:     150ms;
+  --dur-normal:   300ms;
+  --dur-slow:     500ms;
+  --dur-slower:   800ms;
+  --dur-scene:    600ms;
+
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-linear:   linear;
+
+  /* ── Layout ── */
+  --max-content: 760px;
+  --max-wide:    1100px;
+  --max-code:    900px;
+}
+
+/* Reduced-motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast:   0ms;
+    --dur-normal: 0ms;
+    --dur-slow:   0ms;
+    --dur-slower: 0ms;
+    --dur-scene:  0ms;
+  }
+}
