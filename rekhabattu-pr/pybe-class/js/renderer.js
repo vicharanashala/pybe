@@ -811,6 +811,249 @@ const renderer = (function () {
     }, 180);
   }
 
+  function renderLessonContent(screen, container) {
+    container.appendChild(buildEyebrow(screen.eyebrow));
+    container.appendChild(el('h2', null, screen.title));
+
+    (screen.paragraphs || []).forEach((paragraph) => {
+      container.appendChild(el('p', 'exception-paragraph', paragraph));
+    });
+
+    if (screen.objectives && screen.objectives.length) {
+      const list = el('ul', 'exception-objectives');
+      screen.objectives.forEach((objective) => {
+        list.appendChild(el('li', null, objective));
+      });
+      container.appendChild(list);
+    }
+
+    if (screen.code) {
+      container.appendChild(el('pre', 'exception-code', screen.code));
+    }
+
+    if (screen.expected) {
+      const expected = el('div', 'exception-expected');
+      expected.appendChild(el('strong', null, 'Expected behaviour'));
+      expected.appendChild(el('p', null, screen.expected));
+      container.appendChild(expected);
+    }
+
+    if (screen.question) {
+      container.appendChild(el('p', 'exception-question', screen.question));
+    }
+
+    const isComplete = lessonEngine.isScreenComplete(screen.id);
+    const continueButton = el(
+      'button',
+      'primary-btn exception-continue',
+      isComplete ? 'Continue' : 'I’m ready — continue',
+    );
+    continueButton.type = 'button';
+    continueButton.disabled = isComplete;
+    continueButton.addEventListener('click', () => {
+      lessonEngine.markScreenComplete(screen.id);
+      continueButton.disabled = true;
+      notifyInteraction();
+    });
+    container.appendChild(continueButton);
+  }
+
+  function renderChoiceQuestion(screen, container) {
+    container.appendChild(buildEyebrow(screen.eyebrow));
+    container.appendChild(el('h2', null, screen.title));
+    container.appendChild(el('p', 'exception-scenario', screen.scenario));
+    if (screen.code) {
+      container.appendChild(el('pre', 'exception-code', screen.code));
+    }
+
+    const question = el('h3', 'exception-question', screen.question);
+    const options = el('div', 'option-list');
+    const feedback = el('div', 'exception-feedback');
+    feedback.setAttribute('role', 'status');
+    feedback.setAttribute('aria-live', 'polite');
+    const savedAnswer = lessonEngine.getResponse(screen.id);
+
+    function selectOption(option, button) {
+      lessonEngine.saveResponse(screen.id, option.key);
+      lessonEngine.markScreenComplete(screen.id);
+      Array.from(options.children).forEach((item) => {
+        item.classList.toggle('selected', item === button);
+        item.classList.toggle('correct', item.dataset.optionKey === screen.correctAnswer);
+        item.setAttribute('aria-pressed', String(item === button));
+      });
+      feedback.className = 'exception-feedback ' +
+        (option.key === screen.correctAnswer ? 'success' : 'error');
+      feedback.textContent = option.feedback;
+      if (screen.expected) {
+        feedback.appendChild(el('p', null, 'Expected behaviour: ' + screen.expected));
+      }
+      notifyInteraction();
+    }
+
+    screen.options.forEach((option) => {
+      const button = el('button', 'option-btn', option.label);
+      button.type = 'button';
+      button.dataset.optionKey = option.key;
+      button.setAttribute('aria-pressed', String(savedAnswer === option.key));
+      if (savedAnswer === option.key) button.classList.add('selected');
+      if (savedAnswer !== undefined && option.key === screen.correctAnswer) {
+        button.classList.add('correct');
+      }
+      button.addEventListener('click', () => selectOption(option, button));
+      options.appendChild(button);
+    });
+
+    const block = el('div', 'question-block');
+    block.append(question, options);
+    container.appendChild(block);
+    container.appendChild(feedback);
+
+    if (savedAnswer !== undefined) {
+      const savedOption = screen.options.find((option) => option.key === savedAnswer);
+      if (savedOption) {
+        feedback.className = 'exception-feedback ' +
+          (savedAnswer === screen.correctAnswer ? 'success' : 'error');
+        feedback.textContent = savedOption.feedback;
+        if (screen.expected) {
+          feedback.appendChild(el('p', null, 'Expected behaviour: ' + screen.expected));
+        }
+      }
+    }
+  }
+
+  function renderCodeAnswer(screen, container) {
+    container.appendChild(buildEyebrow(screen.eyebrow));
+    container.appendChild(el('h2', null, screen.title));
+    container.appendChild(el('p', 'exception-scenario', screen.scenario));
+    if (screen.code) {
+      container.appendChild(el('pre', 'exception-code', screen.code));
+    }
+
+    const label = el('label', 'exception-editor-label', screen.editorLabel);
+    const editor = el('textarea', 'code-textarea exception-editor');
+    const savedAnswer = lessonEngine.getResponse(screen.id);
+    editor.id = 'exception-answer';
+    editor.setAttribute('aria-describedby', 'exception-validation-note');
+    editor.value = savedAnswer === undefined ? screen.starter || '' : savedAnswer;
+    label.htmlFor = editor.id;
+
+    const note = el(
+      'p',
+      'exception-validation-note',
+      'This lesson checks for the requested Python syntax. It does not execute code or validate full Python syntax.',
+    );
+    note.id = 'exception-validation-note';
+
+    const actions = el('div', 'exception-editor-actions');
+    const checkButton = el('button', 'primary-btn', 'Check my code');
+    checkButton.type = 'button';
+    const hintButton = el('button', 'secondary-btn', 'Show hint');
+    hintButton.type = 'button';
+    const hint = el('p', 'exception-hint', screen.hint);
+    hint.id = 'exception-hint';
+    hint.hidden = true;
+    hintButton.setAttribute('aria-expanded', 'false');
+    hintButton.setAttribute('aria-controls', hint.id);
+    hintButton.addEventListener('click', () => {
+      hint.hidden = !hint.hidden;
+      hintButton.setAttribute('aria-expanded', String(!hint.hidden));
+      hintButton.textContent = hint.hidden ? 'Show hint' : 'Hide hint';
+    });
+
+    const feedback = el('div', 'exception-feedback');
+    feedback.setAttribute('role', 'status');
+    feedback.setAttribute('aria-live', 'polite');
+
+    function updateFeedback(isCorrect, missing) {
+      feedback.className = 'exception-feedback ' + (isCorrect ? 'success' : 'error');
+      if (isCorrect) {
+        feedback.textContent = screen.successFeedback;
+      } else if (!editor.value.trim()) {
+        feedback.textContent = 'Please add some code before checking.';
+      } else if (missing.length) {
+        feedback.textContent = 'Not quite yet. Add or check: ' + missing.join(', ') + '.';
+      } else {
+        feedback.textContent = 'The required Python constructs are not all present yet.';
+      }
+      if (isCorrect && screen.expected) {
+        feedback.appendChild(el('p', null, 'Expected behaviour: ' + screen.expected));
+      }
+      if (isCorrect && screen.explanation) {
+        feedback.appendChild(el('p', null, screen.explanation));
+      }
+      if (isCorrect && screen.solution) {
+        feedback.appendChild(el('p', null, 'One correct pattern:'));
+        feedback.appendChild(el('pre', 'exception-code', screen.solution));
+      }
+    }
+
+    editor.addEventListener('input', () => {
+      lessonEngine.saveResponse(screen.id, editor.value);
+      if (lessonEngine.isScreenComplete(screen.id)) {
+        lessonEngine.markScreenIncomplete(screen.id);
+        feedback.textContent = '';
+        feedback.className = 'exception-feedback';
+        notifyInteraction();
+      }
+    });
+
+    checkButton.addEventListener('click', () => {
+      const answer = editor.value;
+      lessonEngine.saveResponse(screen.id, answer);
+      const missing = (screen.required || []).filter((part) => !answer.includes(part));
+      const isCorrect = answer.trim().length > 0 && missing.length === 0;
+      if (isCorrect) lessonEngine.markScreenComplete(screen.id);
+      else lessonEngine.markScreenIncomplete(screen.id);
+      updateFeedback(isCorrect, missing);
+      if (!isCorrect) editor.focus();
+      notifyInteraction();
+    });
+
+    actions.append(checkButton, hintButton);
+    container.append(label, editor, note, actions, hint, feedback);
+
+    if (lessonEngine.isScreenComplete(screen.id)) {
+      updateFeedback(true, []);
+    }
+  }
+
+  function renderLessonResults(screen, container) {
+    container.appendChild(buildEyebrow(screen.eyebrow));
+    container.appendChild(el('h2', null, screen.title));
+    (screen.paragraphs || []).forEach((paragraph) => {
+      container.appendChild(el('p', 'exception-paragraph', paragraph));
+    });
+
+    const reviewedScreens = LESSON_SCREENS.slice(0, -1);
+    const completedCount = reviewedScreens.filter((item) =>
+      lessonEngine.isScreenComplete(item.id),
+    ).length;
+    const choiceScreens = reviewedScreens.filter((item) => item.kind === 'choice-question');
+    const correctCount = choiceScreens.filter((item) =>
+      lessonEngine.getResponse(item.id) === item.correctAnswer,
+    ).length;
+    const summary = el('div', 'exception-results');
+    summary.appendChild(el(
+      'p',
+      null,
+      'Learning steps completed: ' + completedCount + ' of ' + reviewedScreens.length,
+    ));
+    summary.appendChild(el(
+      'p',
+      null,
+      'Prediction questions answered correctly: ' + correctCount + ' of ' + choiceScreens.length,
+    ));
+
+    const list = el('ul', 'exception-objectives');
+    screen.takeaways.forEach((takeaway) => {
+      list.appendChild(el('li', null, takeaway));
+    });
+    summary.appendChild(list);
+    container.appendChild(summary);
+    lessonEngine.markScreenComplete(screen.id);
+    notifyInteraction();
+  }
+
   /* ---------------------------------------------------------
      DISPATCH TABLE
      --------------------------------------------------------- */
@@ -822,6 +1065,10 @@ const renderer = (function () {
     matching: renderMatching,
     'code-builder': renderCodeBuilder,
     'wrap-up': renderWrapUp,
+    'lesson-content': renderLessonContent,
+    'choice-question': renderChoiceQuestion,
+    'code-answer': renderCodeAnswer,
+    'lesson-results': renderLessonResults,
   };
 
   /* ---------------------------------------------------------
