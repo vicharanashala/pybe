@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="An interactive beginner case study about Python exception handling." />
+  <title>Mission Control: Save the Space Mission · PyBe</title>
+  <link rel="stylesheet" href="../css/base.css" />
+  <link rel="stylesheet" href="../css/storybook.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/editor.css" />
+  <link rel="stylesheet" href="css/exception.css" />
+</head>
+<body>
+  <header class="pybe-header">
+    <div class="pybe-brand">
+      <span class="pybe-logo" aria-hidden="true">✦</span>
+      <span class="pybe-title">PyBe</span>
+      <span class="pybe-subtitle">Mission Control · Python Exception Handling</span>
+    </div>
+    <div class="progress-track" id="progress-track" aria-label="Lesson progress"></div>
+  </header>
+
+  <main class="storybook-stage">
+    <section class="storybook-card" id="storybook-card" aria-live="polite">
+      <div class="card-loading">
+        <p>Preparing the mission briefing...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pybe-footer">
+    <button id="btn-back" class="nav-btn nav-btn-back" type="button">← Back</button>
+    <div class="step-indicator" id="step-indicator" aria-live="polite"></div>
+    <button id="btn-next" class="nav-btn nav-btn-next" type="button" disabled>Next →</button>
+  </footer>
+
+  <script src="js/lessonData.js"></script>
+  <script src="../js/lessonEngine.js"></script>
+  <script src="../js/renderer.js"></script>
+  <script src="../js/navigation.js"></script>
+</body>
+</html>

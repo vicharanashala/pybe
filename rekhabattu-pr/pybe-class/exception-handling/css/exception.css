@@ -1,0 +1,144 @@
+.exception-paragraph,
+.exception-scenario {
+  max-width: 72ch;
+}
+
+.exception-objectives {
+  display: grid;
+  gap: var(--space-sm);
+  margin: 0 0 var(--space-md);
+  padding-left: 1.4rem;
+  list-style: disc;
+  color: var(--color-ink-soft);
+}
+
+.exception-objectives li {
+  padding-left: var(--space-xs);
+}
+
+.exception-code {
+  width: 100%;
+  overflow-x: auto;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  background: #241b13;
+  color: #f3e9d2;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  white-space: pre;
+}
+
+.exception-expected,
+.exception-results {
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-dim);
+}
+
+.exception-expected p,
+.exception-results p {
+  margin: var(--space-xs) 0 0;
+}
+
+.exception-question {
+  margin: var(--space-sm) 0;
+}
+
+.exception-feedback {
+  min-height: 1.5rem;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+}
+
+.exception-feedback:empty {
+  display: none;
+}
+
+.exception-feedback.success {
+  color: var(--color-success);
+  background: var(--color-success-bg);
+}
+
+.exception-feedback.error {
+  color: var(--color-error);
+  background: var(--color-error-bg);
+}
+
+.exception-feedback p {
+  margin: var(--space-sm) 0 0;
+  color: inherit;
+}
+
+.exception-continue,
+.exception-editor-actions {
+  align-self: flex-start;
+}
+
+.exception-editor-label {
+  font-weight: 700;
+  color: var(--color-maroon-dark);
+}
+
+.exception-editor {
+  display: block;
+  min-height: 230px;
+  border-radius: var(--radius-md);
+}
+
+.exception-validation-note {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.exception-editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.exception-hint {
+  padding: var(--space-md);
+  border-left: 4px solid var(--color-gold);
+  background: var(--color-parchment);
+}
+
+.exception-results {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.exception-results .exception-objectives {
+  margin-bottom: 0;
+}
+
+.exception-results > p {
+  font-weight: 700;
+}
+
+.option-btn.correct {
+  border-color: var(--color-success);
+}
+
+.option-btn[aria-pressed="true"] {
+  box-shadow: 0 0 0 2px rgba(122, 31, 43, 0.16);
+}
+
+.pybe-header {
+  padding-bottom: var(--space-md);
+}
+
+@media (max-width: 640px) {
+  .exception-code {
+    padding: var(--space-md);
+    font-size: 0.82rem;
+  }
+
+  .exception-editor {
+    font-size: 0.82rem;
+  }
+
+  .exception-editor-actions {
+    width: 100%;
+  }
+}
