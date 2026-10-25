@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pycrates: The Perfect Recipe (Functions)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Inter:wght@400;600;700&display=swap');
+
+  :root {
+    --bg-dark: #1a1a1a;
+    --panel-border: #000000;
+    --caption-bg: #fff9d6;
+    --primary-blue: #4A90E2;
+    --primary-orange: #E67E22;
+    --text-dark: #2c3e50;
+    --correct-green: #2ecc71;
+    --wrong-red: #e74c3c;
+    --disabled-gray: #bdc3c7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .comic-container {
+    width: 100%;
+    max-width: 1000px;
+    height: 90vh;
+    background: #ffffff;
+    border: 4px solid var(--panel-border);
+    border-radius: 12px;
+    box-shadow: 10px 10px 0px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Slide Area */
+  .slide-viewport {
+    flex: 1;
+    position: relative;
+    background-color: #f4f4f4;
+  }
+
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    z-index: 10;
+  }
+
+  .image-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  .image-wrapper img {
+    max-width: 100%;
+    max-height: 100%;
+    border: 3px solid var(--panel-border);
+    border-radius: 8px;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+    object-fit: contain;
+  }
+
+  /* Comic Caption Box */
+  .caption-box {
+    background: var(--caption-bg);
+    border-top: 3px solid var(--panel-border);
+    padding: 20px 30px;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--text-dark);
+    text-align: center;
+    font-weight: 600;
+    overflow-y: auto;
+  }
+
+  .caption-box p {
+    margin-bottom: 10px;
+  }
+
+  .caption-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Pycrates Final Screen */
+  .pycrates-layout {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .pycrates-code {
+    flex: 1;
+    background: #282c34;
+    border: 3px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 35px;
+    color: #abb2bf;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .pycrates-title {
+    font-family: 'Bangers', cursive;
+    font-size: 48px;
+    color: #e5c07b;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px #000;
+  }
+
+  .pycrates-text {
+    font-size: 18px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+  }
+
+  .code-block {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    line-height: 1.6;
+    border: 1px solid #3e4451;
+    text-align: left;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .kw { color: #c678dd; font-weight: bold; }
+  .fn { color: #61afef; font-weight: bold; }
+  .str { color: #98c379; }
+  .com { color: #7f848e; font-style: italic; }
+
+  /* Quiz Screen */
+  .quiz-screen {
+    background: #ffffff;
+    width: 100%;
+    height: 100%;
+    padding: 30px 40px;
+    overflow-y: auto;
+    border-radius: 12px;
+  }
+
+  .quiz-title {
+    font-family: 'Bangers', cursive;
+    font-size: 42px;
+    color: var(--primary-blue);
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 0px #000;
+    letter-spacing: 2px;
+  }
+
+  .question-block {
+    background: var(--caption-bg);
+    border: 3px solid var(--panel-border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+  }
+
+  .question-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .option-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px;
+    background: white;
+    border: 2px solid var(--panel-border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+  }
+
+  .option-btn:hover:not(.answered) {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+  }
+
+  .option-btn.correct { background: var(--correct-green); color: white; border-color: #1e8449; }
+  .option-btn.wrong { background: var(--wrong-red); color: white; border-color: #c0392b; opacity: 0.7; }
+  .option-btn.answered { cursor: default; transform: none; box-shadow: none; }
+
+  /* Explanation Layout */
+  .explanation-box {
+    margin-top: 15px;
+    padding: 15px;
+    background: white;
+    border: 2px dashed var(--panel-border);
+    border-radius: 6px;
+    display: none;
+  }
+
+  .explanation-box.show { 
+    display: flex; 
+    align-items: center; 
+    gap: 15px;
+    animation: popIn 0.3s ease-out; 
+  }
+
+  .bunku-reaction {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid var(--panel-border);
+    object-fit: cover;
+    flex-shrink: 0;
+    background-color: #f4f4f4;
+  }
+
+  .explanation-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--text-dark);
+  }
+
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  /* Navigation Bar */
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: #ffffff;
+    border-top: 3px solid var(--panel-border);
+  }
+
+  .btn {
+    font-family: 'Bangers', cursive;
+    font-size: 22px;
+    padding: 10px 30px;
+    border: 3px solid var(--panel-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .btn-back {
+    background: #e0e0e0;
+    color: var(--text-dark);
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.8);
+  }
+
+  .btn-back:hover:not(:disabled) { transform: translate(2px, 2px); box-shadow: 1px 1px 0px rgba(0,0,0,0.8); }
+
+  .btn-next {
+    background: var(--primary-orange);
+    color: white;
+    box-shadow: 3px 3px 0px rgba(0,0,0,0.8);
+  }
+
+  .btn-next:hover:not(:disabled) { transform: translate(2px, 2px); box-shadow: 1px 1px 0px rgba(0,0,0,0.8); }
+
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+  }
+
+  /* Confetti Animation */
+  .confetti {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    animation: fall linear forwards;
+    z-index: 100;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+
+  @media (max-width: 768px) {
+    .pycrates-layout { flex-direction: column; overflow-y: auto; }
+    .caption-box { font-size: 15px; padding: 15px; }
+    .options-grid { grid-template-columns: 1fr; }
+    .explanation-box.show { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="comic-container">
+  
+  <div class="slide-viewport">
+    
+    <!-- Scene 1 -->
+    <div class="slide active" id="slide-0">
+      <div class="image-wrapper">
+        <img src="scene_01_morning_rush.png" alt="The Morning Rush">
+      </div>
+      <div class="caption-box">
+        <p>The morning sun rose, and the chai stall under the banyan tree in Gidderbaha was busier than ever.</p>
+        <p>A large crowd of villagers was waiting impatiently for their morning tea before heading to the fields.</p>
+        <p>Bunku the fox sat near the warm clay stove, watching Dada sweat. Making fresh pots of tea from scratch for the endless stream of people was exhausting and terribly slow!</p>
+      </div>
+    </div>
+
+    <!-- Scene 2 -->
+    <div class="slide" id="slide-1">
+      <div class="image-wrapper">
+        <img src="scene_02_tedious_task.png" alt="The Tedious Task">
+      </div>
+      <div class="caption-box">
+        <p>Every time a new group of customers arrived, Dada had to do the exact same chores from scratch to brew a fresh pot.</p>
+        <p>He had to peel and crush the ginger, grind a cardamom pod, measure out the loose tea leaves, and add the sugar.</p>
+        <p>Repeating this long, messy, four-step process pot after pot was taking forever.</p>
+      </div>
+    </div>
+
+    <!-- Scene 3 -->
+    <div class="slide" id="slide-2">
+      <div class="image-wrapper">
+        <img src="scene_03_master_mix.png" alt="Preparing the Solution">
+      </div>
+      <div class="caption-box">
+        <p>Dada decided there had to be a better way. The next morning, before the shop even opened, he tried a new idea.</p>
+        <p>He took a large glass jar and spent a few minutes grinding all the ginger, cardamom, tea leaves, and sugar together in perfect proportions.</p>
+        <p>He had to do the hard work once, but when he finished, he had a jar full of the perfect "Master Spice Mix".</p>
+      </div>
+    </div>
+
+    <!-- Scene 4 -->
+    <div class="slide" id="slide-3">
+      <div class="image-wrapper">
+        <img src="scene_04_reusability.png" alt="The Power of Reusability">
+      </div>
+      <div class="caption-box">
+        <p>When the morning crowd arrived, Dada didn't panic.</p>
+        <p>Instead of peeling and crushing spices from scratch, he simply took a few scoops of his Master Mix and dropped them directly into the large pot of boiling milk.</p>
+        <p>A perfect pot of chai was ready in an instant! Dada could now serve the whole crowd with just one quick motion.</p>
+      </div>
+    </div>
+
+    <!-- Scene 5 -->
+    <div class="slide" id="slide-4">
+      <div class="image-wrapper">
+        <img src="scene_05_pattern_revealed.png" alt="The Pattern Revealed">
+      </div>
+      <div class="caption-box">
+        <p>Bunku watched as the massive line of villagers cleared out in record time.</p>
+        <p>He realized the brilliance of Dada’s trick: package a long, complicated set of steps into a single, ready-to-use mix.</p>
+        <p>You only have to prepare the mix once, but you can use it to do the hard work as many times as you want!</p>
+      </div>
+    </div>
+
+    <!-- Scene 6: Pycrates Summary -->
+    <div class="slide" id="slide-5">
+      <div class="pycrates-layout" style="justify-content: center;">
+        <div class="pycrates-code" style="max-width: 800px;">
+          <div class="pycrates-title">Pycrates: Functions</div>
+          <p class="pycrates-text">
+            Bunku realized that if you have to do the exact same complex chore over and over, you shouldn't start from scratch every time! You can <strong>Define</strong> a Function (like preparing the Master Mix) to package the instructions together. Then, whenever you need to do the chore, you simply <strong>Call</strong> the Function (like dropping a scoop into the milk).
+          </p>
+          
+          <div class="code-block">
+            <span class="com"># 1. DEFINE the function (Make the mix)</span><br>
+            <span class="kw">def</span> <span class="fn">make_chai</span>():<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;crush_ginger()<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;grind_cardamom()<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;add_tea_and_sugar()<br>
+            <br>
+            <span class="com"># 2. CALL the function (Serve the crowd!)</span><br>
+            <span class="fn">make_chai</span>() <span class="com"># Cup 1 ready!</span><br>
+            <span class="fn">make_chai</span>() <span class="com"># Cup 2 ready!</span><br>
+            <span class="fn">make_chai</span>() <span class="com"># Cup 3 ready!</span><br>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 7: Pop Quiz -->
+    <div class="slide" id="slide-6">
+      <div class="quiz-screen">
+        <div class="quiz-title">Pop Quiz!</div>
+        
+        <!-- Question 1 -->
+        <div class="question-block">
+          <div class="question-text">1. In the story, Dada grinds ginger, cardamom, tea leaves, and sugar into a large glass jar before the stall even opens. In Python, what does this step represent?</div>
+          <div class="options-grid">
+            <button class="option-btn" data-correct="false">A) Calling a function</button>
+            <button class="option-btn" data-correct="true">B) Defining a function</button>
+            <button class="option-btn" data-correct="false">C) Creating a for loop</button>
+            <button class="option-btn" data-correct="false">D) Writing an if/else condition</button>
+          </div>
+          <div class="base-explanation" style="display: none;">By preparing the "Master Mix" in advance, Dada is grouping all the complicated steps together and giving them a name. In Python, this is called defining a function using the <code>def</code> keyword.</div>
+          <div class="explanation-box">
+            <img src="" alt="Bunku Reaction" class="bunku-reaction">
+            <div class="explanation-text"></div>
+          </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question-block">
+          <div class="question-text">2. When the morning rush starts, Dada drops a single scoop of his Master Mix into the boiling milk to instantly make a cup of tea. What is this action called in programming?</div>
+          <div class="options-grid">
+            <button class="option-btn" data-correct="true">A) Calling a function</button>
+            <button class="option-btn" data-correct="false">B) Defining a function</button>
+            <button class="option-btn" data-correct="false">C) Importing a library</button>
+            <button class="option-btn" data-correct="false">D) Debugging</button>
+          </div>
+          <div class="base-explanation" style="display: none;">Using the scoop to actually make the tea is the equivalent of "calling" or "executing" the function you previously defined. You are triggering the packaged instructions to do their job.</div>
+          <div class="explanation-box">
+            <img src="" alt="Bunku Reaction" class="bunku-reaction">
+            <div class="explanation-text"></div>
+          </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question-block">
+          <div class="question-text">3. Ayush, Harith, and Keshav arrive at the tea stall together and order three cups of chai. Using his new method, how many times does Dada need to *define* the Master Mix, and how many times does he *call* it to serve them?</div>
+          <div class="options-grid">
+            <button class="option-btn" data-correct="false">A) Define it 3 times, Call it 1 time</button>
+            <button class="option-btn" data-correct="false">B) Define it 3 times, Call it 3 times</button>
+            <button class="option-btn" data-correct="true">C) Define it 1 time, Call it 3 times</button>
+            <button class="option-btn" data-correct="false">D) Define it 0 times, Call it 1 time</button>
+          </div>
+          <div class="base-explanation" style="display: none;">You only need to define a function once (making the jar of Master Mix). Once it exists, you can call it as many times as you need (using three scoops for three cups of tea).</div>
+          <div class="explanation-box">
+            <img src="" alt="Bunku Reaction" class="bunku-reaction">
+            <div class="explanation-text"></div>
+          </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question-block">
+          <div class="question-text">4. Bunku the fox realized that Dada's new trick saved him from doing the exact same messy chores over and over again. What famous programming principle does this represent?</div>
+          <div class="options-grid">
+            <button class="option-btn" data-correct="false">A) WET (Write Everything Twice)</button>
+            <button class="option-btn" data-correct="true">B) DRY (Don't Repeat Yourself)</button>
+            <button class="option-btn" data-correct="false">C) LOOP (Leave Out Old Problems)</button>
+            <button class="option-btn" data-correct="false">D) FAST (Find All Syntax Trouble)</button>
+          </div>
+          <div class="base-explanation" style="display: none;">The DRY principle encourages programmers to package repetitive tasks into functions so they don't have to write the same lines of code from scratch every time.</div>
+          <div class="explanation-box">
+            <img src="" alt="Bunku Reaction" class="bunku-reaction">
+            <div class="explanation-text"></div>
+          </div>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question-block">
+          <div class="question-text">5. What happens if Dada runs a tea stall the next day and wants to make the exact same type of tea?</div>
+          <div class="options-grid">
+            <button class="option-btn" data-correct="false">A) He must define a brand new Mix from scratch.</button>
+            <button class="option-btn" data-correct="true">B) He can simply call the existing Master Mix again.</button>
+            <button class="option-btn" data-correct="false">C) He can only call it if he adds a new ingredient.</button>
+            <button class="option-btn" data-correct="false">D) He is no longer allowed to use the Master Mix.</button>
+          </div>
+          <div class="base-explanation" style="display: none;">One of the greatest powers of a function is its permanent reusability. Once defined, a function can be called over and over again, even on different days!</div>
+          <div class="explanation-box">
+            <img src="" alt="Bunku Reaction" class="bunku-reaction">
+            <div class="explanation-text"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="nav-bar">
+    <button class="btn btn-back" id="backBtn" disabled>Back</button>
+    <button class="btn btn-next" id="nextBtn">Next</button>
+  </div>
+
+</div>
+
+<script>
+  let currentSlide = 0;
+  let correctCount = 0;
+  const slides = document.querySelectorAll('.slide');
+  const backBtn = document.getElementById('backBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const totalSlides = slides.length;
+  const totalQuestions = document.querySelectorAll('.question-block').length;
+
+  function updateSlides() {
+    slides.forEach((slide, index) => {
+      if (index === currentSlide) {
+        slide.classList.add('active');
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+
+    backBtn.disabled = currentSlide === 0;
+    
+    // Logic for the final Quiz slide
+    if (currentSlide === totalSlides - 1) {
+      nextBtn.innerHTML = "Nailed It!";
+      
+      if (correctCount === totalQuestions) {
+        // Unlocked State
+        nextBtn.disabled = false;
+        nextBtn.style.background = "#2ecc71";
+      } else {
+        // Locked State
+        nextBtn.disabled = true;
+        nextBtn.style.background = "var(--disabled-gray)";
+      }
+      
+    } else {
+      // Normal slides
+      nextBtn.disabled = false;
+      nextBtn.innerHTML = "Next";
+      nextBtn.style.background = "var(--primary-orange)";
+    }
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (currentSlide < totalSlides - 1) {
+      currentSlide++;
+      updateSlides();
+    } else {
+      triggerJoyfulEnding();
+    }
+  });
+
+  backBtn.addEventListener('click', () => {
+    if (currentSlide > 0) {
+      currentSlide--;
+      updateSlides();
+    }
+  });
+
+  // Quiz Logic with Required Correct Answers
+  const optionBtns = document.querySelectorAll('.option-btn');
+  optionBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Prevent clicking if already locked as answered
+      if (this.classList.contains('answered') && this.classList.contains('correct')) return;
+      if (this.classList.contains('answered')) return;
+      
+      const parentBlock = this.closest('.question-block');
+      const explanationBox = parentBlock.querySelector('.explanation-box');
+      const explanationText = parentBlock.querySelector('.explanation-text');
+      const reactionImg = parentBlock.querySelector('.bunku-reaction');
+      const baseExplanation = parentBlock.querySelector('.base-explanation').innerHTML;
+      
+      // Check if correct
+      if (this.getAttribute('data-correct') === 'true') {
+        // Lock all buttons in this specific block
+        const allBtnsInBlock = parentBlock.querySelectorAll('.option-btn');
+        allBtnsInBlock.forEach(b => b.classList.add('answered'));
+        
+        this.classList.add('correct');
+        reactionImg.src = "happy_bunku.png";
+        explanationText.innerHTML = "<strong>Correct!</strong> " + baseExplanation;
+        
+        correctCount++;
+        
+        // Re-evaluate button state
+        if (correctCount === totalQuestions && currentSlide === totalSlides - 1) {
+          nextBtn.disabled = false;
+          nextBtn.style.background = "#2ecc71";
+        }
+        
+      } else {
+        // Only mark this specific wrong button as answered so they can try again
+        this.classList.add('answered');
+        this.classList.add('wrong');
+        reactionImg.src = "sad_bunku.png";
+        explanationText.innerHTML = "<strong>Oops, try again!</strong> " + baseExplanation;
+      }
+      
+      explanationBox.classList.add('show');
+    });
+  });
+
+  function triggerJoyfulEnding() {
+    nextBtn.innerHTML = "Awesome!";
+    nextBtn.disabled = true;
+    
+    // Joyful Confetti Explosion
+    const colors = ['#e67e22', '#3498db', '#2ecc71', '#f1c40f', '#e74c3c'];
+    for(let i=0; i<80; i++) {
+      let confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.animationDuration = (Math.random() * 2 + 1.5) + 's';
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      
+      if (Math.random() > 0.5) confetti.style.borderRadius = '50%';
+      
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 3500);
+    }
+  }
+</script>
+
+</body>
+</html>
