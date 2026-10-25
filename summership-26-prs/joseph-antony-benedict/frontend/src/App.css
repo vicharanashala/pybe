@@ -1,0 +1,393 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ======================================================== */
+/* TOP HUD & NAVBAR STYLING                                 */
+/* ======================================================== */
+.top-navbar-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(5, 5, 15, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.brand-sub {
+  font-size: 0.72rem;
+  color: var(--secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.nav-controls-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.xp-pill {
+  border-color: rgba(242, 201, 76, 0.4);
+  background: rgba(242, 201, 76, 0.08);
+  color: var(--accent);
+}
+
+.badge-pill {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-color: rgba(0, 240, 255, 0.3);
+  background: rgba(0, 240, 255, 0.06);
+}
+
+.badge-pill:hover {
+  background: rgba(0, 240, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.mode-toggle-btn {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.mode-toggle-btn.nerd {
+  background: rgba(138, 43, 226, 0.25);
+  border-color: var(--tertiary);
+  color: #D4AAFF;
+  box-shadow: 0 0 10px rgba(138, 43, 226, 0.4);
+}
+
+.mode-toggle-btn.simple {
+  background: rgba(0, 255, 163, 0.15);
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.icon-control-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.icon-control-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.05);
+}
+
+.reset-btn:hover {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+/* Treasure Map Progress Trail */
+.chapter-map-trail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.35);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chapter-step-btn {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.chapter-step-btn.unlocked:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.chapter-step-btn.current {
+  background: rgba(0, 240, 255, 0.15);
+  border: 1px solid var(--secondary);
+  color: var(--secondary);
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.25);
+}
+
+.chapter-step-btn.locked {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.step-number {
+  font-weight: 800;
+}
+
+/* ======================================================== */
+/* QUEST CHAPTER JOURNEY STEPPER                            */
+/* ======================================================== */
+.chapter-quest-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.quest-tab-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 10px 20px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.quest-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.quest-tab-btn.active {
+  background: rgba(0, 240, 255, 0.15);
+  border-color: var(--secondary);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+}
+
+.quest-tab-btn.completed {
+  border-color: rgba(0, 255, 163, 0.4);
+}
+
+/* Story Scene Narrative Hero */
+.story-scene-card {
+  background: rgba(15, 20, 35, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  padding: 32px;
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.story-speech-bubble {
+  background: rgba(0, 240, 255, 0.05);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  border-left: 4px solid var(--secondary);
+  border-radius: 18px;
+  padding: 22px 26px;
+  font-size: 1.15rem;
+  line-height: 1.75;
+  color: #E2E8F0;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.story-speech-author {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 800;
+  color: var(--secondary);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ======================================================== */
+/* MAIN CONTENT LAYOUT                                      */
+/* ======================================================== */
+.page-container {
+  margin-top: 110px; /* Space for fixed navbar */
+  flex: 1;
+}
+
+.story-container {
+  width: 100%;
+}
+
+.story-chapter {
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px 80px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.chapter-content-card {
+  padding: 40px;
+  width: 100%;
+}
+
+.desktop-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .desktop-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: start;
+    gap: 50px;
+  }
+}
+
+.text-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.visual-column {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.chapter-icon {
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.01));
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  display: inline-block;
+  align-self: flex-start;
+}
+
+.story-image-container {
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  background: #000;
+}
+
+.story-image-container img {
+  width: 100%;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.story-image-container:hover img {
+  transform: scale(1.02);
+}
+
+/* Navigation Buttons at Chapter Bottom */
+.navigation-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  width: 100%;
+  padding: 0 20px;
+}
+
+/* ======================================================== */
+/* ACCESSIBILITY & PREFERS-REDUCED-MOTION                   */
+/* ======================================================== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  body {
+    animation: none !important;
+  }
+}
+
+/* Mobile Screens */
+@media (max-width: 768px) {
+  .chapter-content-card {
+    padding: 24px 16px;
+  }
+  .navbar-top-row {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+  .page-container {
+    margin-top: 130px;
+  }
+  .stat-pill span {
+    font-size: 0.75rem;
+  }
+}
