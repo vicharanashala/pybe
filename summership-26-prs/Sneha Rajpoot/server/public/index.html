@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3f3ec" />
+    <title>PyBe | A new kind of challenge</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="wordmark" href="/" aria-label="PyBe home"><span class="wordmark-mark">P</span><span>PyBe</span></a>
+        <div class="topbar-tools"><label for="age-group">AGE GROUP</label><select id="age-group" aria-label="Choose the learner age group"><option value="8-11">8-11</option><option value="12-15" selected>12-15</option><option value="16+">16+</option></select><div class="topbar-note"><span class="status-dot"></span><span id="ai-status">CHECKING AI...</span></div></div>
+      </header>
+
+      <section class="progress-strip" aria-live="polite">
+        <div class="progress-copy"><span class="eyebrow">CHALLENGE <span id="attempt-count">01</span></span><span id="progress-label">Finding your next story</span></div>
+        <div class="progress-track"><span id="progress-fill"></span></div>
+      </section>
+
+      <section class="learning-layout">
+        <article class="story-column">
+          <div class="story-meta"><span id="scenario-stage" class="stage-tag">GETTING STARTED</span><button id="scenario-structuredness" class="mode-toggle" type="button" aria-pressed="false" title="Switch between guided and open-ended stories">GUIDED STORY</button></div>
+          <p class="eyebrow story-kicker">A PYBE SCENARIO</p>
+          <h1 id="scenario-title">Loading your first challenge...</h1>
+          <p id="scenario-narrative" class="scenario-narrative"></p>
+          <div class="story-context"><span class="context-rule"></span><p id="scenario-context"></p></div>
+          <div class="prompt-line"><span class="prompt-label">YOUR QUESTION</span><p id="scenario-prompt"></p></div>
+          <div class="objectives" id="scenario-constraints"></div>
+        </article>
+
+        <aside class="response-column">
+          <div class="response-heading"><div><p class="eyebrow">THINK IT THROUGH</p><h2>Your reasoning</h2></div><span class="response-index">01 / 02</span></div>
+          <p class="response-hint">There is no need to guess a perfect answer. Show the steps and choices you would make.</p>
+          <form id="attempt-form">
+            <label class="sr-only" for="reasoning">Describe your reasoning</label>
+            <textarea id="reasoning" name="reasoning" minlength="1" placeholder="I would start by..." required></textarea>
+            <div class="form-footer"><span id="character-note">Your thinking shapes what comes next.</span><button id="submit-button" type="submit">Share my thinking <span aria-hidden="true">↗</span></button></div>
+          </form>
+          <p id="error-message" class="error-message" role="alert" hidden></p>
+        </aside>
+      </section>
+
+      <section id="outcome-panel" class="outcome-panel" aria-live="polite" hidden>
+        <div class="outcome-copy"><p id="outcome-label" class="eyebrow">YOUR MENTOR NOTICED</p><h2 id="outcome-title"></h2><p id="outcome-detail"></p><div class="teaching-box"><span class="next-overline">A THOUGHT TO TAKE WITH YOU</span><ul id="teaching-points"></ul><p id="reflection-prompt" class="reflection-prompt"></p></div></div>
+        <div class="next-challenge"><span class="next-overline">UP NEXT</span><h3 id="next-title"></h3><p id="next-reason"></p><button id="continue-button" type="button">Continue to next story <span aria-hidden="true">→</span></button></div>
+      </section>
+
+      <footer class="research-note"><span class="note-mark">i</span><span id="boundary-note">Challenges adjust gradually from your attempts. This is a guide for choosing stories, not a score of you.</span><span id="learning-points" class="points-total">0 points</span></footer>
+      <footer class="research-note secondary-note"><span class="note-mark alt">S</span><span id="score-label" title="Average mentor-awarded learning points per attempt, as a share of 20 possible points. This is not a mastery grade.">Average score</span><span id="score-value" class="score-total">0%</span></footer>
+    </main>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
