@@ -1,0 +1,129 @@
+{
+  "caseId": "rosewood-manor",
+  "victim": {
+    "name": "Alden Rosewood",
+    "age": 68,
+    "role": "owner of Rosewood Manor"
+  },
+  "house": {
+    "name": "Rosewood Manor",
+    "rooms": ["study", "library", "conservatory", "music room", "gallery", "front hall", "rose arch", "service passage", "dining room"],
+    "lockedRoom": "study",
+    "objects": ["broken glass", "blue coat", "torn will page", "service thread", "letter opener", "rope", "study clock"]
+  },
+  "timeline": [
+    { "time": "19:45", "event": "Alden announces changes to his will at dinner." },
+    { "time": "20:00", "event": "The household disperses to its claimed rooms." },
+    { "time": "20:02", "event": "Iris enters the study with the corrected will." },
+    { "time": "20:05", "event": "Alden and Iris argue; the study clock runs ten minutes slow." },
+    { "time": "20:05", "event": "A glass breaks in the study; Mrs. Vale hears it from the hall." },
+    { "time": "20:07", "event": "Iris leaves through the study's service door and pulls the thread-release hidden behind the curtain; the door locks from inside." },
+    { "time": "20:10", "event": "Tom sees a blue coat at the rose arch." },
+    { "time": "20:12", "event": "Nurse Adeline sees the hall lights flicker and checks the study corridor." },
+    { "time": "20:15", "event": "The study is forced open; Alden is found dead and the corrected will is gone." }
+  ],
+  "suspects": [
+    {
+      "id": "mina",
+      "name": "Mina Rosewood",
+      "role": "niece and ward",
+      "relationship": "Alden's niece and ward",
+      "motive": "A threatened allowance",
+      "claimedAlibi": "conservatory and kitchen",
+      "trueMovements": ["conservatory", "front hall"],
+      "movements": [{ "time": "20:00", "room": "conservatory" }, { "time": "20:10", "room": "front hall" }],
+      "introducedAt": "rosewood-part-0-characters"
+    },
+    {
+      "id": "dev",
+      "name": "Dev Ashcombe",
+      "role": "business partner",
+      "relationship": "Alden's business partner",
+      "motive": "A ruined deal",
+      "claimedAlibi": "library",
+      "trueMovements": ["library", "front hall"],
+      "movements": [{ "time": "20:00", "room": "library" }, { "time": "20:10", "room": "front hall" }],
+      "introducedAt": "rosewood-part-0-characters"
+    },
+    {
+      "id": "iris",
+      "name": "Iris Vale",
+      "role": "private secretary",
+      "relationship": "Alden's private secretary and Mrs. Vale's daughter",
+      "motive": "A secret Alden held over her",
+      "claimedAlibi": "front hall, then study",
+      "trueMovements": ["study", "service passage", "rose arch"],
+      "movements": [{ "time": "20:02", "room": "study" }, { "time": "20:07", "room": "service passage" }, { "time": "20:10", "room": "rose arch" }],
+      "introducedAt": "rosewood-part-0-characters"
+    },
+    {
+      "id": "ronan",
+      "name": "Ronan Rosewood",
+      "role": "estranged son",
+      "relationship": "Alden's estranged son",
+      "motive": "A lost inheritance and a torn will page",
+      "claimedAlibi": "music room",
+      "trueMovements": ["music room", "front hall"],
+      "movements": [{ "time": "20:00", "room": "music room" }, { "time": "20:12", "room": "front hall" }],
+      "introducedAt": "rosewood-part-0-characters"
+    },
+    {
+      "id": "pia",
+      "name": "Pia Rosewood",
+      "role": "younger wife",
+      "relationship": "Alden's younger wife",
+      "motive": "A threatened divorce",
+      "claimedAlibi": "gallery",
+      "trueMovements": ["gallery", "front hall"],
+      "movements": [{ "time": "20:00", "room": "gallery" }, { "time": "20:12", "room": "front hall" }],
+      "introducedAt": "rosewood-part-0-characters"
+    }
+  ],
+  "witnesses": [
+    {
+      "id": "mrs-vale",
+      "name": "Mrs. Vale",
+      "role": "housekeeper and Iris's mother",
+      "observation": "heard glass break from the hall at 20:05 and says she saw no one leave the study",
+      "reliability": "protective lie: she hides Iris's presence until the notes are compared"
+    },
+    {
+      "id": "tom",
+      "name": "Tom",
+      "role": "gardener",
+      "observation": "saw a blue coat pass the rose arch at 20:10",
+      "reliability": "reliable once the study clock correction is applied"
+    },
+    {
+      "id": "adeline",
+      "name": "Nurse Adeline",
+      "role": "live-in nurse",
+      "observation": "saw the hall lights flicker at 20:12 and found the corridor empty",
+      "reliability": "reliable but read the slow study clock as 20:02"
+    }
+  ],
+  "clues": [
+    { "id": "clue-household", "introducedAt": "rosewood-part-0-characters", "whereFound": "hall table", "whatItShows": "Five suspects had access and motive.", "pointsTo": ["mina", "dev", "iris", "ronan", "pia"] },
+    { "id": "clue-torn-will", "introducedAt": "rosewood-part-1-artifact", "whereFound": "library grate", "whatItShows": "Ronan tore a page but did not enter the study.", "pointsTo": ["ronan"] },
+    { "id": "clue-argument", "introducedAt": "rosewood-part-1-artifact", "whereFound": "dining room", "whatItShows": "Dev argued with Alden before dinner ended.", "pointsTo": ["dev"] },
+    { "id": "clue-clock", "introducedAt": "rosewood-part-2-concept", "whereFound": "study mantel", "whatItShows": "The study clock runs ten minutes slow.", "pointsTo": ["iris"] },
+    { "id": "clue-blue-coat", "introducedAt": "rosewood-part-1-artifact", "whereFound": "rose arch", "whatItShows": "A blue coat left the west wing at 20:10.", "pointsTo": ["iris"] },
+    { "id": "clue-protective-lie", "introducedAt": "rosewood-part-3-artifact", "whereFound": "Mrs. Vale's second statement", "whatItShows": "Mrs. Vale hid Iris's 20:05 visit to the study.", "pointsTo": ["iris", "mrs-vale"] },
+    { "id": "clue-service-thread", "introducedAt": "rosewood-part-4-concept", "whereFound": "study curtain", "whatItShows": "A thread-release let the killer lock the door after leaving.", "pointsTo": ["iris"] },
+    { "id": "clue-hidden-motive", "introducedAt": "rosewood-part-5-reveal", "whereFound": "Alden's private ledger", "whatItShows": "Alden threatened to expose Iris's forged credentials.", "pointsTo": ["iris"] },
+    { "id": "clue-final-will", "introducedAt": "rosewood-part-5-reveal", "whereFound": "study desk", "whatItShows": "The corrected will would remove Iris's protection.", "pointsTo": ["iris"] }
+  ],
+  "method": {
+    "name": "constraint search",
+    "plainDescription": "Line up the facts, test each claim, and reject any arrangement that breaks a clue."
+  },
+  "solution": {
+    "culprit": "iris",
+    "room": "study",
+    "time": "20:05",
+    "exit": "service door and hidden curtain thread-release",
+    "clockTrick": "the study clock runs ten minutes slow",
+    "weapon": "letter opener",
+    "proof": ["clue-clock", "clue-blue-coat", "clue-protective-lie", "clue-service-thread", "clue-hidden-motive", "clue-final-will"]
+  }
+}
