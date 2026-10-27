@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PyBe Discovery Lab — The Smart Factory: Python Generators & yield</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Top Navigation & Progress Bar -->
+  <header class="app-header">
+    <div class="brand">
+      <span class="badge">PyBe Lab</span>
+      <h1>The Smart Factory: The Overheating Conveyor</h1>
+    </div>
+    <div class="meta-info">
+      <span>Topic: <strong>Python Generators & Iterators</strong></span>
+      <span class="author-tag">By Vighnesh Bhilare</span>
+    </div>
+  </header>
+
+  <nav class="stepper-nav" id="stepperNav">
+    <button class="step-btn active" data-step="1">1. The Crisis</button>
+    <button class="step-btn" data-step="2">2. Diagnosis</button>
+    <button class="step-btn" data-step="3">3. The Conveyor</button>
+    <button class="step-btn" data-step="4">4. Live Simulation</button>
+    <button class="step-btn" data-step="5">5. Code Reveal</button>
+    <button class="step-btn" data-step="6">6. Certification</button>
+  </nav>
+
+  <!-- Main Content Container -->
+  <main class="main-container">
+
+    <!-- Step 1: The Crisis -->
+    <section class="lesson-step active" id="step-1">
+      <div class="story-card">
+        <div class="card-tag alert">Incident Report #4092 · 14:15 PM</div>
+        <h2>Red Alert at Precision Motors Assembly Line</h2>
+        <p class="lead-text">
+          You are the lead automation engineer at the Pune Precision Motors plant. 
+          Line #4 manufactures high-precision roller bearings. At 14:15 PM, Shift Supervisor Sharma radios you:
+        </p>
+        <blockquote class="dialogue">
+          "The vibration telemetry terminal just died! Blue screen, factory line halted, and 100,000 bearings are backing up. 
+          The junior intern wrote the quality-check script this morning. Fix it before the whole plant stops!"
+        </blockquote>
+
+        <div class="terminal-box">
+          <div class="terminal-bar">Terminal: QA_STATION_04 — bash</div>
+          <pre class="terminal-content"><code>$ python run_quality_check.py
+[INFO] Loading telemetry readings from 500,000 bearings...
+[INFO] Storing into memory buffer: all_readings = []
+[WARN] RAM usage: 85% ... 94% ... 99% ...
+Traceback (most recent call last):
+  File "run_quality_check.py", line 12, in collect_all_data
+    all_readings.append(sensor.read())
+MemoryError: Out of memory (Process killed by Linux OOM-Killer)</code></pre>
+        </div>
+
+        <div class="interactive-prompt">
+          <p>Why did the system run out of memory when inspecting 500,000 small sensor records?</p>
+          <button class="btn primary" onclick="navigateToStep(2)">Investigate the Code</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 2: The Diagnosis -->
+    <section class="lesson-step" id="step-2">
+      <div class="story-card">
+        <div class="card-tag">Engineering Inspection</div>
+        <h2>Inspect the Junior Engineer's Code</h2>
+        <p>Look at the function that crashed the machine:</p>
+
+        <div class="code-split">
+          <div class="code-viewer">
+            <div class="code-header">flawed_sensor_collector.py</div>
+            <pre><code>def get_all_bearings(total_parts):
+    warehouse_batch = []              <span class="comment"># <-- Empty list created in RAM</span>
+    for i in range(1, total_parts + 1):
+        reading = read_sensor(i)
+        warehouse_batch.append(reading) <span class="comment"># <-- Piling 500,000 items into RAM</span>
+    return warehouse_batch            <span class="comment"># <-- Returns everything at once</span>
+
+<span class="comment"># Later in the code:</span>
+for part in get_all_bearings(500000):
+    inspect_vibration(part)</code></pre>
+          </div>
+
+          <div class="socratic-quiz">
+            <h3>Socratic Check: Where is the design flaw?</h3>
+            <p>Notice the loop at the bottom: <code>for part in get_all_bearings(500000): inspect_vibration(part)</code></p>
+            <div class="quiz-options">
+              <button class="quiz-btn" onclick="checkAnswer(this, false, 'The loop itself is fine; it is how data is delivered that broke the machine.')">
+                A) The <code>for</code> loop syntax is invalid in Python.
+              </button>
+              <button class="quiz-btn" onclick="checkAnswer(this, true, 'EXACTLY! The inspector only inspects ONE part at a time. Piling 500,000 parts in memory before inspecting the first one wastes massive RAM.')">
+                B) The function forces all 500,000 items to occupy RAM at once, even though inspection only needs 1 item at a time.
+              </button>
+              <button class="quiz-btn" onclick="checkAnswer(this, false, 'Python can easily do 500,000 iterations in seconds; the issue is RAM storage, not loop speed.')">
+                C) Python cannot loop 500,000 times without crashing.
+              </button>
+            </div>
+            <div class="quiz-feedback" id="feedback-2"></div>
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <button class="btn secondary" onclick="navigateToStep(1)">Back</button>
+          <button class="btn primary" id="next-btn-2" disabled onclick="navigateToStep(3)">Proceed to Physical Intuition</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 3: The Conveyor Analogy -->
+    <section class="lesson-step" id="step-3">
+      <div class="story-card">
+        <div class="card-tag">Pedagogical Paradigm</div>
+        <h2>Warehouse Floor vs Continuous Conveyor Belt</h2>
+
+        <div class="comparison-grid">
+          <div class="analogy-card list-mode">
+            <div class="analogy-header">
+              <span class="icon">📦</span>
+              <h3>The Traditional List (Eager)</h3>
+            </div>
+            <p class="analogy-desc"><strong>The Warehouse Staging Approach</strong></p>
+            <p>
+              Imagine telling the assembly line workers: 
+              <em>"Do not inspect anything until we manufacture all 500,000 bearings and stack every single box on the inspection room floor."</em>
+            </p>
+            <div class="mini-diagram">
+              <div class="warehouse-box full">500,000 Boxes Piled Up (Floor Collapses! 💥)</div>
+            </div>
+            <ul class="feature-list">
+              <li>Stores all $N$ items simultaneously in memory ($O(N)$ space).</li>
+              <li>High startup delay: must wait for entire batch before reading item #1.</li>
+              <li>Impossible to use for infinite streams (e.g. 24/7 factory telemetry).</li>
+            </ul>
+          </div>
+
+          <div class="analogy-card gen-mode">
+            <div class="analogy-header">
+              <span class="icon">⚙️</span>
+              <h3>The Python Generator (Lazy)</h3>
+            </div>
+            <p class="analogy-desc"><strong>The Moving Conveyor Belt</strong></p>
+            <p>
+              Instead of hoarding parts, install an automated conveyor belt:
+              <em>"Fabricate one bearing, slide it down the belt, inspect it immediately, package it, and only then signal for the next bearing."</em>
+            </p>
+            <div class="mini-diagram">
+              <div class="conveyor-preview">
+                <span class="belt-item">Bearing #1</span> ➔ 
+                <span class="sensor-badge">Sensor</span> ➔ 
+                <span class="belt-item next">Bearing #2 on demand</span>
+              </div>
+            </div>
+            <ul class="feature-list">
+              <li>Only <strong>1 item</strong> exists in memory at any time ($O(1)$ space).</li>
+              <li>Instant startup: processing begins immediately with zero delay.</li>
+              <li>Can process infinitely without ever running out of RAM!</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <button class="btn secondary" onclick="navigateToStep(2)">Back</button>
+          <button class="btn primary" onclick="navigateToStep(4)">Try the Live Interactive Conveyor</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 4: Interactive Conveyor Simulation -->
+    <section class="lesson-step" id="step-4">
+      <div class="story-card">
+        <div class="card-tag highlight">Interactive Laboratory</div>
+        <h2>Live Conveyor Belt Simulator: The Mechanics of <code>yield</code> & <code>next()</code></h2>
+        <p>
+          Step into the operator's shoes. Click <strong>Pull Lever: <code>next()</code></strong> to request the next bearing.
+          Watch the function freeze state at <code>yield</code> and resume only when demanded!
+        </p>
+
+        <div class="simulator-layout">
+          <!-- Visual Conveyor Station -->
+          <div class="visual-station">
+            <div class="station-header">
+              <span>Assembly Line Station #4</span>
+              <span id="shift-status" class="status-badge live">READY</span>
+            </div>
+
+            <div class="conveyor-track">
+              <div class="hopper-zone">
+                <span class="zone-label">Raw Hopper (Pending)</span>
+                <div class="hopper-count" id="hopper-count">10 parts remaining</div>
+              </div>
+
+              <div class="inspection-zone">
+                <div class="sensor-arm" id="sensor-arm">
+                  <div class="laser-beam" id="laser-beam"></div>
+                  <span class="sensor-title">Quality Laser Sensor</span>
+                </div>
+                <div class="bearing-slot" id="bearing-slot">
+                  <div class="bearing-disc" id="active-bearing">#1</div>
+                </div>
+              </div>
+
+              <div class="passed-zone">
+                <span class="zone-label">Packaged & Shipped</span>
+                <div class="shipped-count" id="shipped-count">0 items</div>
+              </div>
+            </div>
+
+            <!-- Dashboard Readout -->
+            <div class="telemetry-readout">
+              <div class="metric">
+                <span class="lbl">Current Bearing ID:</span>
+                <strong id="metric-id">—</strong>
+              </div>
+              <div class="metric">
+                <span class="lbl">Vibration Telemetry:</span>
+                <strong id="metric-vib">—</strong>
+              </div>
+              <div class="metric">
+                <span class="lbl">Inspection Verdict:</span>
+                <strong id="metric-verdict">—</strong>
+              </div>
+              <div class="metric">
+                <span class="lbl">RAM Footprint:</span>
+                <strong class="green-text" id="metric-ram">128 Bytes ($O(1)$)</strong>
+              </div>
+            </div>
+
+            <div class="control-row">
+              <button class="btn action-btn" id="pull-lever-btn" onclick="stepGenerator()">
+                ⚙️ Pull Lever: <code>next(bearing_stream)</code>
+              </button>
+              <button class="btn secondary" onclick="resetSimulator()">Reset Stream</button>
+            </div>
+          </div>
+
+          <!-- Code Execution Pointer -->
+          <div class="code-execution-panel">
+            <div class="panel-title">Python Internal State Machine</div>
+            <div class="code-trace">
+              <div class="code-line" id="line-1"><code>def bearing_stream():</code></div>
+              <div class="code-line" id="line-2"><code>    for part_id in range(1, 11):</code></div>
+              <div class="code-line" id="line-3"><code>        vib = read_vibration(part_id)</code></div>
+              <div class="code-line highlight-target" id="line-4"><code>        yield (part_id, vib)  <span class="hint"># <-- PAUSES HERE!</span></code></div>
+              <div class="code-line" id="line-5"><code>    # End of Hopper</code></div>
+              <div class="code-line" id="line-6"><code>    <span class="hint"># Raises StopIteration</span></code></div>
+            </div>
+
+            <div class="state-monitor">
+              <h4>Internal Generator State:</h4>
+              <p>Generator Status: <strong id="gen-state">Suspended at yield</strong></p>
+              <p>Saved Local Variable <code>part_id</code>: <strong id="var-part-id">0</strong></p>
+              <p>Consumer Received: <strong id="consumer-val">None</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <button class="btn secondary" onclick="navigateToStep(3)">Back</button>
+          <button class="btn primary" onclick="navigateToStep(5)">Understand the Python Syntax</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 5: Code Reveal & Deep Dive -->
+    <section class="lesson-step" id="step-5">
+      <div class="story-card">
+        <div class="card-tag">Technical Mastery</div>
+        <h2>Syntactic Comparison: <code>return</code> vs <code>yield</code></h2>
+
+        <table class="concept-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Regular Function (<code>return</code>)</th>
+              <th>Generator Function (<code>yield</code>)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Execution Model</strong></td>
+              <td>Executes all at once; terminates immediately.</td>
+              <td>Produces a value, <strong>freezes execution</strong>, and waits.</td>
+            </tr>
+            <tr>
+              <td><strong>Memory Footprint</strong></td>
+              <td>$O(N)$ — stores all results in RAM simultaneously.</td>
+              <td>$O(1)$ — holds only the single current value.</td>
+            </tr>
+            <tr>
+              <td><strong>Local State</strong></td>
+              <td>All local variables destroyed upon <code>return</code>.</td>
+              <td>Local variables frozen and preserved for next call.</td>
+            </tr>
+            <tr>
+              <td><strong>End of Stream</strong></td>
+              <td>Returns <code>None</code> or the final object.</td>
+              <td>Raises <code>StopIteration</code> (consumed cleanly by <code>for</code>).</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="solution-code-box">
+          <h3>The Fixed Factory Code</h3>
+          <pre><code><span class="comment"># 1. Define the generator using 'yield'</span>
+def sensor_stream(total_parts):
+    for part_id in range(1, total_parts + 1):
+        yield (part_id, 24.5, 120.2)  <span class="comment"># Emits one reading; freezes state!</span>
+
+<span class="comment"># 2. Consume cleanly with standard for-loop</span>
+for part_id, temp, vib in sensor_stream(500000):
+    if vib > 125.0:
+        alert_defect(part_id)
+<span class="comment"># Result: Runs 500,000 items in 0.45s with under 1 KB of RAM!</span></code></pre>
+        </div>
+
+        <div class="nav-actions">
+          <button class="btn secondary" onclick="navigateToStep(4)">Back</button>
+          <button class="btn primary" onclick="navigateToStep(6)">Take Certification Challenge</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 6: Certification -->
+    <section class="lesson-step" id="step-6">
+      <div class="story-card">
+        <div class="card-tag gold">Assessment & Certification</div>
+        <h2>Precision Stream Engineering Challenge</h2>
+        <p>Answer the 2 quality control questions to unlock your verified completion certificate:</p>
+
+        <div class="quiz-block">
+          <div class="quiz-question" id="q1">
+            <p><strong>Question 1:</strong> What happens to a generator function's local variables when it hits a <code>yield</code> statement?</p>
+            <div class="quiz-options">
+              <button class="quiz-btn" onclick="gradeCert(1, false, this)">They are erased from RAM to save memory.</button>
+              <button class="quiz-btn" onclick="gradeCert(1, true, this)">Their state is frozen in memory until the next call to <code>next()</code>.</button>
+              <button class="quiz-btn" onclick="gradeCert(1, false, this)">They are converted into global variables.</button>
+            </div>
+          </div>
+
+          <div class="quiz-question" id="q2">
+            <p><strong>Question 2:</strong> In Data Analytics, when would a Generator be strictly superior to a List Comprehension?</p>
+            <div class="quiz-options">
+              <button class="quiz-btn" onclick="gradeCert(2, true, this)">When processing a multi-gigabyte log file that exceeds available system RAM.</button>
+              <button class="quiz-btn" onclick="gradeCert(2, false, this)">When you need random access by index like <code>data[450]</code>.</button>
+              <button class="quiz-btn" onclick="gradeCert(2, false, this)">When you need to know the total length <code>len(data)</code> immediately.</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificate Modal / Box -->
+        <div class="certificate-box" id="certificate-box" style="display: none;">
+          <div class="cert-border">
+            <div class="cert-stamp">VERIFIED PASS</div>
+            <h3>Vicharanashala · PyBe Discovery Labs</h3>
+            <p class="cert-subtitle">Certificate of Competency in Python Iterators & Stream Engineering</p>
+            <p class="cert-awarded">This certifies that</p>
+            <h1 class="cert-name">Vighnesh Bhilare</h1>
+            <p class="cert-text">
+              has successfully diagnosed factory floor memory bottlenecks and mastered the implementation of 
+              <strong>Python Generators, Lazy Evaluation, and the Iterator Protocol (<code>yield</code>, <code>next()</code>)</strong>.
+            </p>
+            <div class="cert-footer">
+              <span>Institution: VJTI Mumbai / IIT Madras</span>
+              <span>Platform: PyBe (IIT Ropar)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <button class="btn secondary" onclick="navigateToStep(5)">Review Material</button>
+          <button class="btn primary" onclick="window.print()">Print / Save Certificate</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>PyBe (Python by Experience) · An open-source pedagogical contribution to Vicharanashala (IIT Ropar) · Developed by Vighnesh Bhilare</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
