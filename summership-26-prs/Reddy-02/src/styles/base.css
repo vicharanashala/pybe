@@ -1,0 +1,199 @@
+/* ============================================================
+   DASARA DISCOVERY LAB — BASE STYLES (PYBE LIGHT THEME)
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--clr-text-primary);
+  background-color: var(--clr-bg);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Focus indicators ── */
+:focus-visible {
+  outline: 2px solid var(--clr-focus);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Text elements (PyBe Editorial Serif Titles) ── */
+h1, h2, h3 {
+  font-family: var(--font-story);
+  font-weight: 500;
+  line-height: var(--leading-tight);
+  color: var(--clr-text-primary);
+  letter-spacing: -0.01em;
+}
+
+h4, h5, h6 {
+  font-family: var(--font-ui);
+  font-weight: var(--weight-semi);
+  line-height: var(--leading-snug);
+  color: var(--clr-text-primary);
+}
+
+h1 { font-size: var(--text-4xl); }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+h5 { font-size: var(--text-lg); }
+h6 { font-size: var(--text-md); }
+
+p {
+  color: var(--clr-text-secondary);
+  line-height: var(--leading-normal);
+}
+
+a {
+  color: var(--clr-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--clr-accent-hover);
+}
+
+code, pre {
+  font-family: var(--font-code);
+  font-size: 0.9em;
+}
+
+/* ── Buttons (PyBe Rounded Rectangle Style) ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semi);
+  line-height: 1;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  position: relative;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--clr-accent);
+  color: #FFFFFF;
+  border-color: var(--clr-accent);
+  box-shadow: 0 2px 6px rgba(39, 145, 73, 0.2);
+}
+.btn-primary:hover {
+  background: var(--clr-accent-hover);
+  border-color: var(--clr-accent-hover);
+  box-shadow: 0 4px 12px rgba(39, 145, 73, 0.3);
+}
+
+.btn-secondary {
+  background: #FFFFFF;
+  color: var(--clr-text-primary);
+  border-color: var(--clr-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+.btn-secondary:hover {
+  background: var(--clr-surface-raise);
+  border-color: #D4CCC0;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--clr-text-muted);
+  border-color: transparent;
+  padding-left: var(--sp-3);
+  padding-right: var(--sp-3);
+}
+.btn-ghost:hover {
+  color: var(--clr-text-primary);
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.btn-sm {
+  font-size: var(--text-sm);
+  padding: 8px 16px;
+}
+
+.btn-lg {
+  font-size: 1.1rem;
+  padding: 14px 28px;
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ── Layout helpers ── */
+.container {
+  width: 100%;
+  max-width: var(--max-content);
+  margin-inline: auto;
+  padding-inline: var(--sp-6);
+}
+
+.container-wide {
+  width: 100%;
+  max-width: var(--max-wide);
+  margin-inline: auto;
+  padding-inline: var(--sp-6);
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: var(--clr-border-subtle);
+  border: none;
+}
+
+/* ── Visually hidden (screen readers) ── */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
