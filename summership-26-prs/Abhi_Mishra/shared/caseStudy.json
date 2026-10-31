@@ -1,0 +1,157 @@
+{
+  "company": "NovaTech",
+  "tagline": "Innovating for a smarter tomorrow",
+  "table": [
+    {
+      "month": "Jan",
+      "revenue": 12,
+      "users": 1200,
+      "growth": null
+    },
+    {
+      "month": "Feb",
+      "revenue": 18,
+      "users": 1450,
+      "growth": 50
+    },
+    {
+      "month": "Mar",
+      "revenue": 25,
+      "users": 1900,
+      "growth": 39
+    },
+    {
+      "month": "Apr",
+      "revenue": 32,
+      "users": 2400,
+      "growth": 28
+    },
+    {
+      "month": "May",
+      "revenue": 38,
+      "users": 2950,
+      "growth": 19
+    },
+    {
+      "month": "Jun",
+      "revenue": 45,
+      "users": 3500,
+      "growth": 18
+    }
+  ],
+  "datasets": {
+    "line": {
+      "title": "Monthly revenue",
+      "columns": ["Month", "Revenue ($K)"],
+      "rows": [
+        ["Jan", 12],
+        ["Feb", 18],
+        ["Mar", 25],
+        ["Apr", 32],
+        ["May", 38],
+        ["Jun", 45]
+      ]
+    },
+    "pie": {
+      "title": "Revenue by product, Jan to Jun",
+      "columns": ["Product", "H1 revenue ($K)"],
+      "rows": [
+        ["Core AI", 71],
+        ["Flow CRM", 48],
+        ["Signal API", 32],
+        ["Other", 19]
+      ]
+    },
+    "scatter": {
+      "title": "Weekly usage and months stayed, per customer",
+      "columns": ["Weekly usage (hours)", "Months as a customer"],
+      "rows": [
+        [19, 16],
+        [13, 13],
+        [14, 16],
+        [18, 14],
+        [12, 11],
+        [16, 11],
+        [17, 13],
+        [5, 1],
+        [2, 3],
+        [7, 5],
+        [6, 8],
+        [18, 18],
+        [19, 18],
+        [1, 1],
+        [10, 9],
+        [17, 16],
+        [3, 5],
+        [16, 12],
+        [3, 3],
+        [10, 8],
+        [17, 14],
+        [7, 11],
+        [7, 6],
+        [6, 7],
+        [15, 17],
+        [6, 6]
+      ]
+    },
+    "bar": {
+      "title": "Trial-to-paid conversion by region",
+      "columns": ["Region", "Trial to paid (%)"],
+      "rows": [
+        ["N. America", 18.4],
+        ["Europe", 14.1],
+        ["APAC", 11.3],
+        ["LATAM", 8.2],
+        ["MEA", 5.9]
+      ]
+    },
+    "box": {
+      "title": "Contract value per customer",
+      "columns": ["Customer", "Contract value ($K)"],
+      "rows": [
+        ["C01", 12],
+        ["C02", 14],
+        ["C03", 15],
+        ["C04", 15],
+        ["C05", 16],
+        ["C06", 18],
+        ["C07", 18],
+        ["C08", 19],
+        ["C09", 20],
+        ["C10", 21],
+        ["C11", 22],
+        ["C12", 22],
+        ["C13", 24],
+        ["C14", 25],
+        ["C15", 26],
+        ["C16", 27],
+        ["C17", 28],
+        ["C18", 30],
+        ["C19", 31],
+        ["C20", 33],
+        ["C21", 35],
+        ["C22", 36],
+        ["C23", 38],
+        ["C24", 40],
+        ["C25", 42],
+        ["C26", 45],
+        ["C27", 52],
+        ["C28", 140],
+        ["C29", 185],
+        ["C30", 260]
+      ]
+    },
+    "area": {
+      "title": "Revenue by product and month",
+      "columns": ["Month", "Core AI", "Flow CRM", "Signal API", "Other"],
+      "rows": [
+        ["Jan", 5, 4, 2, 1],
+        ["Feb", 7, 5, 3, 3],
+        ["Mar", 10, 7, 5, 3],
+        ["Apr", 13, 9, 6, 4],
+        ["May", 16, 11, 7, 4],
+        ["Jun", 20, 12, 9, 4]
+      ]
+    }
+  }
+}
