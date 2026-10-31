@@ -1,0 +1,159 @@
+@media (max-width: 800px) {
+  .app-shell {
+    padding: 0 20px;
+  }
+  .topbar {
+    height: 70px;
+  }
+  .status {
+    gap: 6px;
+  }
+  .status-track,
+  .step {
+    display: none;
+  }
+  .hero-grid,
+  .meeting-scene {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding: 7vh 0;
+  }
+  .hero-copy {
+    order: -1;
+  }
+  .hero-copy h1 {
+    font-size: 58px;
+  }
+  .room-visual {
+    height: 320px;
+  }
+  .meeting-scene .room-visual {
+    height: 300px;
+  }
+  .scene-heading,
+  .challenge-copy,
+  .quiz-intro {
+    display: block;
+  }
+  .scene-heading h1,
+  .challenge-copy h1,
+  .quiz-intro h1 {
+    font-size: 48px;
+  }
+  .data-layout,
+  .mastery-grid {
+    grid-template-columns: 1fr;
+  }
+  .confidence-card {
+    position: static;
+    width: auto;
+    margin: 0 0 20px;
+  }
+  .plot-stage {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .pitch-presenter {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 150px;
+    gap: 14px;
+    align-items: end;
+    margin: 0 0 18px;
+  }
+  .pitch-presenter img {
+    height: 210px;
+    max-width: 150px;
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .pitch-bubble {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+  }
+  .pitch-bubble:after {
+    left: auto;
+    right: -10px;
+    bottom: 42%;
+    transform: rotate(-45deg);
+  }
+  .plot-options {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .plot-option {
+    min-height: 76px;
+  }
+  .plot-option small {
+    display: none;
+  }
+  .answer-grid {
+    grid-template-columns: 1fr;
+  }
+  .quiz-card {
+    padding: 20px;
+  }
+  .mastery-score strong {
+    font-size: 60px;
+  }
+  .skills > div {
+    grid-template-columns: 95px 1fr 30px;
+  }
+  .completion {
+    padding-top: 6vh;
+  }
+  .footer {
+    padding-bottom: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .brand small {
+    display: none;
+  }
+  .brand {
+    font-size: 14px;
+  }
+  .hero-copy h1 {
+    font-size: 49px;
+  }
+  .table-head,
+  .table-row {
+    padding: 13px 10px;
+    font-size: 11px;
+    gap: 5px;
+  }
+  .table-head {
+    font-size: 8px;
+  }
+  .plot-options {
+    gap: 5px;
+  }
+  .plot-option {
+    padding: 8px;
+    font-size: 11px;
+  }
+  .plot-option span {
+    font-size: 16px;
+  }
+  .plot-canvas {
+    min-height: 250px;
+    padding: 16px;
+  }
+  .plot-canvas svg {
+    height: 180px;
+  }
+  .pitch-presenter {
+    grid-template-columns: minmax(0, 1fr) 115px;
+  }
+  .pitch-presenter img {
+    height: 170px;
+  }
+  .pitch-bubble {
+    padding: 13px 12px;
+  }
+  .pitch-bubble p {
+    font-size: 12px;
+  }
+  .speech p {
+    font-size: 25px;
+  }
+}

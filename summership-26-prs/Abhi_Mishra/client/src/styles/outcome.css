@@ -1,0 +1,94 @@
+/* Deal-closed and deal-rejected screens (these classes had no styles before) */
+.meeting-outcome {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 6vw;
+  align-items: center;
+  max-width: 1200px;
+  margin: auto;
+  padding: 6vh 0;
+  min-height: calc(100vh - 140px);
+}
+.meeting-outcome .room-visual {
+  height: 460px;
+}
+.meeting-rejected .room-visual {
+  transform: rotate(2deg);
+}
+.outcome-copy h1 {
+  font:
+    clamp(38px, 5vw, 66px)/1 Georgia,
+    serif;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px;
+}
+.meeting-close .outcome-copy em {
+  color: var(--teal);
+}
+.meeting-rejected .outcome-copy em {
+  color: var(--coral);
+}
+.outcome-copy > p {
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 480px;
+  color: #233640aa;
+}
+.handshake,
+.exit-note {
+  margin: 20px 0 26px;
+}
+.handshake div,
+.exit-note div {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.handshake div {
+  background: #dceee7;
+  color: var(--teal);
+}
+.exit-note div {
+  background: #f3ddd2;
+  color: #c4553f;
+}
+.debrief {
+  background: var(--paper);
+  border-left: 4px solid var(--coral);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin: 18px 0;
+  box-shadow: 0 10px 26px #2336400d;
+  max-width: 520px;
+}
+.debrief p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #233640;
+}
+.debrief .eyebrow {
+  font-size: 10px;
+}
+.outcome-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+@media (max-width: 800px) {
+  .meeting-outcome {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    min-height: 0;
+  }
+  .meeting-outcome .room-visual {
+    height: 300px;
+  }
+  .quiz-feedback > div {
+    max-width: 60%;
+  }
+}
