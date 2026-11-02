@@ -1,0 +1,14 @@
+{
+  "name": "pybe-learning-library",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A local, concept-first library of student Python case studies",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "catalog": "python tools/build_catalog.py",
+    "test": "node --test tests/original-library.test.mjs"
+  },
+  "engines": { "node": ">=18" }
+}

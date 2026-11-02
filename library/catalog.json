@@ -1,0 +1,3033 @@
+{
+  "version": 2,
+  "buckets": [
+    {
+      "id": "foundations",
+      "title": "First steps",
+      "description": "Give information a name. Make your first Python program.",
+      "number": "01",
+      "icon": "sprout"
+    },
+    {
+      "id": "flow",
+      "title": "Decisions & loops",
+      "description": "Choose a path, repeat an action, and know when to stop.",
+      "number": "02",
+      "icon": "route"
+    },
+    {
+      "id": "collections",
+      "title": "Strings & data structures",
+      "description": "Find the right home for a word, a list, or a collection.",
+      "number": "03",
+      "icon": "boxes"
+    },
+    {
+      "id": "functions",
+      "title": "Functions & scope",
+      "description": "Build reusable pieces and understand where names belong.",
+      "number": "04",
+      "icon": "function"
+    },
+    {
+      "id": "objects",
+      "title": "Object-oriented Python",
+      "description": "Turn related information and behavior into useful objects.",
+      "number": "05",
+      "icon": "shapes"
+    },
+    {
+      "id": "reliability",
+      "title": "Files & exceptions",
+      "description": "Keep data around and handle the unexpected.",
+      "number": "06",
+      "icon": "shield"
+    },
+    {
+      "id": "special",
+      "title": "Special topics",
+      "description": "Explore algorithms, memory, visualization, and more.",
+      "number": "07",
+      "icon": "spark"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "variables",
+      "bucket": "foundations",
+      "title": "Variables & assignment",
+      "description": "Give a value a name and update it over time.",
+      "skills": [
+        "Names",
+        "assignment",
+        "reassignment"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-c7c40793d26c5b2a",
+        "story-7cede33ab799b7e3",
+        "story-2ad060f951f61c12",
+        "story-e7b0d8a9fe8d0365",
+        "story-6dc52d0b1ddaecb9",
+        "story-d6ff7a5a81fd9717",
+        "story-1be2b5357531f575",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 8
+    },
+    {
+      "id": "types",
+      "bucket": "foundations",
+      "title": "Data types",
+      "description": "Choose numbers, text, and true-or-false values.",
+      "skills": [
+        "int",
+        "float",
+        "str",
+        "bool",
+        "type conversion"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-2ad060f951f61c12",
+        "story-d6ff7a5a81fd9717",
+        "story-a6599cda779ad306"
+      ],
+      "playableCount": 3
+    },
+    {
+      "id": "keywords",
+      "bucket": "foundations",
+      "title": "Keywords & identifiers",
+      "description": "Discover reserved words and the rules for naming things.",
+      "skills": [
+        "Reserved words",
+        "identifiers",
+        "case sensitivity"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-0fdb9bc4ae50094b",
+        "story-50b1ab4f25db0b54"
+      ],
+      "playableCount": 2
+    },
+    {
+      "id": "output",
+      "bucket": "foundations",
+      "title": "Printing & built-in functions",
+      "description": "Make information visible with a function call.",
+      "skills": [
+        "print()",
+        "parentheses",
+        "string literals"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-617c10ea8be694de",
+        "story-c7c40793d26c5b2a",
+        "story-823fd0e08364881e"
+      ],
+      "playableCount": 3
+    },
+    {
+      "id": "arithmetic",
+      "bucket": "foundations",
+      "title": "Arithmetic operators",
+      "description": "Calculate quantities, totals, and remainders.",
+      "skills": [
+        "Addition",
+        "subtraction",
+        "multiplication",
+        "division",
+        "modulo"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-e7b0d8a9fe8d0365",
+        "story-d6ff7a5a81fd9717",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 3
+    },
+    {
+      "id": "comparison",
+      "bucket": "flow",
+      "title": "Comparisons & Boolean logic",
+      "description": "Ask questions that evaluate to True or False.",
+      "skills": [
+        "Comparison operators",
+        "and",
+        "or",
+        "not"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-6c4e74eb56c56740",
+        "story-e7b0d8a9fe8d0365",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 3
+    },
+    {
+      "id": "conditionals",
+      "bucket": "flow",
+      "title": "If, elif & else",
+      "description": "Make a different choice when the situation changes.",
+      "skills": [
+        "Branching",
+        "nested decisions",
+        "elif chains"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-57fb53f5658f810a",
+        "story-c7c40793d26c5b2a",
+        "story-6c4e74eb56c56740",
+        "story-7cede33ab799b7e3",
+        "story-8f35c48bc68d1343",
+        "story-e7b0d8a9fe8d0365",
+        "story-7a30209fcf39425b",
+        "story-1be2b5357531f575",
+        "story-e5fa6a9b145ec00e",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 10
+    },
+    {
+      "id": "for",
+      "bucket": "flow",
+      "title": "For loops & range",
+      "description": "Repeat once for each item or a known number of times.",
+      "skills": [
+        "for",
+        "range()",
+        "iteration",
+        "counters"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-ad89eb826e121d2d",
+        "story-c7c40793d26c5b2a",
+        "story-ed372d85b4644984",
+        "story-249b9aa16e56653a",
+        "story-43d3d164c73db34c",
+        "story-e7b0d8a9fe8d0365",
+        "story-6dc52d0b1ddaecb9",
+        "story-5ab6bebe7c3605f9",
+        "story-7a30209fcf39425b",
+        "story-4049523562c935ab",
+        "story-1be2b5357531f575",
+        "story-82621fb31e80d371",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 13
+    },
+    {
+      "id": "while",
+      "bucket": "flow",
+      "title": "While loops",
+      "description": "Keep going while a condition is true.",
+      "skills": [
+        "while",
+        "updates",
+        "stopping conditions",
+        "infinite loops"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-ad89eb826e121d2d",
+        "story-ed372d85b4644984",
+        "story-249b9aa16e56653a",
+        "story-43d3d164c73db34c",
+        "story-6dc52d0b1ddaecb9",
+        "story-5ab6bebe7c3605f9",
+        "story-7a30209fcf39425b",
+        "story-4049523562c935ab",
+        "story-1be2b5357531f575",
+        "story-e5fa6a9b145ec00e",
+        "story-82621fb31e80d371",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 12
+    },
+    {
+      "id": "control",
+      "bucket": "flow",
+      "title": "Break, continue & return",
+      "description": "Learn when to stop, skip, or leave a function.",
+      "skills": [
+        "break",
+        "continue",
+        "return",
+        "post-check loop pattern"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-ad89eb826e121d2d",
+        "story-823fd0e08364881e",
+        "story-43d3d164c73db34c",
+        "story-e7b0d8a9fe8d0365",
+        "story-a639df8d84d12201",
+        "story-4049523562c935ab"
+      ],
+      "playableCount": 6
+    },
+    {
+      "id": "nested",
+      "bucket": "flow",
+      "title": "Nested loops",
+      "description": "Repeat an action inside another repeating action.",
+      "skills": [
+        "Nested iteration",
+        "grid patterns"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-7a30209fcf39425b"
+      ],
+      "playableCount": 1
+    },
+    {
+      "id": "truthiness",
+      "bucket": "flow",
+      "title": "Truthiness & short-circuiting",
+      "description": "Understand how Python evaluates values in conditions.",
+      "skills": [
+        "Truthy/falsy",
+        "short-circuit and/or"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-680740e43fc4d219"
+      ],
+      "playableCount": 1
+    },
+    {
+      "id": "strings",
+      "bucket": "collections",
+      "title": "Strings & text processing",
+      "description": "Clean, split, join, and format everyday text.",
+      "skills": [
+        "strip",
+        "split",
+        "join",
+        "upper",
+        "replace",
+        "formatting",
+        "parsing"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-9a805a86ccec1a84",
+        "story-1bb2d0ced20d2774",
+        "story-0532cd450cb25c86",
+        "story-e7b0d8a9fe8d0365",
+        "story-a6599cda779ad306",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 5
+    },
+    {
+      "id": "indexing",
+      "bucket": "collections",
+      "title": "Indexing & slicing",
+      "description": "Retrieve a single item or a slice of a sequence.",
+      "skills": [
+        "Zero-based indexing",
+        "negative indexes",
+        "slices",
+        "steps"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-9a805a86ccec1a84",
+        "story-0bdeee990fa852ea",
+        "story-e7b0d8a9fe8d0365",
+        "story-a6599cda779ad306",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 5
+    },
+    {
+      "id": "lists",
+      "bucket": "collections",
+      "title": "Lists",
+      "description": "Keep an ordered collection that can change.",
+      "skills": [
+        "append",
+        "insert",
+        "remove",
+        "pop",
+        "sort",
+        "len",
+        "mutation"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-02cecabc434c5db4",
+        "story-c7c40793d26c5b2a",
+        "story-0bdeee990fa852ea",
+        "story-c563eb4bb23307df",
+        "story-e7b0d8a9fe8d0365",
+        "story-afad22b314e1637c",
+        "story-a6599cda779ad306",
+        "story-1be2b5357531f575",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 9
+    },
+    {
+      "id": "tuples",
+      "bucket": "collections",
+      "title": "Tuples & immutability",
+      "description": "Store ordered records whose references stay fixed.",
+      "skills": [
+        "Tuples",
+        "mixed types",
+        "unpacking",
+        "nested mutable values"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-8167bf7ebbde1018",
+        "story-c563eb4bb23307df",
+        "story-afad22b314e1637c",
+        "story-f12f400b0845e259",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 5
+    },
+    {
+      "id": "sets",
+      "bucket": "collections",
+      "title": "Sets",
+      "description": "Keep unique items and compare groups.",
+      "skills": [
+        "Uniqueness",
+        "membership",
+        "union",
+        "intersection",
+        "difference"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-6bab419ac15f13d3",
+        "story-a76197f8448cddb6",
+        "story-0532cd450cb25c86",
+        "story-afad22b314e1637c",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 5
+    },
+    {
+      "id": "dictionaries",
+      "bucket": "collections",
+      "title": "Dictionaries & hashing",
+      "description": "Connect a unique key directly to a value.",
+      "skills": [
+        "Key-value pairs",
+        "get",
+        "items",
+        "hashing",
+        "collisions",
+        "lookup costs"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-3f56efaff302a5d1",
+        "story-c7c40793d26c5b2a",
+        "story-a76197f8448cddb6",
+        "story-c563eb4bb23307df",
+        "story-61b5840e0fd73941",
+        "story-e7b0d8a9fe8d0365",
+        "story-afad22b314e1637c",
+        "story-a6599cda779ad306",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 9
+    },
+    {
+      "id": "functions",
+      "bucket": "functions",
+      "title": "Defining & calling functions",
+      "description": "Turn a repeated task into a reusable operation.",
+      "skills": [
+        "def",
+        "calls",
+        "parameters",
+        "arguments",
+        "return values"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-c7c40793d26c5b2a",
+        "story-4eb8cd5405a39cc1",
+        "story-e7b0d8a9fe8d0365",
+        "story-489b4ac6ef1bdf99",
+        "story-e11815652818ebf2",
+        "story-ab72e09488ad93d8",
+        "story-a6599cda779ad306",
+        "story-1be2b5357531f575",
+        "story-e5fa6a9b145ec00e",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 10
+    },
+    {
+      "id": "scope",
+      "bucket": "functions",
+      "title": "Scope & name resolution",
+      "description": "Understand which name Python finds and where.",
+      "skills": [
+        "Local",
+        "enclosing",
+        "global",
+        "built-in",
+        "LEGB",
+        "global",
+        "nonlocal"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-4eb8cd5405a39cc1",
+        "story-5477e5af513e2cc7",
+        "story-79891727e2a36617",
+        "story-e11815652818ebf2",
+        "story-e5fa6a9b145ec00e"
+      ],
+      "playableCount": 5
+    },
+    {
+      "id": "closures",
+      "bucket": "functions",
+      "title": "Closures & nested functions",
+      "description": "Let a function remember the context that created it.",
+      "skills": [
+        "Nested functions",
+        "captured variables",
+        "closures"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-4eb8cd5405a39cc1",
+        "story-e11815652818ebf2"
+      ],
+      "playableCount": 2
+    },
+    {
+      "id": "recursion",
+      "bucket": "functions",
+      "title": "Recursion & backtracking",
+      "description": "Solve a smaller version of a problem until a base case.",
+      "skills": [
+        "Base case",
+        "recursive calls",
+        "call stack",
+        "unwinding",
+        "backtracking"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-4eb8cd5405a39cc1",
+        "story-9ff9078eaeb976d4",
+        "story-0532cd450cb25c86",
+        "story-dea913906bfd2b90"
+      ],
+      "playableCount": 4
+    },
+    {
+      "id": "classes",
+      "bucket": "objects",
+      "title": "Classes & objects",
+      "description": "Create many individual objects from one blueprint.",
+      "skills": [
+        "class",
+        "objects",
+        "__init__",
+        "self",
+        "attributes",
+        "methods"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-f0b7bda78197765a",
+        "story-d212101de2e2efa4",
+        "story-6303a4097d69eca7",
+        "story-3af5c8e035f66c59",
+        "story-298332aee7ba2b32"
+      ],
+      "playableCount": 5
+    },
+    {
+      "id": "encapsulation",
+      "bucket": "objects",
+      "title": "Encapsulation & data hiding",
+      "description": "Group state with the methods that safely change it.",
+      "skills": [
+        "Public/internal members",
+        "name mangling",
+        "property",
+        "getters/setters"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-5410a21f8666e0af",
+        "story-6303a4097d69eca7",
+        "story-3af5c8e035f66c59"
+      ],
+      "playableCount": 3
+    },
+    {
+      "id": "inheritance",
+      "bucket": "objects",
+      "title": "Inheritance",
+      "description": "Reuse, override, and extend behavior from a parent class.",
+      "skills": [
+        "Parent/child classes",
+        "overriding",
+        "super",
+        "multiple/hybrid inheritance"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-c080d50fb7e5563f",
+        "story-b4e637427beca75c",
+        "story-3af5c8e035f66c59"
+      ],
+      "playableCount": 3
+    },
+    {
+      "id": "polymorphism",
+      "bucket": "objects",
+      "title": "Polymorphism & duck typing",
+      "description": "Send the same request to objects with different behavior.",
+      "skills": [
+        "Method dispatch",
+        "overriding",
+        "duck typing"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-676a8d1f1dc92e24",
+        "story-3af5c8e035f66c59"
+      ],
+      "playableCount": 2
+    },
+    {
+      "id": "abstraction",
+      "bucket": "objects",
+      "title": "Abstraction",
+      "description": "Expose a simple operation while hiding implementation details.",
+      "skills": [
+        "Interfaces",
+        "implementation hiding"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-3af5c8e035f66c59"
+      ],
+      "playableCount": 1
+    },
+    {
+      "id": "files",
+      "bucket": "reliability",
+      "title": "File handling & persistence",
+      "description": "Read and save information beyond a running program.",
+      "skills": [
+        "RAM vs disk",
+        "open",
+        "read",
+        "readline",
+        "write",
+        "close",
+        "with",
+        "file modes"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-f0859aba1663ed62",
+        "story-a6599cda779ad306"
+      ],
+      "playableCount": 2
+    },
+    {
+      "id": "exceptions",
+      "bucket": "reliability",
+      "title": "Exception handling",
+      "description": "Recover from failures and clean up reliably.",
+      "skills": [
+        "try",
+        "except",
+        "else",
+        "finally",
+        "raise",
+        "exception hierarchy",
+        "custom exceptions"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-9f7b5b4a8ade000c",
+        "story-1441ae79505da6dc",
+        "story-d730e4fa3019fc6d",
+        "story-5b606fcb064ace2d",
+        "story-5b04d1c5808fe44e",
+        "story-c57e8679bce3a32e",
+        "story-a6599cda779ad306"
+      ],
+      "playableCount": 7
+    },
+    {
+      "id": "errors",
+      "bucket": "reliability",
+      "title": "Understanding Python errors",
+      "description": "Recognize what an error means and choose a recovery.",
+      "skills": [
+        "ValueError",
+        "KeyError",
+        "TypeError",
+        "IndexError",
+        "AttributeError",
+        "FileNotFoundError",
+        "ZeroDivisionError",
+        "RecursionError",
+        "ImportError"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-9f7b5b4a8ade000c",
+        "story-1441ae79505da6dc",
+        "story-5b606fcb064ace2d",
+        "story-61b5840e0fd73941",
+        "story-5b04d1c5808fe44e",
+        "story-c57e8679bce3a32e",
+        "story-a6599cda779ad306"
+      ],
+      "playableCount": 7
+    },
+    {
+      "id": "validation",
+      "bucket": "reliability",
+      "title": "Input validation",
+      "description": "Check information before letting it through.",
+      "skills": [
+        "Validation rules",
+        "retry patterns",
+        "defensive checks"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-545172f653234a84"
+      ],
+      "playableCount": 1
+    },
+    {
+      "id": "sorting",
+      "bucket": "special",
+      "title": "Sorting & searching",
+      "description": "Arrange information and find what you need.",
+      "skills": [
+        "Linear search",
+        "binary search",
+        "sorted",
+        "reverse",
+        "key functions",
+        "complexity"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-0532cd450cb25c86",
+        "story-7617eda5b6c5d39c",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 3
+    },
+    {
+      "id": "filtering",
+      "bucket": "special",
+      "title": "Filtering & counting",
+      "description": "Keep matching items and summarize a collection.",
+      "skills": [
+        "Predicates",
+        "accumulation",
+        "counting"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-545172f653234a84"
+      ],
+      "playableCount": 1
+    },
+    {
+      "id": "modules",
+      "bucket": "special",
+      "title": "Modules & imports",
+      "description": "Organize and reuse code from another module.",
+      "skills": [
+        "import",
+        "from",
+        "reusable modules"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-545172f653234a84"
+      ],
+      "playableCount": 1
+    },
+    {
+      "id": "decorators",
+      "bucket": "special",
+      "title": "Decorators",
+      "description": "Wrap an operation with behavior before and after it.",
+      "skills": [
+        "Higher-order functions",
+        "wrappers",
+        "@ syntax"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-fe18dfae0dfa817f"
+      ],
+      "playableCount": 1
+    },
+    {
+      "id": "generators",
+      "bucket": "special",
+      "title": "Iterators & generators",
+      "description": "Produce values on demand instead of all at once.",
+      "skills": [
+        "Iterable",
+        "iter",
+        "next",
+        "StopIteration",
+        "yield",
+        "lazy evaluation"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-b5ddcf051b9a827c"
+      ],
+      "playableCount": 1
+    },
+    {
+      "id": "memory",
+      "bucket": "special",
+      "title": "References, mutation & memory",
+      "description": "Follow objects, references, and their lifetime.",
+      "skills": [
+        "References",
+        "copying",
+        "in-place mutation",
+        "stack vs heap",
+        "garbage collection"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-9c94cab558e9f7a4",
+        "story-545172f653234a84"
+      ],
+      "playableCount": 2
+    },
+    {
+      "id": "threads",
+      "bucket": "special",
+      "title": "Multithreading",
+      "description": "Coordinate several tasks that spend time waiting.",
+      "skills": [
+        "threading.Thread",
+        "start",
+        "join",
+        "I/O concurrency",
+        "GIL caveat"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-b31d201f15970ec2"
+      ],
+      "playableCount": 1
+    },
+    {
+      "id": "plots",
+      "bucket": "special",
+      "title": "Data visualization with Matplotlib",
+      "description": "Choose a chart that answers the question.",
+      "skills": [
+        "Line",
+        "bar",
+        "scatter",
+        "pie",
+        "boxplot",
+        "stacked area",
+        "chart selection"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-4ad76a8313b0be1f"
+      ],
+      "playableCount": 1
+    },
+    {
+      "id": "translation",
+      "bucket": "special",
+      "title": "Compilers & interpreters",
+      "description": "Explore how a computer translates and executes code.",
+      "skills": [
+        "Translators",
+        "compilation",
+        "interpretation"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-f77458836eb67f34"
+      ],
+      "playableCount": 1
+    },
+    {
+      "id": "datetime",
+      "bucket": "special",
+      "title": "Dates & times",
+      "description": "Order events and reason about a timeline.",
+      "skills": [
+        "Datetime parsing",
+        "chronological sorting"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-0532cd450cb25c86"
+      ],
+      "playableCount": 1
+    },
+    {
+      "id": "comprehensions",
+      "bucket": "collections",
+      "title": "Comprehensions",
+      "description": "A dedicated story for list, set, and dictionary comprehensions.",
+      "skills": [],
+      "storyIds": [],
+      "playableCount": 0,
+      "status": "pending",
+      "proposed": true
+    },
+    {
+      "id": "regex",
+      "bucket": "collections",
+      "title": "Regular expressions",
+      "description": "Find and validate text patterns with Python’s re module.",
+      "skills": [],
+      "storyIds": [],
+      "playableCount": 0,
+      "status": "pending",
+      "proposed": true
+    },
+    {
+      "id": "serialization",
+      "bucket": "reliability",
+      "title": "JSON & CSV serialization",
+      "description": "Move structured information between files and Python objects.",
+      "skills": [],
+      "storyIds": [],
+      "playableCount": 0,
+      "status": "pending",
+      "proposed": true
+    },
+    {
+      "id": "testing",
+      "bucket": "reliability",
+      "title": "Testing Python code",
+      "description": "Write assertions, test edge cases, and learn unit testing.",
+      "skills": [],
+      "storyIds": [],
+      "playableCount": 0,
+      "status": "pending",
+      "proposed": true
+    },
+    {
+      "id": "type-hints",
+      "bucket": "special",
+      "title": "Type hints",
+      "description": "Describe the inputs and outputs of Python code with annotations.",
+      "skills": [],
+      "storyIds": [],
+      "playableCount": 0,
+      "status": "pending",
+      "proposed": true
+    },
+    {
+      "id": "dataclasses",
+      "bucket": "objects",
+      "title": "Dataclasses",
+      "description": "Model records with generated initialization and comparison methods.",
+      "skills": [],
+      "storyIds": [],
+      "playableCount": 0,
+      "status": "pending",
+      "proposed": true
+    },
+    {
+      "id": "asyncio",
+      "bucket": "special",
+      "title": "Async / await & asyncio",
+      "description": "Coordinate waiting tasks using coroutines and an event loop.",
+      "skills": [],
+      "storyIds": [],
+      "playableCount": 0,
+      "status": "pending",
+      "proposed": true
+    },
+    {
+      "id": "http",
+      "bucket": "special",
+      "title": "HTTP requests & APIs",
+      "description": "Request data from a service and handle its responses.",
+      "skills": [],
+      "storyIds": [],
+      "playableCount": 0,
+      "status": "pending",
+      "proposed": true
+    },
+    {
+      "id": "sqlite",
+      "bucket": "reliability",
+      "title": "SQLite & databases",
+      "description": "Store, query, and update persistent records using SQL.",
+      "skills": [],
+      "storyIds": [],
+      "playableCount": 0,
+      "status": "pending",
+      "proposed": true
+    },
+    {
+      "id": "environments",
+      "bucket": "foundations",
+      "title": "Packages, pip & virtual environments",
+      "description": "Set up a reproducible Python environment and install packages.",
+      "skills": [],
+      "storyIds": [],
+      "playableCount": 0,
+      "status": "pending",
+      "proposed": true
+    },
+    {
+      "id": "context-protocol",
+      "bucket": "special",
+      "title": "Custom context managers",
+      "description": "Design resource cleanup with __enter__, __exit__, and contextlib.",
+      "skills": [],
+      "storyIds": [],
+      "playableCount": 0,
+      "status": "pending",
+      "proposed": true
+    }
+  ],
+  "stories": [
+    {
+      "id": "story-0fdb9bc4ae50094b",
+      "title": "Traffic System: Rules and Names",
+      "author": "Akshay Vishwakarma",
+      "concepts": [
+        "keywords"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Akshay Vishwakarma/index.html",
+      "description": "Traffic signals have fixed meanings. New roads need names that follow rules.",
+      "source": "summership-26-prs/Akshay Vishwakarma/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-50b1ab4f25db0b54",
+      "title": "The Lost Library of Python",
+      "author": "Mehak Gupta",
+      "concepts": [
+        "keywords"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Mehak Gupta/index.html",
+      "description": "Explore The Lost Library of Python through a story-first Python case study.",
+      "source": "summership-26-prs/Mehak Gupta/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-617c10ea8be694de",
+      "title": "The Royal Messengers of Oakhaven",
+      "author": "Saniya kousar",
+      "concepts": [
+        "output"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Saniya kousar/messenger_in_the_sky/index.html",
+      "description": "Explore The Royal Messengers of Oakhaven through a story-first Python case study.",
+      "source": "summership-26-prs/Saniya kousar/messenger_in_the_sky/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-9a805a86ccec1a84",
+      "title": "The Royal Scribe’s Secret",
+      "author": "Ayush_Anand",
+      "concepts": [
+        "strings",
+        "indexing"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Ayush_Anand/index.html",
+      "description": "Explore The Royal Scribe’s Secret through a story-first Python case study.",
+      "source": "summership-26-prs/Ayush_Anand/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-02cecabc434c5db4",
+      "title": "The Royal Supply Scroll",
+      "author": "A.S.R.S.S Snigdha",
+      "concepts": [
+        "lists"
+      ],
+      "mode": "original",
+      "entry": "/submissions/A.S.R.S.S Snigdha/index.html",
+      "description": "Explore The Royal Supply Scroll through a story-first Python case study.",
+      "source": "summership-26-prs/A.S.R.S.S Snigdha/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-8167bf7ebbde1018",
+      "title": "The Sealed Record",
+      "author": "Bhoomi Gupta",
+      "concepts": [
+        "tuples"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Bhoomi Gupta/sealed_recod/sealed_record.html",
+      "description": "Explore The Sealed Record through a story-first Python case study.",
+      "source": "summership-26-prs/Bhoomi Gupta/sealed_recod/sealed_record.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-ad89eb826e121d2d",
+      "title": "The Wind Crystal Chase",
+      "author": "Mannat Balyan",
+      "concepts": [
+        "for",
+        "while",
+        "control"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Mannat Balyan/index.html",
+      "description": "Explore The Wind Crystal Chase through a story-first Python case study.",
+      "source": "summership-26-prs/Mannat Balyan/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-57fb53f5658f810a",
+      "title": "Birbal and the Royal Reward",
+      "author": "Jandhyala Uma Sri Lekha",
+      "concepts": [
+        "conditionals"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Jandhyala Uma Sri Lekha/index.html",
+      "description": "Explore Birbal and the Royal Reward through a story-first Python case study.",
+      "source": "summership-26-prs/Jandhyala Uma Sri Lekha/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-3f56efaff302a5d1",
+      "title": "Akbar & Birbal’s Royal Tax Registry",
+      "author": "Krishanu Das",
+      "concepts": [
+        "dictionaries"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Krishanu Das/index.html",
+      "description": "Explore Akbar & Birbal’s Royal Tax Registry through a story-first Python case study.",
+      "source": "summership-26-prs/Krishanu Das/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-5410a21f8666e0af",
+      "title": "Khul Ja Sim Sim",
+      "author": "Manan Jain",
+      "concepts": [
+        "encapsulation"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Manan Jain/index.html",
+      "description": "Explore Khul Ja Sim Sim through a story-first Python case study.",
+      "source": "summership-26-prs/Manan Jain/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-9f7b5b4a8ade000c",
+      "title": "The Postman’s Route",
+      "author": "Mohammed Sameer Inamdar",
+      "concepts": [
+        "exceptions",
+        "errors"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Mohammed Sameer Inamdar/postman-exceptions/index.html",
+      "description": "Explore The Postman’s Route through a story-first Python case study.",
+      "source": "summership-26-prs/Mohammed Sameer Inamdar/postman-exceptions/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-1441ae79505da6dc",
+      "title": "The High Pass: Swati’s Himalayan Ride",
+      "author": "Kritika",
+      "concepts": [
+        "exceptions",
+        "errors"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Kritika/index.html",
+      "description": "Explore The High Pass: Swati’s Himalayan Ride through a story-first Python case study.",
+      "source": "summership-26-prs/Kritika/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-fe18dfae0dfa817f",
+      "title": "The Gates of Rajgad",
+      "author": "Pradeep Mishra",
+      "concepts": [
+        "decorators"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Pradeep Mishra/index.html",
+      "description": "Explore The Gates of Rajgad through a story-first Python case study.",
+      "source": "summership-26-prs/Pradeep Mishra/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-f77458836eb67f34",
+      "title": "Humans, Aliens & Translation",
+      "author": "Sahil",
+      "concepts": [
+        "translation"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Sahil/index.html",
+      "description": "Explore Humans, Aliens & Translation through a story-first Python case study.",
+      "source": "summership-26-prs/Sahil/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-f0859aba1663ed62",
+      "title": "Rahul’s Kitchen Lab",
+      "author": "Swastika Mitra",
+      "concepts": [
+        "files"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Swastika Mitra/index.html",
+      "description": "Explore Rahul’s Kitchen Lab through a story-first Python case study.",
+      "source": "summership-26-prs/Swastika Mitra/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-6bab419ac15f13d3",
+      "title": "The Sets Case Study",
+      "author": "Vanshika17-05",
+      "concepts": [
+        "sets"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Vanshika17-05/sets_case_study/index.html",
+      "description": "Explore The Sets Case Study through a story-first Python case study.",
+      "source": "summership-26-prs/Vanshika17-05/sets_case_study/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-c7c40793d26c5b2a",
+      "title": "Flight 218",
+      "author": "Writwik Das",
+      "concepts": [
+        "variables",
+        "output",
+        "lists",
+        "dictionaries",
+        "for",
+        "conditionals",
+        "functions"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Writwik Das/Flight 218_v6.html",
+      "description": "Explore Flight 218 through a story-first Python case study.",
+      "source": "summership-26-prs/Writwik Das/Flight 218_v6.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-0bdeee990fa852ea",
+      "title": "Maple Heights",
+      "author": "Yash Parmar",
+      "concepts": [
+        "lists",
+        "indexing"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Yash Parmar/client/index.html",
+      "description": "Explore Maple Heights through a story-first Python case study.",
+      "source": "summership-26-prs/Yash Parmar/client/index.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-823fd0e08364881e",
+      "title": "Flow Tales",
+      "author": "Ananya-Agarwall2",
+      "concepts": [
+        "control",
+        "output"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Ananya-Agarwall2/Flow Tales.html",
+      "description": "Explore Flow Tales through a story-first Python case study.",
+      "source": "summership-26-prs/Ananya-Agarwall2/Flow Tales.html",
+      "presentation": "original"
+    },
+    {
+      "id": "story-1bb2d0ced20d2774",
+      "title": "The Messy Attendance List",
+      "author": "hosnnasruti",
+      "concepts": [
+        "strings"
+      ],
+      "mode": "source",
+      "entry": null,
+      "description": "Explore The Messy Attendance List through a story-first Python case study.",
+      "source": "summership-26-prs/hosnnasruti/string-manipulation-case-study/case-study.md",
+      "presentation": "original",
+      "setupNote": "This submission is a Python script / written case study. Open the original source and its README to run it as submitted."
+    },
+    {
+      "id": "story-d730e4fa3019fc6d",
+      "title": "The Monkey and the Crocodile",
+      "author": "Abhi Patel",
+      "concepts": [
+        "exceptions"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Monkey and the Crocodile through a story-first Python case study.",
+      "source": "summership-26-prs/Abhi Patel/client/src/lesson/lessonData.js",
+      "presentation": "original",
+      "appId": "app-7b2d81d4c9472267",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-4ad76a8313b0be1f",
+      "title": "NovaTech Investor Room",
+      "author": "Abhi_Mishra",
+      "concepts": [
+        "plots"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore NovaTech Investor Room through a story-first Python case study.",
+      "source": "summership-26-prs/Abhi_Mishra/README.md",
+      "presentation": "original",
+      "appId": "app-ee744a35a2b7d87a",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-a76197f8448cddb6",
+      "title": "Doraemon’s Stamp Collection & Gadget Codes",
+      "author": "Akshra Gupta",
+      "concepts": [
+        "sets",
+        "dictionaries"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Doraemon’s Stamp Collection & Gadget Codes through a story-first Python case study.",
+      "source": "summership-26-prs/Akshra Gupta/README.md",
+      "presentation": "original",
+      "appId": "app-264ab6e167253bae",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-ed372d85b4644984",
+      "title": "Iteration Learning Journey",
+      "author": "Ankit Kumar Prajapati",
+      "concepts": [
+        "for",
+        "while"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Iteration Learning Journey through a story-first Python case study.",
+      "source": "summership-26-prs/Ankit Kumar Prajapati/pybe-iteration-feature/client/README.md",
+      "presentation": "original",
+      "appId": "app-026ada18d0e16b02",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-4eb8cd5405a39cc1",
+      "title": "Hawkins Division: Functions Field Manual",
+      "author": "Anshika Saraswat",
+      "concepts": [
+        "functions",
+        "scope",
+        "closures",
+        "recursion"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Hawkins Division: Functions Field Manual through a story-first Python case study.",
+      "source": "summership-26-prs/Anshika Saraswat/README.md",
+      "presentation": "original",
+      "appId": "app-dacaecdfbbae1a7c",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-6c4e74eb56c56740",
+      "title": "The Magic of Logic",
+      "author": "Arka Kanji",
+      "concepts": [
+        "conditionals",
+        "comparison"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Magic of Logic through a story-first Python case study.",
+      "source": "summership-26-prs/Arka Kanji/client/src/data.ts",
+      "presentation": "original",
+      "appId": "app-e08f25845df25d2d",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-c563eb4bb23307df",
+      "title": "Everyday Python: UPI, Addresses & Checklists",
+      "author": "Aryan Vaghasiya",
+      "concepts": [
+        "tuples",
+        "dictionaries",
+        "lists"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Everyday Python: UPI, Addresses & Checklists through a story-first Python case study.",
+      "source": "summership-26-prs/Aryan Vaghasiya/README.md",
+      "presentation": "original",
+      "appId": "app-636743daeb9f46e5",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-9ff9078eaeb976d4",
+      "title": "Recursive Explorer: Ant Colony Adventure",
+      "author": "Aryan Vishala",
+      "concepts": [
+        "recursion"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Recursive Explorer: Ant Colony Adventure through a story-first Python case study.",
+      "source": "summership-26-prs/Aryan Vishala/readme.md",
+      "presentation": "original",
+      "appId": "app-64a37291b5b737e1",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-5b606fcb064ace2d",
+      "title": "Oracle Journey",
+      "author": "Astha",
+      "concepts": [
+        "exceptions",
+        "errors"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Oracle Journey through a story-first Python case study.",
+      "source": "summership-26-prs/Astha/percy-oracle/README.md",
+      "presentation": "original",
+      "appId": "app-c0b4c6b19e8a214e",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-7cede33ab799b7e3",
+      "title": "PyFarm: Maya’s First Harvest",
+      "author": "Deepa Basnet",
+      "concepts": [
+        "variables",
+        "conditionals"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore PyFarm: Maya’s First Harvest through a story-first Python case study.",
+      "source": "summership-26-prs/Deepa Basnet/README.md",
+      "presentation": "original",
+      "appId": "app-16d5ffd94bfb5258",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-0532cd450cb25c86",
+      "title": "Rosewood Manor",
+      "author": "Dishi Gupta",
+      "concepts": [
+        "strings",
+        "datetime",
+        "sorting",
+        "sets",
+        "recursion"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Rosewood Manor through a story-first Python case study.",
+      "source": "summership-26-prs/Dishi Gupta/server/src/data/db.json",
+      "presentation": "original",
+      "appId": "app-0ace871b4b5bd641",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-249b9aa16e56653a",
+      "title": "The Raidurg Adventure",
+      "author": "Ghanate Lakshmi",
+      "concepts": [
+        "for",
+        "while"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Raidurg Adventure through a story-first Python case study.",
+      "source": "summership-26-prs/Ghanate Lakshmi/src/data/storyData.js",
+      "presentation": "original",
+      "appId": "app-799484d6fb69ccfc",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-8f35c48bc68d1343",
+      "title": "The Hunt for Calico Jack",
+      "author": "Husanpreet Singh",
+      "concepts": [
+        "conditionals"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Hunt for Calico Jack through a story-first Python case study.",
+      "source": "summership-26-prs/Husanpreet Singh/client/src/data/story.js",
+      "presentation": "original",
+      "appId": "app-4eea101c5f2887ab",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-2ad060f951f61c12",
+      "title": "Poko’s Magical Memory",
+      "author": "Jasdeep Kaur",
+      "concepts": [
+        "variables",
+        "types"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Poko’s Magical Memory through a story-first Python case study.",
+      "source": "summership-26-prs/Jasdeep Kaur/README.md",
+      "presentation": "original",
+      "appId": "app-0b2d19412dba651d",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-43d3d164c73db34c",
+      "title": "PyBe Gurukul: Lotus, Well & Bell",
+      "author": "Jasdeep Kaur",
+      "concepts": [
+        "for",
+        "while",
+        "control"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Jasdeep Kaur/gurukul/index.html",
+      "description": "Explore PyBe Gurukul: Lotus, Well & Bell through a story-first Python case study.",
+      "source": "summership-26-prs/Jasdeep Kaur/gurukul/README.md",
+      "presentation": "original"
+    },
+    {
+      "id": "story-dea913906bfd2b90",
+      "title": "The Recursion Discovery Journey",
+      "author": "Jasvinder Kaur",
+      "concepts": [
+        "recursion"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Recursion Discovery Journey through a story-first Python case study.",
+      "source": "summership-26-prs/Jasvinder Kaur/README.md",
+      "presentation": "original",
+      "appId": "app-2c61bd22235ac317",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-61b5840e0fd73941",
+      "title": "The Dictionary Discovery Adventure",
+      "author": "joseph-antony-benedict",
+      "concepts": [
+        "dictionaries",
+        "errors"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Dictionary Discovery Adventure through a story-first Python case study.",
+      "source": "summership-26-prs/joseph-antony-benedict/README.md",
+      "presentation": "original",
+      "appId": "app-ccee7ebc0ed7368b",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-e7b0d8a9fe8d0365",
+      "title": "Find and Squash the Bug",
+      "author": "Kalyanam Hasith",
+      "concepts": [
+        "variables",
+        "lists",
+        "for",
+        "strings",
+        "indexing",
+        "arithmetic",
+        "comparison",
+        "conditionals",
+        "control",
+        "dictionaries",
+        "functions"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Find and Squash the Bug through a story-first Python case study.",
+      "source": "summership-26-prs/Kalyanam Hasith/product_file.md",
+      "presentation": "original",
+      "appId": "app-beca54a9d06d4ddc",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-6dc52d0b1ddaecb9",
+      "title": "Robo’s Magic Loop & Doraemon’s Memory Pockets",
+      "author": "Mahi Agarwal",
+      "concepts": [
+        "for",
+        "while",
+        "variables"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Robo’s Magic Loop & Doraemon’s Memory Pockets through a story-first Python case study.",
+      "source": "summership-26-prs/Mahi Agarwal/README.md",
+      "presentation": "original",
+      "appId": "app-e5e2fb016e61bee4",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-afad22b314e1637c",
+      "title": "The Lost Kingdom of Python",
+      "author": "Manav Bhatt",
+      "concepts": [
+        "lists",
+        "tuples",
+        "sets",
+        "dictionaries"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Lost Kingdom of Python through a story-first Python case study.",
+      "source": "summership-26-prs/Manav Bhatt/client/index.html",
+      "presentation": "original",
+      "appId": "app-0c9544ffe869ceed",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-d6ff7a5a81fd9717",
+      "title": "Dabbo’s Orchard",
+      "author": "Mohammad Hamdan",
+      "concepts": [
+        "variables",
+        "types",
+        "arithmetic"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Dabbo’s Orchard through a story-first Python case study.",
+      "source": "summership-26-prs/Mohammad Hamdan/app.py",
+      "presentation": "original",
+      "appId": "app-aa57010730859eb2",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-9c94cab558e9f7a4",
+      "title": "The Memory Modules",
+      "author": "NIKHIL KUMAR",
+      "concepts": [
+        "memory"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Memory Modules through a story-first Python case study.",
+      "source": "summership-26-prs/NIKHIL KUMAR/context.md",
+      "presentation": "original",
+      "appId": "app-3dae8e5271df7a36",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-676a8d1f1dc92e24",
+      "title": "Dashavatara: The Many Forms",
+      "author": "Nikhil-Kumawat",
+      "concepts": [
+        "polymorphism"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Dashavatara: The Many Forms through a story-first Python case study.",
+      "source": "summership-26-prs/Nikhil-Kumawat/dashavatara-polymorphism/README.md",
+      "presentation": "original",
+      "appId": "app-00482e45e3d9af0b",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-680740e43fc4d219",
+      "title": "The Mela Gatekeeper",
+      "author": "Nikhil-Kumawat",
+      "concepts": [
+        "truthiness"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Mela Gatekeeper through a story-first Python case study.",
+      "source": "summership-26-prs/Nikhil-Kumawat/village-mela-truthiness/README.md",
+      "presentation": "original",
+      "appId": "app-992db4b4871b6350",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-b31d201f15970ec2",
+      "title": "One Restaurant, Many Orders",
+      "author": "Pramod Sharma",
+      "concepts": [
+        "threads"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore One Restaurant, Many Orders through a story-first Python case study.",
+      "source": "summership-26-prs/Pramod Sharma/src/main.jsx",
+      "presentation": "original",
+      "appId": "app-71969231b101c1c5",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-c080d50fb7e5563f",
+      "title": "The Wildlife Observer’s Field Journal",
+      "author": "Pritam_Patra",
+      "concepts": [
+        "inheritance"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Wildlife Observer’s Field Journal through a story-first Python case study.",
+      "source": "summership-26-prs/Pritam_Patra/README.md",
+      "presentation": "original",
+      "appId": "app-3ce6b25707ad182f",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-489b4ac6ef1bdf99",
+      "title": "Adder",
+      "author": "RAVADA LAKSHITHA",
+      "concepts": [
+        "functions"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Adder through a story-first Python case study.",
+      "source": "summership-26-prs/RAVADA LAKSHITHA/Adder/client/src/lessons/content/adderContent.js",
+      "presentation": "original",
+      "appId": "app-9fc6dc1c2d891869",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-5b04d1c5808fe44e",
+      "title": "The Dasara Festival Discovery Lab",
+      "author": "Reddy-02",
+      "concepts": [
+        "exceptions",
+        "errors"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Dasara Festival Discovery Lab through a story-first Python case study.",
+      "source": "summership-26-prs/Reddy-02/README.md",
+      "presentation": "original",
+      "appId": "app-d1c4288344a3ef91",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-f12f400b0845e259",
+      "title": "The Tuple Analogy Playground",
+      "author": "Rohith N R",
+      "concepts": [
+        "tuples"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Tuple Analogy Playground through a story-first Python case study.",
+      "source": "summership-26-prs/Rohith N R/tuple-analogy/README.md",
+      "presentation": "original",
+      "appId": "app-7a7d5dda71da562b",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-5477e5af513e2cc7",
+      "title": "The Campus Fest",
+      "author": "Sanjana_Posannapeta",
+      "concepts": [
+        "scope"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Campus Fest through a story-first Python case study.",
+      "source": "summership-26-prs/Sanjana_Posannapeta/README.md",
+      "presentation": "original",
+      "appId": "app-0a2a5cf92376989c",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-c57e8679bce3a32e",
+      "title": "The Dharma Validator",
+      "author": "Sharanu",
+      "concepts": [
+        "exceptions",
+        "errors"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Dharma Validator through a story-first Python case study.",
+      "source": "summership-26-prs/Sharanu/src/learning/lessons/registry.ts",
+      "presentation": "original",
+      "appId": "app-980429fafad3a95f",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-f0b7bda78197765a",
+      "title": "Creation: The Art of the Eternal Mold",
+      "author": "sheetal",
+      "concepts": [
+        "classes"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Creation: The Art of the Eternal Mold through a story-first Python case study.",
+      "source": "summership-26-prs/sheetal/README.md",
+      "presentation": "original",
+      "appId": "app-2901babd360d8e19",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-d212101de2e2efa4",
+      "title": "Sign the Squad",
+      "author": "Simran",
+      "concepts": [
+        "classes"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Sign the Squad through a story-first Python case study.",
+      "source": "summership-26-prs/Simran/README.md",
+      "presentation": "original",
+      "appId": "app-e6eb44e8cc8704c2",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-b4e637427beca75c",
+      "title": "The Bird Family",
+      "author": "Simran",
+      "concepts": [
+        "inheritance"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Bird Family through a story-first Python case study.",
+      "source": "summership-26-prs/Simran/README.md",
+      "presentation": "original",
+      "appId": "app-e6eb44e8cc8704c2",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-79891727e2a36617",
+      "title": "The Palace of Whispers",
+      "author": "Simranjit Kaur",
+      "concepts": [
+        "scope"
+      ],
+      "mode": "original",
+      "entry": "/submissions/Simranjit Kaur/palace-storybook/index.html",
+      "description": "Explore The Palace of Whispers through a story-first Python case study.",
+      "source": "summership-26-prs/Simranjit Kaur/palace-storybook/README.md",
+      "presentation": "original"
+    },
+    {
+      "id": "story-e11815652818ebf2",
+      "title": "Tiffin Trail",
+      "author": "Somya  Kapoor",
+      "concepts": [
+        "functions",
+        "scope",
+        "closures"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Tiffin Trail through a story-first Python case study.",
+      "source": "summership-26-prs/Somya  Kapoor/tiffin trail-case study/src/TiffinTrail.jsx",
+      "presentation": "original",
+      "appId": "app-3f9177de23d0889e",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-6303a4097d69eca7",
+      "title": "Buddy’s Magic Pet Shop",
+      "author": "Vanisha Tiwari",
+      "concepts": [
+        "encapsulation",
+        "classes"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Buddy’s Magic Pet Shop through a story-first Python case study.",
+      "source": "summership-26-prs/Vanisha Tiwari/README.md",
+      "presentation": "original",
+      "appId": "app-e5e2e59c1566d113",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-ab72e09488ad93d8",
+      "title": "Mia’s Smart Parking Gate",
+      "author": "Samruddhi Chate",
+      "concepts": [
+        "functions"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Mia’s Smart Parking Gate through a story-first Python case study.",
+      "source": "summership-26-prs/Samruddhi Chate/README.md",
+      "presentation": "original",
+      "appId": "app-2a88db6a9d151180",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-5ab6bebe7c3605f9",
+      "title": "The Cricket Chase",
+      "author": "Neeraj Agrawal",
+      "concepts": [
+        "for",
+        "while"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Cricket Chase through a story-first Python case study.",
+      "source": "summership-26-prs/Neeraj Agrawal/pybe-iteration-feature/README.md",
+      "presentation": "original",
+      "appId": "app-9fae73a79254307e",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-a639df8d84d12201",
+      "title": "Loop Control Discovery",
+      "author": "Neeraj Agrawal",
+      "concepts": [
+        "control"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Loop Control Discovery through a story-first Python case study.",
+      "source": "summership-26-prs/Neeraj Agrawal/pybe-loopcontrols-standalone/README.md",
+      "presentation": "original",
+      "appId": "app-a77735f988cc675e",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-b5ddcf051b9a827c",
+      "title": "Treasure Kingdom",
+      "author": "Hemanth_Kumar_Reddy",
+      "concepts": [
+        "generators"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Treasure Kingdom through a story-first Python case study.",
+      "source": "summership-26-prs/Hemanth_Kumar_Reddy/README.md",
+      "presentation": "original",
+      "appId": "app-5aa87c5df7f8c427",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-7a30209fcf39425b",
+      "title": "Python Arcade: Pet, Pixels & Invaders",
+      "author": "Prasoon Lawania",
+      "concepts": [
+        "conditionals",
+        "nested",
+        "for",
+        "while"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Python Arcade: Pet, Pixels & Invaders through a story-first Python case study.",
+      "source": "summership-26-prs/Prasoon Lawania/README.md",
+      "presentation": "original",
+      "appId": "app-f3388615cb54fb41",
+      "launchPath": "/pixel"
+    },
+    {
+      "id": "story-a6599cda779ad306",
+      "title": "Python Case Study Engine",
+      "author": "Prasoon Lawania",
+      "concepts": [
+        "types",
+        "functions",
+        "strings",
+        "indexing",
+        "exceptions",
+        "errors",
+        "lists",
+        "dictionaries",
+        "files"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Python Case Study Engine through a story-first Python case study.",
+      "source": "summership-26-prs/Prasoon Lawania/server/src/data/content.json",
+      "presentation": "original",
+      "appId": "app-f3388615cb54fb41",
+      "launchPath": "/learn"
+    },
+    {
+      "id": "story-4049523562c935ab",
+      "title": "Loops: Reason, Discover & Build",
+      "author": "Saksham Sharma",
+      "concepts": [
+        "for",
+        "while",
+        "control"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Loops: Reason, Discover & Build through a story-first Python case study.",
+      "source": "summership-26-prs/Saksham Sharma/server/src/data/content.json",
+      "presentation": "original",
+      "appId": "app-1caf36318cc70531",
+      "launchPath": "/learn"
+    },
+    {
+      "id": "story-7617eda5b6c5d39c",
+      "title": "Sorting & Searching Basics",
+      "author": "Ansh",
+      "concepts": [
+        "sorting"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Sorting & Searching Basics through a story-first Python case study.",
+      "source": "summership-26-prs/Ansh/server/src/data/content.json",
+      "presentation": "original",
+      "appId": "app-d9caa575fc418fb1",
+      "launchPath": "/learn"
+    },
+    {
+      "id": "story-1be2b5357531f575",
+      "title": "Py-Betaal Tales",
+      "author": "Namrata Saha",
+      "concepts": [
+        "variables",
+        "conditionals",
+        "for",
+        "while",
+        "lists",
+        "functions"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Py-Betaal Tales through a story-first Python case study.",
+      "source": "summership-26-prs/Namrata Saha/README.md",
+      "presentation": "original",
+      "appId": "app-e717e6fa1a5ebae9",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-3af5c8e035f66c59",
+      "title": "Samsung OOP Stories",
+      "author": "Akash",
+      "concepts": [
+        "classes",
+        "encapsulation",
+        "inheritance",
+        "polymorphism",
+        "abstraction"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Samsung OOP Stories through a story-first Python case study.",
+      "source": "summership-26-prs/Akash/CASE_STUDIES_README.md",
+      "presentation": "original",
+      "appId": "app-39be02c2307e227e",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-e5fa6a9b145ec00e",
+      "title": "The Thieves at the Well",
+      "author": "Harshal Ganatra",
+      "concepts": [
+        "functions",
+        "scope",
+        "while",
+        "conditionals"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Thieves at the Well through a story-first Python case study.",
+      "source": "summership-26-prs/Harshal Ganatra/server/src/data/db.json",
+      "presentation": "original",
+      "appId": "app-2db168d3fa190744",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-82621fb31e80d371",
+      "title": "The Royal Bakery & Thirsty Crow",
+      "author": "Damanpreet Singh",
+      "concepts": [
+        "for",
+        "while"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore The Royal Bakery & Thirsty Crow through a story-first Python case study.",
+      "source": "summership-26-prs/Damanpreet Singh/README.md",
+      "presentation": "original",
+      "appId": "app-c74300b31505fc3a",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-545172f653234a84",
+      "title": "Python Through Story Traditions",
+      "author": "Putta_Sri_Tejaswi",
+      "concepts": [
+        "variables",
+        "arithmetic",
+        "comparison",
+        "strings",
+        "lists",
+        "tuples",
+        "sets",
+        "dictionaries",
+        "conditionals",
+        "for",
+        "while",
+        "functions",
+        "indexing",
+        "sorting",
+        "filtering",
+        "modules",
+        "validation",
+        "memory"
+      ],
+      "mode": "application",
+      "entry": null,
+      "description": "Explore Python Through Story Traditions through a story-first Python case study.",
+      "source": "summership-26-prs/Putta_Sri_Tejaswi/src/data/curriculum.ts",
+      "presentation": "original",
+      "appId": "app-98550de0d3e64a37",
+      "launchPath": "/"
+    },
+    {
+      "id": "story-298332aee7ba2b32",
+      "title": "Why Classes Exist",
+      "author": "Rekha Battu",
+      "concepts": [
+        "classes"
+      ],
+      "mode": "original",
+      "entry": "/other-submissions/pybe-class/index.html",
+      "description": "Discover the need for a reusable student format through twelve observations.",
+      "source": "rekhabattu-pr/pybe-class/README.md",
+      "presentation": "original"
+    }
+  ],
+  "applications": [
+    {
+      "id": "app-7b2d81d4c9472267",
+      "kind": "vite",
+      "directory": "summership-26-prs/Abhi Patel/client",
+      "backend": {
+        "directory": "summership-26-prs/Abhi Patel/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-ee744a35a2b7d87a",
+      "kind": "vite",
+      "directory": "summership-26-prs/Abhi_Mishra/client",
+      "backend": {
+        "directory": "summership-26-prs/Abhi_Mishra/server",
+        "entry": "src/server.js",
+        "port": 4000
+      },
+      "modernNode": true
+    },
+    {
+      "id": "app-264ab6e167253bae",
+      "kind": "vite",
+      "directory": "summership-26-prs/Akshra Gupta",
+      "backend": null,
+      "modernNode": true
+    },
+    {
+      "id": "app-026ada18d0e16b02",
+      "kind": "vite",
+      "directory": "summership-26-prs/Ankit Kumar Prajapati/pybe-iteration-feature/client",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-dacaecdfbbae1a7c",
+      "kind": "vite",
+      "directory": "summership-26-prs/Anshika Saraswat",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-e08f25845df25d2d",
+      "kind": "vite",
+      "directory": "summership-26-prs/Arka Kanji/client",
+      "backend": {
+        "directory": "summership-26-prs/Arka Kanji/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-636743daeb9f46e5",
+      "kind": "vite",
+      "directory": "summership-26-prs/Aryan Vaghasiya",
+      "backend": null,
+      "modernNode": true
+    },
+    {
+      "id": "app-64a37291b5b737e1",
+      "kind": "vite",
+      "directory": "summership-26-prs/Aryan Vishala",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-c0b4c6b19e8a214e",
+      "kind": "vite",
+      "directory": "summership-26-prs/Astha/percy-oracle",
+      "backend": null,
+      "modernNode": true
+    },
+    {
+      "id": "app-16d5ffd94bfb5258",
+      "kind": "vite",
+      "directory": "summership-26-prs/Deepa Basnet",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-0ace871b4b5bd641",
+      "kind": "vite",
+      "directory": "summership-26-prs/Dishi Gupta/client",
+      "backend": {
+        "directory": "summership-26-prs/Dishi Gupta/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-799484d6fb69ccfc",
+      "kind": "vite",
+      "directory": "summership-26-prs/Ghanate Lakshmi",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-4eea101c5f2887ab",
+      "kind": "vite",
+      "directory": "summership-26-prs/Husanpreet Singh/client",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-0b2d19412dba651d",
+      "kind": "vite",
+      "directory": "summership-26-prs/Jasdeep Kaur/client",
+      "backend": {
+        "directory": "summership-26-prs/Jasdeep Kaur/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-2c61bd22235ac317",
+      "kind": "vite",
+      "directory": "summership-26-prs/Jasvinder Kaur/client",
+      "backend": {
+        "directory": "summership-26-prs/Jasvinder Kaur/server",
+        "entry": "index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-ccee7ebc0ed7368b",
+      "kind": "vite",
+      "directory": "summership-26-prs/joseph-antony-benedict/frontend",
+      "backend": null,
+      "modernNode": true
+    },
+    {
+      "id": "app-beca54a9d06d4ddc",
+      "kind": "vite",
+      "directory": "summership-26-prs/Kalyanam Hasith/client",
+      "backend": {
+        "directory": "summership-26-prs/Kalyanam Hasith/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-e5e2fb016e61bee4",
+      "kind": "vite",
+      "directory": "summership-26-prs/Mahi Agarwal",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-0c9544ffe869ceed",
+      "kind": "vite",
+      "directory": "summership-26-prs/Manav Bhatt/client",
+      "backend": {
+        "directory": "summership-26-prs/Manav Bhatt/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-aa57010730859eb2",
+      "kind": "streamlit",
+      "directory": "summership-26-prs/Mohammad Hamdan",
+      "entry": "app.py"
+    },
+    {
+      "id": "app-3dae8e5271df7a36",
+      "kind": "vite",
+      "directory": "summership-26-prs/NIKHIL KUMAR/client",
+      "backend": null,
+      "modernNode": true
+    },
+    {
+      "id": "app-00482e45e3d9af0b",
+      "kind": "vite",
+      "directory": "summership-26-prs/Nikhil-Kumawat/dashavatara-polymorphism",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-992db4b4871b6350",
+      "kind": "vite",
+      "directory": "summership-26-prs/Nikhil-Kumawat/village-mela-truthiness",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-71969231b101c1c5",
+      "kind": "vite",
+      "directory": "summership-26-prs/Pramod Sharma",
+      "backend": null,
+      "modernNode": true
+    },
+    {
+      "id": "app-3ce6b25707ad182f",
+      "kind": "vite",
+      "directory": "summership-26-prs/Pritam_Patra/client",
+      "backend": {
+        "directory": "summership-26-prs/Pritam_Patra/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-9fc6dc1c2d891869",
+      "kind": "vite",
+      "directory": "summership-26-prs/RAVADA LAKSHITHA/Adder/client",
+      "backend": {
+        "directory": "summership-26-prs/RAVADA LAKSHITHA/Adder/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-d1c4288344a3ef91",
+      "kind": "vite",
+      "directory": "summership-26-prs/Reddy-02",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-7a7d5dda71da562b",
+      "kind": "vite",
+      "directory": "summership-26-prs/Rohith N R/tuple-analogy",
+      "backend": null,
+      "modernNode": true
+    },
+    {
+      "id": "app-0a2a5cf92376989c",
+      "kind": "vite",
+      "directory": "summership-26-prs/Sanjana_Posannapeta",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-980429fafad3a95f",
+      "kind": "vite",
+      "directory": "summership-26-prs/Sharanu",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-2901babd360d8e19",
+      "kind": "vite",
+      "directory": "summership-26-prs/sheetal/client",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-e6eb44e8cc8704c2",
+      "kind": "vite",
+      "directory": "summership-26-prs/Simran/client",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-3f9177de23d0889e",
+      "kind": "vite",
+      "directory": "summership-26-prs/Somya  Kapoor/tiffin trail-case study",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-e5e2e59c1566d113",
+      "kind": "vite",
+      "directory": "summership-26-prs/Vanisha Tiwari/client",
+      "backend": {
+        "directory": "summership-26-prs/Vanisha Tiwari/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-2a88db6a9d151180",
+      "kind": "vite",
+      "directory": "summership-26-prs/Samruddhi Chate",
+      "backend": null,
+      "modernNode": false
+    },
+    {
+      "id": "app-9fae73a79254307e",
+      "kind": "vite",
+      "directory": "summership-26-prs/Neeraj Agrawal/pybe-iteration-feature/client",
+      "backend": {
+        "directory": "summership-26-prs/Neeraj Agrawal/pybe-iteration-feature/server",
+        "entry": "server.js",
+        "port": 5000
+      },
+      "modernNode": true
+    },
+    {
+      "id": "app-a77735f988cc675e",
+      "kind": "vite",
+      "directory": "summership-26-prs/Neeraj Agrawal/pybe-loopcontrols-standalone/client",
+      "backend": {
+        "directory": "summership-26-prs/Neeraj Agrawal/pybe-loopcontrols-standalone/server",
+        "entry": "server.js",
+        "port": 5000
+      },
+      "modernNode": true
+    },
+    {
+      "id": "app-5aa87c5df7f8c427",
+      "kind": "vite",
+      "directory": "summership-26-prs/Hemanth_Kumar_Reddy",
+      "backend": null,
+      "modernNode": true
+    },
+    {
+      "id": "app-f3388615cb54fb41",
+      "kind": "vite",
+      "directory": "summership-26-prs/Prasoon Lawania/client",
+      "backend": {
+        "directory": "summership-26-prs/Prasoon Lawania/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-1caf36318cc70531",
+      "kind": "vite",
+      "directory": "summership-26-prs/Saksham Sharma/client",
+      "backend": {
+        "directory": "summership-26-prs/Saksham Sharma/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-d9caa575fc418fb1",
+      "kind": "vite",
+      "directory": "summership-26-prs/Ansh/client",
+      "backend": {
+        "directory": "summership-26-prs/Ansh/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-e717e6fa1a5ebae9",
+      "kind": "vite",
+      "directory": "summership-26-prs/Namrata Saha/client",
+      "backend": {
+        "directory": "summership-26-prs/Namrata Saha/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-39be02c2307e227e",
+      "kind": "vite",
+      "directory": "summership-26-prs/Akash/client",
+      "backend": {
+        "directory": "summership-26-prs/Akash/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-2db168d3fa190744",
+      "kind": "vite",
+      "directory": "summership-26-prs/Harshal Ganatra/client",
+      "backend": {
+        "directory": "summership-26-prs/Harshal Ganatra/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-c74300b31505fc3a",
+      "kind": "vite",
+      "directory": "summership-26-prs/Damanpreet Singh/client",
+      "backend": {
+        "directory": "summership-26-prs/Damanpreet Singh/server",
+        "entry": "src/index.js",
+        "port": 5000
+      },
+      "modernNode": false
+    },
+    {
+      "id": "app-98550de0d3e64a37",
+      "kind": "vite",
+      "directory": "summership-26-prs/Putta_Sri_Tejaswi",
+      "backend": null,
+      "modernNode": true
+    }
+  ],
+  "inventory": [
+    {
+      "author": "A.S.R.S.S Snigdha",
+      "stories": [
+        "story-02cecabc434c5db4"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Abhi Patel",
+      "stories": [
+        "story-d730e4fa3019fc6d"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Abhi_Mishra",
+      "stories": [
+        "story-4ad76a8313b0be1f"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Akash",
+      "stories": [
+        "story-3af5c8e035f66c59"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Akshay Vishwakarma",
+      "stories": [
+        "story-0fdb9bc4ae50094b"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Akshra Gupta",
+      "stories": [
+        "story-a76197f8448cddb6"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Ananya-Agarwall2",
+      "stories": [
+        "story-823fd0e08364881e"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Ankit Kumar Prajapati",
+      "stories": [
+        "story-ed372d85b4644984"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Ansh",
+      "stories": [
+        "story-7617eda5b6c5d39c"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Anshika Saraswat",
+      "stories": [
+        "story-4eb8cd5405a39cc1"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Arka Kanji",
+      "stories": [
+        "story-6c4e74eb56c56740"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Aryan Vaghasiya",
+      "stories": [
+        "story-c563eb4bb23307df"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Aryan Vishala",
+      "stories": [
+        "story-9ff9078eaeb976d4"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Astha",
+      "stories": [
+        "story-5b606fcb064ace2d"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Ayush_Anand",
+      "stories": [
+        "story-9a805a86ccec1a84"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Bhoomi Gupta",
+      "stories": [
+        "story-8167bf7ebbde1018"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Damanpreet Singh",
+      "stories": [
+        "story-82621fb31e80d371"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Deepa Basnet",
+      "stories": [
+        "story-7cede33ab799b7e3"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Dishi Gupta",
+      "stories": [
+        "story-0532cd450cb25c86"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Ghanate Lakshmi",
+      "stories": [
+        "story-249b9aa16e56653a"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Harshal Ganatra",
+      "stories": [
+        "story-e5fa6a9b145ec00e"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Hemanth_Kumar_Reddy",
+      "stories": [
+        "story-b5ddcf051b9a827c"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "hosnnasruti",
+      "stories": [
+        "story-1bb2d0ced20d2774"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Husanpreet Singh",
+      "stories": [
+        "story-8f35c48bc68d1343"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Jandhyala Uma Sri Lekha",
+      "stories": [
+        "story-57fb53f5658f810a"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Jasdeep Kaur",
+      "stories": [
+        "story-2ad060f951f61c12",
+        "story-43d3d164c73db34c"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Jasvinder Kaur",
+      "stories": [
+        "story-dea913906bfd2b90"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "joseph-antony-benedict",
+      "stories": [
+        "story-61b5840e0fd73941"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Kalyanam Hasith",
+      "stories": [
+        "story-e7b0d8a9fe8d0365"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Khushi Choudhary",
+      "stories": [],
+      "status": "Platform / generator / no distinct lesson cataloged"
+    },
+    {
+      "author": "Krishanu Das",
+      "stories": [
+        "story-3f56efaff302a5d1"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Kritika",
+      "stories": [
+        "story-1441ae79505da6dc"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Mahi Agarwal",
+      "stories": [
+        "story-6dc52d0b1ddaecb9"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Manan Jain",
+      "stories": [
+        "story-5410a21f8666e0af"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Manav Bhatt",
+      "stories": [
+        "story-afad22b314e1637c"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Mannat Balyan",
+      "stories": [
+        "story-ad89eb826e121d2d"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Mehak Gupta",
+      "stories": [
+        "story-50b1ab4f25db0b54"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Mohammad Hamdan",
+      "stories": [
+        "story-d6ff7a5a81fd9717"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Mohammed Sameer Inamdar",
+      "stories": [
+        "story-9f7b5b4a8ade000c"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Namrata Saha",
+      "stories": [
+        "story-1be2b5357531f575"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Neeraj Agrawal",
+      "stories": [
+        "story-5ab6bebe7c3605f9",
+        "story-a639df8d84d12201"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "NIKHIL KUMAR",
+      "stories": [
+        "story-9c94cab558e9f7a4"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Nikhil-Kumawat",
+      "stories": [
+        "story-676a8d1f1dc92e24",
+        "story-680740e43fc4d219"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Pradeep Mishra",
+      "stories": [
+        "story-fe18dfae0dfa817f"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Pramod Sharma",
+      "stories": [
+        "story-b31d201f15970ec2"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Prasoon Lawania",
+      "stories": [
+        "story-7a30209fcf39425b",
+        "story-a6599cda779ad306"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Pritam_Patra",
+      "stories": [
+        "story-c080d50fb7e5563f"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Putta_Sri_Tejaswi",
+      "stories": [
+        "story-545172f653234a84"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "RAVADA LAKSHITHA",
+      "stories": [
+        "story-489b4ac6ef1bdf99"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Reddy-02",
+      "stories": [
+        "story-5b04d1c5808fe44e"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Rohith N R",
+      "stories": [
+        "story-f12f400b0845e259"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Sahil",
+      "stories": [
+        "story-f77458836eb67f34"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Saksham Sharma",
+      "stories": [
+        "story-4049523562c935ab"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Samruddhi Chate",
+      "stories": [
+        "story-ab72e09488ad93d8"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Saniya kousar",
+      "stories": [
+        "story-617c10ea8be694de"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "saniya-kousar",
+      "stories": [],
+      "status": "Platform / generator / no distinct lesson cataloged"
+    },
+    {
+      "author": "Sanjana_Posannapeta",
+      "stories": [
+        "story-5477e5af513e2cc7"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Sharanu",
+      "stories": [
+        "story-c57e8679bce3a32e"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "sheetal",
+      "stories": [
+        "story-f0b7bda78197765a"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Siddharth Sadhu",
+      "stories": [],
+      "status": "Platform / generator / no distinct lesson cataloged"
+    },
+    {
+      "author": "Simran",
+      "stories": [
+        "story-d212101de2e2efa4",
+        "story-b4e637427beca75c"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Simranjit Kaur",
+      "stories": [
+        "story-79891727e2a36617"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Sneha Rajpoot",
+      "stories": [],
+      "status": "Platform / generator / no distinct lesson cataloged"
+    },
+    {
+      "author": "Somya  Kapoor",
+      "stories": [
+        "story-e11815652818ebf2"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Swastika Mitra",
+      "stories": [
+        "story-f0859aba1663ed62"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Vanisha Tiwari",
+      "stories": [
+        "story-6303a4097d69eca7"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Vanshika17-05",
+      "stories": [
+        "story-6bab419ac15f13d3"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Writwik Das",
+      "stories": [
+        "story-c7c40793d26c5b2a"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Yash Parmar",
+      "stories": [
+        "story-0bdeee990fa852ea"
+      ],
+      "status": "Cataloged"
+    },
+    {
+      "author": "Yaswanth Reddy",
+      "stories": [],
+      "status": "Platform / generator / no distinct lesson cataloged"
+    }
+  ],
+  "backlogNote": "Proposed topics for dedicated case studies, not an approved syllabus. Some ideas may be mentioned within existing stories without having a dedicated case study."
+}
