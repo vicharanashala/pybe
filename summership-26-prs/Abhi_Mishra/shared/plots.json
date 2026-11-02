@@ -1,0 +1,68 @@
+[
+  {
+    "id": "line",
+    "label": "Line chart",
+    "icon": "↗",
+    "keyCall": "plt.plot(",
+    "question": "Revenue changed month by month. Which plot reveals the trend?",
+    "why": "Time runs left to right and the line joins each month to the next, so the climb from $12K to $45K is obvious at a glance.",
+    "pitch": "A line chart makes our momentum clear: revenue went from $12K in January to $45K in June.",
+    "bestFor": "change over time",
+    "weakness": "A line says 'these points follow each other in order'. That only makes sense when the x-axis is time or another ordered sequence."
+  },
+  {
+    "id": "pie",
+    "label": "Pie chart",
+    "icon": "◔",
+    "keyCall": "plt.pie(",
+    "question": "How is NovaTech's first-half revenue split between its four products?",
+    "why": "Four slices add up to 100% of revenue. A pie answers 'what share does each part take?' and nothing else.",
+    "pitch": "Core AI brings in 42% of revenue, Flow CRM 28%. The pie shows how the whole is shared.",
+    "bestFor": "a few parts of one whole",
+    "weakness": "A pie only works for a handful of slices that add up to a whole. It cannot show change over time, and it gets unreadable with many slices."
+  },
+  {
+    "id": "scatter",
+    "label": "Scatter plot",
+    "icon": "⠿",
+    "keyCall": "plt.scatter(",
+    "question": "Do customers who use NovaTech more hours each week stay with us longer?",
+    "why": "Each dot is one customer: weekly usage on the x-axis, months stayed on the y-axis. The dots form a rising cloud, so heavier users stay longer. Customers have no natural order, so there is nothing to join with a line.",
+    "pitch": "Every dot is a customer. Heavy users stay longer: roughly 0.8 extra months for every extra weekly hour of usage.",
+    "bestFor": "the relationship between two numeric variables",
+    "weakness": "A scatter plot needs two numeric variables to compare. With a single list of values or plain categories there is no relationship to show."
+  },
+  {
+    "id": "bar",
+    "label": "Bar chart",
+    "icon": "▥",
+    "keyCall": "plt.bar(",
+    "question": "Which market converts free trials into paying customers best?",
+    "why": "Bars start at zero and stand side by side, so the eye compares their heights instantly. North America clearly leads.",
+    "pitch": "North America converts 18.4% of trials, more than three times the rate in MEA.",
+    "bestFor": "comparing values across separate categories",
+    "weakness": "Bars compare separate categories. They hide trends over time and they cannot show how values are spread inside a group."
+  },
+  {
+    "id": "box",
+    "label": "Boxplot",
+    "icon": "▣",
+    "keyCall": "plt.boxplot(",
+    "question": "Our average contract looks great. Are a few whale customers inflating it?",
+    "why": "The box holds the middle 50% of contracts and the red line is the median ($26.5K). The green triangle, the mean ($43.6K), sits far above it, and the dots are three whale contracts that pull the average up.",
+    "pitch": "The typical contract is $26.5K, but 3 whale customers lift the average to $43.6K. That is a concentration risk we are managing.",
+    "bestFor": "spread, the median and outliers of one numeric variable",
+    "weakness": "A boxplot summarises the distribution of ONE numeric variable. It throws away order, categories and relationships between variables."
+  },
+  {
+    "id": "area",
+    "label": "Area chart",
+    "icon": "◢",
+    "keyCall": "plt.stackplot(",
+    "question": "How did total revenue build up, and how much did each product add along the way?",
+    "why": "In a stacked area chart the top edge is total revenue and every coloured band is one product's share of it, month after month.",
+    "pitch": "The top edge is total revenue. Each band shows what Core AI, Flow CRM and Signal API added every month.",
+    "bestFor": "how a total builds up from its parts over time",
+    "weakness": "Filled areas stress volume over time. They make exact comparisons hard and mislead when the categories are not ordered."
+  }
+]

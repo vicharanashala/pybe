@@ -1,0 +1,425 @@
+.line-graph-image {
+  display: block;
+  width: 100%;
+  height: 320px;
+  margin-top: 5px;
+  object-fit: contain;
+}
+.plot-layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.6fr);
+  gap: 28px;
+  align-items: center;
+}
+.data-table-wrap {
+  min-width: 0;
+}
+.data-table-label {
+  display: block;
+  color: #23364077;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 16px 0 8px;
+}
+.source-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.source-table th {
+  color: #23364077;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+  padding: 7px 8px;
+  border-bottom: 1px solid #23364022;
+}
+.source-table td {
+  padding: 7px 8px;
+  border-bottom: 1px solid #23364012;
+  color: #233640;
+}
+.source-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.plot-visual {
+  min-width: 0;
+}
+.plot-option:disabled {
+  cursor: not-allowed;
+  opacity: 0.38;
+  transform: none;
+}
+.plot-option:disabled:hover {
+  border-color: #23364015;
+}
+@media (max-width: 700px) {
+  .plot-layout {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .data-table-wrap {
+    overflow-x: auto;
+  }
+  .source-table {
+    min-width: 320px;
+  }
+  .plot-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+.plot-scene {
+  max-width: 1200px;
+  margin: auto;
+  padding: 6vh 0;
+}
+.challenge-copy {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+}
+.challenge-copy h1 {
+  font-size: clamp(40px, 5vw, 68px);
+  max-width: 690px;
+}
+.challenge-copy p {
+  max-width: 240px;
+  font-size: 14px;
+}
+.plot-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 230px;
+  gap: 22px;
+  align-items: center;
+}
+.plot-canvas {
+  position: relative;
+  background: #fffaf1;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px #23364012;
+  padding: 22px;
+  margin: 24px 0;
+  min-height: 300px;
+  overflow: hidden;
+}
+.pitch-presenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: stretch;
+  justify-content: end;
+  min-width: 0;
+}
+.pitch-presenter img {
+  display: block;
+  width: 100%;
+  max-width: 210px;
+  height: 265px;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 12px 10px #23364018);
+  animation: presenter-in 0.65s ease both;
+}
+.pitch-bubble {
+  position: relative;
+  width: 100%;
+  padding: 17px 16px 15px;
+  background: var(--paper);
+  border: 1px solid #23364018;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px #23364012;
+  animation: pitch-change 0.35s ease both;
+}
+.pitch-bubble:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  width: 18px;
+  height: 18px;
+  background: var(--paper);
+  border-right: 1px solid #23364018;
+  border-bottom: 1px solid #23364018;
+  transform: translateX(-50%) rotate(45deg);
+}
+.pitch-bubble .eyebrow {
+  display: block;
+  font-size: 8px;
+  line-height: 1.3;
+}
+.pitch-bubble p {
+  position: relative;
+  z-index: 1;
+  margin: 8px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.plot-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.plot-title b {
+  font:
+    21px Georgia,
+    serif;
+}
+.plot-title small {
+  font-size: 10px;
+  color: #23364077;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.plot-canvas svg {
+  width: 100%;
+  height: 220px;
+  margin-top: 8px;
+  overflow: visible;
+}
+.axis {
+  stroke: #23364035;
+  stroke-width: 0.6;
+}
+.chart-line {
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 300;
+  animation: draw 1.2s ease both;
+}
+.chart-bar {
+  transform-origin: bottom;
+  animation: grow 0.55s ease both;
+}
+.chart-dot {
+  animation: pop 0.45s ease both;
+}
+.pie-slice {
+  stroke: #fffaf1;
+  stroke-width: 1.5;
+  animation: pop 0.65s ease both;
+}
+.box-shape,
+.stem {
+  animation: rise 0.65s ease both;
+}
+@keyframes draw {
+  from {
+    stroke-dashoffset: 300;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pitch-change {
+  from {
+    opacity: 0;
+    transform: translateY(7px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes presenter-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.plot-caption {
+  display: flex;
+  justify-content: space-between;
+  color: #23364066;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+.plot-options {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+.plot-option {
+  min-height: 84px;
+  background: #fffaf1;
+  border: 1px solid #23364015;
+  border-radius: 12px;
+  text-align: left;
+  padding: 12px;
+  transition: 0.2s;
+}
+.plot-option:hover,
+.plot-option.chosen {
+  border-color: var(--teal);
+  transform: translateY(-3px);
+}
+.plot-option span {
+  display: block;
+  color: var(--coral);
+  font-size: 19px;
+  margin-bottom: 8px;
+}
+.plot-option small {
+  display: block;
+  font-size: 9px;
+  color: #23364066;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 5px;
+}
+.feedback {
+  background: #f3ddd2;
+  padding: 18px 22px;
+  border-radius: 14px;
+  margin-top: 18px;
+  border-left: 4px solid var(--coral);
+  animation: rise 0.4s ease;
+}
+.feedback.good {
+  background: #dceee7;
+  border-color: var(--teal);
+}
+.feedback p {
+  margin: 6px 0;
+  font-size: 13px;
+}
+.code-panel {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #23364018;
+}
+.code-panel h3 {
+  font:
+    20px Georgia,
+    serif;
+  margin: 5px 0;
+}
+.code-panel p {
+  margin: 0;
+  color: #23364099;
+  font-size: 12px;
+}
+.text-button {
+  background: none;
+  color: var(--teal);
+  font-weight: bold;
+}
+.code-reveal {
+  grid-column: 1/-1;
+  background: #233640;
+  color: #d9efea;
+  padding: 15px;
+  border-radius: 9px;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.code-panel .compact {
+  grid-column: 1/-1;
+  justify-self: start;
+}
+
+/* source table + placeholder */
+.table-scroll {
+  max-height: 300px;
+  overflow: auto;
+  border-radius: 8px;
+}
+.source-table th {
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+}
+.plot-placeholder {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  min-height: 240px;
+  border: 2px dashed #23364025;
+  border-radius: 14px;
+  color: #23364088;
+  font-size: 14px;
+  padding: 20px;
+}
+/* wrong-answer states */
+.pitch-bubble.bad {
+  background: #f8e4dc;
+  border-color: #ee755f55;
+}
+.pitch-bubble.bad:after {
+  background: #f8e4dc;
+  border-color: #ee755f55;
+}
+.plot-option.chosen.bad {
+  border-color: var(--coral);
+}
+.plot-option.chosen:disabled {
+  opacity: 1;
+  cursor: default;
+}
+.feedback .muted {
+  color: #233640aa;
+}
+.feedback .secondary {
+  margin-top: 8px;
+}
+.patience {
+  display: block;
+  margin-top: 8px;
+  color: #233640aa;
+  letter-spacing: 0.1em;
+  font-size: 11px;
+}
+/* code reveal */
+.code-line {
+  display: block;
+  white-space: pre;
+}
+.code-line.hl {
+  background: #ffffff1f;
+  box-shadow: inset 3px 0 0 var(--gold);
+  margin: 0 -15px;
+  padding: 0 15px 0 12px;
+}
+.code-tools {
+  grid-column: 1/-1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+.code-tools small {
+  color: #23364099;
+  font-size: 11px;
+  line-height: 1.4;
+}

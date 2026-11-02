@@ -1,0 +1,19 @@
+{
+  "name": "novatech-investor-room",
+  "private": true,
+  "engines": {
+    "node": ">=18.18"
+  },
+  "scripts": {
+    "install:all": "npm install --prefix client && npm install --prefix server",
+    "dev": "concurrently \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix client",
+    "start": "npm run start --prefix server",
+    "assets": "python tools/build_assets.py",
+    "test": "node --test tests/*.test.js"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.4"
+  },
+  "type": "module"
+}
