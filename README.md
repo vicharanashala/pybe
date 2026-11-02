@@ -4,10 +4,9 @@ The main library uses warm white and orange and organizes the original student s
 
 ## Run locally
 
-Requires Node.js 18+ and npm. Run these commands from `C:\Users\Prakash\Documents\Codex\pybe`:
+Requires Node.js 18+ and npm. From the directory where you downloaded or cloned this repository, run:
 
 ```powershell
-Set-Location 'C:\Users\Prakash\Documents\Codex\pybe'
 npm run dev
 ```
 
