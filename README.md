@@ -29,8 +29,6 @@ npm run dev
 
 The learner flow opens only original submissions. There are no shared readers, extracted quizzes, rewritten stories, or replacement lesson designs.
 
-Starting November 2, 2026, submit all new case studies as pull requests in the `new-pr-submissions/` directory.
-
 Standalone HTML opens inside the library, with a full-tab option. Original React/Vite applications start through the local launcher. Their own Vite config, components, CSS, assets, routes, and backend code are used. Opening another app stops the previously managed app to avoid collisions between originals that use the same API port.
 
 On first launch, the launcher installs the original app's dependencies into its own node_modules folder. This needs internet access and can take a few minutes. Tracked package files and lockfiles are not rewritten. Local package dependencies are installed as copies rather than Windows symlinks; legacy peer dependency resolution is retried only when needed.
@@ -40,6 +38,10 @@ Apps using newer Vite versions run with a private Node 22 installation under wor
 Some originals still require their own external services (for example MongoDB or Prisma setup), API configuration, or Python packages. Their setup failures are displayed with the original source and README path. Python/Streamlit submissions require Python and Streamlit to be installed. Written/script-only submissions open as original source. The launcher does not replace a failed original with a common lesson.
 
 Library bookmarks and “explored” marks are local to this browser. Each original app retains its own progress behavior. Originals run on distinct local ports to separate their browser storage.
+
+## New PR submissions
+
+All new PRs submitted from November 2, 2026 onward must place their case studies in the `new-pr-submissions/` directory.
 
 ## Coverage and maintenance
 
