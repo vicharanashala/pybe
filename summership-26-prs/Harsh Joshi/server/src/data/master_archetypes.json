@@ -1,0 +1,109 @@
+{
+  "master_archetypes": {
+    "variables_identity": {
+      "concept": "variables",
+      "example_scenario": {
+        "pure_story": "In the heart of {domain}, {character} found a magical box named {state_variable}. Initially, it held exactly {initial_value} items. It acted as a perfect memory bank. When {character} completed a grand quest, the box's contents magically changed to 10! A variable is simply a named container that remembers important information for us, and its value can change whenever we need.",
+        "pseudo_code": "Create a box named:\n  {state_variable}\nPut this inside:\n  {initial_value}\nLater, change it to:\n  10",
+        "python_code": "{state_variable} = {initial_value}\n# Change the value later\n{state_variable} = 10"
+      },
+      "practice_scenario": {
+        "pure_story": "During a grand tournament, {character} needed a brand new score tracker and carved the name {practice_variable} into a stone tablet, starting with 0 points. After winning a massive bonus game, they wanted to update their tracker to exactly {practice_target} points. Now, they must set the new value to reflect their impressive standing!",
+        "pseudo_code_template": "Create box named:\n  [ BLANK 1 ]\nSet new value to:\n  [ BLANK 2 ]",
+        "python_code_template": "[ BLANK 3 ] = [ BLANK 4 ]",
+        "options": {
+          "blank_1": ["{practice_variable}", "mystery_box", "nothing"],
+          "blank_2": ["{practice_target}", "0", "-50"]
+        },
+        "explanations": {
+          "wrong_blank_1": "Remember, we want to use the exact name of the new score box from the story!",
+          "wrong_blank_2": "Check how many points they had after winning the bonus game in the story!"
+        }
+      }
+    },
+    "conditional_gatekeeper": {
+      "concept": "if/else logic",
+      "example_scenario": {
+        "pure_story": "Deep in {domain}, {character} wanted to {desired_action}. But a strict guard blocked the ancient gate! 'If your {state_variable} is {operator} {threshold}, you may pass and {desired_action},' the guard boomed. 'Otherwise, you must turn back and {alternative_action}!' This magical rule acted as a strict but fair judge for all who dared to approach the hidden treasure.",
+        "pseudo_code": "If rule is true:\n  {state_variable} is {operator} {threshold}\nThen do:\n  {desired_action}\nOtherwise do:\n  {alternative_action}",
+        "python_code": "if {state_variable} {operator} {threshold}:\n    print('{desired_action}')\nelse:\n    print('{alternative_action}')"
+      },
+      "practice_scenario": {
+        "pure_story": "Soon after, {character} faced a shimmering secret gate behind a waterfall. To {practice_action}, their {practice_variable} had to be exactly equal to {practice_target}. The magic was incredibly sensitive! If their count was wrong by even one point, the gate would stay locked, and they would have to turn around and go home empty-handed.",
+        "pseudo_code_template": "If condition is met:\n  [ BLANK 1 ]\nThen do:\n  {practice_action}\nOtherwise do:\n  [ BLANK 2 ]",
+        "python_code_template": "if [ BLANK 3 ]:\n    print('{practice_action}')\nelse:\n    print('[ BLANK 4 ]')",
+        "options": {
+          "blank_1": ["{practice_variable} == {practice_target}", "{practice_variable} < 0", "{practice_variable} != {practice_target}"],
+          "blank_2": ["go home", "{practice_action}", "nothing"]
+        },
+        "explanations": {
+          "wrong_blank_1": "We need to check if the variable is exactly equal (==) to the target number!",
+          "wrong_blank_2": "What happens when the condition is false? What does the story say they must do otherwise?"
+        }
+      }
+    },
+    "loop_depletion": {
+      "concept": "while loop",
+      "example_scenario": {
+        "pure_story": "The journey across {domain} was tiring, and {character} faced a repetitive task and had to {repeated_action} over and over! The rule was simple: keep working as long as their {state_variable} was {operator} {target_condition}. Every time they completed the motion, they checked their progress. Finally, the target was met, the path cleared, and they could finally rest!",
+        "pseudo_code": "Keep doing:\n  {repeated_action}\nAs long as:\n  {state_variable} is {operator} {target_condition}",
+        "python_code": "while {state_variable} {operator} {target_condition}:\n    {repeated_action}\n    # Update condition\n    {state_variable} = ___"
+      },
+      "practice_scenario": {
+        "pure_story": "A local villager desperately needed help! To fix the problem, {character} had to {practice_action} repeatedly without stopping. They promised to continue until the {practice_variable} reached exactly {practice_target}. One by one, they continued the cycle. It was a test of pure endurance to see the job all the way through to the end!",
+        "pseudo_code_template": "Keep doing:\n  [ BLANK 1 ]\nAs long as:\n  [ BLANK 2 ]",
+        "python_code_template": "while [ BLANK 3 ]:\n    [ BLANK 4 ]",
+        "options": {
+          "blank_1": ["{practice_action}", "go to sleep", "stop working"],
+          "blank_2": ["{practice_variable} < {practice_target}", "{practice_variable} > 100"]
+        },
+        "explanations": {
+          "wrong_blank_1": "Think about what the character is physically doing over and over again in the story!",
+          "wrong_blank_2": "When does the character stop? The loop only runs while the goal is NOT met."
+        }
+      }
+    },
+    "lists_inventory": {
+      "concept": "lists",
+      "example_scenario": {
+        "pure_story": "Exploring an old marketplace in {domain}, {character} discovered several magical items. Instead of clumsily carrying them all, they found a beautiful container named {container_name}. They carefully placed {item_1} into the first slot, {item_2} safely next to it, and tucked {item_3} into the third spot. By keeping their treasures in one organized list, they could easily find what they needed.",
+        "pseudo_code": "Make a list named:\n  {container_name}\nPut these items inside:\n  1. {item_1}\n  2. {item_2}\n  3. {item_3}",
+        "python_code": "{container_name} = ['{item_1}', '{item_2}', '{item_3}']\n# Access the first item\nfirst_item = {container_name}[0]"
+      },
+      "practice_scenario": {
+        "pure_story": "Preparing for a dangerous expedition, {character} packed a highly specialized survival kit named {practice_variable}. They needed three crucial things. First, they securely placed {practice_item} into the first compartment. Then, they added a golden compass and a heavy silver key. With all three distinct items safely packed in order, their collection was ready!",
+        "pseudo_code_template": "Create collection named:\n  [ BLANK 1 ]\nAdd first item:\n  [ BLANK 2 ]",
+        "python_code_template": "[ BLANK 3 ] = ['[ BLANK 4 ]', 'golden compass', 'silver key']",
+        "options": {
+          "blank_1": ["{practice_variable}", "empty_box", "single_item"],
+          "blank_2": ["{practice_item}", "old boot", "broken rock"]
+        },
+        "explanations": {
+          "wrong_blank_1": "What is the name of the special kit collection in the story?",
+          "wrong_blank_2": "Look at the very first item they put inside their special kit in the story!"
+        }
+      }
+    },
+    "functions_reusability": {
+      "concept": "functions",
+      "example_scenario": {
+        "pure_story": "In {domain}, {character} had to perform an exhausting ten-step chore every day. A wise mentor taught them a magical shortcut called {function_name}. Instead of repeating all the boring steps, {character} simply calls {function_name}()! The magic instantly takes over, doing all the hard work automatically and effortlessly returning {final_result}!",
+        "pseudo_code": "Define magic shortcut:\n  Name: {function_name}\n  Action: returns {final_result}\nTo use shortcut:\n  Call {function_name}()",
+        "python_code": "def {function_name}():\n    return '{final_result}'\n\n# Call the function to get the reward\nresult = {function_name}()"
+      },
+      "practice_scenario": {
+        "pure_story": "Famous for their efficiency, {character} decided to invent a brand new shortcut called {practice_action} for the entire village. They gathered everyone to demonstrate this reliable process. Now, whenever anyone uses this specific shortcut, the magic activates instantly and automatically produces {practice_target} for them, proving that reusable commands make life easier!",
+        "pseudo_code_template": "Define shortcut named:\n  [ BLANK 1 ]\nWhen called, it returns:\n  [ BLANK 2 ]",
+        "python_code_template": "def [ BLANK 3 ]():\n    return '[ BLANK 4 ]'",
+        "options": {
+          "blank_1": ["{practice_action}", "do_nothing", "forget_spell"],
+          "blank_2": ["{practice_target}", "nothing", "sadness"]
+        },
+        "explanations": {
+          "wrong_blank_1": "Check the exact name of the new shortcut they wanted to create in the story!",
+          "wrong_blank_2": "What does the new shortcut automatically produce when it is used?"
+        }
+      }
+    }
+  }
+}
