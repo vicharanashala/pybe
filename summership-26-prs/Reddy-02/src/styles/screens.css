@@ -1,0 +1,1567 @@
+/* ============================================================
+   PYBE DISCOVERY LAB — DESIGN SYSTEM (SCREENS.CSS)
+   Faithful recreation of PyBe (https://pybe-discovery.vercel.app)
+   Warm cream palette, serif typography, progressive card structure
+   ============================================================ */
+
+/* ── App Shell & Layout ── */
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--clr-bg);
+  color: var(--clr-text-primary);
+  position: relative;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 20px;
+  background: var(--clr-accent);
+  color: #FFFFFF;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  z-index: 1000;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 10px;
+}
+
+.site-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 96px;
+}
+
+/* ── Site Header (Clean Warm Light Glass) ── */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 247, 238, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--clr-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.header-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+.brand:focus-visible {
+  outline: 2px solid var(--clr-accent);
+  border-radius: var(--radius-md);
+}
+
+.diya-icon {
+  font-size: 1.5rem;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+.brand-title {
+  font-family: var(--font-story);
+  font-weight: 600;
+  font-size: 1.15rem;
+  color: var(--clr-text-primary);
+  line-height: 1.2;
+}
+.brand-subtitle {
+  font-size: 0.7rem;
+  color: var(--clr-accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ── Progress Dots Track ── */
+.chapter-nav {
+  display: flex;
+  align-items: center;
+}
+.chapter-dots {
+  display: flex;
+  list-style: none;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+}
+.dot-wrapper {
+  display: flex;
+  align-items: center;
+}
+.chapter-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid var(--clr-border);
+  background: #FFFFFF;
+  color: var(--clr-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.chapter-dot:hover {
+  border-color: var(--clr-accent);
+  background: var(--clr-accent-dim);
+  color: var(--clr-accent);
+}
+.chapter-dot.active {
+  border-color: var(--clr-accent);
+  background: var(--clr-accent);
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(39, 145, 73, 0.25);
+  transform: scale(1.05);
+}
+.chapter-dot.completed:not(.active) {
+  border-color: var(--clr-accent-border);
+  background: var(--clr-accent-dim);
+  color: var(--clr-accent);
+}
+
+/* ── Audio & CC Controls ── */
+.controls-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn-icon {
+  background: #FFFFFF;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-full);
+  color: var(--clr-text-secondary);
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: var(--shadow-sm);
+}
+.btn-icon:hover {
+  background: var(--clr-surface-raise);
+  color: var(--clr-text-primary);
+}
+.btn-icon.active {
+  background: var(--clr-accent-dim);
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+  font-weight: 600;
+}
+
+/* ── Sticky Footer Navigation ── */
+.site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(250, 247, 238, 0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--clr-border);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.03);
+}
+.footer-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.btn-nav {
+  min-width: 110px;
+  justify-content: center;
+}
+.kbd-shortcut {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  margin-left: 4px;
+  font-family: var(--font-code);
+}
+.chapter-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+.indicator-step {
+  color: var(--clr-accent);
+  font-weight: 600;
+}
+.indicator-title {
+  color: var(--clr-text-primary);
+  font-family: var(--font-story);
+  font-size: 0.95rem;
+}
+
+/* ── Captions Subtitle Box ── */
+.captions-container {
+  position: fixed;
+  bottom: 74px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 760px;
+  z-index: 90;
+  pointer-events: none;
+}
+.captions-card {
+  pointer-events: auto;
+  background: #FFFFFF;
+  border: 1px solid var(--clr-border);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: slideUp 0.2s ease-out;
+}
+.captions-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+}
+.pulse-dot.active {
+  background: var(--clr-accent);
+  box-shadow: 0 0 8px rgba(39, 145, 73, 0.6);
+  animation: pulseDot 1.2s infinite;
+}
+.captions-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  flex: 1;
+}
+.btn-caption-close {
+  background: transparent;
+  border: none;
+  color: var(--clr-text-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 1;
+}
+.captions-text {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--clr-text-primary);
+  margin: 0;
+}
+
+/* ── Common Screen Wrapper ── */
+.screen {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 40px 20px 24px;
+}
+
+.pybe-single-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.pybe-header-centered {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.pybe-progress-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--clr-text-muted);
+  text-transform: uppercase;
+}
+.pybe-story-title {
+  font-family: var(--font-story);
+  font-size: 2.2rem;
+  font-weight: 500;
+  color: var(--clr-text-primary);
+  line-height: 1.25;
+  margin: 0;
+}
+.pybe-lead {
+  font-size: 1.05rem;
+  color: var(--clr-text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── PyBe Base Card ── */
+.pybe-card {
+  background: #FFFFFF;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  padding: 24px 28px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+/* ── Screen 0: PyBe Home / Hero Screen ── */
+.pybe-hero-card {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 48px 36px;
+  margin-top: 20px;
+}
+.pybe-brand-pill {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--clr-accent);
+  background: var(--clr-accent-dim);
+  border: 1px solid var(--clr-accent-border);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+}
+.pybe-title {
+  font-family: var(--font-story);
+  font-size: 2.8rem;
+  font-weight: 500;
+  color: var(--clr-text-primary);
+  line-height: 1.2;
+  margin: 0;
+}
+.pybe-features-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin: 8px 0;
+}
+.pybe-mini-feature {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  color: var(--clr-text-secondary);
+  background: var(--clr-surface-raise);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--clr-border-subtle);
+}
+.pybe-actions-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* ── Screen 1: Story Layout (Illustration Left, Story Right) ── */
+.pybe-story-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+  align-items: start;
+  max-width: 820px;
+  margin: 0 auto;
+}
+.pybe-illustration-card {
+  background: #FFFFFF;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+.illustration-graphic {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: var(--clr-surface-raise);
+  border: 2px dashed var(--clr-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.big-emoji {
+  font-size: 4rem;
+  line-height: 1;
+}
+.graphic-decorations .sparkle {
+  position: absolute;
+  font-size: 1.2rem;
+}
+.sparkle.s1 { top: 10px; right: 15px; }
+.sparkle.s2 { bottom: 10px; left: 15px; }
+.sparkle.s3 { top: 20px; left: 10px; }
+.illustration-caption {
+  font-size: 0.82rem;
+  color: var(--clr-text-muted);
+  text-align: center;
+  line-height: 1.4;
+}
+
+.pybe-story-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.pybe-story-paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.pybe-story-paragraphs p {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--clr-text-secondary);
+  margin: 0;
+}
+.pybe-story-cta {
+  margin-top: 8px;
+}
+
+/* ── Screen 2: Think It Through & Question Cards ── */
+.pybe-question-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.question-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.question-num-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--clr-surface-raise);
+  border: 1px solid var(--clr-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--clr-accent);
+  flex-shrink: 0;
+}
+.question-text {
+  font-family: var(--font-story);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--clr-text-primary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.pybe-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pybe-option-row {
+  background: #FFFFFF;
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+  color: var(--clr-text-primary);
+  font-size: 1rem;
+  line-height: 1.4;
+  transition: all 0.15s ease;
+}
+.pybe-option-row:hover:not(:disabled) {
+  background: var(--clr-surface-raise);
+  border-color: #C5BDB0;
+}
+.pybe-opt-selected {
+  border-color: var(--clr-accent) !important;
+  background: var(--clr-accent-dim) !important;
+  color: var(--clr-accent) !important;
+  font-weight: 600;
+}
+.pybe-opt-correct {
+  border-color: var(--clr-accent) !important;
+  background: var(--clr-accent-dim) !important;
+  color: #17421F !important;
+  font-weight: 600;
+}
+.pybe-opt-wrong {
+  border-color: var(--clr-vermilion) !important;
+  background: var(--clr-vermilion-light) !important;
+  color: #8C1D18 !important;
+}
+.pybe-opt-reveal {
+  border-color: var(--clr-accent) !important;
+  background: var(--clr-accent-dim) !important;
+}
+.check-icon {
+  font-weight: bold;
+  color: var(--clr-accent);
+  font-size: 1.1rem;
+}
+
+/* ── Feedback Box (Green on Success) ── */
+.pybe-feedback-box {
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  animation: fadeIn 0.2s ease-out;
+}
+.feedback-correct {
+  background: var(--clr-accent-dim);
+  border: 1.5px solid var(--clr-accent-border);
+  color: #16431E;
+}
+.feedback-hint {
+  background: var(--clr-surface-raise);
+  border: 1.5px solid var(--clr-border);
+  color: var(--clr-text-secondary);
+}
+.feedback-status-title {
+  font-weight: 700;
+  font-size: 0.98rem;
+}
+
+/* ── PyBe Discovery Reveal ("Here's what you just figured out") ── */
+.pybe-discovery-reveal {
+  background: #FFFFFF;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+.reveal-heading {
+  font-family: var(--font-story);
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--clr-text-primary);
+  margin: 0;
+}
+.reveal-subtext {
+  font-size: 0.95rem;
+  color: var(--clr-text-secondary);
+  max-width: 500px;
+  margin: 0;
+}
+.reveal-cards-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+.reveal-card {
+  background: var(--clr-surface-raise);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 180px;
+}
+.reveal-icon {
+  font-size: 1.8rem;
+}
+.reveal-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--clr-accent);
+  letter-spacing: 0.06em;
+}
+.reveal-val {
+  font-size: 0.95rem;
+  color: var(--clr-text-primary);
+}
+.reveal-val.val-alert {
+  color: var(--clr-vermilion);
+  font-weight: 600;
+}
+.reveal-arrow {
+  font-size: 1.6rem;
+  color: var(--clr-accent);
+  font-weight: bold;
+}
+
+/* ── Chapter 2 & 3 Story Context & Kiosk Styling ── */
+.pybe-story-context-card {
+  background: #FFFFFF;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.story-context-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.story-context-tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--clr-accent);
+}
+
+.story-context-badge {
+  font-size: 0.74rem;
+  font-weight: 600;
+  background: var(--clr-surface-raise);
+  border: 1px solid var(--clr-border-subtle);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  color: var(--clr-text-secondary);
+}
+
+.story-context-status {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--clr-saffron);
+  background: var(--clr-saffron-light);
+  border: 1px solid #FCD34D;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.story-context-text {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: var(--clr-text-secondary);
+  margin: 0;
+}
+
+.story-context-sub {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--clr-text-muted);
+  margin: 0;
+}
+
+/* ── Kiosk Terminal Preview ── */
+.kiosk-terminal-preview {
+  background: #1E2320;
+  border: 1px solid #333C36;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin: 4px 0;
+}
+
+.terminal-header-bar {
+  background: #141715;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #282F2A;
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.td-red { background: #FF5F56; }
+.td-yellow { background: #FFBD2E; }
+.td-green { background: #27C93F; }
+
+.terminal-title {
+  font-family: var(--font-code);
+  font-size: 0.74rem;
+  color: #8C9990;
+  letter-spacing: 0.04em;
+}
+
+.terminal-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+}
+
+.terminal-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.terminal-prompt {
+  color: var(--clr-accent);
+  font-weight: 700;
+}
+
+.terminal-msg {
+  color: #D1D5DB;
+}
+
+.terminal-label {
+  color: #9CA3AF;
+}
+
+.terminal-input-val {
+  background: rgba(217, 119, 6, 0.25);
+  color: #FBBF24;
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+.terminal-blinking-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  background: #FBBF24;
+  animation: blinkCursor 1s infinite;
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Story Transition Box (Connecting Page 2 & Page 3) ── */
+.transition-narrative-card {
+  background: #FFFDF5;
+  border: 1.5px solid #F3DCAC;
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  margin-top: 6px;
+  width: 100%;
+}
+
+.transition-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--clr-saffron);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.transition-narrative-text {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: #4B3814;
+  margin: 0;
+}
+
+/* ── Concept Breakdown Cards (Page 3) ── */
+.pybe-concept-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #FFFFFF;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+}
+
+.concept-breakdown-title {
+  font-family: var(--font-story);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--clr-text-primary);
+  margin: 0;
+}
+
+.concept-breakdown-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.breakdown-item {
+  background: var(--clr-surface-raise);
+  border: 1px solid var(--clr-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.breakdown-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--clr-text-primary);
+}
+
+.breakdown-desc {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--clr-text-secondary);
+  margin: 0;
+}
+
+.compare-mini-box {
+  background: var(--clr-surface-code);
+  border: 1px solid #E5DCC5;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.compare-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-code);
+  font-size: 0.85rem;
+}
+
+.chip-ok {
+  color: var(--clr-accent);
+  font-weight: 600;
+}
+
+.chip-err {
+  color: var(--clr-vermilion);
+  font-weight: 600;
+}
+
+/* ── Screen 3: Code Card & Trace List ── */
+.pybe-code-card {
+  padding: 0;
+  overflow: hidden;
+  background: var(--clr-surface-code);
+  border: 1px solid #E5DCC5;
+  border-left: 4px solid var(--clr-accent);
+}
+.code-header-bar {
+  background: #EDE6D2;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #E0D6BD;
+}
+.code-filename {
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  color: #4A524D;
+}
+.code-badge {
+  font-size: 0.72rem;
+  color: var(--clr-accent);
+  font-weight: 600;
+}
+.pybe-pre {
+  margin: 0;
+  padding: 18px 22px;
+  font-family: var(--font-code);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #1F2937;
+  overflow-x: auto;
+}
+
+.pybe-trace-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.trace-heading {
+  font-family: var(--font-story);
+  font-size: 1.2rem;
+  color: var(--clr-text-primary);
+  margin: 0;
+}
+.trace-subtext {
+  font-size: 0.88rem;
+  color: var(--clr-text-muted);
+  margin: 0;
+}
+.pybe-trace-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pybe-trace-row {
+  display: grid;
+  grid-template-columns: 70px 1.2fr 130px 1.8fr;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--clr-surface-raise);
+  border: 1px solid var(--clr-border-subtle);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.pybe-trace-row:hover, .pybe-trace-row.row-active {
+  background: #FFFFFF;
+  border-color: var(--clr-accent);
+  box-shadow: var(--shadow-sm);
+}
+.trace-step-tag {
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+  color: var(--clr-text-muted);
+}
+.trace-code-text {
+  font-family: var(--font-code);
+  color: var(--clr-text-primary);
+  font-size: 0.85rem;
+}
+.trace-pill {
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+}
+.pill-ok {
+  background: var(--clr-accent-dim);
+  color: var(--clr-accent);
+}
+.pill-raises {
+  background: var(--clr-vermilion-light);
+  color: var(--clr-vermilion);
+}
+.pill-skipped {
+  background: var(--clr-surface-raise);
+  color: var(--clr-text-muted);
+}
+.trace-note-text {
+  color: var(--clr-text-secondary);
+  font-size: 0.82rem;
+}
+
+/* ── Screen 4: Stepper & Input Chips ── */
+.pybe-explain-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-left: 4px solid var(--clr-accent);
+}
+.explain-role-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+.role-keyword {
+  font-family: var(--font-code);
+  color: var(--clr-accent);
+  font-size: 1rem;
+}
+.role-desc {
+  color: var(--clr-text-secondary);
+}
+
+.pybe-stepper-card {
+  padding: 0;
+  overflow: hidden;
+  background: var(--clr-surface-code);
+  border: 1px solid #E5DCC5;
+}
+.pybe-code-lines {
+  display: flex;
+  flex-direction: column;
+}
+.pybe-line-row {
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  gap: 10px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  transition: all 0.15s ease;
+}
+.pybe-line-row:hover, .pybe-line-row.line-active {
+  background: #ECE5CE;
+  border-left-color: var(--clr-accent);
+}
+.line-num {
+  font-family: var(--font-code);
+  font-size: 0.78rem;
+  color: var(--clr-text-muted);
+  width: 18px;
+}
+.line-code {
+  font-family: var(--font-code);
+  font-size: 0.88rem;
+  color: #1F2937;
+  flex: 1;
+  margin: 0;
+}
+.line-status-tag {
+  font-size: 0.7rem;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+}
+.tag-normal { background: #E5DFC8; color: var(--clr-text-secondary); }
+.tag-raises { background: var(--clr-vermilion-light); color: var(--clr-vermilion); }
+.tag-handled { background: var(--clr-accent-dim); color: var(--clr-accent); }
+.tag-skipped { background: #ECE6D5; color: var(--clr-text-muted); }
+
+.pybe-line-detail {
+  background: #FFFFFF;
+  border-top: 1px solid #E5DCC5;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pybe-line-detail strong {
+  font-size: 0.88rem;
+  color: var(--clr-text-primary);
+}
+.pybe-line-detail p {
+  font-size: 0.85rem;
+  color: var(--clr-text-secondary);
+  margin: 0;
+}
+
+.pybe-tester-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.tester-heading {
+  font-family: var(--font-story);
+  font-size: 1.15rem;
+  color: var(--clr-text-primary);
+  margin: 0;
+}
+.chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pybe-chip-btn {
+  background: var(--clr-surface-raise);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--clr-text-primary);
+  transition: all 0.15s ease;
+}
+.pybe-chip-btn:hover {
+  background: #FFFFFF;
+  border-color: #C5BDB0;
+}
+.pybe-chip-btn.chip-active {
+  border-color: var(--clr-accent);
+  background: var(--clr-accent-dim);
+  color: var(--clr-accent);
+  font-weight: 600;
+}
+.chip-label {
+  font-size: 0.72rem;
+  color: var(--clr-text-muted);
+}
+.pybe-chip-btn.chip-active .chip-label {
+  color: var(--clr-accent);
+}
+
+.pybe-terminal-box {
+  background: #1E2421;
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.terminal-label {
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  color: #A3ACA5;
+}
+.terminal-text {
+  font-family: var(--font-code);
+  font-size: 0.92rem;
+  color: #69F0AE;
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Screen 5: Recovery Tabs ── */
+.pybe-recovery-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.recovery-heading {
+  font-family: var(--font-story);
+  font-size: 1.2rem;
+  color: var(--clr-text-primary);
+  margin: 0;
+}
+.recovery-lead {
+  font-size: 0.88rem;
+  color: var(--clr-text-muted);
+  margin: 0;
+}
+.pybe-pill-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pybe-pill-tab {
+  background: var(--clr-surface-raise);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: var(--clr-text-secondary);
+  transition: all 0.15s ease;
+}
+.pybe-pill-tab:hover {
+  background: #FFFFFF;
+  border-color: #C5BDB0;
+}
+.pybe-pill-tab.tab-active {
+  background: var(--clr-accent-dim);
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+  font-weight: 600;
+}
+.strategy-detail-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.strategy-code {
+  background: var(--clr-surface-code);
+  border: 1px solid #E5DCC5;
+  border-left: 4px solid var(--clr-accent);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+  color: #1F2937;
+  margin: 0;
+}
+.strategy-explanation {
+  background: var(--clr-surface-raise);
+  border: 1px solid var(--clr-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--clr-text-secondary);
+  margin: 0;
+}
+
+/* ── Screen 6: 4 Roles & Blanks ── */
+.pybe-roles-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.role-mini-card {
+  background: #FFFFFF;
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-md);
+  padding: 12px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.mini-keyword {
+  font-family: var(--font-code);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--clr-accent);
+}
+.mini-role {
+  font-size: 0.75rem;
+  color: var(--clr-text-muted);
+}
+
+.pybe-blanks-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.blanks-title {
+  font-family: var(--font-story);
+  font-size: 1.25rem;
+  color: var(--clr-text-primary);
+  margin: 0;
+}
+.blanks-lead {
+  font-size: 0.9rem;
+  color: var(--clr-text-muted);
+  margin: 0;
+}
+.pybe-editor-box {
+  background: var(--clr-surface-code);
+  border: 1px solid #E5DCC5;
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.blank-code-line {
+  margin: 0;
+  font-family: var(--font-code);
+  font-size: 0.92rem;
+  color: #1F2937;
+}
+.editor-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+.pybe-blank-field {
+  background: #FFFFFF;
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+  color: #1F2937;
+  width: 90px;
+  transition: all 0.15s ease;
+}
+.pybe-blank-field:focus {
+  outline: none;
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 0 3px rgba(39, 145, 73, 0.15);
+}
+.pybe-blank-field.field-ok {
+  border-color: var(--clr-accent);
+  background: var(--clr-accent-dim);
+  color: #17421F;
+  font-weight: 600;
+}
+.pybe-blank-field.field-fail {
+  border-color: var(--clr-vermilion);
+  background: var(--clr-vermilion-light);
+  color: var(--clr-vermilion);
+}
+.field-colon {
+  font-family: var(--font-code);
+  font-weight: 600;
+  color: #1F2937;
+}
+.field-hint {
+  font-size: 0.78rem;
+  color: var(--clr-text-muted);
+}
+.blanks-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* ── Screen 7: Interactive Simulation ── */
+.pybe-sandbox-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.sandbox-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sandbox-title {
+  font-family: var(--font-story);
+  font-size: 1.2rem;
+  color: var(--clr-text-primary);
+}
+.sandbox-badge {
+  font-size: 0.72rem;
+  background: var(--clr-accent-dim);
+  color: var(--clr-accent);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+.sandbox-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.controls-label {
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+}
+.sandbox-trace-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--clr-surface-raise);
+  border: 1px solid var(--clr-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+}
+.strip-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--clr-text-muted);
+  text-transform: uppercase;
+}
+.strip-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pybe-line-pill {
+  font-family: var(--font-code);
+  font-size: 0.82rem;
+  background: var(--clr-accent-dim);
+  color: var(--clr-accent);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.pill-arrow {
+  color: var(--clr-text-muted);
+  font-weight: normal;
+}
+
+/* ── Screen 8: Quiz Stack & Summary ── */
+.pybe-quiz-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.question-header-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+.concept-pill {
+  font-size: 0.72rem;
+  color: var(--clr-text-muted);
+  background: var(--clr-surface-raise);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  width: fit-content;
+}
+.question-prompt-text p {
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: var(--clr-text-primary);
+  margin: 0;
+}
+.pybe-pre-inline {
+  background: var(--clr-surface-code);
+  border: 1px solid #E5DCC5;
+  border-left: 3px solid var(--clr-accent);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-family: var(--font-code);
+  font-size: 0.88rem;
+  color: #1F2937;
+  margin: 6px 0;
+}
+
+.pybe-submit-card {
+  margin-top: 10px;
+}
+.submit-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.submit-status-text {
+  font-size: 0.95rem;
+  color: var(--clr-text-secondary);
+}
+
+.pybe-result-banner {
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.banner-pass {
+  background: var(--clr-accent-dim);
+  border: 1.5px solid var(--clr-accent-border);
+  color: #16431E;
+}
+.banner-retry {
+  background: var(--clr-vermilion-light);
+  border: 1.5px solid var(--clr-vermilion-border);
+  color: #8A1A14;
+}
+.result-big-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+.result-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.result-headline {
+  font-family: var(--font-story);
+  font-size: 1.3rem;
+  margin: 0;
+}
+.result-subtext {
+  font-size: 0.92rem;
+  margin: 0;
+  line-height: 1.45;
+}
+.result-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.pybe-cheat-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 10px;
+}
+.cheat-sheet-title {
+  font-family: var(--font-story);
+  font-size: 1.25rem;
+  color: var(--clr-text-primary);
+  margin: 0;
+}
+.cheat-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+.cheat-card {
+  background: var(--clr-surface-raise);
+  border: 1px solid var(--clr-border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cheat-keyword {
+  font-family: var(--font-code);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--clr-accent);
+}
+.cheat-desc {
+  font-size: 0.82rem;
+  color: var(--clr-text-secondary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* ── Responsive Rules ── */
+@media (max-width: 768px) {
+  .screen {
+    padding: 24px 16px;
+  }
+  .pybe-story-layout {
+    grid-template-columns: 1fr;
+  }
+  .pybe-roles-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .pybe-trace-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .indicator-title {
+    display: none;
+  }
+  .reveal-cards-row {
+    flex-direction: column;
+  }
+}

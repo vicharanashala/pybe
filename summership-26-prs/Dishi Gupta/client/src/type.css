@@ -1,0 +1,28 @@
+/* ============================================================
+   PyBe Type Scale Tokens & Font Families
+   Only token definitions live in this file.
+   Raw font-size values outside this file are banned by audit:type.
+   ============================================================ */
+
+:root {
+  /* Two typography font families: display (serif) and body (sans-serif) */
+  --font-display: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, "Times New Roman", serif;
+  --font-body: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-code: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+
+  /* Standard Type Scale Tokens */
+  --type-display: clamp(1.5rem, 2.5vw, 2.25rem); /* Display for question / hero */
+  --type-title: clamp(1.25rem, 2vw, 1.75rem);    /* Section, card, and slide titles */
+  --type-body: 1rem;                             /* Story narrative and body copy */
+  --type-option: 1rem;                           /* Multiple-choice option text */
+  --type-label: 0.8125rem;                       /* Badges, tags, chips, buttons */
+  --type-caption: 0.75rem;                       /* Clue footnotes, timestamps, details */
+
+  /* Monospace Code Font Sizes (14-16px desktop, 13px min on mobile) */
+  --type-code: 0.9375rem;                        /* ~15px on desktop */
+  --type-code-mobile: 0.8125rem;                 /* 13px min on mobile */
+
+  /* Edge Spacing Tokens */
+  --edge-mobile: 16px;
+  --edge-desktop: 24px;
+}

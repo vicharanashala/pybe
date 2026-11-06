@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&display=swap');
+
+:root {
+  --primary: #FF2E93; /* Neon Pink */
+  --secondary: #00F0FF; /* Neon Cyan */
+  --tertiary: #8A2BE2; /* Deep Purple */
+  --accent: #F2C94C; /* Glowing Gold */
+  
+  --bg-color: #05050f;
+  --text-main: #FFFFFF;
+  --text-muted: #A0A0B0;
+  
+  --error: #FF4C4C;
+  --success: #00FFA3;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-color);
+  
+  /* The Animated Gradient Mesh Background */
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(138, 43, 226, 0.25), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(255, 46, 147, 0.2), transparent 25%),
+    radial-gradient(circle at 50% 80%, rgba(0, 240, 255, 0.15), transparent 25%);
+  background-size: 200% 200%;
+  animation: bg-shift 15s ease infinite alternate;
+  background-attachment: fixed;
+}
+
+@keyframes bg-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 50% 100%; }
+}
+
+h1, h2, h3, h4 {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+code {
+  font-family: 'Fira Code', monospace;
+}
+
+/* Gradient Text Utilities */
+.gradient-text-primary {
+  background: linear-gradient(135deg, var(--primary), var(--tertiary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gradient-text-secondary {
+  background: linear-gradient(135deg, var(--secondary), var(--primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gradient-text-accent {
+  background: linear-gradient(135deg, var(--accent), #FF8C00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Web3 Glass Card */
+.glass-card {
+  background: rgba(20, 20, 30, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  box-shadow: 
+    0 30px 60px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Attractive Button */
+.web3-button {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--tertiary) 100%);
+  color: white;
+  border: none;
+  padding: 16px 36px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 10px 20px rgba(255, 46, 147, 0.3), inset 0 2px 0 rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  overflow: hidden;
+}
+
+.web3-button::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: all 0.5s;
+}
+
+.web3-button:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(255, 46, 147, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+.web3-button:hover::before {
+  left: 100%;
+}
+
+.web3-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 5px 10px rgba(255, 46, 147, 0.3);
+}
+
+.web3-button:disabled {
+  background: #333;
+  color: #888;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Attractive Input */
+.web3-input {
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  padding: 16px 24px;
+  font-size: 1.2rem;
+  color: var(--text-main);
+  width: 100%;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: 'Fira Code', monospace;
+  box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.web3-input:focus {
+  border-color: var(--secondary);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.2), inset 0 2px 10px rgba(0,0,0,0.5);
+}

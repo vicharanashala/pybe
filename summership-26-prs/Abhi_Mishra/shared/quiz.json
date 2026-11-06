@@ -1,0 +1,65 @@
+[
+  {
+    "q": "Which plot is best for a trend over time?",
+    "options": ["Line chart", "Pie chart", "Boxplot", "Scatter plot"],
+    "answer": "Line chart",
+    "topic": "Line charts",
+    "tip": "Time is ordered, so a line can connect the points."
+  },
+  {
+    "q": "Which plot inspects a relationship between two numeric variables?",
+    "options": ["Scatter plot", "Pie chart", "Area chart", "Bar chart"],
+    "answer": "Scatter plot",
+    "topic": "Relationships",
+    "tip": "Each dot carries an x value and a y value."
+  },
+  {
+    "q": "In a boxplot, what does a dot beyond the whisker represent?",
+    "options": ["An outlier", "The mean", "The maximum allowed value", "A missing value"],
+    "answer": "An outlier",
+    "topic": "Distributions",
+    "tip": "Whiskers stop at 1.5 x IQR; anything beyond is plotted as a dot."
+  },
+  {
+    "q": "NovaTech's mean contract was far above the median. What does that suggest?",
+    "options": ["A few very large contracts pull the average up", "Every customer pays about the same", "The data has no spread", "The median was calculated wrongly"],
+    "answer": "A few very large contracts pull the average up",
+    "topic": "Distributions",
+    "tip": "The mean is sensitive to extreme values, the median is not."
+  },
+  {
+    "q": "When does a pie chart make sense?",
+    "options": ["A few parts that add up to one whole", "A long time series", "Correlation between two variables", "Hundreds of categories"],
+    "answer": "A few parts that add up to one whole",
+    "topic": "Part-to-whole",
+    "tip": "Pies show shares, so slices must sum to 100%."
+  },
+  {
+    "q": "Which chart compares values across separate categories such as regions?",
+    "options": ["Bar chart", "Scatter plot", "Line chart", "Boxplot"],
+    "answer": "Bar chart",
+    "topic": "Bar charts",
+    "tip": "Bar heights are easy to compare from a shared baseline."
+  },
+  {
+    "q": "Which Matplotlib function draws the stacked area chart of revenue by product?",
+    "options": ["plt.stackplot()", "plt.stackedarea()", "plt.areaplot()", "plt.layers()"],
+    "answer": "plt.stackplot()",
+    "topic": "Stacked areas",
+    "tip": "plt.stackplot(x, y1, y2, ...) stacks each series on the previous one."
+  },
+  {
+    "q": "Which Matplotlib function displays a chart after you create it?",
+    "options": ["plt.open()", "plt.view()", "plt.show()", "plt.display()"],
+    "answer": "plt.show()",
+    "topic": "Python basics",
+    "tip": "Every snippet in this case study ends with plt.show()."
+  },
+  {
+    "q": "Which Matplotlib function labels the x-axis?",
+    "options": ["plt.labelx()", "plt.xlabel()", "plt.xname()", "plt.axislabel()"],
+    "answer": "plt.xlabel()",
+    "topic": "Python basics",
+    "tip": "plt.xlabel('Month') and plt.ylabel('Revenue') name the axes."
+  }
+]
