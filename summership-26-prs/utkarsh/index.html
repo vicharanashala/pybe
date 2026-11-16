@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Two Roads to K2 — PyBe Sets Discovery</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/hud.css" />
+  <link rel="stylesheet" href="css/stage.css" />
+  <link rel="stylesheet" href="css/interactions.css" />
+  <link rel="stylesheet" href="css/quickcheck.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Top HUD: Brand, 8 Mental Model Lamps, Counter, Audio Toggle -->
+    <header class="hud" role="banner">
+      <div class="hud-left">
+        <button class="brand" onclick="goToScene(0)" aria-label="Return to Start">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
+          </svg>
+          <span class="brand-title">TWO ROADS TO K2</span>
+        </button>
+      </div>
+
+      <div class="hud-center">
+        <div class="dashboard-lamps" role="status" aria-label="Expedition Sets Dashboard">
+          <div class="lamp" data-stage="ONCE" title="Once: set() Deduplication">
+            <span class="lamp-label">Once</span>
+          </div>
+          <div class="lamp" data-stage="EVERYTHING" title="Everything: | Union">
+            <span class="lamp-label">Union</span>
+          </div>
+          <div class="lamp" data-stage="SHARED" title="Shared: & Intersection">
+            <span class="lamp-label">Shared</span>
+          </div>
+          <div class="lamp" data-stage="LEFT" title="Left: - Difference">
+            <span class="lamp-label">Left</span>
+          </div>
+          <div class="lamp" data-stage="ONLY ONE" title="Only One: ^ Symmetric Diff">
+            <span class="lamp-label">Only One</span>
+          </div>
+          <div class="lamp" data-stage="IS IT THERE" title="Is It There: in Membership">
+            <span class="lamp-label">In?</span>
+          </div>
+          <div class="lamp" data-stage="ALL REQUIRED" title="All Required: <= Subset">
+            <span class="lamp-label">Subset</span>
+          </div>
+          <div class="lamp" data-stage="SEALED" title="Sealed: frozenset">
+            <span class="lamp-label">Sealed</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <div class="step-counter" id="hud-step-counter">01 / 10</div>
+        <button class="sound-btn" id="audio-toggle-btn" onclick="toggleAudio()" aria-label="Toggle Sound">
+          <svg id="icon-sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="1" y1="1" x2="23" y2="23" />
+            <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6" />
+            <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23" />
+            <line x1="12" y1="19" x2="12" y2="23" />
+            <line x1="8" y1="23" x2="16" y2="23" />
+          </svg>
+          <svg id="icon-sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Stage: Full-bleed Mountain Backdrop, Radio, Interaction Dock, Glass Dock -->
+    <main class="stage" id="photo-stage-container" role="main">
+      <div class="photo-bg ken-burns" id="photo-stage-bg" role="img" aria-label="Himalayan mountain background"></div>
+
+      <div class="stage-overlay">
+        <div class="stage-top-meta">
+          <span class="act-pill" id="photo-act-pill">ACT 1: THE DEPOT</span>
+          <h1 class="place-name" id="photo-place-name">DARJEELING DEPOT</h1>
+          <span class="altitude" id="photo-elevation-value">2,000 M</span>
+        </div>
+
+        <div class="radio-bubble" id="radio-bubble" aria-live="polite">
+          <span class="radio-speaker" id="radio-speaker">Pasang</span>
+          <span class="radio-text" id="radio-text">One rope is enough.</span>
+        </div>
+
+        <button class="qc-tab" id="quickcheck-tab" onclick="toggleQuickCheckDrawer()" aria-label="Toggle Trail Audit">
+          <span class="qc-tab-icon">❓</span>
+          <span class="qc-tab-label">Trail Audit</span>
+        </button>
+
+        <aside class="quickcheck-drawer" id="quickcheck-drawer" role="complementary" aria-label="Trail Audit Drawer">
+          <div class="qc-body" id="quickcheck-body"></div>
+        </aside>
+
+        <!-- Dynamic Interaction Layer -->
+        <div class="interaction-layer" id="interaction-layer"></div>
+
+        <!-- Bottom Glass Dock: Tiny Narration -->
+        <div class="glass-dock">
+          <p class="narration-text" id="stage-narration-text">Panniers hold six. Everyone packed rope.</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer: Navigation Buttons & SVG Elevation Profile -->
+    <footer class="elevation-footer" role="navigation" aria-label="Expedition Elevation Navigation">
+      <button class="nav-btn" id="btn-prev" onclick="prevScene()" aria-label="Previous Stage">
+        ← Prev Stage
+      </button>
+
+      <div class="elevation-track" aria-hidden="true">
+        <svg class="elevation-svg" id="elevation-svg" viewBox="0 0 900 38" preserveAspectRatio="none">
+          <polyline id="elev-trail-bg" points="" fill="none" stroke="rgba(255, 255, 255, 0.16)" stroke-width="2" />
+          <polyline id="elev-trail-active" points="" fill="none" stroke="#f59e0b" stroke-width="2.5" />
+          <g id="elev-nodes-group"></g>
+          <g id="elev-bike-marker" transform="translate(30, 32)">
+            <circle cx="0" cy="0" r="6" fill="#f59e0b" stroke="#ffffff" stroke-width="2" />
+          </g>
+        </svg>
+      </div>
+
+      <button class="nav-btn nav-btn-primary locked" id="btn-next" onclick="nextScene()" aria-label="Next Stage">
+        Next Stage →
+      </button>
+    </footer>
+  </div>
+
+  <!-- Scripts: Data, Helpers, Interactions, and Engine Controller -->
+  <script src="js/scenes.js"></script>
+  <script src="js/dragkit.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/certificate.js"></script>
+  <script src="js/interactions/pack.js"></script>
+  <script src="js/interactions/merge.js"></script>
+  <script src="js/interactions/stamp.js"></script>
+  <script src="js/interactions/unload.js"></script>
+  <script src="js/interactions/sort.js"></script>
+  <script src="js/interactions/lookup.js"></script>
+  <script src="js/interactions/audit.js"></script>
+  <script src="js/interactions/seal.js"></script>
+  <script src="js/interactions/flip.js"></script>
+  <script src="js/interactions/run.js"></script>
+  <script src="js/engine.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+/* ==========================================================================
+   THE HIGH PASS v3 — BASE DESIGN SYSTEM
+   Reset · CSS Variables · Typography · Prayer Ribbon · Shared Utilities
+   ========================================================================== */
+
+/* ----------- Reset ----------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  background: var(--c-bg);
+  color: var(--c-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button { font-family: inherit; border: none; cursor: pointer; background: none; }
+input  { font-family: inherit; }
+img    { display: block; max-width: 100%; }
+
+/* ----------- Design Tokens ----------- */
+:root {
+  /* Backgrounds & Surfaces */
+  --c-bg:       #080c18;
+  --c-surface:  rgba(12, 18, 35, 0.92);
+  --c-glass:    rgba(15, 23, 42, 0.75);
+  --c-border:   rgba(255, 255, 255, 0.08);
+
+  /* Text */
+  --c-text:       #f1f5f9;
+  --c-text-muted: #94a3b8;
+  --c-text-dim:   #475569;
+
+  /* 4-Stage Lamp Colours */
+  --c-try:      #38bdf8;   /* blue  — road / bracket  */
+  --c-except:   #ef4444;   /* red   — wrench          */
+  --c-else:     #f59e0b;   /* amber — kettle / chai   */
+  --c-finally:  #22c55e;   /* green — tent / camp     */
+
+  /* Accent */
+  --c-gold:       #f5b942;
+  --c-gold-hover: #f7c95e;
+
+  /* Typography */
+  --font-sans:  'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Cinzel', Georgia, serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Layout Dimensions */
+  --hud-h:    48px;
+  --footer-h: 54px;
+  --ribbon-h: 4px;
+
+  /* Animation */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast:   150ms;
+  --dur-med:    300ms;
+  --dur-slow:   500ms;
+}
+
+/* ----------- Reduced Motion ----------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ----------- Prayer Ribbon ----------- */
+.prayer-ribbon {
+  height: var(--ribbon-h);
+  display: flex;
+  width: 100%;
+  flex-shrink: 0;
+}
+.prayer-ribbon > div { flex: 1; }
+.pr-blue   { background: #2563eb; }
+.pr-white  { background: #f8fafc; }
+.pr-red    { background: #dc2626; }
+.pr-green  { background: #16a34a; }
+.pr-yellow { background: #eab308; }
+
+/* ----------- App Root ----------- */
+#app, #app-root {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: var(--c-bg);
+}
+
+
+/* ----------- Shared Utilities ----------- */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+.fade-in {
+  animation: fadeIn var(--dur-med) var(--ease-out) both;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.scale-in {
+  animation: scaleIn var(--dur-med) var(--ease-snap) both;
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
