@@ -24,7 +24,8 @@ npm run dev
 - All 41 submitted concept groups appear on the homepage, organized into seven chapters.
 - Eleven proposed pending topics are marked “Pending · proposed” and “Case study to be designed.”
 - The pending list is a suggested backlog, not an approved syllabus. An idea may already be mentioned within a broader submission without having a dedicated case study.
-- Search concepts, skills, story titles, and contributors. Filter by Submitted, Pending, or All.
+- Search concepts, skills, and story titles. Filter by Submitted, Pending, or All.
+- Cards and the study toolbar show concepts rather than student names. Original author credits remain in submission files.
 - Choose among original submissions for a concept, save stories, and mark them explored.
 
 ## Original case studies
@@ -37,13 +38,29 @@ On first launch, the launcher installs the original app's dependencies into its 
 
 Apps using newer Vite versions run with a private Node 22 installation under work/ when the system Node is older. The system Node installation is not changed.
 
-Some originals still require their own external services (for example MongoDB or Prisma setup), API configuration, or Python packages. Their setup failures are displayed with the original source and README path. Python/Streamlit submissions require Python and Streamlit to be installed. Written/script-only submissions open as original source. The launcher does not replace a failed original with a common lesson.
+Some originals still require database setup (for example MongoDB or Prisma/SQLite) or Python packages. No LLM provider keys are required; features that depended entirely on cloud generation are unavailable. Their setup failures are displayed with the original source and README path. Python/Streamlit submissions require Python and Streamlit to be installed. Written/script-only submissions open as original source. The launcher does not replace a failed original with a common lesson.
 
 Library bookmarks and “explored” marks are local to this browser. Each original app retains its own progress behavior. Originals run on distinct local ports to separate their browser storage.
 
 ## New PR submissions
 
-All new PRs submitted from November 2, 2026 onward must place their case studies in the `new-pr-submissions/` directory.
+Place all case studies in `case-studies/`, including new contributions. Use a lowercase concept-and-story folder name, with hyphens between words, for example:
+
+```text
+case-studies/
+  lists-royal-supply-scroll/
+  inheritance-wildlife-field-journal/
+  classes-why-classes-exist/
+```
+
+Use a story suffix to distinguish multiple studies of the same concept. Keep each original application's files together, especially when several lessons share a frontend and backend. Platform tools are named by function; `empty-submission/` contains only a blank README and is not a playable study. The old `summership-26-prs/` and `rekhabattu-pr/` folders are no longer used. `new-pr-submissions/` is an unused legacy placeholder.
+
+To add a study:
+
+1. Add the original files under a concept-and-story folder in `case-studies/`.
+2. Add the contributor-to-folder mapping in `tools/submission-folders.json`. Contributor names are internal credits, not folder names or learner-facing labels.
+3. Add the reviewed title, concepts, source path, and entry point in `tools/build_catalog.py` or `tools/original_catalog.py`.
+4. Run `npm run catalog` and `npm test`, then open the study from the homepage to verify its interactions. Do not add external LLM or AI image calls.
 
 ## Coverage and maintenance
 
@@ -57,42 +74,23 @@ All new PRs submitted from November 2, 2026 onward must place their case studies
 - **Files & exceptions:** File handling & persistence; exception handling; understanding Python errors; input validation.
 - **Special topics:** Sorting & searching; filtering & counting; modules & imports; decorators; iterators & generators; references, mutation & memory; multithreading; data visualization with Matplotlib; compilers & interpreters; dates & times.
 
-### Concepts not covered yet
+### Proposed pending concepts
 
-These topics do not yet have a dedicated submitted case study:
+The homepage currently lists these eleven proposed topics for dedicated case studies. This is a suggested backlog, not an approved syllabus; some skills may already appear within broader submissions.
 
-| No. | Concept | What students should learn |
-|---:|---|---|
-| 42 | User input and type conversion | `input()`, `int()`, `float()`, `str()` and handling user input |
-| 43 | String formatting | f-strings, formatting numbers, alignment and precision |
-| 44 | List, set and dictionary comprehensions | Creating and transforming collections concisely |
-| 45 | Unpacking and multiple assignment | Tuple unpacking, `*args`, `**kwargs` and starred expressions |
-| 46 | Lambda functions | Anonymous functions and their use with `sorted()`, `map()` and `filter()` |
-| 47 | Enumeration and parallel iteration | `enumerate()`, `zip()` and iterating over multiple collections |
-| 48 | Context managers | `with` statements and safe resource management |
-| 49 | Working with JSON and CSV | Reading, writing and exchanging structured data |
-| 50 | Working with paths and directories | `pathlib`, `os`, navigating and managing files |
-| 51 | Regular expressions | Pattern matching, extraction and text validation |
-| 52 | Copying and equality | Shallow copy, deep copy, `==` versus `is` |
-| 53 | Type hints and annotations | Improving code readability and checking types |
-| 54 | Virtual environments and package management | `venv`, `pip`, dependencies and reproducibility |
-| 55 | Standard library essentials | `collections`, `itertools`, `math`, `random` and `statistics` |
-| 56 | Debugging techniques | Breakpoints, stepping through code and inspecting variables |
-| 57 | Unit testing | `unittest`, `pytest`, assertions and test cases |
-| 58 | Logging | Recording application events and diagnosing failures |
-| 59 | Code quality and style | PEP 8, meaningful names, formatting and linting |
-| 60 | Documentation | Docstrings, README files and documenting functions |
-| 61 | Dataclasses | Organizing structured data using `@dataclass` |
-| 62 | Advanced object-oriented design | Composition, properties, special methods and operator overloading |
-| 63 | Command-line applications | Command-line arguments using `argparse` |
-| 64 | HTTP requests and APIs | Making requests, handling responses and consuming REST APIs |
-| 65 | Working with databases | SQLite, SQL queries and Python database connections |
-| 66 | Asynchronous programming | `async`, `await`, `asyncio` and concurrent I/O |
-| 67 | Multiprocessing | Process-based parallelism and CPU-intensive tasks |
-| 68 | Data processing with NumPy | Arrays, vectorized operations and numerical computing |
-| 69 | Data analysis with Pandas | DataFrames, cleaning, grouping and aggregation |
-| 70 | Web application development | Building simple applications with Flask or FastAPI |
-| 71 | Packaging and distributing Python projects | Project structure, `pyproject.toml`, building and installing packages |
+| Concept | Proposed focus |
+|---|---|
+| Comprehensions | A dedicated story for list, set, and dictionary comprehensions. |
+| Regular expressions | Find and validate text patterns with Python’s re module. |
+| JSON & CSV serialization | Move structured information between files and Python objects. |
+| Testing Python code | Write assertions, test edge cases, and learn unit testing. |
+| Type hints | Describe the inputs and outputs of Python code with annotations. |
+| Dataclasses | Model records with generated initialization and comparison methods. |
+| Async / await & asyncio | Coordinate waiting tasks using coroutines and an event loop. |
+| HTTP requests & APIs | Request data from a service and handle its responses. |
+| SQLite & databases | Store, query, and update persistent records using SQL. |
+| Packages, pip & virtual environments | Set up a reproducible Python environment and install packages. |
+| Custom context managers | Design resource cleanup with __enter__, __exit__, and contextlib. |
 
 See [CONCEPT_COVERAGE.md](CONCEPT_COVERAGE.md) for original contributors and source paths. Pending topics are a suggested backlog, not an approved syllabus; some may already be mentioned within a broader submission.
 
@@ -101,9 +99,9 @@ npm run catalog
 npm test
 ```
 
-Catalog rebuilds require Python 3. Reviewed mappings live in tools/build_catalog.py and tools/original_catalog.py. The catalog contains original entry points and runtime metadata only; it does not extract lesson content.
+Catalog rebuilds require Python 3. Reviewed mappings live in `tools/build_catalog.py`, `tools/original_catalog.py`, and `tools/submission-folders.json`. Rebuilding updates both `library/catalog.json` and `CONCEPT_COVERAGE.md`. The catalog contains original entry points and runtime metadata only; it does not extract lesson content.
 
-The tests verify original-only catalog entries, submitted/pending status, multiple while-loop choices, source and runtime paths, local HTTP responses, asset rebasing, and launch API restrictions.
+The tests verify original-only catalog entries, submitted/pending status, multiple while-loop choices, source and runtime paths, local HTTP responses, asset rebasing, launch API restrictions, and the absence of model calls. These checks do not guarantee every original lesson works end to end; verify new or changed studies interactively.
 
 ## Project layout
 
@@ -112,7 +110,8 @@ The tests verify original-only catalog entries, submitted/pending status, multip
 - original-runtime.mjs: original app dependency setup and lifecycle
 - tools/run-original.mjs: launches an original Vite application using its own config
 - tools/build_catalog.py and tools/original_catalog.py: reviewed concept and source mappings
-- case-studies/: all student originals, including classes-why-classes-exist, preserved
+- case-studies/: all 71 submission folders, named by concepts, stories, or tool function; includes `classes-why-classes-exist/`
+- tools/submission-folders.json: internal contributor-to-folder mappings
 - work/: ignored local runtime, npm caches, and verification scratch files
 
 Submission folders use concept and story names. `tools/submission-folders.json` maps the original contributor labels to the current folders for catalog rebuilding; original author credits remain in submission files.
