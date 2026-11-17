@@ -1,0 +1,936 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Explore a magical world, perform experiments and master Python exception handling.">
+
+    <meta name="theme-color" content="#ffffff">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+
+    <title>The Sorcerer's Apprentice | A Magical Adventure</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!--
+        The new game controller will be connected in implementation
+        step 4, after its world data and interface are ready.
+    -->
+</head>
+
+<body>
+
+<div class="app-container game-app" id="game-app">
+
+    <!-- =====================================================
+         GAME HEADER
+         ===================================================== -->
+
+    <header class="app-header game-header">
+
+        <button class="brand brand-link" id="brand-home" type="button"
+            aria-label="Return to the adventure">
+
+            <span class="brand-icon" aria-hidden="true">✦</span>
+
+            <span class="brand-copy">
+                <span class="brand-title">
+                    The Sorcerer's Apprentice
+                </span>
+
+                <span class="brand-subtitle">
+                    An Adventure of Magic, Mystery and Python
+                </span>
+            </span>
+
+        </button>
+
+        <nav class="header-controls app-navigation"
+            aria-label="Game navigation">
+
+            <button class="icon-button is-active"
+                id="nav-game" type="button">
+                Adventure
+            </button>
+
+            <button class="icon-button"
+                id="nav-world-map" type="button">
+                World Map
+            </button>
+
+            <button class="icon-button"
+                id="nav-inventory" type="button">
+                Inventory
+            </button>
+
+            <button class="icon-button"
+                id="nav-quest" type="button">
+                Quests
+            </button>
+
+            <button class="icon-button"
+                id="nav-spellbook" type="button">
+                Spellbook
+            </button>
+
+            <button class="icon-button"
+                id="nav-help" type="button">
+                Help
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         GAME HUD
+         ===================================================== -->
+
+    <main class="main-content game-main">
+
+        <section class="game-hud" aria-label="Adventure status">
+
+            <div class="hud-location">
+
+                <span class="hud-eyebrow">CURRENT LOCATION</span>
+
+                <h1 id="location-name">Potion Lab</h1>
+
+                <p id="location-description">
+                    Your journey through the Master's tower begins here.
+                </p>
+
+            </div>
+
+            <div class="hud-status">
+
+                <div class="hud-stat">
+                    <span aria-hidden="true">✦</span>
+
+                    <div>
+                        <strong id="star-count">0</strong>
+                        <small>Golden Stars</small>
+                    </div>
+                </div>
+
+                <div class="hud-stat">
+                    <span aria-hidden="true">◇</span>
+
+                    <div>
+                        <strong id="bag-count">0</strong>
+                        <small>Collected Items</small>
+                    </div>
+                </div>
+
+                <div class="hud-stat">
+                    <span aria-hidden="true">⌂</span>
+
+                    <div>
+                        <strong id="chapter-number">1 / 8</strong>
+                        <small>Adventure</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ACTIVE GAME VIEW
+             ================================================= -->
+
+        <section class="game-layout" id="game-view"
+            aria-label="Explorable game world">
+
+
+            <!-- =============================================
+                 GAME WORLD / ROOM
+                 ============================================= -->
+
+            <section class="game-world-panel">
+
+                <div class="game-world-heading">
+
+                    <div>
+                        <span class="hud-eyebrow">EXPLORE</span>
+
+                        <h2 id="room-heading">
+                            Potion Lab
+                        </h2>
+                    </div>
+
+                    <button class="secondary-button"
+                        id="open-map-button" type="button">
+                        Open World Map
+                    </button>
+
+                </div>
+
+
+                <!--
+                    The game engine will draw the room,
+                    apprentice, objects and movement here.
+
+                    World map backgrounds and room artwork
+                    will be loaded from the local assets folder.
+                -->
+
+                <div class="game-viewport" id="game-viewport">
+
+                    <canvas
+                        id="game-canvas"
+                        width="1100"
+                        height="650"
+                        tabindex="0"
+                        role="application"
+                        aria-label="Game world. Use arrow keys or WASD to move the apprentice.">
+
+                        Your browser does not support the game canvas.
+                    </canvas>
+
+
+                    <!-- Room information -->
+
+                    <div class="room-overlay room-overlay-top">
+
+                        <span id="room-region">
+                            MASTER'S TOWER
+                        </span>
+
+                        <span id="room-object-count">
+                            Explore the room
+                        </span>
+
+                    </div>
+
+
+                    <!-- Object inspection message -->
+                     <button
+                        class="reset-adventure-button"
+                        id="reset-adventure-button"
+                        type="button"
+                        title="Erase saved progress and start the adventure again">
+
+                        ↺ Reset Adventure
+
+                    </button>
+
+                    <div class="interaction-prompt"
+                        id="interaction-prompt"
+                        hidden>
+
+                        <span aria-hidden="true">✧</span>
+
+                        <span id="interaction-prompt-text">
+                            An object is nearby.
+                        </span>
+
+                    </div>
+
+
+                    <!-- Temporary game notifications -->
+
+                    <div class="game-notification"
+                        id="game-notification"
+                        role="status"
+                        aria-live="polite"
+                        hidden>
+                    </div>
+
+
+                    <!-- =====================================
+                         PLAYER MOVEMENT CONTROLS
+                         ===================================== -->
+
+                    <div class="game-controls"
+                        id="game-controls"
+                        aria-label="Apprentice movement controls">
+
+
+                        <!-- Direction pad: bottom-left -->
+
+                        <div class="direction-pad"
+                            aria-label="Movement">
+
+                            <button type="button"
+                                class="direction-button direction-up"
+                                data-move="up"
+                                aria-label="Move up">
+                                ▲
+                            </button>
+
+                            <button type="button"
+                                class="direction-button direction-left"
+                                data-move="left"
+                                aria-label="Move left">
+                                ◀
+                            </button>
+
+                            <button type="button"
+                                class="direction-button direction-down"
+                                data-move="down"
+                                aria-label="Move down">
+                                ▼
+                            </button>
+ī                            <button type="button"
+                                class="direction-button direction-right"
+                                data-move="right"
+                                aria-label="Move right">
+                                ▶
+                            </button>
+
+                        </div>
+
+
+                        <!-- Object and inventory actions -->
+
+                        <div class="action-pad"
+                            aria-label="Object interaction">
+
+                            <button type="button"
+                                class="game-action-button grab-button"
+                                id="action-grab"
+                                data-action="grab">
+
+                                <span aria-hidden="true">✋</span>
+                                <span>Grab</span>
+
+                            </button>
+
+                            <button type="button"
+                                class="game-action-button inspect-button"
+                                id="action-inspect"
+                                data-action="inspect">
+
+                                <span aria-hidden="true">⌕</span>
+                                <span>Inspect</span>
+
+                            </button>
+
+                            <button type="button"
+                                class="game-action-button put-button"
+                                id="action-put"
+                                data-action="put">
+
+                                <span aria-hidden="true">▣</span>
+                                <span>Put / Release</span>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Keyboard instructions -->
+
+                <div class="game-instructions">
+
+                    <p>
+                        <strong>Movement:</strong>
+                        Arrow Keys / WASD
+                    </p>
+
+                    <p>
+                        <strong>Interact:</strong>
+                        E
+                    </p>
+
+                    <p>
+                        <strong>Inspect:</strong>
+                        Click an object
+                    </p>
+
+                    <p>
+                        <strong>Release:</strong>
+                        Q
+                    </p>
+
+                </div>
+
+
+                <!-- Screen-reader game status -->
+
+                <p id="game-status"
+                    class="visually-hidden"
+                    aria-live="polite">
+                    The adventure is ready.
+                </p>
+
+            </section>
+
+            <section class="game-panel quest-panel"
+                    id="quest-panel">
+
+                    <div class="game-panel-heading">
+
+                        <span class="panel-icon"
+                            aria-hidden="true">⚔</span>
+
+                        <div>
+                            <span class="hud-eyebrow">ACTIVE MISSION</span>
+                            <h2 id="quest-title">
+                                A Task from the Master
+                            </h2>
+                        </div>
+
+                    </div>
+
+                    <p id="quest-description">
+                        The Master has prepared your first experiment.
+                        Explore the tower and gather what you need.
+                    </p>
+
+                    <div class="quest-objective">
+
+                        <strong>Current objective</strong>
+
+                        <p id="quest-objective">
+                            Explore your surroundings.
+                        </p>
+
+                    </div>
+
+                    <div class="quest-progress-track"
+                        id="quest-progress-track"
+                        role="progressbar"
+                        aria-label="Mission progress"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        aria-valuenow="0">
+
+                        <div class="quest-progress-fill"
+                            id="quest-progress-fill">
+                        </div>
+
+                    </div>
+
+                    <p class="quest-progress-label"
+                        id="quest-progress-label">
+                        0% completed
+                    </p>
+
+                    <div class="experiment-table-materials"
+                        id="experiment-table-materials"
+                        aria-label="Materials on the experiment table">
+                    </div>
+
+                </section>
+
+
+            <!-- =============================================
+                 RIGHT SIDE GAME PANEL
+                 ============================================= -->
+
+            <aside class="game-sidebar">
+
+
+                <!-- CURRENT QUEST -->
+
+                
+
+
+                <!-- INVENTORY -->
+
+                <section class="game-panel inventory-panel"
+                    id="inventory-panel">
+
+                    <div class="game-panel-heading">
+
+                        <span class="panel-icon"
+                            aria-hidden="true">🎒</span>
+
+                        <div>
+                            <span class="hud-eyebrow">YOUR BELONGINGS</span>
+                            <h2>Shoulder Bag</h2>
+                        </div>
+
+                    </div>
+
+                    <p class="panel-description">
+                        Materials you collect during your journey
+                        are stored here.
+                    </p>
+
+                    <div class="inventory-grid"
+                        id="inventory-items">
+
+                        <div class="inventory-empty"
+                            id="inventory-empty">
+
+                            <span aria-hidden="true">◇</span>
+
+                            <p>Your bag is empty.</p>
+
+                            <small>
+                                Explore the rooms to find useful materials.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    <button class="secondary-button inventory-full-button"
+                        id="open-inventory-button"
+                        type="button">
+
+                        View Full Inventory
+
+                    </button>
+
+                </section>
+
+
+                <!-- NEARBY OBJECT -->
+
+                <section class="game-panel object-panel"
+                    id="object-panel">
+
+                    <div class="game-panel-heading">
+
+                        <span class="panel-icon"
+                            aria-hidden="true">✧</span>
+
+                        <div>
+                            <span class="hud-eyebrow">DISCOVERY</span>
+                            <h2>Nearby Object</h2>
+                        </div>
+
+                    </div>
+
+                    <div id="object-details">
+
+                        <p class="panel-description">
+                            Move close to an object or click it
+                            to discover what it is.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- CHARACTER / MASTER STATUS -->
+
+                <section class="game-panel companion-panel"
+                    id="companion-panel">
+
+                    <div class="game-panel-heading">
+
+                        <span class="panel-icon"
+                            aria-hidden="true">♜</span>
+
+                        <div>
+                            <span class="hud-eyebrow">YOUR GUIDE</span>
+                            <h2 id="companion-name">The Master</h2>
+                        </div>
+
+                    </div>
+
+                    <p id="companion-status">
+                        Your mentor is waiting for the experiment materials.
+                    </p>
+
+                    <button class="primary-button"
+                        id="talk-to-master"
+                        type="button">
+
+                        Speak to the Master
+
+                    </button>
+
+                </section>
+
+            </aside>
+
+        </section>
+
+
+        <!-- =================================================
+             WORLD MAP VIEW
+             ================================================= -->
+
+        <section class="game-secondary-view"
+            id="world-map-view"
+            aria-label="World map"
+            hidden>
+
+            <div class="secondary-view-heading">
+
+                <span class="hud-eyebrow">EXPLORE THE REALM</span>
+
+                <h2>The Six Learning Rooms</h2>
+
+                <p>
+                    Follow the connected rooms to find Python materials
+                    and return to the Potion Lab for each experiment.
+                </p>
+
+            </div>
+
+            <div class="world-map-container"
+                id="world-map-container">
+
+                <img
+                    id="world-map-image"
+                    src="assets/maps/image1.png"
+                    alt="Illustrated map of the magical world"
+                    class="world-map-image">
+
+                <div class="world-map-locations"
+                    id="world-map-locations">
+                </div>
+
+            </div>
+
+            <div class="map-location-information"
+                id="map-location-information">
+
+                <h3>Select a location</h3>
+
+                <p>
+                    Explore the map to discover places you can visit.
+                </p>
+
+            </div>
+
+            <button class="primary-button"
+                type="button"
+                data-return-to-game>
+
+                Return to the Apprentice
+
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             INVENTORY VIEW
+             ================================================= -->
+
+        <section class="game-secondary-view"
+            id="inventory-view"
+            aria-label="Full inventory"
+            hidden>
+
+            <div class="secondary-view-heading">
+
+                <span class="hud-eyebrow">YOUR COLLECTION</span>
+
+                <h2>The Apprentice's Bag</h2>
+
+                <p>
+                    Examine your collected materials and
+                    prepare the next magical experiment.
+                </p>
+
+            </div>
+
+            <div class="full-inventory-grid"
+                id="full-inventory-items">
+
+            </div>
+
+            <button class="primary-button"
+                type="button"
+                data-return-to-game>
+
+                Return to the Adventure
+
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             QUEST JOURNAL VIEW
+             ================================================= -->
+
+        <section class="game-secondary-view"
+            id="quest-view"
+            aria-label="Quest journal"
+            hidden>
+
+            <div class="secondary-view-heading">
+
+                <span class="hud-eyebrow">YOUR ADVENTURE RECORD</span>
+
+                <h2>Quest Journal</h2>
+
+                <p>
+                    Your current mission, completed experiments
+                    and discovered locations.
+                </p>
+
+            </div>
+
+            <div id="quest-journal-content">
+
+            </div>
+
+            <button class="primary-button"
+                type="button"
+                data-return-to-game>
+
+                Return to the Adventure
+
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             SPELLBOOK VIEW
+             ================================================= -->
+
+        <section class="game-secondary-view"
+            id="spellbook-view"
+            aria-label="Magical Spellbook"
+            hidden>
+
+            <div id="spellbook-content">
+
+            </div>
+
+            <button class="primary-button"
+                type="button"
+                data-return-to-game>
+
+                Return to the Adventure
+
+            </button>
+
+        </section>
+
+
+        <!-- =================================================
+             FINAL PRACTICE VIEW
+             ================================================= -->
+
+        <section class="game-secondary-view"
+            id="exam-view"
+            aria-label="Final practice"
+            hidden>
+
+            <div id="exam-content">
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         MASTER DIALOGUE
+         ===================================================== -->
+
+    <dialog class="game-dialogue"
+        id="master-dialogue"
+        aria-labelledby="dialogue-speaker">
+
+        <div class="dialogue-window">
+
+            <div class="dialogue-character">
+
+                <img
+                    id="dialogue-portrait"
+                    alt="The Master">
+
+                <div>
+                    <span class="hud-eyebrow">
+                        CHARACTER DIALOGUE
+                    </span>
+
+                    <h2 id="dialogue-speaker">
+                        The Master
+                    </h2>
+
+                    <span id="dialogue-role">
+                        Master of the Workshop
+                    </span>
+                </div>
+
+            </div>
+
+
+            <div class="dialogue-message"
+                id="dialogue-message"
+                aria-live="polite">
+
+                "Welcome, apprentice. Your first experiment awaits."
+
+            </div>
+
+
+            <div class="dialogue-footer">
+
+                <span id="dialogue-progress">
+                    1 / 1
+                </span>
+
+                <button class="primary-button"
+                    id="dialogue-next"
+                    type="button">
+
+                    Continue
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </dialog>
+
+
+    <!-- =====================================================
+         OBJECT INSPECTION DIALOGUE
+         ===================================================== -->
+
+    <dialog class="game-dialogue object-dialogue"
+        id="object-dialogue"
+        aria-labelledby="object-dialogue-title">
+
+        <div class="dialogue-window">
+
+            <div class="object-dialogue-heading">
+
+                <span class="panel-icon"
+                    aria-hidden="true">✧</span>
+
+                <div>
+                    <span class="hud-eyebrow">OBJECT DISCOVERED</span>
+
+                    <h2 id="object-dialogue-title">
+                        Unknown Object
+                    </h2>
+                </div>
+
+                <button class="dialog-close"
+                    id="object-dialogue-close"
+                    type="button"
+                    aria-label="Close object description">
+
+                    ×
+
+                </button>
+
+            </div>
+
+            <div id="object-dialogue-description">
+
+                <p>Inspect this object to learn more about it.</p>
+
+            </div>
+
+            <div class="dialogue-footer">
+
+                <span id="object-dialogue-status">
+                    Nearby object
+                </span>
+
+                <button class="primary-button"
+                    id="object-dialogue-grab"
+                    type="button">
+
+                    Grab Object
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </dialog>
+
+
+    <!-- =====================================================
+         HELP DIALOGUE
+         ===================================================== -->
+
+    <dialog class="game-dialogue help-dialogue"
+        id="help-dialogue"
+        aria-labelledby="help-dialogue-title">
+
+        <div class="dialogue-window">
+
+            <div class="object-dialogue-heading">
+
+                <div>
+                    <span class="hud-eyebrow">ADVENTURER'S GUIDE</span>
+
+                    <h2 id="help-dialogue-title">
+                        How to Play
+                    </h2>
+                </div>
+
+                <button class="dialog-close"
+                    id="help-dialogue-close"
+                    type="button"
+                    aria-label="Close help">
+
+                    ×
+
+                </button>
+
+            </div>
+
+            <div id="help-dialogue-content">
+
+                <p>
+                    Explore the rooms, inspect objects,
+                    collect useful materials and complete
+                    the Master's experiments.
+                </p>
+
+            </div>
+
+        </div>
+
+    </dialog>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="app-footer">
+
+        <p>
+            The Sorcerer's Apprentice
+            <span aria-hidden="true">✦</span>
+            Every spell begins with an experiment.
+        </p>
+
+        <p class="offline-note">
+            <span class="offline-dot" aria-hidden="true"></span>
+            A local adventure. No internet connection required.
+        </p>
+
+    </footer>
+
+</div>
+
+
+<!--
+    The game controller is connected after the world data,
+    styling and movement implementation are ready.
+
+    Do not add external scripts, CDNs or online libraries.
+-->
+<script type="module" src="js/main.js"></script>
+<script type="module" src="js/activities.js"></script>
+<script type="module" src="js/support.js"></script>
+<script type="module" src="js/challenges.js"></script>
+<script type="module" src="js/compass.js"></script>
+</body>
+</html>
