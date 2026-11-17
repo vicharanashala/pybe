@@ -1,0 +1,311 @@
+/* ==========================================================================
+   STAGE — Full-bleed Photo + Overlays + Elevation Footer
+   ========================================================================== */
+
+/* --- Main Stage Container --- */
+.stage {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* --- Photo Background --- */
+.photo-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 0.5s ease;
+  will-change: transform;
+}
+
+/* Ken Burns slow pan — default direction, toggled per scene */
+.photo-bg.ken-burns {
+  animation: kenBurnsPan 25s ease-in-out infinite alternate;
+}
+@keyframes kenBurnsPan {
+  from { transform: scale(1.04) translate(0, 0); }
+  to   { transform: scale(1.08) translate(-1.5%, -0.8%); }
+}
+
+.photo-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 12, 24, 0.15) 0%,
+    rgba(8, 12, 24, 0.05) 35%,
+    rgba(8, 12, 24, 0.35) 65%,
+    rgba(8, 12, 24, 0.85) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- Location Badge (top-left of photo) --- */
+.location-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1.2rem;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+
+.act-pill {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--c-gold);
+  text-transform: uppercase;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+}
+
+.place-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+}
+
+.altitude {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--c-try);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+}
+
+/* --- Radio Bubble (compact, top-right or bottom area) --- */
+.radio-bubble {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  z-index: 5;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  max-width: 280px;
+  padding: 0.45rem 0.7rem;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  animation: radioFadeIn 0.4s var(--ease-out) both;
+}
+.radio-bubble[hidden] { display: none; }
+
+@keyframes radioFadeIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.radio-icon {
+  width: 14px; height: 14px;
+  color: var(--c-gold);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.radio-content { display: flex; flex-direction: column; gap: 1px; }
+
+.radio-speaker {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+
+.radio-text {
+  font-size: 0.78rem;
+  color: var(--c-text);
+  line-height: 1.35;
+}
+
+/* --- Narration Bar (bottom of photo stage, over scrim) --- */
+.narration-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(to top, rgba(8, 12, 24, 0.95) 0%, transparent 100%);
+}
+
+.narration-text {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: #cbd5e1;
+  line-height: 1.3;
+  border-left: 2px solid var(--c-gold);
+  padding-left: 0.6rem;
+}
+
+/* --- Interaction Layer (dynamically populated per scene) --- */
+.interaction-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none; /* children opt in */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.interaction-layer > * {
+  pointer-events: auto;
+}
+
+/* --- Feedback Toast (overlaid on top of stage) --- */
+.feedback-toast {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 0.65rem 1.4rem;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-align: center;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  animation: toastPop 0.3s var(--ease-snap) both;
+  max-width: 90%;
+  pointer-events: none;
+}
+.feedback-toast.success {
+  background: rgba(34, 197, 94, 0.9);
+  border: 1.5px solid #86efac;
+  color: #022c22;
+}
+.feedback-toast.error {
+  background: rgba(220, 38, 38, 0.92);
+  border: 1.5px solid #fca5a5;
+  color: #fff;
+}
+.feedback-toast.info {
+  background: rgba(14, 116, 144, 0.9);
+  border: 1.5px solid #7dd3fc;
+  color: #fff;
+}
+
+@keyframes toastPop {
+  from { opacity: 0; transform: translateX(-50%) translateY(-10px) scale(0.95); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+}
+
+
+/* ==========================================================================
+   ELEVATION FOOTER — Navigation + SVG Profile + Bike Marker
+   ========================================================================== */
+
+.elevation-footer {
+  height: var(--footer-h);
+  min-height: var(--footer-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  background: rgba(8, 12, 24, 0.95);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--c-border);
+  z-index: 100;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--c-border) !important;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--c-text);
+  white-space: nowrap;
+  transition: all var(--dur-fast);
+}
+.nav-btn:hover:not(:disabled) {
+  background: rgba(245, 185, 66, 0.12);
+  border-color: var(--c-gold) !important;
+  color: var(--c-gold);
+}
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.nav-btn svg { width: 14px; height: 14px; }
+
+.nav-btn-primary {
+  background: var(--c-gold) !important;
+  border-color: var(--c-gold) !important;
+  color: #0b101d !important;
+  font-weight: 700;
+}
+.nav-btn-primary:hover:not(:disabled) {
+  background: var(--c-gold-hover) !important;
+}
+.nav-btn-primary:disabled {
+  opacity: 0.35;
+}
+
+/* Next locked indicator */
+.nav-btn-primary.locked {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: var(--c-border) !important;
+  color: var(--c-text-dim) !important;
+  cursor: pointer;
+}
+.nav-btn-primary.locked:hover {
+  background: rgba(239, 68, 68, 0.15) !important;
+  border-color: rgba(239, 68, 68, 0.4) !important;
+  color: #fca5a5 !important;
+}
+.nav-btn-primary.locked::after {
+  content: '🔒';
+  font-size: 0.65rem;
+  margin-left: 0.2rem;
+}
+.nav-btn.shake {
+  animation: wrongShake 0.4s ease-out;
+}
+.nav-btn-primary.unlocked-pulse {
+  animation: unlockedPulse 1.2s ease-in-out infinite alternate;
+}
+@keyframes unlockedPulse {
+  0% { box-shadow: 0 0 0 0 rgba(245, 185, 66, 0.4); }
+  100% { box-shadow: 0 0 16px 4px rgba(245, 185, 66, 0.6); }
+}
+
+
+.elevation-track {
+  flex: 1;
+  height: 38px;
+  display: flex;
+  align-items: center;
+}
+
+.elevation-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* --- Mobile Footer --- */
+@media (max-width: 700px) {
+  .elevation-footer { padding: 0 0.5rem; gap: 0.4rem; }
+  .nav-btn { padding: 0.35rem 0.55rem; font-size: 0.7rem; }
+  .nav-btn span { display: none; }
+}
