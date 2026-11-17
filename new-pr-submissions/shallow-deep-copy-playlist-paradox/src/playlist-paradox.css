@@ -1,0 +1,3165 @@
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * MetaMix: Stylesheet (Teal + Cream + White Palette)
+ * Strictly scoped under .playlist-paradox.
+ * Palette from attached specification:
+ * - Teal: #087F8C (Primary actions, active highlights, Remix/Working accents)
+ * - Soft teal: #65B8B0 (Secondary accents, soft borders, supportive indicators)
+ * - Pale aqua: #E8F6F3 (Overall application background and soft tinted surfaces)
+ * - Cream: #FFFDF7 (Cards, content surfaces, Master Setlist, light text on dark)
+ * - Dark teal: #243B3A (Headings, secondary buttons, Master/Original anchors, change highlights)
+ */
+
+.playlist-paradox {
+  --pp-teal: #087F8C;
+  --pp-teal-text: #055E68;
+  --pp-teal-hover: #066670;
+  --pp-soft-teal: #65B8B0;
+  --pp-soft-teal-tint: #D6EFEC;
+  --pp-pale-aqua: #E8F6F3;
+  --pp-cream: #FFFDF7;
+  --pp-dark-teal: #243B3A;
+  --pp-dark-teal-hover: #192B2A;
+
+  /* Semantic UI Tokens */
+  --pp-bg: #E8F6F3;
+  --pp-surface: #FFFDF7;
+  --pp-surface-card: #FFFDF7;
+  --pp-surface-subtle: #E8F6F3;
+
+  --pp-text-primary: #243B3A;
+  --pp-text-body: #243B3A;
+  --pp-text-secondary: #375755;
+  --pp-text-muted: #4C6F6D;
+
+  --pp-border-default: #B6DCD6;
+  --pp-border-subtle: #D5ECE8;
+  --pp-border-teal: #087F8C;
+  --pp-border-dark: #243B3A;
+
+  --pp-code-bg: #243B3A;
+  --pp-code-text: #FFFDF7;
+
+  --pp-radius-sm: 6px;
+  --pp-radius-md: 10px;
+  --pp-radius-lg: 14px;
+  --pp-radius-xl: 18px;
+  --pp-radius-full: 9999px;
+
+  --pp-shadow-sm: 0 1px 4px rgba(36, 59, 58, 0.08);
+  --pp-shadow-md: 0 4px 16px rgba(36, 59, 58, 0.10);
+  --pp-shadow-lg: 0 12px 32px rgba(36, 59, 58, 0.16);
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--pp-text-body);
+  background-color: var(--pp-bg);
+  line-height: 1.5;
+  font-size: 16px;
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+}
+
+.playlist-paradox *,
+.playlist-paradox *::before,
+.playlist-paradox *::after {
+  box-sizing: inherit;
+}
+
+/* Accessibility Focus States */
+.playlist-paradox button:focus-visible,
+.playlist-paradox a:focus-visible,
+.playlist-paradox input:focus-visible,
+.playlist-paradox [tabindex]:focus-visible {
+  outline: 2px solid var(--pp-dark-teal);
+  outline-offset: 2px;
+}
+
+.pp-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================== */
+/* PERSISTENT HEADER (NAVBAR)                                     */
+/* ============================================================== */
+
+.pp-app-header {
+  background-color: var(--pp-cream);
+  border-bottom: 1.5px solid var(--pp-border-default);
+  padding: 0.7rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  box-shadow: var(--pp-shadow-sm);
+}
+
+.pp-brand-zone {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pp-brand-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--pp-dark-teal);
+  letter-spacing: -0.02em;
+}
+
+.pp-session-pill {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--pp-teal-text);
+  background-color: var(--pp-pale-aqua);
+  border: 1.5px solid var(--pp-soft-teal);
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--pp-radius-full);
+}
+
+.pp-nav-zone {
+  display: flex;
+  align-items: center;
+}
+
+.pp-chapters-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pp-chapter-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--pp-radius-full);
+  border: 1.5px solid transparent;
+  background: transparent;
+  color: var(--pp-dark-teal);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pp-nav-label-short {
+  display: none;
+}
+
+.pp-chapter-nav-btn:hover:not(:disabled):not(.pp-active) {
+  background-color: var(--pp-pale-aqua);
+  border-color: var(--pp-soft-teal);
+  color: var(--pp-teal-text);
+}
+
+.pp-chapter-nav-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.pp-chapter-nav-btn.pp-active {
+  background-color: var(--pp-dark-teal);
+  color: var(--pp-cream);
+}
+
+.pp-chapter-nav-btn.pp-completed:not(.pp-active) {
+  color: var(--pp-teal-text);
+}
+
+.pp-chapter-num-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 21px;
+  height: 21px;
+  border-radius: var(--pp-radius-full);
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-teal-text);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.pp-chapter-nav-btn.pp-active .pp-chapter-num-badge {
+  background-color: var(--pp-teal);
+  color: var(--pp-cream);
+}
+
+/* ============================================================== */
+/* BUTTON DESIGN SYSTEM (TEAL PRIMARY & DARK TEAL SECONDARY)      */
+/* ============================================================== */
+
+.pp-primary-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--pp-teal);
+  color: var(--pp-cream);
+  font-size: 1rem;
+  font-weight: 800;
+  padding: 0.75rem 1.5rem;
+  min-height: 46px;
+  border-radius: var(--pp-radius-md);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(8, 127, 140, 0.25);
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.pp-primary-cta-btn:hover:not(:disabled) {
+  background-color: var(--pp-teal-hover);
+  transform: translateY(-1px);
+}
+
+.pp-primary-cta-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.pp-secondary-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--pp-dark-teal);
+  color: var(--pp-cream);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  padding: 0.7rem 1.35rem;
+  min-height: 44px;
+  border-radius: var(--pp-radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pp-secondary-cta-btn:hover:not(:disabled) {
+  background-color: var(--pp-dark-teal-hover);
+  transform: translateY(-1px);
+}
+
+.pp-secondary-cta-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ============================================================== */
+/* MAIN CONTENT CONTAINER                                         */
+/* ============================================================== */
+
+.pp-main-content {
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.25rem 32px 2rem;
+}
+
+.pp-scene-stepper-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.pp-chapter-kicker-title {
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--pp-teal-text);
+}
+
+.pp-scene-indicator-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pp-scene-pill-step {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--pp-radius-full);
+  background-color: var(--pp-cream);
+  color: var(--pp-dark-teal);
+  border: 1.5px solid var(--pp-border-default);
+}
+
+.pp-scene-pill-step.pp-current-scene {
+  background-color: var(--pp-dark-teal);
+  color: var(--pp-cream);
+  border-color: var(--pp-dark-teal);
+}
+
+/* ============================================================== */
+/* CHAPTER 1: SCENE 1 TWO-COLUMN DESKTOP HERO                     */
+/* ============================================================== */
+
+.pp-hero-two-col-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-xl);
+  padding: 56px 2rem;
+  box-shadow: var(--pp-shadow-md);
+}
+
+@media (min-width: 960px) {
+  .pp-hero-two-col-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    padding: 60px 2.25rem;
+    align-items: stretch;
+  }
+}
+
+.pp-hero-photo-col {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  align-self: stretch;
+  border-radius: var(--pp-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(36, 59, 58, 0.16);
+  border: 2px solid var(--pp-border-default);
+}
+
+@media (min-width: 960px) {
+  .pp-hero-photo-col {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 440px;
+  }
+}
+
+.pp-hero-real-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.pp-hero-content-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.pp-hero-top-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.pp-hero-title {
+  font-size: clamp(2rem, 3.4vw, 2.65rem);
+  font-weight: 900;
+  color: var(--pp-dark-teal);
+  margin: 0.5rem 0 1.5rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.pp-hero-subtitle {
+  font-size: 1.075rem;
+  color: var(--pp-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.pp-hero-setlist-line {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--pp-dark-teal);
+  background-color: var(--pp-pale-aqua);
+  border-left: 4px solid var(--pp-teal);
+  border-radius: 0 var(--pp-radius-md) var(--pp-radius-md) 0;
+  padding: 0.65rem 0.9rem;
+  margin: 0.9rem 0 0;
+  line-height: 1.45;
+}
+
+.pp-mood-showcase-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0.25rem 0;
+}
+
+.pp-mood-showcase-card {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--pp-pale-aqua);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-md);
+}
+
+.pp-mood-showcase-title {
+  font-size: 1.025rem;
+  font-weight: 800;
+  color: var(--pp-dark-teal);
+  margin: 0 0 0.15rem;
+}
+
+.pp-mood-showcase-tracks {
+  font-size: 0.85rem;
+  color: var(--pp-text-secondary);
+  margin: 0;
+}
+
+/* ============================================================== */
+/* CHAPTER 1: SCENE 2 PROGRESSIVE CONVERSATION (SCROLL REVEAL)    */
+/* ============================================================== */
+
+.pp-dialogue-scene-card {
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-xl);
+  padding: 2rem;
+  box-shadow: var(--pp-shadow-md);
+}
+
+.pp-ch1-scene2-card {
+  padding: 56px 2rem;
+}
+
+.pp-dialogue-thread,
+.pp-shared-conversation-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background-color: var(--pp-pale-aqua);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-lg);
+  padding: 1.35rem;
+  margin: 1.25rem 0;
+}
+
+.pp-ch1-scene2-card .pp-dialogue-thread {
+  gap: 18px;
+}
+
+.pp-dialogue-bubble-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  animation: pp-slide-up-convo 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.pp-dialogue-bubble-row .pp-dialogue-bubble {
+  animation: pp-convo-bubble-glow 1.25s ease-out forwards;
+}
+
+@keyframes pp-slide-up-convo {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pp-convo-bubble-glow {
+  0% {
+    border-color: var(--pp-teal);
+    box-shadow: 0 0 0 4px rgba(8, 127, 140, 0.18);
+  }
+  100% {
+    border-color: var(--pp-border-default);
+    box-shadow: var(--pp-shadow-sm);
+  }
+}
+
+.pp-skip-chat-link {
+  background: transparent;
+  border: none;
+  color: var(--pp-teal-text);
+  font-size: 0.875rem;
+  font-weight: 800;
+  cursor: pointer;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--pp-radius-sm);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.pp-skip-chat-link:hover {
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-dark-teal);
+  text-decoration: underline;
+}
+
+.pp-typing-row {
+  align-items: center;
+}
+
+.pp-typing-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-md);
+  padding: 0.72rem 1rem;
+  box-shadow: var(--pp-shadow-sm);
+}
+
+.pp-typing-speaker-mini {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--pp-text-secondary);
+}
+
+.pp-typing-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pp-typing-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--pp-teal);
+  animation: pp-typing-bounce 1s ease-in-out infinite;
+}
+
+.pp-typing-dot:nth-child(2) {
+  animation-delay: 0.18s;
+}
+
+.pp-typing-dot:nth-child(3) {
+  animation-delay: 0.36s;
+}
+
+@keyframes pp-typing-bounce {
+  0%, 80%, 100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  40% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+
+.pp-dialogue-bubble {
+  flex: 1;
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-md);
+  padding: 1.2rem 1.5rem;
+  box-shadow: var(--pp-shadow-sm);
+}
+
+.pp-dialogue-speaker-name {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--pp-dark-teal);
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pp-dialogue-speaker-role {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--pp-teal-text);
+}
+
+.pp-dialogue-text {
+  font-size: 1.125rem;
+  color: var(--pp-dark-teal);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ============================================================== */
+/* CHAPTER 2: THE PLAYLIST CHALLENGE (SINGLE-GLANCE HORIZONTAL)   */
+/* ============================================================== */
+
+.pp-mystery-inspect-card {
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-xl);
+  padding: 1.35rem 1.6rem;
+  box-shadow: var(--pp-shadow-md);
+}
+
+/* Horizontal 3-column grid: Left info card (~320px) | Master Setlist | Remix Setlist (>= 32px gaps) */
+.pp-ch2-glance-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+@media (min-width: 1024px) {
+  .pp-ch2-glance-grid {
+    grid-template-columns: 320px 1fr 1fr;
+    gap: 28px;
+    align-items: stretch;
+  }
+
+  .pp-ch2-glance-grid .pp-ch2-playlists-col,
+  .pp-ch2-glance-grid .pp-ch2-playlists-col .pp-playlist-comparison-wrapper,
+  .pp-ch2-glance-grid .pp-ch2-playlists-col .pp-playlist-comparison-grid {
+    display: contents;
+  }
+}
+
+.pp-ch2-playlists-col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pp-ch2-controls-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--pp-pale-aqua);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-lg);
+  padding: 1.15rem;
+}
+
+.pp-ch2-title {
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: var(--pp-dark-teal);
+  margin: 0.15rem 0 0.45rem;
+  line-height: 1.2;
+}
+
+.pp-ch2-subtitle {
+  font-size: 0.96rem;
+  color: var(--pp-text-secondary);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.pp-challenge-buttons-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.pp-challenge-tab-btn {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--pp-radius-md);
+  border: 2px solid var(--pp-border-default);
+  background-color: var(--pp-cream);
+  color: var(--pp-dark-teal);
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  box-shadow: var(--pp-shadow-sm);
+}
+
+.pp-challenge-tab-btn:hover:not(.pp-active) {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-pale-aqua);
+}
+
+.pp-challenge-tab-btn.pp-active {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-teal);
+  color: var(--pp-cream);
+  box-shadow: 0 4px 12px rgba(8, 127, 140, 0.22);
+}
+
+.pp-challenge-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+
+.pp-challenge-tag {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pp-teal-text);
+}
+
+.pp-challenge-tab-btn.pp-active .pp-challenge-tag {
+  color: var(--pp-pale-aqua);
+}
+
+.pp-viewed-check {
+  font-size: 0.8125rem;
+  font-weight: 900;
+  color: var(--pp-teal-text);
+  background-color: var(--pp-pale-aqua);
+  border: 1px solid var(--pp-soft-teal);
+  border-radius: var(--pp-radius-full);
+  padding: 0.05rem 0.48rem;
+  line-height: 1.2;
+}
+
+.pp-challenge-tab-btn.pp-active .pp-viewed-check {
+  color: var(--pp-cream);
+  background-color: rgba(255, 253, 247, 0.2);
+  border-color: rgba(255, 253, 247, 0.55);
+}
+
+.pp-ch2-nav-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--pp-border-default);
+}
+
+/* Chapter 2 Standalone Full-Width Gut-Feeling Card */
+.pp-gut-feeling-card {
+  margin-top: 1.35rem;
+  padding: 1.5rem 1.75rem;
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-xl);
+  box-shadow: var(--pp-shadow-md);
+}
+
+.pp-gut-feeling-card.pp-gut-locked {
+  border-style: dashed;
+}
+
+.pp-gut-locked-notice {
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--pp-radius-md);
+  background-color: var(--pp-pale-aqua);
+  border: 1.5px dashed var(--pp-soft-teal);
+  color: var(--pp-text-secondary);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.pp-gut-question-heading {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--pp-dark-teal);
+  margin: 0 0 1rem;
+}
+
+.pp-gut-options-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+@media (min-width: 860px) {
+  .pp-gut-options-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.pp-gut-option-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  width: 100%;
+  min-height: 60px;
+  padding: 0.85rem 1.05rem;
+  border-radius: var(--pp-radius-md);
+  border: 2px solid var(--pp-border-default);
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-dark-teal);
+  font-size: 0.94rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.16s ease;
+  box-shadow: var(--pp-shadow-sm);
+}
+
+.pp-gut-option-btn:hover:not(.pp-selected) {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-cream);
+  transform: translateY(-1px);
+}
+
+.pp-gut-option-btn.pp-selected,
+.pp-gut-option-btn.pp-selected:hover {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-teal);
+  color: var(--pp-cream);
+  box-shadow: 0 4px 12px rgba(8, 127, 140, 0.22);
+}
+
+.pp-gut-option-letter {
+  font-weight: 900;
+  color: var(--pp-teal-text);
+  flex-shrink: 0;
+}
+
+.pp-gut-option-btn.pp-selected .pp-gut-option-letter {
+  color: var(--pp-pale-aqua);
+}
+
+.pp-gut-option-text {
+  line-height: 1.35;
+}
+
+.pp-gut-noted-row {
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--pp-border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pp-gut-noted-msg {
+  font-size: 0.96rem;
+  font-weight: 800;
+  color: var(--pp-dark-teal);
+  background-color: var(--pp-pale-aqua);
+  border: 1.5px solid var(--pp-soft-teal);
+  border-radius: var(--pp-radius-md);
+  padding: 0.55rem 0.95rem;
+}
+
+/* ============================================================== */
+/* PLAYLIST VIEW (SIDE-BY-SIDE, DISTINCT PLAYLIST & MOOD COLORS)  */
+/* ============================================================== */
+
+.pp-playlist-comparison-wrapper {
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pp-playlist-top-caption {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--pp-text-secondary);
+  margin: 0 0 0.65rem;
+  letter-spacing: 0.01em;
+}
+
+.pp-playlist-comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: stretch;
+  flex: 1;
+  min-width: 0;
+}
+
+@media (min-width: 900px) {
+  .pp-playlist-comparison-grid.pp-grid-two-col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+  }
+
+  .pp-playlist-comparison-grid.pp-grid-targeted-arrow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5.5rem;
+    align-items: stretch;
+  }
+
+  .pp-playlist-comparison-grid.pp-grid-with-center-arrow {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: 1rem;
+    align-items: center;
+  }
+}
+
+.pp-comparison-arrow-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.pp-arrow-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-full);
+  padding: 0.6rem 0.85rem;
+  color: var(--pp-teal);
+  box-shadow: var(--pp-shadow-sm);
+}
+
+/* Targeted Remix Copy arrow placed right at the exact change */
+.pp-targeted-arrow-badge {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background-color: var(--pp-dark-teal);
+  color: var(--pp-cream);
+  border: 2px solid var(--pp-soft-teal);
+  border-radius: var(--pp-radius-full);
+  padding: 0.3rem 0.65rem;
+  box-shadow: var(--pp-shadow-md);
+  margin-bottom: 0.4rem;
+}
+
+.pp-targeted-arrow-badge .pp-arrow-glyph {
+  font-size: 1rem;
+  color: var(--pp-soft-teal);
+}
+
+.pp-targeted-arrow-badge .pp-arrow-label {
+  font-size: 0.65rem;
+  color: var(--pp-cream);
+}
+
+@media (min-width: 900px) {
+  .pp-targeted-arrow-badge {
+    position: absolute;
+    flex-direction: column;
+    gap: 0.12rem;
+    width: 76px;
+    padding: 0.38rem 0.3rem;
+    margin-bottom: 0;
+    z-index: 12;
+  }
+
+  .pp-targeted-arrow-badge.pp-arrow-on-song {
+    right: calc(100% + 44px + 6px);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .pp-targeted-arrow-badge.pp-arrow-on-mood {
+    right: calc(100% + 26px + 6px);
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .pp-playlist-compact .pp-targeted-arrow-badge.pp-arrow-on-song {
+    right: calc(100% + 35px + 6px);
+  }
+
+  .pp-playlist-compact .pp-targeted-arrow-badge.pp-arrow-on-mood {
+    right: calc(100% + 20px + 6px);
+  }
+}
+
+.pp-arrow-glyph {
+  font-size: 1.45rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.pp-arrow-label {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--pp-dark-teal);
+  white-space: nowrap;
+}
+
+.pp-collection-card {
+  border-radius: var(--pp-radius-xl);
+  padding: 1.25rem;
+  box-shadow: var(--pp-shadow-md);
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  min-height: 100%;
+  height: auto;
+  min-width: 0;
+}
+
+.pp-playlist-compact .pp-collection-card {
+  padding: 1.05rem 1.15rem;
+  border-radius: var(--pp-radius-lg);
+}
+
+/* Round 1: Single Shared Setlist Card spans full RHS width + Staged Reveal Animations */
+.pp-single-shared-wrap {
+  display: block;
+  width: 100%;
+}
+
+.pp-single-shared-card {
+  width: 100%;
+  max-width: none;
+  background-color: var(--pp-cream);
+  border: 2px solid var(--pp-teal);
+  border-top: 6px solid var(--pp-teal);
+}
+
+.pp-single-shared-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1.5px solid rgba(36, 59, 58, 0.14);
+  margin-bottom: 0.65rem;
+}
+
+.pp-single-names-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.pp-single-names-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.pp-name-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.26rem 0.68rem;
+  border-radius: var(--pp-radius-md);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.pp-name-tag-master {
+  background-color: var(--pp-dark-teal);
+  color: var(--pp-cream);
+}
+
+.pp-name-tag-remix {
+  background-color: var(--pp-soft-teal-tint);
+  color: var(--pp-dark-teal);
+  border: 1.5px solid var(--pp-teal);
+}
+
+.pp-shared-equals {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--pp-teal);
+}
+
+.pp-single-names-caption {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--pp-text-secondary);
+}
+
+@keyframes pp-gentle-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-5px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+
+@keyframes pp-safe-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.45); }
+  55% { box-shadow: 0 0 0 7px rgba(16, 185, 129, 0.16); }
+  100% { box-shadow: var(--pp-shadow-md); }
+}
+
+@keyframes pp-remix-highlight {
+  0% { box-shadow: 0 0 0 0 rgba(8, 127, 140, 0.45); transform: translateY(0); }
+  45% { box-shadow: 0 0 0 6px rgba(8, 127, 140, 0.22); transform: translateY(-2px); }
+  100% { box-shadow: var(--pp-shadow-md); transform: translateY(0); }
+}
+
+.pp-card-shake {
+  animation: pp-gentle-shake 0.46s ease-in-out;
+}
+
+.pp-card-safe-pulse {
+  border-color: #10B981;
+  animation: pp-safe-pulse 0.65s ease-out;
+}
+
+.pp-card-remix-pulse {
+  animation: pp-remix-highlight 0.55s ease-out;
+}
+
+/* Master Setlist: Cream background + Dark Teal accents */
+.pp-master-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background-color: var(--pp-cream);
+  border: 2px solid var(--pp-dark-teal);
+  border-top: 6px solid var(--pp-dark-teal);
+}
+
+/* Remix Setlist: Soft Teal Tint background + Teal accents (visibly different from Cream!) */
+.pp-afterparty-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background-color: var(--pp-soft-teal-tint);
+  border: 2px solid var(--pp-teal);
+  border-top: 6px solid var(--pp-teal);
+}
+
+.pp-header-right-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+}
+
+.pp-safe-tick-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 800;
+  padding: 0.22rem 0.62rem;
+  border-radius: var(--pp-radius-full);
+  background-color: #ECFDF5;
+  color: #065F46;
+  border: 1.5px solid #10B981;
+}
+
+.pp-changed-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 800;
+  padding: 0.22rem 0.62rem;
+  border-radius: var(--pp-radius-full);
+  background-color: var(--pp-dark-teal);
+  color: var(--pp-cream);
+  border: 1.5px solid var(--pp-soft-teal);
+}
+
+.pp-collection-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.65rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1.5px solid rgba(36, 59, 58, 0.14);
+  margin-bottom: 0.85rem;
+}
+
+.pp-playlist-compact .pp-collection-header {
+  padding-bottom: 0.65rem;
+  margin-bottom: 0.8rem;
+}
+
+/* Equal importance & equal font sizes for Original Collection / Working Copy & Master / Remix Setlist */
+.pp-collection-kicker {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.15rem;
+  display: block;
+}
+
+.pp-kicker-master {
+  color: var(--pp-dark-teal);
+}
+
+.pp-kicker-remix {
+  color: var(--pp-teal);
+}
+
+.pp-collection-title,
+.pp-collection-title.pp-title-equal {
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: var(--pp-dark-teal);
+  margin: 0 0 0.2rem;
+  line-height: 1.2;
+}
+
+.pp-playlist-compact .pp-collection-title.pp-title-equal {
+  font-size: 1.35rem;
+}
+
+.pp-collection-sub {
+  font-size: 0.875rem;
+  color: var(--pp-text-secondary);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.pp-collection-meta-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.32rem 0.65rem;
+  border-radius: var(--pp-radius-md);
+  min-width: 58px;
+  background-color: var(--pp-cream);
+}
+
+.pp-stat-master {
+  color: var(--pp-dark-teal);
+  border: 1.5px solid var(--pp-dark-teal);
+}
+
+.pp-stat-remix {
+  color: var(--pp-teal);
+  border: 1.5px solid var(--pp-teal);
+}
+
+.pp-meta-count {
+  font-size: 1.25rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.pp-meta-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.pp-collection-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 1;
+}
+
+.pp-playlist-compact .pp-collection-content {
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+.pp-mood-block {
+  border-radius: var(--pp-radius-md);
+  padding: 0.85rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.pp-playlist-compact .pp-mood-block {
+  padding: 0.82rem 0.9rem;
+}
+
+/* Moods share the exact background color of the playlist they belong to */
+.pp-mood-master {
+  background-color: var(--pp-cream);
+  border: 1.5px solid rgba(36, 59, 58, 0.24);
+}
+
+.pp-mood-remix {
+  background-color: var(--pp-soft-teal-tint);
+  border: 1.5px solid rgba(8, 127, 140, 0.35);
+}
+
+/* Newly added mood highlight uses Dark Teal (#243B3A) — completely different color */
+.pp-mood-block.pp-mood-highlight-added {
+  background-color: var(--pp-dark-teal);
+  border: 2px solid var(--pp-soft-teal);
+  color: var(--pp-cream);
+}
+
+.pp-mood-highlight-added .pp-mood-name,
+.pp-mood-highlight-added .pp-mood-count-text {
+  color: var(--pp-cream);
+}
+
+.pp-mood-placeholder-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 108px;
+  border: 2px dashed var(--pp-soft-teal);
+  border-radius: var(--pp-radius-md);
+  background-color: rgba(232, 246, 243, 0.55);
+  color: var(--pp-text-muted);
+  font-size: 0.96rem;
+  font-weight: 800;
+  padding: 0.85rem;
+  text-align: center;
+}
+
+.pp-mood-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.55rem;
+}
+
+.pp-playlist-compact .pp-mood-header {
+  margin-bottom: 0.55rem;
+  gap: 0.6rem;
+}
+
+.pp-mood-info {
+  flex: 1;
+}
+
+.pp-mood-label-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.pp-mood-index-badge {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-dark-teal);
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--pp-radius-full);
+  border: 1px solid var(--pp-border-default);
+}
+
+.pp-mood-name {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--pp-dark-teal);
+  margin: 0;
+}
+
+.pp-mood-count-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--pp-text-secondary);
+}
+
+/* Shared-with-Master badge displayed on moods that share the same playlist */
+.pp-shared-mood-badge {
+  margin-left: auto;
+  font-size: 0.875rem;
+  font-weight: 800;
+  padding: 0.16rem 0.58rem;
+  border-radius: var(--pp-radius-full);
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-teal-text);
+  border: 1.5px solid var(--pp-soft-teal);
+  white-space: nowrap;
+}
+
+.pp-mood-master .pp-shared-mood-badge {
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-dark-teal);
+  border-color: var(--pp-soft-teal);
+}
+
+.pp-mood-remix .pp-shared-mood-badge {
+  background-color: var(--pp-cream);
+  color: var(--pp-teal-text);
+  border-color: var(--pp-teal);
+}
+
+.pp-own-copy-badge {
+  margin-left: auto;
+  font-size: 0.875rem;
+  font-weight: 800;
+  padding: 0.16rem 0.58rem;
+  border-radius: var(--pp-radius-full);
+  background-color: var(--pp-cream);
+  color: var(--pp-dark-teal);
+  border: 1.5px solid var(--pp-soft-teal);
+  white-space: nowrap;
+}
+
+.pp-song-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+/* Compact horizontal 2-column song rows so all moods fit cleanly */
+.pp-playlist-compact .pp-song-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.pp-song-item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-sm);
+  padding: 0.5rem 0.72rem;
+  min-height: 46px;
+  font-size: 1rem;
+  color: var(--pp-dark-teal);
+  min-width: 0;
+}
+
+.pp-song-item.pp-song-has-badge {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+.pp-song-main-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+  width: 100%;
+}
+
+.pp-mood-remix .pp-song-item {
+  background-color: var(--pp-pale-aqua);
+  border-color: rgba(8, 127, 140, 0.28);
+}
+
+.pp-mood-highlight-added .pp-song-item {
+  background-color: rgba(255, 253, 247, 0.14);
+  border-color: var(--pp-soft-teal);
+  color: var(--pp-cream);
+}
+
+.pp-mood-highlight-added .pp-song-num {
+  color: var(--pp-soft-teal);
+}
+
+.pp-playlist-compact .pp-song-item {
+  padding: 0.48rem 0.68rem;
+  min-height: 46px;
+  font-size: 1rem;
+}
+
+/* Highlighted changed song uses Dark Teal (#243B3A) — completely different color */
+.pp-song-item.pp-song-highlight-changed {
+  border: 2px solid var(--pp-soft-teal);
+  background-color: var(--pp-dark-teal);
+  color: var(--pp-cream);
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(36, 59, 58, 0.24);
+}
+
+.pp-song-num {
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--pp-teal);
+  width: 16px;
+  flex-shrink: 0;
+}
+
+.pp-song-highlight-changed .pp-song-num {
+  color: var(--pp-soft-teal);
+}
+
+.pp-song-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.pp-change-badge {
+  font-size: 0.875rem;
+  font-weight: 800;
+  padding: 0.14rem 0.55rem;
+  border-radius: var(--pp-radius-full);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.pp-badge-highlight {
+  background-color: var(--pp-teal);
+  color: var(--pp-cream);
+  border: 1px solid var(--pp-soft-teal);
+}
+
+.pp-change-removed-alert {
+  padding: 0.65rem 0.85rem;
+  background-color: var(--pp-dark-teal);
+  border: 2px solid var(--pp-soft-teal);
+  border-radius: var(--pp-radius-md);
+  color: var(--pp-cream);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+/* ============================================================== */
+/* CHAPTER 3: SINGLE-GLANCE HORIZONTAL SOUND LAB                  */
+/* ============================================================== */
+
+.pp-ch3-compact-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.pp-ch3-title {
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: var(--pp-dark-teal);
+  margin: 0.05rem 0 0;
+  line-height: 1.18;
+}
+
+.pp-ch3-subtitle {
+  font-size: 0.92rem;
+  color: var(--pp-text-secondary);
+  margin: 0.1rem 0 0;
+}
+
+.pp-chapter3-workspace {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .pp-chapter3-workspace {
+    grid-template-columns: 380px minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .pp-ch3-lhs {
+    min-height: 465px;
+  }
+
+  .pp-ch3-rhs > .pp-playlist-comparison-wrapper {
+    min-height: 465px;
+    flex: 0 0 auto;
+  }
+
+  .pp-ch3-rhs .pp-playlist-comparison-grid {
+    flex: 0 0 auto;
+  }
+}
+
+.pp-ch3-lhs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.pp-ch3-rhs {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+/* Sound Lab vertical compactness so 1200x600+ fits cleanly at 100% zoom */
+.pp-ch3-rhs .pp-playlist-compact .pp-collection-card {
+  padding: 0.65rem 0.9rem;
+}
+
+.pp-ch3-rhs .pp-playlist-compact .pp-collection-header {
+  padding-bottom: 0.36rem;
+  margin-bottom: 0.48rem;
+}
+
+.pp-ch3-rhs .pp-playlist-compact .pp-single-shared-header {
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.48rem;
+}
+
+.pp-ch3-rhs .pp-playlist-compact .pp-collection-content {
+  gap: 12px;
+}
+
+.pp-ch3-rhs .pp-playlist-compact .pp-mood-block {
+  padding: 0.46rem 0.62rem;
+}
+
+.pp-ch3-rhs .pp-playlist-compact .pp-mood-header {
+  margin-bottom: 0.32rem;
+}
+
+.pp-ch3-rhs .pp-playlist-compact .pp-song-item {
+  padding: 0.32rem 0.6rem;
+  min-height: 36px;
+}
+
+/* Compact Static Information Card on LHS */
+.pp-static-info-card {
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-lg);
+  padding: 0.9rem 1rem;
+  box-shadow: var(--pp-shadow-sm);
+}
+
+.pp-static-info-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pp-teal);
+  margin: 0 0 0.4rem;
+}
+
+.pp-info-mini-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+  margin-bottom: 0.65rem;
+}
+
+.pp-info-mini-table:last-child {
+  margin-bottom: 0;
+}
+
+.pp-info-mini-table th,
+.pp-info-mini-table td {
+  padding: 0.34rem 0.5rem;
+  text-align: left;
+  border: 1px solid var(--pp-border-default);
+}
+
+.pp-info-mini-table th {
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-dark-teal);
+  font-weight: 800;
+}
+
+.pp-info-mini-table td {
+  color: var(--pp-dark-teal);
+}
+
+/* Prediction Controller Card on LHS (Top-Aligned, Non-Stretching) */
+.pp-prediction-controller-card {
+  background-color: var(--pp-cream);
+  border: 2px solid var(--pp-teal);
+  border-radius: var(--pp-radius-lg);
+  padding: 1.2rem 1.25rem;
+  box-shadow: var(--pp-shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.pp-prediction-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.pp-exp-badges-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.55rem;
+}
+
+.pp-current-exp-badge {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background-color: var(--pp-dark-teal);
+  color: var(--pp-cream);
+  padding: 0.24rem 0.75rem;
+  border-radius: var(--pp-radius-full);
+}
+
+.pp-exp-step-pill {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--pp-teal);
+  background-color: var(--pp-pale-aqua);
+  border: 1px solid var(--pp-soft-teal);
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--pp-radius-full);
+}
+
+.pp-exp-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--pp-dark-teal);
+  margin: 0 0 0.35rem;
+  line-height: 1.25;
+}
+
+.pp-exp-summary {
+  font-size: 1rem;
+  color: var(--pp-text-secondary);
+  line-height: 1.5;
+  margin: 0 0 0.85rem;
+}
+
+.pp-change-callout-box {
+  background-color: var(--pp-pale-aqua);
+  border: 1.5px solid var(--pp-border-default);
+  border-left: 4px solid var(--pp-teal);
+  border-radius: var(--pp-radius-md);
+  padding: 0.75rem 0.95rem;
+}
+
+.pp-change-callout-label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pp-teal);
+  margin-bottom: 0.25rem;
+}
+
+.pp-change-callout-text {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: var(--pp-dark-teal);
+  line-height: 1.4;
+}
+
+.pp-prediction-question {
+  font-size: 1.075rem;
+  font-weight: 900;
+  color: var(--pp-dark-teal);
+  margin: 0 0 0.6rem;
+}
+
+.pp-prediction-buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.65rem;
+  margin-bottom: 0.8rem;
+}
+
+.pp-pred-choice-btn {
+  padding: 0.58rem 0.65rem;
+  min-height: 46px;
+  border: 2px solid var(--pp-border-default);
+  background-color: var(--pp-cream);
+  color: var(--pp-dark-teal);
+  font-size: 0.9375rem;
+  font-weight: 800;
+  border-radius: var(--pp-radius-md);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pp-pred-choice-btn:disabled {
+  cursor: default;
+  opacity: 0.78;
+}
+
+.pp-pred-choice-btn:hover:not(:disabled):not(.pp-selected) {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-dark-teal);
+}
+
+.pp-pred-choice-btn.pp-selected,
+.pp-pred-choice-btn.pp-selected:hover:not(:disabled) {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-teal);
+  color: var(--pp-cream);
+  opacity: 1;
+}
+
+.pp-pred-choice-btn.pp-selected:hover:not(:disabled) {
+  background-color: var(--pp-teal-hover);
+  border-color: var(--pp-teal-hover);
+}
+
+/* 3 Rounds x 3 Experiments Grouped Progress Dots + Guesses Tally */
+.pp-round-dots-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-top: 0.75rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--pp-border-subtle);
+}
+
+.pp-round-dots-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.pp-guesses-tally {
+  font-size: 0.875rem;
+  color: var(--pp-text-secondary);
+  text-align: right;
+}
+
+.pp-round-dot-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.pp-round-mini-label {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  color: var(--pp-text-muted);
+}
+
+.pp-round-mini-label.pp-round-active {
+  color: var(--pp-teal);
+}
+
+.pp-round-dots-pair {
+  display: flex;
+  align-items: center;
+  gap: 0.32rem;
+}
+
+.pp-progress-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid var(--pp-border-default);
+  background-color: var(--pp-cream);
+  transition: all 0.2s ease;
+}
+
+.pp-progress-dot.pp-dot-current {
+  background-color: var(--pp-dark-teal);
+  border-color: var(--pp-dark-teal);
+  transform: scale(1.25);
+}
+
+.pp-progress-dot.pp-dot-completed {
+  background-color: var(--pp-teal);
+  border-color: var(--pp-teal);
+}
+
+/* RHS: Dynamic Result Banner BELOW playlists */
+.pp-experiment-result-card {
+  background-color: var(--pp-cream);
+  border: 2px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-lg);
+  padding: 0.72rem 1rem;
+  box-shadow: var(--pp-shadow-sm);
+  scroll-margin-bottom: 16px;
+}
+
+.pp-experiment-pending-card {
+  background-color: var(--pp-cream);
+  border: 1.5px dashed var(--pp-soft-teal);
+  border-radius: var(--pp-radius-lg);
+  padding: 0.72rem 1rem;
+  color: var(--pp-text-secondary);
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.pp-result-changed {
+  border-color: var(--pp-dark-teal);
+}
+
+.pp-result-unchanged {
+  border-color: var(--pp-teal);
+}
+
+.pp-result-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.pp-result-chips-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pp-ahaana-reaction-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.pp-ahaana-reaction-text {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--pp-dark-teal);
+  line-height: 1.3;
+}
+
+.pp-result-why-line {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  font-size: 1.0625rem;
+  color: var(--pp-dark-teal);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.pp-result-why-bulb {
+  flex-shrink: 0;
+  line-height: 1.45;
+}
+
+.pp-pred-eval-badge {
+  font-size: 0.875rem;
+  font-weight: 800;
+  padding: 0.22rem 0.68rem;
+  border-radius: var(--pp-radius-full);
+  flex-shrink: 0;
+}
+
+.pp-eval-correct {
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-teal-text);
+  border: 1.5px solid var(--pp-teal);
+}
+
+.pp-eval-surprise {
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-dark-teal);
+  border: 1.5px solid var(--pp-dark-teal);
+}
+
+/* Evidence Journal Table (Chapter 4) */
+.pp-journal-end-card {
+  background-color: var(--pp-cream);
+  border: 2px solid var(--pp-dark-teal);
+  border-radius: var(--pp-radius-xl);
+  padding: 1.75rem;
+  box-shadow: var(--pp-shadow-lg);
+}
+
+.pp-journal-grid-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.pp-journal-grid-table tbody tr {
+  height: 84px;
+}
+
+.pp-journal-grid-table th,
+.pp-journal-grid-table td {
+  padding: 0.85rem 1.05rem;
+  text-align: left;
+  border: 1px solid var(--pp-border-default);
+  font-size: 1.0625rem;
+}
+
+.pp-journal-grid-table th {
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-dark-teal);
+  font-weight: 800;
+}
+
+.pp-cell-badge {
+  font-size: 0.875rem;
+  font-weight: 800;
+  padding: 0.28rem 0.72rem;
+  border-radius: var(--pp-radius-full);
+  display: inline-block;
+}
+
+.pp-cell-changed {
+  background-color: var(--pp-dark-teal);
+  color: var(--pp-cream);
+  border: 1px solid var(--pp-soft-teal);
+}
+
+.pp-cell-safe {
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-teal-text);
+  border: 1.5px solid var(--pp-teal);
+}
+
+/* ============================================================== */
+/* CHAPTER 4: THE FINAL DECISION                                  */
+/* ============================================================== */
+
+.pp-final-decision-card {
+  padding: 28px;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pp-final-decision-heading {
+  font-size: 1.65rem;
+  margin: 0.6rem 0 24px;
+}
+
+.pp-save-methods-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin: 0 0 1.25rem;
+}
+
+@media (min-width: 860px) {
+  .pp-save-methods-grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.pp-save-method-card {
+  background-color: var(--pp-cream);
+  border: 2px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-lg);
+  padding: 28px;
+  min-height: 260px;
+  cursor: pointer;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+  transition: all 0.2s ease;
+  box-shadow: var(--pp-shadow-sm);
+}
+
+.pp-save-method-card:hover:not(.pp-selected) {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-pale-aqua);
+  transform: translateY(-2px);
+}
+
+.pp-save-method-card.pp-selected {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-pale-aqua);
+  box-shadow: 0 0 0 2px var(--pp-teal);
+}
+
+.pp-method-card-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--pp-dark-teal);
+  margin: 0;
+  text-align: left;
+}
+
+.pp-method-card-desc {
+  font-size: 0.9375rem;
+  color: var(--pp-text-secondary);
+  text-align: left;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.pp-method-card-status {
+  font-size: 0.875rem;
+  font-weight: 800;
+  color: var(--pp-teal-text);
+  margin-top: auto;
+}
+
+.pp-final-decision-card .pp-feedback-green,
+.pp-final-decision-card .pp-feedback-amber {
+  font-size: 1.125rem;
+}
+
+.pp-final-decision-card .pp-primary-cta-btn,
+.pp-final-decision-card .pp-secondary-cta-btn {
+  min-height: 48px;
+}
+
+.pp-celebration-banner {
+  background-color: var(--pp-pale-aqua);
+  border: 2px solid var(--pp-teal);
+  border-radius: var(--pp-radius-lg);
+  padding: 1.75rem 2rem;
+  text-align: left;
+  margin-top: 1.5rem;
+}
+
+.pp-celebration-headline {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--pp-dark-teal);
+  margin: 0.5rem 0 0.6rem;
+  text-align: left;
+}
+
+.pp-celebration-banner-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.25rem;
+}
+
+.pp-checks-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin: 1.25rem 0;
+}
+
+.pp-check-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-radius: var(--pp-radius-md);
+  border: 1.5px solid var(--pp-border-default);
+  background-color: var(--pp-cream);
+  font-size: 0.9375rem;
+}
+
+.pp-check-row.pp-check-pass {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-teal-text);
+}
+
+.pp-check-row.pp-check-fail {
+  border-color: var(--pp-dark-teal);
+  background-color: var(--pp-cream);
+  color: var(--pp-dark-teal);
+}
+
+/* ============================================================== */
+/* CHAPTER 4: EVIDENCE JOURNAL OPENING & PYTHON CONCEPTS          */
+/* ============================================================== */
+
+.pp-reveal-journal-card {
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-xl);
+  padding: 28px;
+  box-shadow: var(--pp-shadow-md);
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.pp-reveal-journal-card .pp-journal-grid-table {
+  margin: 0;
+}
+
+.pp-reveal-journal-lead {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--pp-dark-teal);
+  margin: 0;
+}
+
+.pp-journal-method-cell {
+  font-weight: 800;
+  color: var(--pp-dark-teal);
+}
+
+.pp-journal-method-slot {
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+}
+
+.pp-journal-story-only {
+  display: inline-block;
+  font-weight: 800;
+  color: var(--pp-dark-teal);
+}
+
+@keyframes pp-row-flip-in {
+  0% {
+    opacity: 0;
+    transform: perspective(600px) rotateX(75deg);
+  }
+  55% {
+    opacity: 1;
+    transform: perspective(600px) rotateX(-5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(600px) rotateX(0deg);
+  }
+}
+
+.pp-journal-label-flipped {
+  display: flex;
+  flex-direction: column;
+  gap: 0.14rem;
+  line-height: 1.35;
+  background: transparent;
+  transform-origin: center;
+  animation: pp-row-flip-in 0.72s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.pp-journal-python-name {
+  font-size: 1.125rem;
+  font-weight: 900;
+  color: var(--pp-teal-text);
+}
+
+.pp-journal-story-reminder {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--pp-text-secondary);
+}
+
+.pp-reveal-stage1-actions {
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.pp-reveal-stage1-actions .pp-primary-cta-btn {
+  min-height: 52px;
+}
+
+.pp-journal-collapsed-wrap {
+  margin-bottom: 1rem;
+}
+
+.pp-journal-collapsed-bar {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.78rem 1.2rem;
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-md);
+  color: var(--pp-dark-teal);
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: var(--pp-shadow-sm);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.pp-journal-collapsed-bar:hover {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-pale-aqua);
+}
+
+.pp-journal-bar-chevron {
+  font-size: 0.875rem;
+  color: var(--pp-teal-text);
+}
+
+.pp-journal-drawer-body {
+  margin-top: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.pp-tabs-scroll-anchor {
+  scroll-margin-top: 76px;
+}
+
+.pp-reveal-body-lead {
+  color: var(--pp-text-secondary);
+  font-size: 1.0625rem;
+  margin: 0 0 1rem;
+  line-height: 1.55;
+}
+
+.pp-reveal-body-text {
+  margin: 0;
+  font-size: 1.0625rem;
+  color: var(--pp-dark-teal);
+  line-height: 1.55;
+}
+
+.pp-reveal-diagram-caption {
+  font-size: 1.0625rem;
+  color: var(--pp-text-secondary);
+  margin: 0.65rem 0 0;
+  line-height: 1.5;
+}
+
+.pp-trick-text {
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: var(--pp-dark-teal);
+}
+
+.pp-inline-code {
+  font-family: monospace;
+  font-weight: 800;
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-teal-text);
+  padding: 0.1rem 0.42rem;
+  border-radius: var(--pp-radius-sm);
+  border: 1px solid var(--pp-border-default);
+}
+
+.pp-operator-table th,
+.pp-operator-table td {
+  font-size: 1.0625rem;
+  padding: 0.6rem 0.85rem;
+}
+
+.pp-ref-toggle-btn {
+  min-height: 44px;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--pp-radius-md);
+  border: 1.5px solid var(--pp-border-default);
+  background-color: var(--pp-cream);
+  color: var(--pp-dark-teal);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pp-ref-svg-wrap {
+  width: 100%;
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-md);
+  padding: 0.75rem;
+}
+
+.pp-ref-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.pp-code-tip-chip {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--pp-pale-aqua);
+  border: 1.5px solid var(--pp-soft-teal);
+  border-radius: var(--pp-radius-md);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--pp-dark-teal);
+  line-height: 1.5;
+}
+
+.pp-code-tip-chip code {
+  font-weight: 800;
+  color: var(--pp-teal-text);
+  background-color: var(--pp-cream);
+  padding: 0.08rem 0.35rem;
+  border-radius: var(--pp-radius-sm);
+  border: 1px solid var(--pp-border-default);
+}
+
+.pp-gut-recap-banner {
+  margin-top: 1.75rem;
+  padding: 0.9rem 1.1rem;
+  background-color: var(--pp-pale-aqua);
+  border-left: 4px solid var(--pp-teal);
+  border-radius: 0 var(--pp-radius-md) var(--pp-radius-md) 0;
+  font-size: 1.0625rem;
+  color: var(--pp-dark-teal);
+  line-height: 1.55;
+}
+
+/* ============================================================== */
+/* CHAPTER 4: TECHNICAL PYTHON CONCEPTS (5 SEQUENTIAL TABS)       */
+/* ============================================================== */
+
+.pp-tabs-navigation {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+}
+
+.pp-tab-btn {
+  min-height: 44px;
+  padding: 0.65rem 1.2rem;
+  border-radius: var(--pp-radius-md);
+  border: 1.5px solid var(--pp-border-default);
+  background-color: var(--pp-cream);
+  color: var(--pp-dark-teal);
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.15s ease;
+}
+
+.pp-tab-btn:hover:not(:disabled):not(.pp-active) {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-pale-aqua);
+}
+
+.pp-tab-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background-color: var(--pp-pale-aqua);
+}
+
+.pp-tab-btn.pp-active {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-teal);
+  color: var(--pp-cream);
+}
+
+.pp-tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: var(--pp-pale-aqua);
+  color: var(--pp-teal-text);
+  font-size: 0.8125rem;
+}
+
+.pp-tab-btn.pp-active .pp-tab-badge {
+  background-color: var(--pp-cream);
+  color: var(--pp-teal-text);
+}
+
+.pp-tab-lock-glyph {
+  font-size: 0.8125rem;
+  opacity: 0.75;
+}
+
+.pp-setup-code-wrap {
+  margin-bottom: 0.75rem;
+}
+
+.pp-setup-code-label {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--pp-teal-text);
+  margin-bottom: 0.35rem;
+}
+
+.pp-code-block {
+  flex: 1;
+  background-color: var(--pp-code-bg);
+  border-radius: var(--pp-radius-md);
+  padding: 1.25rem;
+  font-family: monospace;
+  font-size: 0.9375rem;
+  color: var(--pp-code-text);
+  overflow-x: auto;
+  line-height: 1.55;
+}
+
+.pp-code-block.pp-code-block-compact {
+  padding: 0.75rem 1.05rem;
+  font-size: 0.875rem;
+  line-height: 1.42;
+}
+
+.pp-code-block pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Diagram & Mutation Boxes Layout (Side by side on desktop) */
+.pp-diagram-mutations-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  margin: 1.5rem 0;
+}
+
+@media (min-width: 960px) {
+  .pp-diagram-mutations-row {
+    grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  }
+}
+
+.pp-master-impact-card {
+  background-color: var(--pp-pale-aqua);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-md);
+  padding: 1.1rem 1.15rem;
+  box-shadow: var(--pp-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.pp-master-impact-title {
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--pp-dark-teal);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.pp-master-impact-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.pp-master-impact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-sm);
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--pp-dark-teal);
+}
+
+.pp-master-impact-why {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--pp-text-secondary);
+  line-height: 1.45;
+}
+
+.pp-trick-to-remember-card {
+  background-color: var(--pp-pale-aqua);
+  border: 2px solid var(--pp-teal);
+  border-radius: var(--pp-radius-md);
+  padding: 1.05rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 1.25rem 0;
+}
+
+.pp-trick-tag {
+  font-size: 0.8125rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background-color: var(--pp-teal);
+  color: var(--pp-cream);
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--pp-radius-full);
+}
+
+.pp-sequential-tab-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1.5px solid var(--pp-border-subtle);
+}
+
+/* Tab 4: Horizontal Method Flashcards */
+.pp-tab4-flashcards-horizontal-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin: 1.25rem 0;
+}
+
+@media (min-width: 860px) {
+  .pp-tab4-flashcards-horizontal-row {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.pp-tab4-card {
+  background-color: var(--pp-pale-aqua);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-lg);
+  padding: 1.15rem;
+  box-shadow: var(--pp-shadow-sm);
+}
+
+.pp-tab4-card-title {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--pp-dark-teal);
+  margin: 0 0 0.5rem;
+}
+
+/* ============================================================== */
+/* TAB 5: TIME TO TEST (QUIZ WITH STATUS COLORS)                   */
+/* ============================================================== */
+
+.pp-quiz-panel {
+  background-color: var(--pp-cream);
+  border: 2px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-xl);
+  padding: 2rem;
+  box-shadow: var(--pp-shadow-md);
+}
+
+.pp-quiz-progress-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Question status indicators */
+.pp-quiz-q-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  font-weight: 800;
+  border: 2px solid var(--pp-border-default);
+  background-color: var(--pp-cream);
+  color: var(--pp-dark-teal);
+}
+
+.pp-quiz-q-indicator.pp-status-current {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-teal);
+  color: var(--pp-cream);
+}
+
+.pp-quiz-q-indicator.pp-status-correct {
+  border-color: #10B981;
+  background-color: #10B981;
+  color: #FFFFFF;
+}
+
+.pp-quiz-q-indicator.pp-status-incorrect {
+  border-color: #EF4444;
+  background-color: #EF4444;
+  color: #FFFFFF;
+}
+
+.pp-quiz-option-btn {
+  width: 100%;
+  text-align: left;
+  padding: 1.05rem 1.3rem;
+  min-height: 54px;
+  background-color: var(--pp-cream);
+  border: 2px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-md);
+  font-size: 1.0625rem;
+  color: var(--pp-dark-teal);
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+  transition: all 0.15s ease;
+  line-height: 1.45;
+}
+
+.pp-quiz-option-btn:hover:not(:disabled) {
+  border-color: var(--pp-teal);
+  background-color: var(--pp-pale-aqua);
+}
+
+.pp-quiz-option-btn.pp-opt-correct {
+  border-color: #10B981;
+  background-color: #ECFDF5;
+  color: #065F46;
+  font-weight: 700;
+}
+
+.pp-quiz-option-btn.pp-opt-incorrect {
+  border-color: #EF4444;
+  background-color: #FEF2F2;
+  color: #991B1B;
+}
+
+.pp-hint-box {
+  background-color: var(--pp-pale-aqua);
+  border-left: 4px solid var(--pp-teal);
+  padding: 0.9rem 1.25rem;
+  border-radius: 0 var(--pp-radius-md) var(--pp-radius-md) 0;
+  margin: 1rem 0;
+  font-size: 1rem;
+  color: var(--pp-dark-teal);
+  line-height: 1.5;
+}
+
+/* ============================================================== */
+/* CELEBRATION MODAL (REDESIGNED WITH LEFT & RIGHT GRAPHICS)      */
+/* ============================================================== */
+
+.pp-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(36, 59, 58, 0.78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  z-index: 50;
+  backdrop-filter: blur(4px);
+}
+
+@keyframes pp-confetti-fall {
+  0% {
+    transform: translateY(-24px) rotate(0deg);
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(105vh) rotate(540deg);
+    opacity: 0;
+  }
+}
+
+@keyframes pp-modal-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.84) translateY(24px);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.03) translateY(-4px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes pp-trophy-bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.08);
+  }
+}
+
+.pp-celebration-balanced-modal {
+  background-color: var(--pp-cream);
+  border-radius: var(--pp-radius-xl);
+  max-width: 680px;
+  width: 100%;
+  padding: 2.25rem 2rem;
+  box-shadow: var(--pp-shadow-lg);
+  border: 3px solid var(--pp-teal);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  z-index: 65;
+  animation: pp-modal-pop 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.pp-celebration-center-content {
+  flex: 1;
+  text-align: center;
+  z-index: 10;
+}
+
+.pp-celebration-trophy {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  animation: pp-trophy-bounce 1.8s ease-in-out infinite;
+}
+
+.pp-celebration-title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--pp-teal);
+  margin: 0 0 0.5rem;
+}
+
+.pp-celebration-text {
+  font-size: 1rem;
+  color: var(--pp-dark-teal);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.pp-score-highlight-card {
+  background-color: var(--pp-pale-aqua);
+  border: 2px solid var(--pp-dark-teal);
+  border-radius: var(--pp-radius-lg);
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.pp-score-number {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: var(--pp-dark-teal);
+}
+
+.pp-score-label {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--pp-teal);
+}
+
+/* ============================================================== */
+/* SHARED UTILITY & FEEDBACK COMPONENTS                           */
+/* ============================================================== */
+
+.pp-panel-heading {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--pp-dark-teal);
+  margin: 0 0 0.75rem;
+}
+
+.pp-journal-progress {
+  font-size: 0.875rem;
+  font-weight: 800;
+  background-color: var(--pp-cream);
+  color: var(--pp-dark-teal);
+  border: 1.5px solid var(--pp-teal);
+  padding: 0.28rem 0.85rem;
+  border-radius: var(--pp-radius-full);
+}
+
+.pp-journal-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.pp-clue-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  background-color: var(--pp-cream);
+  border: 1.5px solid var(--pp-border-default);
+  border-radius: var(--pp-radius-md);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.9375rem;
+  color: var(--pp-dark-teal);
+  line-height: 1.45;
+}
+
+.pp-clue-tag {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.22rem 0.65rem;
+  border-radius: var(--pp-radius-full);
+}
+
+.pp-clue-tag-red {
+  background-color: var(--pp-dark-teal);
+  color: var(--pp-cream);
+}
+
+.pp-clue-tag-blue {
+  background-color: var(--pp-teal);
+  color: var(--pp-cream);
+}
+
+.pp-feedback-correct {
+  background-color: var(--pp-pale-aqua);
+  border: 1.5px solid var(--pp-teal);
+  border-left: 5px solid var(--pp-teal);
+  border-radius: var(--pp-radius-md);
+  padding: 0.95rem 1.25rem;
+  color: var(--pp-dark-teal);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.pp-quiz-right-headline {
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+.pp-quiz-explanation-line {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--pp-dark-teal);
+}
+
+.pp-feedback-wrong {
+  background-color: var(--pp-pale-aqua);
+  border: 1.5px solid var(--pp-dark-teal);
+  border-left: 5px solid var(--pp-dark-teal);
+  border-radius: var(--pp-radius-md);
+  padding: 0.95rem 1.25rem;
+  color: var(--pp-dark-teal);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.pp-feedback-green {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  background-color: #ECFDF5;
+  border: 1.5px solid #10B981;
+  border-left: 5px solid #10B981;
+  border-radius: var(--pp-radius-md);
+  padding: 0.95rem 1.2rem;
+  color: #065F46;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.pp-feedback-amber {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  background-color: #FEF3C7;
+  border: 1.5px solid #D97706;
+  border-left: 5px solid #D97706;
+  border-radius: var(--pp-radius-md);
+  padding: 0.95rem 1.2rem;
+  color: #78350F;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.pp-feedback-icon {
+  font-size: 1.05rem;
+  font-weight: 900;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.pp-card-analogy-box {
+  background-color: var(--pp-pale-aqua);
+  border: 1.5px solid var(--pp-border-default);
+  border-left: 4px solid var(--pp-dark-teal);
+  border-radius: var(--pp-radius-md);
+  padding: 0.95rem 1.25rem;
+}
+
+.pp-analogy-label {
+  font-size: 0.8125rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pp-teal-text);
+  margin-bottom: 0.3rem;
+}
+
+.pp-analogy-text {
+  margin: 0;
+  font-size: 1.0625rem;
+  color: var(--pp-dark-teal);
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .playlist-paradox *,
+  .playlist-paradox *::before,
+  .playlist-paradox *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .pp-confetti-layer {
+    display: none !important;
+  }
+}
+
+/* Responsive stacking below 900px so columns never squeeze */
+@media (max-width: 900px) {
+  .pp-main-content {
+    padding: 1rem 18px 1.75rem;
+  }
+
+  .pp-ch2-glance-grid,
+  .pp-chapter3-workspace,
+  .pp-playlist-comparison-grid,
+  .pp-save-methods-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .pp-ch3-lhs,
+  .pp-ch3-rhs > .pp-playlist-comparison-wrapper {
+    min-height: auto;
+  }
+
+  .pp-final-decision-card {
+    min-height: auto;
+  }
+
+  .pp-round-dots-bar {
+    flex-wrap: wrap;
+  }
+}
+
+/* Tablet / mobile refinements */
+@media (max-width: 720px) {
+  .pp-app-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.85rem 1rem;
+  }
+
+  .pp-chapters-nav {
+    flex-wrap: wrap;
+  }
+
+  .pp-playlist-compact .pp-song-list {
+    grid-template-columns: 1fr;
+  }
+
+  .pp-celebration-balanced-modal {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .pp-celebration-balanced-modal > svg {
+    display: none;
+  }
+}
+
+/* Narrow mobile refinements (<= 600px, cleanly fits 390px without horizontal scrolling) */
+@media (max-width: 600px) {
+  .pp-main-content {
+    padding: 0.9rem 12px 1.5rem;
+  }
+
+  .pp-app-header {
+    padding: 0.75rem 12px;
+    gap: 0.65rem;
+  }
+
+  .pp-nav-label-full {
+    display: none;
+  }
+
+  .pp-nav-label-short {
+    display: inline;
+  }
+
+  .pp-chapters-nav {
+    gap: 0.35rem;
+  }
+
+  .pp-chapter-nav-btn {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.85rem;
+  }
+
+  .pp-tabs-navigation {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    gap: 0.45rem;
+  }
+
+  .pp-tab-btn {
+    white-space: normal;
+  }
+
+  .pp-playlist-compact .pp-song-list {
+    grid-template-columns: 1fr;
+  }
+
+  .pp-hero-two-col-layout,
+  .pp-ch1-scene2-card,
+  .pp-dialogue-scene-card,
+  .pp-mystery-inspect-card,
+  .pp-gut-feeling-card,
+  .pp-reveal-journal-card,
+  .pp-quiz-panel,
+  .pp-final-decision-card {
+    padding: 1rem;
+  }
+
+  .pp-hero-photo-col {
+    min-height: 220px;
+  }
+
+  .pp-single-shared-header,
+  .pp-collection-header {
+    flex-wrap: wrap;
+  }
+
+  .pp-prediction-buttons-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pp-journal-grid-table th,
+  .pp-journal-grid-table td {
+    padding: 0.5rem 0.45rem;
+    font-size: 0.875rem;
+  }
+
+  .pp-journal-grid-table tbody tr {
+    height: auto;
+  }
+
+  .pp-code-block {
+    padding: 0.85rem;
+    font-size: 0.8125rem;
+  }
+}
