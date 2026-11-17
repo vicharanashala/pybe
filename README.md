@@ -44,23 +44,26 @@ Library bookmarks and “explored” marks are local to this browser. Each origi
 
 ## New PR submissions
 
-Place all case studies in `case-studies/`, including new contributions. Use a lowercase concept-and-story folder name, with hyphens between words, for example:
+Existing case studies live in `case-studies/`. New case studies must go under `new-pr-submissions/`. Use a lowercase concept-and-story folder name, with hyphens between words, for example:
 
 ```text
 case-studies/
   lists-royal-supply-scroll/
   inheritance-wildlife-field-journal/
   classes-why-classes-exist/
+new-pr-submissions/
+  concept-story-name/
 ```
 
-Use a story suffix to distinguish multiple studies of the same concept. Keep each original application's files together, especially when several lessons share a frontend and backend. Platform tools are named by function; `empty-submission/` contains only a blank README and is not a playable study. The old `summership-26-prs/` and `rekhabattu-pr/` folders are no longer used. `new-pr-submissions/` is an unused legacy placeholder.
+Use a story suffix to distinguish multiple studies of the same concept. Keep each original application's files together, especially when several lessons share a frontend and backend. Platform tools are named by function; `empty-submission/` contains only a blank README and is not a playable study. The old `summership-26-prs/` and `rekhabattu-pr/` folders are no longer used. `new-pr-submissions/` is the intake directory for new case studies. New submissions are not automatically added to the homepage catalog.
 
 To add a study:
 
-1. Add the original files under a concept-and-story folder in `case-studies/`.
-2. Add the contributor-to-folder mapping in `tools/submission-folders.json`. Contributor names are internal credits, not folder names or learner-facing labels.
-3. Add the reviewed title, concepts, source path, and entry point in `tools/build_catalog.py` or `tools/original_catalog.py`.
-4. Run `npm run catalog` and `npm test`, then open the study from the homepage to verify its interactions. Do not add external LLM or AI image calls.
+1. Add the original files under a concept-and-story folder in `new-pr-submissions/`.
+2. Include a README describing the concepts, entry point, dependencies, and how to run the study. Preserve author credits in the submission files.
+3. Do not add external LLM or AI image calls.
+
+Homepage integration is a separate review step: the current catalog builder and launcher use `case-studies/`. Adding a folder to `new-pr-submissions/` alone does not make it appear in the app. When integrating a submission, update the catalog and runtime paths as needed, run `npm run catalog` and `npm test`, and verify the original study interactively.
 
 ## Coverage and maintenance
 
@@ -105,6 +108,7 @@ The tests verify original-only catalog entries, submitted/pending status, multip
 
 ## Project layout
 
+- new-pr-submissions/: intake directory for new case studies
 - library/: main interface and generated catalog
 - server.mjs: local library server
 - original-runtime.mjs: original app dependency setup and lifecycle
