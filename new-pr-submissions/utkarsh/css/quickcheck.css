@@ -1,0 +1,188 @@
+/* ==========================================================================
+   QUICK CHECK — Collapsible Side Drawer for optional MCQs
+   Shown on scenes 2, 4, 5, 6, 9, 10 only · Collapsed by default
+   ========================================================================== */
+
+.quickcheck-drawer {
+  position: absolute;
+  top: 0.6rem;
+  right: -320px;
+  z-index: 30;
+  width: 300px;
+  max-height: calc(100% - 1.2rem);
+  background: rgba(12, 18, 35, 0.94);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--c-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: right var(--dur-med) var(--ease-out);
+  display: flex;
+  flex-direction: column;
+}
+.quickcheck-drawer[hidden] { display: none; }
+.quickcheck-drawer.open { right: 0.6rem; }
+
+.qc-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.7rem;
+  background: rgba(245, 185, 66, 0.1);
+  border-bottom: 1px solid var(--c-border) !important;
+  color: var(--c-gold);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  width: 100%;
+  text-align: left;
+  transition: background var(--dur-fast);
+}
+.qc-toggle:hover { background: rgba(245, 185, 66, 0.18); }
+.qc-toggle svg { width: 14px; height: 14px; }
+
+/* Toggle tab when collapsed */
+.qc-tab {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 31;
+  padding: 0.6rem 0.35rem;
+  background: rgba(12, 18, 35, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--c-border);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  color: var(--c-gold);
+  font-size: 0.6rem;
+  font-weight: 700;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all var(--dur-fast);
+}
+.qc-tab:hover {
+  background: rgba(245, 185, 66, 0.12);
+}
+.qc-tab[hidden] { display: none; }
+.qc-tab svg { width: 12px; height: 12px; margin-bottom: 0.3rem; }
+
+.qc-body {
+  padding: 0.6rem;
+  overflow-y: auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.qc-question {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--c-text);
+  line-height: 1.35;
+}
+
+.qc-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.qc-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  padding: 0.45rem 0.55rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all var(--dur-fast);
+  text-align: left;
+  width: 100%;
+}
+.qc-option:hover:not(.answered) {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.qc-badge {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--c-text-muted);
+}
+
+.qc-option-text {
+  font-size: 0.74rem;
+  color: var(--c-text-muted);
+  line-height: 1.35;
+}
+
+/* Answered states */
+.qc-option.answered.correct {
+  border-color: var(--c-finally);
+  background: rgba(34, 197, 94, 0.1);
+}
+.qc-option.answered.correct .qc-badge {
+  background: var(--c-finally);
+  border-color: var(--c-finally);
+  color: #fff;
+}
+.qc-option.answered.correct .qc-option-text { color: #bbf7d0; }
+
+.qc-option.answered.wrong {
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.08);
+}
+.qc-option.answered.wrong .qc-badge {
+  background: var(--c-except);
+  border-color: var(--c-except);
+  color: #fff;
+}
+
+.qc-feedback {
+  font-size: 0.72rem;
+  line-height: 1.35;
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  animation: fadeIn var(--dur-med) var(--ease-out) both;
+}
+.qc-feedback.correct-fb {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  color: #bbf7d0;
+}
+.qc-feedback.wrong-fb {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #fecaca;
+}
+
+/* --- Mobile Quick Check: Bottom Drawer --- */
+@media (max-width: 700px) {
+  .quickcheck-drawer {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    max-height: 50%;
+    border-radius: 14px 14px 0 0;
+    transform: translateY(calc(100% - 36px));
+    transition: transform var(--dur-med) var(--ease-out);
+  }
+  .quickcheck-drawer.open {
+    transform: translateY(0);
+    right: 0;
+  }
+  .qc-tab { display: none; }
+}
