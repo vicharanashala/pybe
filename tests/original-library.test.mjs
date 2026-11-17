@@ -13,7 +13,7 @@ function request(url,options={}){return new Promise((resolve,reject)=>{const req
 after(()=>{server.closeAllConnections();server.close();});
 test('catalog retains only original submissions and no shared-reader editions',()=>{
  assert.equal(new Set(catalog.stories.map(s=>s.id)).size,catalog.stories.length);
- assert.ok(catalog.stories.every(s=>['original','application','source'].includes(s.mode)&&s.presentation==='original'||s.author==='Rekha Battu'));
+ assert.ok(catalog.stories.every(s=>['original','application','source'].includes(s.mode)&&s.presentation==='original'));
  assert.ok(!catalog.stories.some(s=>s.steps||s.exercise||s.fable||s.editorialCompanion));
  for(const s of catalog.stories)if(s.mode==='application')assert.ok(catalog.applications.some(a=>a.id===s.appId),s.title);
 });
@@ -36,7 +36,7 @@ test('all original HTML, source evidence and runtime entry points exist',async()
  for(const s of catalog.stories){assert.ok((await stat(path.join(root,s.source))).isFile(),s.source);if(s.mode==='original')assert.ok((await stat(resolveRequest(s.entry))).isFile(),s.title);}
  for(const app of catalog.applications){
   const directory=path.join(root,app.directory);
-  assert.ok(directory.startsWith(path.join(root,'summership-26-prs')+path.sep));
+  assert.ok(directory.startsWith(path.join(root,'case-studies')+path.sep));
   assert.ok((await stat(path.join(directory,app.kind==='vite'?'package.json':app.entry))).isFile());
   if(app.backend)assert.ok((await stat(path.join(root,app.backend.directory,app.backend.entry))).isFile());
  }
@@ -49,7 +49,7 @@ test('homepage loads the new shell and declares original-only learning',async()=
 });
 test('original HTML asset roots are rebased without changing its design',async()=>{
  const s=catalog.stories.find(s=>s.author==='Simranjit Kaur');const response=await request(s.entry);
- assert.equal(response.status,200);assert.match(response.body,/src="\/submissions\/Simranjit%20Kaur\/palace-storybook\/src\/main.js"/);
+ assert.equal(response.status,200);assert.match(response.body,/src="\/submissions\/scope-palace-of-whispers\/palace-storybook\/src\/main.js"/);
 });
 test('launcher rejects cross-origin mutations and unknown app IDs',async()=>{
  const body=JSON.stringify({appId:'unknown'});
@@ -60,4 +60,11 @@ test('launcher rejects cross-origin mutations and unknown app IDs',async()=>{
 test('private paths remain inaccessible and sources are served as text',async()=>{
  for(const url of ['/.git/config','/.env','/%2e%2e%5cREADME.md'])assert.ok((await request(url)).status>=400,url);
  const response=await request(`/source?id=${catalog.stories[0].id}`);assert.equal(response.status,200);assert.match(response.headers['content-type'],/text\/plain/);
+});
+
+test('Rekha’s original is retained alongside all other case studies',async()=>{
+ const story=catalog.stories.find(s=>s.author==='Rekha Battu');
+ assert.equal(story.source,'case-studies/classes-why-classes-exist/README.md');
+ assert.equal((await request(story.entry)).status,200);
+ assert.ok(catalog.stories.every(s=>s.source.startsWith('case-studies/')));
 });

@@ -8,9 +8,9 @@ const root = path.dirname(fileURLToPath(import.meta.url));
 const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.mp3': 'audio/mpeg', '.wav': 'audio/wav', '.woff2': 'font/woff2', '.md': 'text/plain; charset=utf-8', '.txt': 'text/plain; charset=utf-8' };
 export function resolveRequest(url) {
   const pathname = decodeURIComponent(new URL(url, 'http://localhost').pathname);
-  const prefix = pathname.startsWith('/submissions/') ? '/submissions/' : pathname.startsWith('/other-submissions/') ? '/other-submissions/' : null;
+  const prefix = pathname.startsWith('/submissions/') ? '/submissions/' : null;
   const relative = prefix ? pathname.slice(prefix.length) : pathname.slice(1) || 'index.html';
-  const base = prefix ? path.join(root, prefix === '/submissions/' ? 'summership-26-prs' : 'rekhabattu-pr') : path.join(root, 'library');
+  const base = prefix ? path.join(root, 'case-studies') : path.join(root, 'library');
   const target = path.resolve(base, relative);
   if (!target.startsWith(base + path.sep) && target !== base) return null;
   if (relative.split(/[\\/]/).some(p => p.startsWith('.') || p === 'node_modules')) return null;
@@ -38,7 +38,7 @@ export const server = http.createServer(async (req, res) => {
       const entry = catalog.stories.find(s => s.id === id);
       if (!entry) { res.writeHead(404); return res.end('Submission not found'); }
       const target = path.resolve(root, entry.source);
-      if (!['summership-26-prs','rekhabattu-pr'].some(dir=>target.startsWith(path.join(root,dir)+path.sep))) { res.writeHead(403); return res.end(); }
+      if (!['case-studies'].some(dir=>target.startsWith(path.join(root,dir)+path.sep))) { res.writeHead(403); return res.end(); }
       res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8', 'X-Content-Type-Options': 'nosniff' });
       return res.end(await readFile(target));
     }
@@ -46,7 +46,7 @@ export const server = http.createServer(async (req, res) => {
     if (!target) { res.writeHead(403); return res.end('Not available'); }
     if ((await stat(target)).isDirectory()) target = path.join(target, 'index.html');
     let body = await readFile(target);
-    if ((req.url.startsWith('/submissions/') || req.url.startsWith('/other-submissions/')) && path.extname(target) === '.html') {
+    if (req.url.startsWith('/submissions/') && path.extname(target) === '.html') {
       const base = new URL('.', new URL(req.url, 'http://localhost')).pathname;
       body = body.toString().replace(/((?:src|href)\s*=\s*["'])\/(?!\/)/g, `$1${base}`).replace(/(url\(["']?)\/(?!\/)/g, `$1${base}`);
     }

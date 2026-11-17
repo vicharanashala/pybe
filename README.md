@@ -1,3 +1,5 @@
+> Local-only policy (17 November 2026): external LLM transports, provider SDKs, cloud-generation developer utilities, and AI image requests have been removed. Feedback uses local rules or authored lesson text. Cloud-only generation tools are explicitly unavailable; stored studies and their original visual designs remain. Normal localhost APIs, package downloads, fonts, and Python runtime downloads are separate from this policy. `npm test` includes a guard against reintroducing model calls.
+
 # PyBe — original Python case studies
 
 The main library uses warm white and orange and organizes the original student submissions by concept. Case studies keep their submitted colors, layout, interactions, and learning sequence.
@@ -110,5 +112,7 @@ The tests verify original-only catalog entries, submitted/pending status, multip
 - original-runtime.mjs: original app dependency setup and lifecycle
 - tools/run-original.mjs: launches an original Vite application using its own config
 - tools/build_catalog.py and tools/original_catalog.py: reviewed concept and source mappings
-- summership-26-prs/ and rekhabattu-pr/: student originals, preserved
+- case-studies/: all student originals, including classes-why-classes-exist, preserved
 - work/: ignored local runtime, npm caches, and verification scratch files
+
+Submission folders use concept and story names. `tools/submission-folders.json` maps the original contributor labels to the current folders for catalog rebuilding; original author credits remain in submission files.

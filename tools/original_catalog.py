@@ -16,7 +16,7 @@ PENDING = [
  ('context-protocol','special','Custom context managers','Design resource cleanup with __enter__, __exit__, and contextlib.'),
 ]
 
-def finalize(ROOT,SUB,OUT,concepts,stories,BUCKETS,stable_id,add):
+def finalize(ROOT,SUB,OUT,concepts,stories,BUCKETS,stable_id,add,FOLDERS):
     add('Samruddhi Chate','Mia’s Smart Parking Gate','functions',evidence='README.md')
     add('Neeraj Agrawal','The Cricket Chase','for while',evidence='pybe-iteration-feature/README.md')
     add('Neeraj Agrawal','Loop Control Discovery','control',evidence='pybe-loopcontrols-standalone/README.md')
@@ -33,10 +33,9 @@ def finalize(ROOT,SUB,OUT,concepts,stories,BUCKETS,stable_id,add):
     # Scope follows the actual Rosewood topics rather than a generated companion.
     for s in stories:
         if s['author']=='Jasdeep Kaur' and 'Gurukul' in s['title']:
-            s['mode']='original';s['entry']='/submissions/Jasdeep Kaur/gurukul/index.html'
+            s['mode']='original';s['entry']='/submissions/variables-and-loops-poko-and-gurukul/gurukul/index.html'
         if s['author']=='Simranjit Kaur':
-            s['mode']='original';s['entry']='/submissions/Simranjit Kaur/palace-storybook/index.html'
-    stories.append(dict(id=stable_id('story','Rekha Battu','Why Classes Exist'),title='Why Classes Exist',author='Rekha Battu',concepts=['classes'],mode='original',entry='/other-submissions/pybe-class/index.html',description='Discover the need for a reusable student format through twelve observations.',source='rekhabattu-pr/pybe-class/README.md'))
+            s['mode']='original';s['entry']='/submissions/scope-palace-of-whispers/palace-storybook/index.html'
 
     def load(path):return json.loads(path.read_text(encoding='utf-8-sig'))
     def vite_package(directory):
@@ -45,7 +44,7 @@ def finalize(ROOT,SUB,OUT,concepts,stories,BUCKETS,stable_id,add):
         p=load(file)
         return 'vite' in (p.get('dependencies',{})|p.get('devDependencies',{}))
     def frontend_for(s):
-        source=ROOT/s['source'];author_root=SUB/s['author']
+        source=ROOT/s['source'];author_root=SUB/FOLDERS[s['author']]
         parent=source.parent
         while parent.is_relative_to(author_root):
             if vite_package(parent):return parent
@@ -54,6 +53,8 @@ def finalize(ROOT,SUB,OUT,concepts,stories,BUCKETS,stable_id,add):
             if parent==author_root:break
             parent=parent.parent
         return None
+
+    stories.append(dict(id=stable_id('story','Rekha Battu','Why Classes Exist'),title='Why Classes Exist',author='Rekha Battu',concepts=['classes'],mode='original',entry='/submissions/classes-why-classes-exist/index.html',description='Discover the need for a reusable student format through twelve observations.',source='case-studies/classes-why-classes-exist/README.md'))
 
     applications={}
     for s in stories:
@@ -100,7 +101,7 @@ def finalize(ROOT,SUB,OUT,concepts,stories,BUCKETS,stable_id,add):
     inventory=[]
     for directory in sorted(SUB.iterdir(),key=lambda p:p.name.lower()):
         if not directory.is_dir():continue
-        matched=[s for s in stories if s['author']==directory.name]
+        matched=[s for s in stories if s['author']==directory.name or s['source'].startswith(directory.relative_to(ROOT).as_posix()+'/')]
         inventory.append(dict(author=directory.name,stories=[s['id'] for s in matched],status='Cataloged' if matched else 'Platform / generator / no distinct lesson cataloged'))
     catalog=dict(version=2,buckets=[dict(id=i,title=t,description=d,number=n,icon=icon) for i,t,d,n,icon in BUCKETS],concepts=concepts,stories=stories,applications=list(applications.values()),inventory=inventory,
         backlogNote='Proposed topics for dedicated case studies, not an approved syllabus. Some ideas may be mentioned within existing stories without having a dedicated case study.')

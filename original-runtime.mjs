@@ -12,7 +12,7 @@ const children=new Set();
 const exists=async file=>{try{await access(file);return true;}catch{return false;}};
 const safeDirectory=relative=>{
  const absolute=path.resolve(root,relative);
- if(!absolute.startsWith(path.join(root,'summership-26-prs')+path.sep))throw new Error('Invalid original application directory.');
+ if(!absolute.startsWith(path.join(root,'case-studies')+path.sep))throw new Error('Invalid original application directory.');
  return absolute;
 };
 function child(command,args,cwd,env,job){

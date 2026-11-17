@@ -1,10 +1,12 @@
 """Rebuild the local catalog from reviewed submissions; no network or dependencies."""
 import hashlib
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-SUB = ROOT / 'summership-26-prs'
+SUB = ROOT / 'case-studies'
 OUT = ROOT / 'library'
+FOLDERS = json.loads((ROOT / 'tools/submission-folders.json').read_text(encoding='utf-8'))
 BUCKETS = [
     ('foundations', 'First steps', 'Give information a name. Make your first Python program.', '01', 'sprout'),
     ('flow', 'Decisions & loops', 'Choose a path, repeat an action, and know when to stop.', '02', 'route'),
@@ -63,12 +65,12 @@ stories = []
 def stable_id(prefix,*parts):
     return prefix+'-'+hashlib.sha256('\0'.join(parts).encode('utf-8')).hexdigest()[:16]
 def add(author, title, ids, entry=None, description=None, evidence=None):
-    directory = SUB / author
+    directory = SUB / FOLDERS[author]
     if entry:
         assert (directory / entry).is_file(), (author, entry)
     stories.append(dict(id=stable_id('story',author,title), title=title, author=author, concepts=ids.split(),
         mode='original' if entry else 'source',
-        entry=f'/submissions/{author}/{entry}' if entry else None,
+        entry=f'/submissions/{FOLDERS[author]}/{entry}' if entry else None,
         description=description or f'Explore {title} through a story-first Python case study.',
         source=str((directory / (evidence or entry or 'README.md')).relative_to(ROOT)).replace('\\','/')))
 
@@ -132,9 +134,9 @@ for author,title,ids,evidence in [
  ('Somya  Kapoor','Tiffin Trail','functions scope closures','tiffin trail-case study/src/TiffinTrail.jsx'),
  ('Vanisha Tiwari',"Buddy’s Magic Pet Shop",'encapsulation classes','README.md'),
 ]:
-    assert (SUB/author/evidence).is_file(), (author,evidence)
+    assert (SUB/FOLDERS[author]/evidence).is_file(), (author,evidence)
     add(author,title,ids,evidence=evidence)
 
 
 from original_catalog import finalize
-finalize(ROOT,SUB,OUT,concepts,stories,BUCKETS,stable_id,add)
+finalize(ROOT,SUB,OUT,concepts,stories,BUCKETS,stable_id,add,FOLDERS)
