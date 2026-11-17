@@ -30,17 +30,7 @@ npm run dev
 
 ## Original case studies
 
-The learner flow opens only original submissions. There are no shared readers, extracted quizzes, rewritten stories, or replacement lesson designs.
-
-Standalone HTML opens inside the library, with a full-tab option. Original React/Vite applications start through the local launcher. Their own Vite config, components, CSS, assets, routes, and backend code are used. Opening another app stops the previously managed app to avoid collisions between originals that use the same API port.
-
-On first launch, the launcher installs the original app's dependencies into its own node_modules folder. This needs internet access and can take a few minutes. Tracked package files and lockfiles are not rewritten. Local package dependencies are installed as copies rather than Windows symlinks; legacy peer dependency resolution is retried only when needed.
-
-Apps using newer Vite versions run with a private Node 22 installation under work/ when the system Node is older. The system Node installation is not changed.
-
-Some originals still require database setup (for example MongoDB or Prisma/SQLite) or Python packages. No LLM provider keys are required; features that depended entirely on cloud generation are unavailable. Their setup failures are displayed with the original source and README path. Python/Streamlit submissions require Python and Streamlit to be installed. Written/script-only submissions open as original source. The launcher does not replace a failed original with a common lesson.
-
-Library bookmarks and “explored” marks are local to this browser. Each original app retains its own progress behavior. Originals run on distinct local ports to separate their browser storage.
+Build a story-based case study that helps learners understand a Python concept through a clear narrative. Use [Birbal and the Royal Reward](case-studies/conditionals-birbals-royal-reward/README.md) or [The Royal Scribe's Secret](case-studies/strings-royal-scribes-secret/README.md) as examples.
 
 ## New PR submissions
 
@@ -55,15 +45,13 @@ new-pr-submissions/
   concept-story-name/
 ```
 
-Use a story suffix to distinguish multiple studies of the same concept. Keep each original application's files together, especially when several lessons share a frontend and backend. Platform tools are named by function; `empty-submission/` contains only a blank README and is not a playable study. The old `summership-26-prs/` and `rekhabattu-pr/` folders are no longer used. `new-pr-submissions/` is the intake directory for new case studies. New submissions are not automatically added to the homepage catalog.
+Use a story suffix to distinguish multiple studies of the same concept. Keep each original application's files together, especially when several lessons share a frontend and backend. Platform tools are named by function; `empty-submission/` contains only a blank README and is not a playable study. The old `summership-26-prs/` and `rekhabattu-pr/` folders are no longer used. `new-pr-submissions/` is the intake directory for new case studies.
 
 To add a study:
 
 1. Add the original files under a concept-and-story folder in `new-pr-submissions/`.
 2. Include a README describing the concepts, entry point, dependencies, and how to run the study. Preserve author credits in the submission files.
 3. Do not add external LLM or AI image calls.
-
-Homepage integration is a separate review step: the current catalog builder and launcher use `case-studies/`. Adding a folder to `new-pr-submissions/` alone does not make it appear in the app. When integrating a submission, update the catalog and runtime paths as needed, run `npm run catalog` and `npm test`, and verify the original study interactively.
 
 ## Coverage and maintenance
 
