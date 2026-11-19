@@ -1,0 +1,6 @@
+{
+  "name": "Royal Heritage Museum — Encapsulation Mission",
+  "description": "An interactive story-driven Python OOP learning adventure where you protect the Blue Heron Vase inside the Royal Heritage Museum.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
