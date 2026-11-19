@@ -1,0 +1,174 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Cinzel', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+    --bg: #FAF7F0;
+    --sage: #A8BFA3;
+    --sage-light: #E9EFE5;
+    --sage-strong: #7F9274;
+    --white-card: #FFFFFF;
+    --ink: #3F493D;
+    --gold: #C5A46D;
+    --gold-deep: #9E7F4E;
+    --wood-1: #8B6D4B;
+    --wood-2: #B08B60;
+    --wood-3: #E8D6B5;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background:
+      radial-gradient(circle at top, rgba(168, 191, 163, 0.12), transparent 35%),
+      linear-gradient(180deg, #FAF7F0 0%, #F4F1EA 100%);
+    color: var(--ink);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.42;
+    background-image:
+      linear-gradient(rgba(63, 73, 61, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(63, 73, 61, 0.02) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(circle at center, black 20%, transparent 90%);
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono-code {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.museum-shell {
+  background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(248,244,236,0.94));
+  border: 1px solid rgba(168, 191, 163, 0.5);
+  box-shadow: 0 22px 45px rgba(63, 73, 61, 0.08);
+}
+
+.museum-panel {
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(233,239,229,0.75));
+  border: 1px solid rgba(168, 191, 163, 0.45);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 16px 28px rgba(63, 73, 61, 0.05);
+}
+
+.museum-case {
+  position: relative;
+  background: linear-gradient(145deg, #a97945 0%, #7c5631 27%, #d2b078 52%, #754f2c 100%);
+  border: 1px solid rgba(92, 67, 42, 0.72);
+  box-shadow: 0 26px 45px rgba(69, 53, 36, 0.18), inset 0 2px 10px rgba(255,255,255,0.15);
+  overflow: hidden;
+}
+
+.museum-case::before {
+  content: "";
+  position: absolute;
+  inset: 10px 10px 10px 10px;
+  border: 1px solid rgba(255,255,255,0.5);
+  background: linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0));
+  pointer-events: none;
+}
+
+.museum-case::after {
+  content: "";
+  position: absolute;
+  inset: 18px 18px 18px 18px;
+  border: 1px solid rgba(197, 164, 109, 0.65);
+  pointer-events: none;
+}
+
+.museum-glass {
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.25), rgba(224,236,230,0.1));
+  border: 1px solid rgba(197, 164, 109, 0.7);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.2), inset 0 0 22px rgba(255,255,255,0.18);
+}
+
+.museum-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.14), transparent 30%, transparent 70%, rgba(255,255,255,0.14));
+  pointer-events: none;
+}
+
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(197, 164, 109, 0), rgba(197, 164, 109, 0.7), rgba(197, 164, 109, 0));
+}
+
+@keyframes scanBeam {
+  0%, 100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  20%, 80% {
+    opacity: 0.45;
+  }
+  50% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes subtleFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-scan-beam {
+  animation: scanBeam 4.5s ease-in-out infinite;
+}
+
+.animate-subtle-float {
+  animation: subtleFloat 5s ease-in-out infinite;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-slide-up {
+  animation: fadeSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-scan-beam,
+  .animate-subtle-float,
+  .animate-fade-slide-up {
+    animation: none;
+  }
+}
