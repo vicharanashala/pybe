@@ -2,7 +2,7 @@
 
 # PyBe — Python through stories
 
-The library organizes Python case studies by concept. All 71 catalog entries open inside one warm-white and orange PyBe interface. Shared navigation, progress, timers, editors and Python execution support each story’s own learning sequence and special interactions. Every existing case study is retained. See [MIGRATION_STATUS.md](MIGRATION_STATUS.md) for implementation and verification details.
+We learn Python case studies through stories. The library organizes these story-based case studies by concept, and all 71 catalog entries open inside one warm-white and orange PyBe interface. Shared navigation, progress, timers, editors and Python execution support each story’s own learning sequence and special interactions. Every existing case study is retained. See [MIGRATION_STATUS.md](MIGRATION_STATUS.md) for implementation and verification details.
 
 Shared code does not mean a fixed teaching flow. Each study retains its story order, pacing, special interactions, and timing of concept/syntax reveals. [Teaching-flow preservation rules](shared/README.md) guide the migration; Flight 218 is a reference example.
 
