@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
+import React, { useState, useEffect } from 'react';
 import { Check, RotateCcw, ArrowLeft } from 'lucide-react';
 import SceneShell from '../components/SceneShell';
 import SpeechBubble from '../components/SpeechBubble';
@@ -12,16 +14,14 @@ const TASKS = ['find', 'replace', 'retrieve', 'name'];
 // different variable operation the learner has already met on its own:
 // finding a pocket, fixing a wrong value, reading a value, and naming a new
 // one. Clearing all four is the "boss level" that proves the idea stuck.
-export default function Scene10FinalMission({ memory, setMemory, gems, onGem, onBack, onRestart }) {
+export default function Scene10FinalMission({ memory, setMemory, onBack, onRestart,onComplete }) {
   const [taskIndex, setTaskIndex] = useState(0);
   const [taskState, setTaskState] = useState({});
   const [done, setDone] = useState(false);
-  const [correctCount, setCorrectCount] = useState(0);
+  useEffect(()=>{if(done)onComplete?.();},[done]);
 
   function advance(wasCorrect) {
-    if (wasCorrect) setCorrectCount((c) => c + 1);
     if (taskIndex === TASKS.length - 1) {
-      onGem?.();
       setDone(true);
     } else {
       setTaskIndex((i) => i + 1);
@@ -38,7 +38,7 @@ export default function Scene10FinalMission({ memory, setMemory, gems, onGem, on
           hideButton
         />
         <p className="dm-caption-static">
-          You solved {correctCount} of {TASKS.length} missions correctly, and collected <strong>{gems}</strong> memory {gems === 1 ? 'gem' : 'gems'} along the way.
+          The emergency missions are complete. Every gadget has a named memory pocket.
         </p>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
           <button className="dm-btn" onClick={onRestart}><RotateCcw size={16} /> Play it again</button>
@@ -59,6 +59,7 @@ export default function Scene10FinalMission({ memory, setMemory, gems, onGem, on
 }
 
 function FindTask({ onDone, memory }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [wrong, setWrong] = useState(null);
   const [solved, setSolved] = useState(false);
   return (
@@ -90,6 +91,7 @@ function FindTask({ onDone, memory }) {
 }
 
 function ReplaceTask({ onDone, setMemory }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const foodPocket = GADGETS.find((g) => g.pocketId === 'food');
   const bread = foodPocket;
   const [fixed, setFixed] = useState(false);
@@ -128,6 +130,7 @@ function ReplaceTask({ onDone, setMemory }) {
 }
 
 function RetrieveTask({ onDone, memory }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const lightGadget = GADGETS.find((g) => g.pocketId === 'light');
   const [opened, setOpened] = useState(false);
   const [wrong, setWrong] = useState(null);
@@ -166,6 +169,7 @@ function RetrieveTask({ onDone, memory }) {
 }
 
 function NameTask({ onDone }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [pick, setPick] = useState(null);
   const choices = ['petBot', ROBOT_DOG.varName, 'thing5', 'x3'];
 

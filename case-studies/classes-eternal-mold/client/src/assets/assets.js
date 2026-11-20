@@ -1,8 +1,10 @@
 import introFile from './intro.png';
 import tiredFile from './tired.png';
-import scrollFile from './scroll.png';
+// The submitted scroll.png is absent; retain the supplied blueprint illustration instead.
+import scrollFile from './orion_blueprint_sketch_clean.png';
 import forestBgFile from './forest_background.png';
-import transparentFoxFile from './transparent_3d_fox.png';
+// The transparent placeholder is absent and unused in the active story.
+const transparentFoxFile = null;
 import orionFile from './orion.png';
 import workbenchCleanFile from './orion_workbench_clean.png';
 import firstFoxBgFile from './orion_first_fox_bg.png';

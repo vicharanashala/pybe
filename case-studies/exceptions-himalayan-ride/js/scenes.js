@@ -415,7 +415,7 @@ const SCENES_DATA = [
     act: 3,
     actTitle: "ACT 3: SYNTAX BRIDGE",
     verb: "collect",
-    narration: "Journey complete. Collect your credential.",
+    narration: "Journey complete. Review your trail notes.",
     radio: { speaker: "Swati", text: "Leh conquered! Every pass crossed safely." },
     codeEarned: null,
     lampLit: null,

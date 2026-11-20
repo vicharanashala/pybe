@@ -1,7 +1,6 @@
 import React from 'react';
 
-// The header: what Maya owns and what the learner has earned, always visible.
-// XP changes are announced politely so the reward is not conveyed by movement alone.
+// Maya’s resources remain part of the farm story.
 export default function ResourceBar({ farm, onBack, backLabel }) {
   return (
     <header className="pf-header">
@@ -13,21 +12,15 @@ export default function ResourceBar({ farm, onBack, backLabel }) {
       <dl className="pf-stats">
         <div className="pf-stat">
           <dt>
-            <span aria-hidden="true">⭐</span> XP
-          </dt>
-          <dd aria-live="polite">{farm.xp}</dd>
-        </div>
-        <div className="pf-stat">
-          <dt>
             <span aria-hidden="true">💰</span> Coins
           </dt>
           <dd>{farm.coins}</dd>
         </div>
         <div className="pf-stat">
           <dt>
-            <span aria-hidden="true">🏅</span> Level
+            <span aria-hidden="true">🌱</span> Seeds
           </dt>
-          <dd>{farm.level}</dd>
+          <dd>{farm.seeds}</dd>
         </div>
       </dl>
 

@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState } from 'react';
 import { Check, Copy } from 'lucide-react';
 
@@ -142,6 +144,7 @@ export function parseAnnotatedCode(rawCode) {
 }
 
 export default function CodePanel({ code, title = 'Python case solution' }) {
+  const {setTimeout}=useStoryTimers();
   const [copied, setCopied] = useState(false);
   const [activeLine, setActiveLine] = useState(null);
   const [hoveredLine, setHoveredLine] = useState(null);

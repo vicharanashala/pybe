@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Scenario from './Scenario';
 import caseStudies from './data.json';
 
-function App() {
+function App({ studies = caseStudies, onComplete }) {
   const [activeCaseStudyId, setActiveCaseStudyId] = useState(null);
 
-  const activeCaseStudy = caseStudies.find(c => c.id === activeCaseStudyId);
+  const activeCaseStudy = studies.find(c => c.id === activeCaseStudyId);
 
   return (
     <div className="app-container">
@@ -16,7 +16,7 @@ function App() {
 
       {!activeCaseStudy ? (
         <div className="case-studies-grid">
-          {caseStudies.map((study) => (
+          {studies.map((study) => (
             <div key={study.id} className="case-card fade-in">
               <div>
                 <h2 className="case-title">{study.title}</h2>
@@ -35,6 +35,7 @@ function App() {
         <div className="scenario-wrapper">
           <Scenario 
             data={activeCaseStudy} 
+            onComplete={() => onComplete?.(activeCaseStudy.id)}
             onFinish={() => setActiveCaseStudyId(null)} 
           />
         </div>

@@ -1,3 +1,6 @@
+import * as React from 'react';
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import type { OrderChallenge } from '../../types/mission'
@@ -21,6 +24,7 @@ function shuffle<T>(arr: T[]): T[] {
 }
 
 export default function OrderChallengeView({ challenge, onSuccess }: Props) {
+  const {setTimeout}=useStoryTimers();
   const initial = useMemo(() => shuffle(challenge.blocks), [challenge])
   const [order, setOrder] = useState(initial)
   const [dragId, setDragId] = useState<string | null>(null)
@@ -28,6 +32,7 @@ export default function OrderChallengeView({ challenge, onSuccess }: Props) {
   const [showHint, setShowHint] = useState(false)
 
   const move = (from: number, to: number) => {
+    if(status === 'right')return;
     setOrder((prev) => {
       const next = [...prev]
       const [item] = next.splice(from, 1)
@@ -71,7 +76,7 @@ export default function OrderChallengeView({ challenge, onSuccess }: Props) {
           <motion.li
             key={block.id}
             layout
-            draggable
+            draggable={status !== 'right'}
             onDragStart={() => setDragId(block.id)}
             onDragOver={(e) => e.preventDefault()}
             onDrop={() => handleDrop(block.id)}
@@ -84,6 +89,7 @@ export default function OrderChallengeView({ challenge, onSuccess }: Props) {
             <pre className="flex-1 whitespace-pre-wrap break-words px-1 py-3 text-white/85">{block.code}</pre>
             <div className="flex flex-col justify-center gap-1 pr-2">
               <button
+                disabled={status === 'right'}
                 aria-label="Move up"
                 onClick={() => moveByButton(i, -1)}
                 className="text-white/40 hover:text-volt px-1 focus-visible:outline focus-visible:outline-1 focus-visible:outline-volt"
@@ -91,6 +97,7 @@ export default function OrderChallengeView({ challenge, onSuccess }: Props) {
                 {'\u25B2'}
               </button>
               <button
+                disabled={status === 'right'}
                 aria-label="Move down"
                 onClick={() => moveByButton(i, 1)}
                 className="text-white/40 hover:text-volt px-1 focus-visible:outline focus-visible:outline-1 focus-visible:outline-volt"

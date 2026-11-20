@@ -83,7 +83,8 @@ export default function ModuleView({
   content = rawModuleText,
   currentBeat = 1,
   onBeatChange,
-  onBackToModules
+  onBackToModules,
+  onComplete
 }) {
   // Solved state tracking per beat number
   const [solvedBeats, setSolvedBeats] = useState({});
@@ -123,9 +124,9 @@ export default function ModuleView({
   };
 
   return (
-    <div className="flex w-full h-screen bg-slate-900 text-slate-200 overflow-hidden font-sans">
+    <div className="iteration-stage flex w-full h-screen bg-slate-900 text-slate-200 overflow-hidden font-sans">
       {/* Left Section (40vw) */}
-      <section className="w-[40vw] h-screen flex flex-col justify-center items-center px-8 bg-slate-950 border-r border-slate-800/80 relative select-none">
+      <section className="iteration-visual w-[40vw] h-screen flex flex-col justify-center items-center px-8 bg-slate-950 border-r border-slate-800/80 relative select-none">
         {beatData.leftPane.type === 'image' ? (
           <LeftPaneImage key={beatData.leftPane.src} src={beatData.leftPane.src} />
         ) : (
@@ -138,7 +139,7 @@ export default function ModuleView({
       </section>
 
       {/* Right Section (60vw) */}
-      <section className="w-[40vw] sm:w-[60vw] h-screen flex flex-col p-12 relative bg-slate-900 justify-between">
+      <section className="iteration-content w-[40vw] sm:w-[60vw] h-screen flex flex-col p-12 relative bg-slate-900 justify-between">
         {/* Zone A: Top Header */}
         <div className="flex justify-between items-center pb-4 border-b border-slate-800 select-none shrink-0">
           <button
@@ -179,7 +180,7 @@ export default function ModuleView({
 
           {currentBeat === totalBeats ? (
             <button
-              onClick={onBackToModules}
+              onClick={()=>{onComplete?.();onBackToModules();}}
               className="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 active:bg-green-700 text-white px-6 py-2.5 rounded-lg font-semibold text-sm shadow-lg shadow-green-900/30 transition-all cursor-pointer"
               id="finish-module-btn"
             >

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import StoryCard from "./StoryCard.jsx";
 import LearningProgress from "./LearningProgress.jsx";
-import { STORY_CARDS } from "./storyContent.js";
+import { STORY_CARDS } from "./StoryContent.js";
 import { LEVEL_ORDER } from "../levels.js";
 
 // Each level walks through 4 learning stages (Story, Concept, Practice,

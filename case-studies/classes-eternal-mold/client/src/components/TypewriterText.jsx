@@ -1,6 +1,9 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect } from 'react';
 
 export default function TypewriterText({ text = '', speed = 25, onComplete }) {
+  const {setInterval,clearInterval}=useStoryTimers();
   const [displayedText, setDisplayedText] = useState('');
   const [isComplete, setIsComplete] = useState(false);
 

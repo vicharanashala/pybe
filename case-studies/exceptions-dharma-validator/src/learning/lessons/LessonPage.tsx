@@ -21,7 +21,7 @@ export default function LessonPage() {
     <LessonLayout
       lesson={lesson}
       onComplete={() => {
-        markComplete(lesson.slug, lesson.badgeUnlocked);
+        markComplete(lesson.slug);
         navigate("/path");
       }}
     />

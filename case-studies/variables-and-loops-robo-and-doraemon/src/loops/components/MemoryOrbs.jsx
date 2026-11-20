@@ -1,6 +1,9 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useEffect, useRef, useState } from 'react';
 
 export default function MemoryOrbs({ globals, emptyLabel = 'No variables yet.' }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const prevRef = useRef({});
   const [pulse, setPulse] = useState({});
 

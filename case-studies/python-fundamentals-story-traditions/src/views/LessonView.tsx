@@ -1,3 +1,8 @@
+import {createStoryPythonHook} from '../../../../shared/story-python.mjs';
+import {runnableLesson} from '../utils/pythonExamples';
+const useStoryPython=createStoryPythonHook(React);
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect } from 'react';
 import { useProgress } from '../context/ProgressContext';
 import { ManuscriptCard, StoryHeader } from '../components/Ornaments';
@@ -6,9 +11,11 @@ import { getTopic } from '../data/curriculum';
 import { ArrowLeft, ArrowRight, Play, Terminal, Layers } from 'lucide-react';
 
 export const LessonView: React.FC = () => {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const { nextStep, prevStep, activeTopicId } = useProgress();
   const topic = getTopic(activeTopicId);
-  const lessonSlides = topic.lessons;
+  const lessonSlides = topic.lessons.map(slide=>runnableLesson(topic,slide));
+  const {run}=useStoryPython();
   const [activeSlide, setActiveSlide] = useState<number>(0);
   const [consoleOutput, setConsoleOutput] = useState<string>('');
   const [isRunning, setIsRunning] = useState<boolean>(false);
@@ -19,176 +26,10 @@ export const LessonView: React.FC = () => {
     setConsoleOutput('');
   }, [activeSlide]);
 
-  const simulateCode = (code: string): string => {
-    const lines = code.split('\n');
-    const vars: Record<string, unknown> = {};
-    const output: string[] = [];
-
-    const evalExpr = (expr: string): unknown => {
-      expr = expr.trim();
-
-      if (expr.startsWith('"') && expr.endsWith('"')) return expr.slice(1, -1);
-      if (expr.startsWith("'") && expr.endsWith("'")) return expr.slice(1, -1);
-      if (!isNaN(Number(expr))) return Number(expr);
-      if (expr === 'True') return true;
-      if (expr === 'False') return false;
-
-      if (expr.startsWith('{') && expr.endsWith('}')) {
-        const inner = expr.slice(1, -1).trim();
-        if (!inner) return {};
-        const obj: Record<string, string> = {};
-        const pairs = inner.split(',');
-        for (const pair of pairs) {
-          const [k, v] = pair.split(':').map(s => s.trim());
-          if (k && v) obj[evalExpr(k) as string] = evalExpr(v) as string;
-        }
-        return obj;
-      }
-
-      if (expr.startsWith('[') && expr.endsWith(']')) {
-        const inner = expr.slice(1, -1).trim();
-        if (!inner) return [];
-        return inner.split(',').map(s => evalExpr(s.trim()));
-      }
-
-      const callMatch = expr.match(/^(\w+)\((.+)\)$/);
-      if (callMatch) {
-        const [, fn, argStr] = callMatch;
-        const arg = evalExpr(argStr);
-        if (fn === 'str') return String(arg);
-        if (fn === 'int') return parseInt(String(arg), 10);
-        if (fn === 'len') return Array.isArray(arg) ? arg.length : typeof arg === 'string' ? arg.length : 0;
-        if (fn === 'type') return typeof arg;
-        if (fn === 'sorted') return Array.isArray(arg) ? [...arg].sort() : arg;
-        if (fn === 'reversed') return Array.isArray(arg) ? [...arg].reverse() : arg;
-        if (fn === 'range') {
-          const nums = argStr.split(',').map(s => parseInt(s.trim(), 10));
-          if (nums.length === 1) return Array.from({ length: nums[0] }, (_, i) => i);
-          return Array.from({ length: nums[1] - nums[0] }, (_, i) => nums[0] + i);
-        }
-      }
-
-      if (expr in vars) return vars[expr];
-      if (expr.includes(' in ')) {
-        const [item, container] = expr.split(' in ').map(s => s.trim());
-        const containerVal = vars[container] ?? evalExpr(container);
-        if (Array.isArray(containerVal)) return containerVal.includes(evalExpr(item));
-      }
-
-      return expr;
-    };
-
-    for (const rawLine of lines) {
-      const line = rawLine.trim();
-      if (!line || line.startsWith('#')) continue;
-
-      if (line.startsWith('print(') && line.endsWith(')')) {
-        const inner = line.slice(6, -1).trim();
-        const parts: string[] = [];
-        let depth = 0;
-        let current = '';
-        for (const ch of inner) {
-          if (ch === '(' || ch === '[' || ch === '{') depth++;
-          if (ch === ')' || ch === ']' || ch === '}') depth--;
-          if (ch === ',' && depth === 0) {
-            parts.push(current.trim());
-            current = '';
-          } else {
-            current += ch;
-          }
-        }
-        parts.push(current.trim());
-
-        const vals = parts.map(p => {
-          const v = evalExpr(p);
-          if (typeof v === 'object' && v !== null) return JSON.stringify(v);
-          return String(v);
-        });
-        output.push(vals.join(' '));
-        continue;
-      }
-
-      const assignMatch = line.match(/^(\w+)\s*=\s*(.+)$/);
-      if (assignMatch) {
-        const [, name, valueExpr] = assignMatch;
-        vars[name] = evalExpr(valueExpr);
-        continue;
-      }
-
-      const augmentedMatch = line.match(/^(\w+)\s*(\+=|-=|\*=|\/=)\s*(.+)$/);
-      if (augmentedMatch) {
-        const [, name, op, valueExpr] = augmentedMatch;
-        const current = vars[name] ?? 0;
-        const val = evalExpr(valueExpr);
-        if (op === '+=') vars[name] = (current as number) + (val as number);
-        else if (op === '-=') vars[name] = (current as number) - (val as number);
-        else if (op === '*=') vars[name] = (current as number) * (val as number);
-        else if (op === '/=') vars[name] = (current as number) / (val as number);
-        continue;
-      }
-
-      const delMatch = line.match(/^del\s+(\w+)\[(.+)\]$/);
-      if (delMatch) {
-        const [, name, keyExpr] = delMatch;
-        const obj = vars[name];
-        if (obj && typeof obj === 'object') {
-          delete (obj as Record<string, unknown>)[evalExpr(keyExpr) as string];
-        }
-        continue;
-      }
-
-      const forMatch = line.match(/^for\s+(\w+)\s*,\s*(\w+)\s+in\s+(\w+)\.items\(\):$/);
-      if (forMatch) {
-        const [, kVar, vVar, dictName] = forMatch;
-        const obj = vars[dictName];
-        if (obj && typeof obj === 'object') {
-          for (const [k, v] of Object.entries(obj)) {
-            vars[kVar] = k;
-            vars[vVar] = v;
-          }
-        }
-        continue;
-      }
-
-      const forListMatch = line.match(/^for\s+(\w+)\s+in\s+(\w+):$/);
-      if (forListMatch) {
-        const [, varName, listName] = forListMatch;
-        const list = vars[listName];
-        if (Array.isArray(list)) {
-          for (const item of list) {
-            vars[varName] = item;
-          }
-        }
-        continue;
-      }
-
-      const whileMatch = line.match(/^while\s+(.+):$/);
-      if (whileMatch) {
-        continue;
-      }
-
-      if (line === 'break' || line === 'continue' || line.startsWith('if ') || line.startsWith('elif ') || line.startsWith('else:')) {
-        continue;
-      }
-    }
-
-    if (output.length === 0) output.push('Code ran successfully.');
-    return output.join('\n');
-  };
-
-  const executeCode = () => {
-    setIsRunning(true);
-    setConsoleOutput('Executing Python code...\n');
-
-    setTimeout(() => {
-      const output = simulateCode(slide.exampleCode);
-      setConsoleOutput(prev => prev + '>>> ' + output);
-      setIsRunning(false);
-    }, 800);
-  };
+  const executeCode=async()=>{if(isRunning)return;setIsRunning(true);setConsoleOutput('Executing Python code...');const result=await run(slide.exampleCode);setConsoleOutput(result.error||result.output||'Code ran successfully.');setIsRunning(false);};
 
   return (
-    <div className="flex-1 flex flex-col justify-center py-6 px-4 max-w-5xl mx-auto w-full select-none">
+    <div data-tradition-lesson={activeSlide} className="flex-1 flex flex-col justify-center py-6 px-4 max-w-5xl mx-auto w-full select-none">
       <ManuscriptCard className="w-full animate-manuscript-open">
         <StoryHeader topic={topic} />
 
@@ -199,7 +40,7 @@ export const LessonView: React.FC = () => {
             {lessonSlides.map((s, idx) => (
               <button
                 key={idx}
-                onClick={() => setActiveSlide(idx)}
+                onClick={() => {if(!isRunning)setActiveSlide(idx);}}
                 className={`flex-shrink-0 text-left px-3 py-2.5 rounded-lg text-xs md:text-sm font-serif font-semibold border transition-all duration-300 ${
                   idx === activeSlide
                     ? 'bg-royal-crimson text-white border-royal-crimson dark:bg-royal-gold dark:text-royal-indigo dark:border-royal-gold shadow-md'
@@ -271,7 +112,7 @@ export const LessonView: React.FC = () => {
                 <Terminal className="w-3.5 h-3.5" />
                 <span>Python Sandbox Output</span>
               </div>
-              <pre className="text-green-400 whitespace-pre-wrap leading-normal font-sans">
+              <pre data-tradition-output className="text-green-400 whitespace-pre-wrap leading-normal font-sans">
                 {consoleOutput || 'Click [Run] to execute this Python code block in the court simulator.'}
               </pre>
             </div>

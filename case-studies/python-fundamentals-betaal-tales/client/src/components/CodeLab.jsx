@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import {cancelPython} from '../../../../../library/learning/python-client.mjs';
+import { useEffect, useRef, useState } from 'react';
 import { CheckCircle2, Lightbulb, Play, RotateCcw, Shuffle, TerminalSquare } from 'lucide-react';
 import { checkResult } from '../lib/progress';
 
@@ -8,10 +9,6 @@ export default function CodeLab({
   starterCode,
   hint,
   check,
-  pyodide,
-  loading,
-  pyodideError,
-  rewardXp,
   onSuccess,
   onRegenerate
 }) {
@@ -22,9 +19,10 @@ export default function CodeLab({
   const [showHint, setShowHint] = useState(false);
   const [passed, setPassed] = useState(false);
   const runIdRef = useRef(0);
+  useEffect(()=>()=>{runIdRef.current+=1;cancelPython();},[]);
 
   async function run() {
-    if (!pyodide || passed) return;
+    if (passed || status==='running') return;
     if (!code.trim()) {
       setStatus('fail');
       setMessage('Write some Python first, then press Run.');
@@ -36,7 +34,7 @@ export default function CodeLab({
     setOutput('');
     setMessage('');
     try {
-      const result = await checkResult(pyodide, code, check);
+      const result = await checkResult(code, check);
       if (id !== runIdRef.current) return;
       setOutput(result.output || '');
       setStatus(result.passed ? 'pass' : 'fail');
@@ -56,6 +54,7 @@ export default function CodeLab({
     runIdRef.current += 1;
     setOutput('');
     setMessage('');
+    setPassed(false);
     setStatus('idle');
     setShowHint(false);
     if (onRegenerate) {
@@ -65,7 +64,7 @@ export default function CodeLab({
     }
   }
 
-  const cannotRun = loading || !pyodide || passed;
+  const cannotRun = passed || status==='running';
 
   return (
     <section className="codelab" aria-label={title}>
@@ -73,7 +72,6 @@ export default function CodeLab({
         <TerminalSquare size={20} aria-hidden="true" />
         <div>
           <h3>{title}</h3>
-          <p className="codelab-reward">Worth {rewardXp} XP</p>
         </div>
         {passed && (
           <span className="chip chip-pass">
@@ -84,24 +82,14 @@ export default function CodeLab({
 
       <p className="codelab-instruction">{instruction}</p>
 
-      {pyodideError && (
-        <div className="note note-error" role="alert">
-          Could not load the in-browser Python engine ({pyodideError}). Check your internet connection and
-          reload the page - the rest of the lesson still works.
-        </div>
-      )}
 
-      {loading && (
-        <div className="note">
-          <strong>Loading the Python engine…</strong> This downloads once and is cached for the whole session.
-        </div>
-      )}
 
       <div className="codelab-editor">
         <textarea
           className="code-input"
           value={code}
           onChange={(event) => setCode(event.target.value)}
+          disabled={status==='running'}
           onKeyDown={(event) => {
             if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
               event.preventDefault();
@@ -120,7 +108,7 @@ export default function CodeLab({
           <Play size={16} aria-hidden="true" />
           {status === 'running' ? 'Running…' : 'Run code'}
         </button>
-        <button type="button" className="btn btn-ghost" onClick={reset}>
+        <button type="button" className="btn btn-ghost" onClick={reset} disabled={status==='running'}>
           <RotateCcw size={16} aria-hidden="true" /> Reset
         </button>
         <button
@@ -132,7 +120,7 @@ export default function CodeLab({
           <Lightbulb size={16} aria-hidden="true" /> Hint
         </button>
         {onRegenerate && (
-          <button type="button" className="btn btn-ghost" onClick={reset}>
+          <button type="button" className="btn btn-ghost" onClick={reset} disabled={status==='running'}>
             <Shuffle size={16} aria-hidden="true" /> Try another
           </button>
         )}
@@ -151,7 +139,7 @@ export default function CodeLab({
           <CheckCircle2 size={22} aria-hidden="true" />
           <div>
             <strong>Well done, learner!</strong>
-            <p>{message} You earned {rewardXp} XP.</p>
+            <p>{message}</p>
           </div>
         </div>
       )}

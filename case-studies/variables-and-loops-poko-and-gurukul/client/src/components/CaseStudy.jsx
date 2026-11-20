@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { parsePythonCodeToMemory } from "../utils/pythonInterpreter";
 import "./CaseStudy.css";
 
-export default function CaseStudy({ data, onNext, onAddXp, onUpdateMemory }) {
+export default function CaseStudy({ data, onNext, onUpdateMemory }) {
   const { title, subtitle, databaseName, slots: initialSlots, capsules } = data;
-  const [slots, setSlots] = useState(initialSlots);
+  const [slots, setSlots] = useState(()=>initialSlots.map(slot=>({...slot})));
   const [selectedCapsule, setSelectedCapsule] = useState(null);
 
   const handleSelectCapsule = (cap) => {
@@ -18,7 +18,7 @@ export default function CaseStudy({ data, onNext, onAddXp, onUpdateMemory }) {
     const targetSlot = slots[slotIdx];
     if (selectedCapsule === targetSlot.targetValue) {
       // Correct binding!
-      const updated = [...slots];
+      const updated = slots.map(slot=>({...slot}));
       updated[slotIdx].currentValue = selectedCapsule;
       setSlots(updated);
       setSelectedCapsule(null);
@@ -32,7 +32,6 @@ export default function CaseStudy({ data, onNext, onAddXp, onUpdateMemory }) {
         onUpdateMemory(memoryMap, `Restored box '${targetSlot.varName}' in Poko's Memory!`);
       }
 
-      if (onAddXp) onAddXp(25);
     } else {
       alert(`⚠️ Misaligned binding! ${selectedCapsule} does not match ${targetSlot.varName}. Try matching data items.`);
     }

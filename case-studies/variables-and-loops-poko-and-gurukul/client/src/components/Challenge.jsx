@@ -1,9 +1,12 @@
+import {createStoryPythonHook} from '../../../../../shared/story-python.mjs';
+const useStoryPython=createStoryPythonHook(React);
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { parsePythonCodeToMemory } from "../utils/pythonInterpreter";
 import "./Challenge.css";
 
-export default function Challenge({ data, onNext, onAddXp, onUpdateMemory }) {
+export default function Challenge({ data, onNext, onUpdateMemory }) {
+  const {run,running}=useStoryPython();
   const { title, subtitle, missionText, starterCode, requiredVars } = data;
   const [userCode, setUserCode] = useState(starterCode || "");
   const [output, setOutput] = useState("");
@@ -18,42 +21,7 @@ export default function Challenge({ data, onNext, onAddXp, onUpdateMemory }) {
     }
   }, [userCode]);
 
-  const handleTestMission = () => {
-    const lines = userCode.split("\n");
-    const detectedVars = new Set();
-    const outputLines = [];
-
-    lines.forEach((line) => {
-      const trimmed = line.trim();
-      if (trimmed.includes("=") && !trimmed.includes("==")) {
-        const [vName] = trimmed.split("=").map((s) => s.trim());
-        if (vName && !/^\d/.test(vName)) detectedVars.add(vName);
-      }
-      if (trimmed.startsWith("print(")) {
-        const content = trimmed.slice(6, -1).replaceAll('"', "").replaceAll("'", "");
-        outputLines.push(content);
-      }
-    });
-
-    const passed = (requiredVars || ["apple", "honey", "corn", "carrot", "berries", "nuts"]).filter((v) =>
-      detectedVars.has(v)
-    );
-
-    setPassedChecks(passed);
-    setOutput(outputLines.join("\n") || "(Poko's magic executed smoothly with no print output)");
-
-    const { memoryMap, errors } = parsePythonCodeToMemory(userCode);
-    if (onUpdateMemory) {
-      onUpdateMemory(memoryMap, "✨ Mission Execution Verified! All 6 wooden storage boxes active.", errors);
-    }
-
-    if (passed.length === (requiredVars || []).length) {
-      setIsCompleted(true);
-      if (onAddXp) onAddXp(50);
-    } else {
-      setIsCompleted(false);
-    }
-  };
+  const handleTestMission=async()=>{const result=await run(userCode);const required=requiredVars||['apple','honey','corn','carrot','berries','nuts'];const passed=required.filter(name=>Object.hasOwn(result.variables,name));setPassedChecks(passed);setOutput(result.error||result.output||'(Program finished without printed output)');setIsCompleted(!result.error&&passed.length===required.length);if(onUpdateMemory){const {memoryMap,errors}=parsePythonCodeToMemory(userCode);onUpdateMemory(memoryMap,'Winter storage program checked.',errors);}};
 
   return (
     <div className="step-container">
@@ -90,8 +58,8 @@ export default function Challenge({ data, onNext, onAddXp, onUpdateMemory }) {
             </div>
             <textarea
               className="code-input-textarea ch-textarea"
-              value={userCode}
-              onChange={(e) => setUserCode(e.target.value)}
+              aria-label="Poko winter mission Python program" disabled={running} value={userCode}
+              onChange={(e) => {setUserCode(e.target.value);setIsCompleted(false);setPassedChecks([]);}}
               spellCheck="false"
             />
           </div>
@@ -110,7 +78,7 @@ export default function Challenge({ data, onNext, onAddXp, onUpdateMemory }) {
           </div>
 
           <div className="ch-action-row">
-            <button className="btn btn-primary run-mission-btn button-glow" onClick={handleTestMission}>
+            <button className="btn btn-primary run-mission-btn button-glow" disabled={running} onClick={handleTestMission}>
               ▶ Test My Magic & Verify Mission
             </button>
           </div>
@@ -142,7 +110,7 @@ export default function Challenge({ data, onNext, onAddXp, onUpdateMemory }) {
               disabled={!isCompleted}
               onClick={onNext}
             >
-              Claim Mission Rewards →
+              Continue the story →
             </button>
           </div>
         </motion.div>

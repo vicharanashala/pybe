@@ -1,3 +1,6 @@
+import {createTimerGroup} from '../../../../../../library/learning/timer-group.mjs';
+const timers=createTimerGroup();
+const {setTimeout}=timers;
 // Web Audio API Procedural Sound Effects & Speech Synthesis for Buddy's Magic Pet Shop
 
 let audioCtx = null;
@@ -18,6 +21,8 @@ function getAudioContext() {
 }
 
 export const SoundService = {
+  activate(){timers.activate();},
+  dispose(){timers.dispose();if('speechSynthesis' in window)window.speechSynthesis.cancel();const ctx=audioCtx;audioCtx=null;if(ctx&&ctx.state!=='closed')void ctx.close();},
   isSoundEnabled: () => soundEnabled,
   setSoundEnabled: (val) => { soundEnabled = val; },
   isVoiceEnabled: () => voiceEnabled,

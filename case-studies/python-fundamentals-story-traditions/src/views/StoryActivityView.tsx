@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useCallback } from 'react';
 import { useProgress } from '../context/ProgressContext';
 import { getTopic } from '../data/curriculum';
@@ -15,12 +17,13 @@ function shuffleArray<T>(arr: T[]): T[] {
 }
 
 export const StoryActivityView: React.FC = () => {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const { activeTopicId, nextStep } = useProgress();
   const topic = getTopic(activeTopicId);
   const activity = topic.activity;
 
   const [shuffledItems] = useState<ActivityDragItem[]>(() => shuffleArray(activity.items));
-  const [shuffledTargets] = useState<ActivityTarget[]>(() => activity.type === 'match-pairs' ? shuffleArray(activity.targets) : shuffleArray(activity.targets));
+  const [shuffledTargets] = useState<ActivityTarget[]>(() => ['click-order','arrange-order'].includes(activity.type)?activity.targets:shuffleArray(activity.targets));
 
   const [showHint, setShowHint] = useState(false);
   const [completed, setCompleted] = useState(false);
@@ -71,9 +74,10 @@ export const StoryActivityView: React.FC = () => {
 
   const handleDragStart = (itemId: string) => setDraggedItem(itemId);
   const handleDragOver = (e: React.DragEvent) => e.preventDefault();
-  const handleDrop = (targetId: string) => {
-    if (draggedItem) {
-      const newAssignments = { ...assignments, [targetId]: draggedItem };
+  const handleDrop = (targetId: string, transferred?:string) => {
+    const item=transferred||draggedItem;
+    if (item) {
+      const newAssignments = { ...assignments, [targetId]: item };
       setAssignments(newAssignments);
       setDraggedItem(null);
       checkDragCompletion(newAssignments);
@@ -81,9 +85,10 @@ export const StoryActivityView: React.FC = () => {
   };
 
   const handleArrangeDragStart = (itemId: string) => setDragArrangeItem(itemId);
-  const handleArrangeDrop = (targetId: string) => {
-    if (dragArrangeItem) {
-      const newArranged = { ...arrangedSlots, [targetId]: dragArrangeItem };
+  const handleArrangeDrop = (targetId: string, transferred?:string) => {
+    const item=transferred||dragArrangeItem;
+    if (item) {
+      const newArranged = { ...arrangedSlots, [targetId]: item };
       setArrangedSlots(newArranged);
       setDragArrangeItem(null);
       checkArrangeCompletion(newArranged);
@@ -91,9 +96,10 @@ export const StoryActivityView: React.FC = () => {
   };
 
   const handleMatchDragStart = (itemId: string) => setDragMatchItem(itemId);
-  const handleMatchDrop = (targetId: string) => {
-    if (dragMatchItem) {
-      const newMatch = { ...matchAnswers, [targetId]: dragMatchItem };
+  const handleMatchDrop = (targetId: string, transferred?:string) => {
+    const item=transferred||dragMatchItem;
+    if (item) {
+      const newMatch = { ...matchAnswers, [targetId]: item };
       setMatchAnswers(newMatch);
       setDragMatchItem(null);
       checkMatchCompletion(newMatch);
@@ -108,9 +114,11 @@ export const StoryActivityView: React.FC = () => {
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {shuffledItems.map((item) => (
           <div
-            key={item.id}
+            data-tradition-item={item.id} key={item.id}
             draggable
-            onDragStart={() => handleDragStart(item.id)}
+            onDragStart={e=>{e.dataTransfer.setData("text/plain",item.id);handleDragStart(item.id);}}
+            onClick={()=>handleDragStart(item.id)} aria-pressed={draggedItem===item.id} role="button" tabIndex={0} aria-label={"Select "+item.label}
+            onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();handleDragStart(item.id);}}}
             className={`p-3 rounded-lg border-2 border-dashed cursor-grab active:cursor-grabbing transition-all text-center font-serif text-sm
               ${isItemUsed(item.id, assignments)
                 ? 'border-gray-300 bg-gray-100 dark:bg-gray-800 text-gray-400 opacity-50'
@@ -129,9 +137,11 @@ export const StoryActivityView: React.FC = () => {
           const isCorrect = assignedItem === target.correctItemId;
           return (
             <div
-              key={target.id}
+              data-tradition-target={target.id} key={target.id}
               onDragOver={handleDragOver}
-              onDrop={() => handleDrop(target.id)}
+              onDrop={e=>{e.preventDefault();handleDrop(target.id,e.dataTransfer.getData("text/plain"));}}
+              onClick={()=>handleDrop(target.id)} role="button" tabIndex={0} aria-label={"Place selected label: "+target.label}
+              onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();handleDrop(target.id);}}}
               className={`p-4 rounded-xl border-2 transition-all ${
                 assignedItem
                   ? isCorrect
@@ -160,7 +170,7 @@ export const StoryActivityView: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
         {shuffledItems.map((item) => (
           <button
-            key={item.id}
+            data-tradition-item={item.id} key={item.id}
             onClick={() => {
               if (!clickedItems.includes(item.id)) {
                 const newClicked = [...clickedItems, item.id];
@@ -192,7 +202,7 @@ export const StoryActivityView: React.FC = () => {
       </div>
       <div className="space-y-2">
         {shuffledTargets.map((target, idx) => (
-          <div key={target.id} className="flex items-center gap-3 p-3 rounded-lg bg-white/30 dark:bg-gray-800/30 border border-parchment-border dark:border-parchment-darkBorder">
+          <div data-tradition-target={target.id} key={target.id} className="flex items-center gap-3 p-3 rounded-lg bg-white/30 dark:bg-gray-800/30 border border-parchment-border dark:border-parchment-darkBorder">
             <span className="w-6 h-6 rounded-full bg-royal-gold/10 flex items-center justify-center text-[10px] font-bold text-royal-gold">{idx + 1}</span>
             <span className="text-sm font-serif text-gray-700 dark:text-gray-300">{target.label}</span>
           </div>
@@ -204,7 +214,7 @@ export const StoryActivityView: React.FC = () => {
   const renderGateCheck = () => (
     <div className="space-y-4">
       {shuffledItems.map((item) => (
-        <div key={item.id} className="flex items-center justify-between p-4 rounded-xl border border-parchment-border dark:border-parchment-darkBorder bg-white/30 dark:bg-gray-800/30">
+        <div data-tradition-item={item.id} key={item.id} className="flex items-center justify-between p-4 rounded-xl border border-parchment-border dark:border-parchment-darkBorder bg-white/30 dark:bg-gray-800/30">
           <div>
             <p className="font-serif font-bold text-sm text-royal-indigo dark:text-white">{item.label}</p>
             <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -269,7 +279,7 @@ export const StoryActivityView: React.FC = () => {
             setRepeatCount(newCount);
             if (activity.repeatTarget && newCount >= activity.repeatTarget) setCompleted(true);
           }}
-          disabled={completed}
+          disabled={completed} aria-label={activity.repeatAction||"Repeat story action"}
           className="w-32 h-32 mx-auto rounded-full bg-royal-gold/10 border-4 border-royal-gold/30 flex items-center justify-center text-4xl hover:bg-royal-gold/20 hover:border-royal-gold/50 transition-all active:scale-95 disabled:opacity-50"
         >
           {activity.items[0]?.label === 'Temple Bell' ? '🔔' : activity.items[0]?.label === 'Stone' ? '🪨' : '🥥'}
@@ -300,9 +310,11 @@ export const StoryActivityView: React.FC = () => {
       <div className="grid grid-cols-3 gap-3">
         {shuffledItems.map((item) => (
           <div
-            key={item.id}
+            data-tradition-item={item.id} key={item.id}
             draggable
-            onDragStart={() => handleArrangeDragStart(item.id)}
+            onDragStart={e=>{e.dataTransfer.setData("text/plain",item.id);handleArrangeDragStart(item.id);}}
+            onClick={()=>handleArrangeDragStart(item.id)} aria-pressed={dragArrangeItem===item.id} role="button" tabIndex={0} aria-label={"Select "+item.label}
+            onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();handleArrangeDragStart(item.id);}}}
             className={`p-3 rounded-lg border-2 border-dashed cursor-grab active:cursor-grabbing transition-all text-center font-serif text-sm
               ${isItemUsed(item.id, arrangedSlots)
                 ? 'border-gray-300 bg-gray-100 dark:bg-gray-800 text-gray-400 opacity-50'
@@ -321,9 +333,11 @@ export const StoryActivityView: React.FC = () => {
           const isCorrect = arrangedItem === target.correctItemId;
           return (
             <div
-              key={target.id}
+              data-tradition-target={target.id} key={target.id}
               onDragOver={handleDragOver}
-              onDrop={() => handleArrangeDrop(target.id)}
+              onDrop={e=>{e.preventDefault();handleArrangeDrop(target.id,e.dataTransfer.getData("text/plain"));}}
+              onClick={()=>handleArrangeDrop(target.id)} role="button" tabIndex={0} aria-label={"Place selected label: "+target.label}
+              onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();handleArrangeDrop(target.id);}}}
               className={`p-4 rounded-xl border-2 transition-all ${
                 arrangedItem
                   ? isCorrect
@@ -352,9 +366,11 @@ export const StoryActivityView: React.FC = () => {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {shuffledItems.map((item) => (
           <div
-            key={item.id}
+            data-tradition-item={item.id} key={item.id}
             draggable
-            onDragStart={() => handleMatchDragStart(item.id)}
+            onDragStart={e=>{e.dataTransfer.setData("text/plain",item.id);handleMatchDragStart(item.id);}}
+            onClick={()=>handleMatchDragStart(item.id)} aria-pressed={dragMatchItem===item.id} role="button" tabIndex={0} aria-label={"Select "+item.label}
+            onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();handleMatchDragStart(item.id);}}}
             className={`p-3 rounded-lg border-2 border-dashed cursor-grab active:cursor-grabbing transition-all text-center font-serif text-sm
               ${isItemUsed(item.id, matchAnswers)
                 ? 'border-gray-300 bg-gray-100 dark:bg-gray-800 text-gray-400 opacity-50'
@@ -373,9 +389,11 @@ export const StoryActivityView: React.FC = () => {
           const isCorrect = matchItem === target.correctItemId;
           return (
             <div
-              key={target.id}
+              data-tradition-target={target.id} key={target.id}
               onDragOver={handleDragOver}
-              onDrop={() => handleMatchDrop(target.id)}
+              onDrop={e=>{e.preventDefault();handleMatchDrop(target.id,e.dataTransfer.getData("text/plain"));}}
+              onClick={()=>handleMatchDrop(target.id)} role="button" tabIndex={0} aria-label={"Place selected label: "+target.label}
+              onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();handleMatchDrop(target.id);}}}
               className={`p-4 rounded-xl border-2 transition-all ${
                 matchItem
                   ? isCorrect

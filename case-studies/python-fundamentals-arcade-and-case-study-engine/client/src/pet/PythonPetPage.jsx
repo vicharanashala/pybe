@@ -1,19 +1,13 @@
+import {cancelPython} from '../../../../../library/learning/python-client.mjs';
+import {createStoryPythonHook} from '../../../../../shared/story-python.mjs';
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+import {createArcadePythonBridge} from '../../../../../shared/story-arcade-python.mjs';
+const useStoryPython=createStoryPythonHook(React),useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect, useRef } from 'react';
 import { Gamepad2, Play, RotateCcw, AlertTriangle, CheckCircle, Terminal } from 'lucide-react';
 
 // ─── Cyberpunk Neon Theme Palette ─────────────────────────────────────────────
-const Theme = {
-  bg: '#0a0f12',
-  cardBg: '#12181c',
-  border: '#1f2b34',
-  text: '#ffffff',
-  muted: '#7f93a1',
-  neonGreen: '#39ff14',
-  neonCyan: '#00f3ff',
-  neonPink: '#ff007f',
-  neonYellow: '#ffea00',
-  error: '#ff3b30'
-};
+import {arcadeTheme as Theme} from '../../../../../shared/story-arcade-theme.mjs';
 
 // ─── Neon Progress Bar ────────────────────────────────────────────────────────
 function NeonProgressBar({ label, value, color }) {
@@ -123,14 +117,14 @@ function PixelDino({ state }) {
         {isDead ? (
           // Dead Dino Flat on back
           <g transform="rotate(90 50 50) translate(0, 10)">
-            <rect x="25" y="45" width="50" height="20" rx="6" fill="#1f2b34" stroke={Theme.neonPink} strokeWidth="2" />
+            <rect x="25" y="45" width="50" height="20" rx="6" fill="#d4b298" stroke={Theme.neonPink} strokeWidth="2" />
             {/* Tail */}
-            <path d="M 25 55 L 5 45 L 25 45 Z" fill="#1f2b34" stroke={Theme.neonPink} strokeWidth="2" />
+            <path d="M 25 55 L 5 45 L 25 45 Z" fill="#d4b298" stroke={Theme.neonPink} strokeWidth="2" />
             {/* Feet */}
-            <rect x="35" y="35" width="6" height="10" fill="#1f2b34" stroke={Theme.neonPink} strokeWidth="2" />
-            <rect x="55" y="35" width="6" height="10" fill="#1f2b34" stroke={Theme.neonPink} strokeWidth="2" />
+            <rect x="35" y="35" width="6" height="10" fill="#d4b298" stroke={Theme.neonPink} strokeWidth="2" />
+            <rect x="55" y="35" width="6" height="10" fill="#d4b298" stroke={Theme.neonPink} strokeWidth="2" />
             {/* Head */}
-            <rect x="65" y="35" width="22" height="22" rx="4" fill="#1f2b34" stroke={Theme.neonPink} strokeWidth="2" />
+            <rect x="65" y="35" width="22" height="22" rx="4" fill="#d4b298" stroke={Theme.neonPink} strokeWidth="2" />
             {/* X Eyes */}
             <path d="M 72 42 L 76 46 M 76 42 L 72 46" stroke={Theme.neonPink} strokeWidth="2" />
           </g>
@@ -140,7 +134,7 @@ function PixelDino({ state }) {
             {/* Tail */}
             <path
               d="M 25 65 L 5 50 L 25 50 Z"
-              fill={isSad ? '#1f2b34' : '#2e4c3e'}
+              fill={isSad ? '#d4b298' : '#2e4c3e'}
               stroke={isSad ? Theme.border : Theme.neonGreen}
               strokeWidth="2.5"
               style={{
@@ -178,7 +172,7 @@ function PixelDino({ state }) {
               fill={isSad ? '#1d262b' : '#1a2e24'}
               stroke={isSad ? Theme.border : Theme.neonGreen}
               strokeWidth="2.5"
-              transform={isPlaying ? 'rotate(10 38 74)' : 'none'}
+              transform={isPlaying ? 'rotate(10 38 74)' : undefined}
             />
             <rect
               x="50"
@@ -189,11 +183,11 @@ function PixelDino({ state }) {
               fill={isSad ? '#1d262b' : '#1a2e24'}
               stroke={isSad ? Theme.border : Theme.neonGreen}
               strokeWidth="2.5"
-              transform={isPlaying ? 'rotate(-10 50 74)' : 'none'}
+              transform={isPlaying ? 'rotate(-10 50 74)' : undefined}
             />
 
             {/* Neck & Head */}
-            <g transform={isEating ? 'rotate(5 55 52)' : 'none'}>
+            <g transform={isEating ? 'rotate(5 55 52)' : undefined}>
               <rect
                 x="50"
                 y="30"
@@ -252,18 +246,21 @@ function PixelDino({ state }) {
 }
 
 // ─── Main PythonPetPage Component ─────────────────────────────────────────────
-export default function PythonPetPage() {
+export default function PythonPetPage({onComplete}) {
+  const {run,running:runtimeRunning}=useStoryPython();
+  const epochRef=useRef(0);
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [hunger, setHunger] = useState(50);
   const [energy, setEnergy] = useState(50);
   const [happiness, setHappiness] = useState(50);
   const [cycle, setCycle] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [logs, setLogs] = useState(['Tamagotchi simulation loaded. Engaged with local Pyodide interpreter.']);
+  const [logs, setLogs] = useState(['Tamagotchi simulation loaded. Ready for your Python program.']);
   const [animationState, setAnimationState] = useState('idle');
   const [resultMessage, setResultMessage] = useState(null);
   
-  const [pyodide, setPyodide] = useState(null);
-  const [pyodideLoading, setPyodideLoading] = useState(false);
+  const [pyodide] = useState(()=>createArcadePythonBridge(run));
+  const pyodideLoading=runtimeRunning;
 
   const defaultCode = `# Dino Pet Autopilot Control Script
 # Stats available: pet.hunger (0-100), pet.energy (0-100), pet.happiness (0-100)
@@ -285,31 +282,10 @@ else:
   const runningRef = useRef(false);
 
   // Initialize Pyodide on mount or first execution
-  const initPyodide = async () => {
-    if (pyodide) return pyodide;
-    setPyodideLoading(true);
-    try {
-      if (!window.loadPyodide) {
-        await new Promise((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = '/pyodide/pyodide.js';
-          script.onload = resolve;
-          script.onerror = () => reject(new Error('Failed to load local Pyodide files.'));
-          document.head.appendChild(script);
-        });
-      }
-      const py = await window.loadPyodide({ indexURL: '/pyodide/' });
-      setPyodide(py);
-      setPyodideLoading(false);
-      return py;
-    } catch (err) {
-      setLogs(prev => [...prev, `[ERROR] Failed to load local Pyodide: ${err.message}`]);
-      setPyodideLoading(false);
-      return null;
-    }
-  };
+  const initPyodide = async () => pyodide;
 
   const handleReset = () => {
+    epochRef.current++;if(runtimeRunning)cancelPython();
     runningRef.current = false;
     setIsRunning(false);
     setHunger(50);
@@ -322,7 +298,8 @@ else:
   };
 
   const runSimulation = async () => {
-    if (isRunning) return;
+    if (isRunning||runtimeRunning) return;
+    const epoch=++epochRef.current;
     
     // Reset stats for clean simulation start
     let curHunger = 50;
@@ -345,7 +322,7 @@ else:
     runningRef.current = true;
 
     const runDayCycle = async (day) => {
-      if (!runningRef.current) return;
+      if (!runningRef.current||epochRef.current!==epoch) return;
 
       setCycle(day);
 
@@ -404,6 +381,7 @@ pet = VirtualPet(${curHunger}, ${curEnergy}, ${curHappiness})
       try {
         await py.runPythonAsync(code);
         
+        if(!runningRef.current||epochRef.current!==epoch)return;
         // Extract actions
         const action = py.runPython('pet._action');
         const param = py.runPython('pet._action_param');
@@ -435,6 +413,7 @@ pet = VirtualPet(${curHunger}, ${curEnergy}, ${curHappiness})
         setHappiness(curHappiness);
 
       } catch (err) {
+          if(epochRef.current!==epoch)return;
         setLogs(prev => [...prev, `[RUNTIME ERROR] Day ${day}: ${err.message}`]);
         setResultMessage({
           success: false,
@@ -465,6 +444,7 @@ pet = VirtualPet(${curHunger}, ${curEnergy}, ${curHappiness})
         setIsRunning(false);
         runningRef.current = false;
         setAnimationState('idle');
+        onComplete?.();
         setLogs(prev => [...prev, '✓ Autopilot successfully completed the 10-day survival test!']);
         setResultMessage({
           success: true,
@@ -519,7 +499,7 @@ pet = VirtualPet(${curHunger}, ${curEnergy}, ${curHappiness})
             disabled={isRunning || pyodideLoading}
             style={{
               background: isRunning ? '#162026' : Theme.neonGreen,
-              color: isRunning ? Theme.muted : '#0a0f12',
+              color: isRunning ? Theme.muted : '#fffaf3',
               border: 'none',
               borderRadius: 10,
               padding: '0.65rem 1.25rem',
@@ -533,7 +513,7 @@ pet = VirtualPet(${curHunger}, ${curEnergy}, ${curHappiness})
               transition: 'all 0.2s ease'
             }}
           >
-            <Play size={16} /> {pyodideLoading ? 'Loading Pyodide...' : isRunning ? 'Autopilot Running...' : 'Start Autopilot'}
+            <Play size={16} /> {isRunning ? 'Autopilot Running...' : pyodideLoading ? 'Preparing Python...' : 'Start Autopilot'}
           </button>
           <button
             onClick={handleReset}
@@ -655,7 +635,7 @@ pet = VirtualPet(${curHunger}, ${curEnergy}, ${curHappiness})
 
       {/* Outcome Cards */}
       {resultMessage && (
-        <div style={{
+        <div className="arcade-feedback" role="status" style={{
           background: resultMessage.success ? 'rgba(57,255,20,0.06)' : 'rgba(255,0,127,0.06)',
           border: resultMessage.success ? `1px solid ${Theme.neonGreen}` : `1px solid ${Theme.neonPink}`,
           borderRadius: 16,

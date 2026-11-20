@@ -112,7 +112,6 @@ except ValueError as e:
   reflectionPrompt:
     "Draupadi didn't wait for someone else to notice the injustice needed answering, she said so herself, on her own authority. Where else does declaring a problem explicitly, rather than waiting for it to surface on its own, change how a story unfolds?",
 
-  badgeUnlocked: "Pratigya, The Vow That Demanded an Answer",
 };
 
 export default raiseKeyword;

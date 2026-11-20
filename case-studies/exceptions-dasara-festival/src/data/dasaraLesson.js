@@ -365,16 +365,16 @@ day_input = "vijayadashami"   # visitor's choice
 
 _____:
     day_num = festival_days[day_input]
-    _____:
-        print(f"Registered for day {day_num}.")
-_____  KeyError:
+_____ KeyError:
     print(f"Unknown festival day: {day_input}")
+_____:
+    print(f"Registered for day {day_num}.")
 _____:
     print("Registration desk closed for this request.")`,
       blanks: [
         { id: 'b1', answer: 'try',     hint: 'The keyword that begins the block to attempt', position: 'line 9'  },
-        { id: 'b2', answer: 'else',    hint: 'Runs only when the try block succeeds without an exception', position: 'line 11' },
-        { id: 'b3', answer: 'except',  hint: 'The keyword that catches a specific exception type', position: 'line 13' },
+        { id: 'b2', answer: 'except', hint: 'The keyword that catches a specific exception type', position: 'line 11' },
+        { id: 'b3', answer: 'else', hint: 'Runs only when the try block succeeds without an exception', position: 'line 13' },
         { id: 'b4', answer: 'finally', hint: 'Runs whether an exception occurred or not', position: 'line 15' },
       ],
       executionPaths: {

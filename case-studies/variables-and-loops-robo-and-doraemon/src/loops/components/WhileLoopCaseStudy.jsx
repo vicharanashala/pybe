@@ -41,13 +41,12 @@ export default function WhileLoopCaseStudy({ onNext }) {
 
   if (phase === 'quiz') {
     return (
-      <div className="lp-scene">
+      <div data-robo-well={phase} className="lp-scene">
         <span className="lp-concept-tag">Case study · While loop</span>
         <MiniChallenge
           prompt="Did Robo know in advance how many scoops the bucket would need?"
           options={KNEW_IN_ADVANCE_OPTIONS}
           explanation="Right — nobody knew ahead of time. Robo only ever checked one thing: ‘Is the bucket full yet?’ As long as the answer was no, he kept scooping."
-          rewardLabel="Well Badge"
           onNext={() => setPhase('reveal')}
         />
       </div>
@@ -56,7 +55,7 @@ export default function WhileLoopCaseStudy({ onNext }) {
 
   if (phase === 'reveal') {
     return (
-      <div className="lp-scene lp-case-reveal">
+      <div data-robo-well={phase} className="lp-scene lp-case-reveal">
         <span className="lp-concept-tag">Case study · While loop</span>
         <h2>Unknown count, checked condition</h2>
         <div className="lp-case-mapping">
@@ -79,7 +78,7 @@ export default function WhileLoopCaseStudy({ onNext }) {
   }
 
   return (
-    <div className="lp-scene lp-case-study lp-case-while">
+    <div data-robo-well={phase} className="lp-scene lp-case-study lp-case-while">
       <span className="lp-concept-tag">Case study · While loop</span>
       <h2>The Magic Well</h2>
       <p className="lp-scene-intro">

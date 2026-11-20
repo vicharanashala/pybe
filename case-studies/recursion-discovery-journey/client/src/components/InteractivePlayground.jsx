@@ -1,3 +1,4 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, RotateCcw, Terminal, Sparkles, ChevronRight, Unlock, Lightbulb, Layers } from 'lucide-react';
 
@@ -55,7 +56,9 @@ function lineColor(type) {
    MirrorMission
    Props: onMissionComplete — callback when student successfully runs code
    ═══════════════════════════════════════════════════════════════════════════ */
+const useStoryTimers=createStoryTimersHook(React);
 export default function MirrorMission({ onMissionComplete }) {
+  const {setTimeout}=useStoryTimers();
   const [runPhase,      setRunPhase]      = useState('idle');   // idle|running|done
   const [execIdx,       setExecIdx]       = useState(-1);
   const [highlighted,   setHighlighted]   = useState([]);

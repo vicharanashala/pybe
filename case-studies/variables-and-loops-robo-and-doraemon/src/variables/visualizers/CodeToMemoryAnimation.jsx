@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useEffect, useState } from 'react';
 import MemoryPocket from '../components/MemoryPocket';
 
@@ -10,6 +12,7 @@ import MemoryPocket from '../components/MemoryPocket';
 // with "assignment" for the rest of the module.
 // ---------------------------------------------------------------------------
 export default function CodeToMemoryAnimation({ code, pocketLabel, varName, emoji, autoPlay = true, onDone }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [stage, setStage] = useState('code'); // code -> flowing -> landed
   const [playKey, setPlayKey] = useState(0);
 

@@ -42,7 +42,6 @@ export const MISSIONS = [
     chapterId: 1,
     title: 'More Seeds for the Farm',
     concept: 'Variables',
-    xp: 50,
     objective: "Maya's store holds 20 seeds. A neighbour just brought 10 more. Update the seeds variable so it holds the new total.",
     starterCode: 'seeds = 20\n\n# Maya receives 10 more seeds\n',
     setup: [],
@@ -146,7 +145,6 @@ export const MISSIONS = [
     chapterId: 2,
     title: 'Should Maya Water the Crops?',
     concept: 'if / else conditions',
-    xp: 75,
     objective:
       'Water the crops when it is not raining, and leave the tank alone when it is. The farm lends you water_crops() to water them, and a water tank holding 50.',
     starterCode: 'weather = "sunny"\n\n# Decide whether Maya should water the crops\n',

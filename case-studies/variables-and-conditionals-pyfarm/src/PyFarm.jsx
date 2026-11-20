@@ -15,7 +15,7 @@ import {
 } from './engine/farmState';
 
 function ChapterSelect({ farm, hintsUsed, onOpen, onReset }) {
-  const total = CHAPTERS.reduce((sum, c) => sum + (getMissionForChapter(c.id)?.xp ?? 0), 0);
+
   const anyProgress = farm.completedMissions.length > 0;
 
   return (
@@ -28,7 +28,7 @@ function ChapterSelect({ farm, hintsUsed, onOpen, onReset }) {
           farm changes because of what your code did — not because you were told it was right.
         </p>
         <p className="pf-select-progress">
-          <span aria-hidden="true">⭐</span> {farm.xp} of {total} XP earned
+          {farm.completedMissions.length} of {CHAPTERS.length} chapters complete
         </p>
       </div>
 
@@ -56,12 +56,12 @@ function ChapterSelect({ farm, hintsUsed, onOpen, onReset }) {
                 <span className="pf-chapter-foot">
                   {done ? (
                     <>
-                      <span aria-hidden="true">✔</span> Complete · {mission.xp} XP earned
+                      <span aria-hidden="true">✔</span> Complete
                       {hints > 0 && ` · ${hints} hint${hints === 1 ? '' : 's'} used`}
                     </>
                   ) : unlocked ? (
                     <>
-                      <span aria-hidden="true">▶</span> Available now · {mission.xp} XP
+                      <span aria-hidden="true">▶</span> Available now
                     </>
                   ) : (
                     <>
@@ -94,18 +94,18 @@ function ChapterSelect({ farm, hintsUsed, onOpen, onReset }) {
   );
 }
 
-export default function PyFarm({ onExit }) {
+export default function PyFarm({ onExit, onComplete }) {
   const [farm, dispatch] = useReducer(farmReducer, INITIAL_FARM);
   const [hintsUsed, setHintsUsed] = useState({});
   const [openChapterId, setOpenChapterId] = useState(null);
   const [restored, setRestored] = useState(false);
 
-  // Bring back earned XP on load, so a refresh mid-chapter does not cost the
+  // Restore completed chapters, so a refresh mid-chapter does not cost the
   // learner what they already finished.
   useEffect(() => {
     const saved = loadProgress();
     if (saved) {
-      dispatch({ type: 'RESTORE', farm: { xp: saved.xp, completedMissions: saved.completedMissions } });
+      dispatch({ type: 'RESTORE', farm: { completedMissions: saved.completedMissions } });
       setHintsUsed(saved.hintsUsed);
     }
     setRestored(true);
@@ -115,8 +115,12 @@ export default function PyFarm({ onExit }) {
   // saved progress with the empty starting state.
   useEffect(() => {
     if (!restored) return;
-    saveProgress({ xp: farm.xp, completedMissions: farm.completedMissions, hintsUsed });
-  }, [farm.xp, farm.completedMissions, hintsUsed, restored]);
+    saveProgress({ completedMissions: farm.completedMissions, hintsUsed });
+  }, [farm.completedMissions, hintsUsed, restored]);
+
+  useEffect(() => {
+    if (CHAPTERS.every(chapter => farm.completedMissions.includes(chapter.missionId))) onComplete?.();
+  }, [farm.completedMissions, onComplete]);
 
   const handleHintUsed = useCallback((missionId) => {
     setHintsUsed((current) => ({ ...current, [missionId]: (current[missionId] ?? 0) + 1 }));

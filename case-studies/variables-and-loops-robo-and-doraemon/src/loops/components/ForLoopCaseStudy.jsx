@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useEffect, useRef, useState } from 'react';
 import MiniChallenge from './MiniChallenge';
 
@@ -52,6 +54,7 @@ function makeBooks() {
 }
 
 export default function ForLoopCaseStudy({ onNext }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [phase, setPhase] = useState('intro'); // 'intro' | 'library' | 'quiz' | 'reveal'
   const [beat, setBeat] = useState(0);
   const [books, setBooks] = useState(makeBooks);
@@ -94,7 +97,7 @@ export default function ForLoopCaseStudy({ onNext }) {
     const line = INTRO_BEATS[beat];
     const isLast = beat === INTRO_BEATS.length - 1;
     return (
-      <div className="lp-scene lp-library-scene-wrap">
+      <div data-robo-library={phase} className="lp-scene lp-library-scene-wrap">
         <span className="lp-concept-tag">Case study · For loop</span>
         <h2>📚 Robo and the Magic Library</h2>
 
@@ -135,7 +138,7 @@ export default function ForLoopCaseStudy({ onNext }) {
   // ------------------------------------------------------------- quiz ----
   if (phase === 'quiz') {
     return (
-      <div className="lp-scene">
+      <div data-robo-library={phase} className="lp-scene">
         <span className="lp-concept-tag">Case study · For loop</span>
         <MiniChallenge
           prompt="How did Robo know when the work would finish?"
@@ -152,7 +155,7 @@ export default function ForLoopCaseStudy({ onNext }) {
   if (phase === 'reveal') {
     const showTransition = revealStep > REVEAL_CARDS.length;
     return (
-      <div className="lp-scene lp-case-reveal">
+      <div data-robo-library={phase} className="lp-scene lp-case-reveal">
         <span className="lp-concept-tag">Case study · For loop</span>
         <h2>Known count, known repetitions</h2>
 
@@ -186,7 +189,7 @@ export default function ForLoopCaseStudy({ onNext }) {
 
   // ----------------------------------------------------------- library ---
   return (
-    <div className="lp-scene lp-library-scene-wrap">
+    <div data-robo-library={phase} className="lp-scene lp-library-scene-wrap">
       <span className="lp-concept-tag">Case study · For loop</span>
       <h2>The Stamping Table</h2>
       <p className="lp-scene-intro">

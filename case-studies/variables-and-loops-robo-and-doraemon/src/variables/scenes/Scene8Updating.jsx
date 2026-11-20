@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useEffect, useState } from 'react';
 import SceneShell from '../components/SceneShell';
 import SpeechBubble from '../components/SpeechBubble';
@@ -10,7 +12,8 @@ const DOOR = GADGETS[0];
 // Anywhere Door. Doraemon needs to store the Time Machine there instead.
 // The old gadget visibly fades away before the new one arrives — making it
 // unmistakable that a variable replaces its value, it never keeps both.
-export default function Scene8Updating({ onNext, memory, setMemory, onGem }) {
+export default function Scene8Updating({ onNext, memory, setMemory }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [phase, setPhase] = useState('before'); // before -> fading -> landed
   const current = memory.travel || DOOR;
 
@@ -19,7 +22,6 @@ export default function Scene8Updating({ onNext, memory, setMemory, onGem }) {
       const t = setTimeout(() => {
         setMemory((prev) => ({ ...prev, travel: TIME_MACHINE }));
         setPhase('landed');
-        onGem?.();
       }, 650);
       return () => clearTimeout(t);
     }

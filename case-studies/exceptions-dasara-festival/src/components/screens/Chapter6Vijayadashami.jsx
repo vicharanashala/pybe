@@ -1,3 +1,4 @@
+import {parseTemplate} from '../../../../../library/learning/core.mjs';
 import React, { useState } from 'react';
 import { sound } from '../../services/soundEngine.js';
 
@@ -18,8 +19,8 @@ export default function Chapter6Vijayadashami({ chapter, onChallengeSolved, onCo
   };
 
   const isB1Correct = answers.b1 === 'try';
-  const isB2Correct = answers.b2 === 'else';
-  const isB3Correct = answers.b3 === 'except';
+  const isB2Correct = answers.b2 === 'except';
+  const isB3Correct = answers.b3 === 'else';
   const isB4Correct = answers.b4 === 'finally';
   const allCorrect = isB1Correct && isB2Correct && isB3Correct && isB4Correct;
 
@@ -34,7 +35,7 @@ export default function Chapter6Vijayadashami({ chapter, onChallengeSolved, onCo
   };
 
   const handleFillAll = () => {
-    setAnswers({ b1: 'try', b2: 'else', b3: 'except', b4: 'finally' });
+    setAnswers({ b1: 'try', b2: 'except', b3: 'else', b4: 'finally' });
     setChecked(true);
     sound.playSuccess();
     if (onChallengeSolved) onChallengeSolved(true);
@@ -78,73 +79,13 @@ export default function Chapter6Vijayadashami({ chapter, onChallengeSolved, onCo
           <p className="blanks-lead">Fill in the 4 blanks to assemble the pipeline:</p>
 
           <div className="pybe-editor-box">
-            <pre className="blank-code-line">festival_days = &#123; &quot;vijayadashami&quot;: 10, &quot;navami&quot;: 9 &#125;</pre>
-            <pre className="blank-code-line">day_input = &quot;vijayadashami&quot;</pre>
-            <pre className="blank-code-line"></pre>
-
-            {/* Blank 1: try */}
-            <div className="editor-input-row">
-              <input
-                type="text"
-                className={`pybe-blank-field ${checked ? (isB1Correct ? 'field-ok' : 'field-fail') : ''}`}
-                value={answers.b1}
-                onChange={(e) => handleChange('b1', e.target.value)}
-                placeholder="blank 1"
-                aria-label="Blank 1: Keyword that begins the block"
-              />
-              <span className="field-colon">:</span>
-              <span className="field-hint">Hint: {blanks[0].hint}</span>
-            </div>
-
-            <pre className="blank-code-line">    day_num = festival_days[day_input]</pre>
-
-            {/* Blank 2: else */}
-            <div className="editor-input-row">
-              <input
-                type="text"
-                className={`pybe-blank-field ${checked ? (isB2Correct ? 'field-ok' : 'field-fail') : ''}`}
-                value={answers.b2}
-                onChange={(e) => handleChange('b2', e.target.value)}
-                placeholder="blank 2"
-                aria-label="Blank 2: Runs when try succeeds"
-              />
-              <span className="field-colon">:</span>
-              <span className="field-hint">Hint: {blanks[1].hint}</span>
-            </div>
-
-            <pre className="blank-code-line">        print(f"Registered for day &#123;day_num&#125;.")</pre>
-
-            {/* Blank 3: except */}
-            <div className="editor-input-row">
-              <input
-                type="text"
-                className={`pybe-blank-field ${checked ? (isB3Correct ? 'field-ok' : 'field-fail') : ''}`}
-                value={answers.b3}
-                onChange={(e) => handleChange('b3', e.target.value)}
-                placeholder="blank 3"
-                aria-label="Blank 3: Catches KeyError"
-              />
-              <span className="field-colon"> KeyError:</span>
-              <span className="field-hint">Hint: {blanks[2].hint}</span>
-            </div>
-
-            <pre className="blank-code-line">    print(f"Unknown day: &#123;day_input&#125;")</pre>
-
-            {/* Blank 4: finally */}
-            <div className="editor-input-row">
-              <input
-                type="text"
-                className={`pybe-blank-field ${checked ? (isB4Correct ? 'field-ok' : 'field-fail') : ''}`}
-                value={answers.b4}
-                onChange={(e) => handleChange('b4', e.target.value)}
-                placeholder="blank 4"
-                aria-label="Blank 4: Always runs"
-              />
-              <span className="field-colon">:</span>
-              <span className="field-hint">Hint: {blanks[3].hint}</span>
-            </div>
-
-            <pre className="blank-code-line">    print("Registration desk closed.")</pre>
+            <pre className="blank-code-line" style={{whiteSpace:'pre-wrap'}}>{parseTemplate(chapter.finalCodeChallenge.template).parts.map((part,index)=>{
+              if(part.type==='text')return <React.Fragment key={index}>{part.content}</React.Fragment>;
+              const blank=blanks[part.index];
+              const correct=answers[blank.id] === blank.answer;
+              return <input key={index} type="text" className={`pybe-blank-field ${checked ? (correct ? 'field-ok' : 'field-fail') : ''}`} value={answers[blank.id]} onChange={event=>handleChange(blank.id,event.target.value)} placeholder={`blank ${part.index+1}`} aria-label={`Blank ${part.index+1}: ${blank.hint}`} title={blank.hint}/>;
+            })}</pre>
+            <ol>{blanks.map(blank=><li key={blank.id} className="field-hint">{blank.hint}</li>)}</ol>
           </div>
 
           <div className="blanks-actions">
@@ -164,7 +105,7 @@ export default function Chapter6Vijayadashami({ chapter, onChallengeSolved, onCo
               <p>
                 {allCorrect
                   ? 'All 4 keywords placed correctly. Notice how else only runs on success, while finally always runs.'
-                  : 'Make sure you type: try, else, except, and finally.'}
+                  : 'Make sure you type: try, except, else, and finally.'}
               </p>
             </div>
           )}

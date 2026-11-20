@@ -4,29 +4,28 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import TitleScreen from '@/components/TitleScreen';
-import SceneMap from '@/components/SceneMap';
-import ScenePlayer from '@/components/ScenePlayer';
-import ToastStack from '@/components/ToastStack';
-import AchievementsPanel from '@/components/AchievementsPanel';
-import { useGameState } from '@/state/useGameState';
-import { unlockAudio, playSfx } from '@/audio/soundEngine';
-import { SCENES } from '@/data';
-import type { Scene } from '@/data';
+import TitleScreen from './components/TitleScreen';
+import SceneMap from './components/SceneMap';
+import ScenePlayer from './components/ScenePlayer';
+
+
+import { useGameState } from './state/useGameState';
+import { unlockAudio, playSfx, disposeAudio } from './audio/soundEngine';
+import { SCENES } from './data';
+import type { Scene } from './data';
 
 type View = 'title' | 'map' | 'scene';
 
-export default function App() {
+export default function App({onComplete=()=>{}}) {
   const game = useGameState();
   const [view, setView] = useState<View>('title');
   const [sceneIndex, setSceneIndex] = useState(0);
-  const [achievementsOpen, setAchievementsOpen] = useState(false);
 
   // Unlock audio on first user interaction.
   useEffect(() => {
     const handler = () => unlockAudio();
     window.addEventListener('pointerdown', handler, { once: true });
-    return () => window.removeEventListener('pointerdown', handler);
+    return () => {window.removeEventListener('pointerdown', handler);disposeAudio();};
   }, []);
 
   const begin = useCallback(() => {
@@ -54,18 +53,17 @@ export default function App() {
   );
 
   const nextScene = useCallback(() => {
-    setSceneIndex((i) => {
-      const n = Math.min(i + 1, SCENES.length - 1);
-      game.setLastScene(SCENES[n].id);
-      return n;
-    });
-  }, [game]);
+    const n=Math.min(sceneIndex+1,SCENES.length-1);
+    game.setLastScene(SCENES[n].id);
+    setSceneIndex(n);
+  }, [game,sceneIndex]);
 
   const prevScene = useCallback(() => {
     setSceneIndex((i) => Math.max(0, i - 1));
   }, []);
 
   const currentScene = SCENES[sceneIndex];
+  useEffect(()=>{if(game.completedScenes.length===SCENES.length)onComplete();},[game.completedScenes.length,onComplete]);
 
   return (
     <div className="min-h-screen bg-stone-950 font-sans text-stone-100 antialiased">
@@ -73,13 +71,13 @@ export default function App() {
         {view === 'title' && (
           <motion.div key="title" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <TitleScreen
-              xp={game.xp}
+
               completedCount={game.completedScenes.length}
               totalScenes={game.totalScenes}
               muted={game.muted}
               onToggleMute={game.toggleMute}
               onBegin={begin}
-              onOpenAchievements={() => setAchievementsOpen(true)}
+
             />
           </motion.div>
         )}
@@ -90,11 +88,11 @@ export default function App() {
               scenes={SCENES}
               completedScenes={game.completedScenes}
               lastSceneId={game.lastSceneId}
-              xp={game.xp}
+
               muted={game.muted}
               onToggleMute={game.toggleMute}
               onSelect={selectScene}
-              onOpenAchievements={() => setAchievementsOpen(true)}
+
               onExit={() => setView('title')}
               onReset={game.reset}
             />
@@ -120,13 +118,7 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <ToastStack toasts={game.toasts} onDismiss={game.dismissToast} />
-      <AchievementsPanel
-        open={achievementsOpen}
-        onClose={() => setAchievementsOpen(false)}
-        achievements={game.achievements}
-        unlocked={game.unlockedAchievements}
-      />
+
     </div>
   );
 }

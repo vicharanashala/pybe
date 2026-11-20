@@ -1,9 +1,10 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useRef, useEffect } from 'react';
 import { useGame } from '../context/GameContext';
 
 export const useSoundFX = () => {
   const { isMuted } = useGame();
   const audioCtxRef = useRef(null);
+  useEffect(()=>()=>{const ctx=audioCtxRef.current;audioCtxRef.current=null;if(ctx&&ctx.state!=='closed')void ctx.close();},[]);
 
   const getAudioContext = useCallback(() => {
     if (typeof window === 'undefined') return null;

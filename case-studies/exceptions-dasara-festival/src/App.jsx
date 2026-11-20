@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect, useCallback } from 'react';
 import { CHAPTERS, MODULE_META } from './data/dasaraLesson.js';
 import { sound } from './services/soundEngine.js';
@@ -16,7 +18,9 @@ import Chapter6Vijayadashami from './components/screens/Chapter6Vijayadashami.js
 import Chapter7CodeLab from './components/screens/Chapter7CodeLab.jsx';
 import Chapter8Assessment from './components/screens/Chapter8Assessment.jsx';
 
-export default function App() {
+export default function App({onComplete}) {
+  const {setTimeout}=useStoryTimers();
+  useEffect(()=>()=>sound.dispose(),[]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [completedIndices, setCompletedIndices] = useState(new Set([0]));
   const [sfxEnabled, setSfxEnabled] = useState(true);
@@ -220,7 +224,7 @@ export default function App() {
           <Chapter8Assessment
             chapter={currentChapter}
             savedAnswers={assessmentResult?.userAnswers}
-            onAssessmentComplete={(res) => setAssessmentResult(res)}
+            onAssessmentComplete={(res) => {setAssessmentResult(res);if(res.passed)onComplete?.();}}
             onRestart={() => goToChapter(0)}
           />
         )}

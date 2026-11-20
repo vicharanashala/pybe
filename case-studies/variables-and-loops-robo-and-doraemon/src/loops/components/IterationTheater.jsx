@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState } from 'react';
 import { Play } from 'lucide-react';
 import { useSharedPyodide } from '../../shared/pyodide/PyodideContext';
@@ -6,6 +8,7 @@ import { buildLoopTracerHarness } from '../data/loopTracerHarness';
 const CODE = 'for day in range(1, 6):\n    print("Day", day)\n';
 
 export default function IterationTheater({ onNext }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const { status, runHarness } = useSharedPyodide();
   const [days, setDays] = useState([]);
   const [running, setRunning] = useState(false);
@@ -59,10 +62,6 @@ export default function IterationTheater({ onNext }) {
 
       {done && (
         <>
-          <div className="lp-reward-toast lp-reward-inline">
-            <span className="lp-reward-icon">{'🔮'}</span>
-            <span>Magic Rune earned!</span>
-          </div>
           <p className="lp-caption-static">Five iterations, one loop variable (day), climbing from 1 to 5 {'—'} no five separate print statements needed.</p>
           <button className="lp-mini-btn lp-cta" onClick={onNext}>Now take control of it {'→'}</button>
         </>

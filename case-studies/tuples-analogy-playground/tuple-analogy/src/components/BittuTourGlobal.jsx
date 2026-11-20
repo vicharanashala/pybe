@@ -6,7 +6,7 @@ import { useTour } from '../context/TourContext';
 
 export default function BittuTourGlobal() {
   const { 
-  activeTour, currentStep, tourSteps, skipTour, 
+  rootRef, assetBase, activeTour, currentStep, tourSteps, skipTour, 
   nextStep, prevStep, taskCompleted, layoutTrigger 
 } = useTour();
   const [targetRects, setTargetRects] = useState([]);
@@ -26,10 +26,10 @@ export default function BittuTourGlobal() {
       }
 
       const rects = ids.map(id => {
-        const el = document.getElementById(id);
+        const el = rootRef.current?.getRootNode().getElementById(id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          return { id, top: rect.top, left: rect.left, width: rect.width, height: rect.height };
+          return { id, top: rect.top, left: rect.left, width: rect.width, height: rect.height, bottom: rect.bottom, right: rect.right };
         }
         return null;
       }).filter(Boolean);
@@ -94,7 +94,7 @@ export default function BittuTourGlobal() {
         {/* Big Screen-Edge Navigation Arrows */}
         <div className="absolute inset-0 flex justify-between items-center px-4 md:px-12 pointer-events-none z-[10001]">
           <button 
-            onClick={prevStep} 
+            aria-label="Previous tour step" onClick={prevStep} 
             disabled={currentStep === 0} 
             className="pointer-events-auto bg-white/10 hover:bg-white/20 text-white p-4 rounded-full backdrop-blur-md border-2 border-white/20 transition-all disabled:opacity-0 disabled:pointer-events-none"
           >
@@ -102,7 +102,7 @@ export default function BittuTourGlobal() {
           </button>
 
           <button 
-            onClick={nextStep} 
+            aria-label="Next tour step" onClick={nextStep} 
             // Changed this to only disable if it's the very last step of the tour
             disabled={currentStep === tourSteps.length} 
             className="pointer-events-auto bg-white/10 hover:bg-white/20 text-white p-4 rounded-full backdrop-blur-md border-2 border-white/20 transition-all disabled:opacity-30 disabled:hover:bg-white/10"
@@ -123,7 +123,7 @@ export default function BittuTourGlobal() {
 >
   {/* Kept w-28 so the dialog box doesn't move. Added scale, translate, and origin to adjust it visually. */}
   <img 
-    src={imageConfig.url} 
+    src={assetBase + imageConfig.url} 
     alt={stepData.author}
     className="w-28 shrink-0 hidden sm:block object-contain scale-[1.6] -translate-y-1 origin-bottom"
   />

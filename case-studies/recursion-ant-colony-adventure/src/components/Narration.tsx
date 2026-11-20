@@ -5,7 +5,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Volume2 } from 'lucide-react';
-import { playSfx } from '@/audio/soundEngine';
+import { playSfx } from '../audio/soundEngine';
 
 interface NarrationProps {
   lines: string[];

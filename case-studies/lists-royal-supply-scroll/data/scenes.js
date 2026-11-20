@@ -411,7 +411,6 @@ const scenesData = [
     ],
     "interactive": true,
     "interactionType": "completion",
-    "badge": "assets/badge-scroll-keeper.png",
     "buttons": [
       {
         "text": "🔄 Replay Lesson",

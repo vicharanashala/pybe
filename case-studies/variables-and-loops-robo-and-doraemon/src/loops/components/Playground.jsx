@@ -42,7 +42,7 @@ export default function Playground({ onNext }) {
         ))}
       </div>
 
-      <textarea className="lp-code-editor" value={code} spellCheck={false} onChange={(e) => { setCode(e.target.value); setTrace(null); }} />
+      <textarea aria-label="Loop playground Python program" disabled={running} className="lp-code-editor" value={code} spellCheck={false} onChange={(e) => { setCode(e.target.value); setTrace(null); }} />
 
       <button className="lp-mini-btn" onClick={handleRun} disabled={status !== 'ready' || running}>
         <Play size={14} /> {running ? 'Running…' : status !== 'ready' ? 'Starting Python…' : 'Run it'}

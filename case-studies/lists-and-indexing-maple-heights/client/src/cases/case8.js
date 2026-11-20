@@ -82,10 +82,10 @@ var Case8 = (function () {
   }
   function onAllDone() {
     Building.render({ maxSlots: 6 });
-    Narrator.set({ emoji: '🏆', text: 'Inspector Vance nods approvingly and stamps a <strong>5-Star Building Certification!</strong>', actions: [] });
+    Narrator.set({ emoji: '🏢', text: 'Inspector Vance nods approvingly. <strong>The building inspection is complete.</strong>', actions: [] });
     setTimeout(function () {
       Reveal.show({
-        message: "5-Star Certification Awarded! Maple Heights is operating perfectly. 🏆⭐",
+        message: "Inspection complete! Maple Heights is operating properly.",
         code: _completed.join('\n'),
         keyIdea: 'Look at that! You solved real building management challenges using Python list methods.',
         quiz: null, isFinal: true, onComplete: function () { App.showComplete(); }

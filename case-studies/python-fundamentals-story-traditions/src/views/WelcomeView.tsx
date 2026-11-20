@@ -76,7 +76,7 @@ export const WelcomeView: React.FC<{ onBeginChronicle?: () => void }> = ({ onBeg
             </li>
             <li className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-royal-indigo" aria-hidden="true"></span>
-              <span>Simulated Playground</span>
+              <span>Python Playground</span>
             </li>
           </ul>
         </div>

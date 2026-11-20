@@ -1,0 +1,67 @@
+{
+  "samsung": {
+    "stories": 5,
+    "sha256": "cd5f19ec7bfe52db51f5a28e2c623ce685d2d9e0f9e839e52cf6969f7d7c44a1"
+  },
+  "betaal": {
+    "stories": 25,
+    "sha256": "22b269e29959d40328dd53496a6abe6684cd3bf1c1e026127604ebb9437273f5"
+  },
+  "tiffin": {
+    "pages": 15,
+    "sha256": "2e2babf4ddbb3994d6559d8cd40c6754518b49905f09c12e301ca404bb3ff141",
+    "necessaryCodeAddition": "def handoff(dabba, courier):\n    print(f\"Handed {dabba} to {courier}\")\n    return dabba\n\n"
+  },
+  "memory": {
+    "levels": 5,
+    "sha256": "d343813e242e1e494c2307f18d54e0fb822dd924fd55c9a1ed5cd17cf0a7400b"
+  },
+  "hawkins": {
+    "missions": 11,
+    "sha256": "fd5a6d3d779b152eb7f90e6e68207b1022a15867c599db12279c564d18450393"
+  },
+  "dharma": {
+    "lessons": 16,
+    "sha256": "3181862e6af006bb23b207e548f47b8e77c853817f49541e0605898756b0fcec"
+  },
+  "dasara": {
+    "chapters": 9,
+    "sha256": "79a4cdddf0add57e5c748a14a339f1703145aa1c9a921ea8a100e086339d8c5b"
+  },
+  "tuple": {
+    "sha256": "960cd42bf523d2c1addd5b3b81b0da9ec1a46fd56dc7b683ed349711e24a7364"
+  },
+  "wildlife": {
+    "sha256": "5c29cfae0a7a68005ca1b8bc757cd27ae7ede9b9a7b94363de44007915a24005"
+  },
+  "recursionDiscovery": {
+    "scenes": 7,
+    "sha256": "0b03574c5a3b9ce405404dfd7250c960e92d9cb098dd9d638c1fa50e93c213b2"
+  },
+  "birdFamily": {
+    "sha256": "a768a21cbb268b241828fe836485c129d58d5c4005ef3f6cbe52b19416a4f584"
+  },
+  "antAndRobo": {
+    "case-studies/recursion-ant-colony-adventure/src/data/story.ts": "65700cf94272ec83cab93bc062662834cf27d18bc426d50de64980ab16933e8a",
+    "case-studies/variables-and-loops-robo-and-doraemon/src/loops/data/content.js": "e2d08dd4038663de9d3f81259591bac4507aa4af47bddb1cd466f619fb251cf9",
+    "case-studies/variables-and-loops-robo-and-doraemon/src/loops/data/evaluation.js": "ac6f55da5b75e6878f427ab6bdc86830654d4043f8011534f8611ec41d91872b",
+    "case-studies/variables-and-loops-robo-and-doraemon/src/loops/data/spaceRescue.js": "96ee662a2b27b807a970bba7766426b2f83e597b561362cdfe1f814340c10202",
+    "case-studies/variables-and-loops-robo-and-doraemon/src/variables/data/gadgets.js": "bb88ed081ba62e08c6be42554bb2ac19346327cd9a73c0b40cfc71aeb43df1d9"
+  },
+  "gurukul": {
+    "sha256": "caa86f930310ac3f35354bc280a93e98130e1333875da68c0cce1da31caf8b41"
+  },
+  "poko": {
+    "sha256": "4778b70f6b2d3d0a2b394cf81480d65ce53ae2d6c006399febc81b7321417991"
+  },
+  "finalStories": {
+    "case-studies/python-fundamentals-story-traditions/src/data/curriculum.ts": "899de8a7f3c72fe80bfb8a716e3a4dba3e5a4f6e9497bd548e02ef45ff3270cc",
+    "case-studies/python-fundamentals-story-traditions/src/data/learningData.ts": "1cf121a022e52ef8058f2be97df57661dc217f240c53db822774b932c400cb1e",
+    "case-studies/python-fundamentals-story-traditions/src/data/activities.ts": "83c69913d8aa1358e381ee5064ab3b89b43bd2dca0f5b6f394b8befd46766a41",
+    "case-studies/python-fundamentals-story-traditions/src/data/levels.ts": "67014bc90fb4b507062354de7adddb916a784f75032cb1b7d30b5e2831019886",
+    "case-studies/python-fundamentals-story-traditions/src/data/pedagogy.ts": "66ff8ac183c75e6314e1687bd20b3526566e3b72fe202f001186859656db1a83",
+    "case-studies/debugging-find-and-squash-the-bug/server/src/data/db.json": "5876ad90a1d688f0c9698f8b80a3f0fcb75d69eaedaaa80174c068dc8a2380ad",
+    "case-studies/loops-royal-bakery-and-thirsty-crow/server/src/services/ai.service.js": "71409a9f7d2d6849bd304d5bf5bf0573bd5d3e83a7166b725b7701ebf318d7c9",
+    "case-studies/python-fundamentals-arcade-and-case-study-engine/server/src/data/content.json": "4511af2ed28e83501961fc62b9308991b9ef75815ce67eb9e5923c01fa543543"
+  }
+}

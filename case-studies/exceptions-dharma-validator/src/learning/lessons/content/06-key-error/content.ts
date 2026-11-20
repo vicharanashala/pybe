@@ -108,7 +108,6 @@ print(get_mentor("Ekalavya", mentors))`,
   reflectionPrompt:
     "Hanuman's search wasn't wrong to check the palace first — it was the reasonable place to look. Where else does searching the obvious place first, and coming up empty, turn out to be necessary before finding the right one?",
 
-  badgeUnlocked: "Sundara — Finder of the Hidden Grove",
 };
 
 export default keyError;

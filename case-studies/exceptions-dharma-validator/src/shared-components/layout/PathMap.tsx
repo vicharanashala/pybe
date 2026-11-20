@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Check, ChevronDown, ChevronUp, Search, Award, RefreshCw, BookOpen } from "lucide-react";
+import { ArrowRight, Check, ChevronDown, ChevronUp, Search, BookMarked, RefreshCw, BookOpen } from "lucide-react";
 import { LESSONS } from "../../learning/lessons/registry";
 import BackButton from "../ui/BackButton";
-import Badge from "../ui/Badge";
 import { useProgress } from "../../progress/useProgress";
 
 function storyExcerpt(storyBody: string, maxLength = 110): string {
@@ -14,7 +13,7 @@ function storyExcerpt(storyBody: string, maxLength = 110): string {
 }
 
 export default function PathMap() {
-  const { isComplete, completedCount, unlockedBadges, resetProgress } = useProgress();
+  const { isComplete, completedCount, resetProgress } = useProgress();
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState("");
   const [filterMode, setFilterMode] = useState<"all" | "completed" | "todo">("all");
@@ -66,7 +65,7 @@ export default function PathMap() {
         <div className="glass-card-strong max-w-xl mx-auto rounded-3xl p-5 border border-gold/30 shadow-xl mb-8">
           <div className="flex items-center justify-between mb-3 text-sm">
             <span className="text-muted flex items-center gap-2">
-              <Award size={16} className="text-gold" /> Total Mastery Progress
+              <BookMarked size={16} className="text-gold" /> Lessons Explored
             </span>
             <span className="text-gold font-bold font-mono text-base">
               {completedCount} of {total} ({progressPercent}%)
@@ -80,19 +79,7 @@ export default function PathMap() {
           </div>
         </div>
 
-        {/* Badges showcase */}
-        {unlockedBadges.length > 0 && (
-          <div className="mb-8">
-            <p className="text-xs uppercase tracking-widest text-muted mb-3 font-semibold">
-              Unlocked Dharma Badges ({unlockedBadges.length})
-            </p>
-            <div className="flex flex-wrap justify-center gap-2 max-w-2xl mx-auto">
-              {unlockedBadges.map((badge) => (
-                <Badge key={badge} label={badge} />
-              ))}
-            </div>
-          </div>
-        )}
+
       </div>
 
       {/* Filter and Search Bar */}
@@ -168,7 +155,7 @@ export default function PathMap() {
                     </span>
                     {done ? (
                       <span className="flex items-center gap-1 text-[11px] bg-[#7FBF9E]/20 text-[#7FBF9E] border border-[#7FBF9E]/40 px-2.5 py-0.5 rounded-full font-semibold">
-                        <Check size={12} /> Mastered
+                        <Check size={12} /> Explored
                       </span>
                     ) : (
                       <span className="text-[10px] text-muted uppercase tracking-widest bg-panel/60 border border-line px-2 py-0.5 rounded-full">

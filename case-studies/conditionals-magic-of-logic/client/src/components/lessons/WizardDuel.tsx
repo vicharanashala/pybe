@@ -1,9 +1,13 @@
+import * as React from 'react';
+import {createStoryTimersHook} from '../../../../../../shared/story-timers.mjs';
+const useStoryTimers = createStoryTimersHook(React);
 import { useState, useEffect, useRef } from 'react';
 import { LessonLayout } from '../LessonLayout';
 import { CodeViewer } from '../CodeViewer';
 import { SpellCanvas, SpellReference, SPELL_REFS } from './SpellCanvas';
 
 export function WizardDuel({ onComplete, isLastLesson }: { onComplete: () => void, isLastLesson: boolean }) {
+  const {setTimeout, clearTimeout, setInterval, clearInterval, requestAnimationFrame, cancelAnimationFrame} = useStoryTimers();
   const [activeLines, setActiveLines] = useState<number[]>([]);
   const [showSuccess, setShowSuccess] = useState(false);
   const [opponentAction, setOpponentAction] = useState<'attack' | 'distracted'>('attack');
@@ -36,20 +40,20 @@ export function WizardDuel({ onComplete, isLastLesson }: { onComplete: () => voi
   const handleRevealCode = () => {
     const runAnimation = () => {
       setActiveLines([0]);
-      timeoutRef.current = window.setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         if (opponentAction === 'attack') {
           setActiveLines([1]);
-          timeoutRef.current = window.setTimeout(() => {
+          timeoutRef.current = setTimeout(() => {
             setActiveLines([]);
-            timeoutRef.current = window.setTimeout(runAnimation, 1500);
+            timeoutRef.current = setTimeout(runAnimation, 1500);
           }, 800);
         } else {
           setActiveLines([2]);
-          timeoutRef.current = window.setTimeout(() => {
+          timeoutRef.current = setTimeout(() => {
             setActiveLines([3]);
-            timeoutRef.current = window.setTimeout(() => {
+            timeoutRef.current = setTimeout(() => {
               setActiveLines([]);
-              timeoutRef.current = window.setTimeout(runAnimation, 1500);
+              timeoutRef.current = setTimeout(runAnimation, 1500);
             }, 800);
           }, 600);
         }

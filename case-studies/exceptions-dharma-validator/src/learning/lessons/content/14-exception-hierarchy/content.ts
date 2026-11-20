@@ -118,7 +118,6 @@ except Exception:
   reflectionPrompt:
     "Bhishma needed Shikhandi specifically, Drona needed one particular falsehood, no general strategy worked on either. Where else does treating several different problems with the same broad response actually fail the ones that needed something precise?",
 
-  badgeUnlocked: "Vyuha, The Order That Held the Line",
 };
 
 export default exceptionHierarchy;

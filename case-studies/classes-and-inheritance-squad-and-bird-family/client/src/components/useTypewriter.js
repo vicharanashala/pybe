@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
+import React, { useEffect, useState } from "react";
 
 /**
  * Reveals `totalLength` characters one at a time.
@@ -9,6 +11,7 @@ import { useEffect, useState } from "react";
  * @param {{speed?: number, startDelay?: number}} [options]
  */
 export function useTypewriter(totalLength, resetKey, { speed = 20, startDelay = 150 } = {}) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [revealCount, setRevealCount] = useState(0);
   const [isDone, setIsDone] = useState(totalLength === 0);
 

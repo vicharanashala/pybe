@@ -4,8 +4,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X, Sparkles } from 'lucide-react';
-import type { QuizQuestion } from '@/data';
-import { playSfx } from '@/audio/soundEngine';
+import type { QuizQuestion } from '../data';
+import { playSfx } from '../audio/soundEngine';
 
 interface QuizCardProps {
   quiz: QuizQuestion;
@@ -35,7 +35,6 @@ export default function QuizCard({ quiz, onAnswered }: QuizCardProps) {
       <div className="mb-4 flex items-center gap-2 text-amber-300">
         <Sparkles className="h-5 w-5" />
         <span className="text-sm font-semibold uppercase tracking-wider">Quick Check</span>
-        <span className="ml-auto text-xs text-amber-200/70">+{quiz.xp} XP</span>
       </div>
       <p className="mb-5 text-lg font-medium text-stone-100">{quiz.prompt}</p>
       <div className="grid gap-3 sm:grid-cols-2">

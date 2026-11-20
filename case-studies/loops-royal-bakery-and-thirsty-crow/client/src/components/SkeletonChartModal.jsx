@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import { X, RefreshCw, ZoomIn, ZoomOut, Layers, AlertCircle, CheckCircle, ArrowRight, CornerUpLeft, Search, Flag, Sparkles } from 'lucide-react';
-import api from '../lib/api';
+import stories from '../data/skeletons.json';
 
 export default function SkeletonChartModal({ onClose, scenario }) {
   const [skeletonData, setSkeletonData] = useState(null);
@@ -15,12 +15,9 @@ export default function SkeletonChartModal({ onClose, scenario }) {
     setError('');
     setSkeletonData(null);
     try {
-      const res = await api.post('/scenarios/generate-skeleton', { scenario });
-      if (res.data && res.data.data) {
-        setSkeletonData(res.data.data);
-      } else {
-        throw new Error('Failed to receive skeleton structure from server');
-      }
+      const story=stories.find(story=>story.title===scenario.title);
+      if(!story)throw Error('This story has no submitted skeleton chart.');
+      setSkeletonData(story.data);
     } catch (err) {
       console.error('Skeleton scan error:', err);
       setError(err?.response?.data?.error || err.message || 'Error generating skeleton code scan.');
@@ -36,67 +33,67 @@ export default function SkeletonChartModal({ onClose, scenario }) {
   const getStepColor = (type, index, total) => {
     if (type === 'start' || index === 0) {
       return {
-        color: '#f59e0b', // Amber / Warm Orange
+        color: '#c45b19', // Amber / Warm Orange
         nodeBg: 'linear-gradient(135deg, rgba(245, 158, 11, 0.26) 0%, rgba(146, 64, 14, 0.35) 100%)',
-        cardBg: 'linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(30, 41, 59, 0.9) 100%)',
+        cardBg: 'linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(255, 247, 236, 0.98) 100%)',
         border: '2px solid rgba(245, 158, 11, 0.8)',
         badgeBg: 'rgba(245, 158, 11, 0.25)',
         glow: '0 4px 15px rgba(245, 158, 11, 0.2)',
-        textColor: '#fef3c7'
+        textColor: '#78421e'
       };
     }
     if (type === 'condition' || index === 1) {
       return {
-        color: '#facc15', // Golden Yellow
+        color: '#a65b24', // Golden Yellow
         nodeBg: 'linear-gradient(135deg, rgba(234, 179, 8, 0.3) 0%, rgba(161, 98, 7, 0.4) 100%)',
-        cardBg: 'linear-gradient(135deg, rgba(234, 179, 8, 0.25) 0%, rgba(30, 41, 59, 0.9) 100%)',
-        border: '2px solid #facc15',
+        cardBg: 'linear-gradient(135deg, rgba(234, 179, 8, 0.25) 0%, rgba(255, 247, 236, 0.98) 100%)',
+        border: '2px solid #a65b24',
         badgeBg: 'rgba(234, 179, 8, 0.35)',
         glow: '0 0 22px rgba(250, 204, 33, 0.45)',
-        textColor: '#fef9c3'
+        textColor: '#78421e'
       };
     }
     if (type === 'finish' || (total && index === total - 1)) {
       return {
-        color: '#10b981', // Emerald Green
+        color: '#2d713d', // Emerald Green
         nodeBg: 'linear-gradient(135deg, rgba(16, 185, 129, 0.28) 0%, rgba(6, 78, 59, 0.4) 100%)',
-        cardBg: 'linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(30, 41, 59, 0.9) 100%)',
-        border: '2px solid #10b981',
+        cardBg: 'linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(255, 247, 236, 0.98) 100%)',
+        border: '2px solid #2d713d',
         badgeBg: 'rgba(16, 185, 129, 0.3)',
         glow: '0 0 20px rgba(16, 185, 129, 0.35)',
-        textColor: '#d1fae5'
+        textColor: '#285f39'
       };
     }
     if (type === 'repeat' || index === 4) {
       return {
-        color: '#c084fc', // Violet Purple for repeat loop
+        color: '#825590', // Violet Purple for repeat loop
         nodeBg: 'linear-gradient(135deg, rgba(168, 85, 247, 0.28) 0%, rgba(88, 28, 135, 0.4) 100%)',
-        cardBg: 'linear-gradient(135deg, rgba(168, 85, 247, 0.22) 0%, rgba(30, 41, 59, 0.9) 100%)',
+        cardBg: 'linear-gradient(135deg, rgba(168, 85, 247, 0.22) 0%, rgba(255, 247, 236, 0.98) 100%)',
         border: '2px solid rgba(168, 85, 247, 0.85)',
         badgeBg: 'rgba(168, 85, 247, 0.3)',
         glow: '0 4px 15px rgba(168, 85, 247, 0.25)',
-        textColor: '#f3e8ff'
+        textColor: '#6e467b'
       };
     }
     // Default Action / Effect (Bright Blue)
     return {
-      color: '#38bdf8', // Bright Blue
+      color: '#9a5015', // Bright Blue
       nodeBg: 'linear-gradient(135deg, rgba(59, 130, 246, 0.26) 0%, rgba(30, 58, 138, 0.38) 100%)',
-      cardBg: 'linear-gradient(135deg, rgba(59, 130, 246, 0.22) 0%, rgba(30, 41, 59, 0.9) 100%)',
+      cardBg: 'linear-gradient(135deg, rgba(59, 130, 246, 0.22) 0%, rgba(255, 247, 236, 0.98) 100%)',
       border: '2px solid rgba(59, 130, 246, 0.8)',
       badgeBg: 'rgba(59, 130, 246, 0.25)',
       glow: '0 4px 15px rgba(59, 130, 246, 0.22)',
-      textColor: '#e0f2fe'
+      textColor: '#78421e'
     };
   };
 
   const renderContent = () => {
     if (loading) {
       return (
-        <div style={{ padding: '80px 40px', textAlign: 'center', color: '#38bdf8' }}>
+        <div style={{ padding: '80px 40px', textAlign: 'center', color: '#9a5015' }}>
           <RefreshCw size={52} className="spinning-icon" style={{ margin: '0 auto 24px', animation: 'spin 1.5s linear infinite', filter: 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.5))' }} />
-          <h3 style={{ fontSize: '1.5rem', color: '#f8fafc', fontWeight: '800', marginBottom: '8px' }}>Scanning Story Skeleton...</h3>
-          <p style={{ color: '#94a3b8', maxWidth: '420px', margin: '0 auto', fontSize: '1.05rem', lineHeight: '1.5' }}>
+          <h3 style={{ fontSize: '1.5rem', color: '#382b21', fontWeight: '800', marginBottom: '8px' }}>Scanning Story Skeleton...</h3>
+          <p style={{ color: '#705a46', maxWidth: '420px', margin: '0 auto', fontSize: '1.05rem', lineHeight: '1.5' }}>
             Applying Skeleton Scan & Actor-Action Matrix methods to transform story logic into a beginner-friendly code blueprint for Class 10 students...
           </p>
         </div>
@@ -107,11 +104,11 @@ export default function SkeletonChartModal({ onClose, scenario }) {
       return (
         <div style={{ padding: '60px 40px', textAlign: 'center', color: '#ef4444' }}>
           <AlertCircle size={52} style={{ margin: '0 auto 16px', filter: 'drop-shadow(0 0 10px rgba(239, 68, 68, 0.5))' }} />
-          <h3 style={{ fontSize: '1.35rem', fontWeight: '800', color: '#f8fafc', marginBottom: '8px' }}>Scan Failed</h3>
-          <p style={{ color: '#cbd5e1', marginBottom: '24px' }}>{error}</p>
+          <h3 style={{ fontSize: '1.35rem', fontWeight: '800', color: '#382b21', marginBottom: '8px' }}>Scan Failed</h3>
+          <p style={{ color: '#634b38', marginBottom: '24px' }}>{error}</p>
           <button
             onClick={generate}
-            style={{ padding: '12px 24px', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '10px', fontWeight: '700', cursor: 'pointer' }}
+            style={{ padding: '12px 24px', background: '#c45b19', color: '#fffdf9', border: 'none', borderRadius: '10px', fontWeight: '700', cursor: 'pointer' }}
           >
             Retry Skeleton Scan
           </button>
@@ -123,7 +120,7 @@ export default function SkeletonChartModal({ onClose, scenario }) {
 
     const { rows = [], actorActionMatrix = [], storyChain = [], coreNodes = {} } = skeletonData;
 
-    // Dynamically derive theme icons from the story content, scenario title, or AI step icons so every story feels customized!
+    // Dynamically derive theme icons from the story content, scenario title, or step icons so every story feels customized!
     const titleLower = (scenario?.title || skeletonData?.title || '').toLowerCase();
     const textLower = JSON.stringify(skeletonData || {}).toLowerCase();
 
@@ -160,22 +157,22 @@ export default function SkeletonChartModal({ onClose, scenario }) {
         {/* 3-Column Header Bar */}
         <div style={{ display: 'grid', gridTemplateColumns: '31% 25% 44%', padding: '0 10px 16px', borderBottom: '2px solid rgba(51, 65, 85, 0.6)', marginBottom: '24px' }}>
           <div style={{ textAlign: 'center' }}>
-            <h3 style={{ margin: 0, fontSize: '1.18rem', fontWeight: '800', color: '#38bdf8', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+            <h3 style={{ margin: 0, fontSize: '1.18rem', fontWeight: '800', color: '#9a5015', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
               NARRATIVE SKELETON
             </h3>
-            <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#94a3b8' }}>(THE STORY FLOW)</span>
+            <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#705a46' }}>(THE STORY FLOW)</span>
           </div>
           <div style={{ textAlign: 'center', paddingRight: '10px' }}>
-            <h3 style={{ margin: 0, fontSize: '1.18rem', fontWeight: '800', color: '#38bdf8', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+            <h3 style={{ margin: 0, fontSize: '1.18rem', fontWeight: '800', color: '#9a5015', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
               INTERACTIVE TIMELINE
             </h3>
-            <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#94a3b8' }}>(THE BONE SCAN)</span>
+            <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#705a46' }}>(THE BONE SCAN)</span>
           </div>
           <div style={{ textAlign: 'center' }}>
-            <h3 style={{ margin: 0, fontSize: '1.18rem', fontWeight: '800', color: '#38bdf8', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+            <h3 style={{ margin: 0, fontSize: '1.18rem', fontWeight: '800', color: '#9a5015', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
               CODE LOGIC SCAN
             </h3>
-            <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#94a3b8' }}>(THE CODING PART)</span>
+            <span style={{ fontSize: '0.85rem', fontWeight: '700', color: '#705a46' }}>(THE CODING PART)</span>
           </div>
         </div>
 
@@ -188,7 +185,7 @@ export default function SkeletonChartModal({ onClose, scenario }) {
             bottom: '30px',
             left: '43.5%',
             width: '5px',
-            background: 'linear-gradient(to bottom, #f59e0b 0%, #facc15 20%, #3b82f6 50%, #c084fc 78%, #10b981 100%)',
+            background: 'linear-gradient(to bottom, #c45b19 0%, #a65b24 20%, #c45b19 50%, #825590 78%, #2d713d 100%)',
             borderRadius: '4px',
             boxShadow: '0 0 15px rgba(59, 130, 246, 0.7)',
             zIndex: 1
@@ -222,8 +219,8 @@ export default function SkeletonChartModal({ onClose, scenario }) {
               left: '22%',
               right: '22px', // Stops precisely at the outer left perimeter of the golden step button
               height: '52%',
-              borderLeft: '4px solid #38bdf8',
-              borderTop: '4px solid #38bdf8',
+              borderLeft: '4px solid #9a5015',
+              borderTop: '4px solid #9a5015',
               borderTopLeftRadius: '28px',
               boxShadow: '-5px -5px 18px rgba(56, 189, 248, 0.6)'
             }}>
@@ -236,7 +233,7 @@ export default function SkeletonChartModal({ onClose, scenario }) {
                 height: 0,
                 borderTop: '5px solid transparent',
                 borderBottom: '5px solid transparent',
-                borderLeft: '10px solid #38bdf8',
+                borderLeft: '10px solid #9a5015',
                 filter: 'drop-shadow(2px 0 5px #38bdf8)'
               }} />
             </div>
@@ -248,8 +245,8 @@ export default function SkeletonChartModal({ onClose, scenario }) {
               left: '22%',
               right: '22px', // Stops precisely at the outer left perimeter of the purple step button
               height: '52%',
-              borderLeft: '4px solid #c084fc', // purple flow originating from Step 5 Repeat Check
-              borderBottom: '4px solid #c084fc',
+              borderLeft: '4px solid #825590', // purple flow originating from Step 5 Repeat Check
+              borderBottom: '4px solid #825590',
               borderBottomLeftRadius: '28px',
               boxShadow: '-5px 5px 18px rgba(192, 132, 252, 0.6)'
             }}>
@@ -261,19 +258,19 @@ export default function SkeletonChartModal({ onClose, scenario }) {
                 width: '10px',
                 height: '10px',
                 borderRadius: '50%',
-                background: '#c084fc',
-                boxShadow: '0 0 10px #c084fc'
+                background: '#825590',
+                boxShadow: '0 0 10px #825590'
               }} />
             </div>
 
             {/* EXPLANATION BOX THREADED DIRECTLY OVER THE CONDUIT LINE */}
             <div style={{
               position: 'relative',
-              background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
-              border: '2px solid #38bdf8',
+              background: 'linear-gradient(135deg, #fff0df 0%, #fff7ec 100%)',
+              border: '2px solid #9a5015',
               padding: '12px 14px',
               borderRadius: '16px',
-              color: '#38bdf8',
+              color: '#9a5015',
               textAlign: 'center',
               lineHeight: '1.4',
               boxShadow: '0 8px 30px rgba(0, 0, 0, 0.9), 0 0 22px rgba(56, 189, 248, 0.55)',
@@ -283,14 +280,14 @@ export default function SkeletonChartModal({ onClose, scenario }) {
               width: '160px',
               zIndex: 25
             }}>
-              <div style={{ color: '#facc15', fontSize: '0.82rem', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '4px', textShadow: '0 0 8px rgba(250,204,33,0.4)' }}>
+              <div style={{ color: '#a65b24', fontSize: '0.82rem', fontWeight: '900', textTransform: 'uppercase', letterSpacing: '0.8px', marginBottom: '4px', textShadow: '0 0 8px rgba(250,204,33,0.4)' }}>
                 ⚡ WHY WE JUMP BACK:
               </div>
-              <div style={{ color: '#f8fafc', fontWeight: '700', fontSize: '0.85rem', marginBottom: '8px', lineHeight: '1.35' }}>
+              <div style={{ color: '#382b21', fontWeight: '700', fontSize: '0.85rem', marginBottom: '8px', lineHeight: '1.35' }}>
                 Computer must test if goal (100) is reached!
               </div>
               <div style={{
-                color: '#38bdf8',
+                color: '#9a5015',
                 fontSize: '0.78rem',
                 fontWeight: '900',
                 background: 'rgba(56, 189, 248, 0.18)',
@@ -370,7 +367,7 @@ export default function SkeletonChartModal({ onClose, scenario }) {
                       flexShrink: 0,
                       boxShadow: 'inset 0 0 8px rgba(0,0,0,0.6)'
                     }}>
-                      {isCondition ? <Search size={20} style={{ color: '#facc15' }} /> : isFinish ? <Flag size={20} style={{ color: '#10b981' }} /> : row.step}
+                      {isCondition ? <Search size={20} style={{ color: '#a65b24' }} /> : isFinish ? <Flag size={20} style={{ color: '#2d713d' }} /> : row.step}
                     </div>
                     {/* Label entirely to the RIGHT of vertical line */}
                     <div style={{ color: style.color, fontWeight: '800', fontSize: '0.93rem', whiteSpace: 'pre-line', lineHeight: '1.22', textShadow: '0 1px 2px rgba(0,0,0,0.5)' }}>
@@ -397,7 +394,7 @@ export default function SkeletonChartModal({ onClose, scenario }) {
                       {/* Monospace Code Snippet Box (Deep contrast black/blue pill) */}
                       <div style={{
                         background: '#0b1329',
-                        color: '#f8fafc',
+                        color: '#382b21',
                         fontFamily: 'monospace',
                         fontSize: '0.96rem',
                         padding: '10px 16px',
@@ -413,12 +410,12 @@ export default function SkeletonChartModal({ onClose, scenario }) {
                             {line.includes('while ') || line.includes('print(') || line.includes('continue') ? (
                               <span>
                                 <span style={{ color: '#f43f5e', fontWeight: '800' }}>{line.split(' ')[0]} </span>
-                                <span style={{ color: '#38bdf8' }}>{line.slice(line.split(' ')[0].length)}</span>
+                                <span style={{ color: '#9a5015' }}>{line.slice(line.split(' ')[0].length)}</span>
                               </span>
                             ) : line.startsWith('#') ? (
-                              <span style={{ color: '#94a3b8', fontStyle: 'italic' }}>{line}</span>
+                              <span style={{ color: '#705a46', fontStyle: 'italic' }}>{line}</span>
                             ) : (
-                              <span style={{ color: '#e2e8f0' }}>{line}</span>
+                              <span style={{ color: '#513b29' }}>{line}</span>
                             )}
                           </div>
                         )) : 'code_logic = True'}
@@ -445,11 +442,11 @@ export default function SkeletonChartModal({ onClose, scenario }) {
         {/* SLEEK FOOTER BADGE (Matches reference UI) */}
         <div style={{ marginTop: '30px', padding: '12px 20px', display: 'flex', alignItems: 'center', gap: '16px', borderTop: '1px solid rgba(51, 65, 85, 0.5)' }}>
           <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-            <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', background: '#f59e0b', boxShadow: '0 0 6px #f59e0b' }} />
-            <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', background: '#38bdf8', boxShadow: '0 0 6px #38bdf8' }} />
-            <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', background: '#10b981', boxShadow: '0 0 6px #10b981' }} />
+            <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', background: '#c45b19', boxShadow: '0 0 6px #c45b19' }} />
+            <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', background: '#9a5015', boxShadow: '0 0 6px #9a5015' }} />
+            <span style={{ display: 'inline-block', width: '10px', height: '10px', borderRadius: '50%', background: '#2d713d', boxShadow: '0 0 6px #2d713d' }} />
           </div>
-          <div style={{ fontSize: '0.92rem', fontWeight: '800', color: '#94a3b8', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+          <div style={{ fontSize: '0.92rem', fontWeight: '800', color: '#705a46', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
             IDENTIFIES CORE NARRATIVE COMPONENTS AND STRUCTURE
           </div>
         </div>
@@ -458,27 +455,27 @@ export default function SkeletonChartModal({ onClose, scenario }) {
     );
   };
 
-  return ReactDOM.createPortal(
-    <div style={{
-      position: 'fixed',
+  return (
+    <div className="skeleton-chart" style={{
+      position: 'relative',
       top: 0,
       left: 0,
       right: 0,
       bottom: 0,
-      backgroundColor: 'rgba(3, 7, 18, 0.88)',
+      backgroundColor: 'transparent',
       backdropFilter: 'blur(10px)',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      zIndex: 100000,
+      zIndex: 1,
       padding: '16px'
     }}>
       <div style={{
-        backgroundColor: '#0b1120',
+        backgroundColor: '#fffaf3',
         borderRadius: '24px',
-        width: '96vw',
+        width: '100%',
         maxWidth: '1440px',
-        height: '94vh',
+        minHeight: '700px',
         display: 'flex',
         flexDirection: 'column',
         border: '2px solid rgba(59, 130, 246, 0.5)',
@@ -489,7 +486,7 @@ export default function SkeletonChartModal({ onClose, scenario }) {
         {/* MODAL HEADER BAR */}
         <div style={{
           padding: '16px 28px',
-          background: 'linear-gradient(90deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)',
+          background: 'linear-gradient(90deg, #fff7ec 0%, #fff0df 50%, #fff7ec 100%)',
           borderBottom: '2px solid rgba(59, 130, 246, 0.4)',
           display: 'flex',
           alignItems: 'center',
@@ -507,13 +504,13 @@ export default function SkeletonChartModal({ onClose, scenario }) {
               justifyContent: 'center',
               border: '1px solid rgba(59, 130, 246, 0.5)'
             }}>
-              <Layers style={{ color: '#38bdf8' }} size={22} />
+              <Layers style={{ color: '#9a5015' }} size={22} />
             </div>
             <div>
-              <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: '900', color: '#f8fafc', letterSpacing: '0.5px' }}>
+              <h2 style={{ margin: 0, fontSize: '1.35rem', fontWeight: '900', color: '#382b21', letterSpacing: '0.5px' }}>
                 {skeletonData ? skeletonData.title : `SKELETON CODE SCANNER: ${(scenario?.title || '').toUpperCase()}`}
               </h2>
-              <span style={{ fontSize: '0.82rem', color: '#38bdf8', fontWeight: '700' }}>
+              <span style={{ fontSize: '0.82rem', color: '#9a5015', fontWeight: '700' }}>
                 INTERACTIVE STORY TO CODE LOGIC SCAN
               </span>
             </div>
@@ -521,25 +518,25 @@ export default function SkeletonChartModal({ onClose, scenario }) {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             {/* Zoom Controls */}
-            <div style={{ display: 'flex', alignItems: 'center', background: '#1e293b', borderRadius: '10px', border: '1px solid rgba(148, 163, 184, 0.3)', overflow: 'hidden', height: '38px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', background: '#fff0df', borderRadius: '10px', border: '1px solid rgba(148, 163, 184, 0.3)', overflow: 'hidden', height: '38px' }}>
               <button
                 onClick={() => setZoom(z => Math.max(0.7, z - 0.1))}
                 title="Zoom Out"
-                style={{ background: 'transparent', border: 'none', color: '#e2e8f0', padding: '0 10px', cursor: 'pointer', height: '100%', display: 'flex', alignItems: 'center' }}
+                style={{ background: 'transparent', border: 'none', color: '#513b29', padding: '0 10px', cursor: 'pointer', height: '100%', display: 'flex', alignItems: 'center' }}
               >
                 <ZoomOut size={16} />
               </button>
-              <span style={{ color: '#f8fafc', fontSize: '0.85rem', fontWeight: '700', padding: '0 6px' }}>{Math.round(zoom * 100)}%</span>
+              <span style={{ color: '#382b21', fontSize: '0.85rem', fontWeight: '700', padding: '0 6px' }}>{Math.round(zoom * 100)}%</span>
               <button
                 onClick={() => setZoom(z => Math.min(1.4, z + 0.1))}
                 title="Zoom In"
-                style={{ background: 'transparent', border: 'none', color: '#e2e8f0', padding: '0 10px', cursor: 'pointer', height: '100%', display: 'flex', alignItems: 'center' }}
+                style={{ background: 'transparent', border: 'none', color: '#513b29', padding: '0 10px', cursor: 'pointer', height: '100%', display: 'flex', alignItems: 'center' }}
               >
                 <ZoomIn size={16} />
               </button>
             </div>
 
-            {/* Regenerate Skeleton Button */}
+            {/* Replay Skeleton Button */}
             <button
               onClick={generate}
               disabled={loading}
@@ -548,7 +545,7 @@ export default function SkeletonChartModal({ onClose, scenario }) {
                 alignItems: 'center',
                 gap: '8px',
                 background: 'rgba(59, 130, 246, 0.25)',
-                color: '#38bdf8',
+                color: '#9a5015',
                 border: '1px solid rgba(59, 130, 246, 0.6)',
                 padding: '8px 16px',
                 borderRadius: '10px',
@@ -559,7 +556,7 @@ export default function SkeletonChartModal({ onClose, scenario }) {
               }}
             >
               <RefreshCw size={16} className={loading ? "spinning-icon" : ""} style={{ animation: loading ? 'spin 1s linear infinite' : 'none' }} />
-              <span>Regenerate Skeleton</span>
+              <span>Replay Skeleton</span>
             </button>
 
             {/* Close Button */}
@@ -578,7 +575,7 @@ export default function SkeletonChartModal({ onClose, scenario }) {
                 cursor: 'pointer',
                 transition: 'background 0.2s'
               }}
-              title="Close Modal"
+              title="Back to stories"
             >
               <X size={20} />
             </button>
@@ -591,7 +588,6 @@ export default function SkeletonChartModal({ onClose, scenario }) {
         </div>
 
       </div>
-    </div>,
-    document.body
+    </div>
   );
 }

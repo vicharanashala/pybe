@@ -33,44 +33,21 @@ const SCENE_META = [
 // Bumped again — the opening scene was reworked into the Robo garden story inside
 // 'concept', so an old saved index would silently land a returning learner on the
 // wrong scene.
-const STORAGE_KEY = 'pybe_loops_scene_v4';
-const CRYSTAL_KEY = 'pybe_loops_crystals';
+const STORAGE_KEY = 'pybe-learning-v1:robo-doraemon:loops-scene';
 
-export default function LoopEscape({ onBack }) {
+export default function LoopEscape({ onBack,onComplete }) {
   const [sceneIndex, setSceneIndex] = useState(() => {
     try {
-      const saved = Number(localStorage.getItem(STORAGE_KEY));
+      const saved = Number(localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem('pybe_loops_scene_v4'));
       return Number.isInteger(saved) && saved >= 0 && saved < SCENE_META.length ? saved : 0;
     } catch { return 0; }
-  });
-  const [crystals, setCrystals] = useState(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem(CRYSTAL_KEY) || '[]');
-      return new Set(saved);
-    } catch { return new Set(); }
   });
   const [stageProgress, setStageProgress] = useState({ done: 0, total: MISSION.stages.length });
   const [evaluationResult, setEvaluationResult] = useState(null);
 
-  useEffect(() => {
-    const previousTitle = document.title;
-    document.title = '🌼 Robo and the Magic Loop | PyBe';
-    return () => { document.title = previousTitle; };
-  }, []);
-
   function goTo(index) {
     setSceneIndex(index);
     try { localStorage.setItem(STORAGE_KEY, String(index)); } catch { /* unavailable */ }
-  }
-
-  function awardCrystal(key) {
-    setCrystals((prev) => {
-      if (prev.has(key)) return prev;
-      const next = new Set(prev);
-      next.add(key);
-      try { localStorage.setItem(CRYSTAL_KEY, JSON.stringify([...next])); } catch { /* unavailable */ }
-      return next;
-    });
   }
 
   function restart() {
@@ -81,9 +58,6 @@ export default function LoopEscape({ onBack }) {
 
   function handleEvaluationComplete(graded, correctCount) {
     setEvaluationResult({ graded, correctCount });
-    if (correctCount === graded.length) awardCrystal('golden');
-    const bugQuestions = ['q2', 'q7'];
-    if (bugQuestions.every((id) => graded.find((g) => g.id === id)?.correct)) awardCrystal('red');
     goTo(sceneIndex + 1);
   }
 
@@ -108,11 +82,10 @@ export default function LoopEscape({ onBack }) {
       case 'mission': return (
         <SpaceRescueMission
           onNext={next}
-          onCrystal={awardCrystal}
           onStageProgress={(done, total) => setStageProgress({ done, total })}
         />
       );
-      case 'concept': return <RepetitionConcept onNext={next} onCrystal={awardCrystal} />;
+      case 'concept': return <RepetitionConcept onNext={next} />;
       case 'theater': return <IterationTheater onNext={next} />;
       case 'visualizer': return <LoopVisualizer onNext={next} />;
       case 'playground': return <Playground onNext={next} />;
@@ -120,14 +93,14 @@ export default function LoopEscape({ onBack }) {
       case 'feedback': return evaluationResult
         ? <Feedback graded={evaluationResult.graded} correctCount={evaluationResult.correctCount} onNext={next} />
         : <Evaluation onComplete={handleEvaluationComplete} />;
-      case 'ending': return <Ending earnedCrystals={crystals} onBackToHub={onBack} onRestart={restart} />;
+      case 'ending': return <Ending onComplete={onComplete} onBackToHub={onBack} onRestart={restart} />;
       default: return null;
     }
   }
 
   return (
     <PyodideProvider>
-      <main className="lp-shell">
+      <main className="lp-shell" data-robo-scene={SCENE_META[sceneIndex].id}>
         <div className="lp-particles" aria-hidden="true">
           {[...Array(18)].map((_, i) => <span key={i} className="lp-particle" style={{ left: `${(i * 37) % 100}%`, animationDelay: `${i * 0.6}s` }} />)}
         </div>
@@ -135,7 +108,7 @@ export default function LoopEscape({ onBack }) {
         <div className="lp-topbar">
           <button className="lp-back" onClick={onBack}><ArrowLeft size={18} />Learning Hub</button>
           <div className="lp-title">🌼 Robo and the Magic Loop</div>
-          <TimeMachine earned={crystals} repairPct={repairPct} />
+          <TimeMachine repairPct={repairPct} />
         </div>
 
         <nav className="lp-scene-dots">

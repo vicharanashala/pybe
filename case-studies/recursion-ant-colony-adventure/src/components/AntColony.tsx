@@ -1,3 +1,6 @@
+import * as React from 'react';
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 // Reusable animated ant colony cross-section rendered as an SVG.
 //
 // The colony is one continuous vertical shaft at SHAFT_X. The deep chambers
@@ -24,7 +27,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, useMotionValue } from 'framer-motion';
 import type { MotionValue } from 'framer-motion';
-import type { ChamberSpec, ObstacleSpec, SceneAction } from '@/data';
+import type { ChamberSpec, ObstacleSpec, SceneAction } from '../data';
 import {
   COLONY_W,
   COLONY_H,
@@ -152,6 +155,7 @@ export default function AntColony({
   onChamberClick,
   camera,
 }: AntColonyProps) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const shaftRevealed = revealedLayers.includes('shaft');
   const eggsRevealed = revealedLayers.includes('eggs');
   const foodRevealed = revealedLayers.includes('food');
@@ -174,7 +178,7 @@ export default function AntColony({
       newlyAdded.forEach((id) => next.add(id));
       return next;
     });
-    const t = window.setTimeout(() => {
+    const t = setTimeout(() => {
       setDiggingIds((prevSet) => {
         const next = new Set(prevSet);
         newlyAdded.forEach((id) => next.delete(id));
@@ -186,7 +190,7 @@ export default function AntColony({
 
   useEffect(() => {
     const timers = digTimersRef.current;
-    return () => timers.forEach((t) => window.clearTimeout(t));
+    return () => timers.forEach((t) => clearTimeout(t));
   }, []);
 
   const allIds = useMemo(() => chambers.map((c) => c.id), [chambers]);

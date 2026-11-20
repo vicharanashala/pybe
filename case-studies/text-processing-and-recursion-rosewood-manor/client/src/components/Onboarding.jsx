@@ -38,6 +38,7 @@ export default function Onboarding({ onFinish, caseSolved = false }) {
   }
 
   function onKey(event) {
+    if(event.target.closest('button'))return;
     if (event.key === 'Enter' || event.key === 'ArrowRight') advance();
   }
 

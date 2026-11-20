@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GlassCard } from '../../shared-components/GlassCard';
 import { Heart, CheckCircle2 } from 'lucide-react';
 
@@ -24,7 +24,7 @@ const CHECKLIST = [
   "I understand why Dictionaries prevent index mismatch errors when updating collections."
 ];
 
-export const DictReflection: React.FC = () => {
+export const DictReflection: React.FC<{onComplete?:()=>void}> = ({onComplete}) => {
   const [nobitaPick, setNobitaPick] = useState<string | null>(null);
   const [advPicks, setAdvPicks] = useState<Set<number>>(new Set());
   const [checkItems, setCheckItems] = useState<Set<number>>(new Set());
@@ -33,6 +33,7 @@ export const DictReflection: React.FC = () => {
   const nobitaCorrect = nobitaPick === NOBITA_CORRECT;
   const advDone = advPicks.size >= 2;
   const allChecked = checkItems.size === CHECKLIST.length;
+  useEffect(()=>{if(allChecked)onComplete?.();},[allChecked]);
 
   const toggleAdv = (i: number) => {
     setAdvPicks(prev => {
@@ -112,6 +113,8 @@ export const DictReflection: React.FC = () => {
         </div>
       </GlassCard>
 
+      {nobitaDone && !nobitaCorrect && <button className="btn btn-secondary" onClick={()=>setNobitaPick(null)}>Review this reflection</button>}
+
       {/* Q2: Doraemon's Future Adventures */}
       {nobitaDone && nobitaCorrect && (
         <GlassCard style={{ padding: '20px', background: 'white', border: '1px solid rgba(0,0,0,0.08)' }} className="animate-fade-in">
@@ -188,7 +191,7 @@ export const DictReflection: React.FC = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
             <span style={{ fontSize: '28px' }}>🤖</span>
             <div>
-              <div style={{ fontSize: '15px', fontWeight: 900, color: '#0f172a' }}>"Mastered Dictionaries, Nobita!"</div>
+              <div style={{ fontSize: '15px', fontWeight: 900, color: '#0f172a' }}>"The codebook is ready, Nobita!"</div>
               <div style={{ fontSize: '12.5px', color: '#0369a1', marginTop: '2px' }}>
                 You now know how to build ultra-fast key-value database mappings. Time for the Q&A, Test, and Coding challenges!
               </div>

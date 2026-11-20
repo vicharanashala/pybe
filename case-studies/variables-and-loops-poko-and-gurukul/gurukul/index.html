@@ -6,12 +6,8 @@
   <title>500 BCE Ancient Gurukul — Sacred Lotus Loops Adventure</title>
   
   <!-- Google Fonts: Kalam, Tillana, Lora, VT323, Cinzel, Caveat -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cinzel:wght@600;700;800&family=Kalam:wght@300;400;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Tillana:wght@600;800&family=VT323&display=swap" rel="stylesheet">
   
   <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Custom Styles -->
   <link rel="stylesheet" href="styles.css?v=3.0">
@@ -378,10 +374,7 @@
             <div style="font-family:var(--font-heading); font-size:1.6rem; color:var(--forest-green);" id="prikshaSolvedCount">0 / 12</div>
           </div>
 
-          <div class="stat-pill" style="background:var(--warm-beige); border:2px solid var(--mustard-yellow); padding:0.6rem 1.2rem; border-radius:8px; text-align:center;">
-            <div style="font-family:var(--font-handwriting); font-size:1.1rem; color:var(--maroon);">Wisdom Stars</div>
-            <div style="font-family:var(--font-heading); font-size:1.6rem; color:var(--mustard-dark);" id="prikshaStarsCount">⭐ 0</div>
-          </div>
+          
         </div>
       </header>
 
@@ -465,14 +458,14 @@
             </div>
 
             <!-- Textarea Python Code Editor -->
-            <textarea id="prikshaCodeTextarea" class="code-editor-textarea" spellcheck="false" style="width:100%; height:260px; background:#1A211A; color:#85F69C; font-family:var(--font-code); font-size:1.35rem; border:2px solid #362112; border-radius:8px; padding:1rem; outline:none; resize:none; line-height:1.5;"></textarea>
+            <textarea aria-label="Gurukul Python program" id="prikshaCodeTextarea" class="code-editor-textarea" spellcheck="false" style="width:100%; height:260px; background:#1A211A; color:#85F69C; font-family:var(--font-code); font-size:1.35rem; border:2px solid #362112; border-radius:8px; padding:1rem; outline:none; resize:none; line-height:1.5;"></textarea>
 
             <!-- Editor Buttons -->
             <div style="display:flex; gap:1rem; margin-top:1rem;">
-              <button class="vintage-btn secondary" onclick="runPrikshaCode(false)" style="flex:1; justify-content:center;">
+              <button class="vintage-btn secondary" data-python-run onclick="runPrikshaCode(false)" style="flex:1; justify-content:center;">
                 ▶ Run Code
               </button>
-              <button class="vintage-btn primary" onclick="runPrikshaCode(true)" style="flex:1.2; justify-content:center;">
+              <button class="vintage-btn primary" data-python-run onclick="runPrikshaCode(true)" style="flex:1.2; justify-content:center;">
                 ✅ Check Solution & Run Tests
               </button>
             </div>
@@ -517,141 +510,19 @@
         </div>
 
         <div style="display:flex; justify-content:center; gap:1.5rem; margin:1.2rem 0;">
-          <div style="background:var(--warm-beige); border:2px solid var(--mustard-yellow); padding:0.6rem 1.2rem; border-radius:8px; font-weight:bold;">⭐ +10 Wisdom Stars</div>
+          
           <div style="background:var(--warm-beige); border:2px solid var(--mustard-yellow); padding:0.6rem 1.2rem; border-radius:8px; font-weight:bold;">📿 Mala Bead Illuminated</div>
         </div>
 
         <div style="display:flex; justify-content:center; gap:1rem; margin-top:1rem; flex-wrap:wrap;">
           <button class="vintage-btn secondary" onclick="closeSingleRewardModal()">Stay on Challenge</button>
-          <button class="vintage-btn primary" onclick="closeSingleRewardModal(); nextChallenge();">Next Challenge ➡️</button>
+          <button class="vintage-btn primary" onclick="continueAfterChallenge()">Next Challenge ➡️</button>
         </div>
       </div>
     </div>
 
     <!-- Grand Gurukul Graduation & Copper Seal Certificate Modal Overlay -->
-    <div id="prikshaRewardModal" class="priksha-reward-modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.88); z-index:9999; justify-content:center; align-items:center; overflow-y:auto; padding:1.5rem 0;">
-      
-      <!-- Celebratory Particle Confetti Canvas -->
-      <canvas id="celebrationCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:10000;"></canvas>
-
-      <div class="certificate-parchment-frame" style="max-width:820px; width:92%; text-align:center; max-height:92vh; overflow-y:auto; position:relative; z-index:10001;">
-        
-        <!-- Top Ornate Header & Royal Copper Seal -->
-        <div class="certificate-header-seal">
-          <div style="text-align:left;">
-            <span style="font-family:var(--font-handwriting); color:var(--terracotta); font-size:1.1rem; font-weight:700;">📜 ॐ श्री गुरुभ्यो नमः</span>
-            <div style="font-family:var(--font-heading); color:var(--maroon); font-size:1.6rem; font-weight:bold;">500 BCE Ancient Gurukul Academy</div>
-          </div>
-          <div class="royal-wax-seal">
-            <span style="font-size:1.1rem;">🪷</span>
-            <span>गुरुकुल</span>
-            <span>उपाधि</span>
-          </div>
-        </div>
-
-        <!-- Acharya Banner Artwork -->
-        <div style="max-width:640px; margin:0 auto 1.2rem; border:5px solid var(--mud-brown); border-radius:14px; overflow:hidden; box-shadow:0 10px 25px rgba(0,0,0,0.35);">
-          <img src="assets/images/reward_ceremony.png?v=2" alt="Acharya conferring sacred certificate" style="width:100%; display:block;">
-        </div>
-
-        <!-- Acharya Appreciative Dialogue -->
-        <div class="masterji-quote-box reward" style="margin-bottom:1.2rem; text-align:left;">
-          <div class="avatar-circle">👴🏽</div>
-          <div class="quote-text">
-            <span class="speaker-name">Acharya (Gurukul Guru)</span>
-            <p class="dialogue font-large">"Aati Uttam Vats! (अति उत्तम वत्स!) You have triumphantly solved all 12 Gurukul Priksha challenges! Your mastery over Python loops shines like the morning sun over the sacred Lotus Pond!"</p>
-          </div>
-        </div>
-
-        <!-- Royal Certificate Upadhi Body -->
-        <div class="certificate-recipient-box">
-          <h2 class="certificate-title">🏆 GURUKUL TAMRA-PATRA SAMMAN (गुरुकुल ताम्रपत्र)</h2>
-          <p class="certificate-subtitle">Certificate of Master-Level Excellence in Programming Loops</p>
-          
-          <div style="margin:1.2rem 0;">
-            <span style="font-size:1.1rem; color:var(--mud-brown);">This sacred copper seal certificate is proudly presented to:</span>
-            <br>
-            <div style="display:inline-flex; align-items:center; gap:0.5rem; margin-top:0.4rem;">
-              <span class="certificate-name-display" id="displayStudentName">Shiṣya Programmer</span>
-            </div>
-            <div class="no-print" style="margin-top:0.5rem;">
-              <label style="font-size:0.9rem; color:var(--mud-brown); font-weight:600;">✍️ Customize Name for Certificate: </label>
-              <input type="text" id="certificateStudentNameInput" value="Shiṣya Programmer" oninput="updateCertificateName(this.value)" placeholder="Enter your name..." style="padding:0.3rem 0.8rem; font-family:var(--font-heading); font-size:1rem; border:2px solid var(--mustard-yellow); border-radius:6px; outline:none; background:#FFFDF7; width:220px; text-align:center;">
-            </div>
-          </div>
-
-          <p style="font-size:1.05rem; line-height:1.6; color:var(--dark-wood); max-width:680px; margin:0 auto;">
-            For demonstrating complete mastery over <strong>For Loops, While Loops, Do-While Logic, State Iterations, and Algorithmic Problem Solving</strong> under the Sacred Banyan Tree.
-          </p>
-
-          <!-- Bronze & Copper Seal Achievement Badges Grid -->
-          <div class="copper-seals-grid">
-            <div class="copper-seal-card">
-              <div class="seal-emblem">🪷</div>
-              <div class="seal-title">Padma Mudra</div>
-              <div class="seal-sub">Sacred Lotus Master</div>
-            </div>
-            <div class="copper-seal-card">
-              <div class="seal-emblem">🏺</div>
-              <div class="seal-title">Jala Mudra</div>
-              <div class="seal-sub">Temple Well Keeper</div>
-            </div>
-            <div class="copper-seal-card">
-              <div class="seal-emblem">📿</div>
-              <div class="seal-title">Rishi Mudra</div>
-              <div class="seal-sub">Rudraksha Seeker</div>
-            </div>
-            <div class="copper-seal-card">
-              <div class="seal-emblem">🔥</div>
-              <div class="seal-title">Agni Acharya</div>
-              <div class="seal-sub">Yajna Master</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Acharya Blessing Interactive Box -->
-        <div id="masterJiBlessingArea" class="masterji-blessing-area">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
-            <div style="text-align:left;">
-              <div style="font-family:var(--font-heading); color:var(--maroon); font-size:1.2rem; font-weight:bold;">🙏 Acharya's Eternal Blessing (आशीर्वाद)</div>
-              <div id="blessingMessageText" style="font-family:var(--font-handwriting); font-size:1.15rem; color:var(--mud-brown); margin-top:0.2rem;">
-                Click below to touch Acharya's feet and receive a sacred coding blessing!
-              </div>
-            </div>
-            <button class="vintage-btn secondary no-print" onclick="seekMasterJiBlessings()" style="padding:0.5rem 1rem;">
-              <span>🙏 Seek Blessings (चरण स्पर्श)</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Footer Signatures & Date -->
-        <div style="display:flex; justify-content:space-between; align-items:flex-end; border-top:2px solid var(--mustard-yellow); padding-top:1rem; margin-top:1.5rem; text-align:left;">
-          <div>
-            <div style="font-size:0.85rem; color:var(--mud-brown);">DATE OF CONFERRAL</div>
-            <div id="certificateDateDisplay" style="font-family:var(--font-heading); font-size:1.1rem; color:var(--maroon); font-weight:bold;">500 BCE</div>
-          </div>
-          <div style="text-align:center;">
-            <div style="font-size:1.8rem; margin-bottom:-0.4rem;">🍃</div>
-            <div style="font-family:var(--font-handwriting); font-size:1.3rem; color:var(--terracotta); font-weight:bold;">~ Acharya (गुरुदेव)</div>
-            <div style="font-size:0.8rem; color:var(--mud-brown);">HEAD ACHARYA, 500 BCE GURUKUL</div>
-          </div>
-        </div>
-
-        <!-- Action Control Buttons -->
-        <div class="no-print" style="display:flex; justify-content:center; gap:1rem; margin-top:1.8rem; flex-wrap:wrap;">
-          <button class="vintage-btn primary large-btn" onclick="printCertificate()">
-            <span>🖨️ Print / Save Certificate</span>
-          </button>
-          <button class="vintage-btn secondary large-btn" onclick="triggerCelebrationConfetti()">
-            <span>🎉 Celebrate Confetti</span>
-          </button>
-          <button class="vintage-btn secondary large-btn" onclick="closePrikshaRewardModal()">
-            <span>Close & Explore 🏛️</span>
-          </button>
-        </div>
-
-      </div>
-    </div>
+    <div id="prikshaRewardModal" class="priksha-reward-modal-overlay" style="display:none"><div class="parchment-paper" style="max-width:700px;padding:24px"><h2>Gurukul practice complete</h2><p>You have worked through all twelve story challenges. Revisit any challenge to keep exploring.</p><div id="masterJiBlessingArea" class="masterji-blessing-area"><p id="blessingMessageText">Ask Acharya for a closing blessing.</p><button class="vintage-btn secondary" onclick="seekMasterJiBlessings()">🙏 Seek Blessings (चरण स्पर्श)</button></div><button class="vintage-btn primary" onclick="closePrikshaRewardModal()">Close & Explore</button></div></div>
   </section>
 
   <!-- Fullscreen Image Lightbox Modal -->

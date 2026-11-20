@@ -1,5 +1,7 @@
+import {createStoryTimersHook} from '../../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect } from 'react';
-import confetti from 'canvas-confetti';
+
 import { Sparkles, Award, Play, Printer, RotateCcw, CheckCircle2 } from 'lucide-react';
 import { SoundService } from '../services/soundEffects';
 import '../styles/heroAcademy.css';
@@ -8,34 +10,13 @@ export default function HeroCreatorLab({
   onSpawnCustomHero,
   onRestartAdventure
 }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [heroName, setHeroName] = useState('Cosmic Spark');
   const [superPower, setSuperPower] = useState('teleport()');
   const [heroColor, setHeroColor] = useState('#8B5CF6');
   const [heroEmoji, setHeroEmoji] = useState('⭐');
-  const [studentName, setStudentName] = useState('Super Coder');
+
   const [created, setCreated] = useState(false);
-
-  // Trigger celebration confetti
-  useEffect(() => {
-    SoundService.playFanfare();
-
-    const count = 200;
-    const defaults = { origin: { y: 0.7 } };
-
-    function fire(particleRatio, opts) {
-      confetti({
-        ...defaults,
-        ...opts,
-        particleCount: Math.floor(count * particleRatio)
-      });
-    }
-
-    fire(0.25, { spread: 26, startVelocity: 55 });
-    fire(0.2, { spread: 60 });
-    fire(0.35, { spread: 100, decay: 0.91, scalar: 0.8 });
-    fire(0.1, { spread: 120, startVelocity: 25, decay: 0.92, scalar: 1.2 });
-    fire(0.1, { spread: 120, startVelocity: 45 });
-  }, []);
 
   const handleCreateHero = () => {
     setCreated(true);
@@ -55,12 +36,8 @@ export default function HeroCreatorLab({
       });
     }
 
-    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
 
   const generatedPythonCode = `# 🦸 Your Custom Superhero Class!
 class Hero:
@@ -181,47 +158,7 @@ my_hero.${superPower} # ⭐ Your Unique Superpower!`;
         </pre>
       </div>
 
-      {/* Hero Academy Graduation Certificate */}
-      {created && (
-        <div className="hero-diploma-frame" style={{ marginTop: '16px' }}>
-          <div style={{ fontSize: '2.5rem', marginBottom: '4px' }}>🏆</div>
-          <h3 className="diploma-title">HERO ACADEMY GRADUATION DIPLOMA</h3>
-          <p style={{ margin: '0 0 14px 0', fontSize: '1.1rem', fontWeight: 600 }}>
-            This diploma certifies that:
-          </p>
-
-          <input
-            type="text"
-            className="creator-text-input"
-            value={studentName}
-            onChange={(e) => setStudentName(e.target.value)}
-            style={{
-              textAlign: 'center',
-              fontSize: '1.5rem',
-              fontWeight: 700,
-              background: '#FFFFFF',
-              color: '#B45309',
-              border: '2px solid #D97706',
-              maxWidth: '380px',
-              margin: '0 auto 16px'
-            }}
-          />
-
-          <p style={{ fontSize: '1.15rem', maxWidth: '640px', margin: '0 auto 16px', lineHeight: 1.5 }}>
-            Has successfully mastered <strong>Inheritance in Python OOP</strong>, reduced code duplication by creating
-            the <code>Hero</code> base class, and programmed <strong>{heroName}</strong> with superpower <code>{superPower}</code>!
-          </p>
-
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', flexWrap: 'wrap' }}>
-            <button className="btn-bouncy btn-next" onClick={handlePrint}>
-              <Printer size={18} /> Print / Save Diploma
-            </button>
-            <button className="btn-bouncy btn-replay" onClick={onRestartAdventure}>
-              <RotateCcw size={18} /> Replay Hero Academy
-            </button>
-          </div>
-        </div>
-      )}
+      {created&&<div className="hero-story-summary"><p>Your custom hero shares the Hero base class and adds a unique power. Try another hero to compare their behavior.</p><button className="btn-bouncy btn-replay" onClick={onRestartAdventure}>Replay Hero Academy</button></div>}
     </div>
   );
 }

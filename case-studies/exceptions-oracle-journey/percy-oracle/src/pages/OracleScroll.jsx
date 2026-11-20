@@ -19,7 +19,7 @@ export default function OracleScroll() {
   const [q2Message, setQ2Message] = useState("");
   const [q3Message, setQ3Message] = useState("");
   const [q4Message, setQ4Message] = useState("");
-  const [score, setScore] = useState(0);
+  const [correctTrials, setCorrectTrials] = useState([]);
 const [nextMessage, setNextMessage] = useState("");
 
   return (
@@ -78,6 +78,7 @@ const [nextMessage, setNextMessage] = useState("");
 
         <hr />
 
+        <section data-oracle-trial="1">
         <h2>⚔ Trial I — The Cursed Relic</h2>
 
         <div className="scroll">
@@ -100,7 +101,7 @@ const [nextMessage, setNextMessage] = useState("");
               className="option"
               onClick={()=>{
     setQ1Answered(true);
-    setScore(prev => prev + 1);
+    setCorrectTrials(prev => [...new Set([...prev, 1])]);
     setQ1Message("✅ Correct! 'hello' cannot be converted into an integer, so Python raises ValueError.");
 }}
             >
@@ -118,11 +119,14 @@ const [nextMessage, setNextMessage] = useState("");
             </button>
           </>
         ) : (
-          <p className="highlight">{q1Message}</p>
+          <div><p className="highlight">{q1Message}</p>
+          {!correctTrials.includes(1) && <button onClick={()=>{setQ1Answered(false);setQ1Message('');}}>Review Trial 1</button>}</div>
         )}
 
+        </section>
         <hr />
 
+        <section data-oracle-trial="2">
         <h2>Trial II — The Bottomless Pit</h2>
 
         <div className="scroll">
@@ -135,7 +139,7 @@ const [nextMessage, setNextMessage] = useState("");
               className="option"
               onClick={()=>{
     setQ2Answered(true);
-    setScore(prev => prev + 1);
+    setCorrectTrials(prev => [...new Set([...prev, 2])]);
     setQ2Message("✅ Correct! Dividing by zero raises ZeroDivisionError.");
 }}
             >
@@ -163,10 +167,13 @@ const [nextMessage, setNextMessage] = useState("");
             </button>
           </>
         ) : (
-          <p className="highlight">{q2Message}</p>
+          <div><p className="highlight">{q2Message}</p>
+          {!correctTrials.includes(2) && <button onClick={()=>{setQ2Answered(false);setQ2Message('');}}>Review Trial 2</button>}</div>
         )}
 
+        </section>
         <hr />
+        <section data-oracle-trial="3">
         <h2> Trial III — The Forgotten Hero</h2>
 
         <div className="scroll">
@@ -189,7 +196,7 @@ const [nextMessage, setNextMessage] = useState("");
               className="option"
               onClick={()=>{
     setQ3Answered(true);
-    setScore(prev => prev + 1);
+    setCorrectTrials(prev => [...new Set([...prev, 3])]);
     setQ3Message("✅ Correct! Python raises NameError because 'hero' has never been defined.");
 }}
             >
@@ -207,11 +214,14 @@ const [nextMessage, setNextMessage] = useState("");
             </button>
           </>
         ) : (
-          <p className="highlight">{q3Message}</p>
+          <div><p className="highlight">{q3Message}</p>
+          {!correctTrials.includes(3) && <button onClick={()=>{setQ3Answered(false);setQ3Message('');}}>Review Trial 3</button>}</div>
         )}
 
+        </section>
         <hr />
 
+        <section data-oracle-trial="4">
         <h2> Trial IV — The Lost Scroll</h2>
 
         <div className="scroll">
@@ -244,7 +254,7 @@ const [nextMessage, setNextMessage] = useState("");
               className="option"
               onClick={()=>{
     setQ4Answered(true);
-    setScore(prev => prev + 1);
+    setCorrectTrials(prev => [...new Set([...prev, 4])]);
     setQ4Message("✅ Correct! Python raises FileNotFoundError because the requested file doesn't exist.");
 }}
             >
@@ -252,11 +262,13 @@ const [nextMessage, setNextMessage] = useState("");
             </button>
           </>
         ) : (
-          <p className="highlight">{q4Message}</p>
+          <div><p className="highlight">{q4Message}</p>
+          {!correctTrials.includes(4) && <button onClick={()=>{setQ4Answered(false);setQ4Message('');}}>Review Trial 4</button>}</div>
         )}
 
         <hr />
 
+        </section>
         <h2> Oracle's Wisdom</h2>
 
         <div className="highlight">
@@ -320,9 +332,7 @@ Program Continues
           True wisdom comes from preparing for both."
         </div>
 
-        <p className="highlight">
-    Score: {score}/4
-</p>
+
 
 {nextMessage && (
     <p className="highlight">{nextMessage}</p>
@@ -338,11 +348,11 @@ Program Continues
         }
 
         // Require at least 2 correct answers
-        if (score >= 2) {
+        if (correctTrials.length >= 2) {
             navigate("/activity");
         } else {
             setNextMessage(
-                ` You scored ${score}/4. You need at least 2 correct answers to continue.`
+                "Review the trials and correctly identify at least two exception types before continuing."
             );
         }
 

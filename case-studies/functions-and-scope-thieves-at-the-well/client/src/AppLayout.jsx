@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import authoredModule from './story.json';
+import {createStoryProgressHook} from '../../../../shared/story-progress.mjs';
+const useStoryProgress=createStoryProgressHook(React);
+import React, { useState, useEffect, useRef } from 'react';
 import { BookOpen, Check, ChevronRight, Code2 } from 'lucide-react';
 import './AppLayout.css';
 import './styles.css';
 
-function ActSection({ actData, onComplete }) {
+function ActSection({ actData, onComplete,assetBase }) {
   const [mcqSolved, setMcqSolved] = useState(false);
   const [mcqAttempts, setMcqAttempts] = useState(0);
   const [mcqFeedback, setMcqFeedback] = useState(null);
@@ -25,7 +28,7 @@ function ActSection({ actData, onComplete }) {
 
   return (
     <div className="act-section animate-fade-in">
-      <img src={actData.image} alt={actData.title} className="hero-story-image" />
+      <img src={assetBase+actData.image} alt={actData.title} className="hero-story-image" />
       
       <div className="act-content-wrapper">
         <h2 className="story-title">Page {actData.page_number}: {actData.title}</h2>
@@ -100,6 +103,7 @@ function CodingTrialsSection({ trialsData, onComplete }) {
   };
 
   const isAllSolved = solvedTrials.length === trialsData.challenges.length;
+  useEffect(()=>{if(isAllSolved)onComplete?.();},[isAllSolved]);
   const challenge = trialsData.challenges[activeTrialIndex];
   const isSolved = solvedTrials.includes(activeTrialIndex);
   let displayCode = challenge.starter_code;
@@ -193,38 +197,24 @@ function CodingTrialsSection({ trialsData, onComplete }) {
   );
 }
 
-export default function AppLayout() {
-  const [moduleData, setModuleData] = useState(null);
+export default function AppLayout({onComplete,assetBase=''}) {
+  const moduleData=authoredModule;
+  const feedRef=useRef(null);
+  const [,complete]=useStoryProgress('thieves-at-well');
+  const finish=()=>{complete('trials');onComplete?.();};
   
   // 0: Prologue
   // 1-5: Acts 1-5
   // 6: Epilogue
   // 7: Coding Trials
   const [currentStep, setCurrentStep] = useState(() => {
-    const saved = sessionStorage.getItem('currentStep');
-    return saved ? parseInt(saved, 10) : 0;
+    const saved = sessionStorage.getItem('pybe-learning-v1:thieves-at-well-step') ?? sessionStorage.getItem('currentStep');
+    const index=Number(saved);return Number.isInteger(index)&&index>=0&&index<=7?index:0;
   });
 
   useEffect(() => {
-    const fetchModules = async () => {
-      try {
-        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-        const res = await fetch(`${API_URL}/modules`);
-        if (res.ok) {
-          const data = await res.json();
-          const targetModule = data.find(m => m.id === 'thieves-at-the-well');
-          if (targetModule) setModuleData(targetModule);
-        }
-      } catch (err) {
-        console.error('Failed to load modules:', err);
-      }
-    };
-    fetchModules();
-  }, []);
-
-  useEffect(() => {
     // Smooth scroll to top when currentStep changes
-    const feed = document.getElementById('main-feed');
+    const feed = feedRef.current;
     if (feed) {
       feed.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -233,7 +223,7 @@ export default function AppLayout() {
   const handleNextStep = () => {
     const newStep = currentStep + 1;
     setCurrentStep(newStep);
-    sessionStorage.setItem('currentStep', newStep.toString());
+    sessionStorage.setItem('pybe-learning-v1:thieves-at-well-step', newStep.toString());
   };
 
   if (!moduleData) {
@@ -244,7 +234,7 @@ export default function AppLayout() {
   const epiloguePage = moduleData.pages ? moduleData.pages[5] : null;
   
   return (
-    <div className="app-layout">
+    <div className="app-layout" data-thieves-step={currentStep}>
       {/* Sidebar */}
       <aside className="app-sidebar">
         <div className="app-sidebar__brand">
@@ -300,7 +290,7 @@ export default function AppLayout() {
       </aside>
 
       {/* Main Feed */}
-      <main className="app-feed" id="main-feed">
+      <main className="app-feed" id="main-feed" ref={feedRef}>
         <div className="feed-header">
           <h1 className="feed-header__title">{moduleData.title}</h1>
         </div>
@@ -326,7 +316,7 @@ export default function AppLayout() {
           {currentStep >= 1 && currentStep <= 5 && (
             <ActSection 
               key={currentStep} 
-              actData={storyPages[currentStep - 1]} 
+              assetBase={assetBase} actData={storyPages[currentStep - 1]} 
               onComplete={handleNextStep}
             />
           )}
@@ -352,7 +342,7 @@ export default function AppLayout() {
           {currentStep === 7 && (
             <CodingTrialsSection 
               trialsData={moduleData.coding_trials}
-              onComplete={() => {}}
+              onComplete={finish}
             />
           )}
           

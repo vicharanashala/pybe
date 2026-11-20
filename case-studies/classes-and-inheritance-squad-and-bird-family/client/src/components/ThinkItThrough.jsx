@@ -90,7 +90,7 @@ useEffect(() => {
         const answer = answers[q.id];
         const selectedOption = answer && q.options.find((o) => o.id === answer.optId);
         return (
-          <div className="question-block" key={q.id}>
+          <div className="question-block" key={q.id} role="group" aria-label={q.prompt}>
             <p className="question-prompt">
               {idx + 1}. {q.prompt}
             </p>

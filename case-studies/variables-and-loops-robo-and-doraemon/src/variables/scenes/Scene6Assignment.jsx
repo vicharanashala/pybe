@@ -10,7 +10,7 @@ import { GADGETS } from '../data/gadgets';
 // not a one-off trick.
 const DEMO_GADGETS = [GADGETS[0], GADGETS[2]]; // travelDoor, smallLight
 
-export default function Scene6Assignment({ onNext, memory, setMemory, onGem }) {
+export default function Scene6Assignment({ onNext, memory, setMemory }) {
   const [step, setStep] = useState(0);
   const [animDone, setAnimDone] = useState(false);
   const gadget = DEMO_GADGETS[step];
@@ -23,7 +23,6 @@ export default function Scene6Assignment({ onNext, memory, setMemory, onGem }) {
 
   function next() {
     if (step === DEMO_GADGETS.length - 1) {
-      onGem?.();
       onNext();
     } else {
       setStep((s) => s + 1);

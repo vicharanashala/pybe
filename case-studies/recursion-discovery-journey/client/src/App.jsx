@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
+import {createStoryProgressHook} from '../../../../shared/story-progress.mjs';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import IntroScene        from './components/IntroScene';
 import CinematicScene   from './components/CinematicScene';
@@ -14,7 +16,12 @@ import { CornerDownLeft, ArrowLeft, ArrowRight, Lock, Info } from 'lucide-react'
 const PHASE_INTRO   = 'intro';
 const PHASE_LESSONS = 'lessons';
 
-export default function App() {
+const useStoryTimers=createStoryTimersHook(React);
+const useStoryProgress=createStoryProgressHook(React);
+export default function App({onComplete,assetBase=''}) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
+  const [,complete]=useStoryProgress('recursion-discovery');
+  const finish=()=>{complete('review');onComplete?.();};
   const [appPhase,   setAppPhase]   = useState(PHASE_INTRO);
   const [imageIndex, setImageIndex] = useState(0);
   // subStep: 0=Title, 1=Story, 2=PythonConcept, 3=KeyIdea, 4=Concept Summary (scene 7), 5=Interactive
@@ -117,7 +124,7 @@ export default function App() {
   // ── Keyboard navigation ───────────────────────────────────────────────────
   useEffect(() => {
     const down = (e) => {
-      const tag = document.activeElement?.tagName?.toLowerCase();
+      const tag = (e.composedPath?.()[0] || e.target)?.tagName?.toLowerCase();
       if (tag === 'textarea' || tag === 'input') return;
 
       if (e.key === 'i' || e.key === 'I') {
@@ -157,7 +164,7 @@ export default function App() {
   // ── INTRO PHASE ───────────────────────────────────────────────────────────
   if (appPhase === PHASE_INTRO) {
     return (
-      <div className="w-screen h-screen fixed inset-0 overflow-hidden bg-[#050716]" style={{ height: '100dvh' }}>
+      <div className="recursion-shell w-screen h-screen fixed inset-0 overflow-hidden bg-[#050716]" style={{ height: '100dvh' }}>
         <BackgroundParticles />
         <IntroScene onBegin={handleBegin} />
       </div>
@@ -167,7 +174,7 @@ export default function App() {
   // ── LESSONS PHASE ─────────────────────────────────────────────────────────
   return (
     <div
-      className="w-screen h-screen fixed inset-0 overflow-hidden bg-[#050716] text-gray-100 select-none"
+      data-recursion-scene={`${currentLesson.id}:${subStep}`} className="recursion-shell w-screen h-screen fixed inset-0 overflow-hidden bg-[#050716] text-gray-100 select-none"
       style={{ height: '100dvh' }}
     >
       <BackgroundParticles />
@@ -195,7 +202,7 @@ export default function App() {
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <img
             key={`bg-${currentLesson.id}`}
-            src={currentLesson.image}
+            src={assetBase+currentLesson.image}
             alt={currentLesson.title}
             className={imgClass}
             onError={handleImgError}
@@ -271,8 +278,7 @@ export default function App() {
               onClick={e => e.stopPropagation()}
             >
               <RecursionChallengeQuiz
-                onAddXp={() => {}}
-                onNextLesson={() => {}}
+                onNextLesson={finish}
               />
             </div>
           )}

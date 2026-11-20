@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, {useRef} from 'react';
+import { Routes, Route } from 'react-router-dom';
 import { TourProvider } from './context/TourContext';
 
 // Components
@@ -14,15 +14,16 @@ import Heterogeneous from './pages/Heterogeneous';
 import NestedMutable from './pages/NestedMutable';
 import FinalTest from './pages/FinalTest'
 
-export default function App() {
+export default function App({onComplete, assetBase = ''}) {
+  const rootRef=useRef(null);
   return (
-    <TourProvider>
-      <BrowserRouter>
-        <div className="flex min-h-screen bg-sky-50 text-black font-sans selection:bg-black selection:text-white">
+    <TourProvider rootRef={rootRef} assetBase={assetBase} onComplete={onComplete}>
+
+        <div ref={rootRef} className="tuple-shell flex min-h-screen bg-sky-50 text-black font-sans selection:bg-black selection:text-white">
           <Sidebar />
           <main
             className="flex-1 p-12 overflow-y-auto relative bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/images/bg.png')" }}
+            style={{ backgroundImage: `url('${assetBase}/images/bg.png')` }}
           >
             <Routes>
               <Route path="/" element={<Home />} />
@@ -37,7 +38,7 @@ export default function App() {
 
         {/* The global tour component sits outside the main routes, but inside the Router and Provider */}
         <BittuTourGlobal />
-      </BrowserRouter>
+
     </TourProvider>
   );
 }

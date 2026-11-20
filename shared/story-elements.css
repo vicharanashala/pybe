@@ -1,0 +1,40 @@
+.story-completion {
+  max-width: 760px;
+  margin: 32px auto;
+  padding: 36px;
+  border: 1px solid #eadbce;
+  border-radius: 20px;
+  background: #fffdf9;
+  color: #30271f;
+  font:
+    16px/1.6 "Segoe UI",
+    system-ui,
+    sans-serif;
+}
+.story-completion h2 {
+  margin: 0 0 14px;
+  font:
+    32px/1.2 Georgia,
+    serif;
+  color: #30271f;
+}
+.story-completion p {
+  color: #766352;
+}
+.story-completion-button {
+  margin-top: 18px;
+  padding: 12px 20px;
+  border: 1px solid #df622f;
+  border-radius: 10px;
+  background: #df622f;
+  color: white;
+  font:
+    600 16px "Segoe UI",
+    system-ui,
+    sans-serif;
+  cursor: pointer;
+}
+.story-completion-button:focus-visible {
+  outline: 3px solid #a84420;
+  outline-offset: 4px;
+}

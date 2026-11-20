@@ -64,7 +64,7 @@ const QUESTIONS = [
   },
 ];
 
-export default function QuizAct({ onActive }) {
+export default function QuizAct({ onActive, onComplete }) {
   const ref = useRef(null);
   const seen = useHasEntered(ref);
   useSectionLabel(ref, 'Act IV · Captain’s Evaluation', onActive);
@@ -72,8 +72,6 @@ export default function QuizAct({ onActive }) {
   const [current, setCurrent] = useState(0);
   const [picked, setPicked] = useState(null);
   const [checked, setChecked] = useState(false);
-  const [firstTry, setFirstTry] = useState(true);
-  const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
 
   const q = QUESTIONS[current];
@@ -82,29 +80,24 @@ export default function QuizAct({ onActive }) {
   const submit = () => {
     if (picked === null) return;
     setChecked(true);
-    if (q.opts[picked].correct && firstTry) setScore((s) => s + 1);
   };
 
   const next = () => {
     setChecked(false);
     setPicked(null);
-    setFirstTry(true);
     if (current + 1 < QUESTIONS.length) setCurrent(current + 1);
-    else setDone(true);
+    else { setDone(true); onComplete?.(); }
   };
 
   const retry = () => {
     setChecked(false);
     setPicked(null);
-    setFirstTry(false);
   };
 
   const restart = () => {
     setCurrent(0);
     setPicked(null);
     setChecked(false);
-    setFirstTry(true);
-    setScore(0);
     setDone(false);
   };
 
@@ -117,9 +110,6 @@ export default function QuizAct({ onActive }) {
         {done ? (
           <div className="jr-quiz-card jr-quiz-done">
             <div className="jr-quiz-anchor">⚓</div>
-            <div className="jr-quiz-score">
-              {score} / {QUESTIONS.length} <span>first-try</span>
-            </div>
             <p>
               You can read a two-way fork and an ordered ladder — which is most of what conditional
               logic ever asks of you. Scroll back up and hit either <b>re-run</b> button to watch

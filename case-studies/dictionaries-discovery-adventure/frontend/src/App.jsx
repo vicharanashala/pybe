@@ -3,15 +3,15 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { GameProvider } from './context/GameContext';
 import { TopNavBar } from './components/TopNavBar';
 import { BustedModal } from './components/BustedModal';
-import { BadgeToast } from './components/BadgeToast';
+
 import { Story } from './pages/Story';
 import { Finale } from './pages/Finale';
 import './App.css';
 
-function App() {
+function App({onComplete}) {
   return (
     <GameProvider>
-      <Router>
+
         <div className="app-container">
           {/* Top persistent navigation & HUD */}
           <TopNavBar />
@@ -20,7 +20,7 @@ function App() {
           <main className="page-container">
             <Routes>
               <Route path="/" element={<Navigate to="/story/1" replace />} />
-              <Route path="/story/finale" element={<Finale />} />
+              <Route path="/story/finale" element={<Finale onComplete={onComplete}/>} />
               <Route path="/finale" element={<Navigate to="/story/finale" replace />} />
               <Route path="/story/:page" element={<Story />} />
               <Route path="*" element={<Navigate to="/story/1" replace />} />
@@ -29,9 +29,9 @@ function App() {
 
           {/* Global Game State Modals & Toasts */}
           <BustedModal />
-          <BadgeToast />
+
         </div>
-      </Router>
+
     </GameProvider>
   );
 }

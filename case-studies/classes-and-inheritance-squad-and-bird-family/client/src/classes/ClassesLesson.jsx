@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
+import React, { useState, useEffect } from "react";
 import Scene from "./components/Scene.jsx";
 import SignSquad from "./components/SignSquad.jsx";
 import "./classes.css";
@@ -7,13 +9,14 @@ import "./classes.css";
 // already clicked "Try it out" and entered the app view at least once, so
 // a remount (refresh, or navigating back from Inheritance) should skip
 // straight past the intro Scene instead of replaying it.
-const CLASSES_STAGE_STORAGE_KEY = "pybe_classes_stage";
+const CLASSES_STAGE_STORAGE_KEY = "pybe-learning-v1:sign-squad-stage";
 
 function hasStartedSignSquad() {
-  return localStorage.getItem(CLASSES_STAGE_STORAGE_KEY) !== null;
+  return (localStorage.getItem(CLASSES_STAGE_STORAGE_KEY) ?? localStorage.getItem('pybe_classes_stage')) !== null;
 }
 
 export default function ClassesLesson({ onDone }) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const alreadyStarted = hasStartedSignSquad();
   const [sceneClasses, setSceneClasses] = useState("");
   const [sceneHidden, setSceneHidden] = useState(alreadyStarted);

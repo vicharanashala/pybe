@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { RotateCcw } from 'lucide-react';
 
@@ -27,6 +29,7 @@ function computeSequence(start, stop, step) {
 }
 
 export default function ForLoopNumberLine({ onNext }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [start, setStart] = useState(2);
   const [stop, setStop] = useState(10);
   const [step, setStep] = useState(2);

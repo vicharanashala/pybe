@@ -176,7 +176,6 @@ function BookCoverArt({ slug }) {
 
 function StoryCard({ story, statusByStory, onStart }) {
   const status = statusFor(story, statusByStory[story.id]);
-  const earned = statusByStory[story.id] ? statusByStory[story.id].xp : 0;
   return (
     <article className={`story-card ${status}`}>
       <div className="story-card-top">
@@ -204,13 +203,12 @@ function StoryCard({ story, statusByStory, onStart }) {
           </>
         ) : (
           <>
-            <span className="chip">{status === 'in-progress' ? 'In progress' : `+${story.xp + story.projectXp} XP`}</span>
+            <span className="chip">{status === 'in-progress' ? 'In progress' : 'Ready to explore'}</span>
             <button type="button" className="btn btn-primary" onClick={() => onStart(story)}>
               {status === 'in-progress' ? 'Continue' : 'Begin tale'} <Play size={16} aria-hidden="true" />
             </button>
           </>
         )}
-        {earned > 0 && <span className="story-earned">+{earned} XP</span>}
       </div>
     </article>
   );
@@ -247,7 +245,7 @@ function TopicBook({ topic, isOpen, onToggle }) {
 }
 
 export default function StoryMap({ stories, progress, onStart }) {
-  const { statusByStory, totalXp, completed, badges } = progress;
+  const { statusByStory, completed } = progress;
   const [openSlug, setOpenSlug] = useState(null);
   const [revealed, setRevealed] = useState(false);
 
@@ -315,10 +313,6 @@ export default function StoryMap({ stories, progress, onStart }) {
         </div>
         <div className="hero-stats">
           <div className="stat">
-            <strong>{totalXp}</strong>
-            <span>XP earned</span>
-          </div>
-          <div className="stat">
             <strong>{completed}/{stories.length}</strong>
             <span>Tales told</span>
           </div>
@@ -332,14 +326,6 @@ export default function StoryMap({ stories, progress, onStart }) {
         <span>{completed} of {stories.length} tales complete</span>
       </div>
 
-      {badges.length > 0 && (
-        <div className="badge-row" aria-label="Badges earned">
-          <Sparkles size={16} aria-hidden="true" />
-          {badges.map((badge) => (
-            <span key={badge} className="chip chip-badge">{badge}</span>
-          ))}
-        </div>
-      )}
 
       <div className="topic-library">
         {openTopic ? (

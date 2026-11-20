@@ -17,30 +17,9 @@ import { AIMentorView } from './views/AIMentorView';
 import { UserDashboard } from './views/UserDashboard';
 import { ProgressTracker } from './components/Ornaments';
 
-function App() {
-  const { currentStep } = useProgress();
-  const [pathname, setPathname] = React.useState(window.location.pathname);
-
-  React.useEffect(() => {
-    const onRouteChange = () => setPathname(window.location.pathname);
-    window.addEventListener('popstate', onRouteChange);
-    window.addEventListener('pybe-route-change', onRouteChange);
-    return () => {
-      window.removeEventListener('popstate', onRouteChange);
-      window.removeEventListener('pybe-route-change', onRouteChange);
-    };
-  }, []);
-
-  const isDashboard = pathname === '/dashboard';
-
-  if (isDashboard) {
-    return (
-      <div className="w-full min-h-screen bg-[var(--bg-primary)]">
-        <UserDashboard />
-      </div>
-    );
-  }
-
+function App({onComplete}:{onComplete?:()=>void}) {
+  const {currentStep,activeTopicId,completedTopics}=useProgress();
+  React.useEffect(()=>{if(completedTopics.length===21)onComplete?.();},[completedTopics,onComplete]);
   const renderStep = () => {
     switch (currentStep) {
       case 0:
@@ -79,7 +58,7 @@ function App() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-[var(--bg-primary)]">
+    <div data-tradition-step={currentStep} data-tradition-topic={activeTopicId} className="w-full min-h-screen bg-[var(--bg-primary)]">
       <ProgressTracker />
       <div className="w-full max-w-4xl mx-auto px-4 pb-24">
         {renderStep()}
@@ -88,10 +67,10 @@ function App() {
   );
 }
 
-export default function Root() {
+export default function Root({onComplete}:{onComplete?:()=>void}) {
   return (
     <ProgressProvider>
-      <App />
+      <App onComplete={onComplete}/>
     </ProgressProvider>
   );
 }

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { soundEngine } from '../utils/soundEngine';
 
-export default function MCQCard({ question, options, correctIndex, explanations }) {
+export default function MCQCard({ question, options, correctIndex, explanations, onCorrect }) {
   const [selectedIdx, setSelectedIdx] = useState(null);
 
   const handleSelect = (idx) => {
     setSelectedIdx(idx);
     if (idx === correctIndex) {
       soundEngine.playCorrect();
+      onCorrect?.();
     } else {
       soundEngine.playIncorrect();
     }

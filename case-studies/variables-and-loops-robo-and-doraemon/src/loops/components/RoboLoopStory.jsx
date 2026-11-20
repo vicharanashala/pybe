@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useTypewriter } from './useTypewriter';
 import MemoryOrbs from './MemoryOrbs';
@@ -56,6 +58,7 @@ function makeHiddenPots() {
 }
 
 export default function RoboLoopStory({ onNext }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [beat, setBeat] = useState('dawn');
   const [pots, setPots] = useState(makeHappyPots);
   const [pots2, setPots2] = useState(makeHiddenPots);
@@ -111,13 +114,15 @@ export default function RoboLoopStory({ onNext }) {
     if (pots[idx].stage !== 'dry') return;
     setHeld(false);
     waterPot(setPots, idx, () => {
-      setWateredCount((c) => {
-        const next = c + 1;
-        if (next >= 5) after(700, () => setBeat('tired'));
-        return next;
-      });
+      setWateredCount((c) => c + 1);
     });
   }
+
+  useEffect(() => {
+    if (beat !== 'water' || wateredCount < 5) return;
+    const timer = setTimeout(() => setBeat('tired'),700);
+    return () => clearTimeout(timer);
+  },[beat,wateredCount]);
 
   function castSpell() {
     if (castStarted.current) return;
@@ -211,7 +216,7 @@ export default function RoboLoopStory({ onNext }) {
   if (beat === 'reward') return <RewardScene onNext={onNext} />;
 
   return (
-    <div className="lp-robo-story">
+    <div className="lp-robo-story" data-robo-beat={beat}>
       <span className="lp-concept-tag">Robo and the Never-Ending Garden</span>
 
       <div className="lp-garden-stage">
@@ -364,7 +369,9 @@ function Pot({ pot, targetable, onTarget }) {
       onDragOver={(e) => targetable && e.preventDefault()}
       onDrop={handleDrop}
       role="button"
-      tabIndex={-1}
+      tabIndex={targetable ? 0 : -1}
+      aria-label="Water this plant"
+      onKeyDown={(e)=>{if(targetable && (e.key==='Enter'||e.key===' ')){e.preventDefault();onTarget();}}}
     >
       {pot.stage === 'pouring' && <span className="lp-water-splash">{'💧'}</span>}
       <svg viewBox="0 0 40 46" className="lp-pot-svg">
@@ -383,7 +390,7 @@ function Pot({ pot, targetable, onTarget }) {
 // ---------------------------------------------------------------------------
 function MappingScene({ revealed, showCode, onNext }) {
   return (
-    <div className="lp-robo-story">
+    <div className="lp-robo-story" data-robo-beat="mapping">
       <span className="lp-concept-tag">Robo and the Never-Ending Garden</span>
       <div className="lp-scene">
         <h2>Same motion, one instruction</h2>
@@ -404,7 +411,7 @@ function MappingScene({ revealed, showCode, onNext }) {
         <div className="lp-mapping-code">
           <pre className="lp-code-block">{'for plant in garden:\n    water(plant)'}</pre>
           <p className="lp-caption-static">Each lap through the loop is one iteration — and one watered plant. Five plants, five iterations, one instruction written once.</p>
-          <button className="lp-mini-btn lp-cta" onClick={onNext}>Claim your reward {'🏆'}</button>
+          <button className="lp-mini-btn lp-cta" onClick={onNext}>See the garden bloom {'→'}</button>
         </div>
       )}
     </div>
@@ -419,11 +426,11 @@ function RewardScene({ onNext }) {
     id: i,
     left: (i * 37) % 100,
     delay: (i % 10) * 0.18,
-    emoji: ['🎉', '✨', '🌟', '🌸'][i % 4]
+    emoji: ['🌼', '✨', '🌷', '🌸'][i % 4]
   })), []);
 
   return (
-    <div className="lp-robo-story">
+    <div className="lp-robo-story" data-robo-beat="bloom">
       <span className="lp-concept-tag">Robo and the Never-Ending Garden</span>
 
       <div className="lp-garden lp-garden-sky lp-sky-bright lp-reward-garden">
@@ -444,10 +451,7 @@ function RewardScene({ onNext }) {
           ))}
         </div>
         <div className="lp-grass" />
-        <div className="lp-reward-toast lp-reward-toast-final">
-          <span className="lp-reward-icon">{'🏆'}</span>
-          <span>Golden Sunflower Seed unlocked!</span>
-        </div>
+
       </div>
 
       <div className="lp-robo-caption">

@@ -93,7 +93,6 @@ export const missions: Mission[] = [
       speaker: 'dustin',
       text: 'Yes! If I ever need to change the warning, I want to change it in ONE place — not hunt down three copies.',
     },
-    reward: { xp: 100, badge: 'Signal Runner', badgeIcon: '\uD83D\uDCE1' },
     cassette: {
       title: 'Cassette 01 — Field Note',
       tip: 'Programmers call unnecessary repetition "code smell." If you\u2019re copy-pasting the same lines more than once, that\u2019s usually a sign you need a function.',
@@ -174,7 +173,6 @@ export const missions: Mission[] = [
       speaker: 'robin',
       text: 'There it is. The blueprint exists now. It won\u2019t run on its own though — for that, we need to actually CALL it. That\u2019s next.',
     },
-    reward: { xp: 120, badge: 'Blueprint Architect', badgeIcon: '\uD83D\uDCD0' },
     cassette: {
       title: 'Cassette 02 — Field Note',
       tip: 'def only builds the function. It does NOT run it. Think of it like writing a recipe — writing it down doesn\u2019t cook the meal.',
@@ -255,7 +253,6 @@ export const missions: Mission[] = [
       speaker: 'dustin',
       text: 'Whoa. Now Mike, Lucas AND Max can all get the exact same warning, just by calling warn_team() three times. No retyping. Ever.',
     },
-    reward: { xp: 120, badge: 'Channel Opener', badgeIcon: '\uD83D\uDCFB' },
     cassette: {
       title: 'Cassette 03 — Field Note',
       tip: 'Defining vs. calling trips up a lot of beginners. def = write the recipe. name() = actually cook the meal.',
@@ -336,7 +333,6 @@ export const missions: Mission[] = [
       speaker: 'steve',
       text: 'One function, infinite locations. That\u2019s so much cleaner than writing warn_team_everywhere().',
     },
-    reward: { xp: 140, badge: 'Coordinate Tracker', badgeIcon: '\uD83D\uDCCD' },
     cassette: {
       title: 'Cassette 04 — Field Note',
       tip: 'Parameter vs. argument: the parameter is the name in the function\u2019s definition. The argument is the actual value you pass in when calling it.',
@@ -420,7 +416,6 @@ export const missions: Mission[] = [
       speaker: 'hopper',
       text: 'Now THAT\u2019S a warning I can use. Location and danger level, every time, no guesswork.',
     },
-    reward: { xp: 150, badge: 'Threat Assessor', badgeIcon: '\u26A0\uFE0F' },
     cassette: {
       title: 'Cassette 05 — Field Note',
       tip: 'Order matters with parameters. warn_team("the quarry", 4) is not the same as warn_team(4, "the quarry") — Python matches by position.',
@@ -500,7 +495,6 @@ export const missions: Mission[] = [
       speaker: 'elle',
       text: 'Good. Now the number goes where it\u2019s needed, not just onto a screen nobody\u2019s watching.',
     },
-    reward: { xp: 160, badge: 'Data Recoverer', badgeIcon: '\uD83D\uDCCA' },
     cassette: {
       title: 'Cassette 06 — Field Note',
       tip: 'A function without "return" gives back a special value called None. If your code expects a real answer, make sure your function actually returns one.',
@@ -598,7 +592,6 @@ export const missions: Mission[] = [
       speaker: 'steve',
       text: 'Okay, containment makes sense now. If I want it outside, the function has to hand it to me with return.',
     },
-    reward: { xp: 170, badge: 'Containment Officer', badgeIcon: '\uD83D\uDD12' },
     cassette: {
       title: 'Cassette 07 — Field Note',
       tip: 'Scope isn\u2019t a limitation — it\u2019s a safety feature. Two different functions can both use a variable named "score" without ever colliding.',
@@ -678,7 +671,6 @@ export const missions: Mission[] = [
       speaker: 'hopper',
       text: 'Now every function that spots a rift adds to the SAME number. That\u2019s the shared picture I needed.',
     },
-    reward: { xp: 180, badge: 'State Broadcaster', badgeIcon: '\uD83D\uDCE1' },
     cassette: {
       title: 'Cassette 08 — Field Note',
       tip: 'Use globals sparingly. Too many shared variables make it hard to track who changed what. Prefer parameters and return values when you can.',
@@ -763,7 +755,6 @@ export const missions: Mission[] = [
       speaker: 'elle',
       text: 'Now the conversion logic is exactly where it belongs. Nobody outside check_danger even needs to know it exists.',
     },
-    reward: { xp: 200, badge: 'Inner Chamber Keeper', badgeIcon: '\uD83D\uDDDD\uFE0F' },
     cassette: {
       title: 'Cassette 09 — Field Note',
       tip: 'Nested functions are great for one-off helpers. If a helper is useful in MULTIPLE places, pull it back out to the top level instead.',
@@ -860,7 +851,6 @@ export const missions: Mission[] = [
       speaker: 'elle',
       text: 'Now it doesn\u2019t matter how deep the vines go. The function handles the whole thing, one branch at a time, calling itself down to the base case.',
     },
-    reward: { xp: 220, badge: 'Echo Chamber Survivor', badgeIcon: '\uD83C\uDF00' },
     cassette: {
       title: 'Cassette 10 — Field Note',
       tip: 'Every recursive function is really two functions in one: "if I\u2019m done, stop" (base case) and "otherwise, do less work and call myself again" (recursive case).',
@@ -947,7 +937,6 @@ export const missions: Mission[] = [
       speaker: 'elle',
       text: 'The Gate is closing. Every function did its one job, and together, that was enough.',
     },
-    reward: { xp: 500, badge: 'Hawkins Division Commander', badgeIcon: '\uD83C\uDFC6' },
     cassette: {
       title: 'Cassette 11 — Final Field Note',
       tip: 'You now know: def, calling functions, parameters, multiple parameters, return values, local scope, global scope, nested functions, and recursion. That\u2019s the real toolkit. Go build something with it.',

@@ -101,7 +101,6 @@ print(average_score([]))`,
   reflectionPrompt:
     "Where else in this story — or in another one you know — does something resist being divided? What made it indivisible?",
 
-  badgeUnlocked: "Acchedya — The Indivisible",
 };
 
 export default zeroDivisionError;

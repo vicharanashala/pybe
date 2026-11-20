@@ -1,9 +1,13 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useEffect, useState } from 'react';
 import { STORY } from '../data/content';
 import TimeMachine from './TimeMachine';
 
-export default function Ending({ earnedCrystals, onBackToHub, onRestart }) {
+export default function Ending({ onComplete, onBackToHub, onRestart }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [stage, setStage] = useState(0);
+  useEffect(()=>{if(stage===3)onComplete?.();},[stage]);
 
   useEffect(() => {
     const timers = [
@@ -32,7 +36,7 @@ export default function Ending({ earnedCrystals, onBackToHub, onRestart }) {
             Every stage, every fixed sprinkler, every iteration you didn't give up on — that's what got you here.
             Robo's magic spell is complete.
           </p>
-          <TimeMachine earned={earnedCrystals} repairPct={100} />
+          <TimeMachine repairPct={100} />
           <p className="lp-scene-intro" style={{ marginTop: 8 }}>
             "Life also works like loops. Repeating mistakes keeps us stuck, but improving every iteration helps us grow."
           </p>

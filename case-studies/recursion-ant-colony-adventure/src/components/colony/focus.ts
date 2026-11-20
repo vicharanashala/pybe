@@ -6,7 +6,7 @@
 // colony actually sits (so the camera can clamp its pan/zoom and never drift
 // off into empty soil).
 
-import type { ChamberSpec, ObstacleSpec, SceneAction } from '@/data';
+import type { ChamberSpec, ObstacleSpec, SceneAction } from '../../data';
 import {
   COLONY_W,
   COLONY_H,

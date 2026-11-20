@@ -1,38 +1,22 @@
+import {useTour} from '../context/TourContext';
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, CheckCircle2, XCircle, ChevronRight, RotateCcw, Trophy } from 'lucide-react';
+import { ChevronLeft, CheckCircle2, XCircle, ChevronRight, RotateCcw, BookOpen } from 'lucide-react';
 
-export default function Quiz({ title, questions, onPrev, score, setScore, totalPossibleScore, onNextSection }) {
+export default function Quiz({ title, questions, onPrev, onNextSection }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
   
-  // Track local score for the end-of-quiz screen
-  const [localQuizScore, setLocalQuizScore] = useState(0);
-  const [awardedQuestions, setAwardedQuestions] = useState([]);
-
-  // Calculate passing mechanics
-  const percentage = questions?.length ? Math.round((localQuizScore / questions.length) * 100) : 0;
-  const passed = percentage >= 50;
-
-  // WHEN QUIZ FINISHES: If they scored >= 50%, unlock the next section!
-  useEffect(() => {
-    if (isFinished && passed) {
-      // Pull the section number from the title (e.g., "1. Ordered" -> 1)
-      const match = title.match(/^\d+/);
-      const currentLevel = match ? parseInt(match[0]) : 0;
-      
-      if (currentLevel > 0) {
-        const maxUnlocked = parseInt(localStorage.getItem('unlockedLevel') || '1');
-        // If the next level isn't unlocked yet, unlock it!
-        if (currentLevel + 1 > maxUnlocked) {
-          localStorage.setItem('unlockedLevel', (currentLevel + 1).toString());
-          // Tell the Sidebar to refresh its locks immediately
-          window.dispatchEvent(new Event('levelUnlocked'));
-        }
-      }
+  const [correctness,setCorrectness]=useState({});
+  const {completeSection}=useTour();
+  const passed=Object.values(correctness).filter(Boolean).length >= Math.ceil((questions?.length || 0)/2);
+  useEffect(()=>{
+    if(isFinished && passed){
+      const match=title.match(/^\d+/);
+      completeSection(match ? match[0] : 'final');
     }
-  }, [isFinished, passed, title]);
+  },[isFinished,passed,title,completeSection]);
 
   if (!questions || questions.length === 0) {
     return (
@@ -48,14 +32,7 @@ export default function Quiz({ title, questions, onPrev, score, setScore, totalP
   const handleSubmit = () => {
     if (selectedAnswer === null) return;
     
-    if (selectedAnswer === q.correct) {
-      setLocalQuizScore((prev) => prev + 1);
-      
-      if (setScore && !awardedQuestions.includes(currentQuestionIndex)) {
-        setScore((prev) => prev + 1);
-        setAwardedQuestions((prev) => [...prev, currentQuestionIndex]);
-      }
-    }
+    setCorrectness(previous=>({...previous,[currentQuestionIndex]:selectedAnswer === q.correct}));
     setIsSubmitted(true);
   };
 
@@ -70,13 +47,7 @@ export default function Quiz({ title, questions, onPrev, score, setScore, totalP
   };
 
   const handleRetry = () => {
-    // FIX: Reset the global score back to 0!
-    if (setScore) setScore(0);
-    
-    // Also reset local quiz trackers just in case
-    setLocalQuizScore(0);
-    setAwardedQuestions([]);
-    
+    setCorrectness({});
     // Route back to the terminal/snippet view
     if (onPrev) {
       onPrev();
@@ -85,25 +56,16 @@ export default function Quiz({ title, questions, onPrev, score, setScore, totalP
 
   // --- FINISHED SCREEN ---
   if (isFinished) {
-    // Dynamic text based on passing status
-    let message = "Keep practicing! You need at least 50% to unlock the next section.";
-    if (percentage === 100) message = "Perfect Score! Next section unlocked!";
-    else if (passed) message = "Great job! You passed and unlocked the next section.";
-
+    const message=passed ? 'Review complete. The next section is available.' : 'Review the feedback, then try the section again.';
     return (
       <div className="max-w-3xl mx-auto flex flex-col items-center justify-center min-h-[60vh] space-y-8 animate-in zoom-in duration-500 relative">
         <div className="w-full bg-white border-4 border-black rounded-3xl shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] p-12 text-center flex flex-col items-center gap-6">
           <div className="w-24 h-24 bg-yellow-300 border-4 border-black rounded-full flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-            <Trophy size={48} className="text-black" />
+            <BookOpen size={48} className="text-black" />
           </div>
           <h2 className="text-4xl font-black uppercase">
-            {passed ? "Section Complete!" : "Section Failed"}
+            {passed ? "Section Complete!" : "Review Needed"}
           </h2>
-          
-          <div className="text-2xl font-bold bg-zinc-100 px-6 py-4 border-4 border-black rounded-xl inline-block shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-            Total Overall Score: <span className="text-3xl text-emerald-600">{score || 0}</span> 
-            {totalPossibleScore && <span className="text-zinc-400"> / {totalPossibleScore}</span>}
-          </div>
           
           <p className="text-xl font-bold text-gray-600">{message}</p>
           
@@ -118,7 +80,7 @@ export default function Quiz({ title, questions, onPrev, score, setScore, totalP
                     : 'bg-zinc-300 text-zinc-500 cursor-not-allowed opacity-75' // Locked Button Style
                 }`}
               >
-                {passed ? "PROCEED TO NEXT SECTION" : "SCORE 50% TO PROCEED"} <ChevronRight size={24} strokeWidth={3} />
+                {passed ? "PROCEED TO NEXT SECTION" : "REVIEW TO CONTINUE"} <ChevronRight size={24} strokeWidth={3} />
               </button>
             ) : (
               <button 

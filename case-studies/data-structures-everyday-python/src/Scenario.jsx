@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Scenario({ data, onFinish }) {
+function Scenario({ data, onFinish, onComplete }) {
   const [history, setHistory] = useState(['start']);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [feedbackMsg, setFeedbackMsg] = useState(null);
@@ -20,6 +20,7 @@ function Scenario({ data, onFinish }) {
     }
 
     if (option.next === 'end') {
+      onComplete?.();
       onFinish();
     } else if (option.next !== currentStepId) {
       // If we are answering a question from a previous point in history,

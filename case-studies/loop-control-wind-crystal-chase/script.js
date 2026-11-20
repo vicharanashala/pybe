@@ -1,8 +1,6 @@
 const state = {
-  xp: 0,
   section: 'hero',
   done: 0,
-  crystals: 0,
   pages: ['hero','story','concepts','challenge1','challenge2','challenge3','puzzle','result']
 };
 
@@ -62,13 +60,12 @@ function updateProgress() {
     puzzle:'Final', result:'Complete'
   };
   document.getElementById('stageLabel').textContent = labels[state.section] || '';
-  document.getElementById('xpCount').textContent = state.xp;
 }
 
-function addXP(n, msg) {
-  state.xp += n;
-  document.getElementById('xpCount').textContent = state.xp;
-  toast(`+${n} XP  ${msg||''}`, 'ok');
+const completedChallenges = new Set();
+function completeChallenge(id) {
+  completedChallenges.add(id);
+  state.done = completedChallenges.size;
 }
 
 function toast(msg, type='') {
@@ -99,8 +96,7 @@ function run1() {
   setTimeout(() => {
     msg.textContent = '✅ Perfect for-loop!';
     msg.classList.add('ok');
-    state.crystals += 5; state.done++;
-    addXP(25, 'for mastered');
+    completeChallenge('for');
     document.getElementById('n1').classList.remove('hidden');
   }, 5*250+150);
 }
@@ -126,7 +122,7 @@ function run2() {
       out.innerHTML += `<div style="color:#fbbf24">>>> Landed!</div>`;
       msg.textContent = '✅ while loop perfect!';
       msg.classList.add('ok');
-      state.done++; addXP(30, 'while mastered');
+      completeChallenge('while');
       document.getElementById('n2').classList.remove('hidden');
     }
   }
@@ -157,8 +153,7 @@ function run3() {
   setTimeout(() => {
     msg.textContent = '✅ continue + break mastered!';
     msg.classList.add('ok');
-    state.crystals += 2; state.done++;
-    addXP(35, 'control flow');
+    completeChallenge('control');
     document.getElementById('n3').classList.remove('hidden');
   }, lines.length*350+150);
 }
@@ -242,8 +237,7 @@ function checkOrder() {
   if (ok) {
     msg.textContent = '✅ Perfect order!';
     msg.className = 'msg ok';
-    addXP(50, 'Puzzle solved');
-    state.done++;
+    completeChallenge('puzzle');
     document.getElementById('nPuzzle').classList.remove('hidden');
   } else {
     msg.textContent = '❌ Wrong order. Try again or show solution.';
@@ -270,38 +264,16 @@ function showSolution() {
 
 /* Result */
 function showResult() {
-  document.getElementById('fXp').textContent = state.xp;
   document.getElementById('fCh').textContent = state.done;
-  document.getElementById('fCr').textContent = state.crystals;
-
-  let title='Sky Apprentice';
-  if (state.xp>=120){title='Master Glider'}
-  else if(state.xp>=80){title='Crystal Collector'}
-  else if(state.xp>=50){title='Sky Explorer'}
-
-  document.getElementById('resultTitle').textContent = title;
-  // Keep the SVG badge image; only update title/text
-  document.getElementById('resultText').textContent =
-    `You earned ${state.xp} XP and collected ${state.crystals} crystals!`;
-
-  const badges = [
-    {ic:'🌀', nm:'for Loop'},
-    {ic:'♾️', nm:'while Loop'},
-    {ic:'⏭️', nm:'Control'},
-    {ic:'🧩', nm:'Puzzle'}
-  ];
-  const box = document.getElementById('badges');
-  box.innerHTML = '';
-  badges.forEach(b => {
-    box.innerHTML += `<div class="badge-item"><div class="ic">${b.ic}</div><div class="nm">${b.nm}</div></div>`;
-  });
+  document.getElementById('resultTitle').textContent = 'The Wind Crystal Journey Is Complete';
+  document.getElementById('resultText').textContent = 'You used for, while, continue and break to navigate the islands.';
 }
 
 /* Init */
 document.addEventListener('DOMContentLoaded', () => {
   updateProgress();
+  document.getElementById('replayBtn').onclick = () => location.reload();
   document.getElementById('startBtn').onclick = () => {
-    addXP(10, 'Quest started');
     show('story');
   };
   document.querySelectorAll('.next').forEach(btn => {

@@ -1,8 +1,11 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState } from 'react';
 import { Grid, CheckCircle2, Play, Code } from 'lucide-react';
 import { soundFx } from '../../utils/soundEffects';
 
 export default function SeatGrid({ rows = 5, seatsPerRow = 6, onComplete }) {
+  const {setInterval, clearInterval}=useStoryTimers();
   const [checkedSeats, setCheckedSeats] = useState([]);
   const [currentRow, setCurrentRow] = useState(1);
   const [currentSeat, setCurrentSeat] = useState(1);

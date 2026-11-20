@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect } from 'react';
 import { Volume2, VolumeX, RotateCcw, ArrowRight } from 'lucide-react';
 import { SoundService } from '../services/soundEffects';
@@ -9,6 +11,7 @@ export default function SpeechBubble({
   onComplete,
   isLastLine
 }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const line = dialogueList[currentLineIndex] || { speaker: 'Luna', text: '', sfx: null };
   const [displayedText, setDisplayedText] = useState('');
   const [isTyping, setIsTyping] = useState(false);

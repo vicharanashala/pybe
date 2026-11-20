@@ -5,7 +5,8 @@ import { getChapter } from '../data/chapters.js';
 import FillBlank         from '../components/FillBlank.jsx';
 import QuizCard          from '../components/QuizCard.jsx';
 import CodeChallenge     from '../components/CodeChallenge.jsx';
-import AchievementBadge  from '../components/AchievementBadge.jsx';
+import {createStoryElements} from '../../../../../shared/story-elements.mjs';
+const {Completion}=createStoryElements(React);
 import ChapterNavigation from '../components/ChapterNavigation.jsx';
 
 // Lists-specific components
@@ -32,8 +33,7 @@ export default function Chapter1({ progress, onComplete, onNavigate, initialScen
   });
   const [subStep,     setSubStep]     = useState(0);  // within practice suite (0=match, 1=fill, 2=quiz, 3=code, 4=final)
   const [backpack,    setBackpack]    = useState([...initialBackpack]);
-  const [showBadge,   setShowBadge]   = useState(false);
-  const [score,       setScore]       = useState({ fill: null, quiz: null });
+  const [showCompletion,   setShowCompletion]   = useState(false);
 
   // Scroll to top when scene changes
   useEffect(() => {
@@ -118,14 +118,12 @@ export default function Chapter1({ progress, onComplete, onNavigate, initialScen
     }
   }
 
-  function handleFillComplete(correct, total) {
-    setScore((s) => ({ ...s, fill: { correct, total } }));
+  function handleFillComplete() {
     setSubStep(2); // move to Quiz
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function handleQuizComplete(correct, total) {
-    setScore((s) => ({ ...s, quiz: { correct, total } }));
+  function handleQuizComplete() {
     setSubStep(3); // move to Code Challenge
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -136,11 +134,13 @@ export default function Chapter1({ progress, onComplete, onNavigate, initialScen
   }
 
   function handleFinalComplete() {
-    onComplete({ xp: chapter.xp, score });
-    setShowBadge(true);
+    onComplete();
+    setShowCompletion(true);
   }
 
   // ─────────────────────────────────────────────────────────────────────────
+  if(showCompletion)return <Completion title="The Backpack Journey Is Complete" description="You explored the forest, discovered an ordered backpack, and used Python lists to finish the mission." homeLabel="Back to the mission map" onHome={()=>onNavigate('landing')}/>;
+
   return (
     <div
       className="chapter-page"
@@ -747,7 +747,7 @@ export default function Chapter1({ progress, onComplete, onNavigate, initialScen
             {subStep === 4 && (
               <>
                 <div className="scene-story-card" style={{ borderColor: `${color}55`, marginBottom: '20px' }}>
-                  <h2 className="scene-story-card__title">🏆 Final Mission: The Lost Forest</h2>
+                  <h2 className="scene-story-card__title">Final Mission: The Lost Forest</h2>
                   <p>
                     You are now entering the deepest part of the Lost Forest.
                     Use everything you've learned about your magical backpack to complete this final mission!
@@ -792,20 +792,7 @@ export default function Chapter1({ progress, onComplete, onNavigate, initialScen
         onHome={() => onNavigate('landing')}
       />
 
-      {/* ── Completion Badge ──────────────────────────────────────────────── */}
-      {showBadge && (
-        <AchievementBadge
-          chapterTitle="The Magical Backpack"
-          subtitle="Python Lists — Mastered!"
-          emoji="🎒"
-          xp={chapter.xp}
-          chapterColor={color}
-          chapterGlow={colorGlow}
-          nextLabel="View Achievement & Roadmap 🗺️"
-          onNext={() => { setShowBadge(false); onNavigate('landing'); }}
-          onHome={() => { setShowBadge(false); onNavigate('landing'); }}
-        />
-      )}
+
     </div>
   );
 }

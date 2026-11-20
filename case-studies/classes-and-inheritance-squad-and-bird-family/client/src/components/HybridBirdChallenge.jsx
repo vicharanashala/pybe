@@ -76,7 +76,7 @@ export default function HybridBirdChallenge({ onComplete }) {
           const isCorrect = answer === t.correct;
           return (
             <div
-              key={t.id}
+              key={t.id} role="group" aria-label={t.label}
               className={
                 "hybrid-trait-row" +
                 (answer ? (isCorrect ? " hybrid-trait-correct" : " hybrid-trait-incorrect") : "")
@@ -128,7 +128,7 @@ export default function HybridBirdChallenge({ onComplete }) {
             {correctCount === HYBRID_TRAITS.length ? "🐣" : "✓"}
           </span>
           <p>
-            {correctCount}/{HYBRID_TRAITS.length} traits sorted correctly — your hybrid bird is
+            Your hybrid bird is
             assembled.
           </p>
         </div>

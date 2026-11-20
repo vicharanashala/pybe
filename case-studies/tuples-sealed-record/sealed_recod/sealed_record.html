@@ -484,7 +484,6 @@
       steps: "steps.png",        // e.g. "/images/steps-path.jpg"       — a stone path with numbered footsteps from a starting gate
       sage: "ch11.png",         // e.g. "/images/sage-notebook.jpg"    — a traveling sage examining a notebook of six clues
       naming: "chapter 12.png",       // e.g. "/images/slab-to-code.jpg"   — the stone slab glowing/transforming into code
-      achievement: "final.png",  // e.g. "/images/royal-seal.jpg"       — a wax seal / royal emblem for the finished badge
     };
 
     let currentImageHTML = null;
@@ -518,7 +517,7 @@
       { id: 14, label: "Reverse Engineering" },
       { id: 15, label: "Final Mission" },
       { id: 16, label: "Lesson Summary" },
-      { id: 17, label: "Achievement Unlocked" },
+      { id: 17, label: "Story Complete" },
     ];
 
     let state = {
@@ -827,8 +826,7 @@ By the time a dispute reaches court, no two scrolls agree on what the law actual
 
       else if (state.step === 17) {
         panel = `
-      ${imgSlot('achievement', 'a royal wax seal or emblem for the completed achievement')}
-      <div class="panel-title" style="text-align:center;">Royal Scroll Keeper</div>
+      <div class="panel-title" style="text-align:center;">The Record Remains Sealed</div>
       <div class="body-text" style="text-align:center; margin-bottom:20px;">You gathered six clues, met the sage, and learned their true name: the tuple.</div>
       <div class="footer-row" style="justify-content:center;"><button class="btn btn-ghost" onclick="restart()">\u21bb Replay Lesson</button></div>
     `;

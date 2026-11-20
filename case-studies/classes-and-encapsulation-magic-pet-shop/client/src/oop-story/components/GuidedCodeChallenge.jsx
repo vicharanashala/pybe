@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState } from 'react';
 import { CheckCircle2, Wand2 } from 'lucide-react';
 import { SoundService } from '../services/soundEffects';
@@ -7,6 +9,7 @@ export default function GuidedCodeChallenge({
   challenge,
   onSolved
 }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [task1Selection, setTask1Selection] = useState(null);
   const [task2Selection, setTask2Selection] = useState(null);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -26,6 +29,7 @@ export default function GuidedCodeChallenge({
   };
 
   const checkCompletion = (t1, t2) => {
+    if (isCompleted)return;
     if (t1 === challenge.task1.correct && t2 === challenge.task2.correct) {
       setIsCompleted(true);
       SoundService.playSuccess();

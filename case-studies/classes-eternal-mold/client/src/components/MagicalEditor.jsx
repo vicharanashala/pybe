@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import CodeMirror from '@uiw/react-codemirror';
-import { python } from '@codemirror/lang-python';
+import PythonEditor from '../../../../../client/src/learning/PythonEditor.jsx';
+
 import { motion } from 'framer-motion';
 import { usePyodide } from '../usePyodide';
 import ConsoleOutput from './ConsoleOutput';
@@ -77,11 +77,10 @@ export default function MagicalEditor() {
 
       {/* CodeMirror Editor (Top 68%) */}
       <div className="h-[68%] w-full my-3 rounded-2xl overflow-hidden border border-white/15 bg-black/40 shadow-inner relative flex flex-col">
-        <CodeMirror
+        <PythonEditor
           value={code}
           height="100%"
-          theme="dark"
-          extensions={[python()]}
+          disabled={isRunning}
           onChange={(val) => setCode(val)}
           className="w-full h-full font-mono text-sm leading-relaxed"
         />

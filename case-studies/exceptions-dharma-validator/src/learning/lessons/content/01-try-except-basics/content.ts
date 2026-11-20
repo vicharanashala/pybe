@@ -109,7 +109,6 @@ except ValueError:
   reflectionPrompt:
     "Krishna's response to Arjuna wasn't to pretend the crisis didn't happen — it was to meet it directly and keep going. Where else does responding to a problem, instead of ignoring it or being stopped by it, make the difference?",
 
-  badgeUnlocked: "Sthira — Steady Despite the Storm",
 };
 
 export default tryExceptBasics;

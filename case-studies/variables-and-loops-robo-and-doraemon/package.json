@@ -2,7 +2,7 @@
   "name": "story-learning-hub",
   "version": "1.0.0",
   "private": true,
-  "description": "Story Learning Hub — extracted from the PyBe codebase. Story-driven Python lessons: Loops and Variables.",
+  "description": "Story Learning Hub \u2014 extracted from the PyBe codebase. Story-driven Python lessons: Loops and Variables.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -14,5 +14,6 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "vite": "^6.0.7"
-  }
+  },
+  "type": "module"
 }

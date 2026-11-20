@@ -5,3 +5,5 @@
 .status{font-size:9px}.card-foot{font-size:10px}.concept-card>p{font-size:12px}.concept-card h3{font-size:15px}.story-meta{font-size:9px}.byline{font-size:11px}.primary-nav a{font-size:13px}.story-copy p{font-size:12px}
 
 .search-field:focus-within{outline:3px solid #e9985e;outline-offset:2px}.bookmark svg{width:14px;height:18px;margin:auto;display:block;fill:none;stroke:currentColor;stroke-width:1.5}.bookmark.saved svg{fill:#f5bc8a}
+
+.immersive-study>.back-link{margin-top:14px}.immersive-study>.page-intro{padding:12px 0}.immersive-study>.page-intro h1{font-size:26px}.immersive-study>.page-intro>.eyebrow,.immersive-study>.page-intro>p{display:none}

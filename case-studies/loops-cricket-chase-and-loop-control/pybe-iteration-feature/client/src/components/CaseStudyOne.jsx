@@ -1,3 +1,4 @@
+import cricketImage from '../../public/cricket_story.jpg';
 import React, { useState, useEffect } from 'react';
 import { Terminal, CheckCircle, Brain, Play, Code, XCircle, ArrowLeft, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,7 +28,7 @@ const baseQuizzes = [
   }
 ];
 
-const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onComplete, onProceed, isCompleted }) => {
+const CaseStudyOne = ({ resetSignal, onBack, onComplete, onProceed, isCompleted }) => {
   const [currentBeat, setCurrentBeat] = useState(1);
   
   // Quiz states
@@ -76,7 +77,7 @@ const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onComplete, onProcee
       codeAnswers.loop1.trim().toLowerCase() === 'for' && 
       codeAnswers.loop2.trim().toLowerCase() === 'while';
     setCodeVerified(isCorrect);
-    onScoreUpdate('cs1_code', isCorrect ? 1 : 0);
+
   };
 
   const handleVerifyCode2 = () => {
@@ -84,7 +85,7 @@ const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onComplete, onProcee
       codeAnswers2.flow1.trim().toLowerCase() === 'while' && 
       codeAnswers2.flow2.trim() === '>';
     setCodeVerified2(isCorrect);
-    onScoreUpdate('cs1_code2', isCorrect ? 1 : 0);
+
     if (isCorrect) {
       onComplete();
     }
@@ -329,7 +330,7 @@ const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onComplete, onProcee
                       setQ1Selected(opt.id);
                       if(opt.isCorrect) {
                         setQ1Answered(true);
-                        onScoreUpdate('cs1_q1', 1);
+
                       }
                     }}
                     className={btnClass}
@@ -363,7 +364,7 @@ const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onComplete, onProcee
                       setQ2Selected(opt.id);
                       if(opt.isCorrect) {
                         setQ2Answered(true);
-                        onScoreUpdate('cs1_q2', 1);
+
                       }
                     }}
                     className={btnClass}
@@ -580,7 +581,7 @@ const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onComplete, onProcee
             >
               {(currentBeat <= 4 || currentBeat >= 14) && (
                 <div className="rounded-2xl overflow-hidden shadow-2xl border border-slate-800/50 mb-8 max-w-sm w-full opacity-80">
-                  <img src="/cricket_story.jpg" alt="Cricket Match" className="w-full h-auto object-cover" />
+                  <img src={cricketImage} alt="Cricket Match" className="w-full h-auto object-cover" />
                 </div>
               )}
               <h1 className="text-2xl md:text-3xl font-extrabold text-blue-400 text-center tracking-tight drop-shadow-md">
@@ -603,6 +604,7 @@ const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onComplete, onProcee
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentBeat}
+                data-story-beat={currentBeat}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}

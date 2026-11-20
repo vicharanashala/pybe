@@ -12,10 +12,6 @@ export default function Header({ currentSlide, onOpenMenu }) {
       </div>
 
       <div className="user-stats">
-        <div className="stat-badge level-badge" title="Current Level">
-          <Trophy size={16} color="var(--duo-blue)" /> Explorer
-        </div>
-
         <button
           id="toc-open-btn"
           className="icon-btn"

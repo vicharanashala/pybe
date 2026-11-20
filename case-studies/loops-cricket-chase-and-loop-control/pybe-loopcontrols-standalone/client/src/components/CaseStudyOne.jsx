@@ -1,3 +1,4 @@
+import quizData from '../../../../shared/quiz-questions.cjs';
 import React, { useState, useEffect } from 'react';
 import { Terminal, CheckCircle, Brain, Play, Code, XCircle, ArrowLeft, ArrowRight, RotateCcw } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -6,7 +7,7 @@ const TOTAL_BEATS = 13;
 
 // baseQuizzes is now fetched from backend
 
-const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onProceed, isCompleted }) => {
+const CaseStudyOne = ({ resetSignal, onBack, onComplete, onProceed, isCompleted }) => {
   const [currentBeat, setCurrentBeat] = useState(1);
   
   // Quiz states
@@ -22,30 +23,12 @@ const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onProceed, isComplet
   const [codeAnswers2, setCodeAnswers2] = useState({ flow1: '', flow2: '' });
   const [codeVerified2, setCodeVerified2] = useState(null);
 
-  const [quizzes, setQuizzes] = useState([]);
-  const [isQuizzesLoading, setIsQuizzesLoading] = useState(true);
+  const quizzes=quizData.quizQuestions;
+  const isQuizzesLoading=false;
   
   // Results map for validated options (red/green)
   const [q1Results, setQ1Results] = useState({});
   const [q2Results, setQ2Results] = useState({});
-
-  useEffect(() => {
-    fetch('/api/quiz')
-      .then(res => res.json())
-      .then(data => {
-        setQuizzes(data);
-        setIsQuizzesLoading(false);
-      })
-      .catch(err => {
-        console.error("Failed to fetch quizzes:", err);
-        // Fallback if backend is not running
-        setQuizzes([
-          { id: "q1", scenario: "If the machine finds a torn note, what should it do?", options: ["Halt immediately", "Skip it and continue counting", "Restart counting", "Alert manager"] },
-          { id: "q2", scenario: "If the machine finds a fake note, what should it do?", options: ["Skip it", "Continue counting", "Stop immediately", "Ignore it"] }
-        ]);
-        setIsQuizzesLoading(false);
-      });
-  }, []);
 
   useEffect(() => {
     setCurrentBeat(1);
@@ -82,7 +65,7 @@ const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onProceed, isComplet
       codeAnswers.flow1.trim().toLowerCase() === 'continue' && 
       codeAnswers.flow2.trim().toLowerCase() === 'break';
     setCodeVerified(isCorrect);
-    onScoreUpdate('cs1_code', isCorrect ? 1 : 0);
+
   };
 
   const handleVerifyCode2 = () => {
@@ -90,7 +73,8 @@ const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onProceed, isComplet
       codeAnswers2.flow1.trim().toLowerCase() === 'continue' && 
       codeAnswers2.flow2.trim().toLowerCase() === 'break';
     setCodeVerified2(isCorrect);
-    onScoreUpdate('cs1_code2', isCorrect ? 1 : 0);
+    if(isCorrect)onComplete?.();
+
   };
 
   // Determine active step based on current beat
@@ -268,29 +252,9 @@ const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onProceed, isComplet
                     disabled={q1Answered}
                     onClick={() => {
                       setQ1Selected(opt);
-                      fetch('/api/submit', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ answers: [{ id: quizzes[0].id, answer: opt }] })
-                      })
-                      .then(res => res.json())
-                      .then(data => {
-                        const isCorrect = data.results[0].isCorrect;
-                        setQ1Results(prev => ({...prev, [opt]: isCorrect}));
-                        if(isCorrect) {
-                          setQ1Answered(true);
-                          onScoreUpdate('cs1_q1', 1);
-                        }
-                      })
-                      .catch(() => {
-                        // fallback check
-                        const isCorrect = (opt === "Skip it and continue counting" || opt === "Skip it");
-                        setQ1Results(prev => ({...prev, [opt]: isCorrect}));
-                        if (isCorrect) {
-                          setQ1Answered(true);
-                          onScoreUpdate('cs1_q1', 1);
-                        }
-                      });
+                      const isCorrect=opt===quizzes[0].correctAnswer;
+                      setQ1Results(prev=>({...prev,[opt]:isCorrect}));
+                      if(isCorrect)setQ1Answered(true);
                     }}
                     className={btnClass}
                   >
@@ -323,29 +287,9 @@ const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onProceed, isComplet
                     disabled={q2Answered}
                     onClick={() => {
                       setQ2Selected(opt);
-                      fetch('/api/submit', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ answers: [{ id: quizzes[1].id, answer: opt }] })
-                      })
-                      .then(res => res.json())
-                      .then(data => {
-                        const isCorrect = data.results[0].isCorrect;
-                        setQ2Results(prev => ({...prev, [opt]: isCorrect}));
-                        if(isCorrect) {
-                          setQ2Answered(true);
-                          onScoreUpdate('cs1_q2', 1);
-                        }
-                      })
-                      .catch(() => {
-                        // fallback check
-                        const isCorrect = (opt === "Stop immediately" || opt === "Halt immediately");
-                        setQ2Results(prev => ({...prev, [opt]: isCorrect}));
-                        if (isCorrect) {
-                          setQ2Answered(true);
-                          onScoreUpdate('cs1_q2', 1);
-                        }
-                      });
+                      const isCorrect=opt===quizzes[1].correctAnswer;
+                      setQ2Results(prev=>({...prev,[opt]:isCorrect}));
+                      if(isCorrect)setQ2Answered(true);
                     }}
                     className={btnClass}
                   >
@@ -591,6 +535,7 @@ const CaseStudyOne = ({ onScoreUpdate, resetSignal, onBack, onProceed, isComplet
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentBeat}
+                data-story-beat={currentBeat}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}

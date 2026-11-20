@@ -78,7 +78,7 @@ Scene 08: Debring        (15,500 FT) ──► flip      (Interactive in-place 3
 Scene 09: Tanglang La    (17,480 FT) ──► runbreak  (Execute 12-line CPython simulator with synchronized line tracer)
 Scene 10: Karu           (11,100 FT) ──► tapline   (Inspect real-world input parsing code and identify ValueError)
 Scene 11: Shey           (11,500 FT) ──► flag      (Place proactive safety precondition flag to discover raise)
-Scene 12: Leh Arrival    (11,562 FT) ──► collect   (Assemble 4 trail notes, generate verified HTML5 canvas credential)
+Scene 12: Leh Arrival    (11,562 FT) ──► collect   (Review the 4 trail notes and replay the expedition)
 ```
 
 ---
@@ -108,7 +108,7 @@ Ladakh/
 │   ├── engine.js           # Story state machine, audio triggers, navigation controller
 │   ├── audio.js            # Dependency-free Web Audio procedural synthesizer
 │   ├── dragkit.js          # Unified pointer and click-to-place drag-and-drop system
-│   ├── certificate.js      # HTML5 canvas certificate generator and exporter
+│   ├── certificate.js      # Retired per-study award module; shared completion belongs to PyBe
 │   └── interactions/       # 12 standalone interactive verb controllers (pack, wrap, etc.)
 ├── docs/
 │   ├── altitudes.md        # Official BRO survey elevation benchmarks

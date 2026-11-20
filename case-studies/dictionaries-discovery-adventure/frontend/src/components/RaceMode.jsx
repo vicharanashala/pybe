@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Zap, Play, RotateCcw, Award } from 'lucide-react';
@@ -5,6 +7,7 @@ import { useGame } from '../context/GameContext';
 import { useSoundFX } from '../hooks/useSoundFX';
 
 export const RaceMode = () => {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const { nerdMode } = useGame();
   const { playSuccess, playClick } = useSoundFX();
 
@@ -37,19 +40,9 @@ export const RaceMode = () => {
     const stepIncrement = chestSize === 10 ? 1 : chestSize === 1000 ? 25 : 25000;
     const intervalTime = chestSize === 10 ? 80 : 25;
 
-    linearTimerRef.current = setInterval(() => {
-      setLinearSteps(prev => {
-        const next = prev + stepIncrement;
-        if (next >= chestSize) {
-          clearInterval(linearTimerRef.current);
-          setIsRacing(false);
-          setRaceFinished(true);
-          playSuccess();
-          return chestSize;
-        }
-        return next;
-      });
-    }, intervalTime);
+    let steps=0;
+    linearTimerRef.current=setInterval(()=>{steps=Math.min(chestSize,steps+stepIncrement);setLinearSteps(steps);if(steps>=chestSize){clearInterval(linearTimerRef.current);setIsRacing(false);setRaceFinished(true);playSuccess();}},intervalTime);
+
   };
 
   const handleReset = () => {

@@ -8,7 +8,7 @@ import {
   Lightbulb,
   PencilLine,
   TerminalSquare,
-  Trophy,
+  CheckCircle2,
   Wrench
 } from 'lucide-react';
 import BetaalRiddle from './BetaalRiddle';
@@ -18,7 +18,6 @@ import { generateQuestion } from '../lib/questionGenerator';
 import { generateRiddle } from '../lib/riddleGenerator';
 import { generateReflection } from '../lib/reflectionGenerator';
 
-const RIDDLE_XP = 15;
 
 const STEPS = [
   { key: 'story', label: 'Story', icon: BookOpen },
@@ -28,10 +27,10 @@ const STEPS = [
   { key: 'lesson', label: 'Lesson', icon: GraduationCap },
   { key: 'challenge', label: 'Practice', icon: TerminalSquare },
   { key: 'project', label: 'Project', icon: Wrench },
-  { key: 'done', label: 'Done', icon: Trophy }
+  { key: 'done', label: 'Done', icon: CheckCircle2 }
 ];
 
-export default function StoryPlayer({ story, pyodide, pyodideLoading, pyodideError, onRecord, onExit }) {
+export default function StoryPlayer({ story, onRecord, onExit }) {
   const [step, setStep] = useState(0);
   const [page, setPage] = useState(0);
   const [riddleDone, setRiddleDone] = useState(false);
@@ -49,11 +48,13 @@ export default function StoryPlayer({ story, pyodide, pyodideLoading, pyodideErr
   const lastPage = story.fable.length - 1;
 
   function regenChallenge() {
+    setChallengeDone(false);
     setChallengeVariant(generateQuestion(story.id, 'challenge'));
     setChallengeRegenKey((k) => k + 1);
   }
 
   function regenProject() {
+    setProjectDone(false);
     setProjectVariant(generateQuestion(story.id, 'project'));
     setProjectRegenKey((k) => k + 1);
   }
@@ -76,22 +77,21 @@ export default function StoryPlayer({ story, pyodide, pyodideLoading, pyodideErr
     setRiddleDone(true);
     setRiddleAnswer(riddleVariant.correctIndex);
     setRiddleFirstTry(firstTry);
-    onRecord({ event: 'riddle', xp: firstTry ? RIDDLE_XP : 0, firstTry, passed: true });
+    onRecord({ event: 'riddle', firstTry, passed: true });
   }
 
   function recordChallenge() {
     if (challengeDone) return;
     setChallengeDone(true);
-    onRecord({ event: 'challenge', xp: story.xp, passed: true });
+    onRecord({ event: 'challenge', passed: true });
   }
 
   function recordProject() {
     if (projectDone) return;
     setProjectDone(true);
-    onRecord({ event: 'project', xp: story.projectXp, passed: true });
+    onRecord({ event: 'project', passed: true });
   }
 
-  const earnedXp = story.xp + story.projectXp + (riddleDone ? RIDDLE_XP : 0);
 
   return (
     <div className="player">
@@ -103,7 +103,6 @@ export default function StoryPlayer({ story, pyodide, pyodideLoading, pyodideErr
           <span className="player-concept">{story.concept}</span>
           <h2>{story.title}</h2>
         </div>
-        <span className="chip chip-xp">+{earnedXp} XP</span>
       </header>
 
       <nav className="stepper" aria-label="Lesson progress">
@@ -166,7 +165,6 @@ export default function StoryPlayer({ story, pyodide, pyodideLoading, pyodideErr
           <>
             <BetaalRiddle
               riddle={riddleVariant}
-              rewardXp={RIDDLE_XP}
               onSuccess={recordRiddle}
               disabled={riddleDone}
               defaultSelected={riddleAnswer}
@@ -253,10 +251,6 @@ export default function StoryPlayer({ story, pyodide, pyodideLoading, pyodideErr
               starterCode={ch.starterCode}
               hint={ch.hint}
               check={ch.check}
-              pyodide={pyodide}
-              loading={pyodideLoading}
-              pyodideError={pyodideError}
-              rewardXp={story.xp}
               onSuccess={recordChallenge}
               onRegenerate={regenChallenge}
             />
@@ -278,14 +272,10 @@ export default function StoryPlayer({ story, pyodide, pyodideLoading, pyodideErr
             <CodeLab
               key={`pr-${projectRegenKey}`}
               title={story.project.title}
-              instruction={pr.instruction}
+              instruction={pr.instruction||pr.brief}
               starterCode={pr.starterCode}
-              hint={pr.hint}
+              hint={pr.hint||pr.successHint}
               check={pr.check}
-              pyodide={pyodide}
-              loading={pyodideLoading}
-              pyodideError={pyodideError}
-              rewardXp={story.projectXp}
               onSuccess={recordProject}
               onRegenerate={regenProject}
             />
@@ -295,7 +285,7 @@ export default function StoryPlayer({ story, pyodide, pyodideLoading, pyodideErr
               </button>
               {projectDone && (
                 <button type="button" className="btn btn-primary" onClick={next}>
-                  Finish the tale <Trophy size={16} aria-hidden="true" />
+                  Finish the tale <CheckCircle2 size={16} aria-hidden="true" />
                 </button>
               )}
             </div>
@@ -304,19 +294,12 @@ export default function StoryPlayer({ story, pyodide, pyodideLoading, pyodideErr
 
         {step === 7 && (
           <section className="celebration" aria-label="Story complete">
-            <div className="celebration-icon">
-              <Trophy size={56} aria-hidden="true" />
-            </div>
             <div className="section-kicker">Tale complete</div>
             <h2>{story.title}</h2>
             <p>
               You solved Betaal's riddle, learned <strong className="learned-concept">{story.concept}</strong>, wrote working Python, and
               built a mini-project.
             </p>
-            <div className="celebration-xp">
-              <strong>+{earnedXp} XP</strong>
-              <span>earned on this tale</span>
-            </div>
             <div className="stage-actions">
               <button type="button" className="btn btn-primary" onClick={onExit}>
                 Return to the story map <ArrowRight size={16} aria-hidden="true" />

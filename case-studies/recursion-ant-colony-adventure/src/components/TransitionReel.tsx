@@ -1,3 +1,6 @@
+import * as React from 'react';
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 // Full-screen word-by-word transition reel (Scene 12 → Python).
 //
 // Words fade in one at a time, stacked vertically with arrow glyphs between
@@ -7,7 +10,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
-import { playSfx } from '@/audio/soundEngine';
+import { playSfx } from '../audio/soundEngine';
 
 interface TransitionReelProps {
   words: string[];
@@ -18,6 +21,7 @@ const WORD_STAGGER_MS = 500;
 const END_HOLD_MS = 500;
 
 export default function TransitionReel({ words, onDone }: TransitionReelProps) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const [shown, setShown] = useState(0);
   const [exiting, setExiting] = useState(false);
   const doneRef = useRef(false);
@@ -25,21 +29,21 @@ export default function TransitionReel({ words, onDone }: TransitionReelProps) {
   // Reveal one word at a time with a soft tick.
   useEffect(() => {
     if (shown >= words.length) return;
-    const t = window.setTimeout(() => {
+    const t = setTimeout(() => {
       setShown((n) => n + 1);
       playSfx('click');
     }, WORD_STAGGER_MS);
-    return () => window.clearTimeout(t);
+    return () => clearTimeout(t);
   }, [shown, words.length]);
 
   // Hold after the last word, then fade out and finish.
   useEffect(() => {
     if (shown < words.length) return;
-    const t = window.setTimeout(() => {
+    const t = setTimeout(() => {
       setExiting(true);
       playSfx('reveal');
     }, END_HOLD_MS);
-    return () => window.clearTimeout(t);
+    return () => clearTimeout(t);
   }, [shown, words.length]);
 
   const finish = () => {

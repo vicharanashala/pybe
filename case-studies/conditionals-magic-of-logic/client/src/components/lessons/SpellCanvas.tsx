@@ -1,3 +1,6 @@
+import * as React from 'react';
+import {createStoryTimersHook} from '../../../../../../shared/story-timers.mjs';
+const useStoryTimers = createStoryTimersHook(React);
 import React, { useRef, useState, useEffect } from 'react';
 import { Wand2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -90,6 +93,7 @@ export function SpellCanvas({
   onSpellCast: (spell: string) => void,
   disabled?: boolean
 }) {
+  const {setTimeout, clearTimeout, setInterval, clearInterval, requestAnimationFrame, cancelAnimationFrame} = useStoryTimers();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [points, setPoints] = useState<Point[]>([]);

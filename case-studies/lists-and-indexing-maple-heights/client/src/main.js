@@ -60,7 +60,7 @@ var App = (function () {
     var main = document.getElementById('app-main');
     main.innerHTML =
       '<div class="complete-screen">'
-      + '<div class="complete-trophy">🏆</div>'
+      + '<div class="complete-building">🏢</div>'
       + '<h2 class="complete-title">Maple Heights Complete! 🎉</h2>'
       + '<p class="complete-subtitle">You ran the building like a pro.</p>'
       + '<button class="btn btn-primary" id="btn-restart" style="margin-top:4px;font-size:15px;">↺ Play Again</button>'

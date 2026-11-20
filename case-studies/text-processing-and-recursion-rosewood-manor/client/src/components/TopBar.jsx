@@ -46,9 +46,6 @@ export default function TopBar({ storyParts, completedParts, activePartId, onJum
       )}
 
       <div className="top-actions">
-        <button type="button" className="bar-btn icon-btn" onClick={onToggleTheme} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`} title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
-          {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-        </button>
         <button type="button" className="bar-btn" onClick={onOpenLedger}>
           <BookOpenText size={16} />
           Ledger

@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal, Send, Sparkles, AlertCircle, CheckCircle2 } from 'lucide-react';
@@ -6,13 +8,7 @@ import { useGame } from '../context/GameContext';
 import { useSoundFX } from '../hooks/useSoundFX';
 
 export const LiveExecutionTerminal = ({ onExecutedSuccess }) => {
-  const { 
-    addXP, 
-    raiseDogMeter, 
-    lowerDogMeter, 
-    triggerConfetti, 
-    unlockBadge 
-  } = useGame();
+  const {raiseDogMeter,lowerDogMeter}=useGame();
   const { playSuccess, playWrong, playDogBark, playChestOpen, playClick } = useSoundFX();
 
   const [inputKey, setInputKey] = useState('star');
@@ -38,16 +34,16 @@ export const LiveExecutionTerminal = ({ onExecutedSuccess }) => {
       if (data.isEasterEgg) {
         // Easter egg bonus!
         playChestOpen();
-        triggerConfetti();
-        addXP(40);
+
+
         lowerDogMeter(30);
       } else {
         playSuccess();
         playChestOpen();
-        triggerConfetti();
-        addXP(30);
+
+
         lowerDogMeter(20);
-        unlockBadge('master_thief');
+
         if (onExecutedSuccess) onExecutedSuccess();
       }
     } else {

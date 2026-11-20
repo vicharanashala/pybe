@@ -21,6 +21,7 @@ export default function MemoryPocket({
       onDragOver={interactive ? (e) => { e.preventDefault(); onDragOver?.(e); } : undefined}
       onDrop={interactive ? onDrop : undefined}
       onClick={onClick}
+      onKeyDown={onClick?e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onClick(e);}}:undefined}
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
     >

@@ -19,7 +19,7 @@ const STAGE_DEFINITIONS = [
   { key: "story", label: "Story", icon: "📖" },
   { key: "concept", label: "Concept", icon: "🧠" },
   { key: "practice", label: "Practice", icon: "💻" },
-  { key: "quiz", label: "Quiz", icon: "🏆" },
+  { key: "quiz", label: "Quiz", icon: "✏️" },
 ];
 
 const STATUS_META = {

@@ -984,7 +984,7 @@ buddy.set_health(500)  # ❌ Blocked by validation check!`,
   // =========================================================================
   {
     id: 17,
-    title: "Grand Celebration & Pet Hero Certificate!",
+    title: "Grand Celebration & Reflection",
     subtitle: "Scene 17: Graduation & Reflection",
     theme: "grand-stage",
     stageProps: {
@@ -1008,7 +1008,7 @@ buddy.set_health(500)  # ❌ Blocked by validation check!`,
       },
       {
         speaker: "Luna",
-        text: "Before receiving your certificate, let's reflect on the 3 big truths we discovered:",
+        text: "Let’s reflect on the 3 big truths we discovered:",
         sfx: "chime"
       },
       {
@@ -1018,7 +1018,7 @@ buddy.set_health(500)  # ❌ Blocked by validation check!`,
       },
       {
         speaker: "Buddy",
-        text: "Woof! Woof! That is why we use ENCAPSULATION! Claim your certificate below!",
+        text: "Woof! Woof! That is why we use ENCAPSULATION! Explore the story recap below!",
         sfx: "bark"
       }
     ],

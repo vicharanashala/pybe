@@ -1,14 +1,19 @@
-> Local-only policy (17 November 2026): external LLM transports, provider SDKs, cloud-generation developer utilities, and AI image requests have been removed. Feedback uses local rules or authored lesson text. Cloud-only generation tools are explicitly unavailable; stored studies and their original visual designs remain. Normal localhost APIs, package downloads, fonts, and Python runtime downloads are separate from this policy. `npm test` includes a guard against reintroducing model calls.
+> Local-only policy (17 November 2026): external LLM transports, provider SDKs, cloud-generation developer utilities, and AI image requests have been removed. Feedback uses local rules or authored lesson text. Cloud-only generation tools are explicitly unavailable; stored studies remain. The current refactor standardizes visual designs while retaining the authored learning content. Normal localhost APIs, package downloads, fonts, and Python runtime downloads are separate from this policy. `npm test` includes a guard against reintroducing model calls.
 
-# PyBe — original Python case studies
+# PyBe — Python through stories
 
-The main library uses warm white and orange and organizes the original student submissions by concept. Case studies keep their submitted colors, layout, interactions, and learning sequence.
+The library organizes Python case studies by concept. All 71 catalog entries open inside one warm-white and orange PyBe interface. Shared navigation, progress, timers, editors and Python execution support each story’s own learning sequence and special interactions. Every existing case study is retained. See [MIGRATION_STATUS.md](MIGRATION_STATUS.md) for implementation and verification details.
+
+Shared code does not mean a fixed teaching flow. Each study retains its story order, pacing, special interactions, and timing of concept/syntax reveals. [Teaching-flow preservation rules](shared/README.md) guide the migration; Flight 218 is a reference example.
+
+Integrated studies use their original React scenes, native adapters for their authored HTML/scripts, or shared widgets driven by their original ordered step data. Each option fits the authored story. Reviewed inline buttons dispatch to explicit local handlers; they do not depend on global functions or evaluated strings. Illustrations and audio remain part of their stories, with shared asset resolution and lifecycle cleanup. Written submissions render from their original Markdown. Authored utility styles use one root build toolchain, and chapter-based HTML stories keep browser Back/Forward inside the PyBe route. React stories with internal pages share an in-memory router and retain their own navigation controls.
 
 ## Run locally
 
-Requires Node.js 18+ and npm. From the directory where you downloaded or cloned this repository, run:
+Requires Node.js 20+ and npm. From the directory where you downloaded or cloned this repository, run:
 
 ```powershell
+npm install
 npm run dev
 ```
 
@@ -21,7 +26,7 @@ npm run dev
 
 ## Homepage
 
-- All 41 submitted concept groups appear on the homepage, organized into seven chapters.
+- All 42 submitted concept groups appear on the homepage, organized into seven chapters.
 - Eleven proposed pending topics are marked “Pending · proposed” and “Case study to be designed.”
 - The pending list is a suggested backlog, not an approved syllabus. An idea may already be mentioned within a broader submission without having a dedicated case study.
 - Search concepts, skills, and story titles. Filter by Submitted, Pending, or All.
@@ -51,7 +56,8 @@ To add a study:
 
 1. Add the original files under a concept-and-story folder in `new-pr-submissions/`.
 2. Include a README describing the concepts, entry point, dependencies, and how to run the study. Preserve author credits in the submission files.
-3. Do not add external LLM or AI image calls.
+3. Use shared Python execution, progress and UI infrastructure while preserving the submitted story sequence. Do not add local scores, stars, badges, external LLM calls or AI image requests.
+4. Keep new submissions in `new-pr-submissions/` for review. Promote reviewed studies into `case-studies/`, register the native entry in `shared/lesson-registry.json`, and add a walkthrough for its authored interactions.
 
 ## Coverage and maintenance
 
@@ -59,7 +65,7 @@ To add a study:
 
 - **First steps:** Variables & assignment; data types; keywords & identifiers; printing & built-in functions; arithmetic operators.
 - **Decisions & loops:** Comparisons & Boolean logic; if, elif & else; for loops & range; while loops; break, continue & return; nested loops; truthiness & short-circuiting.
-- **Strings & data structures:** Strings & text processing; indexing & slicing; lists; tuples & immutability; sets; dictionaries & hashing.
+- **Strings & data structures:** Strings & text processing; indexing & slicing; lists; stacks & LIFO; tuples & immutability; sets; dictionaries & hashing.
 - **Functions & scope:** Defining & calling functions; scope & name resolution; closures & nested functions; recursion & backtracking.
 - **Object-oriented Python:** Classes & objects; encapsulation & data hiding; inheritance; polymorphism & duck typing; abstraction.
 - **Files & exceptions:** File handling & persistence; exception handling; understanding Python errors; input validation.
@@ -90,19 +96,28 @@ npm run catalog
 npm test
 ```
 
-Catalog rebuilds require Python 3. Reviewed mappings live in `tools/build_catalog.py`, `tools/original_catalog.py`, and `tools/submission-folders.json`. Rebuilding updates both `library/catalog.json` and `CONCEPT_COVERAGE.md`. The catalog contains original entry points and runtime metadata only; it does not extract lesson content.
+Python executes in the browser through one worker. The first execution downloads the Pyodide runtime from jsDelivr; this is separate from model APIs, which are not used. The supported learning entry point is the main PyBe route; retained private backends and inactive prototypes are submission records.
 
-The tests verify original-only catalog entries, submitted/pending status, multiple while-loop choices, source and runtime paths, local HTTP responses, asset rebasing, launch API restrictions, and the absence of model calls. These checks do not guarantee every original lesson works end to end; verify new or changed studies interactively.
+Dabbo’s Orchard retains its original Python source and renders all eight authored screens from an extracted payload. After intentionally editing that source, run `python tools/build_dabbo.py` to regenerate it. Submitted Sign the Squad animations and their shared player runtime are hosted locally.
+
+Catalog rebuilds require Python 3. Reviewed mappings live in `tools/build_catalog.py`, `tools/original_catalog.py`, and `tools/submission-folders.json`. Rebuilding updates both `library/catalog.json` and `CONCEPT_COVERAGE.md`. The catalog contains entry points and runtime metadata. `shared/lesson-registry.json` explicitly selects the collections that use the integrated player; migrated studies read their authored lesson data through the main PyBe server.
+
+The tests verify retention of every pre-migration study, submitted/pending status, source paths, lesson APIs, reflection branches, worker cancellation and recovery, shared progress, authored reference programs, and the absence of model calls. Python 3 is required for the Python-runner checks.
+
+Run `npm run test:browser` for real browser Python execution and representative lesson-flow checks. It uses installed Chrome on Windows by default; set `PYBE_BROWSER_PATH` to another Chromium executable when needed. The walkthroughs cover authored paths, retries and representative failure cases; they do not prove every possible learner program is correct.
 
 ## Project layout
 
 - new-pr-submissions/: intake directory for new case studies
+- client/src/learning/: shared React lesson stages and player
+- library/learning/: shared lesson rules, progress, styling, and worker-backed Python runtime
+- shared/: explicit integrated-study registry and pre-migration preservation baseline
 - library/: main interface and generated catalog
 - server.mjs: local library server
-- original-runtime.mjs: original app dependency setup and lifecycle
-- tools/run-original.mjs: launches an original Vite application using its own config
+- original-runtime.mjs: retained legacy launcher support; no current catalog entry uses it
+- tools/run-original.mjs: retained standalone source helper; unnecessary for the PyBe learning interface
 - tools/build_catalog.py and tools/original_catalog.py: reviewed concept and source mappings
-- case-studies/: all 71 submission folders, named by concepts, stories, or tool function; includes `classes-why-classes-exist/`
+- case-studies/: retained submissions for all 71 catalog entries, named by concepts, stories, or tool function; includes `classes-why-classes-exist/`
 - tools/submission-folders.json: internal contributor-to-folder mappings
 - work/: ignored local runtime, npm caches, and verification scratch files
 

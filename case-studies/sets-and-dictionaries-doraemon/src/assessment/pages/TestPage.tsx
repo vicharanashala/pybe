@@ -1,3 +1,4 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
 import React, { useState } from 'react';
 import { GlassCard } from '../../shared-components/GlassCard';
 import { Badge } from '../../shared-components/Badge';
@@ -110,10 +111,12 @@ interface TestPageProps {
   onProceedToCoding?: () => void;
 }
 
+const useStoryTimers=createStoryTimersHook(React);
 export const TestPage: React.FC<TestPageProps> = ({
   questions = SETS_TEST_QUESTIONS,
   onProceedToCoding
 }) => {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [userAnswers, setUserAnswers] = useState<Record<number, number>>({});
   const [showWhy, setShowWhy] = useState<Record<number, boolean>>({});
@@ -189,9 +192,7 @@ export const TestPage: React.FC<TestPageProps> = ({
           <Badge variant="warning">
             Difficulty: Easy-Medium
           </Badge>
-          <Badge variant="primary">
-            Score: {correctCount}/{answeredCount}
-          </Badge>
+
         </div>
       </div>
 

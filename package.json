@@ -8,7 +8,31 @@
     "dev": "node server.mjs",
     "start": "node server.mjs",
     "catalog": "python tools/build_catalog.py",
-    "test": "node --test tests/original-library.test.mjs tests/local-only.test.mjs"
+    "test": "node --test tests/original-library.test.mjs tests/local-only.test.mjs tests/integrated-learning.test.mjs",
+    "build": "node tools/build_lessons.mjs",
+    "predev": "npm run build",
+    "prestart": "npm run build",
+    "pretest": "npm run build",
+    "test:browser": "npm run build && node tests/learning-browser.mjs"
   },
-  "engines": { "node": ">=18" }
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.12",
+    "playwright-core": "^1.56.1",
+    "postcss": "8.5.33",
+    "prettier": "^3.6.2",
+    "tailwindcss": "3.4.1"
+  },
+  "dependencies": {
+    "@codemirror/lang-python": "6.1.6",
+    "@lottiefiles/dotlottie-react": "0.22.3",
+    "@uiw/react-codemirror": "4.23.0",
+    "framer-motion": "13.1.0",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "7.18.6"
+  }
 }

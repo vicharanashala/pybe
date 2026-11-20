@@ -11,7 +11,7 @@ const OBJECTIVES = [
 
 const STATS = [
   { label: '7 Scenes', sub: 'Progressive lessons' },
-  { label: 'Live IDE', sub: 'Interactive execution' },
+  { label: 'Code Trace', sub: 'Animated execution' },
   { label: '5 MCQs',  sub: 'Conceptual assessment' },
 ];
 

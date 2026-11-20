@@ -16,6 +16,7 @@ function formatError(raw: string): string {
 }
 
 export default function CodeEditor({ initialCode, label = "Try it yourself" }: CodeEditorProps) {
+  const [stdin,setStdin]=useState('');
   const [code, setCode] = useState(initialCode);
   const [result, setResult] = useState<{ output: string; error: string | null } | null>(null);
   const [running, setRunning] = useState(false);
@@ -26,7 +27,7 @@ export default function CodeEditor({ initialCode, label = "Try it yourself" }: C
     setRunning(true);
     setShowFullTraceback(false);
     try {
-      const res = await run(code);
+      const res = await run(code,{input:stdin.split(/\r?\n/)});
       setResult(res);
     } finally {
       setRunning(false);
@@ -51,11 +52,14 @@ export default function CodeEditor({ initialCode, label = "Try it yourself" }: C
 
       <textarea
         value={code}
-        onChange={(e) => setCode(e.target.value)}
+        aria-label="Python program"
+        disabled={busy}
+        onChange={(e) => {setCode(e.target.value);setResult(null);}}
         spellCheck={false}
         className="w-full bg-transparent text-ink font-mono text-sm p-4 outline-none resize-y min-h-[140px] leading-relaxed"
       />
 
+      {/\binput\s*\(/.test(code) && <label className="block p-4 text-sm text-ink">Program input (one answer per line)<textarea aria-label="Program input" className="w-full bg-panel text-ink border border-line p-2" value={stdin} onChange={e=>setStdin(e.target.value)} rows={2}/></label>}
       {result && (
         <div
           className={`px-4 py-3 text-sm font-mono border-t ${

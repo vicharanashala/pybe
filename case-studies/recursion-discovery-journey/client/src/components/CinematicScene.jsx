@@ -10,7 +10,7 @@ export default function CinematicScene({ lesson, subStep, onAdvance }) {
         <div 
           key={`cloud-story-${lesson.id}`}
           className="magical-cloud-panel pointer-events-auto cursor-pointer"
-          onClick={onAdvance}
+          onClick={e=>{e.stopPropagation();onAdvance();}}
         >
           {/* Sparkle Trail Badge */}
           <div className="panel-sparkle-trail bg-purple-900/90 text-purple-200 border border-purple-400/50 flex items-center gap-1.5">
@@ -34,7 +34,7 @@ export default function CinematicScene({ lesson, subStep, onAdvance }) {
         <div 
           key={`holo-concept-${lesson.id}`}
           className="holographic-code-panel pointer-events-auto cursor-pointer"
-          onClick={onAdvance}
+          onClick={e=>{e.stopPropagation();onAdvance();}}
         >
           {/* Sparkle Trail Badge */}
           <div className="panel-sparkle-trail bg-cyan-950/90 text-cyan-200 border border-cyan-400/50 flex items-center gap-1.5">
@@ -58,7 +58,7 @@ export default function CinematicScene({ lesson, subStep, onAdvance }) {
         <div 
           key={`crystal-idea-${lesson.id}`}
           className="glowing-crystal-panel pointer-events-auto cursor-pointer"
-          onClick={onAdvance}
+          onClick={e=>{e.stopPropagation();onAdvance();}}
         >
           {/* Sparkle Trail Badge */}
           <div className="panel-sparkle-trail bg-amber-950/90 text-amber-200 border border-amber-400/50 flex items-center gap-1.5">

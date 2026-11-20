@@ -5,7 +5,6 @@ import { useGame } from '../context/GameContext';
 import { useSoundFX } from '../hooks/useSoundFX';
 
 export const SpotTheBug = ({ onCompleted }) => {
-  const { addXP, triggerConfetti } = useGame();
   const { playSuccess, playWrong, playClick } = useSoundFX();
 
   const [currentRound, setCurrentRound] = useState(0);
@@ -77,8 +76,8 @@ export const SpotTheBug = ({ onCompleted }) => {
       setWrongMsg(null);
       const updated = [...solvedRounds, round.id];
       setSolvedRounds(updated);
-      addXP(20);
-      triggerConfetti();
+
+
 
       if (updated.length === rounds.length && onCompleted) {
         onCompleted();
@@ -205,7 +204,7 @@ export const SpotTheBug = ({ onCompleted }) => {
       {solvedRounds.includes(round.id) && (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span style={{ color: 'var(--success)', fontSize: '0.9rem', fontWeight: 'bold' }}>
-            🎉 Great debugging! +20 XP awarded!
+            Great debugging! The code is corrected.
           </span>
           {currentRound < rounds.length - 1 ? (
             <button 

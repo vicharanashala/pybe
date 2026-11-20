@@ -281,7 +281,7 @@ export const StoryView: React.FC = () => {
   const bgUrl = getCachedUrl(`scene:${topic.id}:${activeSceneIndex}`, () => sceneBackground(world.sceneImagePrompt, stableSeed(topic.id + activeSceneIndex)));
 
   return (
-    <div className="flex-1 flex flex-col w-full select-none">
+    <div data-tradition-scene={activeSceneIndex} className="flex-1 flex flex-col w-full select-none">
       {/* ===== Header Bar ===== */}
       <div className="w-full bg-parchment-card/80 dark:bg-parchment-darkCard/80 backdrop-blur-sm border-b border-parchment-border dark:border-parchment-darkBorder px-4 py-2.5 flex items-center justify-between sticky top-0 z-30">
         <div className="flex items-center gap-2 min-w-0">

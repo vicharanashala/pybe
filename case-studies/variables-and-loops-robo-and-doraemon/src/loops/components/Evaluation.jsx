@@ -51,7 +51,7 @@ export default function Evaluation({ onComplete }) {
       <p className="lp-scene-intro">Ten questions, mostly not multiple-choice — this checks whether the pattern actually clicked.</p>
 
       {EVALUATION.map((q, i) => (
-        <div key={q.id} className="lp-eval-question">
+        <div key={q.id} className="lp-eval-question" data-robo-question={q.id}>
           <div className="lp-quiz-prompt">
             <span className="lp-quiz-index">{i + 1}</span>
             <div>
@@ -122,8 +122,8 @@ function ArrangeInput({ question, answer, setAnswer }) {
         <div key={originalIndex} className="lp-arrange-row">
           <code>{question.lines[originalIndex]}</code>
           <div className="lp-arrange-controls">
-            <button className="lp-icon-btn" onClick={() => move(pos, -1)} disabled={pos === 0}><ArrowUp size={13} /></button>
-            <button className="lp-icon-btn" onClick={() => move(pos, 1)} disabled={pos === order.length - 1}><ArrowDown size={13} /></button>
+            <button aria-label="Move line up" className="lp-icon-btn" onClick={() => move(pos, -1)} disabled={pos === 0}><ArrowUp size={13} /></button>
+            <button aria-label="Move line down" className="lp-icon-btn" onClick={() => move(pos, 1)} disabled={pos === order.length - 1}><ArrowDown size={13} /></button>
           </div>
         </div>
       ))}
@@ -149,7 +149,7 @@ function CodeExecInput({ question, onResult }) {
 
   return (
     <div className="lp-code-exec">
-      <textarea className="lp-code-editor" value={code} spellCheck={false} onChange={(e) => { setCode(e.target.value); setOutput(null); setPassed(null); }} />
+      <textarea aria-label="Evaluation Python program" disabled={running} className="lp-code-editor" value={code} spellCheck={false} onChange={(e) => { setCode(e.target.value); setOutput(null); setPassed(null); onResult(undefined,e.target.value); }} />
       <button className="lp-chip" onClick={handleRun} disabled={status !== 'ready' || running}>
         <Play size={13} /> {running ? 'Running…' : 'Run'}
       </button>
@@ -167,7 +167,6 @@ function ResultsSummary({ graded, correctCount, onComplete }) {
   return (
     <div className="lp-scene">
       <h2>Results</h2>
-      <p className="lp-score-headline">{correctCount} / {graded.length} correct</p>
       <div className="lp-breakdown-list">
         {EVALUATION.map((q, i) => (
           <div key={q.id} className={`lp-breakdown-row ${graded[i].correct ? 'correct' : 'incorrect'}`}>

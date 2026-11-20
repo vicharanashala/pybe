@@ -1,13 +1,13 @@
 import React from 'react';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import LocalAnimation from '../../../../../../client/src/learning/LocalAnimation.jsx';
 
 export default function Scene({ sceneClasses, onTryItOut, hideButton }) {
   return (
     <div id="scene" className={`scene-container ${sceneClasses || ""}`}>
       {/* --- LEFT COLUMN: Animation --- */}
       <div className="scene-animation">
-        <DotLottieReact
-          src="https://lottie.host/2f1ab0c2-e939-479b-909e-a22bc47846ec/TLaYG61JfD.lottie"
+        <LocalAnimation label="Team manager animation"
+          src="/submissions/classes-and-inheritance-squad-and-bird-family/client/public/animations/team-manager.lottie"
           loop
           autoplay
           className="scene-lottie"

@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState } from 'react';
 import { Sparkles, HelpCircle, CheckCircle2, XCircle } from 'lucide-react';
 import { SoundService } from '../services/soundEffects';
@@ -7,6 +9,7 @@ export default function StoryChoiceModal({
   mcq,
   onSolved
 }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [selectedOption, setSelectedOption] = useState(null);
   const [feedback, setFeedback] = useState(null);
   const [isCorrect, setIsCorrect] = useState(false);
@@ -20,7 +23,7 @@ export default function StoryChoiceModal({
       setFeedback(option.feedback);
       SoundService.playSuccess();
       setTimeout(() => SoundService.playBark(), 300);
-      if (onSolved) onSolved();
+      if (onSolved && !isCorrect) onSolved();
     } else {
       setIsCorrect(false);
       setFeedback(option.feedback);

@@ -5,8 +5,6 @@ import {
   CheckCircle2,
   XCircle,
   Play,
-  Trophy,
-  Star,
   Lock,
   Compass,
   Wrench,
@@ -17,19 +15,20 @@ import {
 
 /* ============================== PALETTE ============================== */
 const C = {
-  bg: "#0F1B33",
-  bgSoft: "#152546",
-  panel: "#1B2C52",
-  panelLight: "#25406E",
-  panelLine: "#33507F",
-  marigold: "#F3A62A",
-  marigoldDeep: "#C97E12",
+  bg: "#fcf8f2",
+  bgSoft: "#fff5eb",
+  panel: "#fffdf9",
+  panelLight: "#fff0e2",
+  panelLine: "#eadbce",
+  marigold: "#df622f",
+  marigoldDeep: "#b24e25",
   vermilion: "#E25A34",
-  steel: "#AFC0D6",
-  steelDim: "#7C8CAA",
-  cream: "#FBF1DD",
+  steel: "#68513e",
+  steelDim: "#806c5c",
+  cream: "#30271f",
   leaf: "#4F9A63",
-  ink: "#081020",
+  ink: "#20232c",
+  codeText: "#f1f0ed",
 };
 
 /* ============================ ILLUSTRATIONS ============================ */
@@ -235,13 +234,6 @@ function FinaleBurst() {
 
 /* ============================== CONTENT DATA ============================== */
 
-const BADGES = {
-  scope: { name: "Scope Scout", icon: Compass, color: C.marigold },
-  functions: { name: "Function Foreman", icon: Wrench, color: C.leaf },
-  closures: { name: "Closure Keeper", icon: Lock, color: C.vermilion },
-  global: { name: "Global Guardian", icon: Globe2, color: C.steel },
-};
-
 const PAGES = [
   {
     id: 1,
@@ -283,7 +275,6 @@ const PAGES = [
     id: 3,
     type: "concept",
     title: "Concept Reveal — Scope",
-    badge: "scope",
     body: [
       "The depot's master sheet is a global variable — created outside any function, visible everywhere.",
       "Each courier's cart is a local variable — created inside a function, and it vanishes the moment that function finishes running.",
@@ -352,7 +343,6 @@ print(depot_total)`,
     id: 7,
     type: "concept",
     title: "Concept Reveal — Functions",
-    badge: "functions",
     body: [
       "Each leg of the relay becomes its own small function — a single job, clear inputs, a clear return value.",
       "The dabba itself flows through the chain as the return value of one function becoming the input to the next.",
@@ -365,7 +355,7 @@ def sort_at_station(dabba, station):
     print(f"Sorted {dabba} at {station}")
     return dabba
 
-def deliver(dabba, desk):
+def handoff(dabba, courier):\n    print(f\"Handed {dabba} to {courier}\")\n    return dabba\n\ndef deliver(dabba, desk):
     print(f"Delivered {dabba} to {desk}")`,
   },
   {
@@ -420,7 +410,6 @@ dabba = handoff(dabba, "Rafiq")
     id: 11,
     type: "concept",
     title: "Concept Reveal — Closures",
-    badge: "closures",
     body: [
       "assign_route() runs once, like a courier chalking the lid, and returns deliver_to — a function that still remembers destination.",
       "Every courier down the chain can call that returned function and get the right answer, without ever being told destination directly.",
@@ -486,7 +475,6 @@ log_delivery()`,
     id: 14,
     type: "concept",
     title: "Concept Reveal — global & nonlocal",
-    badge: "global",
     body: [
       "Adding global route_count tells Python: don't create a new local variable — reach out and update the depot's shared sheet on purpose.",
       "nonlocal does the same thing, but one level in — for reaching into an enclosing function's variable from a nested one, like a closure.",
@@ -625,39 +613,12 @@ function Trail({ pages, current, unlocked, onJump }) {
   );
 }
 
-function BadgeRow({ earned }) {
-  const ids = Object.keys(BADGES);
-  return (
-    <div className="flex items-center gap-2 flex-wrap">
-      {ids.map((id) => {
-        const b = BADGES[id];
-        const Icon = b.icon;
-        const has = earned.includes(id);
-        return (
-          <div
-            key={id}
-            title={b.name}
-            className="w-8 h-8 rounded-lg flex items-center justify-center"
-            style={{
-              background: has ? b.color + "22" : "transparent",
-              border: `1.5px solid ${has ? b.color : C.panelLine}`,
-              opacity: has ? 1 : 0.35,
-            }}
-          >
-            <Icon size={15} color={has ? b.color : C.steelDim} />
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
 function CodeWithBlanks({ template, blanks, values, onChange, checked, results }) {
   const parts = template.split(/(\{\{\w+\}\})/g);
   return (
     <pre
       className="rounded-xl p-4 text-[13px] sm:text-sm leading-relaxed whitespace-pre-wrap font-mono overflow-x-auto"
-      style={{ background: C.ink, color: C.cream, border: `1px solid ${C.panelLine}` }}
+      style={{ background: C.ink, color: C.codeText, border: `1px solid ${C.panelLine}` }}
     >
       {parts.map((part, i) => {
         const m = part.match(/^\{\{(\w+)\}\}$/);
@@ -698,7 +659,7 @@ function Terminal({ lines, visible }) {
         <span className="w-2.5 h-2.5 rounded-full" style={{ background: C.vermilion }} />
         <span className="w-2.5 h-2.5 rounded-full" style={{ background: C.marigold }} />
         <span className="w-2.5 h-2.5 rounded-full" style={{ background: C.leaf }} />
-        <span className="ml-2 text-[11px]" style={{ color: C.steelDim }}>
+        <span className="ml-2 text-[11px]" style={{ color: "#b4bcc8" }}>
           terminal
         </span>
       </div>
@@ -721,35 +682,16 @@ function Terminal({ lines, visible }) {
 
 /* ============================== MAIN APP ============================== */
 
-export default function TiffinTrail() {
+export default function TiffinTrail({onComplete,assetBase=""}) {
   const [current, setCurrent] = useState(0);
   const [unlocked, setUnlocked] = useState(0);
-  const [xp, setXp] = useState(0);
-  const [badges, setBadges] = useState([]);
   const [pageState, setPageState] = useState({});
   const [direction, setDirection] = useState("fwd");
-  const [xpBump, setXpBump] = useState(false);
-  const prevXp = useRef(0);
 
   const page = PAGES[current];
   const ps = pageState[page.id] || {};
 
-  useEffect(() => {
-    if (xp !== prevXp.current) {
-      prevXp.current = xp;
-      setXpBump(true);
-      const t = setTimeout(() => setXpBump(false), 550);
-      return () => clearTimeout(t);
-    }
-  }, [xp]);
-
   const patch = (obj) => setPageState((prev) => ({ ...prev, [page.id]: { ...prev[page.id], ...obj } }));
-
-  const awardXp = (amount, key) => {
-    if (ps[key]) return;
-    setXp((x) => x + amount);
-    patch({ [key]: true });
-  };
 
   const goTo = (idx) => {
     if (idx <= unlocked) {
@@ -773,8 +715,6 @@ export default function TiffinTrail() {
     setDirection("fwd");
     setCurrent(0);
     setUnlocked(0);
-    setXp(0);
-    setBadges([]);
     setPageState({});
   };
 
@@ -782,14 +722,13 @@ export default function TiffinTrail() {
   let canAdvance = true;
   if (page.type === "predict") canAdvance = ps.selected !== undefined;
   if (page.type === "code") canAdvance = ps.allCorrect === true;
-  if (page.type === "concept") canAdvance = ps.claimed === true;
+  if (page.type === "concept") canAdvance = ps.reviewed === true;
   if (page.type === "bughunt") canAdvance = ps.solved === true;
 
   /* ---- handlers ---- */
   const selectChoice = (i) => {
     if (ps.selected !== undefined) return;
     patch({ selected: i });
-    if (i === page.correctIndex) awardXp(10, "xpGiven");
   };
 
   const updateBlank = (id, val) => {
@@ -806,26 +745,18 @@ export default function TiffinTrail() {
       if (!ok) all = false;
     });
     patch({ checked: true, results, allCorrect: all });
-    if (all) awardXp(15, "xpGiven");
   };
 
-  const claimBadge = () => {
-    patch({ claimed: true });
-    if (page.badge && !badges.includes(page.badge)) {
-      setBadges((b) => [...b, page.badge]);
-      setXp((x) => x + 20);
-    }
-  };
+  const reviewConcept = () => patch({reviewed:true});
 
   const selectBugLine = (i) => {
     if (ps.solved) return;
     patch({ picked: i, solved: i === page.buggyIndex });
-    if (i === page.buggyIndex) awardXp(20, "xpGiven");
   };
 
   const runCapstone = () => {
     patch({ ran: true });
-    awardXp(50, "xpGiven");
+    onComplete?.();
   };
 
   return (
@@ -837,8 +768,7 @@ export default function TiffinTrail() {
         @keyframes tt-slide-back { 0% { opacity:0; transform: translateX(-28px) scale(0.98);} 100% { opacity:1; transform: translateX(0) scale(1);} }
         @keyframes tt-fade-up { 0% { opacity:0; transform: translateY(10px);} 100% { opacity:1; transform: translateY(0);} }
         @keyframes tt-art-in { 0% { opacity:0; transform: scale(0.94) translateY(6px);} 100% { opacity:1; transform: scale(1) translateY(0);} }
-        @keyframes tt-badge-pop { 0% { transform: scale(0.5) rotate(-8deg); opacity:0;} 60% { transform: scale(1.15) rotate(4deg); opacity:1;} 100% { transform: scale(1) rotate(0deg); opacity:1;} }
-        @keyframes tt-xp-bump { 0% { transform: scale(1);} 40% { transform: scale(1.28);} 100% { transform: scale(1);} }
+        @keyframes tt-feedback-pop { 0% { transform: scale(0.5) rotate(-8deg); opacity:0;} 60% { transform: scale(1.15) rotate(4deg); opacity:1;} 100% { transform: scale(1) rotate(0deg); opacity:1;} }
         @keyframes tt-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(243,166,42,0.45);} 50% { box-shadow: 0 0 0 7px rgba(243,166,42,0);} }
         @keyframes tt-marker-in { 0% { transform: scale(0.6); opacity:0.4;} 100% { transform: scale(1); opacity:1;} }
       `}</style>
@@ -857,20 +787,7 @@ export default function TiffinTrail() {
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <BadgeRow earned={badges} />
-            <div
-              className="flex items-center gap-1 px-2.5 py-1 rounded-full font-mono text-xs font-bold"
-              style={{
-                background: C.panel,
-                color: C.marigold,
-                border: `1px solid ${C.panelLine}`,
-                animation: xpBump ? "tt-xp-bump 0.5s ease" : "none",
-              }}
-            >
-              <Star size={13} /> {xp} XP
-            </div>
-          </div>
+
         </div>
 
         {/* trail */}
@@ -884,7 +801,7 @@ export default function TiffinTrail() {
           style={{
             background: `linear-gradient(165deg, ${C.panelLight}, ${C.panel} 55%)`,
             border: `1px solid ${C.panelLine}`,
-            boxShadow: "0 20px 50px -12px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03)",
+            boxShadow: "0 8px 24px rgba(78,45,24,0.08)",
             animation: `${direction === "fwd" ? "tt-slide-fwd" : "tt-slide-back"} 0.8s cubic-bezier(0.2,0.8,0.2,1) both`,
           }}
           key={page.id}
@@ -919,7 +836,7 @@ export default function TiffinTrail() {
               }}
             >
               <img
-                src={page.photo}
+                src={assetBase+page.photo}
                 alt={page.title}
                 className="w-full h-40 sm:h-56 object-cover"
                 style={{ display: "block" }}
@@ -995,7 +912,7 @@ export default function TiffinTrail() {
                     }}
                   >
                     <span>{c}</span>
-                    {selected !== undefined && isRight && <CheckCircle2 size={16} color={C.leaf} style={{ animation: "tt-badge-pop 0.4s ease both" }} />}
+                    {selected !== undefined && isRight && <CheckCircle2 size={16} color={C.leaf} style={{ animation: "tt-feedback-pop 0.4s ease both" }} />}
                     {selected !== undefined && isPicked && !isRight && <XCircle size={16} color={C.vermilion} />}
                   </button>
                 );
@@ -1017,27 +934,14 @@ export default function TiffinTrail() {
               {page.code && (
                 <pre
                   className="rounded-xl p-4 text-[12px] sm:text-sm font-mono overflow-x-auto whitespace-pre"
-                  style={{ background: C.ink, color: C.cream, border: `1px solid ${C.panelLine}` }}
+                  style={{ background: C.ink, color: C.codeText, border: `1px solid ${C.panelLine}` }}
                 >
                   {page.code}
                 </pre>
               )}
-              {page.badge && (
-                <button
-                  onClick={claimBadge}
-                  disabled={ps.claimed}
-                  className="mt-4 flex items-center gap-2 px-4 py-2 rounded-full text-sm font-bold font-mono transition-transform duration-150 hover:enabled:scale-105 active:enabled:scale-95"
-                  style={{
-                    background: ps.claimed ? C.leaf + "22" : BADGES[page.badge].color,
-                    color: ps.claimed ? C.leaf : C.ink,
-                    border: `1.5px solid ${ps.claimed ? C.leaf : BADGES[page.badge].color}`,
-                    animation: ps.claimed ? "tt-badge-pop 0.45s ease both" : "tt-pulse 1.8s ease infinite",
-                  }}
-                >
-                  {ps.claimed ? <CheckCircle2 size={16} /> : <Sparkles size={16} />}
-                  {ps.claimed ? `${BADGES[page.badge].name} earned` : `Claim "${BADGES[page.badge].name}" badge`}
-                </button>
-              )}
+              <button onClick={reviewConcept} disabled={ps.reviewed} className="mt-4 px-4 py-2 rounded-full text-sm font-bold" style={{background:C.marigold,color:'#fff'}}>
+                {ps.reviewed?'Concept reviewed':'I understand this idea'}
+              </button>
             </div>
           )}
 
@@ -1124,7 +1028,7 @@ export default function TiffinTrail() {
                       key={i}
                       onClick={() => line.trim() && selectBugLine(i)}
                       className="px-2 py-0.5 rounded cursor-pointer whitespace-pre"
-                      style={{ background: bg, color: line.trim() ? C.cream : "transparent" }}
+                      style={{ background: bg, color: line.trim() ? C.codeText : "transparent" }}
                     >
                       <span style={{ color: C.steelDim, marginRight: 10, userSelect: "none" }}>{String(i + 1).padStart(2, "0")}</span>
                       {line || " "}
@@ -1153,7 +1057,7 @@ export default function TiffinTrail() {
             <div className="mt-3">
               <pre
                 className="rounded-xl p-4 text-[12px] sm:text-sm font-mono overflow-x-auto whitespace-pre"
-                style={{ background: C.ink, color: C.cream, border: `1px solid ${C.panelLine}` }}
+                style={{ background: C.ink, color: C.codeText, border: `1px solid ${C.panelLine}` }}
               >
                 {page.code}
               </pre>
@@ -1173,14 +1077,8 @@ export default function TiffinTrail() {
               <Terminal lines={page.outputLines} visible={ps.ran} />
               {ps.ran && (
                 <div className="mt-5 text-center" style={{ animation: "tt-fade-up 0.5s ease both", animationDelay: `${page.outputLines.length * 140 + 150}ms` }}>
-                  <div className="flex justify-center mb-2" style={{ animation: "tt-badge-pop 0.5s ease both", animationDelay: `${page.outputLines.length * 140 + 200}ms` }}>
-                    <Trophy size={34} color={C.marigold} />
-                  </div>
                   <p className="font-serif text-lg font-bold" style={{ color: C.cream }}>
                     Tiffin Trail complete!
-                  </p>
-                  <p className="text-xs mb-4" style={{ color: C.steelDim }}>
-                    {badges.length}/4 badges · {xp} XP total
                   </p>
                   <button
                     onClick={restart}
@@ -1212,7 +1110,7 @@ export default function TiffinTrail() {
               className="flex items-center gap-1 px-5 py-2.5 rounded-full text-sm font-mono font-bold transition-transform duration-150 hover:enabled:translate-x-0.5 hover:enabled:scale-105 active:enabled:scale-95"
               style={{
                 background: canAdvance ? C.vermilion : C.panel,
-                color: canAdvance ? C.cream : C.steelDim,
+                color: canAdvance ? "#fff" : C.steelDim,
                 border: `1px solid ${canAdvance ? C.vermilion : C.panelLine}`,
               }}
             >

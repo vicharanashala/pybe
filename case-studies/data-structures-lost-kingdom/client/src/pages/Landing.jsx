@@ -1,119 +1,103 @@
 import React from 'react';
-import { chapters } from '../data/chapters.js';
-import ProgressBar from '../components/ProgressBar.jsx';
 
-// 13 Adventure Levels — framed purely around story missions and leveling up
+// 13 Adventure Missions — framed purely around story missions and leveling up
 const ADVENTURE_LEVELS = [
   {
     num: 1,
     icon: '🎒',
     title: 'The Trailhead',
-    levelBadge: 'Level 1',
-    xpReward: '+15 XP',
+    missionLabel: 'Mission 1',
     desc: 'Setting out into the unknown with two simple supplies in your pack.'
   },
   {
     num: 2,
     icon: '💥',
     title: 'The Outpost Chaos',
-    levelBadge: 'Level 2',
-    xpReward: '+15 XP',
+    missionLabel: 'Mission 2',
     desc: 'Experience the mess of stuffing 10 supplies into 10 separate pockets all over your jacket.'
   },
   {
     num: 3,
     icon: '📦',
     title: 'The Ordered Pack',
-    levelBadge: 'Level 3',
-    xpReward: '+15 XP',
+    missionLabel: 'Mission 3',
     desc: 'Discover the solution: one single bag keeping all supplies together in a neat, ordered row.'
   },
   {
     num: 4,
     icon: '🧭',
     title: 'Trailside Compass',
-    levelBadge: 'Level 4',
-    xpReward: '+15 XP',
+    missionLabel: 'Mission 4',
     desc: 'A shiny compass is spotted! See how naturally a new item attaches to the very end of your line.'
   },
   {
     num: 5,
     icon: '🗑️',
     title: 'Discarding Ruined Gear',
-    levelBadge: 'Level 5',
-    xpReward: '+15 XP',
+    missionLabel: 'Mission 5',
     desc: 'A soaked map is ruined in the stream. Discard it by name to keep your pack neat and light.'
   },
   {
     num: 6,
     icon: '📏',
     title: 'Distance from the Start',
-    levelBadge: 'Level 6',
-    xpReward: '+15 XP',
+    missionLabel: 'Mission 6',
     desc: 'The Forest Guardian counts items by measuring steps from the bag opening (starting at 0!).'
   },
   {
     num: 7,
     icon: '🔄',
     title: 'The Canteen Swap',
-    levelBadge: 'Level 7',
-    xpReward: '+15 XP',
+    missionLabel: 'Mission 7',
     desc: 'Your water bottle springs a leak. Swap it in place with a sturdy flask without buying a new pack.'
   },
   {
     num: 8,
     icon: '🔢',
     title: 'The Toll Bridge Tally',
-    levelBadge: 'Level 8',
-    xpReward: '+15 XP',
+    missionLabel: 'Mission 8',
     desc: 'A mountain bridge troll demands an accurate total item count before letting you cross.'
   },
   {
     num: 9,
     icon: '🔍',
     title: 'Dusk in the Woods',
-    levelBadge: 'Level 9',
-    xpReward: '+15 XP',
+    missionLabel: 'Mission 9',
     desc: 'Night falls fast in the woods. Check whether the torch is inside your bag in one quick check.'
   },
   {
     num: 10,
     icon: '✂️',
     title: 'Sharing Provisions',
-    levelBadge: 'Level 10',
-    xpReward: '+15 XP',
+    missionLabel: 'Mission 10',
     desc: 'A fellow explorer needs provisions. Grab a bunch of items together from start to finish to share.'
   },
   {
     num: 11,
     icon: '🔥',
     title: 'Campfire Roll-Call',
-    levelBadge: 'Level 11',
-    xpReward: '+15 XP',
+    missionLabel: 'Mission 11',
     desc: 'Gather around the campfire and show each item one by one from first to last without missing a thing.'
   },
   {
     num: 12,
     icon: '✨',
     title: 'The Grand Reveal',
-    levelBadge: 'Level 12',
-    xpReward: '+25 XP',
+    missionLabel: 'Mission 12',
     desc: 'The master summary: connect every single backpack action directly to real Python code!'
   },
   {
     num: 13,
     icon: '🧙‍♂️',
     title: 'Code Mastery Hub',
-    levelBadge: 'Level 13',
-    xpReward: '+35 XP',
+    missionLabel: 'Mission 13',
     desc: 'Decode every Python command one piece at a time with zero fear and 100% confidence!'
   },
   {
     num: 14,
     icon: '⚡',
     title: 'Explorer Trials',
-    levelBadge: 'Level 14',
-    xpReward: '+50 XP',
+    missionLabel: 'Mission 14',
     desc: 'Put your Python skills to the test with interactive matching, quizzes, and code challenges.'
   },
 ];
@@ -140,16 +124,14 @@ const JOURNEY_STEPS = [
   {
     icon: '🚀',
     step: 'Stage 4',
-    title: 'Level Up & Code',
-    desc: 'Solve interactive code challenges, earn badges, and watch your explorer rank climb.'
+    title: 'Mission Up & Code',
+    desc: 'Solve interactive code challenges and connect each command to your story.'
   }
 ];
 
-export default function Landing({ progress, totalXP, onNavigate }) {
-  const chapter1Data = chapters[0] || {};
+export default function Landing({ progress, onNavigate }) {
+  const missions = React.useRef(null);
   const isCompleted = progress.chapter1?.completed;
-  const earnedXP = progress.chapter1?.xp || 0;
-  const maxXP = chapter1Data.xp || 200;
 
   return (
     <div className="page">
@@ -173,7 +155,7 @@ export default function Landing({ progress, totalXP, onNavigate }) {
 
           <p className="hero-subtitle">
             Embark on an immersive journey where every survival mission leads to a new discovery.
-            Solve problems hands-on, complete assignments, and level up your coding skills.
+            Solve problems hands-on, complete assignments, and practise Python.
           </p>
 
           <div className="hero-cta-group">
@@ -187,73 +169,39 @@ export default function Landing({ progress, totalXP, onNavigate }) {
                 padding: '14px 32px'
               }}
             >
-              {isCompleted ? '🏆 Revisit Backpack Adventure' : earnedXP > 0 ? '▶ Continue Adventure' : '🎒 Start Adventure'}
+              {isCompleted ? '↻ Revisit Backpack Adventure' : '🎒 Start Adventure'}
             </button>
 
             <button
               className="btn btn-secondary btn-lg"
-              onClick={() => document.getElementById('levels-section')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => missions.current?.scrollIntoView({ behavior: 'smooth' })}
             >
               🗺️ View Adventure Missions
             </button>
           </div>
 
-          {/* Completion banner if finished */}
-          {isCompleted && (
-            <div style={{
-              marginTop: '24px',
-              padding: '12px 24px',
-              borderRadius: '999px',
-              background: 'rgba(57, 211, 83, 0.12)',
-              border: '1px solid rgba(57, 211, 83, 0.35)',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '10px',
-              fontSize: '0.92rem',
-              color: '#39d353',
-              fontWeight: 600
-            }}>
-              <span>🌟</span>
-              <span>All 12 Levels Mastered! Total Earned: +{earnedXP} XP</span>
-            </div>
-          )}
-
-          {/* Progress bar if started */}
-          {!isCompleted && earnedXP > 0 && (
-            <div style={{ width: '100%', maxWidth: '440px', margin: '24px auto 0' }}>
-              <ProgressBar
-                value={Math.round((earnedXP / maxXP) * 100)}
-                label={`${earnedXP} / ${maxXP} XP Earned`}
-                color="var(--green)"
-              />
-            </div>
-          )}
+          {isCompleted && <p className="story-explored">✓ Backpack journey explored</p>}
 
           {/* Stats Bar */}
           <div className="hero-stats" style={{ marginTop: '36px', paddingTop: '28px' }}>
             <div className="hero-stat">
               <span className="hero-stat-value" style={{ color: 'var(--green)' }}>13</span>
-              <span className="hero-stat-label">Story Levels</span>
+              <span className="hero-stat-label">Story Parts</span>
             </div>
             <div className="hero-stat">
               <span className="hero-stat-value">5</span>
               <span className="hero-stat-label">Coding Missions</span>
             </div>
-            <div className="hero-stat">
-              <span className="hero-stat-value" style={{ color: 'var(--gold)' }}>
-                {totalXP > 0 ? `${totalXP} XP` : `${maxXP} XP`}
-              </span>
-              <span className="hero-stat-label">{totalXP > 0 ? 'XP Earned' : 'Max Explorer XP'}</span>
-            </div>
+
           </div>
         </div>
       </section>
 
-      {/* ── 13 Adventure Levels Grid ──────────────────────────────────────── */}
-      <section className="section" id="levels-section">
+      {/* ── 13 Adventure Missions Grid ──────────────────────────────────────── */}
+      <section className="section" id="levels-section" ref={missions}>
         <div className="section-header">
           <div className="section-label">Mission Path</div>
-          <h2 className="section-title">13 Adventure Levels</h2>
+          <h2 className="section-title">13 Adventure Missions</h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: '580px', margin: '8px auto 0', fontSize: '0.95rem' }}>
             Travel through the Lost Forest. Overcome each obstacle with your pack,
             discover the superpower of ordered data, and connect intuition to code!
@@ -323,21 +271,11 @@ export default function Landing({ progress, totalXP, onNavigate }) {
                     color: 'var(--green)',
                     letterSpacing: '0.04em'
                   }}>
-                    {level.levelBadge}
+                    {level.missionLabel}
                   </span>
                 </div>
 
-                <span style={{
-                  fontSize: '0.74rem',
-                  padding: '3px 10px',
-                  borderRadius: '999px',
-                  background: 'rgba(240, 192, 64, 0.12)',
-                  border: '1px solid rgba(240, 192, 64, 0.25)',
-                  color: 'var(--gold)',
-                  fontWeight: 600
-                }}>
-                  ⭐ {level.xpReward}
-                </span>
+
               </div>
 
               {/* Title & Description */}
@@ -380,11 +318,11 @@ export default function Landing({ progress, totalXP, onNavigate }) {
       {/* ── Journey Progression (Story → Mission → Concept → Level Up) ─────── */}
       <section className="section" style={{ paddingTop: '20px' }}>
         <div className="section-header">
-          <div className="section-label">How You Level Up</div>
+          <div className="section-label">How the Story Unfolds</div>
           <h2 className="section-title">The Explorer Progression</h2>
           <p style={{ color: 'var(--text-muted)', maxWidth: '580px', margin: '8px auto 0', fontSize: '0.95rem' }}>
             No boring lectures or syntax memorization. We start with storytelling, hand you real missions,
-            and empower you to level up naturally.
+            and connect the story to Python.
           </p>
         </div>
 
@@ -452,7 +390,7 @@ export default function Landing({ progress, totalXP, onNavigate }) {
             { icon: '📖', label: 'Story-First Missions', desc: 'Encounter genuine adventure situations before writing any code' },
             { icon: '🎒', label: 'Interactive Backpack', desc: 'Watch your supplies dynamically respond as you solve problems' },
             { icon: '⚡', label: 'Coding Assignments', desc: 'Apply what you discover in real code editors with live test feedback' },
-            { icon: '💾', label: 'Auto-Saved Leveling', desc: 'Your progress, completed levels, and earned XP are stored safely' }
+            { icon: '💾', label: 'Saved Journey', desc: 'Your completed backpack journey is saved in this browser' }
           ].map((feat) => (
             <div
               key={feat.label}

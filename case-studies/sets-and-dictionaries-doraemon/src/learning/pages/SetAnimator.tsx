@@ -1,3 +1,4 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { GlassCard } from '../../shared-components/GlassCard';
 import { Play, RotateCcw, SkipForward } from 'lucide-react';
@@ -35,7 +36,9 @@ interface StampEntry extends Stamp {
 const STEP_MS = 900; // ms between auto-steps
 
 // ── Component ─────────────────────────────────────────────────
+const useStoryTimers=createStoryTimersHook(React);
 export const SetAnimator: React.FC = () => {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const buildInitial = (): StampEntry[] =>
     SOURCE.map(s => ({ ...s, state: 'idle', animKey: 0 }));
 
@@ -47,9 +50,14 @@ export const SetAnimator: React.FC = () => {
   const [log, setLog]             = useState<{ text: string; type: 'new' | 'dup' }[]>([]);
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const outcomeTimerRef=useRef<ReturnType<typeof setTimeout>|null>(null);
+  const processingRef=useRef(false);
+  const snapshot=useRef({entries,uniqueSet,cursor});
+  snapshot.current={entries,uniqueSet,cursor};
 
   // ── Process one stamp ──────────────────────────────────────
   const processNext = useCallback((currentEntries: StampEntry[], currentSet: Stamp[], currentCursor: number) => {
+    if(processingRef.current)return;
     const nextIdx = currentCursor + 1;
     if (nextIdx >= SOURCE.length) {
       setRunning(false);
@@ -57,6 +65,7 @@ export const SetAnimator: React.FC = () => {
       return;
     }
 
+    processingRef.current=true;
     const stamp = currentEntries[nextIdx];
     const isDup = currentSet.some(s => s.name === stamp.name);
 
@@ -66,7 +75,8 @@ export const SetAnimator: React.FC = () => {
     ));
 
     // After brief pause apply outcome
-    timerRef.current = setTimeout(() => {
+    outcomeTimerRef.current = setTimeout(() => {
+      processingRef.current=false;
       const logEntry = isDup
         ? { text: `"${stamp.name}" already exists → removed`, type: 'dup' as const }
         : { text: `"${stamp.name}" is new → added to Set`, type: 'new' as const };
@@ -93,16 +103,8 @@ export const SetAnimator: React.FC = () => {
     if (!running || done) return;
 
     timerRef.current = setTimeout(() => {
-      setEntries(prev => {
-        setUniqueSet(prevSet => {
-          setCursor(prevCursor => {
-            processNext(prev, prevSet, prevCursor);
-            return prevCursor;
-          });
-          return prevSet;
-        });
-        return prev;
-      });
+      const latest=snapshot.current;
+      processNext(latest.entries,latest.uniqueSet,latest.cursor);
     }, STEP_MS);
 
     return () => { if (timerRef.current) clearTimeout(timerRef.current); };
@@ -113,20 +115,13 @@ export const SetAnimator: React.FC = () => {
     if (done) return;
     setRunning(false);
     if (timerRef.current) clearTimeout(timerRef.current);
-    setEntries(prev => {
-      let result = prev;
-      setUniqueSet(prevSet => {
-        setCursor(prevCursor => {
-          processNext(result, prevSet, prevCursor);
-          return prevCursor;
-        });
-        return prevSet;
-      });
-      return result;
-    });
+    const latest=snapshot.current;
+    processNext(latest.entries,latest.uniqueSet,latest.cursor);
   };
 
   const reset = () => {
+    processingRef.current=false;
+    if(outcomeTimerRef.current)clearTimeout(outcomeTimerRef.current);
     if (timerRef.current) clearTimeout(timerRef.current);
     setEntries(buildInitial());
     setUniqueSet([]);

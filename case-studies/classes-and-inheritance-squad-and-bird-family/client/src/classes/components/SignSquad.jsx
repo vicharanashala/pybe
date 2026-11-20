@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import { DotLottiePlayer } from "@dotlottie/react-player";
+import LocalAnimation from '../../../../../../client/src/learning/LocalAnimation.jsx';
+import {createStoryTimersHook} from '../../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import { players, extraPlayers } from "../data/players.js";
 import { jargonExplanations } from "../data/jargonData.js";
 import JargonModal from "./JargonModal.jsx";
@@ -303,7 +305,7 @@ function TemplateVisualizerPanel({
                     <span className="tv-label">{f.label}</span>
                     {isReady ? (
                       <input
-                        className="tv-input"
+                        className="tv-input" aria-label={f.label}
                         type="text"
                         value={liveForm[f.key] ?? ""}
                         placeholder="type here…"
@@ -384,24 +386,11 @@ function TemplateVisualizerPanel({
   );
 }
 
-function addCodeLine(setCodeLines, html, delay) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      setCodeLines((prev) => [...prev, html]);
-      resolve();
-    }, delay);
-  });
-}
-
-function wait(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 // --- Stage persistence (frontend-only, localStorage — same pattern as
 // InheritanceLesson's step index) -----------------------------------
 // Shared key with ClassesLesson.jsx, which uses its mere presence to
 // decide whether to skip the intro Scene on remount.
-const CLASSES_STAGE_STORAGE_KEY = "pybe_classes_stage";
+const CLASSES_STAGE_STORAGE_KEY = "pybe-learning-v1:sign-squad-stage";
 
 // Pure mirrors of the code-line HTML produced by signManually() and the
 // scaling loop in runScaling(), used to instantly rebuild state for
@@ -442,6 +431,21 @@ function buildSmartFinalLines() {
 }
 
 export default function SignSquad({ show, onDone }) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
+function addCodeLine(setCodeLines, html, delay) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      setCodeLines((prev) => [...prev, html]);
+      resolve();
+    }, delay);
+  });
+}
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+
   const [appStage, setAppStage] = useState("manual");
   const [codeLines, setCodeLines] = useState([]);
   const [activeJargon, setActiveJargon] = useState(null);
@@ -501,7 +505,7 @@ export default function SignSquad({ show, onDone }) {
   // since effects fire in declaration order), which previously wiped
   // out the saved stage before the "restore" effect could read it.
   // Reading it here, ahead of every effect, avoids that race entirely.
-  const initialStageRef = useRef(localStorage.getItem(CLASSES_STAGE_STORAGE_KEY));
+  const initialStageRef = useRef((localStorage.getItem(CLASSES_STAGE_STORAGE_KEY) ?? localStorage.getItem('pybe_classes_stage')));
 
   useEffect(() => {
     if (codePanelRef.current) {
@@ -922,7 +926,7 @@ export default function SignSquad({ show, onDone }) {
   }
 
   return (
-    <div id="appView" className={show ? "show" : ""}>
+    <div id="appView" data-sign-stage={appStage} className={show ? "show" : ""}>
       <h1>Sign the squad</h1>
       <p className="sub">Same manager task, step-by-step code evolution</p>
 
@@ -940,8 +944,8 @@ export default function SignSquad({ show, onDone }) {
             <div className="manager-speech-bubble">
               "39 lines for 13 entries is insane!"
             </div>
-            <DotLottiePlayer
-              src="https://lottie.host/af07d95f-1912-485d-aef4-3d1d0e4b22fe/zFkLvmDEsw.lottie"
+            <LocalAnimation label="Blueprint guide animation"
+              src="/submissions/classes-and-inheritance-squad-and-bird-family/client/public/animations/blueprint-guide.lottie"
               autoplay
               loop
               style={{ width: "200px", height: "200px" }}
@@ -1122,7 +1126,7 @@ export default function SignSquad({ show, onDone }) {
 
               {testPassed && testSubStep === 3 && (
                 <div className="completion-badge">
-                  🏆 Mastered! You understand Class Blueprints!
+                  You understand class blueprints.
                 </div>
               )}
             </div>
@@ -1191,7 +1195,7 @@ export default function SignSquad({ show, onDone }) {
               Completed the Module!
             </h2>
             <p className="completion-modal-text">
-              Awesome work! You've mastered the basics of Blueprints & Templates in code.
+              You've explored the basics of blueprints and templates in code.
             </p>
 
             <div className="bird-preview-container">
@@ -1210,7 +1214,7 @@ export default function SignSquad({ show, onDone }) {
                 // Classes is done — clear the stage marker so a later
                 // "revisit Classes" (from InheritanceLesson) starts fresh
                 // at the intro Scene instead of dropping back at Stage 6.
-                localStorage.removeItem(CLASSES_STAGE_STORAGE_KEY);
+                localStorage.removeItem(CLASSES_STAGE_STORAGE_KEY);localStorage.removeItem('pybe_classes_stage');
                 onDone && onDone();
               }}
             >

@@ -42,7 +42,7 @@ export default function Feedback({ graded, correctCount, onNext }) {
       {mistakes.length === 0 && (
         <div className="lp-note-card">
           <strong>Nothing to flag</strong>
-          <p>Every question landed. One more crystal is waiting for this.</p>
+          <p>Every question has been reviewed. Keep these loop patterns in mind.</p>
         </div>
       )}
 

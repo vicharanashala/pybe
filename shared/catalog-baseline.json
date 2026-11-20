@@ -1,0 +1,357 @@
+[
+  {
+    "id": "story-0fdb9bc4ae50094b",
+    "title": "Traffic System: Rules and Names",
+    "source": "case-studies/keywords-traffic-system/index.html"
+  },
+  {
+    "id": "story-50b1ab4f25db0b54",
+    "title": "The Lost Library of Python",
+    "source": "case-studies/keywords-lost-library/index.html"
+  },
+  {
+    "id": "story-617c10ea8be694de",
+    "title": "The Royal Messengers of Oakhaven",
+    "source": "case-studies/printing-royal-messengers/messenger_in_the_sky/index.html"
+  },
+  {
+    "id": "story-9a805a86ccec1a84",
+    "title": "The Royal Scribe’s Secret",
+    "source": "case-studies/strings-royal-scribes-secret/index.html"
+  },
+  {
+    "id": "story-02cecabc434c5db4",
+    "title": "The Royal Supply Scroll",
+    "source": "case-studies/lists-royal-supply-scroll/index.html"
+  },
+  {
+    "id": "story-8167bf7ebbde1018",
+    "title": "The Sealed Record",
+    "source": "case-studies/tuples-sealed-record/sealed_recod/sealed_record.html"
+  },
+  {
+    "id": "story-ad89eb826e121d2d",
+    "title": "The Wind Crystal Chase",
+    "source": "case-studies/loop-control-wind-crystal-chase/index.html"
+  },
+  {
+    "id": "story-57fb53f5658f810a",
+    "title": "Birbal and the Royal Reward",
+    "source": "case-studies/conditionals-birbals-royal-reward/index.html"
+  },
+  {
+    "id": "story-3f56efaff302a5d1",
+    "title": "Akbar & Birbal’s Royal Tax Registry",
+    "source": "case-studies/dictionaries-royal-tax-registry/index.html"
+  },
+  {
+    "id": "story-5410a21f8666e0af",
+    "title": "Khul Ja Sim Sim",
+    "source": "case-studies/encapsulation-khul-ja-sim-sim/index.html"
+  },
+  {
+    "id": "story-9f7b5b4a8ade000c",
+    "title": "The Postman’s Route",
+    "source": "case-studies/exceptions-postmans-route/postman-exceptions/index.html"
+  },
+  {
+    "id": "story-1441ae79505da6dc",
+    "title": "The High Pass: Swati’s Himalayan Ride",
+    "source": "case-studies/exceptions-himalayan-ride/index.html"
+  },
+  {
+    "id": "story-fe18dfae0dfa817f",
+    "title": "The Gates of Rajgad",
+    "source": "case-studies/decorators-gates-of-rajgad/index.html"
+  },
+  {
+    "id": "story-f77458836eb67f34",
+    "title": "Humans, Aliens & Translation",
+    "source": "case-studies/compilers-and-interpreters-humans-and-aliens/index.html"
+  },
+  {
+    "id": "story-f0859aba1663ed62",
+    "title": "Rahul’s Kitchen Lab",
+    "source": "case-studies/file-handling-kitchen-lab/index.html"
+  },
+  {
+    "id": "story-6bab419ac15f13d3",
+    "title": "The Sets Case Study",
+    "source": "case-studies/sets-case-study/sets_case_study/index.html"
+  },
+  {
+    "id": "story-c7c40793d26c5b2a",
+    "title": "Flight 218",
+    "source": "case-studies/python-fundamentals-flight-218/Flight 218_v6.html"
+  },
+  {
+    "id": "story-0bdeee990fa852ea",
+    "title": "Maple Heights",
+    "source": "case-studies/lists-and-indexing-maple-heights/client/index.html"
+  },
+  {
+    "id": "story-823fd0e08364881e",
+    "title": "Flow Tales",
+    "source": "case-studies/loop-control-and-printing-flow-tales/Flow Tales.html"
+  },
+  {
+    "id": "story-1bb2d0ced20d2774",
+    "title": "The Messy Attendance List",
+    "source": "case-studies/string-processing-attendance-cleaner/string-manipulation-case-study/case-study.md"
+  },
+  {
+    "id": "story-d730e4fa3019fc6d",
+    "title": "The Monkey and the Crocodile",
+    "source": "case-studies/exceptions-monkey-and-crocodile/client/src/lesson/lessonData.js"
+  },
+  {
+    "id": "story-4ad76a8313b0be1f",
+    "title": "NovaTech Investor Room",
+    "source": "case-studies/data-visualization-novatech-investor-room/README.md"
+  },
+  {
+    "id": "story-a76197f8448cddb6",
+    "title": "Doraemon’s Stamp Collection & Gadget Codes",
+    "source": "case-studies/sets-and-dictionaries-doraemon/README.md"
+  },
+  {
+    "id": "story-ed372d85b4644984",
+    "title": "Iteration Learning Journey",
+    "source": "case-studies/loops-iteration-learning-journey/pybe-iteration-feature/client/README.md"
+  },
+  {
+    "id": "story-4eb8cd5405a39cc1",
+    "title": "Hawkins Division: Functions Field Manual",
+    "source": "case-studies/functions-and-scope-hawkins-division/README.md"
+  },
+  {
+    "id": "story-6c4e74eb56c56740",
+    "title": "The Magic of Logic",
+    "source": "case-studies/conditionals-magic-of-logic/client/src/data.ts"
+  },
+  {
+    "id": "story-c563eb4bb23307df",
+    "title": "Everyday Python: UPI, Addresses & Checklists",
+    "source": "case-studies/data-structures-everyday-python/README.md"
+  },
+  {
+    "id": "story-9ff9078eaeb976d4",
+    "title": "Recursive Explorer: Ant Colony Adventure",
+    "source": "case-studies/recursion-ant-colony-adventure/readme.md"
+  },
+  {
+    "id": "story-5b606fcb064ace2d",
+    "title": "Oracle Journey",
+    "source": "case-studies/exceptions-oracle-journey/percy-oracle/README.md"
+  },
+  {
+    "id": "story-7cede33ab799b7e3",
+    "title": "PyFarm: Maya’s First Harvest",
+    "source": "case-studies/variables-and-conditionals-pyfarm/README.md"
+  },
+  {
+    "id": "story-0532cd450cb25c86",
+    "title": "Rosewood Manor",
+    "source": "case-studies/text-processing-and-recursion-rosewood-manor/server/src/data/db.json"
+  },
+  {
+    "id": "story-249b9aa16e56653a",
+    "title": "The Raidurg Adventure",
+    "source": "case-studies/loops-raidurg-adventure/src/data/storyData.js"
+  },
+  {
+    "id": "story-8f35c48bc68d1343",
+    "title": "The Hunt for Calico Jack",
+    "source": "case-studies/conditionals-hunt-for-calico-jack/client/src/data/story.js"
+  },
+  {
+    "id": "story-2ad060f951f61c12",
+    "title": "Poko’s Magical Memory",
+    "source": "case-studies/variables-and-loops-poko-and-gurukul/README.md"
+  },
+  {
+    "id": "story-43d3d164c73db34c",
+    "title": "PyBe Gurukul: Lotus, Well & Bell",
+    "source": "case-studies/variables-and-loops-poko-and-gurukul/gurukul/README.md"
+  },
+  {
+    "id": "story-dea913906bfd2b90",
+    "title": "The Recursion Discovery Journey",
+    "source": "case-studies/recursion-discovery-journey/README.md"
+  },
+  {
+    "id": "story-61b5840e0fd73941",
+    "title": "The Dictionary Discovery Adventure",
+    "source": "case-studies/dictionaries-discovery-adventure/README.md"
+  },
+  {
+    "id": "story-e7b0d8a9fe8d0365",
+    "title": "Find and Squash the Bug",
+    "source": "case-studies/debugging-find-and-squash-the-bug/product_file.md"
+  },
+  {
+    "id": "story-6dc52d0b1ddaecb9",
+    "title": "Robo’s Magic Loop & Doraemon’s Memory Pockets",
+    "source": "case-studies/variables-and-loops-robo-and-doraemon/README.md"
+  },
+  {
+    "id": "story-afad22b314e1637c",
+    "title": "The Lost Kingdom of Python",
+    "source": "case-studies/data-structures-lost-kingdom/client/index.html"
+  },
+  {
+    "id": "story-d6ff7a5a81fd9717",
+    "title": "Dabbo’s Orchard",
+    "source": "case-studies/variables-and-arithmetic-dabbos-orchard/app.py"
+  },
+  {
+    "id": "story-9c94cab558e9f7a4",
+    "title": "The Memory Modules",
+    "source": "case-studies/references-and-memory-modules/context.md"
+  },
+  {
+    "id": "story-676a8d1f1dc92e24",
+    "title": "Dashavatara: The Many Forms",
+    "source": "case-studies/polymorphism-and-truthiness-dashavatara-and-mela/dashavatara-polymorphism/README.md"
+  },
+  {
+    "id": "story-680740e43fc4d219",
+    "title": "The Mela Gatekeeper",
+    "source": "case-studies/polymorphism-and-truthiness-dashavatara-and-mela/village-mela-truthiness/README.md"
+  },
+  {
+    "id": "story-b31d201f15970ec2",
+    "title": "One Restaurant, Many Orders",
+    "source": "case-studies/multithreading-restaurant-orders/src/main.jsx"
+  },
+  {
+    "id": "story-c080d50fb7e5563f",
+    "title": "The Wildlife Observer’s Field Journal",
+    "source": "case-studies/inheritance-wildlife-field-journal/README.md"
+  },
+  {
+    "id": "story-489b4ac6ef1bdf99",
+    "title": "Adder",
+    "source": "case-studies/functions-adder/Adder/client/src/lessons/content/adderContent.js"
+  },
+  {
+    "id": "story-5b04d1c5808fe44e",
+    "title": "The Dasara Festival Discovery Lab",
+    "source": "case-studies/exceptions-dasara-festival/README.md"
+  },
+  {
+    "id": "story-f12f400b0845e259",
+    "title": "The Tuple Analogy Playground",
+    "source": "case-studies/tuples-analogy-playground/tuple-analogy/README.md"
+  },
+  {
+    "id": "story-5477e5af513e2cc7",
+    "title": "The Campus Fest",
+    "source": "case-studies/scope-campus-fest/README.md"
+  },
+  {
+    "id": "story-c57e8679bce3a32e",
+    "title": "The Dharma Validator",
+    "source": "case-studies/exceptions-dharma-validator/src/learning/lessons/registry.ts"
+  },
+  {
+    "id": "story-f0b7bda78197765a",
+    "title": "Creation: The Art of the Eternal Mold",
+    "source": "case-studies/classes-eternal-mold/README.md"
+  },
+  {
+    "id": "story-d212101de2e2efa4",
+    "title": "Sign the Squad",
+    "source": "case-studies/classes-and-inheritance-squad-and-bird-family/README.md"
+  },
+  {
+    "id": "story-b4e637427beca75c",
+    "title": "The Bird Family",
+    "source": "case-studies/classes-and-inheritance-squad-and-bird-family/README.md"
+  },
+  {
+    "id": "story-79891727e2a36617",
+    "title": "The Palace of Whispers",
+    "source": "case-studies/scope-palace-of-whispers/palace-storybook/README.md"
+  },
+  {
+    "id": "story-e11815652818ebf2",
+    "title": "Tiffin Trail",
+    "source": "case-studies/functions-and-closures-tiffin-trail/tiffin trail-case study/src/TiffinTrail.jsx"
+  },
+  {
+    "id": "story-6303a4097d69eca7",
+    "title": "Buddy’s Magic Pet Shop",
+    "source": "case-studies/classes-and-encapsulation-magic-pet-shop/README.md"
+  },
+  {
+    "id": "story-ab72e09488ad93d8",
+    "title": "Mia’s Smart Parking Gate",
+    "source": "case-studies/functions-smart-parking-gate/README.md"
+  },
+  {
+    "id": "story-5ab6bebe7c3605f9",
+    "title": "The Cricket Chase",
+    "source": "case-studies/loops-cricket-chase-and-loop-control/pybe-iteration-feature/README.md"
+  },
+  {
+    "id": "story-a639df8d84d12201",
+    "title": "Loop Control Discovery",
+    "source": "case-studies/loops-cricket-chase-and-loop-control/pybe-loopcontrols-standalone/README.md"
+  },
+  {
+    "id": "story-b5ddcf051b9a827c",
+    "title": "Treasure Kingdom",
+    "source": "case-studies/generators-treasure-kingdom/README.md"
+  },
+  {
+    "id": "story-7a30209fcf39425b",
+    "title": "Python Arcade: Pet, Pixels & Invaders",
+    "source": "case-studies/python-fundamentals-arcade-and-case-study-engine/README.md"
+  },
+  {
+    "id": "story-a6599cda779ad306",
+    "title": "Python Case Study Engine",
+    "source": "case-studies/python-fundamentals-arcade-and-case-study-engine/server/src/data/content.json"
+  },
+  {
+    "id": "story-4049523562c935ab",
+    "title": "Loops: Reason, Discover & Build",
+    "source": "case-studies/loops-reason-discover-and-build/server/src/data/content.json"
+  },
+  {
+    "id": "story-7617eda5b6c5d39c",
+    "title": "Sorting & Searching Basics",
+    "source": "case-studies/sorting-and-searching-basics/server/src/data/content.json"
+  },
+  {
+    "id": "story-1be2b5357531f575",
+    "title": "Py-Betaal Tales",
+    "source": "case-studies/python-fundamentals-betaal-tales/README.md"
+  },
+  {
+    "id": "story-3af5c8e035f66c59",
+    "title": "Samsung OOP Stories",
+    "source": "case-studies/object-oriented-python-samsung-stories/CASE_STUDIES_README.md"
+  },
+  {
+    "id": "story-e5fa6a9b145ec00e",
+    "title": "The Thieves at the Well",
+    "source": "case-studies/functions-and-scope-thieves-at-the-well/server/src/data/db.json"
+  },
+  {
+    "id": "story-82621fb31e80d371",
+    "title": "The Royal Bakery & Thirsty Crow",
+    "source": "case-studies/loops-royal-bakery-and-thirsty-crow/README.md"
+  },
+  {
+    "id": "story-545172f653234a84",
+    "title": "Python Through Story Traditions",
+    "source": "case-studies/python-fundamentals-story-traditions/src/data/curriculum.ts"
+  },
+  {
+    "id": "story-298332aee7ba2b32",
+    "title": "Why Classes Exist",
+    "source": "case-studies/classes-why-classes-exist/README.md"
+  }
+]

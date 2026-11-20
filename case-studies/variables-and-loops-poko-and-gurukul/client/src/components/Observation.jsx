@@ -1,8 +1,11 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./Observation.css";
 
-export default function Observation({ data, onNext, onAddXp }) {
+export default function Observation({ data, onNext }) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const { title, subtitle, questions } = data;
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selectedOpt, setSelectedOpt] = useState(null);
@@ -15,7 +18,7 @@ export default function Observation({ data, onNext, onAddXp }) {
     setSelectedOpt(opt);
     if (opt === q.answer) {
       setIsCorrect(true);
-      if (onAddXp) onAddXp(25);
+
     } else {
       setIsCorrect(false);
       setShake(true);
@@ -79,7 +82,7 @@ export default function Observation({ data, onNext, onAddXp }) {
                 >
                   <span className="opt-number">{String.fromCharCode(65 + idx)}</span>
                   <span className="obs-opt-text">{opt}</span>
-                  {isSel && isCorrect && <span className="feedback-icon">✓ +25 XP</span>}
+                  {isSel && isCorrect && <span className="feedback-icon">✓ Correct</span>}
                   {isSel && !isCorrect && <span className="feedback-icon">✗ Try again</span>}
                 </motion.button>
               );

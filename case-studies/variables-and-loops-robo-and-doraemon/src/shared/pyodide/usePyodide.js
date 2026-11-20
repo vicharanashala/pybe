@@ -1,91 +1,15 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {useCallback,useEffect,useRef,useState} from 'react';
+import {runPython,cancelPython} from '../../../../../library/learning/python-client.mjs';
+export function printTraceResult(source){return source.replace(/__run_traced\(\)\s*$/, `__pybe_result = json.loads(__run_traced())
+if __pybe_result.get('error'):
+    __pybe_result['trace'] = []
+__pybe_serialized = json.dumps(__pybe_result, separators=(',', ':'))
+print(__pybe_serialized if len(__pybe_serialized) <= 48000 else json.dumps({'error': 'This execution trace is too large to display. Try fewer iterations or smaller values.', 'trace': []}))`);}
 
-function supportsModuleWorkers() {
-  let supported = false;
-  try {
-    new Worker('data:text/javascript,', { get type() { supported = true; return 'module'; } }).terminate();
-  } catch {
-    // ignore — `supported` above already tells us what we need
-  }
-  return supported;
-}
-
-export function usePyodide() {
-  const workerRef = useRef(null);
-  const runIdRef = useRef(0);
-  const [status, setStatus] = useState('loading');
-  const [errorDetail, setErrorDetail] = useState(null);
-  const [running, setRunning] = useState(false);
-
-  useEffect(() => {
-    if (typeof Worker === 'undefined' || !supportsModuleWorkers()) {
-      setStatus('error');
-      setErrorDetail('This browser does not support module Web Workers, which the Python runtime needs. Try a recent version of Chrome, Edge, Firefox, or Safari.');
-      return undefined;
-    }
-    let worker;
-    try {
-      worker = new Worker(new URL('./pyodideWorker.js', import.meta.url), { type: 'module' });
-    } catch (error) {
-      setStatus('error');
-      setErrorDetail(`Could not create the Python worker: ${error.message}`);
-      return undefined;
-    }
-    workerRef.current = worker;
-    worker.onmessage = (event) => {
-      const { kind, error } = event.data;
-      if (kind === 'ready') setStatus('ready');
-      if (kind === 'loading') setStatus('loading');
-      if (kind === 'init-error') { setStatus('error'); setErrorDetail(error || 'Unknown error while starting the Python runtime.'); }
-    };
-    worker.onerror = (event) => {
-      setStatus('error');
-      setErrorDetail(event.message || 'The Python worker crashed while loading (often a blocked CDN request — check network/ad-blocker/browser extensions).');
-    };
-    return () => worker.terminate();
-  }, []);
-
-  const run = useCallback((code) => {
-    return new Promise((resolve) => {
-      const worker = workerRef.current;
-      if (!worker) return resolve({ output: '', error: 'Python runtime not ready yet.', returnValue: null });
-      const id = ++runIdRef.current;
-      let output = '';
-      let runError = null;
-      let returnValue = null;
-      setRunning(true);
-
-      function handleMessage(event) {
-        const msg = event.data;
-        if (msg.id !== id) return;
-        if (msg.kind === 'stdout' || msg.kind === 'stderr') output += `${msg.msg}\n`;
-        else if (msg.kind === 'error') { runError = msg.error; finish(); }
-        else if (msg.kind === 'done') { returnValue = msg.returnValue; finish(); }
-      }
-      function finish() {
-        worker.removeEventListener('message', handleMessage);
-        setRunning(false);
-        resolve({ output, error: runError, returnValue });
-      }
-      worker.addEventListener('message', handleMessage);
-      worker.postMessage({ id, code });
-    });
-  }, []);
-
-  // Runs code wrapped in a harness and parses the JSON it returns as its final
-  // expression — used by any per-module tracer (recursion's call-stack tracer keeps its
-  // own copy of this pattern; Variables' memory-state tracer uses this shared one).
-  const runHarness = useCallback(async (harnessCode) => {
-    const result = await run(harnessCode);
-    if (result.error) return { data: null, error: result.error };
-    try {
-      const parsed = JSON.parse(result.returnValue);
-      if (parsed.error) return { data: null, error: parsed.error };
-      return { data: parsed, error: null };
-    } catch {
-      return { data: null, error: 'Could not read the execution trace — check your code runs without errors.' };
-    }
-  }, [run]);
-
-  return { status, running, run, runHarness, errorDetail };
+export function usePyodide(){
+ const active=useRef(false),mounted=useRef(true);const [running,setRunning]=useState(false);
+ useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;if(active.current)cancelPython();};},[]);
+ const run=useCallback(async code=>{if(active.current)return {output:'',error:'A program is already running.',returnValue:null};active.current=true;setRunning(true);try{const r=await runPython(code);return {...r,returnValue:null};}finally{active.current=false;if(mounted.current)setRunning(false);}},[]);
+ const runHarness=useCallback(async code=>{const result=await run(printTraceResult(code));if(result.error)return {data:null,error:result.error};try{const data=JSON.parse(result.output);return data.error?{data:null,error:data.error}:{data,error:null};}catch{return {data:null,error:'Could not read the execution trace — check your code runs without errors.'};}},[run]);
+ return {status:'ready',running,run,runHarness,errorDetail:null};
 }

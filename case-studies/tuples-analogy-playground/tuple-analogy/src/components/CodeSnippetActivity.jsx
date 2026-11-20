@@ -1,8 +1,12 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
+import {pointInElement as isPointInside} from '../../../../../library/learning/geometry.mjs';
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ChevronLeft, CheckCircle2, XCircle, Code2 } from 'lucide-react';
 
-export default function CodeSnippetActivity({ title, score, setScore, snippets, onNext, onPrev }) {
+export default function CodeSnippetActivity({ title, snippets, onNext, onPrev }) {
+  const {setTimeout}=useStoryTimers();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [droppedId, setDroppedId] = useState(null);
   const [shake, setShake] = useState(false);
@@ -22,16 +26,7 @@ export default function CodeSnippetActivity({ title, score, setScore, snippets, 
   const currentSnippet = snippets[currentIndex];
   const isLastSnippet = currentIndex === snippets.length - 1;
 
-  const isPointInside = (point, ref) => {
-    if (!ref.current) return false;
-    const rect = ref.current.getBoundingClientRect();
-    return (
-      point.x >= rect.left + window.scrollX &&
-      point.x <= rect.right + window.scrollX &&
-      point.y >= rect.top + window.scrollY &&
-      point.y <= rect.bottom + window.scrollY
-    );
-  };
+
 
   const handleDrop = (option, point) => {
     if (isPointInside(point, dropZoneRef)) {
@@ -40,7 +35,6 @@ export default function CodeSnippetActivity({ title, score, setScore, snippets, 
       
       if (option.isCorrect) {
         setShowError(false);
-        if (setScore) setScore(prevScore => prevScore + 1);
       } else {
         setShake(true);
         setShowError(true);
@@ -98,6 +92,7 @@ export default function CodeSnippetActivity({ title, score, setScore, snippets, 
 
           {/* Drop Zone */}
           <motion.span
+            role="group" aria-label="Code blank"
             ref={dropZoneRef}
             animate={shake ? { x: [-10, 10, -10, 10, 0] } : {}}
             transition={{ duration: 0.4 }}

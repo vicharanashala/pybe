@@ -1,10 +1,14 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import CodeSlotChallenge from './CodeSlotChallenge';
 import React, { useState, useEffect } from 'react';
 import { CheckCircle, AlertTriangle, ArrowRight, RotateCcw } from 'lucide-react';
 
 const Quiz = ({ questions, onPass, onComplete, codeChallenge, onClose }) => {
+  const {setTimeout}=useStoryTimers();
   const [currentQ, setCurrentQ] = useState(0);
-  const [score, setScore] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const allCorrect=questions.every((_,index)=>answers[index]===true);
   const [showResult, setShowResult] = useState(false);
   const [feedback, setFeedback] = useState('');
 
@@ -18,8 +22,10 @@ const Quiz = ({ questions, onPass, onComplete, codeChallenge, onClose }) => {
   }, [currentQ]);
 
   const handleNext = (isCorrect) => {
+    if(feedback)return;
+    const nextAnswers={...answers,[currentQ]:isCorrect};
+    setAnswers(nextAnswers);
     if (isCorrect) {
-      setScore(s => s + 1);
       setFeedback('Correct!');
     } else {
       setFeedback('Incorrect, but keep going!');
@@ -30,8 +36,8 @@ const Quiz = ({ questions, onPass, onComplete, codeChallenge, onClose }) => {
         setCurrentQ(currentQ + 1);
       } else {
         setShowResult(true);
-        const finalScore = score + (isCorrect ? 1 : 0);
-        if (finalScore === questions.length && !codeChallenge) {
+        const allAnsweredCorrectly=questions.every((_,index)=>nextAnswers[index]===true);
+        if (allAnsweredCorrectly && !codeChallenge) {
           if (onPass) onPass();
           if (onComplete) onComplete();
         }
@@ -40,7 +46,7 @@ const Quiz = ({ questions, onPass, onComplete, codeChallenge, onClose }) => {
   };
 
   if (showResult) {
-    if (score === questions.length && codeChallenge) {
+    if (allCorrect && codeChallenge) {
       return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div style={{
@@ -59,7 +65,7 @@ const Quiz = ({ questions, onPass, onComplete, codeChallenge, onClose }) => {
               <CheckCircle size={24} color="#2f6564" />
               <div>
                 <h4 style={{ margin: 0, color: '#256038', fontSize: '1.15rem', fontFamily: '"Fraunces", Georgia, serif', fontWeight: 800 }}>
-                  Questions Passed (3/3 Correct)!
+                  Questions Reviewed
                 </h4>
                 <p style={{ margin: '3px 0 0', fontSize: '0.84rem', color: '#4a443b' }}>
                   Now complete the practical challenge below to patch the code and unlock the next level!
@@ -92,13 +98,12 @@ const Quiz = ({ questions, onPass, onComplete, codeChallenge, onClose }) => {
       );
     }
 
-    const isFullScore = score === questions.length;
 
     return (
       <div style={{
         padding: '28px',
         background: '#fffdfa',
-        border: `1.5px solid ${isFullScore ? '#4f9a63' : '#e4dcc8'}`,
+        border: `1.5px solid ${allCorrect ? '#4f9a63' : '#e4dcc8'}`,
         borderRadius: '18px',
         marginTop: '10px',
         boxShadow: '0 12px 36px rgba(43, 30, 20, 0.08)',
@@ -111,28 +116,28 @@ const Quiz = ({ questions, onPass, onComplete, codeChallenge, onClose }) => {
           width: '56px',
           height: '56px',
           borderRadius: '50%',
-          background: isFullScore ? '#e9f4ec' : '#fbeae7',
-          color: isFullScore ? '#4f9a63' : '#c25b4a',
+          background: allCorrect ? '#e9f4ec' : '#fbeae7',
+          color: allCorrect ? '#4f9a63' : '#c25b4a',
           marginBottom: '16px'
         }}>
-          {isFullScore ? <CheckCircle size={32} /> : <AlertTriangle size={32} />}
+          {allCorrect ? <CheckCircle size={32} /> : <AlertTriangle size={32} />}
         </div>
 
         <h3 style={{
-          color: isFullScore ? '#256038' : '#c25b4a',
+          color: allCorrect ? '#256038' : '#c25b4a',
           fontSize: '1.4rem',
           fontFamily: '"Fraunces", Georgia, serif',
           margin: '0 0 8px',
           fontWeight: 800
         }}>
-          {isFullScore ? (questions.length >= 10 ? "Mega Exam Mastered!" : "Quiz Mastered!") : "Quiz Incomplete"}
+          {allCorrect ? "Review Complete" : "Quiz Incomplete"}
         </h3>
 
         <p style={{ fontSize: '1.05rem', color: '#5b5648', margin: '0 0 18px' }}>
-          You scored <strong style={{ color: '#2b2b2b' }}>{score}</strong> out of <strong style={{ color: '#2b2b2b' }}>{questions.length}</strong>.
+          {allCorrect?"You answered the review questions correctly.":"Some answers need another review. Try these questions again."}
         </p>
 
-        {isFullScore ? (
+        {allCorrect ? (
           <div style={{
             padding: '14px 18px',
             background: '#e9f4ec',
@@ -142,7 +147,7 @@ const Quiz = ({ questions, onPass, onComplete, codeChallenge, onClose }) => {
             margin: '0 auto'
           }}>
             <p style={{ margin: 0, fontWeight: 700, color: '#256038', fontSize: '0.92rem' }}>
-              🏆 Outstanding! You answered all {questions.length} questions correctly!
+              The question review is complete.
             </p>
           </div>
         ) : (
@@ -162,7 +167,7 @@ const Quiz = ({ questions, onPass, onComplete, codeChallenge, onClose }) => {
               gap: '8px',
               boxShadow: '0 4px 14px rgba(250, 153, 79, 0.3)'
             }}
-            onClick={() => { setCurrentQ(0); setScore(0); setShowResult(false); }}
+            onClick={() => { setCurrentQ(0); setAnswers({}); setShowResult(false); }}
           >
             <RotateCcw size={16} /> {questions.length >= 10 ? "Retry Exam" : "Retry Quiz"}
           </button>

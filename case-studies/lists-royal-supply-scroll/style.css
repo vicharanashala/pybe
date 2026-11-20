@@ -115,7 +115,7 @@ html, body {
     text-transform: uppercase;
 }
 
-.badge-desc {
+.completion-description {
     font-size: 0.95rem;
     color: var(--text-muted);
     margin-top: 10px;
@@ -766,24 +766,18 @@ html, body {
     font-weight: bold;
 }
 
-/* Completion Badge Panel */
-.badge-container {
+/* Completion Panel */
+.completion-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 15px;
     margin: 20px 0;
-    animation: scaleInBadge 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: scaleInCompletion 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-.badge-img {
-    height: 120px;
-    width: auto;
-    filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5));
-}
-
-.badge-title {
+.completion-title {
     font-family: var(--font-royal);
     color: var(--gold);
     font-size: 1.5rem;
@@ -791,7 +785,7 @@ html, body {
     letter-spacing: 1px;
 }
 
-@keyframes scaleInBadge {
+@keyframes scaleInCompletion {
     from {
         opacity: 0;
         transform: scale(0.6) translateY(20px);
@@ -1109,7 +1103,7 @@ html, body {
 }
 
 /* Badge Overlay Panel (Renders centered over closed curtains) */
-.badge-overlay-panel {
+.completion-overlay-panel {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1138,7 +1132,7 @@ html, body {
     }
 }
 
-.badge-desc {
+.completion-description {
     font-size: 0.95rem;
     color: var(--text-muted);
     margin-top: 10px;

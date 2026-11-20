@@ -1,4 +1,4 @@
-"""Original-only catalog: never extract or restyle the submitted lesson contents."""
+"""Reviewed catalog and explicit shared-player migration metadata."""
 import json
 import re
 
@@ -28,7 +28,7 @@ def finalize(ROOT,SUB,OUT,concepts,stories,BUCKETS,stable_id,add,FOLDERS):
     add('Namrata Saha','Py-Betaal Tales','variables conditionals for while lists functions',evidence='README.md')
     add('Akash','Samsung OOP Stories','classes encapsulation inheritance polymorphism abstraction',evidence='CASE_STUDIES_README.md')
     add('Harshal Ganatra','The Thieves at the Well','functions scope while conditionals',evidence='server/src/data/db.json')
-    add('Damanpreet Singh','The Royal Bakery & Thirsty Crow','for while',evidence='README.md')
+    add('Damanpreet Singh','The Royal Bakery & Thirsty Crow','variables for while control lists stacks dictionaries',evidence='README.md')
     add('Putta_Sri_Tejaswi','Python Through Story Traditions','variables arithmetic comparison strings lists tuples sets dictionaries conditionals for while functions indexing sorting filtering modules validation memory',evidence='src/data/curriculum.ts')
     # Scope follows the actual Rosewood topics rather than a generated companion.
     for s in stories:
@@ -91,10 +91,21 @@ def finalize(ROOT,SUB,OUT,concepts,stories,BUCKETS,stable_id,add,FOLDERS):
             s['mode']='source'
             s['setupNote']='This submission is a Python script / written case study. Open the original source and its README to run it as submitted.'
 
+    integrations=load(ROOT/'shared/lesson-registry.json')['studies']
+    for story in stories:
+        if story['id'] in integrations:
+            story['mode']='integrated'
+            story['presentation']='pybe'
+            story['lessonEndpoint']='/api/lessons/'+story['id']
+            story.pop('appId',None)
+            story.pop('launchPath',None)
+    active_apps={s.get('appId') for s in stories}
+    applications={id:app for id,app in applications.items() if id in active_apps}
+
     for c in concepts:
         c['status']='covered'
         c['storyIds']=[s['id'] for s in stories if c['id'] in s['concepts']]
-        c['playableCount']=sum(s['mode'] in ['original','application'] for s in stories if c['id'] in s['concepts'])
+        c['playableCount']=sum(s['mode'] in ['original','application','integrated'] for s in stories if c['id'] in s['concepts'])
         assert c['storyIds'],c['id']
     for id,bucket,title,description in PENDING:
         concepts.append(dict(id=id,bucket=bucket,title=title,description=description,skills=[],storyIds=[],playableCount=0,status='pending',proposed=True))
@@ -108,7 +119,7 @@ def finalize(ROOT,SUB,OUT,concepts,stories,BUCKETS,stable_id,add,FOLDERS):
     OUT.mkdir(exist_ok=True)
     (OUT/'catalog.json').write_text(json.dumps(catalog,ensure_ascii=False,indent=2),encoding='utf-8')
     lines=['# PyBe: submitted and pending concepts','',f'{sum(c["status"]=="covered" for c in concepts)} covered concept groups; {len(PENDING)} proposed pending topics; {len(stories)} original submission entries.','',
-        'The library opens original HTML pages or launches original applications. Student styles, interactions, lesson order, and content are not adapted into a shared reader. Application dependencies are installed on first launch; some originals require external services or Python packages.','']
+        'All catalog entries open inside the shared PyBe player using their authored flows, common infrastructure and browser Python. Every submitted case study and its original source remain in the catalog; see MIGRATION_STATUS.md for implementation and verification details.','']
     for bid,title,*_ in BUCKETS:
         lines += ['## '+title,'']
         for c in [c for c in concepts if c['bucket']==bid]:
@@ -119,4 +130,4 @@ def finalize(ROOT,SUB,OUT,concepts,stories,BUCKETS,stable_id,add,FOLDERS):
     lines += ['## Proposed backlog','',catalog['backlogNote'],'','## Submission audit','']
     lines += [f'- **{i["author"]}**: {i["status"]}.' for i in inventory]
     (ROOT/'CONCEPT_COVERAGE.md').write_text('\n'.join(lines)+'\n',encoding='utf-8')
-    print(f'Original-only catalog: {len(stories)} entries; {len(applications)} app runtimes; {len(PENDING)} proposed pending topics.')
+    print(f'PyBe catalog: {len(stories)} entries; {sum(s["mode"]=="integrated" for s in stories)} integrated;  {len(applications)} app runtimes; {len(PENDING)} proposed pending topics.')

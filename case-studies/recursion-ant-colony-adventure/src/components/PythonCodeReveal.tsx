@@ -1,3 +1,6 @@
+import * as React from 'react';
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 // Post-order recursion reveal with three synchronized panels:
 //
 //   Python Code  |  Call Stack  |  Mini Colony
@@ -11,7 +14,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, RotateCcw, Terminal, Layers, Bug } from 'lucide-react';
-import { playSfx } from '@/audio/soundEngine';
+import { playSfx } from '../audio/soundEngine';
 
 interface CodeLine {
   text: string;
@@ -91,6 +94,7 @@ function statusFor(step: RunStep): { title: string; detail: string; tone: 'amber
 }
 
 export default function PythonCodeReveal({ onContinue }: { onContinue: () => void }) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const [revealedLines, setRevealedLines] = useState(0);
   const [running, setRunning] = useState(false);
   const [step, setStep] = useState(0);
@@ -103,11 +107,11 @@ export default function PythonCodeReveal({ onContinue }: { onContinue: () => voi
   // Phase 1: reveal code lines one by one.
   useEffect(() => {
     if (revealedLines >= CODE.length) return;
-    const t = window.setTimeout(() => {
+    const t = setTimeout(() => {
       setRevealedLines((n) => n + 1);
       playSfx('click');
     }, 420);
-    return () => window.clearTimeout(t);
+    return () => clearTimeout(t);
   }, [revealedLines]);
 
   // Phase 2: one timer advances all three panels together.
@@ -118,7 +122,7 @@ export default function PythonCodeReveal({ onContinue }: { onContinue: () => voi
     const pushDepth = s.push;
     const digTo = s.digTo;
     const carveAt = s.carveAt;
-    const t = window.setTimeout(() => {
+    const t = setTimeout(() => {
       if (pushDepth !== undefined) {
         setStack((prev) => [...prev, pushDepth]);
         playSfx('click');
@@ -142,7 +146,7 @@ export default function PythonCodeReveal({ onContinue }: { onContinue: () => voi
       }
       setStep((n) => n + 1);
     }, 640);
-    return () => window.clearTimeout(t);
+    return () => clearTimeout(t);
   }, [running, finished, step]);
 
   const activeLine = running && !finished ? STEPS[step]?.code ?? -1 : -1;

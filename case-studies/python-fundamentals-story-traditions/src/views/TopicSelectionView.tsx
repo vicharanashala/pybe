@@ -8,7 +8,7 @@ import { getLevelForTopic, isLevelUnlocked, learningLevels, getLevelProgress, ty
 import type { TopicId } from '../data/curriculum';
 
 export const TopicSelectionView: React.FC = () => {
-  const { completedTopics, selectTopic, currentLevel, collectedCards, collectedArtifacts } = useProgress();
+  const { completedTopics, selectTopic, currentLevel } = useProgress();
 
   // Group topics by level
   const levelGroups = useMemo(() => {
@@ -43,10 +43,6 @@ export const TopicSelectionView: React.FC = () => {
         </p>
         <div className="flex items-center justify-center gap-4 mt-3 text-xs text-gray-400 dark:text-gray-500">
           <span>{completedTopics.length}/{allTopics.length} stories completed</span>
-          <span className="w-1 h-1 rounded-full bg-gray-300" />
-          <span>{collectedCards.length}/63 characters</span>
-          <span className="w-1 h-1 rounded-full bg-gray-300" />
-          <span>{collectedArtifacts.length}/9 artifacts</span>
         </div>
       </div>
 
@@ -93,11 +89,10 @@ export const TopicSelectionView: React.FC = () => {
                 const isLocked = status === 'locked' || !unlocked;
                 const canPlay = !isCompleted && !isLocked;
                 const tTheme = getTraditionTheme(topic.storyWorld.storyTradition);
-                const topicCards = collectedCards.filter(c => c.topicId === topic.id);
 
                 return (
                   <div
-                    key={topic.id}
+                    data-tradition-choice={topic.id} key={topic.id}
                     role="listitem"
                     className={`cursor-pointer hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 ${isLocked ? 'opacity-60 cursor-not-allowed' : ''}`}
                     onClick={() => canPlay && selectTopic(topic.id)}
@@ -124,10 +119,7 @@ export const TopicSelectionView: React.FC = () => {
                           }`}>
                             {isCompleted ? 'Completed' : isCurrent ? 'In Progress' : isLocked ? 'Locked' : 'Ready'}
                           </span>
-                          <div className="flex items-center gap-1 text-[10px] text-gray-400">
-                            <Clock className="w-3 h-3" />
-                            <span>{topic.duration}</span>
-                          </div>
+  
                         </div>
 
                         {/* Title + narrative */}
@@ -164,10 +156,7 @@ export const TopicSelectionView: React.FC = () => {
 
                       {/* Footer: Cards collected + action */}
                       <div className="pt-2 border-t border-parchment-border dark:border-parchment-darkBorder flex items-center justify-between mt-auto">
-                        <div className="flex items-center gap-1 text-[10px] text-gray-400">
-                          <Star className="w-3 h-3" />
-                          <span>{topicCards.length}/3 cards</span>
-                        </div>
+
                         {isCompleted ? (
                           <div className="flex items-center gap-1 text-green-600 dark:text-green-400">
                             <CheckCircle className="w-3.5 h-3.5" />

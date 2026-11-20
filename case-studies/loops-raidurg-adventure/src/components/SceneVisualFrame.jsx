@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default function SceneVisualFrame({ frameId, defaultImage, character }) {
+export default function SceneVisualFrame({ frameId, defaultImage, character, assetBase = '' }) {
   return (
     <div className="relative w-full h-full min-h-[340px] bg-stone-900 overflow-hidden flex items-center justify-center">
       {/* Background image fallback */}
       <img
-        src={defaultImage || '/images/auditorium_seats.jpg'}
+        src={assetBase + (defaultImage || '/images/auditorium_seats.svg').replace('/images/auditorium_seats.jpg', '/images/auditorium_seats.svg')}
         alt="Scene illustration frame"
         className="absolute inset-0 w-full h-full object-cover transition-all duration-700 transform hover:scale-105"
       />

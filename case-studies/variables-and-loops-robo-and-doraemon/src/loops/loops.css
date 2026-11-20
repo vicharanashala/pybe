@@ -929,3 +929,6 @@ button:focus-visible, [tabindex]:focus-visible, input:focus-visible { outline: 2
   .lp-fw-door { width: 120px; padding: 16px 10px; }
   .lp-fw-columns { grid-template-columns: 1fr; }
 }
+
+/* Decorative robot and a picked-up bucket must not intercept plant targets. */
+.lp-robot,.lp-bucket.held { pointer-events:none; }

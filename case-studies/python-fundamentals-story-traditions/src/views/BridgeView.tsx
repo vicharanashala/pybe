@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState } from 'react';
 import { useProgress } from '../context/ProgressContext';
 import { ManuscriptCard, StoryHeader } from '../components/Ornaments';
@@ -19,6 +21,7 @@ const iconFor = (icon: string, code = false) => {
 };
 
 export const BridgeView: React.FC = () => {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const { nextStep, prevStep, activeTopicId } = useProgress();
   const topic = getTopic(activeTopicId);
   const [activeStage, setActiveStage] = useState<number>(0);
@@ -45,7 +48,7 @@ export const BridgeView: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col justify-center py-6 px-4 max-w-4xl mx-auto w-full select-none">
+    <div data-tradition-bridge={activeStage} className="flex-1 flex flex-col justify-center py-6 px-4 max-w-4xl mx-auto w-full select-none">
       <ManuscriptCard className="w-full animate-manuscript-open">
         <StoryHeader topic={topic} />
 

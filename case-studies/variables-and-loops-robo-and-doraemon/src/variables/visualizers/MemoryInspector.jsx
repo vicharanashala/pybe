@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState } from 'react';
 import MemoryPocket from '../components/MemoryPocket';
 
@@ -22,6 +24,7 @@ export default function MemoryInspector({ entries }) {
 }
 
 function BatteryDemo() {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [value, setValue] = useState(100);
   const [pulse, setPulse] = useState(false);
 

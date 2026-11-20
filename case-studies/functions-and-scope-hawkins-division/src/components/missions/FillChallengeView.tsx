@@ -1,3 +1,6 @@
+import * as React from 'react';
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import type { FillChallenge } from '../../types/mission'
@@ -8,6 +11,7 @@ interface Props {
 }
 
 export default function FillChallengeView({ challenge, onSuccess }: Props) {
+  const {setTimeout}=useStoryTimers();
   const [value, setValue] = useState('')
   const [status, setStatus] = useState<'idle' | 'wrong' | 'right'>('idle')
   const [showHint, setShowHint] = useState(false)
@@ -34,6 +38,7 @@ export default function FillChallengeView({ challenge, onSuccess }: Props) {
           <span className="text-white/80">{before}</span>
           <input
             aria-label="Fill in the missing code"
+            disabled={status === 'right'}
             value={value}
             onChange={(e) => {
               setValue(e.target.value)

@@ -1,5 +1,5 @@
 import LearningProgress from "./components/LearningProgress.jsx";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import StoryScreen from "./components/StoryScreen.jsx";
 import ReflectPrompt from "./components/ReflectPrompt.jsx";
 import ThinkItThrough from "./components/ThinkItThrough.jsx";
@@ -10,19 +10,12 @@ import LevelIntro from "./components/LevelIntro.jsx";
 import TrySimulator from "./components/TrySimulator.jsx";
 import LevelComplete from "./components/LevelComplete.jsx";
 import Recap from "./components/Recap.jsx";
-import AchievementPopup from "./components/AchievementPopup.jsx";
-import { BADGES } from "./components/Achievements.jsx";
 import { LEVELS, LEVEL_ORDER } from "./levels.js";
-import { saveProgress } from "./api.js";
-import usePointsAndStreak from "./hooks/usePointsAndStreak.js";
-import ProgressStats from "./components/ProgressStats.jsx";
 import LevelMap from "./components/LevelMap.jsx";
 
-// CHANGED: the Challenge Path used to be a single fixed "levelmap" step
-// wedged between "code" and the first level's "intro-<id>". It's now
-// tagged per level — `levelmap-<id>` — and inserted before every level's
-// intro/simulate/complete trio, so the hub is what the learner always
-// lands back on after finishing a level, not just before the first one.
+import {saveNotes} from './api.js';
+import {createStoryProgressHook} from '../../../../shared/story-progress.mjs';
+const useStoryProgress=createStoryProgressHook(React);
 const FIXED_STEPS = [
   "story",
   "reflect",
@@ -37,34 +30,10 @@ const STEPS = [
   "recap",
 ];
 
-// --- Achievement system (additive) ---------------------------------
-// Mirrors the same step boundaries already used above for stageStates:
-// story finishes when leaving "think", concept when leaving "concept",
-// practice (the "build" stage in stageStates) when leaving "build", and
-// quiz when leaving the very last step before "recap".
-const MILESTONE_BY_STEP = {
-  think: "storyComplete",
-  concept: "conceptComplete",
-  build: "practiceComplete",
-};
-MILESTONE_BY_STEP[STEPS[STEPS.length - 2]] = "quizComplete";
-
-const ACHIEVEMENTS_STORAGE_KEY = "pybe_achievements";
-const ACTIVE_BADGE_STORAGE_KEY = "pybe_active_badge";
-const STEP_INDEX_STORAGE_KEY = "pybe_step_index";
-// NEW: persists which levels are completed, the same way stepIndex and
-// achievements already persist — so a refresh mid-lesson doesn't lose
-// which Challenge Path nodes should show as completed/unlocked.
-const COMPLETED_LEVELS_STORAGE_KEY = "pybe_completed_levels";
-const EMPTY_ACHIEVEMENTS = {
-  storyComplete: false,
-  conceptComplete: false,
-  practiceComplete: false,
-  quizComplete: false,
-};
-
+const STEP_INDEX_STORAGE_KEY='pybe-learning-v1:bird-family-step';
+const COMPLETED_LEVELS_STORAGE_KEY='pybe-learning-v1:bird-family-levels';
 function getInitialStepIndex() {
-  const raw = localStorage.getItem(STEP_INDEX_STORAGE_KEY);
+  const raw = (localStorage.getItem(STEP_INDEX_STORAGE_KEY) ?? localStorage.getItem('pybe_step_index'));
   const parsed = raw === null ? NaN : Number(raw);
   if (!Number.isFinite(parsed) || parsed < 0) return 0;
   // Clamp in case STEPS has changed shape (e.g. levels added/removed)
@@ -72,18 +41,9 @@ function getInitialStepIndex() {
   return Math.min(parsed, STEPS.length - 1);
 }
 
-function getInitialAchievements() {
-  try {
-    const stored = JSON.parse(localStorage.getItem(ACHIEVEMENTS_STORAGE_KEY));
-    return stored ? { ...EMPTY_ACHIEVEMENTS, ...stored } : EMPTY_ACHIEVEMENTS;
-  } catch {
-    return EMPTY_ACHIEVEMENTS;
-  }
-}
-
 function getInitialCompletedLevelIds() {
   try {
-    const stored = JSON.parse(localStorage.getItem(COMPLETED_LEVELS_STORAGE_KEY));
+    const stored = JSON.parse((localStorage.getItem(COMPLETED_LEVELS_STORAGE_KEY) ?? localStorage.getItem('pybe_completed_levels')));
     if (!Array.isArray(stored)) return [];
     // Filter against the real LEVEL_ORDER so a stale/edited list can never
     // reference a level id that no longer exists.
@@ -93,51 +53,14 @@ function getInitialCompletedLevelIds() {
   }
 }
 
-function getLearnerId() {
-  let id = localStorage.getItem("pybe_learner_id");
-  if (!id) {
-    id = "learner-" + Math.random().toString(36).slice(2, 8);
-    localStorage.setItem("pybe_learner_id", id);
-  }
-  return id;
-}
-
-export default function InheritanceLesson({ onRevisitClasses }) {
-const [stepIndex, setStepIndex] = useState(getInitialStepIndex);
-const [achievements, setAchievements] = useState(getInitialAchievements);
-const [activeBadgeKey, setActiveBadgeKey] = useState(null);
-const [stageProgress, setStageProgress] = useState(0);
-const [storyProgress, setStoryProgress] = useState(0);
-const [conceptProgress, setConceptProgress] = useState(0);
-const [quizProgress, setQuizProgress] = useState(0);
-const [codeProgress, setCodeProgress] = useState(0);
-// NEW: which levels are done, and which one (if any) should play its
-// "just unlocked" animation the next time the Challenge Path is shown.
-const [completedLevelIds, setCompletedLevelIds] = useState(getInitialCompletedLevelIds);
-const [justUnlockedLevelId, setJustUnlockedLevelId] = useState(null);
-
-
-const {
-  points,
-  streak,
-  levelsCompleted,
-  recordStoryProgress,
-  recordConceptProgress,
-  recordQuizProgress,
-  recordLevelComplete,
-  resetAll: resetPointsAndStreak,
-} = usePointsAndStreak();
-
-useEffect(() => {
-  const savedBadge = localStorage.getItem(ACTIVE_BADGE_STORAGE_KEY);
-
-  if (savedBadge) {
-    setActiveBadgeKey(savedBadge);
-  }
-}, []);
-  const learnerId = getLearnerId();
-  const step = STEPS[stepIndex];
-
+export default function InheritanceLesson({onRevisitClasses,onComplete}){
+ const [stepIndex,setStepIndex]=useState(getInitialStepIndex);
+ const [stageProgress,setStageProgress]=useState(0);
+ const [completedLevelIds,setCompletedLevelIds]=useState(getInitialCompletedLevelIds);
+ const [justUnlockedLevelId,setJustUnlockedLevelId]=useState(null);
+ const [,complete]=useStoryProgress('bird-family');
+ const step=STEPS[stepIndex];
+ useEffect(()=>{localStorage.setItem(STEP_INDEX_STORAGE_KEY,String(stepIndex));saveNotes({lastStep:step}).catch(()=>{});if(step==='recap')onComplete?.();},[stepIndex]);
 let currentLevel = 1;
 
 if (["story", "reflect", "think"].includes(step)) {
@@ -210,48 +133,9 @@ if (
   stageStates.quiz = "current";
 }
 
-function goNext() {
-
-  if (step.startsWith("complete-")) {
-    recordLevelComplete();
-  }
-
-  const milestoneKey = MILESTONE_BY_STEP[step];
-
-
-  if (milestoneKey && localStorage.getItem(ACTIVE_BADGE_STORAGE_KEY) === null) {
-    const nextAchievements = {
-      ...achievements,
-      [milestoneKey]: true,
-    };
-
-    setAchievements(nextAchievements);
-
-    localStorage.setItem(
-      ACHIEVEMENTS_STORAGE_KEY,
-      JSON.stringify(nextAchievements)
-    );
-
-    setActiveBadgeKey(milestoneKey);
-
-    localStorage.setItem(
-      ACTIVE_BADGE_STORAGE_KEY,
-      milestoneKey
-    );
-
-    return;
-  }
-setStageProgress(0);
-setStepIndex((i) => Math.min(i + 1, STEPS.length - 1));
-}
-
-// NEW: replaces the plain `goNext` that LevelComplete used to call
-// directly. Marks the level as completed, persists it, figures out
-// which level (if any) just unlocked, then does the normal step
-// advance — which lands on `levelmap-<nextId>` (or "recap" after the
-// last level, exactly like before). Scoring/XP/points are untouched:
-// `recordLevelComplete()` still runs inside goNext() exactly as it did.
+function goNext(){setStageProgress(0);setStepIndex(i=>Math.min(i+1,STEPS.length-1));}
 function handleLevelComplete(id) {
+  complete(id);
   setCompletedLevelIds((prev) => {
     if (prev.includes(id)) return prev;
     const next = [...prev, id];
@@ -267,44 +151,17 @@ function handleLevelComplete(id) {
 }
 
 
-function restart() {
-
-  localStorage.removeItem(ACHIEVEMENTS_STORAGE_KEY);
-  localStorage.removeItem(ACTIVE_BADGE_STORAGE_KEY);
-  localStorage.removeItem(STEP_INDEX_STORAGE_KEY);
-  localStorage.removeItem(COMPLETED_LEVELS_STORAGE_KEY);
-
-  setAchievements({...EMPTY_ACHIEVEMENTS});
-  setActiveBadgeKey(null);
-  setCompletedLevelIds([]);
-  setJustUnlockedLevelId(null);
-
-  resetPointsAndStreak();
-
-  setStepIndex(0);
-
-  // "Restart" means the whole course, not just Inheritance — send the
-  // learner back through Classes too, from its intro Scene.
-  onRevisitClasses && onRevisitClasses();
+function restart(){
+ localStorage.setItem(STEP_INDEX_STORAGE_KEY,'0');
+ localStorage.setItem(COMPLETED_LEVELS_STORAGE_KEY,'[]');
+ setCompletedLevelIds([]);setJustUnlockedLevelId(null);setStepIndex(0);
+ onRevisitClasses?.();
 }
-
-  useEffect(() => {
-    localStorage.setItem(STEP_INDEX_STORAGE_KEY, String(stepIndex));
-  }, [stepIndex]);
-
-  useEffect(() => {
-    saveProgress(learnerId, { lastStep: step }).catch(() => {});
-  }, [step]);
-
- const activeBadge = activeBadgeKey ? BADGES[activeBadgeKey] : null;
-
-
   return (
-    <div className="app-shell">
+    <div className="app-shell" data-bird-step={step}>
       <header className="app-header">
         <p className="brand">
         pyBe · The Bird Family 
-        <span className="header-points">🌟 {points} pts</span>
       </p>
         
         <div className="feather-trail">
@@ -313,12 +170,6 @@ function restart() {
           ))}
         </div>
       </header>
-
-      <ProgressStats 
-        points={points}
-        streak={streak}
-        levelsCompleted={levelsCompleted}
-      />
 
       <main className="app-main">
         <LearningProgress
@@ -332,7 +183,7 @@ function restart() {
           <StoryScreen 
             onNext={goNext}
           onStoryProgress={(value) => {
-            recordStoryProgress(value);
+
             setStageProgress(value);
           }}
           />
@@ -352,7 +203,7 @@ function restart() {
             setStageProgress(value);
           }}
           onDone={(answers)=>{
-              saveProgress(learnerId, {
+              saveNotes({
                 thinkItThrough: Object.entries(answers).map(([questionId, a]) => ({
                   questionId,
                   selected: a.optId,
@@ -367,8 +218,8 @@ function restart() {
             <ConceptReveal
               onNext={goNext}
               onConceptProgress={(value) => {
-                recordConceptProgress(value);
-                setConceptProgress(value);
+
+
                 setStageProgress(value);
               }}
             />
@@ -377,12 +228,12 @@ function restart() {
           {step === "build" && (
             <BuildItQuiz
               onQuizProgress={(value) => {
-                recordQuizProgress(value);
-                setQuizProgress(value);
+
+
                 setStageProgress(value);
               }}
             onDone={(answers) => {
-              saveProgress(learnerId, {
+              saveNotes({
                 buildItAnswers: Object.entries(answers).map(([questionId, selected]) => ({
                   questionId,
                   selected,
@@ -397,7 +248,7 @@ function restart() {
           <CodeBuilder
             onDone={goNext}
           onCodeProgress={(value) => {
-            setCodeProgress(value);
+
             setStageProgress(value);
           }}
           />
@@ -417,7 +268,7 @@ function restart() {
                 setJustUnlockedLevelId(null);
                 goNext();
               }}
-              points={points}
+
             />
           )}
 
@@ -433,7 +284,7 @@ function restart() {
               levelId={id}
               onComplete={() => {
                 const isLast = id === LEVEL_ORDER[LEVEL_ORDER.length - 1];
-                saveProgress(learnerId, {
+                saveNotes({
                   [`simulatorSteps.${id}Completed`]: true,
                   ...(isLast ? { lessonCompleted: true } : {}),
                 }).catch(() => {});
@@ -454,20 +305,8 @@ function restart() {
           ) : null
         )}
 
-        {step === "recap" && <Recap onRestart={restart} achievements={achievements} />}
+        {step === "recap" && <Recap onRestart={restart} />}
       </main>
-      {activeBadge && (
-        <AchievementPopup
-          badgeName={activeBadge.name}
-          message={activeBadge.message}
-        onContinue={() => {
-          setActiveBadgeKey(null);
-          localStorage.removeItem(ACTIVE_BADGE_STORAGE_KEY);
-          setStageProgress(0);
-          setStepIndex((i)=>Math.min(i+1,STEPS.length-1));
-        }}
-        />
-      )}
     </div>
   );
 }

@@ -1,7 +1,10 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import MCQCard from '../components/MCQCard';
 
-export default function Page13_VictorySandbox() {
+export default function Page13_VictorySandbox({onComplete}) {
+ const [correct,setCorrect]=useState(new Set());
+ const answer=id=>setCorrect(prev=>new Set([...prev,id]));
+ useEffect(()=>{if(correct.size===6)onComplete?.();},[correct.size]);
   return (
     <div className="slide-body" style={{ gap: '16px' }}>
       <div style={{ textAlign: 'center' }}>
@@ -14,7 +17,7 @@ export default function Page13_VictorySandbox() {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', width: '100%', maxWidth: '800px' }}>
-        <MCQCard
+        <MCQCard onCorrect={()=>answer(1)}
           question="❓ Question 1: Where are items in a Python List (Iterable) kept?"
           options={[
             "Generated on-demand dynamically",
@@ -31,7 +34,7 @@ export default function Page13_VictorySandbox() {
           ]}
         />
 
-        <MCQCard
+        <MCQCard onCorrect={()=>answer(2)}
           question="❓ Question 2: Which function creates an Iterator pointer from an Iterable?"
           options={[
             "next(warehouse)",
@@ -48,7 +51,7 @@ export default function Page13_VictorySandbox() {
           ]}
         />
 
-        <MCQCard
+        <MCQCard onCorrect={()=>answer(3)}
           question="❓ Question 3: What is the main characteristic of an Iterator in Python?"
           options={[
             "Holds all elements together in memory beforehand",
@@ -65,7 +68,7 @@ export default function Page13_VictorySandbox() {
           ]}
         />
 
-        <MCQCard
+        <MCQCard onCorrect={()=>answer(4)}
           question="❓ Question 4: Why does a Generator use almost 0 MB of RAM?"
           options={[
             "Generates items 1-by-1 lazily on-demand",
@@ -82,7 +85,7 @@ export default function Page13_VictorySandbox() {
           ]}
         />
 
-        <MCQCard
+        <MCQCard onCorrect={()=>answer(5)}
           question="❓ Question 5: Which keyword pauses a Generator function and remembers state?"
           options={[
             "return",
@@ -99,7 +102,7 @@ export default function Page13_VictorySandbox() {
           ]}
         />
 
-        <MCQCard
+        <MCQCard onCorrect={()=>answer(6)}
           question="❓ Question 6: What exception is raised when next() reaches the end of an Iterator or Generator?"
           options={[
             "IndexError",

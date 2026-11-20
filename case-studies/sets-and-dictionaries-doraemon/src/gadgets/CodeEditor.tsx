@@ -1,13 +1,17 @@
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
 import React, { useRef } from 'react';
 import { GadgetShell } from './GadgetShell';
 
 interface CodeEditorProps {
   code: string;
+  disabled?: boolean;
   onChange: (value: string) => void;
   onRun?: () => void;
 }
 
-export const CodeEditor: React.FC<CodeEditorProps> = ({ code, onChange, onRun }) => {
+const useStoryTimers=createStoryTimersHook(React);
+export const CodeEditor: React.FC<CodeEditorProps> = ({ code, onChange, onRun, disabled=false }) => {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const lineCount = code.split('\n').length;
   const lineNumbers = Array.from({ length: Math.max(lineCount, 1) }, (_, i) => i + 1);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -106,7 +110,7 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({ code, onChange, onRun })
           </div>
 
           {/* Code Input Box */}
-          <textarea
+          <textarea aria-label="Python program" disabled={disabled}
             ref={textareaRef}
             value={code}
             onChange={(e) => onChange(e.target.value)}

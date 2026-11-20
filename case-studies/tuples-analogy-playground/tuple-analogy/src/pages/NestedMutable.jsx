@@ -1,3 +1,6 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
+import {pointInElement} from '../../../../../library/learning/geometry.mjs';
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
@@ -29,6 +32,7 @@ const initialBatteries = [
 ];
 
 export default function NestedMutable() {
+  const {setTimeout}=useStoryTimers();
   const [view, setView] = useState('analogy'); // 'analogy' | 'terminal' | 'quiz'
 
   const [batteries, setBatteries] = useState(initialBatteries);
@@ -44,7 +48,6 @@ export default function NestedMutable() {
   const discardRef = useRef(null);
 
   const navigate = useNavigate();
-  const [score, setScore] = useState(0);
 
   const zoneRefs = { slot0: slot0Ref, slot1: slot1Ref, tray: trayRef, discard: discardRef };
 
@@ -53,12 +56,7 @@ export default function NestedMutable() {
     for (const zone of ['slot0', 'slot1', 'tray', 'discard']) {
       const el = zoneRefs[zone].current;
       if (!el) continue;
-      const r = el.getBoundingClientRect();
-      const left = r.left + window.scrollX;
-      const right = r.right + window.scrollX;
-      const top = r.top + window.scrollY;
-      const bottom = r.bottom + window.scrollY;
-      if (point.x >= left - pad && point.x <= right + pad && point.y >= top - pad && point.y <= bottom + pad) {
+      if (pointInElement(point, el, pad)) {
         return zone;
       }
     }
@@ -109,8 +107,6 @@ export default function NestedMutable() {
     return (
       <CodeSnippetActivity 
         title="3. Nested Mutable" 
-        score={score}
-        setScore={setScore}
         snippets={dataArray}
         onPrev={() => setView('analogy')} 
         onNext={() => setView('quiz')} 
@@ -119,14 +115,10 @@ export default function NestedMutable() {
   }
 
   if (view === 'quiz') {
-    const totalScore = (SNIPPET_DATA.nested?.length || 0) + (QUIZ_DATA.nested?.length || 0);
-    return (
+      return (
       <Quiz
         title="3. Nested Mutable"
         questions={QUIZ_DATA.nested || []}
-        score={score}
-        setScore={setScore}
-        totalPossibleScore={totalScore}
         onPrev={() => setView('terminal')}
         // Routes back to the Home Dashboard when the whole tutorial is done!
         onNextSection={() => navigate('/finalTest')} 
@@ -175,7 +167,7 @@ export default function NestedMutable() {
           <div id="unused slot" className="flex flex-col items-center gap-2">
             <span className="text-xs font-black uppercase tracking-wide text-zinc-500">Spares</span>
             <div
-              ref={trayRef}
+              role="group" aria-label="Unused battery tray" ref={trayRef}
               className={`w-24 min-h-[140px] rounded-2xl border-4 border-dashed p-3 flex flex-wrap content-start items-start justify-center gap-2 transition-colors ${
                 dragOverZone === 'tray' ? 'border-orange-500 bg-orange-50' : 'border-zinc-300 bg-zinc-50'
               }`}
@@ -281,7 +273,7 @@ export default function NestedMutable() {
 
                 <div className="flex justify-center gap-4">
                   <div
-                    ref={slot0Ref}
+                    role="group" aria-label="Battery slot 1" ref={slot0Ref}
                     className={`relative w-10 h-24 rounded-lg border-2 border-dashed flex items-center justify-center transition-colors ${
                       dragOverZone === 'slot0'
                         ? 'border-white bg-orange-300 ring-4 ring-white'
@@ -303,7 +295,7 @@ export default function NestedMutable() {
                     )}
                   </div>
                   <div
-                    ref={slot1Ref}
+                    role="group" aria-label="Battery slot 2" ref={slot1Ref}
                     className={`relative w-10 h-24 rounded-lg border-2 border-dashed flex items-center justify-center transition-colors ${
                       dragOverZone === 'slot1'
                         ? 'border-white bg-orange-300 ring-4 ring-white'
@@ -337,7 +329,7 @@ export default function NestedMutable() {
           <div id="used slot" className="flex flex-col items-center gap-2">
             <span className="text-xs font-black uppercase tracking-wide text-zinc-500">Used</span>
             <div
-              ref={discardRef}
+              role="group" aria-label="Used battery tray" ref={discardRef}
               className={`w-24 min-h-[140px] rounded-2xl border-4 border-dashed p-3 flex flex-wrap content-start items-start justify-center gap-2 transition-colors ${
                 dragOverZone === 'discard' ? 'border-zinc-500 bg-zinc-100' : 'border-zinc-300 bg-zinc-50'
               }`}
@@ -359,6 +351,7 @@ function DraggableBattery({ battery, onDrag, onDragEnd }) {
   const charged = battery.charge === 'new';
   return (
     <motion.div
+      role="img" aria-label={`${charged ? 'Fresh' : 'Used'} battery ${battery.id}`}
       layout
       drag
       dragSnapToOrigin

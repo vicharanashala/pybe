@@ -16,7 +16,7 @@ import './journey.css';
    further down the page.
    ========================================================= */
 
-export default function ScrollJourney({ onExit }) {
+export default function ScrollJourney({ onExit, onComplete }) {
   const [label, setLabel] = useState('Prologue');
   const [progress, setProgress] = useState(0);
   const [showTop, setShowTop] = useState(false);
@@ -61,7 +61,7 @@ export default function ScrollJourney({ onExit }) {
 
       <IntroAct onActive={onActive} />
       <Expedition onActive={onActive} />
-      <QuizAct onActive={onActive} />
+      <QuizAct onActive={onActive} onComplete={onComplete} />
 
       <footer className="jr-end">
         <div className="jr-end-inner">

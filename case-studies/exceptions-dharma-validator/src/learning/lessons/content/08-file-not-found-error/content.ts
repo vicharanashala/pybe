@@ -101,7 +101,6 @@ print(load_character("new_player"))`,
   reflectionPrompt:
     "Guha's crossing wasn't the wrong place to look — it was simply no longer where Rama was. Where else does correctly following the information you had still lead you to an empty spot, with the real destination one step further on?",
 
-  badgeUnlocked: "Chitrakoot — Where the Search Continues",
 };
 
 export default fileNotFoundError;

@@ -673,3 +673,4 @@
     min-width: 55px;
   }
 }
+.journey-trail-notes{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin:.8rem 0}.journey-trail-notes code{padding:.25rem .5rem;border:1px solid var(--c-border);border-radius:6px}

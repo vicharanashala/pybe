@@ -1,9 +1,10 @@
 const $=selector=>document.querySelector(selector);
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let unmountLesson=null,renderToken=0,internalStudy=null;
 let catalog,query='',statusFilter='all',chapter='all',route='home';
 let state;try{state=JSON.parse(localStorage.getItem('pybe-original-library')||'{}');}catch{state={};}
 state={saved:[],completed:[],...state};for(const key of ['saved','completed'])if(!Array.isArray(state[key]))state[key]=[];
-const main=$('#main'),dialog=$('#story-dialog');let toastTimer,launchToken=0;
+const main=$('#main');let toastTimer;
 const save=()=>{try{localStorage.setItem('pybe-original-library',JSON.stringify(state));}catch{toast('Browser storage is unavailable. Changes last for this visit.');}};
 function toast(text){$('#toast').textContent=text;$('#toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),2500);}
 const submitted=()=>catalog.concepts.filter(c=>c.status==='covered');
@@ -22,7 +23,7 @@ function coverageCard(c){
 }
 function renderHome(){
  const b=catalog.buckets.find(b=>b.id===chapter);
- main.innerHTML=(b?title(`CHAPTER ${b.number}`,b.title,b.description):`<section class="hero"><div class="hero-copy"><div class="eyebrow"><span class="sun-dot"></span> PYTHON, THROUGH DIFFERENT EYES</div><h1>Pick an idea.<br>Find <em>your story.</em></h1><p>A royal court. A cricket chase. A farm that needs your help.<br>Discover Python through case studies made by our students.</p><a class="button primary" href="#concept/variables">Begin with variables <span>↗</span></a><div class="hero-note">Different creators. Their original worlds. Your choice.</div></div><div class="hero-index"><div class="index-top"><span>THE LEARNING COLLECTION</span><span>↗</span></div><div class="index-feature"><span class="index-symbol">{ }</span><div><strong>${submitted().length}</strong><span>concepts with submissions</span></div></div><div class="index-separator"></div><div class="index-row"><span class="index-number">${catalog.buckets.length}</span><div>chapters to explore<small>From your first variable to special topics</small></div></div><div class="index-row"><span class="index-number light">${pending().length}</span><div>ideas still waiting for a story<small>A proposed backlog for our next case studies</small></div></div><div class="index-bottom"><i></i> Every case study keeps its creator’s original design.</div></div></section>`)+
+ main.innerHTML=(b?title(`CHAPTER ${b.number}`,b.title,b.description):`<section class="hero"><div class="hero-copy"><div class="eyebrow"><span class="sun-dot"></span> PYTHON, THROUGH DIFFERENT EYES</div><h1>Pick an idea.<br>Find <em>your story.</em></h1><p>A royal court. A cricket chase. A farm that needs your help.<br>Discover Python through case studies made by our students.</p><a class="button primary" href="#concept/variables">Begin with variables <span>↗</span></a><div class="hero-note">Different creators. Their original worlds. Your choice.</div></div><div class="hero-index"><div class="index-top"><span>THE LEARNING COLLECTION</span><span>↗</span></div><div class="index-feature"><span class="index-symbol">{ }</span><div><strong>${submitted().length}</strong><span>concepts with submissions</span></div></div><div class="index-separator"></div><div class="index-row"><span class="index-number">${catalog.buckets.length}</span><div>chapters to explore<small>From your first variable to special topics</small></div></div><div class="index-row"><span class="index-number light">${pending().length}</span><div>ideas still waiting for a story<small>A proposed backlog for our next case studies</small></div></div><div class="index-bottom"><i></i> Explore stories. Discover concepts. Practice Python.</div></div></section>`)+
  `<section class="coverage" aria-labelledby="coverage-title"><div class="section-heading"><div><div class="eyebrow">THE WHOLE PICTURE</div><h2 id="coverage-title">${b?'Concepts in this chapter':'What’s covered. What’s next.'}</h2><p>Submitted topics and proposed case studies, together in one place.</p></div><span class="coverage-count">${submitted().length} submitted <b>·</b> ${pending().length} proposed</span></div><div class="filters"><label class="search-field"><span aria-hidden="true">⌕</span><input id="concept-search" type="search" placeholder="Find a concept, skill or story…" aria-label="Search concepts, skills and stories" value="${esc(query)}"></label><div class="status-tabs" aria-label="Filter concept status">${[['all','All concepts'],['covered','Submitted'],['pending','Pending']].map(([id,label])=>`<button data-status="${id}" class="${statusFilter===id?'selected':''}" aria-pressed="${statusFilter===id}">${label}</button>`).join('')}</div></div><p class="backlog-note"><span>ABOUT THE PENDING LIST</span> ${esc(catalog.backlogNote)}</p><div id="coverage-results"></div></section>`;
  const update=()=>{
   const visible=catalog.concepts.filter(c=>(chapter==='all'||c.bucket===chapter)&&(statusFilter==='all'||c.status===statusFilter)&&`${c.title} ${c.description} ${c.skills.join(' ')} ${studies(c.id).map(s=>`${s.title}`).join(' ')}`.toLowerCase().includes(query.toLowerCase()));
@@ -37,7 +38,7 @@ function renderHome(){
 }
 function storyCard(s){
  const saved=state.saved.includes(s.id),done=state.completed.includes(s.id);
- return `<article class="story-card"><div class="story-icon">${s.mode==='original'?'↗':s.mode==='application'?'◈':'⌘'}</div><div class="story-copy"><div class="story-meta">${s.mode==='original'?'ORIGINAL INTERACTIVE STORY':s.mode==='application'?'ORIGINAL STUDENT APP':'ORIGINAL WRITTEN / PYTHON CASE STUDY'} ${done?' · ✓ EXPLORED':''}</div><h3>${esc(s.title)}</h3><p>${esc(s.description)}</p><div class="byline">${s.concepts.map(id=>esc(concept(id).title)).join(" · ")}</div></div><div class="story-actions"><button class="bookmark ${saved?'saved':''}" data-save="${s.id}" aria-label="${saved?'Unsave':'Save'} ${esc(s.title)}" aria-pressed="${saved}"><svg viewBox="0 0 20 24" aria-hidden="true"><path d="M4 3h12v18l-6-4-6 4Z"/></svg></button><button class="button primary" data-open="${s.id}">${s.mode==='source'?'View original source':'Open original'} <span>↗</span></button></div></article>`;
+ return `<article class="story-card"><div class="story-icon">${s.mode==='original'?'↗':s.mode==='application'?'◈':'⌘'}</div><div class="story-copy"><div class="story-meta">${s.mode==='source'?'WRITTEN / PYTHON CASE STUDY':'INTERACTIVE CASE STUDY'} ${done?' · ✓ EXPLORED':''}</div><h3>${esc(s.title)}</h3><p>${esc(s.description)}</p><div class="byline">${s.concepts.map(id=>esc(concept(id).title)).join(" · ")}</div></div><div class="story-actions"><button class="bookmark ${saved?'saved':''}" data-save="${s.id}" aria-label="${saved?'Unsave':'Save'} ${esc(s.title)}" aria-pressed="${saved}"><svg viewBox="0 0 20 24" aria-hidden="true"><path d="M4 3h12v18l-6-4-6 4Z"/></svg></button><button class="button primary" data-open="${s.id}">${s.mode==='source'?'View case study':'Open case study'} <span>↗</span></button></div></article>`;
 }
 function wireStories(container){
  container.querySelectorAll('[data-open]').forEach(button=>button.addEventListener('click',()=>openStory(button.dataset.open)));
@@ -48,7 +49,7 @@ function renderConcept(id){
  if(c.status==='pending'){
   main.innerHTML=`<a class="back-link" href="#bucket/${b.id}">← ${b.title}</a>${title('PENDING · PROPOSED',esc(c.title),esc(c.description))}<section class="pending-detail"><span class="pending-symbol">＋</span><h2>This idea is waiting for its story.</h2><p>No dedicated case study is cataloged for this topic yet. It’s part of the proposed backlog, ready for someone to design.</p><p class="backlog-note">${esc(catalog.backlogNote)}</p><a class="button primary" href="#bucket/${b.id}">Explore this chapter ↗</a></section>`;return;
  }
- main.innerHTML=`<a class="back-link" href="#bucket/${b.id}">← ${b.title}</a>${title('ONE CONCEPT. DIFFERENT STORY WORLDS.',esc(c.title),esc(c.description))}<div class="skill-list">${c.skills.map(s=>`<span>${esc(s)}</span>`).join('')}</div><div class="original-promise"><span>✳</span><div><b>Choose a story. Step into its original world.</b><p>Each submission keeps its creator’s colors, layout, interactions and learning sequence.</p></div></div><div class="section-heading"><div><h2>${c.storyIds.length} ways to explore this idea</h2><p>Some submissions contain several stories; choose within the original app.</p></div></div><div class="story-list">${studies(id).map(storyCard).join('')}</div><div class="page-bottom"><a href="#home">← All concepts</a><a href="#path">View suggested path →</a></div>`;
+ main.innerHTML=`<a class="back-link" href="#bucket/${b.id}">← ${b.title}</a>${title('ONE CONCEPT. DIFFERENT STORY WORLDS.',esc(c.title),esc(c.description))}<div class="skill-list">${c.skills.map(s=>`<span>${esc(s)}</span>`).join('')}</div><div class="original-promise"><span>✳</span><div><b>Choose a story. Step into its original world.</b><p>Follow the story, explore its ideas, and put them into practice.</p></div></div><div class="section-heading"><div><h2>${c.storyIds.length} ways to explore this idea</h2><p>Some collections contain several stories and exercises to explore.</p></div></div><div class="story-list">${studies(id).map(storyCard).join('')}</div><div class="page-bottom"><a href="#home">← All concepts</a><a href="#path">View suggested path →</a></div>`;
  wireStories(main);
 }
 function renderSaved(){
@@ -61,43 +62,41 @@ function renderPath(){
 }
 function renderMissing(){main.innerHTML='<div class="empty"><h2>That page isn’t in the library.</h2><a class="button primary" href="#home">Back to concepts</a></div>';}
 function render(){
+ internalStudy=null;renderToken++;unmountLesson?.();unmountLesson=null;main.classList.remove("immersive-study");
  const hash=decodeURIComponent(location.hash.slice(1));route=hash||'home';chapter=route.startsWith('bucket/')?route.split('/')[1]:'all';nav();
- if(['home','explore','concepts'].includes(route)||route.startsWith('bucket/'))renderHome();else if(route.startsWith('concept/'))renderConcept(route.split('/')[1]);else if(route==='saved')renderSaved();else if(route==='path')renderPath();else renderMissing();
+ if(['home','explore','concepts'].includes(route)||route.startsWith('bucket/'))renderHome();else if(route.startsWith('concept/'))renderConcept(route.split('/')[1]);else if(route.startsWith('study/'))renderIntegrated(route.split('/')[1],renderToken);else if(route==='saved')renderSaved();else if(route==='path')renderPath();else renderMissing();
 }
-function showDialog(title,body,wide=false){
- dialog.classList.toggle('wide',wide);dialog.innerHTML=`<div class="dialog-header"><div><span class="dialog-eyebrow">ORIGINAL SUBMISSION</span><h2 id="dialog-title">${esc(title)}</h2></div><button class="close-dialog" aria-label="Close original case study">×</button></div><div class="dialog-body">${body}</div>`;
- dialog.querySelector('.close-dialog').addEventListener('click',()=>dialog.close());if(!dialog.open)dialog.showModal();
-}
-function showOriginal(s,url){
- showDialog(s.title,'',true);const body=dialog.querySelector('.dialog-body');body.classList.add('original-body');
- const bar=document.createElement('div');bar.className='original-toolbar';bar.innerHTML=`<span>${s.concepts.map(id=>esc(concept(id).title)).join(" · ")}</span><div><a href="${esc(url)}" target="_blank" rel="noopener">Open in a full tab ↗</a><button class="button secondary" id="mark-complete">Mark as explored ✓</button></div>`;body.append(bar);
- const frame=document.createElement('iframe');frame.title=s.title;frame.src=url;frame.className='original-frame';frame.setAttribute('sandbox','allow-scripts allow-same-origin allow-forms allow-modals allow-downloads allow-popups');body.append(frame);
- $('#mark-complete').addEventListener('click',()=>{if(!state.completed.includes(s.id))state.completed.push(s.id);save();toast('Marked as explored in your learning path.');$('#mark-complete').textContent='✓ Explored';});
-}
-async function openStory(id){
- const s=catalog.stories.find(s=>s.id===id);if(!s)return;
- if(s.mode==='original'){
-  const url=new URL(s.entry,location.origin);url.hostname=location.hostname==='localhost'?'127.0.0.1':'localhost';showOriginal(s,url.href);return;
- }
- if(s.mode==='source')return showSource(s);
- const token=++launchToken;
- showDialog(s.title,`<div class="launch-state"><div class="spinner"></div><h3>Opening the creator’s original app.</h3><p id="launch-message">Preparing the original submission…</p><p class="setup-note">The first launch installs this app’s dependencies. Its original interface and lesson content stay unchanged.</p></div>`);
- const fail=job=>{
-  showDialog(s.title,`<div class="setup-error"><span class="status pending">Original app needs attention</span><h3>We couldn’t start this submission yet.</h3><p>${esc(job.message)}</p><p>The original is preserved. Its own runtime requirements need to be resolved before it can open.</p><details><summary>Setup details</summary><pre>${esc(job.log||'Check the original README for dependencies and configuration.')}</pre><p class="source-path">${esc(s.source)}</p><a class="text-link" target="_blank" rel="noopener" href="/source?id=${encodeURIComponent(s.id)}">Read the original source ↗</a></details><button class="button primary" id="retry-original">Try starting it again ↗</button></div>`);$('#retry-original').addEventListener('click',()=>openStory(id));
- };
- try{
-  const response=await fetch('/api/originals/launch',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({appId:s.appId})});
-  let job=await response.json();if(!response.ok)return fail(job);
-  while(token===launchToken&&dialog.open){
-   if(job.status==='ready')return showOriginal(s,new URL(s.launchPath||'/',job.url).href);
-   if(['error','stopped'].includes(job.status))return fail(job);
-   if($('#launch-message'))$('#launch-message').textContent=job.message;
-   await new Promise(resolve=>setTimeout(resolve,1200));if(token!==launchToken||!dialog.open)return;
-   const poll=await fetch(`/api/originals/status?id=${encodeURIComponent(s.appId)}`);job=await poll.json();if(!poll.ok)return fail(job);
-  }
- }catch(error){if(token===launchToken&&dialog.open)fail({message:`The library couldn’t reach the original-app launcher. Restart PyBe with npm run dev. ${error.message}`});}
-}
-function showSource(s){showDialog(s.title,`<div class="source-detail"><span class="status covered">Original source preserved</span><h3>${esc(s.title)}</h3><p>${esc(s.setupNote||s.description)}</p><p class="source-path">${esc(s.source)}</p><a class="button primary" href="/source?id=${encodeURIComponent(s.id)}" target="_blank" rel="noopener">Open original source ↗</a><p class="setup-note">This is a script / written submission rather than an interactive web app.</p></div>`);}
-dialog.addEventListener('close',()=>{launchToken++;dialog.querySelector('iframe')?.remove();render();});
-window.addEventListener('hashchange',()=>{query='';render();window.scrollTo({top:0,behavior:'instant'});});
+function openStory(id){const story=catalog.stories.find(s=>s.id===id);if(story)location.hash=`study/${story.id}`;}
+window.addEventListener('hashchange',()=>{if(internalStudy&&location.hash.split('/')[0]==='#study'&&location.hash.split('/')[1]===internalStudy)return;query='';render();window.scrollTo({top:0,behavior:'instant'});});
 try{const response=await fetch('/catalog.json');if(!response.ok)throw new Error('Catalog unavailable');catalog=await response.json();render();}catch(error){main.innerHTML=`<div class="empty"><h2>The library couldn’t open.</h2><p>${esc(error.message)}. Run npm run catalog and reload.</p></div>`;}
+
+async function renderIntegrated(id,token){
+ const study=catalog.stories.find(study=>study.id===id&&study.mode==='integrated');
+ if(!study)return renderMissing();
+ main.innerHTML=`<a class="back-link" href="#concept/${study.concepts[0]}">← Back to concepts</a>${title('LEARN THROUGH A STORY',esc(study.title),esc(study.description))}<div id="lesson-root"><div class="loading" role="status">Opening your lesson…</div></div>`;
+ try{
+  const [response,player]=await Promise.all([fetch(study.lessonEndpoint),import('/assets/learning.js')]);
+  if(!response.ok)throw new Error('The lesson could not be loaded.');
+  const lesson=await response.json();
+  if(token!==renderToken)return;
+  main.classList.toggle('immersive-study',(lesson.kind==='html'&&lesson.layout!=='document')||lesson.layout==='viewport');
+  internalStudy=lesson.scopedHash?id:null;
+  unmountLesson=player.mountLesson(document.getElementById('lesson-root'),lesson,()=>{
+   if(!state.completed.includes(id))state.completed.push(id);save();toast('Collection completed.');
+  });
+ }catch(error){
+  if(token!==renderToken)return;
+  const root=document.getElementById('lesson-root');
+  root.innerHTML=`<div class="empty" role="alert"><h2>This lesson could not open.</h2><p>${esc(error.message)}</p><button class="button primary" id="retry-lesson">Try again</button></div>`;
+  document.getElementById('retry-lesson').addEventListener('click',render);
+ }
+}
+
+window.addEventListener('pybe:navigate',event=>{
+ if(!catalog)return;
+ const available=catalog.concepts.filter(concept=>concept.status==='covered');
+ const index=available.findIndex(concept=>concept.id===event.detail?.concept);
+ if(index<0)return;
+ const target=event.detail.next?available[index+1]:available[index];
+ if(target)location.hash=`concept/${target.id}`;
+});

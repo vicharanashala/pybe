@@ -5,9 +5,9 @@
 // public/images/ants/ (keeping the filenames), or repoint a key here.
 
 export const ANT_IMAGES = {
-  day1: '/images/ants/day-1.png',
-  day3: '/images/ants/day-3.png',
-  day5: '/images/ants/day-5.png',
-  day10: '/images/ants/day-10.png',
-  plasterCast: '/images/ants/final_.jpg',
+  day1: '/submissions/recursion-ant-colony-adventure/public/images/ants/day-1.png',
+  day3: '/submissions/recursion-ant-colony-adventure/public/images/ants/day-3.png',
+  day5: '/submissions/recursion-ant-colony-adventure/public/images/ants/day-5.png',
+  day10: '/submissions/recursion-ant-colony-adventure/public/images/ants/day-10.png',
+  plasterCast: '/submissions/recursion-ant-colony-adventure/public/images/ants/final_.jpg',
 } as const;

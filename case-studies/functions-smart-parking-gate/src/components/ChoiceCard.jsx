@@ -9,7 +9,7 @@ export default function ChoiceCard({ prompt, options, correctId, correctFeedback
   const isCorrect = selectedId === correctId;
 
   function handleSelect(id) {
-    if (selectedId) return;
+    if (selectedId === correctId) return;
     setSelectedId(id);
     if (id === correctId) onCorrect && onCorrect();
   }
@@ -29,7 +29,7 @@ export default function ChoiceCard({ prompt, options, correctId, correctFeedback
                 showIncorrect ? "is-incorrect" : ""
               }`}
               onClick={() => handleSelect(option.id)}
-              disabled={Boolean(selectedId)}
+              disabled={isCorrect}
             >
               {option.text}
             </button>

@@ -18,7 +18,7 @@ const STAGE_LABELS = {
   reveal: 'Concept',
   explain: 'Python',
   challenge: 'Code',
-  complete: 'Reward',
+  complete: 'Complete',
 };
 
 // How long the farm holds its highlight after a successful run, so the change
@@ -148,12 +148,12 @@ export default function ChapterRunner({
   }, [codeToRun, dispatch, mission, runJSON]);
 
   const handleContinue = useCallback(() => {
-    dispatch({ type: 'COMPLETE_MISSION', missionId: mission.id, xp: mission.xp });
-    // Drop any scenario preview, or the reward screen would show the morning the
+    dispatch({ type: 'COMPLETE_MISSION', missionId: mission.id });
+    // Drop any scenario preview, or the completion screen would show the morning the
     // learner was last inspecting instead of the farm they actually ended up with.
     setScenarioView(null);
     setStageIndex(STAGES.length - 1);
-  }, [dispatch, mission.id, mission.xp]);
+  }, [dispatch, mission.id]);
 
   // After Chapter 2 passes, the learner can look at either morning their code
   // handled. This only re-dresses the scene for viewing; it changes no progress.
@@ -233,7 +233,7 @@ export default function ChapterRunner({
                 selections={selections}
                 onSelect={handleSelect}
                 draft={draft}
-                onDraftChange={setDraft}
+                onDraftChange={(value) => { setDraft(value); setResult(null); setRuntimeError(null); setOutput(''); }}
                 onRun={handleRun}
                 onReset={() => {
                   if (mode === 'blanks') setSelections({});

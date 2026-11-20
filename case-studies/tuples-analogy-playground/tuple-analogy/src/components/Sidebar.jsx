@@ -1,3 +1,4 @@
+import {useTour} from '../context/TourContext';
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -56,38 +57,9 @@ export default function Sidebar() {
 
   const [isOpen, setIsOpen] = useState(true);
 
-  // Track the highest unlocked level
-  const [unlockedLevel, setUnlockedLevel] = useState(1);
-
-  // Sync lock state with LocalStorage
-  useEffect(() => {
-    const updateLevel = () => {
-      const level = parseInt(
-        localStorage.getItem('unlockedLevel') || '1'
-      );
-
-      setUnlockedLevel(level);
-    };
-
-    // Check on mount
-    updateLevel();
-
-    // Listen for changes
-    window.addEventListener('levelUnlocked', updateLevel);
-
-    return () => {
-      window.removeEventListener('levelUnlocked', updateLevel);
-    };
-  }, []);
-
- 
-  const handleReset = () => {
-    localStorage.removeItem('unlockedLevel');
-    location.pathname === "/home";
-
-    // Tell Sidebar to update immediately
-    window.dispatchEvent(new Event('levelUnlocked'));
-  };
+  const {completedSections,resetSections}=useTour();
+  const unlockedLevel=1+Math.max(0,...completedSections.filter(id=>/^\d+$/.test(id)).map(Number));
+  const handleReset=()=>resetSections();
 
   return (
     <motion.nav
@@ -104,7 +76,7 @@ export default function Sidebar() {
 
       {/* Toggle Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Toggle lesson navigation" onClick={() => setIsOpen(!isOpen)}
         className="absolute -right-5 top-8 bg-[#FFF8E7]/95 border-4 border-black shadow-[6px_0_15px_rgba(0,0,0,0.12)] rounded-full p-1 hover:bg-[#FFF8E7] hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:translate-y-0 active:shadow-none transition-all z-[60]"
       >
         {isOpen ? (
@@ -184,7 +156,7 @@ export default function Sidebar() {
               }`}
               title={
                 isLocked
-                  ? 'Score 50% in the previous section to unlock!'
+                  ? 'Complete the previous section’s review to continue.'
                   : !isOpen
                     ? link.label
                     : ''

@@ -18,18 +18,9 @@ export default function Chapter8Assessment({ chapter, onAssessmentComplete, save
   const totalAnswered = Object.keys(userAnswers).length;
   const allAnswered = totalAnswered === questions.length;
 
-  const calculateScore = () => {
-    let score = 0;
-    questions.forEach((q) => {
-      if (userAnswers[q.id] === q.correctId) {
-        score++;
-      }
-    });
-    return score;
-  };
-
-  const score = calculateScore();
-  const passed = score >= passMark;
+  // Per-question correctness keeps the original learning gate, without awards.
+  const correctAnswers = Object.fromEntries(questions.map(q=>[q.id,userAnswers[q.id] === q.correctId]));
+  const passed = Object.values(correctAnswers).filter(Boolean).length >= passMark;
 
   const handleSubmit = () => {
     setSubmitted(true);
@@ -39,7 +30,7 @@ export default function Chapter8Assessment({ chapter, onAssessmentComplete, save
       sound.playError();
     }
     if (onAssessmentComplete) {
-      onAssessmentComplete({ score, passed, userAnswers });
+      onAssessmentComplete({ passed, userAnswers });
     }
   };
 
@@ -57,7 +48,7 @@ export default function Chapter8Assessment({ chapter, onAssessmentComplete, save
             Test your understanding
           </h2>
           <span className="pybe-progress-label">
-            {totalAnswered} OF {questions.length} ANSWERED ({passMark}/5 REQUIRED TO PASS)
+            {totalAnswered} OF {questions.length} ANSWERED
           </span>
         </header>
 
@@ -145,16 +136,16 @@ export default function Chapter8Assessment({ chapter, onAssessmentComplete, save
             </div>
           ) : (
             <div className={`pybe-result-banner ${passed ? 'banner-pass' : 'banner-retry'}`}>
-              <span className="result-big-icon">{passed ? '🏆' : '📚'}</span>
+              <span className="result-big-icon">📖</span>
               <div className="result-info">
                 <h3 className="result-headline">
                   {passed
-                    ? `Congratulations! You passed with ${score} / ${questions.length}`
-                    : `You scored ${score} / ${questions.length} (Requires ${passMark}/${questions.length} to pass)`}
+                    ? 'Review complete'
+                    : 'Review the explanations and try again'}
                 </h3>
                 <p className="result-subtext">
                   {passed
-                    ? 'You have mastered the core concepts of Python exception handling.'
+                    ? 'You have explored the core ideas of Python exception handling.'
                     : 'Review the explanations above and retry the questions you missed.'}
                 </p>
                 <div className="result-buttons">

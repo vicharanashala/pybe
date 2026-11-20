@@ -115,7 +115,6 @@ else:
   reflectionPrompt:
     "Rama's success didn't need explaining or recovering from — it just needed to be stated plainly. Where else does keeping a clean success separate from a recovered failure actually change how a story, or a piece of code, reads?",
 
-  badgeUnlocked: "Pinaka — The Bow That Needed No Recovery",
 };
 
 export default elseClause;

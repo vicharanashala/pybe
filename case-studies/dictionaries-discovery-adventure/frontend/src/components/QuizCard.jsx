@@ -23,14 +23,7 @@ export const QuizCard = ({
   hints = [], 
   onPassed 
 }) => {
-  const { 
-    xp, 
-    spendXP, 
-    addXP, 
-    raiseDogMeter, 
-    lowerDogMeter, 
-    triggerConfetti 
-  } = useGame();
+  const {raiseDogMeter,lowerDogMeter}=useGame();
   const { playSuccess, playWrong, playClick } = useSoundFX();
 
   const [selected, setSelected] = useState(null);
@@ -60,9 +53,9 @@ export const QuizCard = ({
       setPassed(true);
       setWrongFeedback(null);
       lowerDogMeter(15);
-      addXP(25);
+
       playSuccess();
-      triggerConfetti();
+
       if (onPassed) onPassed();
     } else {
       setWrongFeedback(opt.why);
@@ -73,24 +66,18 @@ export const QuizCard = ({
 
   const handleUnlockHint = () => {
     playClick();
-    const cost = hintTier === 0 ? 2 : hintTier === 1 ? 5 : 10;
-    if (xp < cost) {
-      alert(`You need ${cost} XP for this hint! Solve more challenges or try an educated guess.`);
-      return;
-    }
-    spendXP(cost);
     setHintTier(prev => Math.min(3, prev + 1));
   };
 
   const hintLabels = [
-    '💡 Need a hint? (-2 XP for Nudge)',
-    '💡 Bigger Clue (-5 XP)',
-    '💡 Near-Answer Revelation (-10 XP)'
+    '💡 Need a hint? (Nudge)',
+    '💡 Bigger Clue',
+    '💡 Near-Answer Revelation'
   ];
 
   return (
     <motion.div 
-      className="quiz-card-container glass-card"
+      data-dictionary-question={id} className="quiz-card-container glass-card"
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       style={{
@@ -104,7 +91,7 @@ export const QuizCard = ({
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <HelpCircle size={20} color={passed ? 'var(--success)' : 'var(--accent)'} />
           <span style={{ fontSize: '0.85rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '0.1em', color: passed ? 'var(--success)' : 'var(--accent)' }}>
-            {passed ? 'Checkpoint Cleared (+25 XP)' : 'Security Checkpoint'}
+            {passed ? 'Checkpoint Cleared' : 'Security Checkpoint'}
           </span>
         </div>
 

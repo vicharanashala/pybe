@@ -1,3 +1,6 @@
+import * as React from 'react';
+import {createStoryTimersHook} from '../../../../../../shared/story-timers.mjs';
+const useStoryTimers = createStoryTimersHook(React);
 import { useState, useRef, useEffect } from 'react';
 import { LessonLayout } from '../LessonLayout';
 import { CodeViewer } from '../CodeViewer';
@@ -5,6 +8,7 @@ import { RotateCcw, Crosshair, Wind } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 export function FirstFlyingClass({ onComplete, isLastLesson }: { onComplete: () => void, isLastLesson: boolean }) {
+  const {setTimeout, clearTimeout, setInterval, clearInterval, requestAnimationFrame, cancelAnimationFrame} = useStoryTimers();
   const [isPlaying, setIsPlaying] = useState(true);
   const [currentSize, setCurrentSize] = useState(60);
   const [accuracy, setAccuracy] = useState<number | null>(null);
@@ -76,13 +80,13 @@ export function FirstFlyingClass({ onComplete, isLastLesson }: { onComplete: () 
   const handleRevealCode = () => {
     const runAnimation = () => {
       setActiveLines([1]);
-      timeoutRef.current = window.setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         setActiveLines([3]);
-        timeoutRef.current = window.setTimeout(() => {
+        timeoutRef.current = setTimeout(() => {
           setActiveLines([4]);
-          timeoutRef.current = window.setTimeout(() => {
+          timeoutRef.current = setTimeout(() => {
             setActiveLines([]);
-            timeoutRef.current = window.setTimeout(runAnimation, 1500);
+            timeoutRef.current = setTimeout(runAnimation, 1500);
           }, 800);
         }, 600);
       }, 600);

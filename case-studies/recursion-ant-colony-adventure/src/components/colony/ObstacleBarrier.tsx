@@ -2,7 +2,7 @@
 // across the main shaft with a jagged top edge and a few mineral veins.
 
 import { motion } from 'framer-motion';
-import type { ObstacleSpec } from '@/data';
+import type { ObstacleSpec } from '../../data';
 import { SURFACE_Y, SHAFT_X, ROW_H } from './geometry';
 
 interface ObstacleBarrierProps {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Ghost, CheckCircle2, XCircle, Zap } from 'lucide-react';
 
-export default function BetaalRiddle({ riddle, rewardXp, onSuccess, disabled, defaultSelected = null, defaultAnswered = false, defaultFailed = false }) {
+export default function BetaalRiddle({ riddle, onSuccess, disabled, defaultSelected = null, defaultAnswered = false, defaultFailed = false }) {
   const [selected, setSelected] = useState(defaultSelected);
   const [locked, setLocked] = useState(defaultAnswered);
   const [failed, setFailed] = useState(defaultFailed);
@@ -79,7 +79,6 @@ export default function BetaalRiddle({ riddle, rewardXp, onSuccess, disabled, de
           <div>
             <strong>{failed ? 'Betaal smiles - you got it after thinking!' : 'Betaal is impressed - you solved it on the first try!'}</strong>
             <p>{riddle.explanation}</p>
-            {!failed && <p className="xp-note">+{rewardXp} XP for a first-try answer.</p>}
           </div>
         </div>
       )}

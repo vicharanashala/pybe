@@ -3,7 +3,6 @@ import {
   INITIAL_FARM,
   farmReducer,
   isChapterUnlocked,
-  levelForXp,
   nextChapterId,
 } from '../farmState';
 
@@ -13,8 +12,6 @@ describe('initial farm', () => {
       coins: 100,
       seeds: 20,
       water: 50,
-      xp: 0,
-      level: 1,
       weather: 'sunny',
       currentChapter: 1,
       completedMissions: [],
@@ -22,31 +19,16 @@ describe('initial farm', () => {
   });
 });
 
-describe('XP and levels', () => {
-  it('awards Chapter 1 XP', () => {
-    const next = farmReducer(INITIAL_FARM, { type: 'COMPLETE_MISSION', missionId: 'ch1-seeds', xp: 50 });
-    expect(next.xp).toBe(50);
-    expect(next.completedMissions).toEqual(['ch1-seeds']);
-  });
-
-  it('reaches 125 XP across both chapters', () => {
-    let s = farmReducer(INITIAL_FARM, { type: 'COMPLETE_MISSION', missionId: 'ch1-seeds', xp: 50 });
-    s = farmReducer(s, { type: 'COMPLETE_MISSION', missionId: 'ch2-weather', xp: 75 });
-    expect(s.xp).toBe(125);
-    expect(s.completedMissions).toEqual(['ch1-seeds', 'ch2-weather']);
-  });
-
-  it('does not award the same mission twice', () => {
-    let s = farmReducer(INITIAL_FARM, { type: 'COMPLETE_MISSION', missionId: 'ch1-seeds', xp: 50 });
-    s = farmReducer(s, { type: 'COMPLETE_MISSION', missionId: 'ch1-seeds', xp: 50 });
-    expect(s.xp).toBe(50);
-    expect(s.completedMissions).toEqual(['ch1-seeds']);
-  });
-
-  it('derives level from XP', () => {
-    expect(levelForXp(0)).toBe(1);
-    expect(levelForXp(50)).toBe(1);
-    expect(levelForXp(125)).toBe(2);
+describe('mission completion', () => {
+  it('records both chapters without awards', () => {
+    let state = farmReducer(INITIAL_FARM, {type:'COMPLETE_MISSION', missionId:'ch1-seeds'});
+    const once = state;
+    state = farmReducer(state, {type:'COMPLETE_MISSION', missionId:'ch1-seeds'});
+    expect(state).toBe(once);
+    state = farmReducer(state, {type:'COMPLETE_MISSION', missionId:'ch2-weather'});
+    expect(state.completedMissions).toEqual(['ch1-seeds','ch2-weather']);
+    expect(state).not.toHaveProperty('xp');
+    expect(state).not.toHaveProperty('level');
   });
 });
 
@@ -98,13 +80,13 @@ describe('farm patches', () => {
 });
 
 describe('restoring saved progress (refresh behaviour)', () => {
-  it('brings back XP and completions, and recomputes level', () => {
+  it('restores completions and discards legacy awards', () => {
     const s = farmReducer(INITIAL_FARM, {
       type: 'RESTORE',
       farm: { xp: 125, completedMissions: ['ch1-seeds', 'ch2-weather'] },
     });
-    expect(s.xp).toBe(125);
-    expect(s.level).toBe(2);
+    expect(s).not.toHaveProperty('xp');
+    expect(s).not.toHaveProperty('level');
     expect(isChapterUnlocked(2, s.completedMissions)).toBe(true);
   });
 

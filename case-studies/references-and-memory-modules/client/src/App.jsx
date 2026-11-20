@@ -1,3 +1,8 @@
+import {createStoryProgressHook} from '../../../../shared/story-progress.mjs';
+const useStoryProgress=createStoryProgressHook(React);
+import storyImage0 from '../public/ram_storage_hero.svg';
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect } from 'react';
 import { Cpu, Database, FolderTree, Box, Activity, Scissors, Zap, Trash2, Lock, Trophy, Menu } from 'lucide-react';
 import './App.css';
@@ -7,7 +12,7 @@ import Level2 from './levels/Level2';
 import Level3 from './levels/Level3';
 import Level4 from './levels/Level4';
 import Level5 from './levels/Level5';
-import { playCrash } from './utils/audio';
+import { playCrash,disposeAudio } from './utils/audio';
 
 // The Memory Crash Overlay - ONLY dismisses on button click
 const CrashScreen = ({ level = 1, onRestart }) => {
@@ -212,7 +217,7 @@ const WelcomeScreen = ({ onStart }) => (
       borderBottom: '1px solid #e4dcc8',
       paddingBottom: '24px'
     }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '10px' }}>
+      <div className="memory-welcome-heading" style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '10px' }}>
         <h1 style={{
           fontSize: '3.1rem',
           margin: 0,
@@ -266,7 +271,7 @@ const WelcomeScreen = ({ onStart }) => (
           height: '420px'
         }}>
           <img
-            src="/ram_storage_hero.svg"
+            src={storyImage0}
             alt="Physical RAM & Memory Architecture"
             style={{
               width: '100%',
@@ -417,7 +422,11 @@ const RamBar = ({ usage }) => (
 );
 
 // Main App Component
-function App() {
+function App({onComplete}) {
+  const {setTimeout}=useStoryTimers();
+  useEffect(()=>()=>disposeAudio(),[]);
+  const [completed,complete]=useStoryProgress('memory-modules');
+  useEffect(()=>{if([1,2,3,4,5].every(id=>completed.has(String(id))))onComplete?.();},[completed,onComplete]);
   const [crashed, setCrashed] = useState(false);
   const [activeLevel, setActiveLevel] = useState(0);
   const [unlockedLevels, setUnlockedLevels] = useState([1, 2, 3, 4, 5]); // All levels unlocked
@@ -445,6 +454,7 @@ function App() {
   const handleRestart = () => setCrashed(false);
 
   const handlePassLevel = (levelId) => {
+    complete(String(levelId));
     if (!unlockedLevels.includes(levelId + 1)) {
       setUnlockedLevels([...unlockedLevels, levelId + 1]);
     }
@@ -513,7 +523,7 @@ function App() {
         </div>
 
         <div className={navItemClass(5) + (!unlockedLevels.includes(5) ? " locked" : "")} onClick={() => unlockedLevels.includes(5) && navigateTo(5)}>
-          {!unlockedLevels.includes(5) ? <Lock size={18} /> : <Trophy size={18} />} 5. Final Exam
+          {!unlockedLevels.includes(5) ? <Lock size={18} /> : <Activity size={18} />} 5. Final Exam
         </div>
       </div>
 
@@ -557,7 +567,7 @@ function App() {
         {activeLevel === 2 && <Level2 onCrash={triggerCrash} onPass={() => handlePassLevel(2)} RamBar={RamBar} />}
         {activeLevel === 3 && <Level3 onCrash={triggerCrash} onPass={() => handlePassLevel(3)} RamBar={RamBar} />}
         {activeLevel === 4 && <Level4 onCrash={triggerCrash} onPass={() => handlePassLevel(4)} RamBar={RamBar} />}
-        {activeLevel === 5 && <Level5 />}
+        {activeLevel === 5 && <Level5 onComplete={()=>complete("5")} />}
       </div>
     </div>
   );

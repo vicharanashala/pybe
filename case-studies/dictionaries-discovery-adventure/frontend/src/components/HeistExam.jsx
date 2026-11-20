@@ -5,7 +5,6 @@ import { useGame } from '../context/GameContext';
 import { useSoundFX } from '../hooks/useSoundFX';
 
 export const HeistExam = ({ onExamPassed }) => {
-  const { addXP, triggerConfetti } = useGame();
   const { playSuccess, playWrong, playClick } = useSoundFX();
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -80,8 +79,8 @@ export const HeistExam = ({ onExamPassed }) => {
     const correctCount = questions.filter(q => selectedAnswers[q.id]?.isCorrect).length;
     if (correctCount >= 4) {
       playSuccess();
-      triggerConfetti();
-      addXP(50);
+
+
       if (onExamPassed) onExamPassed();
     } else {
       playWrong();
@@ -107,7 +106,7 @@ export const HeistExam = ({ onExamPassed }) => {
           <div>
             <h3 style={{ color: '#fff', margin: 0, fontSize: '1.3rem' }}>The Grand Heist Exam</h3>
             <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', margin: '2px 0 0 0' }}>
-              Pass 4 out of 5 questions to claim your Master Thief Certificate!
+              Review these five questions. You can revisit any answer and try again.
             </p>
           </div>
         </div>
@@ -122,7 +121,7 @@ export const HeistExam = ({ onExamPassed }) => {
           const selected = selectedAnswers[q.id];
           return (
             <div 
-              key={q.id}
+              key={q.id} data-heist-question={q.id}
               style={{
                 background: 'rgba(0,0,0,0.3)',
                 border: '1px solid rgba(255, 255, 255, 0.08)',
@@ -225,10 +224,10 @@ export const HeistExam = ({ onExamPassed }) => {
             marginBottom: '16px'
           }}>
             <h3 style={{ color: correctCount >= 4 ? 'var(--success)' : 'var(--error)', fontSize: '1.5rem', margin: '0 0 8px 0' }}>
-              {correctCount >= 4 ? '🎉 EXAM PASSED: MASTER THIEF ACCREDITED!' : 'ALMOST THERE! REVIEW WEAK SPOTS'}
+              {correctCount >= 4 ? 'Heist review complete' : 'ALMOST THERE! REVIEW WEAK SPOTS'}
             </h3>
             <p style={{ color: '#fff', fontSize: '1.1rem', margin: 0 }}>
-              You scored <strong>{correctCount} / {questions.length}</strong> correct!
+              Review the feedback for each question below.
             </p>
 
             {/* Weak Spots Diagnostic */}

@@ -156,6 +156,7 @@ function mountWrapInteraction(container, data, onComplete) {
 
     // Keyboard
     handle.addEventListener('keydown', (e) => {
+      if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.preventDefault();e.stopPropagation();}
       if (e.key === 'ArrowLeft') {
         if (isLeft) bracketLeft = Math.max(0, bracketLeft - 1);
         else bracketRight = Math.max(bracketLeft, bracketRight - 1);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GlassCard } from '../../shared-components/GlassCard';
 import { Heart, CheckCircle2, ChevronDown } from 'lucide-react';
 
@@ -31,7 +31,7 @@ const CHECKLIST = [
 ];
 
 // ── Component ─────────────────────────────────────────────────
-export const Reflection: React.FC = () => {
+export const Reflection: React.FC<{onComplete?:()=>void}> = ({onComplete}) => {
   const [nobitaPick, setNobitaPick]       = useState<string | null>(null);
   const [adventurePicks, setAdventurePicks] = useState<Set<number>>(new Set());
   const [checkItems, setCheckItems]       = useState<Set<number>>(new Set());
@@ -41,6 +41,7 @@ export const Reflection: React.FC = () => {
   const nobitaCorrect = nobitaPick === NOBITA_CORRECT;
   const adventureDone = adventurePicks.size >= 2;
   const allChecked    = checkItems.size === CHECKLIST.length;
+  useEffect(()=>{if(allChecked)onComplete?.();},[allChecked]);
 
   const toggleAdventure = (i: number) => {
     setAdventurePicks(prev => {
@@ -150,6 +151,8 @@ export const Reflection: React.FC = () => {
           </p>
         )}
       </GlassCard>
+
+      {nobitaDone && !nobitaCorrect && <button className="btn btn-secondary" onClick={()=>setNobitaPick(null)}>Review this reflection</button>}
 
       {/* ── Q2: Where else could this help Doraemon? ── */}
       {nobitaDone && nobitaCorrect && (

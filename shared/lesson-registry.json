@@ -1,0 +1,848 @@
+{
+  "collections": {
+    "python-fundamentals": "case-studies/loops-reason-discover-and-build/server/src/data/content.json",
+    "sorting-searching": "case-studies/sorting-and-searching-basics/server/src/data/content.json",
+    "monkey-and-crocodile": {
+      "kind": "sequence",
+      "source": "case-studies/exceptions-monkey-and-crocodile/client/src/lesson/lessonData.js",
+      "exportName": "LESSON_STEPS",
+      "output": "library/lessons/monkey-and-crocodile.json",
+      "fixtures": {
+        "cross_river": {
+          "raises": "BetrayalError",
+          "message": "Wife wants your heart!"
+        }
+      }
+    },
+    "royal-tax-registry": {
+      "kind": "sequence",
+      "format": "script",
+      "source": "case-studies/dictionaries-royal-tax-registry/js/lessonData.js",
+      "exportName": "LESSON_STEPS",
+      "output": "library/lessons/royal-tax-registry.json"
+    },
+    "smart-parking-gate": {
+      "kind": "component",
+      "component": "smart-parking-gate",
+      "source": "case-studies/functions-smart-parking-gate/src/App.jsx"
+    },
+    "flight-218": {
+      "kind": "html",
+      "source": "case-studies/python-fundamentals-flight-218/Flight 218_v6.html",
+      "output": "library/lessons/flight-218.json",
+      "module": "/assets/stories/flight-218.js",
+      "baseURL": "/submissions/python-fundamentals-flight-218/",
+      "controller": "ENGINE",
+      "course": "COURSE",
+      "completionSelector": "#endwrap.on"
+    },
+    "traffic-system": {
+      "kind": "html",
+      "source": "case-studies/keywords-traffic-system/index.html",
+      "output": "library/lessons/traffic-system.json",
+      "module": "/assets/stories/traffic-system.js",
+      "baseURL": "/submissions/keywords-traffic-system/",
+      "layout": "viewport",
+      "controller": "{get index(){return index;},get busy(){return busy;}}",
+      "course": "scenes",
+      "completeExpression": "index===scenes.length-1"
+    },
+    "why-classes": {
+      "kind": "html",
+      "source": "case-studies/classes-why-classes-exist/index.html",
+      "output": "library/lessons/why-classes.json",
+      "module": "/assets/stories/why-classes.js",
+      "baseURL": "/submissions/classes-why-classes-exist/",
+      "layout": "document",
+      "controller": "lessonEngine",
+      "course": "LESSON_SCREENS",
+      "completeExpression": "lessonEngine.isLastScreen() && lessonEngine.isScreenComplete(lessonEngine.getCurrentScreen().id)"
+    },
+    "postmans-route": {
+      "kind": "html",
+      "source": "case-studies/exceptions-postmans-route/postman-exceptions/index.html",
+      "output": "library/lessons/postmans-route.json",
+      "module": "/assets/stories/postmans-route.js",
+      "baseURL": "/submissions/exceptions-postmans-route/postman-exceptions/",
+      "layout": "document",
+      "completionSelector": "#completionPanel.show"
+    },
+    "campus-fest": {
+      "kind": "component",
+      "component": "campus-fest",
+      "source": "case-studies/scope-campus-fest/src/App.jsx"
+    },
+    "royal-supply-scroll": {
+      "kind": "html",
+      "source": "case-studies/lists-royal-supply-scroll/index.html",
+      "output": "library/lessons/royal-supply-scroll.json",
+      "module": "/assets/stories/royal-supply-scroll.js",
+      "baseURL": "/submissions/lists-royal-supply-scroll/",
+      "controller": "state",
+      "course": "scenesData",
+      "completeExpression": "state.currentSceneIndex===scenesData.length-1",
+      "layout": "viewport"
+    },
+    "humans-and-aliens": {
+      "kind": "html",
+      "source": "case-studies/compilers-and-interpreters-humans-and-aliens/index.html",
+      "output": "library/lessons/humans-and-aliens.json",
+      "module": "/assets/stories/humans-and-aliens.js",
+      "baseURL": "/submissions/compilers-and-interpreters-humans-and-aliens/",
+      "layout": "document",
+      "completionSelector": "#pg-end.page--active"
+    },
+    "royal-scribes-secret": {
+      "kind": "html",
+      "source": "case-studies/strings-royal-scribes-secret/index.html",
+      "output": "library/lessons/royal-scribes-secret.json",
+      "module": "/assets/stories/royal-scribes-secret.js",
+      "baseURL": "/submissions/strings-royal-scribes-secret/",
+      "layout": "document",
+      "controller": "lessonEngine",
+      "course": "LESSON_STEPS",
+      "completeExpression": "lessonEngine.isLastStep() && lessonEngine.canGoNext()"
+    },
+    "everyday-python": {
+      "kind": "component",
+      "component": "everyday-python",
+      "source": "case-studies/data-structures-everyday-python/src/App.jsx"
+    },
+    "restaurant-orders": {
+      "kind": "component",
+      "component": "restaurant-orders",
+      "source": "case-studies/multithreading-restaurant-orders/src/RestaurantStory.jsx"
+    },
+    "khul-ja-sim-sim": {
+      "kind": "html",
+      "moduleScripts": true,
+      "source": "case-studies/encapsulation-khul-ja-sim-sim/index.html",
+      "output": "library/lessons/khul-ja-sim-sim.json",
+      "module": "/assets/stories/khul-ja-sim-sim.js",
+      "baseURL": "/submissions/encapsulation-khul-ja-sim-sim/",
+      "layout": "viewport",
+      "completionSelector": "#restart-btn"
+    },
+    "royal-messengers": {
+      "kind": "html",
+      "source": "case-studies/printing-royal-messengers/messenger_in_the_sky/index.html",
+      "output": "library/lessons/royal-messengers.json",
+      "module": "/assets/stories/royal-messengers.js",
+      "baseURL": "/submissions/printing-royal-messengers/messenger_in_the_sky/",
+      "layout": "document",
+      "controller": "{get chapter(){return currentChapter},get beat(){return currentBeat},get typing(){return isTyping},get slide(){return activeSlideIndex}}",
+      "course": "STORY_DATA",
+      "completeExpression": "currentChapter===4 && activeSlideIndex===1",
+      "pythonFactory": "getPyodide"
+    },
+    "sealed-record": {
+      "kind": "html",
+      "inlineHandlers": [
+        "nextStep",
+        "prevStep",
+        "restart",
+        "chooseThink",
+        "tryReorder",
+        "tryTamper",
+        "selectPosition",
+        "selectZero",
+        "selectCount",
+        "issueDecree",
+        "tryRealTamper",
+        "selectReverse",
+        "toggleMission"
+      ],
+      "source": "case-studies/tuples-sealed-record/sealed_recod/sealed_record.html",
+      "output": "library/lessons/sealed-record.json",
+      "module": "/assets/stories/sealed-record.js",
+      "baseURL": "/submissions/tuples-sealed-record/sealed_recod/",
+      "layout": "document",
+      "controller": "{get step(){return state.step},get clues(){return cluesCollected()}}",
+      "course": "CHAPTERS",
+      "completeExpression": "state.step===17"
+    },
+    "lost-library": {
+      "kind": "html",
+      "source": "case-studies/keywords-lost-library/index.html",
+      "output": "library/lessons/lost-library.json",
+      "module": "/assets/stories/lost-library.js",
+      "baseURL": "/submissions/keywords-lost-library/",
+      "layout": "document",
+      "controller": "{get index(){return currentPuzzle},get steps(){return currentSteps},get discovered(){return discovered.size}}",
+      "course": "puzzles",
+      "completionSelector": "#result:not(.hidden)"
+    },
+    "maple-heights": {
+      "kind": "html",
+      "source": "case-studies/lists-and-indexing-maple-heights/client/index.html",
+      "output": "library/lessons/maple-heights.json",
+      "module": "/assets/stories/maple-heights.js",
+      "baseURL": "/submissions/lists-and-indexing-maple-heights/client/",
+      "layout": "document",
+      "controller": "State",
+      "completionSelector": ".complete-screen"
+    },
+    "wind-crystal": {
+      "kind": "html",
+      "inlineHandlers": [
+        "run1",
+        "run2",
+        "run3",
+        "hint",
+        "checkOrder",
+        "resetOrder",
+        "showSolution"
+      ],
+      "source": "case-studies/loop-control-wind-crystal-chase/index.html",
+      "output": "library/lessons/wind-crystal.json",
+      "module": "/assets/stories/wind-crystal.js",
+      "baseURL": "/submissions/loop-control-wind-crystal-chase/",
+      "layout": "document",
+      "controller": "state",
+      "completionSelector": "#result.active"
+    },
+    "birbal-royal-reward": {
+      "kind": "html",
+      "inlineHandlers": [
+        "nextStep",
+        "prevStep",
+        "restartModule",
+        "checkAnswerPhase2",
+        "checkAnswerPhase4Step2",
+        "checkAnswerPhase4Step3",
+        "checkAnswerPhase4Step4",
+        "setIfOnlyCondition",
+        "setSimScenario"
+      ],
+      "source": "case-studies/conditionals-birbals-royal-reward/index.html",
+      "output": "library/lessons/birbal-royal-reward.json",
+      "module": "/assets/stories/birbal-royal-reward.js",
+      "baseURL": "/submissions/conditionals-birbals-royal-reward/",
+      "layout": "document",
+      "controller": "{get step(){return currentStep}}",
+      "completeExpression": "currentStep===totalSteps"
+    },
+    "sets-auction": {
+      "kind": "html",
+      "inlineHandlers": [
+        "checkQuiz",
+        "doAddDuplicate",
+        "doAddVirat",
+        "doDifference",
+        "doIntersect",
+        "doPopulate",
+        "doRemove",
+        "doUnion",
+        "nextScreen",
+        "resetStory"
+      ],
+      "source": "case-studies/sets-case-study/sets_case_study/index.html",
+      "output": "library/lessons/sets-auction.json",
+      "module": "/assets/stories/sets-auction.js",
+      "baseURL": "/submissions/sets-case-study/sets_case_study/",
+      "layout": "document",
+      "controller": "{get screen(){return currentScreen},get players(){return [...blazeSet]}}",
+      "completeExpression": "currentScreen===totalScreens"
+    },
+    "flow-tales": {
+      "kind": "html",
+      "source": "case-studies/loop-control-and-printing-flow-tales/Flow Tales.html",
+      "output": "library/lessons/flow-tales.json",
+      "module": "/assets/stories/flow-tales.js",
+      "baseURL": "/submissions/loop-control-and-printing-flow-tales/",
+      "layout": "document",
+      "controller": "{get step(){return currentStep},get slide(){return slideIdx}}",
+      "course": "STEPS",
+      "completeExpression": "currentStep===STEPS.length-1"
+    },
+    "gates-of-rajgad": {
+      "kind": "html",
+      "inlineHandlers": [
+        "answerQ",
+        "answerQuiz",
+        "deliverScroll",
+        "goToStep",
+        "restartJourney",
+        "runCode",
+        "writeRecord"
+      ],
+      "source": "case-studies/decorators-gates-of-rajgad/index.html",
+      "output": "library/lessons/gates-of-rajgad.json",
+      "module": "/assets/stories/gates-of-rajgad.js",
+      "baseURL": "/submissions/decorators-gates-of-rajgad/",
+      "layout": "document",
+      "completionSelector": "#screen-done.active"
+    },
+    "adder": {
+      "kind": "component",
+      "component": "adder",
+      "source": "case-studies/functions-adder/Adder/client/src/lessons/AdderLesson.jsx"
+    },
+    "kitchen-lab": {
+      "kind": "book",
+      "pages": [
+        {
+          "kind": "html",
+          "source": "case-studies/file-handling-kitchen-lab/index.html",
+          "output": "library/lessons/kitchen-index.json",
+          "module": "/assets/stories/kitchen-index.js",
+          "baseURL": "/submissions/file-handling-kitchen-lab/",
+          "layout": "document",
+          "slug": "index.html",
+          "route": "/submissions/file-handling-kitchen-lab/index.html"
+        },
+        {
+          "kind": "html",
+          "source": "case-studies/file-handling-kitchen-lab/chapter1.html",
+          "output": "library/lessons/kitchen-chapter1.json",
+          "module": "/assets/stories/kitchen-chapter1.js",
+          "baseURL": "/submissions/file-handling-kitchen-lab/",
+          "layout": "document",
+          "slug": "chapter1.html",
+          "route": "/submissions/file-handling-kitchen-lab/chapter1.html"
+        },
+        {
+          "kind": "html",
+          "source": "case-studies/file-handling-kitchen-lab/chapter2.html",
+          "output": "library/lessons/kitchen-chapter2.json",
+          "module": "/assets/stories/kitchen-chapter2.js",
+          "baseURL": "/submissions/file-handling-kitchen-lab/",
+          "layout": "document",
+          "slug": "chapter2.html",
+          "route": "/submissions/file-handling-kitchen-lab/chapter2.html"
+        },
+        {
+          "kind": "html",
+          "source": "case-studies/file-handling-kitchen-lab/quiz.html",
+          "output": "library/lessons/kitchen-quiz.json",
+          "module": "/assets/stories/kitchen-quiz.js",
+          "baseURL": "/submissions/file-handling-kitchen-lab/",
+          "layout": "document",
+          "slug": "quiz.html",
+          "route": "/submissions/file-handling-kitchen-lab/quiz.html",
+          "controller": "{get questions(){return MCQS},get reviewed(){return Object.keys(answered).length}}",
+          "course": "MCQS",
+          "completionSelector": ".mcq-verdict"
+        }
+      ]
+    },
+    "himalayan-ride": {
+      "kind": "html",
+      "inlineHandlers": [
+        "goToScene",
+        "toggleAudio",
+        "toggleQuickCheckDrawer",
+        "prevScene",
+        "nextScene"
+      ],
+      "source": "case-studies/exceptions-himalayan-ride/index.html",
+      "output": "library/lessons/himalayan-ride.json",
+      "module": "/assets/stories/himalayan-ride.js",
+      "baseURL": "/submissions/exceptions-himalayan-ride/",
+      "layout": "viewport",
+      "controller": "{get index(){return currentSceneIndex},get completed(){return [...completedScenes]}}",
+      "course": "SCENES_DATA",
+      "completeExpression": "completedScenes.has(12)"
+    },
+    "investor-room": {
+      "kind": "component",
+      "component": "investor-room",
+      "source": "case-studies/data-visualization-novatech-investor-room/client/src/App.jsx"
+    },
+    "mela-gatekeeper": {
+      "kind": "component",
+      "component": "mela-gatekeeper",
+      "source": "case-studies/polymorphism-and-truthiness-dashavatara-and-mela/village-mela-truthiness/src/MelaStory.jsx"
+    },
+    "dashavatara": {
+      "kind": "component",
+      "component": "dashavatara",
+      "source": "case-studies/polymorphism-and-truthiness-dashavatara-and-mela/dashavatara-polymorphism/src/DashavataraStory.jsx"
+    },
+    "lost-forest": {
+      "kind": "component",
+      "component": "lost-forest",
+      "source": "case-studies/data-structures-lost-kingdom/client/src/LostForestStory.jsx"
+    },
+    "samsung-stories": {
+      "kind": "component",
+      "component": "samsung-stories",
+      "source": "case-studies/object-oriented-python-samsung-stories/client/src/CaseStudy.jsx"
+    },
+    "betaal-tales": {
+      "kind": "component",
+      "component": "betaal-tales",
+      "source": "case-studies/python-fundamentals-betaal-tales/client/src/BetaalTales.jsx"
+    },
+    "iteration-journey": {
+      "kind": "component",
+      "component": "iteration-journey",
+      "source": "case-studies/loops-iteration-learning-journey/pybe-iteration-feature/client/src/App.jsx",
+      "layout": "viewport"
+    },
+    "attendance-reading": {
+      "kind": "component",
+      "component": "attendance-reading",
+      "source": "case-studies/string-processing-attendance-cleaner/string-manipulation-case-study/case-study.md"
+    },
+    "cricket-chase": {
+      "kind": "component",
+      "component": "cricket-chase",
+      "source": "case-studies/loops-cricket-chase-and-loop-control/pybe-iteration-feature/client/src/App.jsx"
+    },
+    "loop-control-discovery": {
+      "kind": "component",
+      "component": "loop-control-discovery",
+      "source": "case-studies/loops-cricket-chase-and-loop-control/pybe-loopcontrols-standalone/client/src/App.jsx"
+    },
+    "palace-whispers": {
+      "kind": "html",
+      "moduleScripts": true,
+      "scopedHash": true,
+      "source": "case-studies/scope-palace-of-whispers/palace-storybook/index.html",
+      "output": "library/lessons/palace-whispers.json",
+      "module": "/assets/stories/palace-whispers.js",
+      "baseURL": "/submissions/scope-palace-of-whispers/palace-storybook/",
+      "layout": "document",
+      "completionSelector": ".the-end",
+      "theme": ":host{--lavender:#f2d5bb;--lavender-deep:#df622f;--lavender-soft:#fff0e2;--ivory:#fcf8f2;--ivory-deep:#eadbce;--plum:#30271f;--plum-soft:#766352;--serif:Georgia,serif;--sans:\"Segoe UI\",system-ui,sans-serif}.topbar{position:relative;top:auto}.btn-primary{background:#df622f;color:white}.topbar-title{color:#a84420}"
+    },
+    "memory-modules": {
+      "kind": "component",
+      "component": "memory-modules",
+      "source": "case-studies/references-and-memory-modules/client/src/App.jsx"
+    },
+    "tiffin-trail": {
+      "kind": "component",
+      "component": "tiffin-trail",
+      "source": "case-studies/functions-and-closures-tiffin-trail/tiffin trail-case study/src/TiffinTrail.jsx"
+    },
+    "pyfarm": {
+      "kind": "component",
+      "component": "pyfarm",
+      "source": "case-studies/variables-and-conditionals-pyfarm/src/PyFarm.jsx"
+    },
+    "calico-jack": {
+      "kind": "component",
+      "component": "calico-jack",
+      "source": "case-studies/conditionals-hunt-for-calico-jack/client/src/App.jsx",
+      "layout": "viewport"
+    },
+    "magic-logic": {
+      "kind": "component",
+      "component": "magic-logic",
+      "source": "case-studies/conditionals-magic-of-logic/client/src/App.tsx"
+    },
+    "raidurg-adventure": {
+      "kind": "component",
+      "component": "raidurg-adventure",
+      "source": "case-studies/loops-raidurg-adventure/src/App.jsx"
+    },
+    "hawkins-division": {
+      "kind": "component",
+      "component": "hawkins-division",
+      "source": "case-studies/functions-and-scope-hawkins-division/src/App.tsx"
+    },
+    "oracle-journey": {
+      "kind": "component",
+      "component": "oracle-journey",
+      "source": "case-studies/exceptions-oracle-journey/percy-oracle/src/App.jsx"
+    },
+    "dharma-validator": {
+      "kind": "component",
+      "component": "dharma-validator",
+      "source": "case-studies/exceptions-dharma-validator/src/App.tsx"
+    },
+    "dasara-festival": {
+      "kind": "component",
+      "component": "dasara-festival",
+      "source": "case-studies/exceptions-dasara-festival/src/App.jsx"
+    },
+    "tuple-playground": {
+      "kind": "component",
+      "component": "tuple-playground",
+      "source": "case-studies/tuples-analogy-playground/tuple-analogy/src/App.jsx"
+    },
+    "wildlife-journal": {
+      "kind": "component",
+      "component": "wildlife-journal",
+      "source": "case-studies/inheritance-wildlife-field-journal/client/src/WildlifeJournal.jsx"
+    },
+    "recursion-discovery": {
+      "kind": "component",
+      "component": "recursion-discovery",
+      "source": "case-studies/recursion-discovery-journey/client/src/App.jsx"
+    },
+    "doraemon-collections": {
+      "kind": "component",
+      "component": "doraemon-collections",
+      "source": "case-studies/sets-and-dictionaries-doraemon/src/App.tsx"
+    },
+    "dabbos-orchard": {
+      "kind": "component",
+      "component": "dabbos-orchard",
+      "source": "case-studies/variables-and-arithmetic-dabbos-orchard/app.py"
+    },
+    "treasure-kingdom": {
+      "kind": "component",
+      "component": "treasure-kingdom",
+      "source": "case-studies/generators-treasure-kingdom/src/App.jsx"
+    },
+    "rosewood-manor": {
+      "kind": "component",
+      "component": "rosewood-manor",
+      "source": "case-studies/text-processing-and-recursion-rosewood-manor/client/src/App.jsx"
+    },
+    "sign-squad": {
+      "kind": "component",
+      "component": "sign-squad",
+      "source": "case-studies/classes-and-inheritance-squad-and-bird-family/client/src/classes/ClassesLesson.jsx"
+    },
+    "bird-family": {
+      "kind": "component",
+      "component": "bird-family",
+      "source": "case-studies/classes-and-inheritance-squad-and-bird-family/client/src/InheritanceLesson.jsx"
+    },
+    "thieves-at-well": {
+      "kind": "component",
+      "component": "thieves-at-well",
+      "source": "case-studies/functions-and-scope-thieves-at-the-well/client/src/StoryApp.jsx"
+    },
+    "robo-doraemon": {
+      "kind": "component",
+      "component": "robo-doraemon",
+      "source": "case-studies/variables-and-loops-robo-and-doraemon/src/learning/LearningHub.jsx"
+    },
+    "ant-colony": {
+      "kind": "component",
+      "component": "ant-colony",
+      "source": "case-studies/recursion-ant-colony-adventure/src/App.tsx"
+    },
+    "gurukul": {
+      "kind": "html",
+      "source": "case-studies/variables-and-loops-poko-and-gurukul/gurukul/index.html",
+      "output": "library/lessons/gurukul.json",
+      "module": "/assets/stories/gurukul.js",
+      "baseURL": "/submissions/variables-and-loops-poko-and-gurukul/gurukul/",
+      "layout": "document",
+      "inlineHandlers": [
+        "animateManualLotusPick",
+        "animatePouringBucket",
+        "autoLightAllDiyas",
+        "closeImageLightbox",
+        "closePrikshaRewardModal",
+        "closeSingleRewardModal",
+        "continueAfterChallenge",
+        "handleDiyaAnswer",
+        "handleLockedSlate",
+        "handleThinkChoice",
+        "lightNextDiyaStep",
+        "nextChallenge",
+        "openGurukulPrikshaView",
+        "openWoodenChestView",
+        "playTripleBellSound",
+        "prevChallenge",
+        "renderForLoopStep1_Story",
+        "renderForLoopStep2_Problem",
+        "renderForLoopStep3_Think",
+        "renderForLoopStep4_Discovery",
+        "renderForLoopStep5_InteractivePond",
+        "renderForLoopStep6_Missions",
+        "renderForLoopStep7_Reward",
+        "renderLoopSection1_Origin",
+        "renderLoopSection2_History",
+        "renderLoopSection3_Anatomy",
+        "resetDefaultCode",
+        "resetDoWhileAnatomyDemo",
+        "resetForAnatomyDemo",
+        "resetLotusLoop",
+        "resetWhileAnatomyDemo",
+        "revealCurrentChallengeHint",
+        "runLotusLoopAuto",
+        "runMissionCode",
+        "runPrikshaCode",
+        "seekMasterJiBlessings",
+        "showLandingPage",
+        "showWoodenChest",
+        "startCinematicEntry",
+        "startForLoopAdventure",
+        "startFoundationalJourney",
+        "stepDoWhileAnatomyDemo",
+        "stepForAnatomyDemo",
+        "stepLotusLoop",
+        "stepWhileAnatomyDemo",
+        "switchCinematicArtwork"
+      ],
+      "pythonFactory": "getGurukulPython",
+      "controller": "{get challenges(){return prikshaChallenges},get solved(){return [...solvedChallengeIds]}}",
+      "completeExpression": "solvedChallengeIds.size===12",
+      "theme": ":host{--sand-beige:#fff0df;--mud-brown:#63432c;--mud-brown-dark:#4e3525;--warm-beige:#fff7ec;--warm-beige-dark:#e7cfb5;--warm-beige-light:#fffdf9;--terracotta:#c45b19;--terracotta-dark:#9a4211;--maroon:#78421e;--forest-green:#684525;--mustard-yellow:#c77735;--mustard-dark:#9a5015;--muted-gold:#a56225;--ivory-paper:#fffdf9;--aged-paper:#fff7ec;--font-handwriting:\"Segoe UI\",system-ui,sans-serif;--font-heading:Georgia,serif;--font-body:\"Segoe UI\",system-ui,sans-serif;--font-code:Consolas,monospace}.authored-html-body{background:#fffaf3}.ambient-layer{position:absolute}.python-feedback.correct{color:#75de98}.python-feedback.incorrect{color:#ffb69e}.priksha-reward-modal-overlay,#imageLightboxModal{position:absolute!important;min-height:700px;align-items:flex-start!important;padding:40px 14px!important}.priksha-reward-modal-overlay>div{background:#fffdf9;color:#382b21;border-radius:16px}.stat-pill{box-shadow:none}.vintage-btn{box-shadow:none}.code-editor-textarea{font-family:Consolas,monospace!important;font-size:16px!important}@media(max-width:760px){.priksha-layout-grid,.adventure-split-grid{grid-template-columns:minmax(0,1fr)!important}.adventure-stage-card{padding:18px 12px}.vintage-btn{white-space:normal}.priksha-problem-card{min-height:0!important}.diya-pathway-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.top-nav{position:relative}.handwritten-title{font-size:25px}} #prikshaRewardModal{inset:0;z-index:9999;background:#382b21bb;justify-content:center}#prikshaOutputConsole{white-space:pre-wrap}.priksha-reward-modal-overlay h2{font-size:26px} .gurukul-header{background:#fff7ec;border-color:#e7cfb5;box-shadow:none;gap:16px}.gurukul-header .main-title{color:#382b21}.gurukul-header .sub-title{color:#8c451a}.header-controls{flex-wrap:wrap}.priksha-header{background:#fff7ec}@media(max-width:760px){.gurukul-header{flex-direction:column;align-items:flex-start;padding:20px 14px}.gurukul-header .main-title{font-size:26px}.header-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:8px}.header-controls button{width:100%;min-width:0;padding:10px 6px!important}.view-container{padding:20px 10px}.priksha-problem-card{padding:16px!important}.priksha-layout-grid>*{min-width:0}.code-editor-textarea{max-width:100%}}"
+    },
+    "eternal-mold": {
+      "kind": "component",
+      "component": "eternal-mold",
+      "source": "case-studies/classes-eternal-mold/client/src/App.jsx"
+    },
+    "poko-journey": {
+      "kind": "component",
+      "component": "poko-journey",
+      "source": "case-studies/variables-and-loops-poko-and-gurukul/client/src/App.jsx"
+    },
+    "magic-pet-shop": {
+      "kind": "component",
+      "component": "magic-pet-shop",
+      "source": "case-studies/classes-and-encapsulation-magic-pet-shop/client/src/oop-story/OopStoryApp.jsx"
+    },
+    "dictionary-discovery": {
+      "kind": "component",
+      "component": "dictionary-discovery",
+      "source": "case-studies/dictionaries-discovery-adventure/frontend/src/App.jsx"
+    },
+    "find-squash-bug": {
+      "kind": "component",
+      "component": "find-squash-bug",
+      "layout": "document",
+      "source": "case-studies/debugging-find-and-squash-the-bug/client/src/FindSquashBug.jsx"
+    },
+    "bakery-crow": {
+      "kind": "component",
+      "component": "bakery-crow",
+      "layout": "document",
+      "source": "case-studies/loops-royal-bakery-and-thirsty-crow/client/src/BakeryCrow.jsx"
+    },
+    "python-arcade": {
+      "kind": "component",
+      "component": "python-arcade",
+      "layout": "document",
+      "source": "case-studies/python-fundamentals-arcade-and-case-study-engine/client/src/ArcadeStory.jsx"
+    },
+    "story-traditions": {
+      "kind": "component",
+      "component": "story-traditions",
+      "layout": "document",
+      "source": "case-studies/python-fundamentals-story-traditions/src/App.tsx"
+    }
+  },
+  "studies": {
+    "story-4049523562c935ab": {
+      "collection": "python-fundamentals",
+      "inspectVariables": false,
+      "reasoningDelay": 1000
+    },
+    "story-7617eda5b6c5d39c": {
+      "collection": "sorting-searching",
+      "inspectVariables": false,
+      "reasoningDelay": 1000
+    },
+    "story-a6599cda779ad306": {
+      "collection": "python-fundamentals",
+      "inspectVariables": true,
+      "reasoningDelay": 1000
+    },
+    "story-d730e4fa3019fc6d": {
+      "collection": "monkey-and-crocodile",
+      "inspectVariables": false
+    },
+    "story-3f56efaff302a5d1": {
+      "collection": "royal-tax-registry"
+    },
+    "story-ab72e09488ad93d8": {
+      "collection": "smart-parking-gate"
+    },
+    "story-c7c40793d26c5b2a": {
+      "collection": "flight-218"
+    },
+    "story-0fdb9bc4ae50094b": {
+      "collection": "traffic-system"
+    },
+    "story-298332aee7ba2b32": {
+      "collection": "why-classes"
+    },
+    "story-9f7b5b4a8ade000c": {
+      "collection": "postmans-route"
+    },
+    "story-5477e5af513e2cc7": {
+      "collection": "campus-fest"
+    },
+    "story-02cecabc434c5db4": {
+      "collection": "royal-supply-scroll"
+    },
+    "story-f77458836eb67f34": {
+      "collection": "humans-and-aliens"
+    },
+    "story-9a805a86ccec1a84": {
+      "collection": "royal-scribes-secret"
+    },
+    "story-c563eb4bb23307df": {
+      "collection": "everyday-python"
+    },
+    "story-b31d201f15970ec2": {
+      "collection": "restaurant-orders"
+    },
+    "story-5410a21f8666e0af": {
+      "collection": "khul-ja-sim-sim"
+    },
+    "story-617c10ea8be694de": {
+      "collection": "royal-messengers"
+    },
+    "story-8167bf7ebbde1018": {
+      "collection": "sealed-record"
+    },
+    "story-50b1ab4f25db0b54": {
+      "collection": "lost-library"
+    },
+    "story-0bdeee990fa852ea": {
+      "collection": "maple-heights"
+    },
+    "story-ad89eb826e121d2d": {
+      "collection": "wind-crystal"
+    },
+    "story-57fb53f5658f810a": {
+      "collection": "birbal-royal-reward"
+    },
+    "story-6bab419ac15f13d3": {
+      "collection": "sets-auction"
+    },
+    "story-823fd0e08364881e": {
+      "collection": "flow-tales"
+    },
+    "story-fe18dfae0dfa817f": {
+      "collection": "gates-of-rajgad"
+    },
+    "story-489b4ac6ef1bdf99": {
+      "collection": "adder"
+    },
+    "story-f0859aba1663ed62": {
+      "collection": "kitchen-lab"
+    },
+    "story-1441ae79505da6dc": {
+      "collection": "himalayan-ride"
+    },
+    "story-4ad76a8313b0be1f": {
+      "collection": "investor-room"
+    },
+    "story-680740e43fc4d219": {
+      "collection": "mela-gatekeeper"
+    },
+    "story-676a8d1f1dc92e24": {
+      "collection": "dashavatara"
+    },
+    "story-afad22b314e1637c": {
+      "collection": "lost-forest"
+    },
+    "story-3af5c8e035f66c59": {
+      "collection": "samsung-stories"
+    },
+    "story-1be2b5357531f575": {
+      "collection": "betaal-tales"
+    },
+    "story-ed372d85b4644984": {
+      "collection": "iteration-journey"
+    },
+    "story-1bb2d0ced20d2774": {
+      "collection": "attendance-reading"
+    },
+    "story-5ab6bebe7c3605f9": {
+      "collection": "cricket-chase"
+    },
+    "story-a639df8d84d12201": {
+      "collection": "loop-control-discovery"
+    },
+    "story-79891727e2a36617": {
+      "collection": "palace-whispers"
+    },
+    "story-9c94cab558e9f7a4": {
+      "collection": "memory-modules"
+    },
+    "story-e11815652818ebf2": {
+      "collection": "tiffin-trail"
+    },
+    "story-7cede33ab799b7e3": {
+      "collection": "pyfarm"
+    },
+    "story-8f35c48bc68d1343": {
+      "collection": "calico-jack"
+    },
+    "story-6c4e74eb56c56740": {
+      "collection": "magic-logic"
+    },
+    "story-249b9aa16e56653a": {
+      "collection": "raidurg-adventure"
+    },
+    "story-4eb8cd5405a39cc1": {
+      "collection": "hawkins-division"
+    },
+    "story-5b606fcb064ace2d": {
+      "collection": "oracle-journey"
+    },
+    "story-c57e8679bce3a32e": {
+      "collection": "dharma-validator"
+    },
+    "story-5b04d1c5808fe44e": {
+      "collection": "dasara-festival"
+    },
+    "story-f12f400b0845e259": {
+      "collection": "tuple-playground"
+    },
+    "story-c080d50fb7e5563f": {
+      "collection": "wildlife-journal"
+    },
+    "story-dea913906bfd2b90": {
+      "collection": "recursion-discovery"
+    },
+    "story-a76197f8448cddb6": {
+      "collection": "doraemon-collections"
+    },
+    "story-d6ff7a5a81fd9717": {
+      "collection": "dabbos-orchard"
+    },
+    "story-b5ddcf051b9a827c": {
+      "collection": "treasure-kingdom"
+    },
+    "story-0532cd450cb25c86": {
+      "collection": "rosewood-manor"
+    },
+    "story-d212101de2e2efa4": {
+      "collection": "sign-squad"
+    },
+    "story-b4e637427beca75c": {
+      "collection": "bird-family"
+    },
+    "story-e5fa6a9b145ec00e": {
+      "collection": "thieves-at-well"
+    },
+    "story-6dc52d0b1ddaecb9": {
+      "collection": "robo-doraemon"
+    },
+    "story-9ff9078eaeb976d4": {
+      "collection": "ant-colony"
+    },
+    "story-43d3d164c73db34c": {
+      "collection": "gurukul"
+    },
+    "story-f0b7bda78197765a": {
+      "collection": "eternal-mold"
+    },
+    "story-2ad060f951f61c12": {
+      "collection": "poko-journey"
+    },
+    "story-6303a4097d69eca7": {
+      "collection": "magic-pet-shop"
+    },
+    "story-61b5840e0fd73941": {
+      "collection": "dictionary-discovery"
+    },
+    "story-e7b0d8a9fe8d0365": {
+      "collection": "find-squash-bug"
+    },
+    "story-82621fb31e80d371": {
+      "collection": "bakery-crow"
+    },
+    "story-7a30209fcf39425b": {
+      "collection": "python-arcade"
+    },
+    "story-545172f653234a84": {
+      "collection": "story-traditions"
+    }
+  }
+}

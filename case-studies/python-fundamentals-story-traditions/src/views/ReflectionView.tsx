@@ -39,6 +39,7 @@ export const ReflectionView: React.FC = () => {
       };
 
       setRecognitionObj(rec);
+      return ()=>{rec.onresult=null;rec.onerror=null;rec.onend=null;rec.abort();};
     }
   }, []);
 

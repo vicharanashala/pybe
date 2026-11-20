@@ -509,7 +509,7 @@ class ShieldHero(Hero):
   },
   {
     id: 12,
-    title: "Final Story Quiz & Superhero Graduation!",
+    title: "Final Story Quiz & Hero Creator Lab",
     subtitle: "Episode 12: Hero Academy Diploma",
     theme: "grand-hall",
     characters: {

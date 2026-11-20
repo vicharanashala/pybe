@@ -70,7 +70,7 @@ export default function TraitDNASplicer() {
       </div>
 
       {childLevel && (
-        <div className="dna-result" key={spliceCount}>
+        <div className="dna-result" key={spliceCount} data-bird-genes={selectedId}>
           <p className="dna-row-label">
             {NICKNAMES[selectedId]}'s genes, after splicing
           </p>

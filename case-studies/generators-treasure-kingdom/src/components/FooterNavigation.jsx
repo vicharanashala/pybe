@@ -26,10 +26,8 @@ export default function FooterNavigation({ currentSlide, totalSlides, onGoToSlid
   return (
     <footer>
       <div className="progress-header">
-        <span>⭐ Chapter 1: Treasure Kingdom • Page {currentSlide + 1} of {totalSlides}</span>
-        <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          <Award size={16} color="var(--duo-gold)" /> Iterator Master Path
-        </span>
+        <span>Chapter 1: Treasure Kingdom • Page {currentSlide + 1} of {totalSlides}</span>
+
       </div>
 
       <div className="progress-bar-container">
@@ -67,7 +65,7 @@ export default function FooterNavigation({ currentSlide, totalSlides, onGoToSlid
         >
           {isLast ? (
             <>
-              🏆 Restart Journey <RotateCcw size={18} />
+              Restart Journey <RotateCcw size={18} />
             </>
           ) : (
             <>

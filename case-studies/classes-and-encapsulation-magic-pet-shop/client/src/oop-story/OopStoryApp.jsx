@@ -1,3 +1,6 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+import {createStoryProgressHook} from '../../../../../shared/story-progress.mjs';
+const useStoryTimers=createStoryTimersHook(React),useStoryProgress=createStoryProgressHook(React);
 import React, { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX, Mic, MicOff, RotateCcw, Play, Zap, Shield, Sparkles } from 'lucide-react';
 
@@ -31,7 +34,12 @@ import './styles/cartoonStage.css';
 import './styles/petCareUI.css';
 import './styles/heroAcademy.css';
 
-export default function OopStoryApp() {
+export default function OopStoryApp({onComplete}) {
+ const timers=useStoryTimers(),{clearTimeout}=timers;
+ const setTimeout=(fn,delay)=>{const id=timers.setTimeout(fn,delay);timelineTimeoutsRef.current.push(id);return id;};
+ const [completed,complete]=useStoryProgress('magic-pet-shop');
+ useEffect(()=>{SoundService.activate();SoundService.setSoundEnabled(true);SoundService.setVoiceEnabled(true);return()=>SoundService.dispose();},[]);
+ useEffect(()=>{if(completed.has('encapsulation'))onComplete?.();},[completed,onComplete]);
   // Top-level Case Study Selector: 'encapsulation' (CS1) vs 'inheritance' (CS2)
   const [activeCaseStudy, setActiveCaseStudy] = useState('encapsulation');
 
@@ -250,6 +258,7 @@ export default function OopStoryApp() {
   const cs2Episode = HERO_ACADEMY_EPISODES.find(e => e.id === cs2EpisodeId) || HERO_ACADEMY_EPISODES[0];
 
   const currentEpisode = activeCaseStudy === 'encapsulation' ? cs1Episode : cs2Episode;
+  useEffect(()=>{if(activeCaseStudy==='encapsulation'&&currentEpisode.interactiveType==='graduation')complete('encapsulation');},[activeCaseStudy,currentEpisode,complete]);
   const currentDialogueIdx = activeCaseStudy === 'encapsulation' ? cs1DialogueIdx : cs2DialogueIdx;
 
   // ----------------------------------------------------
@@ -438,7 +447,7 @@ export default function OopStoryApp() {
   const isCaseStudy1 = activeCaseStudy === 'encapsulation';
 
   return (
-    <div className={isCaseStudy1 ? "petshop-app-root" : "hero-academy-root"}>
+    <div data-magic-pet-case={activeCaseStudy} data-magic-pet-episode={currentEpisode.id} data-magic-pet-line={currentDialogueIdx} className={isCaseStudy1 ? "petshop-app-root" : "hero-academy-root"}>
       {/* Top Header Bar */}
       <header className={isCaseStudy1 ? "petshop-header" : "hero-academy-header"}>
         {/* Brand Badge */}
@@ -629,6 +638,7 @@ export default function OopStoryApp() {
               <HeroCreatorLab
                 key={`lab-cs2-${cs2EpisodeId}`}
                 onSpawnCustomHero={(hero) => {
+                  complete('inheritance');
                   setCustomHero(hero);
                   setNovaActor(n => ({ ...n, action: 'celebrating' }));
                   setZippyActor(z => ({ ...z, action: 'celebrating' }));

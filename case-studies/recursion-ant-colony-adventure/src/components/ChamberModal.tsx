@@ -3,7 +3,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
-import type { ChamberSpec } from '@/data';
+import type { ChamberSpec } from '../data';
 
 interface ChamberModalProps {
   chamber: ChamberSpec | null;

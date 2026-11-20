@@ -101,7 +101,6 @@ print(apply_bonus(85, 5))`,
   reflectionPrompt:
     "Where else in this story — or in another one you know — does raw strength or effort turn out to be the wrong kind of thing entirely for what's actually being asked?",
 
-  badgeUnlocked: "Gandiva — The Bow That Fits",
 };
 
 export default typeError;

@@ -1,3 +1,4 @@
+import cinemaImage from '../../public/cinema_hall.jpg';
 import React, { useState, useEffect } from 'react';
 import { Terminal, CheckCircle, Brain, Play, Code, XCircle, ArrowLeft, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -27,7 +28,7 @@ const baseQuizzes = [
   }
 ];
 
-const CaseStudyTwo = ({ onScoreUpdate, resetSignal, onBack, onComplete, isCompleted }) => {
+const CaseStudyTwo = ({ resetSignal, onBack, onComplete, isCompleted }) => {
   const [currentBeat, setCurrentBeat] = useState(1);
   
   // Quiz states
@@ -72,10 +73,10 @@ const CaseStudyTwo = ({ onScoreUpdate, resetSignal, onBack, onComplete, isComple
       codeAnswers.loop2.trim() === '11';
     setCodeVerified(isCorrect);
     if(isCorrect) {
-        onScoreUpdate('cs2_code', 1);
+
         if (onComplete) onComplete();
     } else {
-        onScoreUpdate('cs2_code', 0);
+
     }
   };
 
@@ -194,7 +195,7 @@ const CaseStudyTwo = ({ onScoreUpdate, resetSignal, onBack, onComplete, isComple
                       setQ1Selected(opt.id);
                       if(opt.isCorrect) {
                         setQ1Answered(true);
-                        onScoreUpdate('cs2_q1', 1);
+
                       }
                     }}
                     className={btnClass}
@@ -228,7 +229,7 @@ const CaseStudyTwo = ({ onScoreUpdate, resetSignal, onBack, onComplete, isComple
                       setQ2Selected(opt.id);
                       if(opt.isCorrect) {
                         setQ2Answered(true);
-                        onScoreUpdate('cs2_q2', 1);
+
                       }
                     }}
                     className={btnClass}
@@ -380,7 +381,7 @@ const CaseStudyTwo = ({ onScoreUpdate, resetSignal, onBack, onComplete, isComple
             >
               {(currentBeat <= 4 || currentBeat >= 9) && (
                 <div className="rounded-2xl overflow-hidden shadow-2xl border border-slate-800/50 mb-8 max-w-sm w-full opacity-80">
-                  <img src="/cinema_hall.jpg" alt="Cinema Hall Rows" className="w-full h-auto object-cover" />
+                  <img src={cinemaImage} alt="Cinema Hall Rows" className="w-full h-auto object-cover" />
                 </div>
               )}
               <h1 className="text-2xl md:text-3xl font-extrabold text-blue-400 text-center tracking-tight drop-shadow-md">
@@ -401,6 +402,7 @@ const CaseStudyTwo = ({ onScoreUpdate, resetSignal, onBack, onComplete, isComple
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentBeat}
+                data-story-beat={currentBeat}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}

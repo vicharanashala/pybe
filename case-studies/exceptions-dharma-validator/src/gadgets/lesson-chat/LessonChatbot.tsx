@@ -48,11 +48,11 @@ export default function LessonChatbot({ lesson }: LessonChatbotProps) {
           </div>
           <div>
             <p className="text-ink text-sm font-semibold font-display">Ask Krishna about {lesson.title}</p>
-            <p className="text-muted text-[11px]">Personalized Doubt Resolution</p>
+            <p className="text-muted text-[11px]">Authored lesson reference</p>
           </div>
         </div>
         <span className="text-[10px] bg-gold/10 border border-gold/30 text-gold px-2.5 py-0.5 rounded-full font-mono uppercase tracking-wider">
-          AI Active
+          Local Guide
         </span>
       </div>
 

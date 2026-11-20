@@ -50,7 +50,6 @@ export default function App() {
     done: () => (
       <Completion
         results={progress.quizResults}
-        confidence={progress.confidence}
         reflection={progress.reflection}
         setReflection={progress.setReflection}
         onRestart={restart}
@@ -60,7 +59,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <TopBar confidence={progress.confidence} stage={stage} total={progress.order.length || plots.length} />
+      <TopBar stage={stage} total={progress.order.length || plots.length} />
       <main>{scenes[stage]?.()}</main>
       <footer><span>PYBE CASE STUDY</span><span>TURNING DATA INTO DECISIONS</span></footer>
     </div>

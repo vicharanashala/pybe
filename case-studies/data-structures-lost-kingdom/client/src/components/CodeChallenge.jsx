@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import {validateSource} from '../../../../../library/learning/sequence-state.mjs';
+import {runPython} from '../../../../../library/learning/python-client.mjs';
 
 /**
  * CodeChallenge — mini coding textarea with pattern-matching answer check.
@@ -14,20 +16,27 @@ export default function CodeChallenge({ challenge, chapterColor, chapterColorDim
   const [result, setResult]     = useState(null); // null | 'pass' | 'fail'
   const [failMsg, setFailMsg]   = useState('');
   const [showHint, setShowHint] = useState(false);
-  const [hintStep, setHintStep] = useState(0);
+  const [running,setRunning]=useState(false);
+  const [execution,setExecution]=useState(null);
 
-  function checkCode() {
+  async function checkCode() {
+    setExecution(null);
     // Run through every pattern. The first one that fails gives the user a hint.
     for (const p of challenge.patterns) {
-      if (!p.regex.test(code)) {
+      if (!validateSource({patterns:[{pattern:p.regex.source,flags:p.regex.flags}]},code)) {
         setResult('fail');
         setFailMsg(p.error);
         return;
       }
     }
-    // All patterns passed!
-    setResult('pass');
-    setFailMsg('');
+    setRunning(true);
+    try{
+      const actual=await runPython(code+'\n'+(challenge.validationCode||''));
+      setExecution(actual);
+      if(actual.error){setResult('fail');setFailMsg(actual.error.trim().split('\n').at(-1));return;}
+      if(challenge.outputIncludes?.some(line=>!actual.output.split(/\r?\n/).includes(line))){setResult('fail');setFailMsg('Print the requested item so it appears in the output.');return;}
+      setResult('pass');setFailMsg('');
+    }finally{setRunning(false);}
   }
 
   function handleKeyDown(e) {
@@ -50,7 +59,7 @@ export default function CodeChallenge({ challenge, chapterColor, chapterColorDim
     setResult(null);
     setFailMsg('');
     setShowHint(false);
-    setHintStep(0);
+    setExecution(null);
   }
 
   return (
@@ -76,6 +85,7 @@ export default function CodeChallenge({ challenge, chapterColor, chapterColorDim
           <button
             className="btn btn-ghost btn-sm"
             onClick={handleReset}
+            disabled={running}
             style={{ padding: '4px 10px', fontSize: '0.75rem' }}
           >
             ↺ Reset
@@ -85,7 +95,8 @@ export default function CodeChallenge({ challenge, chapterColor, chapterColorDim
           id="code-challenge-editor"
           className="code-editor"
           value={code}
-          onChange={(e) => { setCode(e.target.value); setResult(null); setFailMsg(''); }}
+          onChange={(e) => { setCode(e.target.value); setResult(null); setFailMsg(''); setExecution(null); }}
+          disabled={running}
           onKeyDown={handleKeyDown}
           spellCheck={false}
           autoCapitalize="none"
@@ -93,6 +104,8 @@ export default function CodeChallenge({ challenge, chapterColor, chapterColorDim
           aria-label="Python code editor"
         />
       </div>
+
+      {execution&&<div className="code-execution"><h4>Python output</h4><pre>{execution.output||'(No output)'}</pre></div>}
 
       {/* Result feedback */}
       {result === 'pass' && (
@@ -129,7 +142,7 @@ export default function CodeChallenge({ challenge, chapterColor, chapterColorDim
         <button
           className="btn btn-primary"
           onClick={checkCode}
-          disabled={result === 'pass'}
+          disabled={result === 'pass'||running}
           style={{
             background: result !== 'pass'
               ? `linear-gradient(135deg, ${chapterColor}, rgba(255,255,255,0.3))`
@@ -137,7 +150,7 @@ export default function CodeChallenge({ challenge, chapterColor, chapterColorDim
           }}
           id="check-code-btn"
         >
-          {result === 'pass' ? '✓ Passed!' : '▶ Check My Code'}
+          {running?'Checking Python…':result === 'pass' ? '✓ Checked' : '▶ Check My Code'}
         </button>
 
         {!showHint && result !== 'pass' && (
@@ -154,7 +167,7 @@ export default function CodeChallenge({ challenge, chapterColor, chapterColorDim
             className="btn btn-gold"
             onClick={onComplete}
           >
-            🏆 Complete Chapter!
+            {challenge.continueLabel||'Continue'}
           </button>
         )}
       </div>

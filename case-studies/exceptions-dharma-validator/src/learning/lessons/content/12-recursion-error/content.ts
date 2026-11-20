@@ -105,7 +105,6 @@ print(sum_down_to_zero(5))`,
   reflectionPrompt:
     "The universe inside the universe wasn't the frightening part, the absence of any natural stopping point was. Where else does something become overwhelming not because of its scale, but because nothing in it says where to stop?",
 
-  badgeUnlocked: "Vishwarupa, The Form That Ends the Cycle",
 };
 
 export default recursionError;

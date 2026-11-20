@@ -1,9 +1,12 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { parsePythonCodeToMemory } from "../utils/pythonInterpreter";
 import "./PatternDiscovery.css";
 
-export default function PatternDiscovery({ data, onNext, onAddXp, onUpdateMemory }) {
+export default function PatternDiscovery({ data, onNext, onUpdateMemory }) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const { title, subtitle, description, connections, leftHeader, rightHeader, missionTitle, successTitle, successText } = data;
   const [activeConnections, setActiveConnections] = useState([]);
   const [selectedKey, setSelectedKey] = useState(null);
@@ -41,7 +44,6 @@ export default function PatternDiscovery({ data, onNext, onAddXp, onUpdateMemory
           onUpdateMemory(memoryMap, `Linked '${valItem.name}' in Poko's Memory!`);
         }
 
-        if (onAddXp) onAddXp(20);
       }
     } else {
       // Incorrect match attempt: shake item

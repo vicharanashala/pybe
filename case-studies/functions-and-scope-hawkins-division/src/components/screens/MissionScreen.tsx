@@ -1,3 +1,6 @@
+import * as React from 'react';
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { Mission, Choice } from '../../types/mission'
@@ -9,7 +12,6 @@ import ChallengeStep from '../missions/ChallengeStep'
 import RewardStep from '../missions/RewardStep'
 import CharacterLine from '../ui/CharacterLine'
 import GlowButton from '../ui/GlowButton'
-import XPBar from '../ui/XPBar'
 import ParticleField from '../layout/ParticleField'
 
 type Stage = 'briefing' | 'story' | 'choice' | 'concept' | 'challenge' | 'reward'
@@ -25,6 +27,7 @@ interface Props {
 const RIFT_COLORS = ['#00C2FF', '#00C2FF', '#7A00FF', '#7A00FF', '#E50914']
 
 export default function MissionScreen({ mission, hasNext, onNextMission, onExitToMap, onMissionComplete }: Props) {
+  const {setTimeout}=useStoryTimers();
   const [stage, setStage] = useState<Stage>('briefing')
   const [screenShake, setScreenShake] = useState(false)
   const { completeMission } = useGame()
@@ -41,7 +44,7 @@ export default function MissionScreen({ mission, hasNext, onNextMission, onExitT
   }
 
   const handleChallengeSuccess = () => {
-    completeMission(mission.id, mission.reward.xp, mission.reward.badge, mission.cassette.title)
+    completeMission(mission.id)
     onMissionComplete?.()
     triggerShake()
     setStage('reward')
@@ -50,7 +53,7 @@ export default function MissionScreen({ mission, hasNext, onNextMission, onExitT
   const riftColor = RIFT_COLORS[Math.min(mission.riftLevel - 1, RIFT_COLORS.length - 1)]
 
   return (
-    <motion.div
+    <motion.div data-hawkins-stage={stage}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, x: screenShake ? [0, -6, 6, -4, 4, 0] : 0 }}
       transition={{ duration: screenShake ? 0.45 : 0.4 }}
@@ -75,7 +78,6 @@ export default function MissionScreen({ mission, hasNext, onNextMission, onExitT
               {mission.codename}
             </p>
           </div>
-          <XPBar compact />
         </div>
         {/* Rift level meter */}
         <div className="max-w-3xl mx-auto px-4 sm:px-6 pb-2 flex items-center gap-1">

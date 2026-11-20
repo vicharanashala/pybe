@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import "./SuccessScreen.css";
 
-export default function SuccessScreen({ data, xp, coins, onNext, onNextChapter, onRestart }) {
-  const { title, subtitle, missionName, badgeUnlocked, rewards, message, nextChapterId, nextChapterTitle } = data;
+export default function SuccessScreen({ data, onNext, onNextChapter, onRestart }) {
+  const { title, subtitle, missionName, message, nextChapterId, nextChapterTitle } = data;
 
   return (
     <div className="step-container">
@@ -37,41 +37,6 @@ export default function SuccessScreen({ data, xp, coins, onNext, onNextChapter, 
           <p>
             {message || "Poko smiles happily! You have mastered this concept in Poko's Forest!"}
           </p>
-        </div>
-
-        {/* Unlocked Badge */}
-        {badgeUnlocked && (
-          <motion.div
-            className="badge-unlocked-card"
-            initial={{ rotateY: 90 }}
-            animate={{ rotateY: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <div className="badge-glow-ring">
-              <span className="badge-icon-large">{badgeUnlocked.icon}</span>
-            </div>
-            <div className="badge-details">
-              <span className="badge-header-tag">UNLOCKED ACHIEVEMENT BADGE</span>
-              <h3 className="badge-title-text">{badgeUnlocked.title}</h3>
-              <p className="badge-desc-text">{badgeUnlocked.description}</p>
-            </div>
-          </motion.div>
-        )}
-
-        {/* Rewards Summary Bar */}
-        <div className="rewards-summary-bar">
-          <div className="reward-stat">
-            <span className="stat-label">TOTAL XP</span>
-            <span className="stat-val xp-color">+{xp || rewards?.xp || 250} XP</span>
-          </div>
-          <div className="reward-stat">
-            <span className="stat-label">CREDITS EARNED</span>
-            <span className="stat-val coin-color">+{coins || rewards?.coins || 50} COINS</span>
-          </div>
-          <div className="reward-stat">
-            <span className="stat-label">RANK UNLOCKED</span>
-            <span className="stat-val rank-color">{rewards?.rank || "Forest Hero"}</span>
-          </div>
         </div>
 
         {/* Action Controls */}

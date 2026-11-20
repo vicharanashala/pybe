@@ -3,13 +3,13 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { Award, Zap, BookKey, ShieldCheck, Sparkles, RotateCcw } from 'lucide-react';
 import { HeistExam } from '../components/HeistExam';
-import { CertificateGenerator } from '../components/CertificateGenerator';
+
 import { useGame } from '../context/GameContext';
 import { useSoundFX } from '../hooks/useSoundFX';
 
-export const Finale = () => {
+export const Finale = ({onComplete}) => {
   const navigate = useNavigate();
-  const { xp, unlockedBadges, BADGES_DATA, resetAllProgress } = useGame();
+  const {resetAllProgress} = useGame();
   const { playClick } = useSoundFX();
 
   const [examPassed, setExamPassed] = useState(false);
@@ -61,29 +61,6 @@ export const Finale = () => {
             </p>
           </div>
 
-          {/* Stats Bar */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-            gap: '16px',
-            marginBottom: '35px'
-          }}>
-            <div style={{ background: 'rgba(242, 201, 76, 0.1)', border: '1px solid var(--accent)', borderRadius: '16px', padding: '20px', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.85rem', color: 'var(--accent)', textTransform: 'uppercase', fontWeight: 'bold' }}>Total Heist XP</div>
-              <div style={{ fontSize: '2.4rem', fontWeight: '800', color: '#fff', marginTop: '4px' }}>✨ {xp}</div>
-            </div>
-
-            <div style={{ background: 'rgba(0, 240, 255, 0.1)', border: '1px solid var(--secondary)', borderRadius: '16px', padding: '20px', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.85rem', color: 'var(--secondary)', textTransform: 'uppercase', fontWeight: 'bold' }}>Badges Unlocked</div>
-              <div style={{ fontSize: '2.4rem', fontWeight: '800', color: '#fff', marginTop: '4px' }}>🏆 {unlockedBadges.length} / {Object.keys(BADGES_DATA).length}</div>
-            </div>
-
-            <div style={{ background: 'rgba(0, 255, 163, 0.1)', border: '1px solid var(--success)', borderRadius: '16px', padding: '20px', textAlign: 'center' }}>
-              <div style={{ fontSize: '0.85rem', color: 'var(--success)', textTransform: 'uppercase', fontWeight: 'bold' }}>Guard Dog Status</div>
-              <div style={{ fontSize: '2.4rem', fontWeight: '800', color: '#fff', marginTop: '4px' }}>💤 Fast Asleep</div>
-            </div>
-          </div>
-
           {/* 3 "What You Learned" Cards */}
           <h2 style={{ color: '#fff', fontSize: '1.5rem', marginBottom: '18px', textAlign: 'center' }}>
             What You Learned (The Master Thief Rulebook)
@@ -118,10 +95,10 @@ export const Finale = () => {
           </div>
 
           {/* Final Heist Exam */}
-          <HeistExam onExamPassed={() => setExamPassed(true)} />
+          <HeistExam onExamPassed={() => {setExamPassed(true);onComplete?.();}} />
 
           {/* Certificate Generator */}
-          <CertificateGenerator />
+
 
           {/* Restart Adventure Button */}
           <div style={{ textAlign: 'center', marginTop: '30px' }}>

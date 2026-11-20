@@ -120,7 +120,6 @@ attempt_action(fight_battle)`,
   reflectionPrompt:
     "Krishna's teaching separates the duty from the outcome entirely, one doesn't wait on the other. Where else in this story, or in your own life, does something feel owed regardless of how things turn out?",
 
-  badgeUnlocked: "Nishkama Karma, Action Without Attachment to Result",
 };
 
 export default finallyClause;

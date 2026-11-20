@@ -42,7 +42,7 @@ export function Quiz({ questions, onAnswer, onDone }) {
               <b>{picked === question.answer ? 'Exactly.' : `The clearer answer is ${question.answer}.`}</b>
               {question.tip && <p className="quiz-tip">{question.tip}</p>}
             </div>
-            <button className="secondary" onClick={next}>{last ? 'See my mastery' : 'Next question →'}</button>
+            <button className="secondary" onClick={next}>{last ? 'Finish the review' : 'Next question →'}</button>
           </div>
         )}
       </div>

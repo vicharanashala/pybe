@@ -81,5 +81,4 @@ export interface Lesson {
   // Beat 7 — Reflection
   reflectionPrompt: string;
 
-  badgeUnlocked?: string;
 }

@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { parsePythonCodeToMemory } from "../utils/pythonInterpreter";
@@ -38,6 +40,7 @@ const DISCOVERY_MEDALLIONS = [
 ];
 
 export default function ConceptReveal({ data, onNext, onUpdateMemory, onHighlightTarget }) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const { title, subtitle } = data;
   const [activeRecord, setActiveRecord] = useState(POKO_RECORDS[0]);
   const [activeMedallion, setActiveMedallion] = useState(1);

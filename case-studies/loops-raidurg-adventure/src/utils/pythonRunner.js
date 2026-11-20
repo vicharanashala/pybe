@@ -1,136 +1,22 @@
-// Lightweight Python Code Runner & Interpreter for PyBe
-// Executes Python loop constructs and returns stdout / stderr / output list.
-
-export function executePythonCode(code, testType) {
-  const stdout = [];
-  const errors = [];
-  let isPassed = false;
-
-  // Custom mini Python interpreter for loop challenges
-  try {
-    const cleanCode = code.trim();
-    if (!cleanCode) {
-      return { stdout: [], errors: ["Code is empty."], isPassed: false };
-    }
-
-    // 1. HELP LAKSHMI REACH RAIDURG
-    if (testType === 'while_metro') {
-      // Evaluate if code uses while or for loop to reach Raidurg station
-      const stations = [
-        "Ameerpet", "Madhura Nagar", "Yusufguda", "Road No. 5 Jubilee Hills",
-        "Jubilee Hills Check Post", "Peddamma Gudi", "Madhapur", "Durgam Cheruvu",
-        "HITEC City", "Raidurg"
-      ];
-      
-      const hasLoop = /while|for/i.test(cleanCode);
-      const mentionsRaidurg = /Raidurg/i.test(cleanCode);
-      
-      if (!hasLoop) {
-        errors.push("Hint: Use a loop (`while` or `for`) to iterate through stations!");
-      }
-
-      // Simulate execution
-      stations.forEach(st => {
-        stdout.push(`Checking: ${st}`);
-      });
-      stdout.push("Reached Raidurg! 🎉");
-
-      if (hasLoop && mentionsRaidurg) {
-        isPassed = true;
-      }
-    }
-    // 2. PRINT ALL FRIENDS
-    else if (testType === 'for_friends') {
-      const friends = ["Lakshmi", "Ananya", "Rahul", "Vikram"];
-      const hasFor = /for\s+\w+\s+in/i.test(cleanCode);
-
-      friends.forEach(f => {
-        stdout.push(`Friend: ${f}`);
-      });
-
-      if (hasFor) {
-        isPassed = true;
-      } else {
-        errors.push("Hint: Use a `for` loop to iterate over the list of friends.");
-      }
-    }
-    // 3. COUNTDOWN 10 TO 1
-    else if (testType === 'range_countdown') {
-      const hasRange = /range\s*\(/i.test(cleanCode);
-      for (let i = 10; i >= 1; i--) {
-        stdout.push(`${i}`);
-      }
-      if (hasRange) {
-        isPassed = true;
-      } else {
-        errors.push("Hint: Use `range()` to count down from 10 to 1.");
-      }
-    }
-    // 4. FIND MICROPHONE
-    else if (testType === 'break_mic') {
-      const locations = ["Classroom", "Canteen", "Library", "Ground", "Auditorium"];
-      const hasBreak = /\bbreak\b/i.test(cleanCode);
-
-      for (const loc of locations) {
-        stdout.push(`Checking location: ${loc}`);
-        if (loc === "Auditorium") {
-          stdout.push("Found the microphone!");
-          break;
-        }
-      }
-
-      if (hasBreak) {
-        isPassed = true;
-      } else {
-        errors.push("Hint: Use the `break` statement to stop searching once found!");
-      }
-    }
-    // 5. SKIP LOCKED ROOM
-    else if (testType === 'continue_room') {
-      const rooms = [101, 102, 103, 104, 105];
-      const hasContinue = /\bcontinue\b/i.test(cleanCode);
-
-      for (const room of rooms) {
-        if (room === 103) {
-          stdout.push(`Room ${room} is locked! Skipping...`);
-          continue;
-        }
-        stdout.push(`Decorations collected from Room ${room}`);
-      }
-
-      if (hasContinue) {
-        isPassed = true;
-      } else {
-        errors.push("Hint: Use `continue` to skip Room 103 without stopping the loop.");
-      }
-    }
-    // 6. CHECK ALL SEATS
-    else if (testType === 'nested_seats') {
-      const hasNested = (cleanCode.match(/for\s+/g) || []).length >= 2;
-
-      let totalSeats = 0;
-      for (let r = 1; r <= 5; r++) {
-        for (let s = 1; s <= 6; s++) {
-          totalSeats++;
-          stdout.push(`Row ${r}, Seat ${s} checked`);
-        }
-      }
-      stdout.push(`Total 30 seats checked!`);
-
-      if (hasNested) {
-        isPassed = true;
-      } else {
-        errors.push("Hint: Write an outer `for` loop for rows and an inner `for` loop for seats!");
-      }
-    } else {
-      // Default evaluator
-      stdout.push("Code executed successfully.");
-      isPassed = true;
-    }
-
-  } catch (err) {
-    errors.push(`Python Execution Error: ${err.message}`);
-  }
-
-  return { stdout, errors, isPassed };
+import {runPython} from '../../../../library/learning/python-client.mjs';
+import {validateOutput} from '../../../../library/learning/core.mjs';
+// The three supplied programs run in the same isolated worker as every other lab.
+// Judge actual stdout and Python syntax trees, never fabricated keyword output.
+const stations=['Ameerpet','Madhura Nagar','Yusufguda','Road No. 5 Jubilee Hills','Jubilee Hills Check Post','Peddamma Gudi','Madhapur','Durgam Cheruvu','HITEC City','Raidurg'];
+export const LOOP_CHECKS={
+  while_metro:{expected:stations.map(s=>'Checking station: '+s).join('\n')+'\nReached Raidurg!',kind:'while'},
+  for_friends:{expected:['Samosa','Puff','Dosa','Juice','Biryani'].map(d=>'Preparing dish: '+d).join('\n'),kind:'for'},
+  nested_seats:{expected:Array.from({length:5},(_,r)=>Array.from({length:6},(_,s)=>`Row ${r+1} Seat ${s+1} checked`)).flat().join('\n'),kind:'nested'}
+};
+export async function executePythonCode(code,testType){
+  const check=LOOP_CHECKS[testType];
+  if(!check)return {stdout:[],errors:['This challenge has no check defined.'],isPassed:false};
+  const marker='__PYBE_RAIDURG_SYNTAX__';
+  const inspection=`\nimport ast as _pybe_ast\n_pybe_tree=_pybe_ast.parse(${JSON.stringify(code)})\n_pybe_nodes=list(_pybe_ast.walk(_pybe_tree))\n_pybe_kind=${JSON.stringify(check.kind)}\n_pybe_valid=any(isinstance(n,_pybe_ast.While) for n in _pybe_nodes) if _pybe_kind=='while' else any(isinstance(n,_pybe_ast.For) for n in _pybe_nodes) if _pybe_kind=='for' else any(isinstance(n,_pybe_ast.For) and any(isinstance(inner,_pybe_ast.For) for child in n.body for inner in _pybe_ast.walk(child)) for n in _pybe_nodes)\nprint(${JSON.stringify(marker)}+str(_pybe_valid))`;
+  const result=await runPython(code+inspection);
+  if(result.error)return {stdout:result.output.trimEnd().split('\n').filter(Boolean),errors:[result.error],isPassed:false};
+  const index=result.output.lastIndexOf(marker),output=index<0?result.output:result.output.slice(0,index);
+  const structure=index>=0&&result.output.slice(index+marker.length).trim()==='True';
+  const matches=validateOutput({type:'exact',expected:check.expected},output).valid;
+  return {stdout:output.trimEnd().split('\n').filter(Boolean),errors:matches&&structure?[]:['Compare the loop structure and printed results with the task. Use the hint if you need it.'],isPassed:matches&&structure};
 }

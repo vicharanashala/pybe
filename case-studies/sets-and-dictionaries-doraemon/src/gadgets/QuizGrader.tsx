@@ -1,3 +1,4 @@
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
 import React, { useState, useEffect } from 'react';
 import { GlassCard } from '../shared-components/GlassCard';
 import { GadgetShell } from './GadgetShell';
@@ -12,6 +13,7 @@ interface QuizGraderProps {
   isCompleted?: boolean;
 }
 
+const useStoryTimers=createStoryTimersHook(React);
 export const QuizGrader: React.FC<QuizGraderProps> = ({
   question,
   options,
@@ -20,6 +22,7 @@ export const QuizGrader: React.FC<QuizGraderProps> = ({
   onGrade,
   isCompleted = false
 }) => {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const [isAnswered, setIsAnswered] = useState<boolean>(isCompleted);
   const [shake, setShake] = useState<boolean>(false);

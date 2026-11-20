@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import LandingPage from './components/LandingPage';
 import ModuleView from './components/ModuleView';
 
-export default function App() {
+export default function App({onComplete}) {
   const [activeModule, setActiveModule] = useState(null);
   const [currentBeat, setCurrentBeat] = useState(1);
 
@@ -25,6 +25,7 @@ export default function App() {
           currentBeat={currentBeat}
           onBeatChange={setCurrentBeat}
           onBackToModules={handleBackToModules}
+          onComplete={onComplete}
         />
       )}
     </div>

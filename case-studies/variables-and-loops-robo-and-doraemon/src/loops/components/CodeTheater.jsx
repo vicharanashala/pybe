@@ -1,9 +1,12 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useEffect, useMemo, useState } from 'react';
 import { Play, Pause, SkipBack, SkipForward, RotateCcw } from 'lucide-react';
 import MemoryOrbs from './MemoryOrbs';
 import ExecutionTimeline from './ExecutionTimeline';
 
 export default function CodeTheater({ trace, code }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [stepIndex, setStepIndex] = useState(-1);
   const [playing, setPlaying] = useState(false);
 

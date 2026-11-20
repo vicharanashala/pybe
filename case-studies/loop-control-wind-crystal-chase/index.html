@@ -20,7 +20,6 @@
     <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
     <div class="top-meta">
       <span id="stageLabel">Start</span>
-      <span class="xp">✦ <span id="xpCount">0</span> XP</span>
     </div>
   </div>
 
@@ -274,27 +273,21 @@ for island in islands:
       </div>
 
       <div class="msg" id="msgPuzzle"></div>
-      <button class="btn-main next hidden" id="nPuzzle" data-next="result">Claim Badge →</button>
+      <button class="btn-main next hidden" id="nPuzzle" data-next="result">Finish the Journey →</button>
     </div>
   </section>
 
   <!-- ==================== RESULT ==================== -->
   <section class="page" id="result">
     <div class="content result-box">
-      <div class="big-badge" id="finalBadge">
-        <img src="assets/badge-sky.svg" alt="Sky Badge" class="badge-img" />
-      </div>
-      <h2 id="resultTitle">Sky Glider</h2>
+      <h2 id="resultTitle">Journey Complete</h2>
       <p id="resultText">You mastered Python loops!</p>
 
       <div class="stats">
-        <div><span id="fXp">0</span><small>XP</small></div>
         <div><span id="fCh">0</span><small>Challenges</small></div>
-        <div><span id="fCr">0</span><small>Crystals</small></div>
       </div>
 
-      <div class="badges" id="badges"></div>
-      <button class="btn-main" onclick="location.reload()">Fly Again</button>
+      <button class="btn-main" id="replayBtn">Fly Again</button>
     </div>
   </section>
 

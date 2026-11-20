@@ -1,3 +1,6 @@
+import * as React from 'react';
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 // Scene player — orchestrates one scene: cinematic camera move over the
 // colony viewer, sequential narration, an interactive action phase, the
 // quiz, and (for the reveal scene) the recursion reveal. Advances the
@@ -11,20 +14,20 @@
 import { useEffect, useState, useMemo, useRef, Suspense, lazy } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Hand, RotateCcw, Eye, EyeOff, Crosshair, ZoomIn, ZoomOut } from 'lucide-react';
-import type { Scene, ChamberSpec, SceneAction, SceneLayer } from '@/data';
-import Narration from '@/components/Narration';
-import QuizCard from '@/components/QuizCard';
-import ChamberModal from '@/components/ChamberModal';
-import PythonCodeReveal from '@/components/PythonCodeReveal';
-import PhotoStage from '@/components/PhotoStage';
-import ConclusionCard from '@/components/ConclusionCard';
-import TransitionReel from '@/components/TransitionReel';
-import { useColonyCamera } from '@/components/colony/useColonyCamera';
-import ColonyMinimap from '@/components/colony/ColonyMinimap';
-import { shaftBottomY, VENT_XS } from '@/components/colony/geometry';
-import { playSfx } from '@/audio/soundEngine';
+import type { Scene, ChamberSpec, SceneAction, SceneLayer } from '../data';
+import Narration from './Narration';
+import QuizCard from './QuizCard';
+import ChamberModal from './ChamberModal';
+import PythonCodeReveal from './PythonCodeReveal';
+import PhotoStage from './PhotoStage';
+import ConclusionCard from './ConclusionCard';
+import TransitionReel from './TransitionReel';
+import { useColonyCamera } from './colony/useColonyCamera';
+import ColonyMinimap from './colony/ColonyMinimap';
+import { shaftBottomY, VENT_XS } from './colony/geometry';
+import { playSfx } from '../audio/soundEngine';
 
-const AntColony = lazy(() => import('@/components/AntColony'));
+const AntColony = lazy(() => import('./AntColony'));
 
 type Stage = 'narration' | 'action' | 'code' | 'quiz' | 'conclusion' | 'bridge' | 'done';
 
@@ -35,7 +38,7 @@ interface ScenePlayerProps {
   index: number;
   total: number;
   recursionDiscovered: boolean;
-  onSceneComplete: (sceneId: number, xp: number) => void;
+  onSceneComplete: (sceneId: number) => void;
   onQuizAnswered: (sceneId: number, correct: boolean) => void;
   onDiscoverRecursion: () => void;
   onPrev: () => void;
@@ -73,6 +76,7 @@ export default function ScenePlayer({
   onExit,
   hasNext,
 }: ScenePlayerProps) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const [stage, setStage] = useState<Stage>('narration');
   const [activeActivity, setActiveActivity] = useState<SceneAction | null>(null);
   const [narrationIndex, setNarrationIndex] = useState(0);
@@ -88,7 +92,7 @@ export default function ScenePlayer({
   const timers = useRef<number[]>([]);
 
   const clearTimers = () => {
-    timers.current.forEach((id) => window.clearTimeout(id));
+    timers.current.forEach((id) => clearTimeout(id));
     timers.current = [];
   };
 
@@ -158,7 +162,7 @@ export default function ScenePlayer({
     if (act.chamberId) setHighlightedChamber(act.chamberId);
     // The layer appears once the work is done, not on click.
     timers.current.push(
-      window.setTimeout(() => {
+      setTimeout(() => {
         if (act.chamberId) {
           setVisibleChamberIds((prev) => (prev.includes(act.chamberId as string) ? prev : [...prev, act.chamberId as string]));
         }
@@ -172,7 +176,7 @@ export default function ScenePlayer({
       }, 1400),
     );
     timers.current.push(
-      window.setTimeout(() => {
+      setTimeout(() => {
         setActiveActivity(null);
         setHighlightedChamber(null);
       }, 2600),
@@ -180,7 +184,7 @@ export default function ScenePlayer({
   };
 
   const awardScene = () => {
-    onSceneComplete(scene.id, scene.xp);
+    onSceneComplete(scene.id);
     if (scene.discoversRecursion && !recursionDiscovered) {
       onDiscoverRecursion();
     }
@@ -219,7 +223,7 @@ export default function ScenePlayer({
   const handleQuizAnswered = (correct: boolean) => {
     onQuizAnswered(scene.id, correct);
     timers.current.push(
-      window.setTimeout(() => {
+      setTimeout(() => {
         if (correct && scene.conclusion) {
           setStage('conclusion');
         } else {
@@ -240,7 +244,7 @@ export default function ScenePlayer({
   const foundingEggsSettled = !revealChamberIds.has('founding');
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-stone-950">
+    <div data-ant-scene={scene.id} data-ant-stage={stage} className="relative min-h-screen overflow-hidden bg-stone-950">
       {/* Cinematic colony backdrop with camera motion + drag-to-pan */}
       <div
         ref={camera.containerRef}
@@ -272,7 +276,7 @@ export default function ScenePlayer({
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-stone-950/40 via-transparent to-stone-950/40" />
 
       {/* Top bar: scene title + nav */}
-      <div className="relative z-20 flex items-center justify-between p-4 sm:p-6">
+      <div className="ant-scene-header relative z-20 flex items-center justify-between p-4 sm:p-6">
         <button
           onClick={onExit}
           className="flex items-center gap-1 rounded-full bg-stone-900/70 px-3 py-1.5 text-sm text-stone-200 backdrop-blur transition hover:bg-stone-800"
@@ -306,7 +310,7 @@ export default function ScenePlayer({
       </div>
 
       {/* Subtitle */}
-      <p className="relative z-20 px-4 text-center text-sm text-amber-200/80 sm:px-0">{scene.subtitle}</p>
+      <p className="ant-scene-subtitle relative z-20 px-4 text-center text-sm text-amber-200/80 sm:px-0">{scene.subtitle}</p>
 
       {/* Reality photograph stage — real colony photos above the dimmed animation.
           Photos advance with the narration; the compare layout (both photos side
@@ -331,7 +335,7 @@ export default function ScenePlayer({
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute left-1/2 top-20 z-20 -translate-x-1/2 rounded-full border border-amber-400/30 bg-stone-900/80 px-4 py-1.5 text-xs text-amber-200 backdrop-blur sm:top-24"
+          className="ant-pattern-hint absolute left-1/2 top-20 z-20 -translate-x-1/2 rounded-full border border-amber-400/30 bg-stone-900/80 px-4 py-1.5 text-xs text-amber-200 backdrop-blur sm:top-24"
         >
           <span className="font-mono">↻ {scene.recursionStep.label}</span>
           {scene.recursionStep.repeats && (
@@ -341,7 +345,7 @@ export default function ScenePlayer({
       )}
 
       {/* Bottom interaction dock */}
-      <div className="absolute inset-x-0 bottom-0 z-20 p-4 sm:p-6">
+      <div className="ant-dock absolute inset-x-0 bottom-0 z-20 p-4 sm:p-6">
         <AnimatePresence mode="wait">
           {stage === 'narration' && (
             <motion.div key="narr" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 30 }}>
@@ -440,7 +444,7 @@ export default function ScenePlayer({
               animate={{ opacity: 1, y: 0 }}
               className="mx-auto w-full max-w-xl rounded-2xl border border-emerald-400/30 bg-stone-900/85 p-5 text-center backdrop-blur"
             >
-              <p className="mb-3 text-lg font-semibold text-emerald-300">Scene complete — +{scene.xp} XP earned</p>
+              <p className="mb-3 text-lg font-semibold text-emerald-300">Scene complete</p>
               <div className="flex justify-center gap-3">
                 <button
                   onClick={() => {
@@ -478,7 +482,7 @@ export default function ScenePlayer({
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 0.7, 0] }}
           transition={{ duration: 3, repeat: Infinity }}
-          className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 text-xs text-amber-200/50"
+          className="ant-explore-hint absolute left-1/2 top-1/2 z-10 -translate-x-1/2 text-xs text-amber-200/50"
         >
           tap a chamber to explore
         </motion.p>

@@ -1,0 +1,55 @@
+/* Palette for authored utility-CSS stories. Their layout and interactions stay local. */
+[class*="bg-slate-9"],
+[class*="bg-slate-8"],
+[class*="bg-stone-9"],
+[class*="bg-stone-8"],
+[class*="bg-zinc-9"],
+[class*="bg-zinc-8"] {
+  background-color: #fcf8f2;
+}
+[class*="bg-slate-7"],
+[class*="bg-slate-6"] {
+  background-color: #fff0e2;
+}
+[class*="text-slate-1"],
+[class*="text-slate-2"],
+[class*="text-stone-1"],
+[class*="text-stone-2"],
+[class*="text-zinc-1"],
+[class*="text-zinc-2"],
+[class*="text-white"] {
+  color: #30271f;
+}
+[class*="text-slate-3"],
+[class*="text-slate-4"],
+[class*="text-slate-5"] {
+  color: #765d48;
+}
+[class*="text-stone-3"], [class*="text-stone-4"], [class*="text-stone-5"],
+[class*="text-zinc-3"], [class*="text-zinc-4"], [class*="text-zinc-5"] {color:#765d48}
+[class*="border-stone-"], [class*="border-zinc-"] {border-color:#eadbce}
+[class*="bg-blue-9"], [class*="bg-blue-8"] {background-color:#fff0e2}
+[class*="bg-emerald-9"], [class*="bg-green-9"] {background-color:#eef5e9}
+[class*="text-emerald-2"], [class*="text-emerald-3"], [class*="text-emerald-4"],
+[class*="text-green-2"], [class*="text-green-3"], [class*="text-green-4"] {color:#286435}
+[class*="bg-red-9"], [class*="bg-rose-9"] {background-color:#fff0e9}
+[class*="text-red-2"], [class*="text-red-3"], [class*="text-rose-2"], [class*="text-rose-3"] {color:#9a352a}
+[class*="border-slate-"] {
+  border-color: #eadbce;
+}
+[class*="bg-blue-6"],
+[class*="bg-blue-5"] {
+  background-color: #df622f;
+  color: white;
+}
+[class*="text-blue-"] {
+  color: #b24e25;
+}
+[class*="border-blue-"] {
+  border-color: #df622f;
+}
+pre,
+pre code {
+  background: #20232c;
+  color: #f1f0ed;
+}

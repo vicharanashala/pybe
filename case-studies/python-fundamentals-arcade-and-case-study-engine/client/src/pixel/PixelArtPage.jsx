@@ -1,17 +1,12 @@
+import {cancelPython} from '../../../../../library/learning/python-client.mjs';
+import {createStoryPythonHook} from '../../../../../shared/story-python.mjs';
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+import {createArcadePythonBridge} from '../../../../../shared/story-arcade-python.mjs';
+const useStoryPython=createStoryPythonHook(React),useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect, useRef } from 'react';
 import { Palette, Play, RotateCcw, AlertTriangle, CheckCircle, Terminal } from 'lucide-react';
 
-const Theme = {
-  bg: '#0a0f12',
-  cardBg: '#12181c',
-  border: '#1f2b34',
-  text: '#ffffff',
-  muted: '#7f93a1',
-  neonCyan: '#00f3ff',
-  neonGreen: '#39ff14',
-  neonPink: '#ff007f',
-  neonYellow: '#ffea00'
-};
+import {arcadeTheme as Theme} from '../../../../../shared/story-arcade-theme.mjs';
 
 const CHALLENGES = [
   {
@@ -96,58 +91,43 @@ for y in range(16):
   }
 ];
 
-export default function PixelArtPage() {
+export default function PixelArtPage({onComplete}) {
+  const {run}=useStoryPython();
+  const epochRef=useRef(0);
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [selectedChallenge, setSelectedChallenge] = useState(CHALLENGES[0]);
   const [cells, setCells] = useState(Array(16 * 16).fill('#0d1317'));
   const [logs, setLogs] = useState(['Pixel canvas initialized. Exposing paint hooks to Python.']);
   const [resultMessage, setResultMessage] = useState(null);
   
-  const [pyodide, setPyodide] = useState(null);
+  const [pyodide] = useState(()=>createArcadePythonBridge(run));
   const [pyodideLoading, setPyodideLoading] = useState(false);
 
   const [code, setCode] = useState(CHALLENGES[0].template);
 
   // Sync editor template on challenge switch
   const handleChallengeChange = (challenge) => {
+    if(pyodideLoading)return;
     setSelectedChallenge(challenge);
     setCode(challenge.template);
     handleReset();
   };
 
   const handleReset = () => {
+    epochRef.current++;if(pyodideLoading)cancelPython();
     setCells(Array(16 * 16).fill('#0d1317'));
     setResultMessage(null);
     setLogs(['Canvas reset. Board cleared.']);
   };
 
   // Load Pyodide
-  const initPyodide = async () => {
-    if (pyodide) return pyodide;
-    setPyodideLoading(true);
-    try {
-      if (!window.loadPyodide) {
-        await new Promise((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = '/pyodide/pyodide.js';
-          script.onload = resolve;
-          script.onerror = () => reject(new Error('Failed to load local Pyodide.'));
-          document.head.appendChild(script);
-        });
-      }
-      const py = await window.loadPyodide({ indexURL: '/pyodide/' });
-      setPyodide(py);
-      setPyodideLoading(false);
-      return py;
-    } catch (err) {
-      setLogs(prev => [...prev, `[ERROR] Failed to load Pyodide: ${err.message}`]);
-      setPyodideLoading(false);
-      return null;
-    }
-  };
+  const initPyodide = async () => pyodide;
 
   const runCode = async () => {
+    if(pyodideLoading)return;
+    const epoch=++epochRef.current;
+    setPyodideLoading(true);
     const py = await initPyodide();
-    if (!py) return;
 
     // Reset grid initially
     const freshCells = Array(16 * 16).fill('#0d1317');
@@ -175,6 +155,7 @@ export default function PixelArtPage() {
 
     try {
       await py.runPythonAsync(code);
+      if(epochRef.current!==epoch)return;
       
       // Update cell colors state
       const mappedHexes = freshCells.map(c => colorMap[c] || c);
@@ -183,6 +164,7 @@ export default function PixelArtPage() {
       // Validate pattern
       const isCorrect = selectedChallenge.validate(freshCells);
       if (isCorrect) {
+        onComplete?.(selectedChallenge.id);
         setLogs(prev => [...prev, '✓ Canvas rendering matches target pattern! Success.']);
         setResultMessage({
           success: true,
@@ -197,12 +179,13 @@ export default function PixelArtPage() {
       }
 
     } catch (err) {
+      if(epochRef.current!==epoch)return;
       setLogs(prev => [...prev, `[RUNTIME ERROR] ${err.message}`]);
       setResultMessage({
         success: false,
         text: 'Autopilot crash! Python script encountered a runtime exception.'
       });
-    }
+    } finally {setPyodideLoading(false);}
   };
 
   // Convert pixels to a PNG and trigger download offline
@@ -219,7 +202,7 @@ export default function PixelArtPage() {
         ctx.fillStyle = color === '#0d1317' ? '#070a0e' : color;
         ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
         // Draw grid border for resolution
-        ctx.strokeStyle = '#12181c';
+        ctx.strokeStyle = '#fffdf9';
         ctx.strokeRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
       }
     }
@@ -269,7 +252,7 @@ export default function PixelArtPage() {
             disabled={pyodideLoading}
             style={{
               background: Theme.neonGreen,
-              color: '#0a0f12',
+              color: '#fffaf3',
               border: 'none',
               borderRadius: 10,
               padding: '0.65rem 1.25rem',
@@ -371,7 +354,7 @@ export default function PixelArtPage() {
             <Terminal size={18} /> PYTHON CANVAS ALGORITHM
           </h2>
           <textarea
-            value={code}
+            value={code} disabled={pyodideLoading}
             onChange={(e) => setCode(e.target.value)}
             style={{
               width: '100%',
@@ -450,7 +433,7 @@ export default function PixelArtPage() {
 
       {/* Outcome Banner */}
       {resultMessage && (
-        <div style={{
+        <div className="arcade-feedback" role="status" style={{
           background: resultMessage.success ? 'rgba(57,255,20,0.06)' : 'rgba(255,0,127,0.06)',
           border: resultMessage.success ? `1px solid ${Theme.neonGreen}` : `1px solid ${Theme.neonPink}`,
           borderRadius: 16,

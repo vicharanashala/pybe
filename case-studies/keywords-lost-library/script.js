@@ -218,14 +218,8 @@ const puzzles = puzzleBank.map(item => {
   };
 });
 
-let xp = 0, score = 0, discovered = new Set(), currentPuzzle = 0, currentSteps = [], draggedIndex = null, activeCategory = 'All';
-const xpEl = document.getElementById('xp');
+let discovered = new Set(), currentPuzzle = 0, currentSteps = [], draggedIndex = null, activeCategory = 'All';
 const grid = document.getElementById('keywordGrid');
-
-function addXP(n) {
-  xp += n;
-  xpEl.textContent = xp;
-}
 
 function esc(t) {
   return t.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
@@ -274,7 +268,6 @@ function renderKeywords() {
         card.classList.add('open');
         if (!discovered.has(w)) {
           discovered.add(w);
-          addXP(5);
           updateDiscovery();
         }
       }
@@ -290,7 +283,6 @@ function updateDiscovery() {
 function loadPuzzle() {
   const p = puzzles[currentPuzzle];
   document.getElementById('puzzleCount').textContent = `Question ${currentPuzzle + 1} / ${puzzles.length}`;
-  document.getElementById('score').textContent = score;
   document.getElementById('puzzleIcon').textContent = p.icon;
   document.getElementById('puzzleTitle').textContent = p.title;
   document.getElementById('puzzleMission').textContent = p.mission;
@@ -359,9 +351,6 @@ document.getElementById('checkPuzzle').onclick = () => {
   const ok = currentSteps.every((s, i) => s === correct[i]);
   const fb = document.getElementById('puzzleFeedback');
   if (ok) {
-    score += 20;
-    addXP(20);
-    document.getElementById('score').textContent = score;
     fb.textContent = '✨ Perfect! You rebuilt the execution path correctly.';
     fb.className = 'feedback good';
     document.querySelectorAll('.step-card').forEach(c => {
@@ -400,28 +389,17 @@ document.getElementById('nextPuzzle').onclick = () => {
 function showResult() {
   document.getElementById('quiz').classList.add('hidden');
   document.getElementById('result').classList.remove('hidden');
-  const total = puzzles.length * 20;
-  const percent = Math.round((score / total) * 100);
-  document.getElementById('finalScore').textContent = `${percent}%`;
-  document.getElementById('finalXp').textContent = xp;
   document.getElementById('finalDiscovered').textContent = discovered.size;
   const title = document.getElementById('resultTitle');
   const text = document.getElementById('resultText');
-  if (percent >= 85) {
-    title.textContent = '🐍 Python Keyword Guardian';
-    text.textContent = `Excellent! You solved the full puzzle journey and scored ${percent}%. The Lost Library is fully restored.`;
-  } else if (percent >= 60) {
-    title.textContent = '📚 Python Code Explorer';
-    text.textContent = `Great work! You completed the journey and scored ${percent}%. Review the solution cards and try again to master the trickier ones.`;
-  } else {
-    title.textContent = '🔎 Curious Python Beginner';
-    text.textContent = `You completed the journey and scored ${percent}%. Use the explanations and solutions, then play again with fresh questions.`;
-  }
+  title.textContent = 'The Lost Library Is Restored';
+  text.textContent = 'You rebuilt the full puzzle journey. Review the keyword cards and explanations, or play again with fresh questions.';
   document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
 }
 
 document.getElementById('startBtn').onclick = () =>
   document.getElementById('quest').scrollIntoView({ behavior: 'smooth' });
+document.getElementById('replayBtn').onclick = () => location.reload();
 
 document.querySelectorAll('.next-btn').forEach(b => {
   b.onclick = () =>

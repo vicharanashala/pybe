@@ -38,7 +38,7 @@ const WHILE_LOOP_OPTIONS = [
 // the While Loop Flowchart's own mini challenge (subStep 7) and before the module moves
 // on toward the Playground — a discovery-based "for vs. while" comparison scene the
 // learner reaches only once every existing beat above it has run untouched.
-export default function RepetitionConcept({ onNext, onCrystal }) {
+export default function RepetitionConcept({ onNext }) {
   const [subStep, setSubStep] = useState(0);
   const go = (n) => () => setSubStep(n);
 
@@ -51,8 +51,6 @@ export default function RepetitionConcept({ onNext, onCrystal }) {
       prompt="Before you move on: how many times does the body of for i in range(2, 9, 2): run?"
       options={FOR_LOOP_OPTIONS}
       explanation="Exactly! range(2, 9, 2) produces 2, 4, 6, 8 — four values, four passes through the body. 9 is never reached."
-      rewardLabel="Loop Crystal"
-      onCorrectFirstTime={() => onCrystal?.('blue')}
       onNext={go(5)}
     />
   );
@@ -64,13 +62,11 @@ export default function RepetitionConcept({ onNext, onCrystal }) {
       prompt="c starts at 2, the loop checks c < 5, and nothing inside the body ever changes c. What happens?"
       options={WHILE_LOOP_OPTIONS}
       explanation="Right — the condition c < 5 stays true forever because c never moves. That's exactly what an infinite loop looks like: always double-check that something inside the loop pushes the condition toward false."
-      rewardLabel="Wizard Scroll"
-      onCorrectFirstTime={() => onCrystal?.('blue')}
       onNext={go(8)}
     />
   );
 
-  if (subStep === 8) return <ForVsWhileChoice onNext={onNext} onCrystal={onCrystal} />;
+  if (subStep === 8) return <ForVsWhileChoice onNext={onNext} />;
 
   return (
     <div className="lp-scene">

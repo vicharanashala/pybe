@@ -128,7 +128,6 @@ except DuplicateWarriorError as e:
   reflectionPrompt:
     "Gandhari's curse means something specific because she built it for one exact grief, not because curses are inherently powerful. Where else does naming a problem precisely, instead of reaching for a general complaint, change how seriously, and how specifically, it gets addressed?",
 
-  badgeUnlocked: "Shraapa, The Curse Built for One Grief",
 };
 
 export default customExceptions;

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { ArrowLeft, Gem } from 'lucide-react';
+import {readStoryState,saveStoryState} from '../../../../shared/story-state.mjs';
+import React, { useState, useEffect } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import Scene1Explosion from './scenes/Scene1Explosion';
 import Scene2Searching from './scenes/Scene2Searching';
 import Scene3Discovery from './scenes/Scene3Discovery';
@@ -26,7 +27,6 @@ import './theme/theme.css';
 //  - `memory`: the live { pocketId: gadget } map that scenes 6-10 read and
 //    write, so the Memory Room (Scene 9) and the finale (Scene 10) reflect
 //    exactly what the learner has actually done.
-//  - `gems`: a small reward count, persisted like the rest of progress.
 // ---------------------------------------------------------------------------
 
 const SCENE_META = [
@@ -42,21 +42,18 @@ const SCENE_META = [
   { id: 'mission', label: "Nobita's Emergency" }
 ];
 
-const SCENE_KEY = 'pybe_variables_scene_v2';
-const GEMS_KEY = 'pybe_variables_gems_v2';
+const SCENE_KEY = 'pybe-learning-v1:robo-doraemon:variables-scene';
 const CLOUD_EMOJI = ['☁️', '✨', '☁️', '🌤️'];
 
-export default function Variables({ onBack }) {
+export default function Variables({ onBack,onComplete }) {
   const [sceneIndex, setSceneIndex] = useState(() => {
     try {
-      const saved = Number(localStorage.getItem(SCENE_KEY));
+      const saved = Number(localStorage.getItem(SCENE_KEY) ?? localStorage.getItem('pybe_variables_scene_v2'));
       return Number.isInteger(saved) && saved >= 0 && saved < SCENE_META.length ? saved : 0;
     } catch { return 0; }
   });
-  const [gems, setGems] = useState(() => {
-    try { return Number(localStorage.getItem(GEMS_KEY)) || 0; } catch { return 0; }
-  });
-  const [memory, setMemoryState] = useState({});
+  const [memory, setMemoryState] = useState(()=>readStoryState(localStorage,'robo-doraemon','memory',{}));
+  useEffect(()=>{saveStoryState(localStorage,'robo-doraemon','memory',memory);},[memory]);
 
   function goTo(index) {
     const clamped = Math.max(0, Math.min(index, SCENE_META.length - 1));
@@ -68,25 +65,15 @@ export default function Variables({ onBack }) {
     setMemoryState((prev) => (typeof updater === 'function' ? updater(prev) : updater));
   }
 
-  function addGem() {
-    setGems((g) => {
-      const next = g + 1;
-      try { localStorage.setItem(GEMS_KEY, String(next)); } catch { /* storage unavailable */ }
-      return next;
-    });
-  }
-
   function restart() {
     setMemoryState({});
-    setGems(0);
-    try { localStorage.setItem(GEMS_KEY, '0'); } catch { /* storage unavailable */ }
     goTo(0);
   }
 
   const next = () => goTo(sceneIndex + 1);
 
   function renderScene() {
-    const shared = { memory, setMemory, onGem: addGem };
+    const shared = { memory, setMemory };
     switch (SCENE_META[sceneIndex].id) {
       case 'explosion': return <Scene1Explosion onNext={next} />;
       case 'searching': return <Scene2Searching onNext={next} />;
@@ -97,13 +84,13 @@ export default function Variables({ onBack }) {
       case 'reading': return <Scene7Reading onNext={next} {...shared} />;
       case 'updating': return <Scene8Updating onNext={next} {...shared} />;
       case 'memoryroom': return <Scene9MemoryRoom onNext={next} {...shared} />;
-      case 'mission': return <Scene10FinalMission {...shared} gems={gems} onBack={onBack} onRestart={restart} />;
+      case 'mission': return <Scene10FinalMission {...shared} onComplete={onComplete} onBack={onBack} onRestart={restart} />;
       default: return null;
     }
   }
 
   return (
-    <main className="dm-shell">
+    <main className="dm-shell" data-doraemon-scene={SCENE_META[sceneIndex].id}>
       <div className="dm-clouds" aria-hidden="true">
         {CLOUD_EMOJI.map((e, i) => (
           <span key={i} className="dm-cloud" style={{ top: `${8 + i * 18}%`, animationDelay: `${i * -6}s`, animationDuration: `${22 + i * 4}s` }}>{e}</span>
@@ -113,7 +100,6 @@ export default function Variables({ onBack }) {
       <div className="dm-topbar">
         <button className="dm-back" onClick={onBack}><ArrowLeft size={18} />Learning Hub</button>
         <div className="dm-title">🐱 Doraemon's Magical Memory Pockets</div>
-        <div className="dm-gem-counter"><Gem size={15} />{gems}</div>
       </div>
 
       <nav className="dm-scene-dots">

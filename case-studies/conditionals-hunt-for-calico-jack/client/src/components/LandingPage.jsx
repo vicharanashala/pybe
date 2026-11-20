@@ -16,10 +16,10 @@ const features = [
     desc: 'Write real Python code to navigate through story scenarios. Solve puzzles, outsmart pirates, and watch your code come to life.',
   },
   {
-    icon: '🏆',
+    icon: '🧭',
     iconClass: 'feature-icon--badge',
-    title: 'Earn Pirate Badges',
-    desc: 'Complete each chapter to unlock badges and climb the ranks from Deckhand to Captain. Track your mastery across every topic.',
+    title: 'Explore Both Paths',
+    desc: 'Replay the voyage to see another outcome. Follow each decision and discover why the same instructions can lead down different paths.',
   },
 ];
 
@@ -96,6 +96,7 @@ function WaveSVG({ color }) {
    LANDING PAGE COMPONENT
    ========================================================= */
 export default function LandingPage({ onStartAdventure }) {
+  const topicsRef = useRef(null);
   const revealRefs = useRef([]);
 
   /* Intersection Observer for scroll-reveal */
@@ -182,7 +183,7 @@ export default function LandingPage({ onStartAdventure }) {
           <div className="hero-cta-group">
             <button
               className="cta-secondary"
-              onClick={() => document.getElementById('topics')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => topicsRef.current?.scrollIntoView({ behavior: 'smooth' })}
               id="cta-explore-topics"
             >
               Explore Topics ↓
@@ -234,7 +235,7 @@ export default function LandingPage({ onStartAdventure }) {
       </section>
 
       {/* ====== TOPICS ====== */}
-      <section className="landing-topics" id="topics">
+      <section className="landing-topics" id="topics" ref={topicsRef}>
         <div className="topics-inner">
           <div ref={addRevealRef} className="reveal">
             <p className="section-label">Your Journey</p>

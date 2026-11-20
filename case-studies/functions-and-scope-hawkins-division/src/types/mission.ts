@@ -74,10 +74,5 @@ export interface Mission {
   concept: ConceptReveal
   challenge: Challenge
   challengeSuccess: DialogueLine
-  reward: {
-    xp: number
-    badge: string
-    badgeIcon: string
-  }
   cassette: CassetteTape
 }

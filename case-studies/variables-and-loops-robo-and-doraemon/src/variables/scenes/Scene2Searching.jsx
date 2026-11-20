@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useMemo, useState } from 'react';
 import SceneShell from '../components/SceneShell';
 import SpeechBubble from '../components/SpeechBubble';
@@ -11,7 +13,8 @@ import { GADGETS, JUNK_GADGETS } from '../data/gadgets';
 function shuffledGrid(target, round) {
   const decoyCount = 9 + round * 3;
   const decoys = [];
-  for (let i = 0; i < decoyCount; i += 1) decoys.push(JUNK_GADGETS[(i + round * 3) % JUNK_GADGETS.length]);
+  const junk=JUNK_GADGETS.filter(emoji=>emoji!==target.emoji);
+  for (let i = 0; i < decoyCount; i += 1) decoys.push(junk[(i + round * 3) % junk.length]);
   const items = [
     { id: target.id, emoji: target.emoji, isTarget: true },
     ...decoys.map((emoji, i) => ({ id: `decoy-${round}-${i}`, emoji, isTarget: false }))
@@ -24,6 +27,7 @@ function shuffledGrid(target, round) {
 }
 
 export default function Scene2Searching({ onNext }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [round, setRound] = useState(0);
   const [wrongId, setWrongId] = useState(null);
   const [foundId, setFoundId] = useState(null);
@@ -71,7 +75,7 @@ export default function Scene2Searching({ onNext }) {
       <div className="dm-search-grid">
         {grid.map((item) => (
           <button
-            key={item.id}
+            key={item.id} aria-label={item.isTarget?target.name:`Other gadget ${item.emoji}`}
             className={`dm-search-item ${wrongId === item.id ? 'wrong' : ''} ${foundId === item.id ? 'correct' : ''}`}
             onClick={() => handleClick(item)}
           >

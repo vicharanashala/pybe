@@ -12,7 +12,7 @@ async function files(directory){let found=[];for(const entry of await readdir(di
 test('no submission contains model endpoints, remote SDK initialization, or model requests',async()=>{
  const forbidden=/api\.x\.ai|api\.groq\.com|api\.openai\.com|generativelanguage\.googleapis\.com|api\.anthropic\.com|api\.minimax\.(?:io|chat)|samagama\.in\/platform\/proxy|api\.tokenrouter\.com|image\.pollinations\.ai|new\s+(?:GoogleGenAI|GoogleGenerativeAI|Groq|OpenAI|Anthropic)\s*\(|\.chat\.completions\.create\s*\(|\.generateContent\s*\(/;
  const found=[];
- for(const file of await files(submissions)){
+ for(const file of [...await files(submissions),...await files(path.join(root,'client/src/learning')),...await files(path.join(root,'library/learning'))]){
   if(!/\.(?:js|jsx|mjs|cjs|ts|tsx|py|html)$/.test(file))continue;
   if(forbidden.test(await readFile(file,'utf8')))found.push(path.relative(root,file));
  }
@@ -20,7 +20,7 @@ test('no submission contains model endpoints, remote SDK initialization, or mode
 });
 test('model SDKs are absent from all valid package manifests',async()=>{
  const names=['groq-sdk','@google/genai','@google/generative-ai','openai','@anthropic-ai/sdk'];
- for(const file of await files(submissions))if(path.basename(file)==='package.json'){
+ for(const file of [...await files(submissions),path.join(root,'package.json')])if(path.basename(file)==='package.json'){
   const p=JSON.parse(await readFile(file,'utf8'));
   for(const group of ['dependencies','devDependencies','optionalDependencies'])for(const name of names)assert.ok(!p[group]?.[name],`${file}: ${name}`);
  }

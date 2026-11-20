@@ -1,3 +1,6 @@
+import React from 'react';
+import {createStoryProgressHook} from '../../../shared/story-progress.mjs';
+const useStoryProgress=createStoryProgressHook(React);
 import { useState } from 'react';
 import { RouterProvider, useRouter } from './shared-components/Router';
 import { GlassCard } from './shared-components/GlassCard';
@@ -43,7 +46,9 @@ import {
 
 
 
-function MainAppContent() {
+function MainAppContent({onComplete}:{onComplete?:()=>void}) {
+  const [completed,complete]=useStoryProgress('doraemon-collections');
+  const finish=(topic:string)=>{complete(topic);if(['sets','dicts'].every(t=>t===topic || completed.has(t)))onComplete?.();};
   const { currentRoute, navigate } = useRouter();
 
   // Navigation Drawer state
@@ -196,7 +201,7 @@ function MainAppContent() {
   };
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="doraemon-shell" data-doraemon-route={currentRoute} data-doraemon-step={`${currentTopic}:${learningStep}`} style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       
       {/* 1. Left Drawer Backdrop Overlay */}
       {isDrawerOpen && (
@@ -225,6 +230,7 @@ function MainAppContent() {
         boxShadow: '10px 0 30px rgba(0,0,0,0.3)',
         zIndex: 160,
         transform: isDrawerOpen ? 'translateX(0)' : 'translateX(-100%)',
+        visibility: isDrawerOpen?'visible':'hidden',
         transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         display: 'flex',
         flexDirection: 'column'
@@ -432,7 +438,7 @@ function MainAppContent() {
         {/* Left Side: Hamburger Menu & Py Be Logo */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
           <button 
-            onClick={() => setIsDrawerOpen(true)}
+            aria-label="Open episode menu" onClick={() => setIsDrawerOpen(true)}
             style={{ background: 'transparent', border: 'none', color: '#008cff', cursor: 'pointer', display: 'flex', alignItems: 'center' }}
           >
             <Menu size={30} />
@@ -482,25 +488,9 @@ function MainAppContent() {
           border: '1.5px solid rgba(59, 130, 246, 0.15)'
         }}>
           <span style={{ color: '#22c55e', fontSize: '18px' }}>⏱</span>
-          0 / 2 Completed
+          {completed.size} / 2 Completed
         </div>
 
-        {/* Right Side: Streak Flame badge */}
-        <div style={{
-          border: '2.5px solid #f97316',
-          borderRadius: '9999px',
-          padding: '10px 22px',
-          backgroundColor: 'rgba(249, 115, 22, 0.05)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          color: '#f97316',
-          fontSize: '16px',
-          fontWeight: 800
-        }}>
-          <Flame size={18} fill="#f97316" />
-          1
-        </div>
       </header>
 
       {/* Main Page Area */}
@@ -614,15 +604,9 @@ function MainAppContent() {
                     <span style={{ color: '#475569', fontWeight: 600 }}>Active Student:</span>
                     <span style={{ color: '#0f172a', fontWeight: 800 }}>Nobi Nobita</span>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px', borderBottom: '1.5px solid rgba(0,0,0,0.04)', paddingBottom: '10px' }}>
-                    <span style={{ color: '#475569', fontWeight: 600 }}>Streak Count:</span>
-                    <span style={{ color: '#f97316', fontWeight: 800, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                      <Flame size={14} fill="#f97316" style={{ marginTop: '-2px' }} /> 1 Day
-                    </span>
-                  </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
                     <span style={{ color: '#475569', fontWeight: 600 }}>Total Completed:</span>
-                    <span style={{ color: '#22c55e', fontWeight: 800 }}>0 / 2 Topics</span>
+                    <span style={{ color: '#22c55e', fontWeight: 800 }}>{completed.size} / 2 Topics</span>
                   </div>
                 </div>
               </div>
@@ -1186,7 +1170,7 @@ function MainAppContent() {
                             {learningStep === 5 && <DictDiscovery />}
                             {learningStep === 6 && <DictConceptReveal />}
                             {learningStep === 7 && <DictGuidedPractice />}
-                            {learningStep === 8 && <DictReflection />}
+                            {learningStep === 8 && <DictReflection onComplete={()=>finish('dicts')} />}
                           </>
                         ) : (
                           <>
@@ -1214,7 +1198,7 @@ function MainAppContent() {
                             {learningStep === 5 && <Discovery />}
                             {learningStep === 6 && <ConceptReveal />}
                             {learningStep === 7 && <GuidedPractice />}
-                            {learningStep === 8 && <Reflection />}
+                            {learningStep === 8 && <Reflection onComplete={()=>finish('sets')} />}
                           </>
                         )}
                       </div>
@@ -1296,29 +1280,10 @@ function MainAppContent() {
 
               <div style={{ textAlign: 'center' }}>
                 <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a' }}>Nobi Nobita</h2>
-                <p style={{ fontSize: '13px', color: '#475569', marginTop: '2px' }}>Apprentice Python Coder</p>
+                <p style={{ fontSize: '13px', color: '#475569', marginTop: '2px' }}>Story companion</p>
               </div>
 
-              {/* Progress metrics */}
-              <div style={{
-                width: '100%',
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '16px',
-                marginTop: '10px'
-              }}>
-                <div style={{ background: '#f8fafc', border: '1px solid rgba(0,0,0,0.04)', padding: '16px', borderRadius: '12px', textAlign: 'center' }}>
-                  <Award size={20} style={{ color: '#ffcc00', margin: '0 auto 8px' }} />
-                  <div style={{ fontSize: '11px', color: '#475569', textTransform: 'uppercase' }}>Rank Status</div>
-                  <div style={{ fontSize: '16px', fontWeight: 700, color: '#0f172a', marginTop: '4px' }}>Robo-Cat Student</div>
-                </div>
-
-                <div style={{ background: '#f8fafc', border: '1px solid rgba(0,0,0,0.04)', padding: '16px', borderRadius: '12px', textAlign: 'center' }}>
-                  <BookOpen size={20} style={{ color: '#38bdf8', margin: '0 auto 8px' }} />
-                  <div style={{ fontSize: '11px', color: '#475569', textTransform: 'uppercase' }}>Completed</div>
-                  <div style={{ fontSize: '16px', fontWeight: 700, color: '#0f172a', marginTop: '4px' }}>0/2 Topics</div>
-                </div>
-              </div>
+              <p>{completed.size} of 2 episodes explored.</p>
             </GlassCard>
           </div>
         )}
@@ -1406,10 +1371,10 @@ function MainAppContent() {
   );
 }
 
-function App() {
+function App({onComplete}:{onComplete?:()=>void}) {
   return (
     <RouterProvider>
-      <MainAppContent />
+      <MainAppContent onComplete={onComplete} />
     </RouterProvider>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Volume2, VolumeX, Sparkles, Award, RotateCcw, BookOpen, Compass } from 'lucide-react';
 import { DogMeter } from './DogMeter';
-import { BadgesModal } from './BadgesModal';
+
 import { useGame } from '../context/GameContext';
 import { useSoundFX } from '../hooks/useSoundFX';
 
@@ -10,19 +10,15 @@ export const TopNavBar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { 
-    xp, 
-    unlockedBadges, 
     nerdMode, 
     toggleNerdMode, 
     isMuted, 
     toggleMute, 
     maxPage, 
-    resetAllProgress,
-    BADGES_DATA
+    resetAllProgress
   } = useGame();
   const { playClick } = useSoundFX();
 
-  const [isBadgesOpen, setIsBadgesOpen] = useState(false);
 
   // Determine current chapter from URL
   const match = location.pathname.match(/\/story\/(\d+|finale)/);
@@ -47,7 +43,7 @@ export const TopNavBar = () => {
   };
 
   const handleReset = () => {
-    if (window.confirm('Reset all progress, XP, and badges back to Chapter 1?')) {
+    if (window.confirm('Reset this story back to Chapter 1?')) {
       resetAllProgress();
       navigate('/story/1');
     }
@@ -71,22 +67,6 @@ export const TopNavBar = () => {
 
           {/* Stats & Controls */}
           <div className="nav-controls-group">
-            {/* XP Pill */}
-            <div className="stat-pill xp-pill" title="Earn XP by solving quizzes and experimenting!">
-              <Sparkles size={16} color="var(--accent)" />
-              <span>{xp} XP</span>
-            </div>
-
-            {/* Badges Pill */}
-            <button 
-              className="stat-pill badge-pill" 
-              onClick={() => { playClick(); setIsBadgesOpen(true); }}
-              title="Click to view unlocked badges"
-            >
-              <Award size={16} color="var(--secondary)" />
-              <span>{unlockedBadges.length}/{Object.keys(BADGES_DATA).length} Badges</span>
-            </button>
-
             {/* Mode Switch: Simple vs Nerd Mode */}
             <button 
               className={`mode-toggle-btn ${nerdMode ? 'nerd' : 'simple'}`}
@@ -138,7 +118,7 @@ export const TopNavBar = () => {
       </header>
 
       {/* Badges modal */}
-      <BadgesModal isOpen={isBadgesOpen} onClose={() => setIsBadgesOpen(false)} />
+
     </>
   );
 };

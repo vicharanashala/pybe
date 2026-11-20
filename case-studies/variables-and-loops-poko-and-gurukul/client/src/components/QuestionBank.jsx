@@ -1,9 +1,12 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { parsePythonCodeToMemory } from "../utils/pythonInterpreter";
 import "./QuestionBank.css";
 
-export default function QuestionBank({ data, onNext, onAddXp, onUpdateMemory }) {
+export default function QuestionBank({ data, onNext, onUpdateMemory }) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const { title, subtitle, bank } = data;
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selectedOpt, setSelectedOpt] = useState(null);
@@ -59,9 +62,9 @@ export default function QuestionBank({ data, onNext, onAddXp, onUpdateMemory }) 
     if (q.type === "mcq") {
       correct = optIdx === q.answer;
     } else if (q.type === "choose_label") {
-      correct = optVal === q.answer;
+      correct = optVal === (typeof q.answer==='number'?q.options[q.answer]:q.answer);
     } else if (q.type === "true_false") {
-      correct = optVal === q.answer;
+      correct = optVal === (typeof q.answer==='number'?q.options[q.answer]:q.answer);
     }
 
     setIsAnswered(true);
@@ -72,7 +75,7 @@ export default function QuestionBank({ data, onNext, onAddXp, onUpdateMemory }) 
         const varName = String(optVal).replace(" Box", "").replace(" ✅", "").toLowerCase();
         triggerMemoryUpdate(`${varName} = "${optVal}"`, `Stored box '${varName}' in Poko's Memory!`);
       }
-      if (onAddXp) onAddXp(20);
+
     } else {
       setShake(true);
       setTimeout(() => setShake(false), 500);
@@ -87,7 +90,7 @@ export default function QuestionBank({ data, onNext, onAddXp, onUpdateMemory }) 
     if (correct) {
       const varName = String(q.targetContainer || "honey").replace(" Box", "").toLowerCase();
       triggerMemoryUpdate(`${varName} = ${val}`, `Stored ${val} in ${varName} box!`);
-      if (onAddXp) onAddXp(25);
+
     } else {
       setShake(true);
       setTimeout(() => setShake(false), 500);
@@ -100,7 +103,7 @@ export default function QuestionBank({ data, onNext, onAddXp, onUpdateMemory }) 
     setIsCorrect(card.correct);
     if (card.correct) {
       triggerMemoryUpdate(`berries = "Sweet Berries"`, `Stored Sweet Berries in Poko's Memory!`);
-      if (onAddXp) onAddXp(25);
+
     } else {
       setShake(true);
       setTimeout(() => setShake(false), 500);
@@ -131,7 +134,7 @@ export default function QuestionBank({ data, onNext, onAddXp, onUpdateMemory }) 
           `carrot = "Crunchy Carrot"\ncorn = "Golden Corn"\nnuts = "Crisp Nuts"`,
           "Matched pairs in Poko's Memory!"
         );
-        if (onAddXp) onAddXp(30);
+
       }
     } else {
       // Wrong match
@@ -239,7 +242,7 @@ export default function QuestionBank({ data, onNext, onAddXp, onUpdateMemory }) 
                     disabled={isAnswered}
                     onClick={() => handleMcqSelect(undefined, opt)}
                   >
-                    <span className="opt-text">{opt === "True" ? "✓ True" : "✗ False"}</span>
+                    <span className="opt-text">{opt === "True" ? "✓ True" : opt === "False" ? "✗ False" : opt}</span>
                   </button>
                 );
               })}
@@ -316,7 +319,7 @@ export default function QuestionBank({ data, onNext, onAddXp, onUpdateMemory }) 
                   onClick={() => {
                     setIsAnswered(true);
                     setIsCorrect(true);
-                    if (onAddXp) onAddXp(25);
+
                   }}
                 >
                   Confirm Sequence Order ✓

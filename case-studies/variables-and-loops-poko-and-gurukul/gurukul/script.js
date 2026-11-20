@@ -1,3 +1,5 @@
+async function getGurukulPython(){throw new Error("Open this story in PyBe to run Python.");}
+let prikshaRunning=false;
 /* ==========================================================================
    500 BCE ANCIENT GURUKUL — INTERACTIVE SACRED LOTUS LOOP ENGINE
    ========================================================================== */
@@ -89,6 +91,7 @@ function showWoodenChest() {
 }
 
 function switchView(viewId) {
+  stopLotusLoop();
   document.querySelectorAll('.view-container').forEach(v => v.classList.remove('active-view'));
   const target = document.getElementById(viewId);
   if (target) target.classList.add('active-view');
@@ -691,6 +694,7 @@ function renderLoopSection2_History() {
 let activeAnatomyTab = 'FOR';
 let anatomyForStep = 0;
 let anatomyWhileVal = 0;
+let anatomyWhileStep=0,anatomyDoWhileStep=0;
 
 function renderLoopSection3_Anatomy() {
   updateRudrakshaMala(3, 3);
@@ -1376,6 +1380,7 @@ function resetDoWhileAnatomyDemo() {
 
 // STEP 1 — STORY AT THE SACRED LOTUS POND
 function renderForLoopStep1_Story() {
+  manualLotusCount=0;
   updateRudrakshaMala(1, 7);
   document.getElementById('adventureStepIndicator').innerText = 'Step 1 of 7: Story at the Sacred Lotus Pond';
   const stage = document.getElementById('adventureStageArea');
@@ -1645,6 +1650,7 @@ let lotusLoopInterval = null;
 let currentLotusStep = 1;
 
 function renderForLoopStep5_InteractivePond() {
+  stopLotusLoop();simLotusCount=0;
   updateRudrakshaMala(5, 7);
   document.getElementById('adventureStepIndicator').innerText = 'Step 5 of 7: Interactive Lotus Pond & Carved Practice Board';
   const stage = document.getElementById('adventureStageArea');
@@ -1790,7 +1796,7 @@ function renderForLoopStep6_Missions() {
         </button>
 
         <button class="vintage-btn primary" onclick="renderForLoopStep7_Reward()">
-          <span>Claim Copper Seal & Unlock Next Slate ➔</span>
+          <span>Reflect & Continue ➔</span>
         </button>
       </footer>
     </div>
@@ -1805,7 +1811,7 @@ function runMissionCode(missionId) {
 
   if (missionId === 1) {
     box.innerHTML = '<div style="color:var(--chalk-yellow);">for i in range(1, 11): print(f"8 x {i} = {8 * i}")</div>';
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 10; i++) {
       box.innerHTML += `<div class="sim-line">8 x ${i} = ${8 * i}</div>`;
     }
   } else if (missionId === 2) {
@@ -1813,7 +1819,7 @@ function runMissionCode(missionId) {
     box.innerHTML += `<div class="sim-line" style="font-size:1.6rem;">🪷 🪷 🪷 🪷 🪷 🪷 🪷 🪷 🪷 🪷 🪷 🪷</div>`;
   } else if (missionId === 3) {
     box.innerHTML = '<div style="color:var(--chalk-yellow);">for ring in range(1, 8): print("Bell Chimes 🔔")</div>';
-    for (let r = 1; r <= 4; r++) {
+    for (let r = 1; r <= 7; r++) {
       box.innerHTML += `<div class="sim-line">Bell Chimes 🔔 #${r}</div>`;
     }
     playHeavyGhantaSound();
@@ -1824,7 +1830,7 @@ function runMissionCode(missionId) {
 // STEP 7 — REWARD & COPPER SEAL UNLOCK
 function renderForLoopStep7_Reward() {
   updateRudrakshaMala(7, 7);
-  document.getElementById('adventureStepIndicator').innerText = 'Step 7 of 7: Acharya Reward & Copper Seal Badges';
+  document.getElementById('adventureStepIndicator').innerText = 'Step 7 of 7: Reflection & Next Story';
   const stage = document.getElementById('adventureStageArea');
 
   // Unlock While Loop slate
@@ -1845,39 +1851,20 @@ function renderForLoopStep7_Reward() {
       <div class="scroll-wood-handle"></div>
 
       <div class="reward-artwork-container" style="max-width:640px; margin:0 auto 1.5rem; border:6px solid var(--mud-brown); border-radius:16px; overflow:hidden; box-shadow:0 12px 30px rgba(0,0,0,0.35);">
-        <img src="assets/images/reward_ceremony.png?v=2" alt="Acharya Stamping Copper Seal" style="width:100%; display:block;">
+        <img src="assets/images/reward_ceremony.png?v=2" alt="Acharya and students reflecting" style="width:100%; display:block;">
       </div>
 
       <div class="masterji-quote-box reward">
         <div class="avatar-circle">👴🏽</div>
         <div class="quote-text">
-          <span class="speaker-name">Acharya Awarding Copper Seal</span>
-          <p class="dialogue font-large">"Shabash Vats! You have mastered the Sacred Lotus Loop and earned the Padma Mudra Copper Seal!"</p>
-        </div>
-      </div>
-
-      <!-- Copper Seal Badges Grid -->
-      <div class="copper-seals-grid" style="max-width:600px; margin:1.8rem auto;">
-        <div class="copper-seal-card">
-          <div class="seal-emblem">🪷</div>
-          <div class="seal-title">Padma Mudra</div>
-          <div class="seal-sub">Sacred Lotus Master</div>
-        </div>
-        <div class="copper-seal-card" style="opacity:0.6;">
-          <div class="seal-emblem">🏺</div>
-          <div class="seal-title">Jala Mudra</div>
-          <div class="seal-sub">Temple Well Keeper</div>
-        </div>
-        <div class="copper-seal-card" style="opacity:0.6;">
-          <div class="seal-emblem">📿</div>
-          <div class="seal-title">Rishi Mudra</div>
-          <div class="seal-sub">Rudraksha Seeker</div>
+          <span class="speaker-name">Acharya Reflects</span>
+          <p class="dialogue font-large">"Shabash Vats! You have explored how one instruction repeats across the Sacred Lotus Pond. What stays the same on each pass?"</p>
         </div>
       </div>
 
       <div style="margin-top:1.8rem; display:flex; justify-content:center; gap:1.2rem; flex-wrap:wrap;">
         <button class="vintage-btn primary large-btn" onclick="openGurukulPrikshaView()">
-          <span>Enter Gurukul Priksha Arena 🏆</span>
+          <span>Enter Gurukul Practice Arena</span>
         </button>
         <button class="vintage-btn secondary large-btn" onclick="openWoodenChestView()">
           <span>Return to Manuscripts 📜</span>
@@ -1899,6 +1886,7 @@ function startWhileLoopAdventure() {
 }
 
 function renderWhileLoopStep1_Story() {
+  waterBucketsCount=0;
   updateRudrakshaMala(1);
   document.getElementById('adventureStepIndicator').innerText = 'Step 1 of 5: Water Well Story';
   const stage = document.getElementById('adventureStageArea');
@@ -2221,6 +2209,7 @@ function renderChallengeSelector() {
     btn.style.fontSize = '0.85rem';
     btn.innerHTML = `${isSolved ? '✅' : idx + 1}`;
     btn.onclick = () => {
+      if(prikshaRunning)return;
       currentChallengeIndex = idx;
       renderChallengeSelector();
       loadChallenge(idx);
@@ -2232,11 +2221,11 @@ function renderChallengeSelector() {
   const solvedEl = document.getElementById('prikshaSolvedCount');
   if (solvedEl) solvedEl.innerText = `${solvedChallengeIds.size} / 12`;
 
-  const starsEl = document.getElementById('prikshaStarsCount');
-  if (starsEl) starsEl.innerText = `⭐ ${solvedChallengeIds.size * 10}`;
+
 }
 
 function loadChallenge(index) {
+  if(prikshaRunning)return;
   const ch = prikshaChallenges[index];
   if (!ch) return;
 
@@ -2283,6 +2272,7 @@ function revealCurrentChallengeHint() {
 }
 
 function prevChallenge() {
+  if(prikshaRunning)return;
   if (currentChallengeIndex > 0) {
     currentChallengeIndex--;
     renderChallengeSelector();
@@ -2291,6 +2281,7 @@ function prevChallenge() {
 }
 
 function nextChallenge() {
+  if(prikshaRunning)return;
   if (currentChallengeIndex < prikshaChallenges.length - 1) {
     currentChallengeIndex++;
     renderChallengeSelector();
@@ -2298,19 +2289,7 @@ function nextChallenge() {
   }
 }
 
-function showPrikshaRewardModal() {
-  const modal = document.getElementById('prikshaRewardModal');
-  if (modal) {
-    const dateEl = document.getElementById('certificateDateDisplay');
-    if (dateEl) {
-      dateEl.innerText = "500 BCE";
-    }
-    modal.style.display = 'flex';
-    playVictoryFanfareSound();
-    triggerCelebrationConfetti();
-  }
-}
-
+function showPrikshaRewardModal(){const modal=document.getElementById('prikshaRewardModal');if(modal)modal.style.display='flex';}
 function closePrikshaRewardModal() {
   const modal = document.getElementById('prikshaRewardModal');
   if (modal) {
@@ -2335,13 +2314,6 @@ function closeSingleRewardModal() {
   }
 }
 
-function updateCertificateName(val) {
-  const display = document.getElementById('displayStudentName');
-  if (display) {
-    display.innerText = val.trim() ? val : "Shiṣya Programmer";
-  }
-}
-
 function seekMasterJiBlessings() {
   playHeavyGhantaSound();
   const area = document.getElementById('masterJiBlessingArea');
@@ -2352,153 +2324,32 @@ function seekMasterJiBlessings() {
   }
 }
 
-function printCertificate() {
-  playChalkSound();
-  window.print();
-}
-
-let confettiAnimId = null;
-
-function triggerCelebrationConfetti() {
-  const canvas = document.getElementById('celebrationCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const particles = [];
-  const colors = ['#C98F1D', '#D4AF37', '#A8482A', '#1E3B1C', '#FFD700', '#B87333', '#F5E6C8'];
-
-  for (let i = 0; i < 130; i++) {
-    particles.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height - canvas.height,
-      r: Math.random() * 7 + 4,
-      d: Math.random() * 120,
-      color: colors[Math.floor(Math.random() * colors.length)],
-      tilt: Math.floor(Math.random() * 10) - 10,
-      tiltAngleIncremental: Math.random() * 0.07 + 0.05,
-      tiltAngle: 0,
-      shape: Math.random() > 0.4 ? 'petal' : 'circle'
-    });
+async function runPrikshaCode(isFullCheck) {
+ if(prikshaRunning)return;
+ const ch=prikshaChallenges[currentChallengeIndex],editor=document.getElementById('prikshaCodeTextarea'),consoleEl=document.getElementById('prikshaOutputConsole'),statsEl=document.getElementById('testEvaluationStats');
+ const userCode=editor.value;prikshaRunning=true;editor.disabled=true;
+ consoleEl.textContent='Running Python…';statsEl.style.display='none';
+ const buttons=[...document.querySelectorAll('[data-python-run]')];buttons.forEach(b=>b.disabled=true);
+ try{
+  const python=await getGurukulPython();let output='';python.setStdout({batched:line=>output+=line+'\n'});python.setStderr({batched:()=>{}});
+  await python.runPythonAsync(userCode);
+  if(!consoleEl.isConnected||ch!==prikshaChallenges[currentChallengeIndex])return;
+  consoleEl.textContent=output || '(No printed output)';
+  if(isFullCheck){const normalize=value=>value.replace(/\r\n/g,'\n').trim();const passed=normalize(output)===normalize(ch.expectedOutput);
+   const feedback=document.createElement('p');feedback.className=passed?'python-feedback correct':'python-feedback incorrect';feedback.textContent=passed?'The output matches this story’s sample.':'The output differs from the sample. Check the values and try again.';consoleEl.appendChild(feedback);
+   if(passed){solvedChallengeIds.add(ch.id);renderChallengeSelector();if(solvedChallengeIds.size===12)showPrikshaRewardModal();else showSingleRewardModal(ch);}
   }
-
-  if (confettiAnimId) cancelAnimationFrame(confettiAnimId);
-
-  let step = 0;
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    step += 0.01;
-    particles.forEach(p => {
-      p.tiltAngle += p.tiltAngleIncremental;
-      p.y += (Math.cos(step + p.d) + 3 + p.r / 2) * 0.8;
-      p.x += Math.sin(step);
-      p.tilt = Math.sin(p.tiltAngle) * 15;
-
-      ctx.beginPath();
-      ctx.lineWidth = p.r / 2;
-      ctx.strokeStyle = p.color;
-      ctx.fillStyle = p.color;
-
-      if (p.shape === 'petal') {
-        ctx.save();
-        ctx.translate(p.x, p.y);
-        ctx.rotate((p.tilt * Math.PI) / 180);
-        ctx.beginPath();
-        ctx.ellipse(0, 0, p.r, p.r * 1.8, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      } else {
-        ctx.arc(p.x + p.tilt, p.y, p.r, 0, Math.PI * 2, false);
-        ctx.fill();
-      }
-    });
-
-    if (step < 7) {
-      confettiAnimId = requestAnimationFrame(draw);
-    } else {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    }
-  }
-  draw();
+ }catch(error){if(consoleEl.isConnected)consoleEl.textContent=error.message;}
+ finally{prikshaRunning=false;editor.disabled=false;buttons.forEach(b=>b.disabled=false);}
 }
-
-function playVictoryFanfareSound() {
-  const soundToggle = document.getElementById('soundToggleBtn');
-  if (soundToggle && soundToggle.innerText.includes('OFF')) return;
-
-  try {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    if (!AudioContext) return;
-    const ctx = new AudioContext();
-
-    playHeavyGhantaSound();
-
-    const notes = [293.66, 369.99, 440.00, 587.33];
-    notes.forEach((freq, idx) => {
-      setTimeout(() => {
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(freq, ctx.currentTime);
-        gain.gain.setValueAtTime(0.25, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 0.8);
-      }, idx * 180 + 300);
-    });
-  } catch (err) {
-    console.log(err);
-  }
+function continueAfterChallenge(){closeSingleRewardModal();nextChallenge();}
+let simLotusCount=0,simLotusTimer=null;
+function stopLotusLoop(){if(simLotusTimer!==null)clearInterval(simLotusTimer);simLotusTimer=null;}
+function stepLotusLoop(){
+ if(simLotusCount>=10 || !document.getElementById('simLotusGrid')){stopLotusLoop();return;}
+ simLotusCount++;document.getElementById('simLotus'+simLotusCount).classList.add('picked');
+ document.getElementById('simPondStock').textContent='Stock: '+(10-simLotusCount)+' Lotuses';document.getElementById('simJholaCounter').textContent='Collected: '+simLotusCount+' / 10 Lotuses';document.getElementById('memLotusCount').textContent=String(simLotusCount);document.getElementById('memStatus').textContent=simLotusCount===10?'FINISHED':'RUNNING';
+ if(simLotusCount===10)stopLotusLoop();
 }
-
-function runPrikshaCode(isFullCheck) {
-  const ch = prikshaChallenges[currentChallengeIndex];
-  const userCode = document.getElementById('prikshaCodeTextarea').value;
-  const consoleEl = document.getElementById('prikshaOutputConsole');
-  const statsEl = document.getElementById('testEvaluationStats');
-
-  if (!consoleEl) return;
-  playChalkSound();
-
-  consoleEl.innerHTML = `<div style="color:var(--chalk-yellow);">⚡ Executing Python Code on Carved Practice Board...</div>`;
-
-  setTimeout(() => {
-    try {
-      let simulatedOutput = ch.expectedOutput;
-
-      consoleEl.innerHTML = `<div style="color:#85F69C;">${simulatedOutput.replace(/\n/g, '<br>')}</div>`;
-
-      if (isFullCheck) {
-        solvedChallengeIds.add(ch.id);
-        renderChallengeSelector();
-        playHeavyGhantaSound();
-
-        if (statsEl) {
-          statsEl.style.display = 'block';
-          document.getElementById('statPassed').innerText = '3/3 (100%)';
-          document.getElementById('statTime').innerText = `${Math.floor(Math.random() * 8 + 4)}ms`;
-          document.getElementById('statMemory').innerText = '1.2 MB';
-          document.getElementById('statQuality').innerText = 'A+';
-        }
-
-        consoleEl.innerHTML += `<div style="color:#4EFE84; margin-top:0.6rem; font-weight:bold;">🎉 SUCCESS! All Hidden Test Cases PASSED!</div>`;
-
-        if (ch.id === 12 || solvedChallengeIds.size === 12) {
-          setTimeout(() => {
-            showPrikshaRewardModal();
-          }, 500);
-        } else {
-          setTimeout(() => {
-            showSingleRewardModal(ch);
-          }, 500);
-        }
-      }
-    } catch (err) {
-      consoleEl.innerHTML = `<div style="color:#FF6B6B;">❌ Syntax Error in Code: ${err.message}</div>`;
-    }
-  }, 400);
-}
+function runLotusLoopAuto(){if(simLotusTimer!==null)return;simLotusTimer=setInterval(stepLotusLoop,650);}
+function resetLotusLoop(){stopLotusLoop();simLotusCount=0;document.querySelectorAll('#simLotusGrid .picked').forEach(n=>n.classList.remove('picked'));document.getElementById('simPondStock').textContent='Stock: 10 Lotuses';document.getElementById('simJholaCounter').textContent='Collected: 0 / 10 Lotuses';document.getElementById('memLotusCount').textContent='0';document.getElementById('memStatus').textContent='READY';}

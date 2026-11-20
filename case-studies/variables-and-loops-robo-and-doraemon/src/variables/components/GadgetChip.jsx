@@ -10,6 +10,7 @@ export default function GadgetChip({ emoji, label, selected, draggable = false, 
       draggable={draggable}
       onDragStart={onDragStart}
       onClick={onClick}
+      onKeyDown={onClick?e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onClick(e);}}:undefined}
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
     >

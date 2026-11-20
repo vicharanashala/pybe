@@ -1,0 +1,692 @@
+{
+  "sourceSha256": "59c62a18a2da2cb8fd23ee031c863e8eb1e4c5f10a1313d84729afa78654f3ea",
+  "frameDelayMs": 600,
+  "footer": "🥭 Dabbo's Orchard • Learn Python through a simple story",
+  "pages": [
+    [
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "📖 Dabbo's Story"
+          },
+          {
+            "kind": "write",
+            "text": "👨‍🌾 This is Dabbo."
+          },
+          {
+            "kind": "write",
+            "text": "Dabbo takes care of a beautiful mango orchard. 🌳🥭"
+          },
+          {
+            "kind": "write",
+            "text": "His orchard has many mango trees and many mango boxes."
+          },
+          {
+            "kind": "write",
+            "text": "Every box contains mangoes."
+          },
+          {
+            "kind": "write",
+            "text": "Today, a buyer has come to buy some mangoes."
+          },
+          {
+            "kind": "write",
+            "text": "Let's follow Dabbo and learn Python through his work."
+          }
+        ]
+      },
+      {
+        "kind": "divider",
+        "text": ""
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "📦 One Mango Box"
+          },
+          {
+            "kind": "write",
+            "text": "Dabbo opens one box."
+          },
+          {
+            "kind": "write",
+            "text": "He counts the mangoes."
+          },
+          {
+            "kind": "metric",
+            "label": "🥭 Mangoes in the box",
+            "value": "50"
+          },
+          {
+            "kind": "success",
+            "text": "Dabbo knows that this box contains 50 mangoes."
+          }
+        ]
+      },
+      {
+        "kind": "info",
+        "text": "Next, we will learn how Dabbo can remember the number 50."
+      }
+    ],
+    [
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "📦 Dabbo Needs to Remember a Number"
+          },
+          {
+            "kind": "write",
+            "text": "Dabbo has counted 50 mangoes."
+          },
+          {
+            "kind": "write",
+            "text": "But he may need this number again later."
+          },
+          {
+            "kind": "write",
+            "text": "So he needs a way to remember it."
+          }
+        ]
+      },
+      {
+        "kind": "divider",
+        "text": ""
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "💡 Python Concept: Variable"
+          },
+          {
+            "kind": "write",
+            "text": "Imagine you have a box."
+          },
+          {
+            "kind": "write",
+            "text": "You put something inside the box."
+          },
+          {
+            "kind": "write",
+            "text": "Then you give the box a name."
+          },
+          {
+            "kind": "write",
+            "text": "Later, you can use that name to find what you stored."
+          },
+          {
+            "kind": "success",
+            "text": "In Python, this named storage is called a VARIABLE."
+          }
+        ]
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "write",
+            "text": "🥭 Dabbo remembers:"
+          },
+          {
+            "kind": "metric",
+            "label": "Mangoes",
+            "value": "50"
+          },
+          {
+            "kind": "write",
+            "text": "The important idea is:"
+          },
+          {
+            "kind": "info",
+            "text": "A variable is simply a name that helps Python remember a value."
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "🛒 The Buyer Arrives"
+          },
+          {
+            "kind": "write",
+            "text": "A buyer comes to Dabbo's orchard."
+          },
+          {
+            "kind": "write",
+            "text": "The buyer tells Dabbo exactly what he wants."
+          }
+        ]
+      },
+      {
+        "kind": "divider",
+        "text": ""
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "subheader",
+            "text": "🥭 The buyer wants:"
+          },
+          {
+            "kind": "success",
+            "text": "Mango type: Alphonso"
+          },
+          {
+            "kind": "success",
+            "text": "Condition: Ripe"
+          },
+          {
+            "kind": "success",
+            "text": "Quantity: 8 mangoes"
+          }
+        ]
+      },
+      {
+        "kind": "divider",
+        "text": ""
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "💡 Python Concept: Storing Information"
+          },
+          {
+            "kind": "write",
+            "text": "Dabbo now has three important pieces of information."
+          },
+          {
+            "kind": "write",
+            "text": "1. Which mango?"
+          },
+          {
+            "kind": "write",
+            "text": "2. What condition?"
+          },
+          {
+            "kind": "write",
+            "text": "3. How many?"
+          },
+          {
+            "kind": "info",
+            "text": "Python can remember information so that we can use it later."
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "🤔 Dabbo Makes a Decision"
+          },
+          {
+            "kind": "write",
+            "text": "The buyer wants Alphonso mangoes."
+          },
+          {
+            "kind": "write",
+            "text": "The buyer also wants ripe mangoes."
+          },
+          {
+            "kind": "write",
+            "text": "Dabbo cannot simply give any mango."
+          },
+          {
+            "kind": "write",
+            "text": "He must first check the buyer's request."
+          }
+        ]
+      },
+      {
+        "kind": "divider",
+        "text": ""
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "💡 Python Concept: IF"
+          },
+          {
+            "kind": "write",
+            "text": "An IF condition means:"
+          },
+          {
+            "kind": "success",
+            "text": "👉 Check something before doing something."
+          },
+          {
+            "kind": "write",
+            "text": "Dabbo asks himself:"
+          },
+          {
+            "kind": "write",
+            "text": "❓ Do I have the mango type the buyer wants?"
+          },
+          {
+            "kind": "write",
+            "text": "❓ Are the mangoes ripe?"
+          }
+        ]
+      },
+      {
+        "kind": "divider",
+        "text": ""
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "🌱 Simple Example"
+          },
+          {
+            "kind": "write",
+            "text": "IF the mango is Alphonso..."
+          },
+          {
+            "kind": "write",
+            "text": "AND IF the mango is ripe..."
+          },
+          {
+            "kind": "success",
+            "text": "✅ Then Dabbo can give the mango to the buyer."
+          },
+          {
+            "kind": "info",
+            "text": "This kind of decision is called an IF condition in Python."
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "📦 Dabbo Searches the Boxes"
+          },
+          {
+            "kind": "write",
+            "text": "Dabbo has many mango boxes."
+          },
+          {
+            "kind": "write",
+            "text": "He needs to find the box containing Alphonso mangoes."
+          },
+          {
+            "kind": "write",
+            "text": "He starts checking the boxes one by one."
+          }
+        ]
+      },
+      {
+        "kind": "divider",
+        "text": ""
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "💡 Python Concept: FOR LOOP"
+          },
+          {
+            "kind": "write",
+            "text": "Imagine Dabbo saying:"
+          },
+          {
+            "kind": "write",
+            "text": "🔍 Check this box."
+          },
+          {
+            "kind": "write",
+            "text": "🔍 Check the next box."
+          },
+          {
+            "kind": "write",
+            "text": "🔍 Check the next box."
+          },
+          {
+            "kind": "write",
+            "text": "🔍 Keep checking."
+          },
+          {
+            "kind": "success",
+            "text": "When Python repeats the same task for many items, we can use a FOR LOOP."
+          }
+        ]
+      },
+      {
+        "kind": "divider",
+        "text": ""
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "subheader",
+            "text": "🔎 Dabbo is checking the boxes..."
+          },
+          {
+            "kind": "animation",
+            "frames": [
+              {
+                "kind": "info",
+                "text": "🔍 Dabbo is checking Box 1..."
+              },
+              {
+                "kind": "info",
+                "text": "🔍 Dabbo is checking Box 2..."
+              },
+              {
+                "kind": "info",
+                "text": "🔍 Dabbo is checking Box 3..."
+              },
+              {
+                "kind": "info",
+                "text": "🔍 Dabbo is checking Box 4..."
+              },
+              {
+                "kind": "info",
+                "text": "🔍 Dabbo is checking Box 5..."
+              },
+              {
+                "kind": "success",
+                "text": "🎉 Dabbo found the Alphonso mango box!"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kind": "info",
+        "text": "Simple meaning: A FOR LOOP helps Python repeat a task."
+      }
+    ],
+    [
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "🥭 The Buyer Takes 8 Mangoes"
+          },
+          {
+            "kind": "write",
+            "text": "Dabbo's box originally had 50 mangoes."
+          },
+          {
+            "kind": "write",
+            "text": "The buyer takes 8 mangoes."
+          },
+          {
+            "kind": "write",
+            "text": "Now Dabbo needs to know how many are left."
+          }
+        ]
+      },
+      {
+        "kind": "divider",
+        "text": ""
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "💡 Python Concept: SUBTRACTION"
+          },
+          {
+            "kind": "write",
+            "text": "When something is taken away, we subtract it."
+          },
+          {
+            "kind": "metric",
+            "label": "Mangoes before the sale",
+            "value": "50"
+          },
+          {
+            "kind": "metric",
+            "label": "Mangoes given to buyer",
+            "value": "8"
+          },
+          {
+            "kind": "metric",
+            "label": "Mangoes remaining",
+            "value": "42"
+          }
+        ]
+      },
+      {
+        "kind": "success",
+        "text": "50 − 8 = 42"
+      },
+      {
+        "kind": "info",
+        "text": "Python can perform this calculation for Dabbo."
+      }
+    ],
+    [
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "💰 Dabbo Calculates the Price"
+          },
+          {
+            "kind": "write",
+            "text": "The buyer bought 8 mangoes."
+          },
+          {
+            "kind": "write",
+            "text": "Each mango costs ₹20."
+          },
+          {
+            "kind": "write",
+            "text": "Dabbo needs to calculate the total amount."
+          }
+        ]
+      },
+      {
+        "kind": "divider",
+        "text": ""
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "💡 Python Concept: MULTIPLICATION"
+          },
+          {
+            "kind": "write",
+            "text": "Instead of adding ₹20 eight times..."
+          },
+          {
+            "kind": "write",
+            "text": "Dabbo can multiply."
+          },
+          {
+            "kind": "metric",
+            "label": "Number of mangoes",
+            "value": "8"
+          },
+          {
+            "kind": "metric",
+            "label": "Price of one mango",
+            "value": "₹20"
+          },
+          {
+            "kind": "metric",
+            "label": "Total",
+            "value": "₹160"
+          }
+        ]
+      },
+      {
+        "kind": "success",
+        "text": "8 × ₹20 = ₹160"
+      },
+      {
+        "kind": "info",
+        "text": "Python can multiply numbers and calculate the total automatically."
+      }
+    ],
+    [
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "header",
+            "text": "🎉 Dabbo Completes the Order"
+          },
+          {
+            "kind": "write",
+            "text": "The buyer asked for ripe Alphonso mangoes."
+          },
+          {
+            "kind": "write",
+            "text": "Dabbo checked his mango boxes."
+          },
+          {
+            "kind": "write",
+            "text": "He found the required mangoes."
+          },
+          {
+            "kind": "write",
+            "text": "He gave 8 mangoes to the buyer."
+          },
+          {
+            "kind": "write",
+            "text": "The box went from 50 mangoes to 42 mangoes."
+          },
+          {
+            "kind": "write",
+            "text": "The buyer paid ₹160."
+          }
+        ]
+      },
+      {
+        "kind": "success",
+        "text": "🥭 Dabbo successfully completed the order!"
+      },
+      {
+        "kind": "divider",
+        "text": ""
+      },
+      {
+        "kind": "header",
+        "text": "🧠 What Did We Learn?"
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "subheader",
+            "text": "📦 Variable"
+          },
+          {
+            "kind": "write",
+            "text": "A variable helps Python remember information."
+          },
+          {
+            "kind": "caption",
+            "text": "Dabbo remembered that his box contained 50 mangoes."
+          }
+        ]
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "subheader",
+            "text": "🤔 IF Condition"
+          },
+          {
+            "kind": "write",
+            "text": "IF helps Python make a decision."
+          },
+          {
+            "kind": "caption",
+            "text": "Dabbo checked whether the mango matched the buyer's request."
+          }
+        ]
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "subheader",
+            "text": "🔄 FOR Loop"
+          },
+          {
+            "kind": "write",
+            "text": "A FOR LOOP repeats a task."
+          },
+          {
+            "kind": "caption",
+            "text": "Dabbo checked his boxes one by one."
+          }
+        ]
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "subheader",
+            "text": "➖ Subtraction"
+          },
+          {
+            "kind": "write",
+            "text": "Subtraction helps us find what remains."
+          },
+          {
+            "kind": "caption",
+            "text": "50 mangoes − 8 mangoes = 42 mangoes."
+          }
+        ]
+      },
+      {
+        "kind": "container",
+        "children": [
+          {
+            "kind": "subheader",
+            "text": "✖️ Multiplication"
+          },
+          {
+            "kind": "write",
+            "text": "Multiplication helps us calculate totals quickly."
+          },
+          {
+            "kind": "caption",
+            "text": "8 mangoes × ₹20 = ₹160."
+          }
+        ]
+      },
+      {
+        "kind": "success",
+        "text": "🎓 Congratulations! You completed Dabbo's Python lesson."
+      }
+    ]
+  ]
+}

@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldAlert, ShieldCheck, AlertOctagon, HelpCircle, CheckCircle2 } from 'lucide-react';
@@ -5,7 +7,8 @@ import { useGame } from '../context/GameContext';
 import { useSoundFX } from '../hooks/useSoundFX';
 
 export const BoobyTrapDemo = ({ onTrapDisarmed }) => {
-  const { addXP, raiseDogMeter, lowerDogMeter, triggerConfetti, unlockBadge } = useGame();
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
+  const {raiseDogMeter,lowerDogMeter} = useGame();
   const { playSuccess, playWrong, playDogBark, playClick } = useSoundFX();
 
   const [selectedMethod, setSelectedMethod] = useState(null);
@@ -58,10 +61,10 @@ KeyError: 'dragon'`,
     } else {
       playSuccess();
       lowerDogMeter(25);
-      addXP(30);
-      triggerConfetti();
+
+
       setTrapCleared(true);
-      unlockBadge('trap_dodger');
+
       if (onTrapDisarmed) onTrapDisarmed();
     }
   };

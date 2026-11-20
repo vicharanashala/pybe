@@ -124,81 +124,10 @@ export const ProgressTracker: React.FC = () => {
   );
 };
 
-// Application Main Header with Theme Switcher
-export const Header: React.FC = () => {
-  const { theme, toggleTheme, resetAll } = useProgress();
-
-  return (
-    <header className="w-full bg-parchment-light dark:bg-parchment-dark border-b border-parchment-border dark:border-parchment-darkBorder px-6 py-4 flex items-center justify-between z-30 select-none" role="banner">
-      <div 
-        className="flex items-center gap-3 cursor-pointer group" 
-        onClick={resetAll}
-        onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); resetAll(); } }}
-        tabIndex={0}
-        role="button"
-        aria-label="Reset and return to welcome"
-      >
-        <div className="w-10 h-10 rounded-xl bg-royal-crimson flex items-center justify-center shadow-lg border border-royal-gold/40 rotate-3 group-hover:rotate-12 transition-transform duration-300">
-          <span className="text-white font-serif text-xl font-bold italic" aria-hidden="true">Py</span>
-        </div>
-        <div>
-          <h1 className="text-xl md:text-2xl font-serif font-bold text-royal-crimson dark:text-royal-gold tracking-wide m-0">
-            PyBe
-          </h1>
-          <p className="text-[10px] md:text-xs font-sans text-gray-500 dark:text-gray-400 tracking-wider uppercase font-medium">
-            Sanskrit of Scripting
-          </p>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-4">
-        <button 
-          onClick={toggleTheme}
-          className="p-2.5 rounded-full bg-parchment-card dark:bg-parchment-darkCard border border-parchment-border dark:border-parchment-darkBorder hover:text-royal-crimson dark:hover:text-royal-gold hover:scale-105 transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-royal-crimson"
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? (
-            <Moon className="w-5 h-5 text-royal-indigo" aria-hidden="true" />
-          ) : (
-            <Sun className="w-5 h-5 text-royal-gold" aria-hidden="true" />
-          )}
-        </button>
-      </div>
-    </header>
-  );
-};
-
-// Animated Score Gauge for AI Feedback Metrics
-export const ScoreGauge: React.FC<{
-  label: string;
-  score: number;
-  colorClass?: string;
-  delayMs?: number;
-}> = ({ label, score, colorClass = 'bg-royal-crimson', delayMs = 0 }) => {
-  const [width, setWidth] = React.useState(0);
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setWidth(score);
-    }, delayMs + 100);
-    return () => clearTimeout(timer);
-  }, [score, delayMs]);
-
-  return (
-    <div className="mb-4">
-      <div className="flex justify-between items-center mb-1 text-sm font-medium">
-        <span className="text-gray-700 dark:text-gray-300">{label}</span>
-        <span className="text-royal-crimson dark:text-royal-gold font-semibold">{score}/100</span>
-      </div>
-      <div className="w-full bg-parchment-border dark:bg-parchment-darkBorder h-2 rounded-full overflow-hidden">
-        <div 
-          className={`h-full rounded-full ${colorClass} transition-all duration-1000 ease-out`}
-          style={{ width: `${width}%` }}
-        />
-      </div>
-    </div>
-  );
-};
+// The surrounding PyBe module owns its header and palette.
+export const Header=()=>null;
+// Retained export for older references; learner grades have been retired.
+export const ScoreGauge=()=>null;
 
 // Helper SVG Icons to avoid import issues
 const HelpCircleIcon = (props: React.SVGProps<SVGSVGElement>) => (

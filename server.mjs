@@ -1,11 +1,12 @@
 import http from 'node:http';
+import {getLesson} from './lesson-registry.mjs';
 import { readFile, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { launchOriginal, publicJob, closeOriginals } from './original-runtime.mjs';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
-const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.mp3': 'audio/mpeg', '.wav': 'audio/wav', '.woff2': 'font/woff2', '.md': 'text/plain; charset=utf-8', '.txt': 'text/plain; charset=utf-8' };
+const mime = { '.wasm':'application/wasm', '.lottie':'application/zip', '.py': 'text/plain; charset=utf-8', '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.gif': 'image/gif', '.mp3': 'audio/mpeg', '.wav': 'audio/wav', '.woff2': 'font/woff2', '.md': 'text/plain; charset=utf-8', '.txt': 'text/plain; charset=utf-8' };
 export function resolveRequest(url) {
   const pathname = decodeURIComponent(new URL(url, 'http://localhost').pathname);
   const prefix = pathname.startsWith('/submissions/') ? '/submissions/' : null;
@@ -20,6 +21,11 @@ export function resolveRequest(url) {
 export const server = http.createServer(async (req, res) => {
   try {
     const requestUrl=new URL(req.url,'http://localhost');
+    if(requestUrl.pathname.startsWith('/api/lessons/')&&req.method==='GET'){
+      const lesson=await getLesson(decodeURIComponent(requestUrl.pathname.slice('/api/lessons/'.length)));
+      res.writeHead(lesson?200:404,{'Content-Type':'application/json','Cache-Control':'no-store'});
+      return res.end(JSON.stringify(lesson||{message:'Lesson not found.'}));
+    }
     if(requestUrl.pathname==='/api/originals/launch'&&req.method==='POST'){
       const origin=req.headers.origin;
       if(!origin||new URL(origin).host!==req.headers.host){res.writeHead(403);return res.end('Open original apps from the PyBe library.');}

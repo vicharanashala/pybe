@@ -132,7 +132,7 @@ function initApp() {
     });
 
     // Load scenes from localized scenesData variable
-    state.scenes = scenesData;
+    state.scenes = structuredClone(scenesData);
     console.log('Script loaded successfully.');
     
     // Attempt to restore saved state
@@ -881,14 +881,13 @@ function renderCompletion(scene, container) {
         curtain.classList.remove('open');
     }
 
-    // 2. Render badge panel on top of closed curtains
-    const badgeOverlay = document.createElement('div');
-    badgeOverlay.className = 'badge-overlay-panel';
-    badgeOverlay.innerHTML = `
-        <div class="badge-container">
-            <img class="badge-img" src="${scene.badge}" alt="Scroll Keeper Badge" />
-            <div class="badge-title">🏅 Royal Scroll Keeper</div>
-            <p class="badge-desc">Congratulations! You have successfully mastered Python Lists and configured the royal supply scroll for the Mauryan army.</p>
+    // 2. Render completion panel on top of closed curtains
+    const completionOverlay = document.createElement('div');
+    completionOverlay.className = 'completion-overlay-panel';
+    completionOverlay.innerHTML = `
+        <div class="completion-container">
+            <h2 class="completion-title">Your supply scroll is ready.</h2>
+            <p class="completion-description">Congratulations! You have successfully mastered Python Lists and configured the royal supply scroll for the Mauryan army.</p>
         </div>
         <div class="choice-container" style="margin-top: 25px; justify-content: center; gap: 15px;">
             <button id="replay-btn" class="wood-button" style="padding: 12px 24px; font-size: 1rem;">Replay Lesson</button>
@@ -897,20 +896,19 @@ function renderCompletion(scene, container) {
     `;
 
     if (curtain) {
-        curtain.appendChild(badgeOverlay);
+        curtain.appendChild(completionOverlay);
     } else {
-        container.appendChild(badgeOverlay);
+        container.appendChild(completionOverlay);
     }
 
     // Bind buttons
     document.getElementById('replay-btn').addEventListener('click', () => {
-        badgeOverlay.remove();
+        completionOverlay.remove();
         resetGame();
     });
 
     document.getElementById('next-concept-btn').addEventListener('click', () => {
-        console.log("Future concept placeholder clicked.");
-        alert("Next concept coming soon! You are now a master of Python Lists.");
+        document.dispatchEvent(new CustomEvent('pybe:navigate', {detail:{concept:'lists',next:true},bubbles:true,composed:true}));
     });
 }
 
@@ -1421,10 +1419,8 @@ function resetGame() {
     state.codeApproved = false;
     state.suppliesList = [];
     
-    // Clear custom dialogue override on Screen 3
-    if (state.scenes[2]) {
-        state.scenes[2].dialogue = [];
-    }
+    // Restore authored dialogue as well as interactive state for a true replay.
+    state.scenes = structuredClone(scenesData);
 
     startScene(0, false);
 

@@ -1,9 +1,13 @@
+import * as React from 'react';
+import {createStoryTimersHook} from '../../../../../../shared/story-timers.mjs';
+const useStoryTimers = createStoryTimersHook(React);
 import { useState, useEffect, useRef } from 'react';
 import { LessonLayout } from '../LessonLayout';
 import { CodeViewer } from '../CodeViewer';
 import { Sparkles } from 'lucide-react';
 
 export function SortingCeremony({ onComplete, isLastLesson }: { onComplete: () => void, isLastLesson: boolean }) {
+  const {setTimeout, clearTimeout, setInterval, clearInterval, requestAnimationFrame, cancelAnimationFrame} = useStoryTimers();
   const [selectedTrait, setSelectedTrait] = useState<string | null>(null);
   const [activeLines, setActiveLines] = useState<number[]>([]);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -40,9 +44,9 @@ export function SortingCeremony({ onComplete, isLastLesson }: { onComplete: () =
     
     const runAnimation = () => {
       setActiveLines([0]);
-      timeoutRef.current = window.setTimeout(() => {
+      timeoutRef.current = setTimeout(() => {
         setActiveLines([2]);
-        timeoutRef.current = window.setTimeout(() => {
+        timeoutRef.current = setTimeout(() => {
           let caseLine = 3;
           let houseLine = 4;
           if (selectedTrait === 'Cunning') { caseLine = 5; houseLine = 6; }
@@ -50,11 +54,11 @@ export function SortingCeremony({ onComplete, isLastLesson }: { onComplete: () =
           else if (selectedTrait === 'Loyal') { caseLine = 9; houseLine = 10; }
           
           setActiveLines([caseLine]);
-          timeoutRef.current = window.setTimeout(() => {
+          timeoutRef.current = setTimeout(() => {
             setActiveLines([houseLine]);
-            timeoutRef.current = window.setTimeout(() => {
+            timeoutRef.current = setTimeout(() => {
               setActiveLines([]);
-              timeoutRef.current = window.setTimeout(runAnimation, 1500);
+              timeoutRef.current = setTimeout(runAnimation, 1500);
             }, 800);
           }, 600);
         }, 600);

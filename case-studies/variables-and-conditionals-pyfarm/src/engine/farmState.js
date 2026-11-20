@@ -1,3 +1,4 @@
+import {readProgress as readCommonProgress, saveProgress as saveCommonProgress} from '../../../../library/learning/core.mjs';
 // The farm's single source of truth. A plain reducer with no React and no
 // browser APIs, so every progression rule below is directly unit-testable.
 //
@@ -13,19 +14,11 @@ export const INITIAL_FARM = {
   coins: 100,
   seeds: 20,
   water: 50,
-  xp: 0,
-  level: 1,
   weather: 'sunny',
   crops: 'dry',
   currentChapter: 1,
   completedMissions: [],
 };
-
-const XP_PER_LEVEL = 100;
-
-export function levelForXp(xp) {
-  return Math.floor(xp / XP_PER_LEVEL) + 1;
-}
 
 /**
  * A chapter is open when every chapter before it has had its mission completed.
@@ -59,20 +52,17 @@ export function farmReducer(state, action) {
         ? { ...state, currentChapter: action.chapterId }
         : state;
 
-    // Awarding is idempotent: re-running a solved mission must not stack XP.
+    // Re-running a completed mission leaves chapter progress unchanged.
     case 'COMPLETE_MISSION': {
       if (state.completedMissions.includes(action.missionId)) return state;
-      const xp = state.xp + action.xp;
       return {
         ...state,
-        xp,
-        level: levelForXp(xp),
         completedMissions: [...state.completedMissions, action.missionId],
       };
     }
 
     case 'RESTORE':
-      return { ...INITIAL_FARM, ...action.farm, level: levelForXp(action.farm.xp ?? 0) };
+      return { ...INITIAL_FARM, completedMissions: validMissions(action.farm?.completedMissions) };
 
     case 'RESET':
       return { ...INITIAL_FARM };
@@ -82,45 +72,25 @@ export function farmReducer(state, action) {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Persistence
-//
-// A learner should not lose their XP to a page refresh. Only progress is stored,
-// never the per-run visual state, so a reload starts each chapter's farm fresh
-// while keeping what was earned. Every access is guarded: private browsing and
-// blocked site data both make localStorage throw rather than return empty.
-
+// Store completion through PyBe; hints are chapter-specific metadata.
 const STORAGE_KEY = 'pyfarm.progress.v1';
-
+const HINTS_KEY = 'pybe-learning-v1:pyfarm:hints';
+function validMissions(ids) {
+  return [...new Set(Array.isArray(ids) ? ids.filter(id => CHAPTER_ORDER.some(c => c.missionId === id)) : [])];
+}
 export function loadProgress() {
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    if (!parsed || typeof parsed !== 'object') return null;
-    return {
-      xp: Number.isFinite(parsed.xp) ? parsed.xp : 0,
-      completedMissions: Array.isArray(parsed.completedMissions) ? parsed.completedMissions : [],
-      hintsUsed: parsed.hintsUsed && typeof parsed.hintsUsed === 'object' ? parsed.hintsUsed : {},
-    };
-  } catch {
-    return null;
-  }
+    const legacy = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    const current = readCommonProgress(localStorage, 'pyfarm').completed;
+    return { completedMissions: validMissions([...current, ...validMissions(legacy.completedMissions)]),
+      hintsUsed: JSON.parse(localStorage.getItem(HINTS_KEY) || 'null') || legacy.hintsUsed || {} };
+  } catch { return {completedMissions: [], hintsUsed: {}}; }
 }
-
-export function saveProgress({ xp, completedMissions, hintsUsed }) {
-  try {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ xp, completedMissions, hintsUsed }));
-  } catch {
-    // Progress is a convenience, not the feature. If the browser refuses to
-    // store it, the chapter still plays through normally.
-  }
+export function saveProgress({completedMissions, hintsUsed}) {
+  saveCommonProgress(localStorage, 'pyfarm', {completed: validMissions(completedMissions)});
+  try { localStorage.setItem(HINTS_KEY, JSON.stringify(hintsUsed)); localStorage.removeItem(STORAGE_KEY); } catch {}
 }
-
 export function clearProgress() {
-  try {
-    window.localStorage.removeItem(STORAGE_KEY);
-  } catch {
-    // see saveProgress
-  }
+  saveCommonProgress(localStorage, 'pyfarm', {completed: []});
+  try { localStorage.removeItem(HINTS_KEY); localStorage.removeItem(STORAGE_KEY); } catch {}
 }

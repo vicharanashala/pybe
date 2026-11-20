@@ -1,3 +1,12 @@
+import illustration0 from '../../public/going.png';
+import illustration1 from '../../public/harbor-scene.png';
+import illustration2 from '../../public/image.png';
+import illustration3 from '../../public/mapdisc.png';
+import illustration4 from '../../public/officer.png';
+import illustration5 from '../../public/shipent.png';
+import illustration6 from '../../public/soldierdiscu.png';
+import illustration7 from '../../public/thinkforjack.png';
+import illustration8 from '../../public/titl1.png';
 /* =========================================================
    PyBe — Story data for the Calico Jack expedition
    Every asset referenced here already lives in client/public.
@@ -10,56 +19,56 @@ export const INTRO_SCENES = [
     type: 'title',
     speaker: null,
     text: 'Start Learning with Story of Calico Jack and The British Navy Raids.',
-    bg: '/titl1.png',
+    bg: illustration8,
   },
   {
     id: 'harbor',
     type: 'narrator',
     speaker: 'Narrator',
     text: 'In the year 1720, the harbor was busy with sailors preparing ships for their next voyage. Among them stood a group of naval soldiers, waiting for their commanding officer.',
-    bg: '/harbor-scene.png',
+    bg: illustration1,
   },
   {
     id: 'briefing',
     type: 'officer',
     speaker: 'Commanding Officer',
     text: 'Men, we have received intelligence about a notorious pirate known as Calico Jack. He has been raiding merchant ships across these waters, stealing gold, supplies, and valuable cargo.',
-    bg: '/thinkforjack.png',
+    bg: illustration7,
   },
   {
     id: 'informants',
     type: 'officer',
     speaker: 'Commanding Officer',
     text: "Our informants have tracked his movements to a remote region beyond these waters. We don't know exactly where he is hiding, but we believe he is somewhere within that area.",
-    bg: '/soldierdiscu.png',
+    bg: illustration6,
   },
   {
     id: 'setsail',
     type: 'officer',
     speaker: 'Commanding Officer',
     text: 'This pirate has escaped us for long enough. We are setting sail immediately.',
-    bg: '/shipent.png',
+    bg: illustration5,
   },
   {
     id: 'voyage',
     type: 'narrator',
     speaker: 'Narrator',
     text: 'The crew prepared the ship, raised the sails, and began their journey toward the unknown waters. The hunt for Calico Jack had begun. ⚓🏴‍☠️',
-    bg: '/going.png',
+    bg: illustration0,
   },
   {
     id: 'orders',
     type: 'officer',
     speaker: 'Commanding Officer',
     text: 'There is an island we got intelligence about. I want the soldier to go and look for Jack.',
-    bg: '/image.png',
+    bg: illustration2,
   },
 ];
 
 /* ---------- Act 2 — the branch scenes (uses the last two unused plates) ---------- */
 export const BRIDGE_SCENES = {
   caught: {
-    bg: '/officer.png',
+    bg: illustration4,
     eyebrow: 'Aboard HMS Resolute — the brig',
     title: 'The Interrogation',
     lines: [
@@ -79,7 +88,7 @@ export const BRIDGE_SCENES = {
     huntFor: 'treasure',
   },
   escaped: {
-    bg: '/mapdisc.png',
+    bg: illustration3,
     eyebrow: 'Aboard HMS Resolute — the chart room',
     title: 'Fresh Intelligence',
     lines: [

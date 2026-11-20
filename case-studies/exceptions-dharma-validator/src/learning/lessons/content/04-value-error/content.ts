@@ -107,7 +107,6 @@ except ValueError as e:
   reflectionPrompt:
     "Yudhishthira trusted the dice because they looked ordinary. Where else does something pass every obvious check and still turn out invalid underneath?",
 
-  badgeUnlocked: "Akshahridaya — The Heart of the Dice",
 };
 
 export default valueError;

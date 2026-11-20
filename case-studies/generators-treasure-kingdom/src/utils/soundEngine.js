@@ -1,11 +1,15 @@
+import {createTimerGroup} from '../../../../library/learning/timer-group.mjs';
 // 🔊 Web Audio API Synthesizer Sound Engine for PyBe: Treasure Kingdom
 
 class SoundEngine {
   constructor() {
     this.ctx = null;
+    this.timers=createTimerGroup();
     this.isMuted = false;
   }
 
+  activate(){this.timers.activate();}
+  dispose(){this.timers.dispose();this.ctx?.close().catch(()=>{});this.ctx=null;}
   initContext() {
     if (!this.ctx && typeof window !== 'undefined') {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -56,15 +60,15 @@ class SoundEngine {
     if (this.isMuted) return;
     this.initContext();
     this.playTone(523.25, 'triangle', 0.12, 0.2); // C5
-    setTimeout(() => this.playTone(659.25, 'triangle', 0.18, 0.2), 80); // E5
-    setTimeout(() => this.playTone(783.99, 'triangle', 0.25, 0.25), 160); // G5
+    this.timers.setTimeout(() => this.playTone(659.25, 'triangle', 0.18, 0.2), 80); // E5
+    this.timers.setTimeout(() => this.playTone(783.99, 'triangle', 0.25, 0.25), 160); // G5
   }
 
   playIncorrect() {
     if (this.isMuted) return;
     this.initContext();
     this.playTone(220, 'sawtooth', 0.15, 0.2); // A3
-    setTimeout(() => this.playTone(185, 'sawtooth', 0.25, 0.2), 100); // F#3
+    this.timers.setTimeout(() => this.playTone(185, 'sawtooth', 0.25, 0.2), 100); // F#3
   }
 
   playWaterDrop() {

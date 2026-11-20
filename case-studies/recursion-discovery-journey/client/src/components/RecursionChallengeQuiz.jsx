@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { CheckCircle2, XCircle, ArrowRight, RotateCcw, Trophy, AlertCircle, BookOpen } from 'lucide-react';
 import LearningReport from './LearningReport';
 
-const QUESTIONS = [
+export const QUESTIONS = [
   {
     id:           1,
     type:         'concept',
@@ -79,18 +79,17 @@ count(3)`,
 
 const LETTERS = ['A', 'B', 'C', 'D'];
 
-export default function RecursionChallengeQuiz({ onAddXp, onNextLesson }) {
+export default function RecursionChallengeQuiz({ onNextLesson }) {
   const [currentIdx, setCurrentIdx]   = useState(0);
   const [selected,   setSelected]     = useState(null);
   const [submitted,  setSubmitted]    = useState(false);
-  const [score,      setScore]        = useState(0);
+  const [correctAnswers, setCorrectAnswers] = useState([]);
   const [completed,  setCompleted]    = useState(false);
   const [showReport, setShowReport]   = useState(false);
 
   const q        = QUESTIONS[currentIdx];
   const total    = QUESTIONS.length;
-  const pct      = Math.round((score / total) * 100);
-  const passed   = pct >= 50;
+  const passed = correctAnswers.length >= Math.ceil(total/2);
 
   const handleSelect = (e, idx) => {
     e.stopPropagation();
@@ -103,8 +102,7 @@ export default function RecursionChallengeQuiz({ onAddXp, onNextLesson }) {
     if (selected === null || submitted) return;
     setSubmitted(true);
     if (selected === q.correctIndex) {
-      setScore(s => s + 1);
-      if (onAddXp) onAddXp(20);
+      setCorrectAnswers(ids=>[...ids,currentIdx]);
     }
   };
 
@@ -124,7 +122,7 @@ export default function RecursionChallengeQuiz({ onAddXp, onNextLesson }) {
     setCurrentIdx(0);
     setSelected(null);
     setSubmitted(false);
-    setScore(0);
+    setCorrectAnswers([]);
     setCompleted(false);
     setShowReport(false);
   };
@@ -133,8 +131,7 @@ export default function RecursionChallengeQuiz({ onAddXp, onNextLesson }) {
   if (showReport) {
     return (
       <LearningReport
-        score={score}
-        total={total}
+        passed={passed}
         onRetry={() => { handleRetry(); }}
         onClose={() => { if (passed && onNextLesson) onNextLesson(); else setShowReport(false); }}
       />
@@ -150,7 +147,7 @@ export default function RecursionChallengeQuiz({ onAddXp, onNextLesson }) {
       >
         <div className="qr-icon">
           {passed
-            ? <Trophy className="w-10 h-10 text-amber-400" />
+            ? <BookOpen className="w-10 h-10 text-amber-400" />
             : <AlertCircle className="w-10 h-10 text-red-400" />}
         </div>
 
@@ -158,22 +155,10 @@ export default function RecursionChallengeQuiz({ onAddXp, onNextLesson }) {
           {passed ? '🎉 Assessment Passed' : 'Assessment Incomplete'}
         </div>
 
-        <div className="qr-score-row">
-          <div className="qr-score-chip">
-            Score <strong>{score}/{total}</strong>
-          </div>
-          <div
-            className="qr-pct-chip"
-            style={{ color: passed ? '#34D399' : '#F87171' }}
-          >
-            {pct}%
-          </div>
-        </div>
-
         <p className="qr-verdict-text">
           {passed
             ? 'You have demonstrated a solid understanding of Python recursion fundamentals.'
-            : 'Score below 50%. Review the lesson material and retry the assessment.'}
+            : 'Review the lesson material and retry the assessment.'}
         </p>
 
         <div className="qr-actions">
@@ -202,7 +187,7 @@ export default function RecursionChallengeQuiz({ onAddXp, onNextLesson }) {
       <div className="quiz-header">
         <div className="flex items-center gap-2.5">
           <div className="quiz-icon-wrap">
-            <Trophy className="w-4.5 h-4.5 text-amber-300" />
+            <BookOpen className="w-4.5 h-4.5 text-amber-300" />
           </div>
           <div>
             <h3 className="quiz-heading">Recursion Assessment</h3>
@@ -211,7 +196,6 @@ export default function RecursionChallengeQuiz({ onAddXp, onNextLesson }) {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="quiz-score-badge">Score: {score}/{total}</span>
           <span className="quiz-progress-badge">Q{currentIdx + 1}/{total}</span>
         </div>
       </div>

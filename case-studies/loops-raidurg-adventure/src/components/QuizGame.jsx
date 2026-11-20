@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { SCENARIO_QUIZ } from '../data/challengesData';
-import { Trophy, CheckCircle2, XCircle, ArrowRight, RotateCcw, HelpCircle } from 'lucide-react';
+import { BookOpen, CheckCircle2, XCircle, ArrowRight, RotateCcw, HelpCircle } from 'lucide-react';
 import { soundFx } from '../utils/soundEffects';
 
 export default function QuizGame({ onComplete }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [score, setScore] = useState(0);
   const [showFeedback, setShowFeedback] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
@@ -20,7 +19,6 @@ export default function QuizGame({ onComplete }) {
 
     if (opt === question.correct) {
       soundFx.playSuccess();
-      setScore(prev => prev + 1);
     } else {
       soundFx.playWarning();
     }
@@ -42,7 +40,6 @@ export default function QuizGame({ onComplete }) {
   const handleRestart = () => {
     setCurrentIdx(0);
     setSelectedOption(null);
-    setScore(0);
     setShowFeedback(false);
     setIsFinished(false);
   };
@@ -54,7 +51,7 @@ export default function QuizGame({ onComplete }) {
       <div className="flex items-center justify-between border-b border-stone-800 pb-4">
         <div className="flex items-center gap-3">
           <div className="p-3 bg-amber-500/20 text-amber-400 rounded-2xl border border-amber-500/30">
-            <Trophy className="w-6 h-6" />
+            <BookOpen className="w-6 h-6" />
           </div>
           <div>
             <h3 className="font-extrabold text-xl text-amber-200">HELP LAKSHMI & FRIENDS</h3>
@@ -140,11 +137,11 @@ export default function QuizGame({ onComplete }) {
         /* Results Card */
         <div className="bg-stone-950 p-8 rounded-2xl border border-amber-500/30 text-center space-y-6">
           <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-amber-500 to-orange-600 text-black flex items-center justify-center text-4xl mx-auto shadow-2xl shadow-amber-500/40">
-            🏆
+            📖
           </div>
           <div>
             <h4 className="font-extrabold text-2xl text-amber-200">Mini-Game Completed!</h4>
-            <p className="text-stone-400 text-sm mt-1">You correctly matched {score} out of {SCENARIO_QUIZ.length} story scenarios!</p>
+            <p className="text-stone-400 text-sm mt-1">You explored all {SCENARIO_QUIZ.length} story scenarios. Revisit any situation to compare its loop.</p>
           </div>
 
           <div className="flex items-center justify-center gap-4">

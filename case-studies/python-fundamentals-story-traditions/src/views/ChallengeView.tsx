@@ -6,7 +6,7 @@ import { getTopic } from '../data/curriculum';
 import { getTraditionTheme } from '../utils/storyThemes';
 
 export const ChallengeView: React.FC = () => {
-  const { vaultState, updateVault, completeChallenge, nextStep, prevStep, unlockBadge, activeTopicId } = useProgress();
+  const { vaultState, updateVault, completeChallenge, nextStep, prevStep, activeTopicId } = useProgress();
   const topic = getTopic(activeTopicId);
   const world = topic.storyWorld;
   const theme = getTraditionTheme(world.storyTradition);
@@ -47,13 +47,12 @@ export const ChallengeView: React.FC = () => {
     if (activeTaskIdx < tasks.length - 1) {
       setActiveTaskIdx(activeTaskIdx + 1);
     } else {
-      unlockBadge(topic.badgeName);
       nextStep();
     }
   };
 
   return (
-    <div className="flex-1 flex flex-col justify-center py-6 px-4 max-w-5xl mx-auto w-full select-none">
+    <div data-tradition-task={activeTaskIdx} className="flex-1 flex flex-col justify-center py-6 px-4 max-w-5xl mx-auto w-full select-none">
       <ManuscriptCard className="w-full animate-manuscript-open">
         <StoryHeader topic={topic} />
 

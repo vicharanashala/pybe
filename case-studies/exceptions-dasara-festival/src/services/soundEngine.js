@@ -177,6 +177,8 @@ class SoundEngine {
     }
   }
 
+  dispose() { this.stopSpeaking(); const ctx=this.ctx;this.ctx=null; if(ctx&&ctx.state!=='closed')ctx.close().catch(()=>{}); }
+
   stopSpeaking() {
     if (typeof window !== 'undefined' && window.speechSynthesis) {
       window.speechSynthesis.cancel();

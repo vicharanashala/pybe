@@ -11,7 +11,7 @@ import PythonSandbox from './PythonSandbox';
 import { MapPin, Clock, ArrowRight, ArrowLeft, Lightbulb, CheckCircle2, XCircle, Sparkles } from 'lucide-react';
 import { soundFx } from '../utils/soundEffects';
 
-export default function StoryContainer({ currentChapterIdx, onSelectChapter }) {
+export default function StoryContainer({ currentChapterIdx, onSelectChapter, onComplete, assetBase }) {
   const [slideIdx, setSlideIdx] = useState(0);
   const [selectedChoice, setSelectedChoice] = useState(null);
   const [choiceFeedback, setChoiceFeedback] = useState(null);
@@ -69,7 +69,7 @@ export default function StoryContainer({ currentChapterIdx, onSelectChapter }) {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-6 px-3 sm:px-6 py-4">
+    <div data-raidurg-scene={`${currentChapterIdx}:${slideIdx}`} className="max-w-5xl mx-auto space-y-6 px-3 sm:px-6 py-4">
       
       {/* Chapter Stepper Pill Navigation */}
       <div className="flex items-center justify-between gap-2 overflow-x-auto py-2 scrollbar-thin">
@@ -148,7 +148,7 @@ export default function StoryContainer({ currentChapterIdx, onSelectChapter }) {
       {/* RENDER MODES */}
       {mode === 'timeline' && <TimelineVisualizer onComplete={() => setMode('quiz')} />}
       {mode === 'quiz' && <QuizGame onComplete={() => setMode('sandbox')} />}
-      {mode === 'sandbox' && <PythonSandbox />}
+      {mode === 'sandbox' && <PythonSandbox onComplete={onComplete} />}
 
       {/* RENDER STORY MODE (FRAME BY FRAME COMIC SLIDES) */}
       {mode === 'story' && (
@@ -156,7 +156,7 @@ export default function StoryContainer({ currentChapterIdx, onSelectChapter }) {
           
           {/* TOP SECTION: LARGE VISUAL ILLUSTRATION (65%–75% Height) */}
           <div className="relative h-[360px] sm:h-[440px] w-full overflow-hidden bg-stone-900">
-            <SceneVisualFrame
+            <SceneVisualFrame assetBase={assetBase}
               frameId={currentSlide.frameId}
               defaultImage={currentSlide.image || chapter.image}
               character={currentSlide.character}

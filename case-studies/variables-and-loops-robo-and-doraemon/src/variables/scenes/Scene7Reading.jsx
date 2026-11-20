@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useEffect, useState } from 'react';
 import SceneShell from '../components/SceneShell';
 import SpeechBubble from '../components/SpeechBubble';
@@ -10,6 +12,7 @@ const DOOR = GADGETS[0];
 // on its own instead of anyone searching. Only after the learner has
 // watched that happen does print(travelDoor) get named as what's going on.
 export default function Scene7Reading({ onNext, memory }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [phase, setPhase] = useState('ask'); // ask -> opening -> revealed
   const stored = memory.travel;
 

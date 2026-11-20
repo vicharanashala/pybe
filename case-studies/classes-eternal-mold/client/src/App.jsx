@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
+import React, { useState, useEffect } from 'react';
 import StoryCanvas from './components/StoryCanvas';
 import RightPanelManager from './RightPanelManager';
 import IntroScreen from './components/IntroScreen';
@@ -7,9 +9,11 @@ import EurekaScreen from './components/EurekaScreen';
 import MagicalBackground from './components/MagicalBackground';
 import { ChapterProvider } from './context/ChapterContext';
 
-export default function App() {
+export default function App({onComplete}) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const [currentStage, setCurrentStage] = useState('intro');
   const [isFoxSummoned, setIsFoxSummoned] = useState(false);
+  useEffect(()=>{if(currentStage!=='exhaustion')return;const timer=setTimeout(()=>setCurrentStage('epiphany'),4000);return()=>clearTimeout(timer);},[currentStage]);
 
   // Exact Master Orion intro dialogue
   const [orionText, setOrionText] = useState(
@@ -46,7 +50,7 @@ export default function App() {
 
   return (
     <ChapterProvider>
-      <div className="w-screen h-screen max-h-screen overflow-hidden relative font-sans-rounded">
+      <div data-eternal-stage={currentStage} className="eternal-shell w-screen h-screen max-h-screen overflow-hidden relative font-sans-rounded">
         {/* Full-Screen Dynamic Background Image & Ambient Orbs */}
         <MagicalBackground currentStage={currentStage} isFoxSummoned={isFoxSummoned} />
 
@@ -96,6 +100,7 @@ export default function App() {
               currentStage === 'blueprint_success' || currentStage === 'blueprint_forged' ? 'pt-10' : 'pt-4'
             }`}>
               <RightPanelManager
+                onComplete={onComplete}
                 initialStage={currentStage}
                 triggerOrionDialogue={handleDialogueTrigger}
                 onStageChange={(stage) => setCurrentStage(stage)}

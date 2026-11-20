@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { missions } from '../../data/missions'
 import { useGame } from '../../context/GameContext'
-import XPBar from '../ui/XPBar'
 import FogLayer from '../layout/FogLayer'
 
 interface Props {
@@ -11,7 +10,7 @@ interface Props {
 const RIFT_COLORS = ['#00C2FF', '#00C2FF', '#7A00FF', '#7A00FF', '#E50914']
 
 export default function MapScreen({ onSelectMission }: Props) {
-  const { isMissionUnlocked, isMissionComplete, badges, xp, resetProgress } = useGame()
+  const { isMissionUnlocked, isMissionComplete, completedMissions, resetProgress } = useGame()
 
   return (
     <div className="relative min-h-screen">
@@ -24,7 +23,6 @@ export default function MapScreen({ onSelectMission }: Props) {
             </p>
             <h1 className="font-display text-4xl sm:text-5xl text-white tracking-wide">Mission Map</h1>
           </div>
-          <XPBar />
         </div>
 
         <ol className="relative border-l border-white/10 pl-6 sm:pl-8 space-y-6">
@@ -69,7 +67,7 @@ export default function MapScreen({ onSelectMission }: Props) {
                     <div className="shrink-0 text-right">
                       {complete && (
                         <span className="text-2xl" title="Completed" aria-label="Completed">
-                          {m.reward.badgeIcon}
+                          ✓
                         </span>
                       )}
                       {!unlocked && (
@@ -85,29 +83,7 @@ export default function MapScreen({ onSelectMission }: Props) {
           })}
         </ol>
 
-        <div className="mt-14">
-          <h3 className="font-display text-xl text-white/80 tracking-wide mb-4">Badges Earned</h3>
-          {badges.length === 0 ? (
-            <p className="text-white/35 text-sm">No badges yet. Complete Mission 1 to start earning your rank.</p>
-          ) : (
-            <div className="flex flex-wrap gap-3">
-              {badges.map((b) => {
-                const mission = missions.find((m) => m.reward.badge === b)
-                return (
-                  <span
-                    key={b}
-                    className="flex items-center gap-2 rounded-full border border-volt/30 bg-volt/5 px-4 py-2 text-sm text-white/80"
-                  >
-                    <span>{mission?.reward.badgeIcon}</span>
-                    {b}
-                  </span>
-                )
-              })}
-            </div>
-          )}
-        </div>
-
-        {xp > 0 && (
+        {completedMissions.length > 0 && (
           <button
             onClick={() => {
               if (confirm('Reset all progress? This cannot be undone.')) resetProgress()

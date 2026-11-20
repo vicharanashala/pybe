@@ -5,7 +5,7 @@ import { buildGuardedLoopTracerHarness } from '../data/loopTracerHarness';
 import { MISSION } from '../data/spaceRescue';
 import MemoryOrbs from './MemoryOrbs';
 
-export default function SpaceRescueMission({ onNext, onCrystal, onStageProgress }) {
+export default function SpaceRescueMission({ onNext, onStageProgress }) {
   const { status, runHarness } = useSharedPyodide();
   const [stageIndex, setStageIndex] = useState(0);
   const [accumulatedCode, setAccumulatedCode] = useState('');
@@ -35,7 +35,6 @@ export default function SpaceRescueMission({ onNext, onCrystal, onStageProgress 
     if (outcome.passed) {
       // Every completed stage grows the magic spell a little more.
       onStageProgress(stageIndex + 1, MISSION.stages.length);
-      if (stageIndex === 0) onCrystal('blue');
     }
     setRunning(false);
   }
@@ -49,8 +48,6 @@ export default function SpaceRescueMission({ onNext, onCrystal, onStageProgress 
       setStageIndex(stageIndex + 1);
       setDraft(MISSION.stages[stageIndex + 1].placeholder);
     } else {
-      if (!anyHintUsedEver && !hintShown) onCrystal('purple');
-      onCrystal('emerald');
       setFinished(true);
     }
   }
@@ -87,7 +84,7 @@ export default function SpaceRescueMission({ onNext, onCrystal, onStageProgress 
         </details>
       )}
 
-      <textarea className="lp-code-editor" value={draft} spellCheck={false} onChange={(e) => { setDraft(e.target.value); setResult(null); }} />
+      <textarea aria-label="Garden mission Python program" disabled={running} className="lp-code-editor" value={draft} spellCheck={false} onChange={(e) => { setDraft(e.target.value); setResult(null); }} />
 
       <div className="lp-playground-actions">
         <button className="lp-mini-btn" onClick={handleRunCheck} disabled={status !== 'ready' || running}>

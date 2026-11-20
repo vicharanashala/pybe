@@ -71,9 +71,10 @@
         "story-6dc52d0b1ddaecb9",
         "story-d6ff7a5a81fd9717",
         "story-1be2b5357531f575",
+        "story-82621fb31e80d371",
         "story-545172f653234a84"
       ],
-      "playableCount": 8
+      "playableCount": 9
     },
     {
       "id": "types",
@@ -240,6 +241,7 @@
         "story-ed372d85b4644984",
         "story-249b9aa16e56653a",
         "story-43d3d164c73db34c",
+        "story-e7b0d8a9fe8d0365",
         "story-6dc52d0b1ddaecb9",
         "story-5ab6bebe7c3605f9",
         "story-7a30209fcf39425b",
@@ -249,7 +251,7 @@
         "story-82621fb31e80d371",
         "story-545172f653234a84"
       ],
-      "playableCount": 12
+      "playableCount": 13
     },
     {
       "id": "control",
@@ -269,9 +271,10 @@
         "story-43d3d164c73db34c",
         "story-e7b0d8a9fe8d0365",
         "story-a639df8d84d12201",
-        "story-4049523562c935ab"
+        "story-4049523562c935ab",
+        "story-82621fb31e80d371"
       ],
-      "playableCount": 6
+      "playableCount": 7
     },
     {
       "id": "nested",
@@ -326,7 +329,7 @@
         "story-a6599cda779ad306",
         "story-545172f653234a84"
       ],
-      "playableCount": 5
+      "playableCount": 6
     },
     {
       "id": "indexing",
@@ -373,9 +376,27 @@
         "story-afad22b314e1637c",
         "story-a6599cda779ad306",
         "story-1be2b5357531f575",
+        "story-82621fb31e80d371",
         "story-545172f653234a84"
       ],
-      "playableCount": 9
+      "playableCount": 10
+    },
+    {
+      "id": "stacks",
+      "bucket": "collections",
+      "title": "Stacks & LIFO",
+      "description": "Undo the most recent action with a last-in, first-out stack.",
+      "skills": [
+        "Push with append",
+        "pop",
+        "LIFO",
+        "undo"
+      ],
+      "status": "covered",
+      "storyIds": [
+        "story-82621fb31e80d371"
+      ],
+      "playableCount": 1
     },
     {
       "id": "tuples",
@@ -443,9 +464,10 @@
         "story-e7b0d8a9fe8d0365",
         "story-afad22b314e1637c",
         "story-a6599cda779ad306",
+        "story-82621fb31e80d371",
         "story-545172f653234a84"
       ],
-      "playableCount": 9
+      "playableCount": 10
     },
     {
       "id": "functions",
@@ -699,11 +721,12 @@
         "story-1441ae79505da6dc",
         "story-5b606fcb064ace2d",
         "story-61b5840e0fd73941",
+        "story-e7b0d8a9fe8d0365",
         "story-5b04d1c5808fe44e",
         "story-c57e8679bce3a32e",
         "story-a6599cda779ad306"
       ],
-      "playableCount": 7
+      "playableCount": 8
     },
     {
       "id": "validation",
@@ -1027,11 +1050,12 @@
       "concepts": [
         "keywords"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/keywords-traffic-system/index.html",
       "description": "Traffic signals have fixed meanings. New roads need names that follow rules.",
       "source": "case-studies/keywords-traffic-system/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-0fdb9bc4ae50094b"
     },
     {
       "id": "story-50b1ab4f25db0b54",
@@ -1040,11 +1064,12 @@
       "concepts": [
         "keywords"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/keywords-lost-library/index.html",
       "description": "Explore The Lost Library of Python through a story-first Python case study.",
       "source": "case-studies/keywords-lost-library/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-50b1ab4f25db0b54"
     },
     {
       "id": "story-617c10ea8be694de",
@@ -1053,11 +1078,12 @@
       "concepts": [
         "output"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/printing-royal-messengers/messenger_in_the_sky/index.html",
       "description": "Explore The Royal Messengers of Oakhaven through a story-first Python case study.",
       "source": "case-studies/printing-royal-messengers/messenger_in_the_sky/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-617c10ea8be694de"
     },
     {
       "id": "story-9a805a86ccec1a84",
@@ -1067,11 +1093,12 @@
         "strings",
         "indexing"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/strings-royal-scribes-secret/index.html",
       "description": "Explore The Royal Scribe’s Secret through a story-first Python case study.",
       "source": "case-studies/strings-royal-scribes-secret/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-9a805a86ccec1a84"
     },
     {
       "id": "story-02cecabc434c5db4",
@@ -1080,11 +1107,12 @@
       "concepts": [
         "lists"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/lists-royal-supply-scroll/index.html",
       "description": "Explore The Royal Supply Scroll through a story-first Python case study.",
       "source": "case-studies/lists-royal-supply-scroll/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-02cecabc434c5db4"
     },
     {
       "id": "story-8167bf7ebbde1018",
@@ -1093,11 +1121,12 @@
       "concepts": [
         "tuples"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/tuples-sealed-record/sealed_recod/sealed_record.html",
       "description": "Explore The Sealed Record through a story-first Python case study.",
       "source": "case-studies/tuples-sealed-record/sealed_recod/sealed_record.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-8167bf7ebbde1018"
     },
     {
       "id": "story-ad89eb826e121d2d",
@@ -1108,11 +1137,12 @@
         "while",
         "control"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/loop-control-wind-crystal-chase/index.html",
       "description": "Explore The Wind Crystal Chase through a story-first Python case study.",
       "source": "case-studies/loop-control-wind-crystal-chase/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-ad89eb826e121d2d"
     },
     {
       "id": "story-57fb53f5658f810a",
@@ -1121,11 +1151,12 @@
       "concepts": [
         "conditionals"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/conditionals-birbals-royal-reward/index.html",
       "description": "Explore Birbal and the Royal Reward through a story-first Python case study.",
       "source": "case-studies/conditionals-birbals-royal-reward/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-57fb53f5658f810a"
     },
     {
       "id": "story-3f56efaff302a5d1",
@@ -1134,11 +1165,12 @@
       "concepts": [
         "dictionaries"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/dictionaries-royal-tax-registry/index.html",
       "description": "Explore Akbar & Birbal’s Royal Tax Registry through a story-first Python case study.",
       "source": "case-studies/dictionaries-royal-tax-registry/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-3f56efaff302a5d1"
     },
     {
       "id": "story-5410a21f8666e0af",
@@ -1147,11 +1179,12 @@
       "concepts": [
         "encapsulation"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/encapsulation-khul-ja-sim-sim/index.html",
       "description": "Explore Khul Ja Sim Sim through a story-first Python case study.",
       "source": "case-studies/encapsulation-khul-ja-sim-sim/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-5410a21f8666e0af"
     },
     {
       "id": "story-9f7b5b4a8ade000c",
@@ -1161,11 +1194,12 @@
         "exceptions",
         "errors"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/exceptions-postmans-route/postman-exceptions/index.html",
       "description": "Explore The Postman’s Route through a story-first Python case study.",
       "source": "case-studies/exceptions-postmans-route/postman-exceptions/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-9f7b5b4a8ade000c"
     },
     {
       "id": "story-1441ae79505da6dc",
@@ -1175,11 +1209,12 @@
         "exceptions",
         "errors"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/exceptions-himalayan-ride/index.html",
       "description": "Explore The High Pass: Swati’s Himalayan Ride through a story-first Python case study.",
       "source": "case-studies/exceptions-himalayan-ride/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-1441ae79505da6dc"
     },
     {
       "id": "story-fe18dfae0dfa817f",
@@ -1188,11 +1223,12 @@
       "concepts": [
         "decorators"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/decorators-gates-of-rajgad/index.html",
       "description": "Explore The Gates of Rajgad through a story-first Python case study.",
       "source": "case-studies/decorators-gates-of-rajgad/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-fe18dfae0dfa817f"
     },
     {
       "id": "story-f77458836eb67f34",
@@ -1201,11 +1237,12 @@
       "concepts": [
         "translation"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/compilers-and-interpreters-humans-and-aliens/index.html",
       "description": "Explore Humans, Aliens & Translation through a story-first Python case study.",
       "source": "case-studies/compilers-and-interpreters-humans-and-aliens/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-f77458836eb67f34"
     },
     {
       "id": "story-f0859aba1663ed62",
@@ -1214,11 +1251,12 @@
       "concepts": [
         "files"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/file-handling-kitchen-lab/index.html",
       "description": "Explore Rahul’s Kitchen Lab through a story-first Python case study.",
       "source": "case-studies/file-handling-kitchen-lab/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-f0859aba1663ed62"
     },
     {
       "id": "story-6bab419ac15f13d3",
@@ -1227,11 +1265,12 @@
       "concepts": [
         "sets"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/sets-case-study/sets_case_study/index.html",
       "description": "Explore The Sets Case Study through a story-first Python case study.",
       "source": "case-studies/sets-case-study/sets_case_study/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-6bab419ac15f13d3"
     },
     {
       "id": "story-c7c40793d26c5b2a",
@@ -1246,11 +1285,12 @@
         "conditionals",
         "functions"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/python-fundamentals-flight-218/Flight 218_v6.html",
       "description": "Explore Flight 218 through a story-first Python case study.",
       "source": "case-studies/python-fundamentals-flight-218/Flight 218_v6.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-c7c40793d26c5b2a"
     },
     {
       "id": "story-0bdeee990fa852ea",
@@ -1260,11 +1300,12 @@
         "lists",
         "indexing"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/lists-and-indexing-maple-heights/client/index.html",
       "description": "Explore Maple Heights through a story-first Python case study.",
       "source": "case-studies/lists-and-indexing-maple-heights/client/index.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-0bdeee990fa852ea"
     },
     {
       "id": "story-823fd0e08364881e",
@@ -1274,11 +1315,12 @@
         "control",
         "output"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/loop-control-and-printing-flow-tales/Flow Tales.html",
       "description": "Explore Flow Tales through a story-first Python case study.",
       "source": "case-studies/loop-control-and-printing-flow-tales/Flow Tales.html",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-823fd0e08364881e"
     },
     {
       "id": "story-1bb2d0ced20d2774",
@@ -1287,12 +1329,13 @@
       "concepts": [
         "strings"
       ],
-      "mode": "source",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Messy Attendance List through a story-first Python case study.",
       "source": "case-studies/string-processing-attendance-cleaner/string-manipulation-case-study/case-study.md",
-      "presentation": "original",
-      "setupNote": "This submission is a Python script / written case study. Open the original source and its README to run it as submitted."
+      "presentation": "pybe",
+      "setupNote": "This submission is a Python script / written case study. Open the original source and its README to run it as submitted.",
+      "lessonEndpoint": "/api/lessons/story-1bb2d0ced20d2774"
     },
     {
       "id": "story-d730e4fa3019fc6d",
@@ -1301,13 +1344,12 @@
       "concepts": [
         "exceptions"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Monkey and the Crocodile through a story-first Python case study.",
       "source": "case-studies/exceptions-monkey-and-crocodile/client/src/lesson/lessonData.js",
-      "presentation": "original",
-      "appId": "app-97f391255dbb6397",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-d730e4fa3019fc6d"
     },
     {
       "id": "story-4ad76a8313b0be1f",
@@ -1316,13 +1358,12 @@
       "concepts": [
         "plots"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore NovaTech Investor Room through a story-first Python case study.",
       "source": "case-studies/data-visualization-novatech-investor-room/README.md",
-      "presentation": "original",
-      "appId": "app-c6ed2766132d4439",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-4ad76a8313b0be1f"
     },
     {
       "id": "story-a76197f8448cddb6",
@@ -1332,13 +1373,12 @@
         "sets",
         "dictionaries"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Doraemon’s Stamp Collection & Gadget Codes through a story-first Python case study.",
       "source": "case-studies/sets-and-dictionaries-doraemon/README.md",
-      "presentation": "original",
-      "appId": "app-ded1f07ba24f946b",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-a76197f8448cddb6"
     },
     {
       "id": "story-ed372d85b4644984",
@@ -1348,13 +1388,12 @@
         "for",
         "while"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Iteration Learning Journey through a story-first Python case study.",
       "source": "case-studies/loops-iteration-learning-journey/pybe-iteration-feature/client/README.md",
-      "presentation": "original",
-      "appId": "app-6327ddd506f5c831",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-ed372d85b4644984"
     },
     {
       "id": "story-4eb8cd5405a39cc1",
@@ -1366,13 +1405,12 @@
         "closures",
         "recursion"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Hawkins Division: Functions Field Manual through a story-first Python case study.",
       "source": "case-studies/functions-and-scope-hawkins-division/README.md",
-      "presentation": "original",
-      "appId": "app-64238dd7df5780cb",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-4eb8cd5405a39cc1"
     },
     {
       "id": "story-6c4e74eb56c56740",
@@ -1382,13 +1420,12 @@
         "conditionals",
         "comparison"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Magic of Logic through a story-first Python case study.",
       "source": "case-studies/conditionals-magic-of-logic/client/src/data.ts",
-      "presentation": "original",
-      "appId": "app-ca806fffa818b5a9",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-6c4e74eb56c56740"
     },
     {
       "id": "story-c563eb4bb23307df",
@@ -1399,13 +1436,12 @@
         "dictionaries",
         "lists"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Everyday Python: UPI, Addresses & Checklists through a story-first Python case study.",
       "source": "case-studies/data-structures-everyday-python/README.md",
-      "presentation": "original",
-      "appId": "app-f8ff7e1a2651dc52",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-c563eb4bb23307df"
     },
     {
       "id": "story-9ff9078eaeb976d4",
@@ -1414,13 +1450,12 @@
       "concepts": [
         "recursion"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Recursive Explorer: Ant Colony Adventure through a story-first Python case study.",
       "source": "case-studies/recursion-ant-colony-adventure/readme.md",
-      "presentation": "original",
-      "appId": "app-184366ece45d31b4",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-9ff9078eaeb976d4"
     },
     {
       "id": "story-5b606fcb064ace2d",
@@ -1430,13 +1465,12 @@
         "exceptions",
         "errors"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Oracle Journey through a story-first Python case study.",
       "source": "case-studies/exceptions-oracle-journey/percy-oracle/README.md",
-      "presentation": "original",
-      "appId": "app-f03ebfaa0c394b59",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-5b606fcb064ace2d"
     },
     {
       "id": "story-7cede33ab799b7e3",
@@ -1446,13 +1480,12 @@
         "variables",
         "conditionals"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore PyFarm: Maya’s First Harvest through a story-first Python case study.",
       "source": "case-studies/variables-and-conditionals-pyfarm/README.md",
-      "presentation": "original",
-      "appId": "app-904ffa702d8eec71",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-7cede33ab799b7e3"
     },
     {
       "id": "story-0532cd450cb25c86",
@@ -1465,13 +1498,12 @@
         "sets",
         "recursion"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Rosewood Manor through a story-first Python case study.",
       "source": "case-studies/text-processing-and-recursion-rosewood-manor/server/src/data/db.json",
-      "presentation": "original",
-      "appId": "app-0d0f39316b783151",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-0532cd450cb25c86"
     },
     {
       "id": "story-249b9aa16e56653a",
@@ -1481,13 +1513,12 @@
         "for",
         "while"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Raidurg Adventure through a story-first Python case study.",
       "source": "case-studies/loops-raidurg-adventure/src/data/storyData.js",
-      "presentation": "original",
-      "appId": "app-e0e27860e2454628",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-249b9aa16e56653a"
     },
     {
       "id": "story-8f35c48bc68d1343",
@@ -1496,13 +1527,12 @@
       "concepts": [
         "conditionals"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Hunt for Calico Jack through a story-first Python case study.",
       "source": "case-studies/conditionals-hunt-for-calico-jack/client/src/data/story.js",
-      "presentation": "original",
-      "appId": "app-979290b529568640",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-8f35c48bc68d1343"
     },
     {
       "id": "story-2ad060f951f61c12",
@@ -1512,13 +1542,12 @@
         "variables",
         "types"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Poko’s Magical Memory through a story-first Python case study.",
       "source": "case-studies/variables-and-loops-poko-and-gurukul/README.md",
-      "presentation": "original",
-      "appId": "app-af39bca2f6d24525",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-2ad060f951f61c12"
     },
     {
       "id": "story-43d3d164c73db34c",
@@ -1529,11 +1558,12 @@
         "while",
         "control"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/variables-and-loops-poko-and-gurukul/gurukul/index.html",
       "description": "Explore PyBe Gurukul: Lotus, Well & Bell through a story-first Python case study.",
       "source": "case-studies/variables-and-loops-poko-and-gurukul/gurukul/README.md",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-43d3d164c73db34c"
     },
     {
       "id": "story-dea913906bfd2b90",
@@ -1542,13 +1572,12 @@
       "concepts": [
         "recursion"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Recursion Discovery Journey through a story-first Python case study.",
       "source": "case-studies/recursion-discovery-journey/README.md",
-      "presentation": "original",
-      "appId": "app-3b38362d51f7eefd",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-dea913906bfd2b90"
     },
     {
       "id": "story-61b5840e0fd73941",
@@ -1558,13 +1587,12 @@
         "dictionaries",
         "errors"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Dictionary Discovery Adventure through a story-first Python case study.",
       "source": "case-studies/dictionaries-discovery-adventure/README.md",
-      "presentation": "original",
-      "appId": "app-2ba9252f3987958f",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-61b5840e0fd73941"
     },
     {
       "id": "story-e7b0d8a9fe8d0365",
@@ -1574,6 +1602,7 @@
         "variables",
         "lists",
         "for",
+        "while",
         "strings",
         "indexing",
         "arithmetic",
@@ -1581,15 +1610,15 @@
         "conditionals",
         "control",
         "dictionaries",
-        "functions"
+        "functions",
+        "errors"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Find and Squash the Bug through a story-first Python case study.",
       "source": "case-studies/debugging-find-and-squash-the-bug/product_file.md",
-      "presentation": "original",
-      "appId": "app-af98ac397c4af2df",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-e7b0d8a9fe8d0365"
     },
     {
       "id": "story-6dc52d0b1ddaecb9",
@@ -1600,13 +1629,12 @@
         "while",
         "variables"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Robo’s Magic Loop & Doraemon’s Memory Pockets through a story-first Python case study.",
       "source": "case-studies/variables-and-loops-robo-and-doraemon/README.md",
-      "presentation": "original",
-      "appId": "app-a7c959a640c6bfee",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-6dc52d0b1ddaecb9"
     },
     {
       "id": "story-afad22b314e1637c",
@@ -1618,13 +1646,12 @@
         "sets",
         "dictionaries"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Lost Kingdom of Python through a story-first Python case study.",
       "source": "case-studies/data-structures-lost-kingdom/client/index.html",
-      "presentation": "original",
-      "appId": "app-c790aa353dcb1a47",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-afad22b314e1637c"
     },
     {
       "id": "story-d6ff7a5a81fd9717",
@@ -1635,13 +1662,12 @@
         "types",
         "arithmetic"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Dabbo’s Orchard through a story-first Python case study.",
       "source": "case-studies/variables-and-arithmetic-dabbos-orchard/app.py",
-      "presentation": "original",
-      "appId": "app-65df67b74ee0320a",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-d6ff7a5a81fd9717"
     },
     {
       "id": "story-9c94cab558e9f7a4",
@@ -1650,13 +1676,12 @@
       "concepts": [
         "memory"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Memory Modules through a story-first Python case study.",
       "source": "case-studies/references-and-memory-modules/context.md",
-      "presentation": "original",
-      "appId": "app-7747913573246a5a",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-9c94cab558e9f7a4"
     },
     {
       "id": "story-676a8d1f1dc92e24",
@@ -1665,13 +1690,12 @@
       "concepts": [
         "polymorphism"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Dashavatara: The Many Forms through a story-first Python case study.",
       "source": "case-studies/polymorphism-and-truthiness-dashavatara-and-mela/dashavatara-polymorphism/README.md",
-      "presentation": "original",
-      "appId": "app-065c5a6c2b7ecd97",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-676a8d1f1dc92e24"
     },
     {
       "id": "story-680740e43fc4d219",
@@ -1680,13 +1704,12 @@
       "concepts": [
         "truthiness"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Mela Gatekeeper through a story-first Python case study.",
       "source": "case-studies/polymorphism-and-truthiness-dashavatara-and-mela/village-mela-truthiness/README.md",
-      "presentation": "original",
-      "appId": "app-c82f4a1598a28f4c",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-680740e43fc4d219"
     },
     {
       "id": "story-b31d201f15970ec2",
@@ -1695,13 +1718,12 @@
       "concepts": [
         "threads"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore One Restaurant, Many Orders through a story-first Python case study.",
       "source": "case-studies/multithreading-restaurant-orders/src/main.jsx",
-      "presentation": "original",
-      "appId": "app-69e0076bee5708f6",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-b31d201f15970ec2"
     },
     {
       "id": "story-c080d50fb7e5563f",
@@ -1710,13 +1732,12 @@
       "concepts": [
         "inheritance"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Wildlife Observer’s Field Journal through a story-first Python case study.",
       "source": "case-studies/inheritance-wildlife-field-journal/README.md",
-      "presentation": "original",
-      "appId": "app-466a913a0ebefb42",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-c080d50fb7e5563f"
     },
     {
       "id": "story-489b4ac6ef1bdf99",
@@ -1725,13 +1746,12 @@
       "concepts": [
         "functions"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Adder through a story-first Python case study.",
       "source": "case-studies/functions-adder/Adder/client/src/lessons/content/adderContent.js",
-      "presentation": "original",
-      "appId": "app-359bfee11c9cc5b1",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-489b4ac6ef1bdf99"
     },
     {
       "id": "story-5b04d1c5808fe44e",
@@ -1741,13 +1761,12 @@
         "exceptions",
         "errors"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Dasara Festival Discovery Lab through a story-first Python case study.",
       "source": "case-studies/exceptions-dasara-festival/README.md",
-      "presentation": "original",
-      "appId": "app-8b3bb2a98a748f93",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-5b04d1c5808fe44e"
     },
     {
       "id": "story-f12f400b0845e259",
@@ -1756,13 +1775,12 @@
       "concepts": [
         "tuples"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Tuple Analogy Playground through a story-first Python case study.",
       "source": "case-studies/tuples-analogy-playground/tuple-analogy/README.md",
-      "presentation": "original",
-      "appId": "app-0a78ce73734d7ecc",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-f12f400b0845e259"
     },
     {
       "id": "story-5477e5af513e2cc7",
@@ -1771,13 +1789,12 @@
       "concepts": [
         "scope"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Campus Fest through a story-first Python case study.",
       "source": "case-studies/scope-campus-fest/README.md",
-      "presentation": "original",
-      "appId": "app-764d523398e0ee3e",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-5477e5af513e2cc7"
     },
     {
       "id": "story-c57e8679bce3a32e",
@@ -1787,13 +1804,12 @@
         "exceptions",
         "errors"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Dharma Validator through a story-first Python case study.",
       "source": "case-studies/exceptions-dharma-validator/src/learning/lessons/registry.ts",
-      "presentation": "original",
-      "appId": "app-3fa7b065676bb80f",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-c57e8679bce3a32e"
     },
     {
       "id": "story-f0b7bda78197765a",
@@ -1802,13 +1818,12 @@
       "concepts": [
         "classes"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Creation: The Art of the Eternal Mold through a story-first Python case study.",
       "source": "case-studies/classes-eternal-mold/README.md",
-      "presentation": "original",
-      "appId": "app-b4c55646df4af9d6",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-f0b7bda78197765a"
     },
     {
       "id": "story-d212101de2e2efa4",
@@ -1817,13 +1832,12 @@
       "concepts": [
         "classes"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Sign the Squad through a story-first Python case study.",
       "source": "case-studies/classes-and-inheritance-squad-and-bird-family/README.md",
-      "presentation": "original",
-      "appId": "app-774bea0c541b4e3a",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-d212101de2e2efa4"
     },
     {
       "id": "story-b4e637427beca75c",
@@ -1832,13 +1846,12 @@
       "concepts": [
         "inheritance"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Bird Family through a story-first Python case study.",
       "source": "case-studies/classes-and-inheritance-squad-and-bird-family/README.md",
-      "presentation": "original",
-      "appId": "app-774bea0c541b4e3a",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-b4e637427beca75c"
     },
     {
       "id": "story-79891727e2a36617",
@@ -1847,11 +1860,12 @@
       "concepts": [
         "scope"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/scope-palace-of-whispers/palace-storybook/index.html",
       "description": "Explore The Palace of Whispers through a story-first Python case study.",
       "source": "case-studies/scope-palace-of-whispers/palace-storybook/README.md",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-79891727e2a36617"
     },
     {
       "id": "story-e11815652818ebf2",
@@ -1862,13 +1876,12 @@
         "scope",
         "closures"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Tiffin Trail through a story-first Python case study.",
       "source": "case-studies/functions-and-closures-tiffin-trail/tiffin trail-case study/src/TiffinTrail.jsx",
-      "presentation": "original",
-      "appId": "app-13c4fcae7dd39216",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-e11815652818ebf2"
     },
     {
       "id": "story-6303a4097d69eca7",
@@ -1878,13 +1891,12 @@
         "encapsulation",
         "classes"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Buddy’s Magic Pet Shop through a story-first Python case study.",
       "source": "case-studies/classes-and-encapsulation-magic-pet-shop/README.md",
-      "presentation": "original",
-      "appId": "app-908feb9d111bd1c6",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-6303a4097d69eca7"
     },
     {
       "id": "story-ab72e09488ad93d8",
@@ -1893,13 +1905,12 @@
       "concepts": [
         "functions"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Mia’s Smart Parking Gate through a story-first Python case study.",
       "source": "case-studies/functions-smart-parking-gate/README.md",
-      "presentation": "original",
-      "appId": "app-ec1910982f70706f",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-ab72e09488ad93d8"
     },
     {
       "id": "story-5ab6bebe7c3605f9",
@@ -1909,13 +1920,12 @@
         "for",
         "while"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Cricket Chase through a story-first Python case study.",
       "source": "case-studies/loops-cricket-chase-and-loop-control/pybe-iteration-feature/README.md",
-      "presentation": "original",
-      "appId": "app-c996d940a56a3abe",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-5ab6bebe7c3605f9"
     },
     {
       "id": "story-a639df8d84d12201",
@@ -1924,13 +1934,12 @@
       "concepts": [
         "control"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Loop Control Discovery through a story-first Python case study.",
       "source": "case-studies/loops-cricket-chase-and-loop-control/pybe-loopcontrols-standalone/README.md",
-      "presentation": "original",
-      "appId": "app-91d5dbc65c06174d",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-a639df8d84d12201"
     },
     {
       "id": "story-b5ddcf051b9a827c",
@@ -1939,13 +1948,12 @@
       "concepts": [
         "generators"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Treasure Kingdom through a story-first Python case study.",
       "source": "case-studies/generators-treasure-kingdom/README.md",
-      "presentation": "original",
-      "appId": "app-38aa2d9bedb5cd6b",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-b5ddcf051b9a827c"
     },
     {
       "id": "story-7a30209fcf39425b",
@@ -1957,13 +1965,12 @@
         "for",
         "while"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Python Arcade: Pet, Pixels & Invaders through a story-first Python case study.",
       "source": "case-studies/python-fundamentals-arcade-and-case-study-engine/README.md",
-      "presentation": "original",
-      "appId": "app-a94d2ed3f73b45aa",
-      "launchPath": "/pixel"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-7a30209fcf39425b"
     },
     {
       "id": "story-a6599cda779ad306",
@@ -1980,13 +1987,12 @@
         "dictionaries",
         "files"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Python Case Study Engine through a story-first Python case study.",
       "source": "case-studies/python-fundamentals-arcade-and-case-study-engine/server/src/data/content.json",
-      "presentation": "original",
-      "appId": "app-a94d2ed3f73b45aa",
-      "launchPath": "/learn"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-a6599cda779ad306"
     },
     {
       "id": "story-4049523562c935ab",
@@ -1997,13 +2003,12 @@
         "while",
         "control"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Loops: Reason, Discover & Build through a story-first Python case study.",
       "source": "case-studies/loops-reason-discover-and-build/server/src/data/content.json",
-      "presentation": "original",
-      "appId": "app-d7a3f6530fdd9f55",
-      "launchPath": "/learn"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-4049523562c935ab"
     },
     {
       "id": "story-7617eda5b6c5d39c",
@@ -2012,13 +2017,12 @@
       "concepts": [
         "sorting"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Sorting & Searching Basics through a story-first Python case study.",
       "source": "case-studies/sorting-and-searching-basics/server/src/data/content.json",
-      "presentation": "original",
-      "appId": "app-79b8a476900e62ae",
-      "launchPath": "/learn"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-7617eda5b6c5d39c"
     },
     {
       "id": "story-1be2b5357531f575",
@@ -2032,13 +2036,12 @@
         "lists",
         "functions"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Py-Betaal Tales through a story-first Python case study.",
       "source": "case-studies/python-fundamentals-betaal-tales/README.md",
-      "presentation": "original",
-      "appId": "app-3e683d64342f2117",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-1be2b5357531f575"
     },
     {
       "id": "story-3af5c8e035f66c59",
@@ -2051,13 +2054,12 @@
         "polymorphism",
         "abstraction"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Samsung OOP Stories through a story-first Python case study.",
       "source": "case-studies/object-oriented-python-samsung-stories/CASE_STUDIES_README.md",
-      "presentation": "original",
-      "appId": "app-4a2740e5fd546096",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-3af5c8e035f66c59"
     },
     {
       "id": "story-e5fa6a9b145ec00e",
@@ -2069,29 +2071,32 @@
         "while",
         "conditionals"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Thieves at the Well through a story-first Python case study.",
       "source": "case-studies/functions-and-scope-thieves-at-the-well/server/src/data/db.json",
-      "presentation": "original",
-      "appId": "app-5eeeb18cff87e5cd",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-e5fa6a9b145ec00e"
     },
     {
       "id": "story-82621fb31e80d371",
       "title": "The Royal Bakery & Thirsty Crow",
       "author": "Damanpreet Singh",
       "concepts": [
+        "variables",
         "for",
-        "while"
+        "while",
+        "control",
+        "lists",
+        "stacks",
+        "dictionaries"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore The Royal Bakery & Thirsty Crow through a story-first Python case study.",
       "source": "case-studies/loops-royal-bakery-and-thirsty-crow/README.md",
-      "presentation": "original",
-      "appId": "app-88f867af6d6bc256",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-82621fb31e80d371"
     },
     {
       "id": "story-545172f653234a84",
@@ -2117,13 +2122,12 @@
         "validation",
         "memory"
       ],
-      "mode": "application",
+      "mode": "integrated",
       "entry": null,
       "description": "Explore Python Through Story Traditions through a story-first Python case study.",
       "source": "case-studies/python-fundamentals-story-traditions/src/data/curriculum.ts",
-      "presentation": "original",
-      "appId": "app-db99dc93a09a5a1c",
-      "launchPath": "/"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-545172f653234a84"
     },
     {
       "id": "story-298332aee7ba2b32",
@@ -2132,416 +2136,15 @@
       "concepts": [
         "classes"
       ],
-      "mode": "original",
+      "mode": "integrated",
       "entry": "/submissions/classes-why-classes-exist/index.html",
       "description": "Discover the need for a reusable student format through twelve observations.",
       "source": "case-studies/classes-why-classes-exist/README.md",
-      "presentation": "original"
+      "presentation": "pybe",
+      "lessonEndpoint": "/api/lessons/story-298332aee7ba2b32"
     }
   ],
-  "applications": [
-    {
-      "id": "app-97f391255dbb6397",
-      "kind": "vite",
-      "directory": "case-studies/exceptions-monkey-and-crocodile/client",
-      "backend": {
-        "directory": "case-studies/exceptions-monkey-and-crocodile/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-c6ed2766132d4439",
-      "kind": "vite",
-      "directory": "case-studies/data-visualization-novatech-investor-room/client",
-      "backend": {
-        "directory": "case-studies/data-visualization-novatech-investor-room/server",
-        "entry": "src/server.js",
-        "port": 4000
-      },
-      "modernNode": true
-    },
-    {
-      "id": "app-ded1f07ba24f946b",
-      "kind": "vite",
-      "directory": "case-studies/sets-and-dictionaries-doraemon",
-      "backend": null,
-      "modernNode": true
-    },
-    {
-      "id": "app-6327ddd506f5c831",
-      "kind": "vite",
-      "directory": "case-studies/loops-iteration-learning-journey/pybe-iteration-feature/client",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-64238dd7df5780cb",
-      "kind": "vite",
-      "directory": "case-studies/functions-and-scope-hawkins-division",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-ca806fffa818b5a9",
-      "kind": "vite",
-      "directory": "case-studies/conditionals-magic-of-logic/client",
-      "backend": {
-        "directory": "case-studies/conditionals-magic-of-logic/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-f8ff7e1a2651dc52",
-      "kind": "vite",
-      "directory": "case-studies/data-structures-everyday-python",
-      "backend": null,
-      "modernNode": true
-    },
-    {
-      "id": "app-184366ece45d31b4",
-      "kind": "vite",
-      "directory": "case-studies/recursion-ant-colony-adventure",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-f03ebfaa0c394b59",
-      "kind": "vite",
-      "directory": "case-studies/exceptions-oracle-journey/percy-oracle",
-      "backend": null,
-      "modernNode": true
-    },
-    {
-      "id": "app-904ffa702d8eec71",
-      "kind": "vite",
-      "directory": "case-studies/variables-and-conditionals-pyfarm",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-0d0f39316b783151",
-      "kind": "vite",
-      "directory": "case-studies/text-processing-and-recursion-rosewood-manor/client",
-      "backend": {
-        "directory": "case-studies/text-processing-and-recursion-rosewood-manor/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-e0e27860e2454628",
-      "kind": "vite",
-      "directory": "case-studies/loops-raidurg-adventure",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-979290b529568640",
-      "kind": "vite",
-      "directory": "case-studies/conditionals-hunt-for-calico-jack/client",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-af39bca2f6d24525",
-      "kind": "vite",
-      "directory": "case-studies/variables-and-loops-poko-and-gurukul/client",
-      "backend": {
-        "directory": "case-studies/variables-and-loops-poko-and-gurukul/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-3b38362d51f7eefd",
-      "kind": "vite",
-      "directory": "case-studies/recursion-discovery-journey/client",
-      "backend": {
-        "directory": "case-studies/recursion-discovery-journey/server",
-        "entry": "index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-2ba9252f3987958f",
-      "kind": "vite",
-      "directory": "case-studies/dictionaries-discovery-adventure/frontend",
-      "backend": null,
-      "modernNode": true
-    },
-    {
-      "id": "app-af98ac397c4af2df",
-      "kind": "vite",
-      "directory": "case-studies/debugging-find-and-squash-the-bug/client",
-      "backend": {
-        "directory": "case-studies/debugging-find-and-squash-the-bug/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-a7c959a640c6bfee",
-      "kind": "vite",
-      "directory": "case-studies/variables-and-loops-robo-and-doraemon",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-c790aa353dcb1a47",
-      "kind": "vite",
-      "directory": "case-studies/data-structures-lost-kingdom/client",
-      "backend": {
-        "directory": "case-studies/data-structures-lost-kingdom/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-65df67b74ee0320a",
-      "kind": "streamlit",
-      "directory": "case-studies/variables-and-arithmetic-dabbos-orchard",
-      "entry": "app.py"
-    },
-    {
-      "id": "app-7747913573246a5a",
-      "kind": "vite",
-      "directory": "case-studies/references-and-memory-modules/client",
-      "backend": null,
-      "modernNode": true
-    },
-    {
-      "id": "app-065c5a6c2b7ecd97",
-      "kind": "vite",
-      "directory": "case-studies/polymorphism-and-truthiness-dashavatara-and-mela/dashavatara-polymorphism",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-c82f4a1598a28f4c",
-      "kind": "vite",
-      "directory": "case-studies/polymorphism-and-truthiness-dashavatara-and-mela/village-mela-truthiness",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-69e0076bee5708f6",
-      "kind": "vite",
-      "directory": "case-studies/multithreading-restaurant-orders",
-      "backend": null,
-      "modernNode": true
-    },
-    {
-      "id": "app-466a913a0ebefb42",
-      "kind": "vite",
-      "directory": "case-studies/inheritance-wildlife-field-journal/client",
-      "backend": {
-        "directory": "case-studies/inheritance-wildlife-field-journal/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-359bfee11c9cc5b1",
-      "kind": "vite",
-      "directory": "case-studies/functions-adder/Adder/client",
-      "backend": {
-        "directory": "case-studies/functions-adder/Adder/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-8b3bb2a98a748f93",
-      "kind": "vite",
-      "directory": "case-studies/exceptions-dasara-festival",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-0a78ce73734d7ecc",
-      "kind": "vite",
-      "directory": "case-studies/tuples-analogy-playground/tuple-analogy",
-      "backend": null,
-      "modernNode": true
-    },
-    {
-      "id": "app-764d523398e0ee3e",
-      "kind": "vite",
-      "directory": "case-studies/scope-campus-fest",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-3fa7b065676bb80f",
-      "kind": "vite",
-      "directory": "case-studies/exceptions-dharma-validator",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-b4c55646df4af9d6",
-      "kind": "vite",
-      "directory": "case-studies/classes-eternal-mold/client",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-774bea0c541b4e3a",
-      "kind": "vite",
-      "directory": "case-studies/classes-and-inheritance-squad-and-bird-family/client",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-13c4fcae7dd39216",
-      "kind": "vite",
-      "directory": "case-studies/functions-and-closures-tiffin-trail/tiffin trail-case study",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-908feb9d111bd1c6",
-      "kind": "vite",
-      "directory": "case-studies/classes-and-encapsulation-magic-pet-shop/client",
-      "backend": {
-        "directory": "case-studies/classes-and-encapsulation-magic-pet-shop/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-ec1910982f70706f",
-      "kind": "vite",
-      "directory": "case-studies/functions-smart-parking-gate",
-      "backend": null,
-      "modernNode": false
-    },
-    {
-      "id": "app-c996d940a56a3abe",
-      "kind": "vite",
-      "directory": "case-studies/loops-cricket-chase-and-loop-control/pybe-iteration-feature/client",
-      "backend": {
-        "directory": "case-studies/loops-cricket-chase-and-loop-control/pybe-iteration-feature/server",
-        "entry": "server.js",
-        "port": 5000
-      },
-      "modernNode": true
-    },
-    {
-      "id": "app-91d5dbc65c06174d",
-      "kind": "vite",
-      "directory": "case-studies/loops-cricket-chase-and-loop-control/pybe-loopcontrols-standalone/client",
-      "backend": {
-        "directory": "case-studies/loops-cricket-chase-and-loop-control/pybe-loopcontrols-standalone/server",
-        "entry": "server.js",
-        "port": 5000
-      },
-      "modernNode": true
-    },
-    {
-      "id": "app-38aa2d9bedb5cd6b",
-      "kind": "vite",
-      "directory": "case-studies/generators-treasure-kingdom",
-      "backend": null,
-      "modernNode": true
-    },
-    {
-      "id": "app-a94d2ed3f73b45aa",
-      "kind": "vite",
-      "directory": "case-studies/python-fundamentals-arcade-and-case-study-engine/client",
-      "backend": {
-        "directory": "case-studies/python-fundamentals-arcade-and-case-study-engine/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-d7a3f6530fdd9f55",
-      "kind": "vite",
-      "directory": "case-studies/loops-reason-discover-and-build/client",
-      "backend": {
-        "directory": "case-studies/loops-reason-discover-and-build/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-79b8a476900e62ae",
-      "kind": "vite",
-      "directory": "case-studies/sorting-and-searching-basics/client",
-      "backend": {
-        "directory": "case-studies/sorting-and-searching-basics/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-3e683d64342f2117",
-      "kind": "vite",
-      "directory": "case-studies/python-fundamentals-betaal-tales/client",
-      "backend": {
-        "directory": "case-studies/python-fundamentals-betaal-tales/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-4a2740e5fd546096",
-      "kind": "vite",
-      "directory": "case-studies/object-oriented-python-samsung-stories/client",
-      "backend": {
-        "directory": "case-studies/object-oriented-python-samsung-stories/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-5eeeb18cff87e5cd",
-      "kind": "vite",
-      "directory": "case-studies/functions-and-scope-thieves-at-the-well/client",
-      "backend": {
-        "directory": "case-studies/functions-and-scope-thieves-at-the-well/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-88f867af6d6bc256",
-      "kind": "vite",
-      "directory": "case-studies/loops-royal-bakery-and-thirsty-crow/client",
-      "backend": {
-        "directory": "case-studies/loops-royal-bakery-and-thirsty-crow/server",
-        "entry": "src/index.js",
-        "port": 5000
-      },
-      "modernNode": false
-    },
-    {
-      "id": "app-db99dc93a09a5a1c",
-      "kind": "vite",
-      "directory": "case-studies/python-fundamentals-story-traditions",
-      "backend": null,
-      "modernNode": true
-    }
-  ],
+  "applications": [],
   "inventory": [
     {
       "author": "adaptive-scenario-learning-engine",

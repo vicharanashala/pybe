@@ -148,8 +148,8 @@ export default function CodeMasteryHub({
             fontWeight: 600,
           }}
         >
-          <span>🏆 Progress:</span>
-          <span>{masteredIds.size} of {STORY_COMMANDS.length} Commands Mastered</span>
+          <span>Review progress:</span>
+          <span>{masteredIds.size} of {STORY_COMMANDS.length} Commands Reviewed</span>
         </div>
       </div>
 

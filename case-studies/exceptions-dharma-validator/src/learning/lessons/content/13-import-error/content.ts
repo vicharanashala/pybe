@@ -120,7 +120,6 @@ print(show_report())`,
   reflectionPrompt:
     "Duryodhana's plan assumed a resource would simply be enough, without confirming it was the right fit. Where else does a plan quietly depend on something being available, right up until the exact moment it's needed?",
 
-  badgeUnlocked: "Sambhavya, What Was Assumed, Not Confirmed",
 };
 
 export default importError;

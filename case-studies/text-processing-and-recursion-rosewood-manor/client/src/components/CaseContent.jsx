@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
+import React, { useEffect, useState, useRef } from 'react';
 import { ArrowLeft, ArrowRight, Check, CircleAlert, CodeXml, RotateCcw, Sparkles } from 'lucide-react';
 import EvidenceBoard from './EvidenceBoard';
 import { WaxSeal } from './Motifs';
@@ -28,14 +30,19 @@ export default function CaseContent({
   clueTotal = 0,
   onViewCode
 }) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
+  const pendingChoice=useRef(null);
   const slides = fallbackSlides(scenario);
   const slide = slides[Math.min(stepIndex, slides.length - 1)];
   const [choiceState, setChoiceState] = useState({});
   const finalPart = Boolean(!scenario.nextScenarioId);
   const isRevealSlide = Boolean(slide.isCodeReveal || slide.kind === 'code-reveal');
+  useEffect(()=>()=>clearTimeout(pendingChoice.current),[slide.id]);
 
   useEffect(() => {
     function onKeyDown(event) {
+      const target=event.composedPath?.()[0] || event.target;
+      if(['INPUT','TEXTAREA','SELECT','BUTTON'].includes(target?.tagName))return;
       if (event.key === 'ArrowLeft') onStepChange(Math.max(0, stepIndex - 1));
       if (event.key === 'ArrowRight' && slide.kind !== 'question' && !isRevealSlide) {
         onStepChange(Math.min(slides.length - 1, stepIndex + 1));
@@ -46,19 +53,19 @@ export default function CaseContent({
   }, [onStepChange, slide.kind, slides.length, stepIndex, isRevealSlide]);
 
   function choose(choice) {
-    if (submitting) return;
+    if (submitting || choiceState[slide.id]?.correct) return;
     const next = { attempts: (choiceState[slide.id]?.attempts || 0) + 1, selected: choice.id, correct: choice.correct, feedback: choice.feedback };
     setChoiceState((state) => ({ ...state, [slide.id]: next }));
     if (choice.correct) {
       onChoiceSubmit(choice, slide, next.attempts);
-      window.setTimeout(() => onStepChange(Math.min(slides.length - 1, stepIndex + 1)), 250);
+      pendingChoice.current=setTimeout(() => onStepChange(Math.min(slides.length - 1, stepIndex + 1)), 250);
     }
   }
 
   const isLast = stepIndex >= slides.length - 1;
 
   return (
-    <section className="case-content">
+    <section className="case-content" data-rosewood-slide={slide.id}>
       <header className="part-header">
         <p className="part-eyebrow">{scenario.partLabel} · file {partIndex + 1} of {partTotal}</p>
         <h2 className="part-title">{scenario.partLabel || scenario.title.replace(/^Rosewood Manor: /, '')}</h2>

@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause, RotateCcw, AlertTriangle, TrendingUp } from 'lucide-react';
@@ -5,6 +7,7 @@ import { useGame } from '../context/GameContext';
 import { useSoundFX } from '../hooks/useSoundFX';
 
 export const DrawerSimulation = () => {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const { raiseDogMeter, nerdMode } = useGame();
   const { playDogGrowl, playClick } = useSoundFX();
 
@@ -23,36 +26,15 @@ export const DrawerSimulation = () => {
   // Target item placed at the very last drawer for worst-case demonstration
   const targetDrawer = totalDrawers;
 
-  useEffect(() => {
-    if (isRunning) {
-      intervalRef.current = setInterval(() => {
-        setCurrentDrawer(prev => {
-          if (prev >= targetDrawer) {
-            clearInterval(intervalRef.current);
-            setIsRunning(false);
-            setFound(true);
-            // Record run in history for graph
-            setHistoryRuns(h => {
-              if (!h.some(item => item.n === totalDrawers)) {
-                return [...h, { n: totalDrawers, steps: totalDrawers }].sort((a, b) => a.n - b.n);
-              }
-              return h;
-            });
-            return targetDrawer;
-          }
-          // Slight dog meter pressure during search
-          if (prev % 150 === 0 && prev > 0) {
-            raiseDogMeter(8);
-            playDogGrowl();
-          }
-          return prev + 1;
-        });
-      }, searchSpeed);
-    } else {
-      clearInterval(intervalRef.current);
-    }
-    return () => clearInterval(intervalRef.current);
-  }, [isRunning, searchSpeed, targetDrawer, totalDrawers, raiseDogMeter, playDogGrowl]);
+  useEffect(()=>{
+    if(!isRunning)return;
+    const timer=setTimeout(()=>{
+      if(currentDrawer>=targetDrawer){setIsRunning(false);setFound(true);setHistoryRuns(history=>history.some(item=>item.n===totalDrawers)?history:[...history,{n:totalDrawers,steps:totalDrawers}].sort((a,b)=>a.n-b.n));return;}
+      if(currentDrawer%150===0&&currentDrawer>0){raiseDogMeter(8);playDogGrowl();}
+      setCurrentDrawer(currentDrawer+1);
+    },searchSpeed);
+    return()=>clearTimeout(timer);
+  },[isRunning,currentDrawer,searchSpeed,targetDrawer,totalDrawers,raiseDogMeter,playDogGrowl]);
 
   const handleStart = () => {
     playClick();

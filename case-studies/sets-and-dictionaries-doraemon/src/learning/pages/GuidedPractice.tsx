@@ -48,7 +48,7 @@ const Act1: React.FC = () => {
       {scenarios.map((sc, si) => {
         const chosen = picks[si];
         return (
-          <div key={si} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div key={si} role="group" aria-label={sc.label} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <div style={{ fontSize: '12px', fontWeight: 700, color: '#64748b' }}>{sc.label}</div>
             <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
               {sc.options.map((opt, oi) => {
@@ -164,7 +164,7 @@ const Act2: React.FC = () => {
         const shown   = revealed[pi];
 
         return (
-          <GlassCard key={pi} style={{ padding: '18px 20px', background: 'rgba(255,255,255,0.85)', border: '1px solid rgba(0,0,0,0.07)' }}>
+          <GlassCard key={pi} role="group" aria-label={p.character+" unique items"} style={{ padding: '18px 20px', background: 'rgba(255,255,255,0.85)', border: '1px solid rgba(0,0,0,0.07)' }}>
             {/* Scene header */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
               <div style={{
@@ -298,7 +298,7 @@ const Act3: React.FC = () => {
           const correct = picked === q.expected;
 
           return (
-            <div key={qi} style={{
+            <div key={qi} role="group" aria-label={q.item+" membership"} style={{
               display: 'flex', alignItems: 'center', gap: '10px',
               padding: '10px 14px', borderRadius: '10px',
               background: done ? (correct ? 'rgba(34,197,94,0.06)' : 'rgba(239,68,68,0.04)') : 'white',
@@ -386,7 +386,7 @@ const Act4: React.FC = () => {
         const shown  = revealed[ai];
 
         return (
-          <div key={ai} style={{
+          <div key={ai} role="group" aria-label={add.item+" addition"} style={{
             padding: '14px 16px', borderRadius: '12px',
             background: done ? (correct ? 'rgba(34,197,94,0.05)' : 'rgba(239,68,68,0.04)') : 'white',
             border: done ? (correct ? '1.5px solid rgba(34,197,94,0.25)' : '1.5px solid rgba(239,68,68,0.2)') : '1px solid rgba(0,0,0,0.07)',

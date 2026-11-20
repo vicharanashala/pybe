@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState } from 'react';
 import { CheckCircle, AlertTriangle, Play, RefreshCw, X, ArrowRight, Zap, Code, HelpCircle } from 'lucide-react';
 import { playThud, playPop, unlockAudio } from '../utils/audio';
@@ -54,6 +56,7 @@ const CodeSlotChallenge = ({
   onUnlockNextLevel,
   onClose
 }) => {
+  const {setTimeout}=useStoryTimers();
   const [selectedOptionId, setSelectedOptionId] = useState(null);
   const [isDragOver, setIsDragOver] = useState(false);
   const [testResult, setTestResult] = useState(null); // { isCorrect, title, message }
@@ -220,6 +223,7 @@ const CodeSlotChallenge = ({
 
             {/* The Interactive Code Drop Slot */}
             <div
+              role="group" aria-label="Replacement code slot"
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}

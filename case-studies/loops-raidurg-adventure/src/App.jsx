@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import {soundFx} from './utils/soundEffects';
 import Navbar from './components/Navbar';
 import StoryContainer from './components/StoryContainer';
 import { STORY_PARTS } from './data/storyData';
 
-export default function App() {
+export default function App({onComplete, assetBase = ''}) {
+  useEffect(() => () => soundFx.dispose(), []);
   const [currentChapterIdx, setCurrentChapterIdx] = useState(0);
 
   const handleSelectChapter = (chapterIdx) => {
@@ -23,7 +25,7 @@ export default function App() {
 
       {/* Main Interactive Story Experience */}
       <main className="flex-1 pb-8">
-        <StoryContainer
+        <StoryContainer onComplete={onComplete} assetBase={assetBase}
           currentChapterIdx={currentChapterIdx}
           onSelectChapter={handleSelectChapter}
         />

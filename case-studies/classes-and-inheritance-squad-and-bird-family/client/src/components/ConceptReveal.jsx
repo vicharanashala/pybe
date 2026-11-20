@@ -131,7 +131,7 @@ const CHECK_QUESTIONS = [
 function MicroCheckQuestion({ q, answer, onSelect }) {
   const selectedOption = answer && q.options.find((o) => o.id === answer.optId);
   return (
-    <div
+    <div role="group" aria-label={q.prompt}
       className={
         "question-block" +
         (answer
@@ -225,9 +225,6 @@ export default function ConceptReveal({ onNext, onConceptProgress }) {
   }, [onConceptProgress]);
 
   const allChecked = CHECK_QUESTIONS.every((q) => checkAnswers[q.id]);
-  const correctCount = CHECK_QUESTIONS.filter(
-    (q) => checkAnswers[q.id]?.isCorrect,
-  ).length;
 
   function selectCheckOption(qId, optId, correctId) {
     if (checkAnswers[qId]) return; // lock after first answer, matching ThinkItThrough
@@ -486,26 +483,7 @@ export default function ConceptReveal({ onNext, onConceptProgress }) {
         />
       ))}
 
-      {allChecked && (
-        <div
-          className={
-            "checkpoint-summary " +
-            (correctCount === CHECK_QUESTIONS.length
-              ? "checkpoint-summary-full"
-              : "checkpoint-summary-partial")
-          }
-        >
-          <span className="checkpoint-summary-icon" aria-hidden="true">
-            {correctCount === CHECK_QUESTIONS.length ? "🌟" : "✓"}
-          </span>
-          <p>
-            {correctCount}/{CHECK_QUESTIONS.length} correct —{" "}
-            {correctCount === CHECK_QUESTIONS.length
-              ? "you've got inheritance down. Level 3 is ready."
-              : "solid effort — the feedback above covers what to remember. Level 3 is unlocked."}
-          </p>
-        </div>
-      )}
+      {allChecked && <div className="checkpoint-summary"><span aria-hidden="true">✓</span><p>Check complete. Review the explanations above before continuing.</p></div>}
 
       <div className="concept-nav">
         <button className="btn small" onClick={() => goToStep(5, 90)}>

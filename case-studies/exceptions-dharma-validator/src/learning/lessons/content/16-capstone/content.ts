@@ -125,7 +125,6 @@ register_warrior('Arjuna', 30, names)`,
   reflectionPrompt:
     "Arjuna doesn't say the war became easy, he says he can now act clearly, situation by situation. Looking back at everything in this module, what's the one shift in how you think about errors that you'd keep, even outside of Python entirely?",
 
-  badgeUnlocked: "Sthitaprajna, One of Steady Wisdom",
 };
 
 export default capstone;

@@ -10,7 +10,7 @@ import BlueprintSuccessLedger from './components/BlueprintSuccessLedger';
  * Visual Novel State Machine Stages:
  * 'intro' -> 'molding_1' -> 'molding_2' -> 'molding_3' -> 'exhaustion' -> 'epiphany' -> 'fill_in_the_blank' -> 'blueprint_success' -> 'summoning' -> 'full_editor'
  */
-export default function RightPanelManager({ triggerOrionDialogue, onStageChange, initialStage = 'molding_1' }) {
+export default function RightPanelManager({ triggerOrionDialogue, onStageChange, onComplete, initialStage = 'molding_1' }) {
   const [activeStage, setActiveStage] = useState(initialStage);
   const [foxesCrafted, setFoxesCrafted] = useState(0);
 
@@ -47,13 +47,8 @@ export default function RightPanelManager({ triggerOrionDialogue, onStageChange,
         `"Your fingers are completely exhausted! Typing every single attribute for every single creature by hand... There MUST be a better way!"`
       );
 
-      // Auto-transition to Epiphany after 4 seconds
-      setTimeout(() => {
-        setStage(
-          'epiphany',
-          `"Master Orion reaches into his robes and pulls out a glowing Midnight Parchment! 'Behold the secret of Python Classes! Unfold the blueprint scroll!'"`,
-        );
-      }, 4000);
+      // The owning app keeps the original four-second transition and cancels stale callbacks.
+
     }
   };
 
@@ -226,6 +221,7 @@ export default function RightPanelManager({ triggerOrionDialogue, onStageChange,
           >
             <SummoningLedger
               onSummonSuccess={() => {
+                onComplete?.();
                 triggerOrionDialogue(
                   "Magnificent! Look at them come to life! With a single class definition, we can mint infinite unique guardians without rewriting a single line of structural code. That is the ultimate elegance of Object-Oriented Programming!"
                 );

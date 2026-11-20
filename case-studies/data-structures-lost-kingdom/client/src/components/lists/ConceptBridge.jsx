@@ -118,7 +118,7 @@ export default function ConceptBridge({
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontSize: '1.2rem' }}>🧩</span>
           <span style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-primary)' }}>
-            Code Mastery: <span style={{ color: chapterColor }}>{concept.conceptName}</span>
+            Code Exploration: <span style={{ color: chapterColor }}>{concept.conceptName}</span>
           </span>
         </div>
 
@@ -127,7 +127,7 @@ export default function ConceptBridge({
             { id: 'breakdown', label: '1. Piece by Piece' },
             { id: 'mcq', label: '2. Quick Check' },
             { id: 'fill', label: '3. Fill in Blank' },
-            { id: 'celebrate', label: '4. Code Mastered!' },
+            { id: 'celebrate', label: '4. Code Reviewed' },
           ].map((item) => {
             const stepOrder = ['breakdown', 'mcq', 'fill', 'celebrate'];
             const currentIdx = stepOrder.indexOf(subStep);
@@ -570,7 +570,7 @@ export default function ConceptBridge({
                 textShadow: '0 0 16px rgba(57, 211, 83, 0.5)',
               }}
             >
-              You Mastered This Code Piece by Piece!
+              You Wrote This Code Piece by Piece!
             </h3>
             <p style={{ margin: '0 0 18px', color: 'var(--text-secondary)', fontSize: '0.94rem' }}>
               You understand every single character in this command:

@@ -12,7 +12,7 @@
 // horizontal rooms connected to the shaft by a straight horizontal tunnel
 // (no elbows) and are marked by an `x` fraction (0-1) that spreads them out.
 
-import type { ChamberSpec, ObstacleSpec } from '@/data';
+import type { ChamberSpec, ObstacleSpec } from '../../data';
 
 export interface Pt {
   x: number;

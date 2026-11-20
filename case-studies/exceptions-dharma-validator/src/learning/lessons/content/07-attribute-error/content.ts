@@ -119,7 +119,6 @@ print(invoke(karna))`,
   reflectionPrompt:
     "The curse didn't take away Karna's skill as a warrior — only one specific recall, at one specific moment. Where else does losing just one narrow, specific capability change everything, even when everything else about someone remains intact?",
 
-  badgeUnlocked: "Vijaya — What Remains When One Thing Is Missing",
 };
 
 export default attributeError;

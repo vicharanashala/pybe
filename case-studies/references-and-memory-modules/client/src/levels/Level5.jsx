@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Quiz from '../components/Quiz';
-import { Award, BookOpen, CheckCircle, Sparkles } from 'lucide-react';
+import { BookOpen, CheckCircle, Sparkles } from 'lucide-react';
 
-const Level5 = () => {
+const Level5 = ({onComplete}) => {
   const [showQuiz, setShowQuiz] = useState(false);
   const [hasCompleted, setHasCompleted] = useState(false);
 
@@ -121,11 +121,11 @@ const Level5 = () => {
         marginBottom: '16px',
         letterSpacing: '0.8px'
       }}>
-        <Award size={18} /> FINAL COMPREHENSIVE CERTIFICATION EXAM
+        <BookOpen size={18} /> COMPREHENSIVE MEMORY REVIEW
       </div>
 
       <h1 style={{ fontSize: '2.8rem', color: '#2b2b2b', fontFamily: '"Fraunces", Georgia, serif', fontWeight: 700, marginBottom: '14px' }}>
-        Master Python Memory Architect
+        Python Memory Review
       </h1>
 
       <p style={{ maxWidth: '820px', fontSize: '1.08rem', lineHeight: '1.7', margin: '0 auto 28px auto', color: '#5b5648' }}>
@@ -186,7 +186,7 @@ const Level5 = () => {
           <Quiz
             questions={questions}
             onPass={() => setHasCompleted(true)}
-            onComplete={() => setHasCompleted(true)}
+            onComplete={() => {setHasCompleted(true);onComplete?.();}}
           />
         </div>
       )}
@@ -203,10 +203,10 @@ const Level5 = () => {
           boxShadow: '0 4px 16px rgba(79, 154, 99, 0.12)'
         }}>
           <h2 style={{ color: '#256038', margin: '0 0 10px 0', fontFamily: '"Fraunces", Georgia, serif', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', fontSize: '1.4rem' }}>
-            <CheckCircle size={28} /> Certified Python Memory Master
+            <CheckCircle size={28} /> Memory Journey Complete
           </h2>
           <p style={{ margin: 0, color: '#4a443b', fontSize: '1.02rem', lineHeight: '1.6' }}>
-            You have successfully mastered memory pointers, mutation semantics, recursion call frames, and garbage collection in Python. You are ready to build ultra-scalable, crash-proof production software!
+            You have successfully mastered memory pointers, mutation semantics, recursion call frames, and garbage collection in Python. Use these ideas when you reason about the data and references in your programs.
           </p>
         </div>
       )}

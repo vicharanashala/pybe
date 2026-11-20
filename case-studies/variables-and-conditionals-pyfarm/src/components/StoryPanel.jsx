@@ -175,8 +175,7 @@ function Explain({ chapter, onNext }) {
   );
 }
 
-// Beats 10 to 12: the mission is done, the XP is awarded, and the next chapter
-// opens. The XP figure is announced so it is not delivered by animation alone.
+// The completed mission opens the next authored chapter.
 function Complete({ chapter, mission, farm, hintsUsed, nextChapterTitle, onNextChapter, onBackToChapters }) {
   const { complete } = chapter;
 
@@ -189,13 +188,7 @@ function Complete({ chapter, mission, farm, hintsUsed, nextChapterTitle, onNextC
       </p>
       <h2>{mission.title}</h2>
 
-      <p className="pf-reward" aria-live="polite">
-        <span aria-hidden="true">⭐</span> +{mission.xp} XP
-      </p>
-      <p className="pf-reward-total">
-        Total XP: {farm.xp}
-        {hintsUsed > 0 && ` · ${hintsUsed} hint${hintsUsed === 1 ? '' : 's'} used`}
-      </p>
+      <p>Chapter complete.</p>
 
       <MayaLine mood={complete.mayaMood}>{complete.mayaLine}</MayaLine>
 

@@ -1,0 +1,10 @@
+import React from 'react';
+import AuthoredRouterStory from '../AuthoredRouterStory.jsx';
+import Story from '../../../../case-studies/exceptions-dharma-validator/src/App.tsx';
+import {ProgressProvider} from '../../../../case-studies/exceptions-dharma-validator/src/progress/ProgressContext.tsx';
+import styles from '../../../../case-studies/exceptions-dharma-validator/src/index.css?tailwind';
+const theme=`input,textarea{min-width:0;box-sizing:border-box}input[placeholder="Search exceptions or stories…"]{width:100%;max-width:100%}.text-\\[\\#7FBF9E\\]{color:#286435}:host{position:relative;isolation:isolate;overflow-x:clip}#root{background:#fffaf3;color:#382b21}.min-h-screen{min-height:0}.fixed{position:absolute}.text-ink,[class*="text-white"],[class*="text-[#ffffff]"]{color:#382b21}.text-muted,.text-mutedSoft,.text-blue-100\\/80{color:#705a46}.text-bg{color:white}.text-gold{color:#a44712}.bg-gold,.bg-vermilion{background:#c45b19;color:white}.bg-panel,.bg-panel\\/60,.bg-panel\\/70,.bg-panel\\/80{background:#fff7ec}.border-line{border-color:#e7cfb5}:host .dark-blue-card,:host .glass-card,:host .glass-card-strong{background:#fffdf9!important;border-color:#e7cfb5;box-shadow:0 8px 24px #59371512}.text-gold-gradient{background:none;color:#a44712;-webkit-text-fill-color:#a44712}.shine-sweep{opacity:.15}button{scroll-margin:130px}main{padding-top:24px;padding-bottom:32px;min-width:0}.text-cyan-400,.text-slate-400{color:#705a46}[class*="bg-[#171029]"],[class*="bg-[#0E1F1A]"]{background:#fff1df}.shadow-xl,.shadow-2xl{box-shadow:0 8px 24px #59371512}textarea{max-width:100%}.fixed.inset-0{opacity:.15}@media(max-width:600px){main{padding:16px}.p-10,.p-8,.p-6{padding:16px}.text-4xl{font-size:30px}.text-3xl{font-size:26px}.min-h-\\[340px\\]{min-height:0}.font-mono{overflow-wrap:anywhere}pre{max-width:100%;overflow:auto}}`;
+export default function DharmaValidator({onComplete}){
+  const localStyles=styles;
+  return <AuthoredRouterStory styles={[localStyles]} theme={theme}><ProgressProvider onComplete={onComplete}><Story/></ProgressProvider></AuthoredRouterStory>;
+}

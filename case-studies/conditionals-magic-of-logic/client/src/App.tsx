@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { IntroductionPage } from './components/IntroductionPage';
 import { chapters } from './data';
-import { Sparkles, GraduationCap, Trophy } from 'lucide-react';
+import { Sparkles, GraduationCap, BookOpen } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Chapter 1 Lessons
@@ -12,7 +12,7 @@ import { DefenseAgainstTheDarkArts } from './components/lessons/DefenseAgainstTh
 import { PotionsDungeon } from './components/lessons/PotionsDungeon';
 import { FirstFlyingClass } from './components/lessons/FirstFlyingClass';
 
-export default function App() {
+export default function App({onComplete}: {onComplete?: () => void}) {
   const [activeChapterId, setActiveChapterId] = useState('intro'); // Default to intro
   const [currentLessonIndex, setCurrentLessonIndex] = useState(0);
   const [chapterCompleted, setChapterCompleted] = useState(false);
@@ -26,6 +26,7 @@ export default function App() {
       setCurrentLessonIndex((prev) => prev + 1);
     } else {
       setChapterCompleted(true);
+      onComplete?.();
     }
   };
 
@@ -79,11 +80,11 @@ export default function App() {
               {activeChapterId === 'ch1' ? (
                 <>
                   <div className="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mb-6 border border-red-200 shadow-sm">
-                    <Trophy className="w-12 h-12 text-red-600" />
+                    <BookOpen className="w-12 h-12 text-red-600" />
                   </div>
-                  <h1 className="text-4xl font-bold text-stone-900 mb-4">Course Complete!</h1>
+                  <h1 className="text-4xl font-bold text-stone-900 mb-4">Journey Complete!</h1>
                   <p className="text-xl text-stone-600 max-w-lg mb-8 font-medium">
-                    You are a Python Master! You have successfully completed all modules on Pybe.
+                    You have explored all five stories about conditional logic. Revisit any activity to try another path.
                   </p>
                   <button 
                     onClick={() => {

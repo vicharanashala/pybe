@@ -24,7 +24,8 @@ useEffect(() => {
       <div className="book-frame">
 
         <div
-          className="book"
+          className="book" role="button" tabIndex={0} aria-label="Open the ancient spellbook"
+          onKeyDown={event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();navigate('/intro');}}}
           onClick={() => navigate("/intro")}
         >
 

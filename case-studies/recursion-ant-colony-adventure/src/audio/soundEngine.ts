@@ -145,3 +145,5 @@ export function unlockAudio() {
   const ac = getCtx();
   if (ac && ac.state === 'suspended') void ac.resume();
 }
+
+export function disposeAudio(){const active=ctx;ctx=null;if(active&&active.state!=="closed")void active.close();}

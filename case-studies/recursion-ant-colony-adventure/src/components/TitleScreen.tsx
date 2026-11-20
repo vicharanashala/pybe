@@ -5,26 +5,22 @@ import { motion } from 'framer-motion';
 import { lazy, Suspense } from 'react';
 import { Bug, Play, Trophy, Volume2, VolumeX } from 'lucide-react';
 
-const AntColony = lazy(() => import('@/components/AntColony'));
+const AntColony = lazy(() => import('./AntColony'));
 
 interface TitleScreenProps {
-  xp: number;
   completedCount: number;
   totalScenes: number;
   muted: boolean;
   onToggleMute: () => void;
   onBegin: () => void;
-  onOpenAchievements: () => void;
 }
 
 export default function TitleScreen({
-  xp,
   completedCount,
   totalScenes,
   muted,
   onToggleMute,
   onBegin,
-  onOpenAchievements,
 }: TitleScreenProps) {
   const resume = completedCount > 0 && completedCount < totalScenes;
   return (
@@ -67,17 +63,10 @@ export default function TitleScreen({
         >
           {muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
         </button>
-        <button
-          onClick={onOpenAchievements}
-          className="flex items-center gap-1.5 rounded-full bg-stone-900/70 px-3 py-2.5 text-stone-200 backdrop-blur transition hover:bg-stone-800"
-        >
-          <Trophy className="h-5 w-5 text-amber-300" />
-          <span className="text-sm font-semibold">{xp} XP</span>
-        </button>
       </div>
 
       {/* Hero content */}
-      <div className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
+      <div className="ant-title-content relative z-10 flex min-h-screen flex-col items-center justify-center px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -151,7 +140,7 @@ export default function TitleScreen({
           <span className="text-stone-700">•</span>
           <span>Interactive quizzes</span>
           <span className="text-stone-700">•</span>
-          <span>XP &amp; achievements</span>
+          <span>Explore at your pace</span>
         </motion.div>
       </div>
     </div>

@@ -180,7 +180,7 @@ export default function MagicalScrollMadLibs({
   const handleSubmit = (e) => {
     if (e) e.preventDefault();
     const forged = checkValidation(codeInputs);
-    if (forged || isCodeForged) {
+    if (forged) {
       if (onUnlockFullEditor) {
         onUnlockFullEditor();
       }

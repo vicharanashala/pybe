@@ -1,3 +1,5 @@
+import {createStoryProgressHook} from '../../../../shared/story-progress.mjs';
+const useStoryProgress=createStoryProgressHook(React);
 import React, { useState } from 'react';
 import { Flower2, Boxes } from 'lucide-react';
 import LoopEscape from '../loops/LoopEscape.jsx';
@@ -27,13 +29,15 @@ const MODULES = [
   }
 ];
 
-export default function LearningHub() {
+export default function LearningHub({onComplete}) {
+  const [completed,complete]=useStoryProgress('robo-doraemon');
+  const finish=id=>{complete(id);if(['loops','variables'].every(key=>key===id || completed.has(key)))onComplete?.();};
   const [activeId, setActiveId] = useState(null);
   const active = MODULES.find((m) => m.id === activeId);
 
   if (active) {
     const { Component } = active;
-    return <Component onBack={() => setActiveId(null)} />;
+    return <Component onBack={() => setActiveId(null)} onComplete={()=>finish(active.id)}/>;
   }
 
   return (

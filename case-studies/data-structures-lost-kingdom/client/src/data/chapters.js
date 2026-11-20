@@ -13,7 +13,6 @@ export const chapters = [
     colorDim: 'rgba(57, 211, 83, 0.12)',
     colorGlow: 'rgba(57, 211, 83, 0.3)',
     emoji: '🎒',
-    xp: 200,
     order: 1,
 
     // ── Initial backpack items ────────────────────────────────────────────────
@@ -571,6 +570,7 @@ export const chapters = [
 
     // ── Practice: Code Challenge ─────────────────────────────────────────────
     challenge: {
+      continueLabel: 'Continue to the final mission',
       prompt: 'Your backpack starts with ["Map", "Water"]. Add "Torch" to the end. Change "Map" (spot 0) to "Compass". Then print the second item (spot 1).',
       starterCode:
 `backpack = ["Map", "Water"]
@@ -583,6 +583,8 @@ export const chapters = [
 
 # Print the second item (spot 1)
 print()`,
+      validationCode: 'assert backpack == ["Compass", "Water", "Torch"], "Check the final backpack items and order."',
+      outputIncludes: ['Water'],
       patterns: [
         { regex: /\.append\s*\(\s*["']Torch["']\s*\)/, error: 'Use .append("Torch") to add Torch to the end' },
         { regex: /backpack\s*\[\s*0\s*\]\s*=\s*["']Compass["']/, error: 'Use backpack[0] = "Compass" to change the first item' },
@@ -594,6 +596,7 @@ print()`,
 
     // ── Final Challenge ──────────────────────────────────────────────────────
     finalChallenge: {
+      continueLabel: 'Finish backpack journey',
       prompt: `Your backpack has: ["Map", "Water", "Food"]
 
 Do these 4 tasks:
@@ -617,6 +620,8 @@ Do these 4 tasks:
 
 
 print("Final backpack:", backpack)`,
+      validationCode: 'assert backpack == ["Torch", "Water", "Map"], "Check what remains after the reverse."',
+      outputIncludes: ['Water'],
       patterns: [
         { regex: /\.append\s*\(\s*["']Torch["']\s*\)/, error: 'Task 1: Use backpack.append("Torch")' },
         { regex: /\.remove\s*\(\s*["']Food["']\s*\)/, error: 'Task 2: Use backpack.remove("Food")' },
@@ -624,7 +629,7 @@ print("Final backpack:", backpack)`,
         { regex: /\.reverse\s*\(\s*\)/, error: 'Task 4: Use backpack.reverse()' },
       ],
       hint: 'append("Torch") -> remove("Food") -> print(backpack[1]) -> backpack.reverse()',
-      successMessage: '🏆 CHAMPION! You solved the packing problem and mastered Python Lists!'
+      successMessage: 'The packing mission is complete. Your backpack is ready for the way home.'
     },
   },
 ];

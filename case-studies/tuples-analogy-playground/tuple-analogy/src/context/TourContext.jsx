@@ -1,9 +1,17 @@
-import React, { createContext, useState, useContext } from 'react';
+import {readProgress,saveProgress} from '../../../../../library/learning/core.mjs';
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
+import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import { TOUR_DATA } from '../data/tours';
 
 const TourContext = createContext();
 
-export const TourProvider = ({ children }) => {
+export const TourProvider = ({ children, rootRef, assetBase = '', onComplete }) => {
+  const {setTimeout}=useStoryTimers();
+  const [completedSections,setCompletedSections]=useState(()=>readProgress(localStorage,'tuple-playground').completed);
+  const completeSection=useCallback(id=>setCompletedSections(prev=>prev.includes(id)?prev:[...prev,id]),[]);
+  const resetSections=()=>{saveProgress(localStorage,'tuple-playground',{completed:[]});setCompletedSections([]);};
+  useEffect(()=>{saveProgress(localStorage,'tuple-playground',{completed:completedSections});if(['1','2','3','final'].every(id=>completedSections.includes(id)))onComplete?.();},[completedSections,onComplete]);
   const [activeTour, setActiveTour] = useState(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [taskCompleted, setTaskCompleted] = useState(false);
@@ -37,7 +45,7 @@ export const TourProvider = ({ children }) => {
   };
 
   const completeTask = (expectedStep) => {
-    if (currentStep !== expectedStep) return;
+    if (!activeTour || !TOUR_DATA[activeTour]?.[currentStep] || currentStep !== expectedStep) return;
     const stepData = TOUR_DATA[activeTour][currentStep];
     if (stepData.automated) {
       nextStep();
@@ -53,6 +61,7 @@ export const TourProvider = ({ children }) => {
 
   return (
     <TourContext.Provider value={{ 
+      rootRef,assetBase,completedSections,completeSection,resetSections,
       activeTour, currentStep, taskCompleted, layoutTrigger, // exported trigger
       startTour, nextStep, prevStep, completeTask, skipTour, updateTourLayout, // exported function
       tourSteps: activeTour ? TOUR_DATA[activeTour] : [] 

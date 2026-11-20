@@ -1,0 +1,68 @@
+:host {
+  --bg-dark: var(--bg);
+  --bg-panel: var(--paper);
+  --bg-card: #fff9f0;
+  --border-light: var(--line);
+  --border-accent: #e5b28e;
+  --border-glow: #e8ae83;
+  --color-text-main: var(--ink);
+  --color-text-muted: #80664f;
+  --brand-indigo: #d65c2b;
+  --brand-purple: #bc6841;
+  --font-sans: "Segoe UI", system-ui, sans-serif;
+}
+.scope-shell {
+  min-height: 0;
+}
+.scope-logo {
+  color: var(--ink);
+}
+.scope-panel {
+  min-height: 0;
+}
+.ctrl-btn {
+  color: #a84420;
+  border-color: #e5b28e;
+}
+.scope-scene-dot.active {
+  background: #df622f;
+}
+.storyboard-narrative-panel,
+.storyboard-header-section {
+  background: var(--paper) !important;
+  color: var(--ink);
+}
+.storyboard-header-section {
+  border-radius: 10px;
+  padding: 12px;
+}
+.storyboard-title-text {
+  color: var(--ink) !important;
+}
+.storyboard-chapter-tag {
+  color: #b24e25;
+}
+.storyboard-narrative-body > p {
+  color: #4d3928 !important;
+}
+.highlight-panel-v2 {
+  background: #fff0e2 !important;
+  border-color: #e5b28e !important;
+}
+.dialogue-box-panel {
+  background: #f7e6d4 !important;
+  color: var(--ink);
+}
+.dialogue-text {
+  color: var(--ink) !important;
+}
+.dialogue-continue-btn {
+  background: #df622f;
+  color: white;
+}
+.lab-board-screen .lab-stat-label {
+  color: #cbbcae !important;
+}
+.lab-board-screen .lab-stat-value {
+  color: #fff5e9 !important;
+}

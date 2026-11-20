@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import {createStoryProgressHook} from '../../../shared/story-progress.mjs';
+const useStoryProgress=createStoryProgressHook(React);
+import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import FooterNavigation from './components/FooterNavigation';
 import AdventureMapModal from './components/AdventureMapModal';
@@ -35,7 +37,10 @@ const SLIDES_CONFIG = [
   { id: 'slide-13', badge: 'Page 13 / 13', tag: '🏆 VICTORY!', Component: Page13_VictorySandbox, theme: null }
 ];
 
-export default function App() {
+export default function App({onComplete}) {
+  const [,complete]=useStoryProgress('treasure-kingdom');
+  useEffect(()=>{soundEngine.activate();return()=>soundEngine.dispose();},[]);
+  const finish=()=>{complete('questions');onComplete?.();};
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,7 +78,7 @@ export default function App() {
                     <span className="concept-tag">{tag}</span>
                   </div>
 
-                  <Component />
+                  <Component onComplete={finish} />
                 </section>
               );
             })}

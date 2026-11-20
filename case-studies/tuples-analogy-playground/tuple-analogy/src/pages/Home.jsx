@@ -5,7 +5,7 @@ import { BookOpen, Rocket, Sparkles } from 'lucide-react';
 
 export default function Home() {
   const navigate = useNavigate();
-  const { startTour } = useTour();
+  const { startTour,assetBase } = useTour();
 
   return (
     <div className="max-w-4xl mx-auto pt-8 pb-16 animate-in fade-in slide-in-from-bottom-4 duration-500 flex flex-col items-center">
@@ -36,7 +36,7 @@ export default function Home() {
   className="absolute top-1/2 -left-28 md:-left-36 w-40 h-56 md:w-52 md:h-72 hover:-translate-y-[calc(5%+4px)] transition-transform duration-300"
   style={{ transform: 'translateY(-50%) rotate(-6deg)' }}
 >
-  <img src="/images/5.png" alt="Bittu" className="w-full h-full object-contain drop-shadow-[4px_4px_0px_rgba(0,0,0,1)]" />
+  <img src={assetBase+"/images/5.png"} alt="Bittu" className="w-full h-full object-contain drop-shadow-[4px_4px_0px_rgba(0,0,0,1)]" />
 </div>
 
 {/* Grandpa — out in the right margin, vertically centered on the banner */}
@@ -45,7 +45,7 @@ export default function Home() {
   className="absolute top-1/2 -right-24 md:-right-36 w-40 h-56 md:w-52 md:h-72 hover:-translate-y-[calc(5%+4px)] transition-transform duration-300"
   style={{ transform: 'translateY(-50%) rotate(6deg)' }}
 >
-  <img src="/images/a1.png" alt="Grandpa" className="w-full h-full object-contain drop-shadow-[4px_4px_0px_rgba(0,0,0,1)]" />
+  <img src={assetBase+"/images/a1.png"} alt="Grandpa" className="w-full h-full object-contain drop-shadow-[4px_4px_0px_rgba(0,0,0,1)]" />
 </div>
       </div>
 

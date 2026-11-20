@@ -1,63 +1,19 @@
+import {createStoryPythonHook} from '../../../../../shared/story-python.mjs';
+const useStoryPython=createStoryPythonHook(React);
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { parsePythonCodeToMemory } from "../utils/pythonInterpreter";
 import "./CodePlayground.css";
 
-// Lightweight Python evaluator for terminal print output
-function evaluateTerminalOutput(codeStr) {
-  const lines = codeStr.split("\n");
-  const variables = {};
-  const outputLines = [];
-
-  for (let line of lines) {
-    const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith("#")) continue;
-
-    if (trimmed.startsWith("print(")) {
-      const match = trimmed.match(/^print\((.*)\)$/);
-      if (match) {
-        const rawArgs = match[1];
-        const parts = rawArgs.split(",").map((p) => p.trim());
-        const evaluatedParts = parts.map((part) => {
-          if ((part.startsWith('"') && part.endsWith('"')) || (part.startsWith("'") && part.endsWith("'"))) {
-            return part.slice(1, -1);
-          }
-          if (!isNaN(Number(part))) return part;
-          if (variables.hasOwnProperty(part)) return String(variables[part]);
-          return `<NameError: name '${part}' is not defined>`;
-        });
-        outputLines.push(evaluatedParts.join(" "));
-      }
-      continue;
-    }
-
-    if (trimmed.includes("=") && !trimmed.includes("==")) {
-      const [varNameRaw, valRaw] = trimmed.split("=").map((s) => s.trim());
-      if (varNameRaw && valRaw && !/^\d/.test(varNameRaw)) {
-        let evaluatedVal = valRaw;
-        if ((valRaw.startsWith('"') && valRaw.endsWith('"')) || (valRaw.startsWith("'") && valRaw.endsWith("'"))) {
-          evaluatedVal = valRaw.slice(1, -1);
-        } else if (!isNaN(Number(valRaw))) {
-          evaluatedVal = Number(valRaw);
-        } else if (variables.hasOwnProperty(valRaw)) {
-          evaluatedVal = variables[valRaw];
-        }
-        variables[varNameRaw] = evaluatedVal;
-      }
-    }
-  }
-
-  return outputLines.join("\n") || "(Poko's magic executed smoothly with no print output)";
-}
-
-export default function CodePlayground({ data, onNext, onAddXp, onUpdateMemory }) {
+export default function CodePlayground({ data, onNext, onUpdateMemory }) {
+  const {run,running:isRunning}=useStoryPython();
   const { title, subtitle, defaultCode, hints } = data;
   const [code, setCode] = useState(
     defaultCode || `# Help Poko store his food in Python variables!\napple = "Red Apple"\nhoney = "Wild Honey"\ncorn = "Yellow Corn"\n\nprint("Poko's Apple:", apple)\nprint("Poko's Honey:", honey)\nprint("Poko's Corn:", corn)`
   );
   const [output, setOutput] = useState("");
   const [activeHintIdx, setActiveHintIdx] = useState(null);
-  const [isRunning, setIsRunning] = useState(false);
+
   const [hasCelebrated, setHasCelebrated] = useState(false);
 
   // Sync memory on code edit in real-time
@@ -68,26 +24,7 @@ export default function CodePlayground({ data, onNext, onAddXp, onUpdateMemory }
     }
   }, [code]);
 
-  const handleRun = () => {
-    setIsRunning(true);
-    setOutput("Casting Poko's Python Magic...");
-
-    setTimeout(() => {
-      const termOutput = evaluateTerminalOutput(code);
-      const { memoryMap, errors } = parsePythonCodeToMemory(code);
-      setOutput(termOutput);
-      setIsRunning(false);
-
-      if (onUpdateMemory) {
-        onUpdateMemory(memoryMap, "✨ Magic executed! Poko's Memory updated live.", errors);
-      }
-
-      if (!hasCelebrated) {
-        setHasCelebrated(true);
-        if (onAddXp) onAddXp(30);
-      }
-    }, 300);
-  };
+  const handleRun=async()=>{setOutput("Running Poko's Python program…");const result=await run(code);setOutput(result.error||result.output||'(Program finished without printed output)');if(onUpdateMemory){const {memoryMap,errors}=parsePythonCodeToMemory(code);onUpdateMemory(memoryMap,'Python execution complete.',errors);}};
 
   const handleReset = () => {
     setCode(defaultCode || "");
@@ -157,7 +94,7 @@ export default function CodePlayground({ data, onNext, onAddXp, onUpdateMemory }
               </div>
               <textarea
                 className="code-input-textarea"
-                value={code}
+                aria-label="Poko playground Python program" disabled={isRunning} value={code}
                 onChange={(e) => setCode(e.target.value)}
                 spellCheck="false"
               />

@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { CODING_CHALLENGES } from '../data/challengesData';
 import { executePythonCode } from '../utils/pythonRunner';
-import { Play, CheckCircle2, AlertCircle, HelpCircle, Code2, Award, Sparkles } from 'lucide-react';
+import { Play, CheckCircle2, AlertCircle, HelpCircle, Code2, BookOpen, Sparkles } from 'lucide-react';
 import { soundFx } from '../utils/soundEffects';
-import confetti from 'canvas-confetti';
+import {cancelPython} from '../../../../library/learning/python-client.mjs';
 
-export default function PythonSandbox() {
+export default function PythonSandbox({onComplete}) {
+  const mounted=useRef(true);
+  const [running,setRunning]=useState(false);
+  useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;cancelPython();};},[]);
   const [activeChallengeIdx, setActiveChallengeIdx] = useState(0);
   const [codeState, setCodeState] = useState(
     CODING_CHALLENGES.reduce((acc, ch) => ({ ...acc, [ch.id]: ch.initialCode }), {})
@@ -15,17 +18,23 @@ export default function PythonSandbox() {
   const [passedChallenges, setPassedChallenges] = useState([]);
 
   const currentChallenge = CODING_CHALLENGES[activeChallengeIdx];
-  const currentCode = codeState[currentChallenge.id] || currentChallenge.initialCode;
+  const currentCode = codeState[currentChallenge.id] ?? currentChallenge.initialCode;
   const currentOutput = outputs[currentChallenge.id];
 
   const handleCodeChange = (e) => {
     const val = e.target.value;
+    setOutputs(prev=>({...prev,[currentChallenge.id]:null}));
+    setPassedChallenges(prev=>prev.filter(id=>id!==currentChallenge.id));
     setCodeState(prev => ({ ...prev, [currentChallenge.id]: val }));
   };
 
-  const handleRunCode = () => {
+  const handleRunCode = async () => {
+    if(running)return;
+    setRunning(true);
     soundFx.playClick();
-    const res = executePythonCode(currentCode, currentChallenge.testType);
+    const res = await executePythonCode(currentCode, currentChallenge.testType);
+    if(!mounted.current)return;
+    setRunning(false);
     setOutputs(prev => ({ ...prev, [currentChallenge.id]: res }));
 
     if (res.isPassed) {
@@ -35,11 +44,7 @@ export default function PythonSandbox() {
         setPassedChallenges(nextPassed);
         if (nextPassed.length === CODING_CHALLENGES.length) {
           soundFx.playFanfare();
-          try {
-            confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
-          } catch (e) {
-            // confetti fallback
-          }
+          onComplete?.();
         }
       }
     } else {
@@ -140,10 +145,11 @@ export default function PythonSandbox() {
           <div className="flex justify-end pt-2">
             <button
               onClick={handleRunCode}
+              disabled={running}
               className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-black font-extrabold text-sm flex items-center gap-2 shadow-lg shadow-emerald-500/20 transform transition hover:scale-105"
             >
               <Play className="w-4 h-4 fill-black" />
-              <span>Run Python Code</span>
+              <span>{running ? 'Running Python…' : 'Run Python Code'}</span>
             </button>
           </div>
         </div>
@@ -201,13 +207,13 @@ export default function PythonSandbox() {
 
       </div>
 
-      {/* FINAL TROPHY BANNER WHEN ALL 6 COMPLETED */}
+      {/* Original closing dialogue, once all supplied challenges are complete */}
       {passedChallenges.length === CODING_CHALLENGES.length && (
         <div className="bg-gradient-to-r from-amber-500 via-orange-500 to-red-600 p-8 rounded-3xl text-black text-center space-y-4 shadow-2xl transform animate-fade-in mt-8">
           <div className="w-20 h-20 rounded-full bg-black text-amber-400 flex items-center justify-center text-4xl mx-auto shadow-2xl">
-            👑
+            📖
           </div>
-          <h2 className="font-extrabold text-3xl tracking-tight">🐍 LOOP MASTER UNLOCKED!</h2>
+          <h2 className="font-extrabold text-3xl tracking-tight">Loop Journey Complete</h2>
           <div className="text-base font-medium max-w-xl mx-auto space-y-2">
             <p>"Today we didn't learn loops from a textbook." — Lakshmi</p>
             <p>"We discovered them by repeating the same kind of problem!" — Vikram</p>

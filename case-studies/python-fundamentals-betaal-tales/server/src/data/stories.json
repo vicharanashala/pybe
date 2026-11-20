@@ -7,8 +7,6 @@
     "conceptSlug": "variables",
     "difficulty": "Beginner",
     "icon": "crow",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "On a hot summer afternoon, a thirsty crow flew over a dusty village looking for water. The ponds were dry and the wells were empty.",
       "At last it spotted a clay pot in a garden. There was a little water at the bottom, but the crow's beak could not reach it.",
@@ -81,8 +79,6 @@
     "conceptSlug": "variables",
     "difficulty": "Beginner",
     "icon": "milkmaid",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A village milkmaid named Meera balanced a pail of fresh milk on her head and walked carefully toward the market. Every step had to be steady, or the milk would spill.",
       "As she walked, she began to dream. \"When I sell this milk I will have money,\" she thought. \"With that money I will buy a basket of eggs, and every egg will hatch a chick.\"",
@@ -155,8 +151,6 @@
     "conceptSlug": "variables",
     "difficulty": "Beginner",
     "icon": "dog",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A hungry dog trotted home carrying a juicy bone it had found beside the river. It gripped the bone tightly, planning to enjoy it in the shade of its favourite tree.",
       "Crossing a narrow wooden bridge, it glanced down at the calm water. There, in the reflection, it saw another dog - one that seemed to be holding an even bigger bone.",
@@ -229,8 +223,6 @@
     "conceptSlug": "variables",
     "difficulty": "Beginner",
     "icon": "elephdog",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A great elephant lived alone near a village. He was gentle but huge, and all the smaller animals kept away from him, leaving him lonely and sad.",
       "One day a tiny stray dog wandered into the village. Seeing the elephant, she trotted up and lay down in his shadow. \"May I stay here?\" she asked. \"The sun is very hot.\"",
@@ -304,8 +296,6 @@
     "conceptSlug": "variables",
     "difficulty": "Beginner",
     "icon": "jackal",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A scrawny jackal slunk through the village at dusk, hungry and afraid. Every animal chased him away - the dogs barked, the goats kicked, and even the crows pecked at his tail.",
       "Desperate for shelter he crept into a dyer's workshop and fell into a great vat of blue dye. When he clambered out, his entire body was brilliant blue from nose to tail.",
@@ -379,8 +369,6 @@
     "conceptSlug": "conditionals",
     "difficulty": "Beginner",
     "icon": "monkey",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "On the banks of a great river lived a monkey and a crocodile who became fast friends. The monkey ate sweet mangoes and always shared them with the crocodile.",
       "One day the crocodile's wife grew greedy. 'Bring me the monkey's heart, I must taste it!' she demanded. Ashamed, the crocodile agreed and offered the monkey a ride across the river.",
@@ -453,8 +441,6 @@
     "conceptSlug": "conditionals",
     "difficulty": "Beginner",
     "icon": "heron",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A wise old heron lived beside a quiet pond full of fish and one slow, careful crab. The heron was too old to catch fish by speed, so he thought of a trick.",
       "'Dear friends,' he said one morning, 'I have heard that a hunter is coming to drain the pond. I know a secret pond high in the hills where you will be safe. I will carry you there one by one.'",
@@ -528,8 +514,6 @@
     "conceptSlug": "conditionals",
     "difficulty": "Beginner",
     "icon": "brahmin",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A poor Brahmin received a fat goat as a gift and hoisted it onto his shoulders to carry home. Along the road he met a clever woman who cried, 'Brahmin! Why do you carry a dog on your shoulders? That is inauspicious!'",
       "The Brahmin looked at the goat and said firmly, 'This is a goat, not a dog.' But a little farther on a man called out, 'Hey Brahmin, you are carrying a pig! Put it down before it dirties your clothes.' The Brahmin shook his head. 'It is a goat.'",
@@ -603,8 +587,6 @@
     "conceptSlug": "conditionals",
     "difficulty": "Beginner",
     "icon": "monkeyking",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A great monkey king led his troop of a hundred monkeys through a dangerous forest. One winter they found a mango grove beside a wide, still lake, and the monkey king tasted the fruit and declared it safe.",
       "The troop gorged on sweet mangoes and fell asleep in the warm sun by the water's edge. But the monkey king stayed awake, watching the lake. He noticed the water creeping higher - warm snowmelt from the mountains was flowing in.",
@@ -678,8 +660,6 @@
     "conceptSlug": "conditionals",
     "difficulty": "Beginner",
     "icon": "crowsnake",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A crow and her mate built a cosy nest in a great banyan tree. In a hollow at the foot of the same tree lived a black cobra, silent and greedy.",
       "Every time the crow laid eggs, the cobra waited until the parents flew out, then slithered up and swallowed them. The heartbroken parents tried to guard the nest day and night, but they were far too weak to fight such a serpent.",
@@ -753,8 +733,6 @@
     "conceptSlug": "loops",
     "difficulty": "Beginner",
     "icon": "tortoise",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "The hare laughed at the tortoise for being slow. 'Let us race,' said the tortoise calmly. 'I accept!' the hare chuckled, and they began.",
       "In a flash the hare shot ahead. It grew so confident that it lay down under a tree for a nap, sure it would still win.",
@@ -828,8 +806,6 @@
     "conceptSlug": "loops",
     "difficulty": "Beginner",
     "icon": "banyandeer",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "Long ago, two herds of deer grazed beside the fields of Benares - one led by the wise golden Banyan Deer, the other by the proud Branch Deer. The king of men, craving venison for his table, ordered hunters to snare the groves every single day.",
       "So the two kings made a pact, and a quiet routine was born: each morning the lots were drawn, and whichever deer was chosen walked calmly to the killing block while the rest grazed in peace. Day after day the same ritual repeated, fair and orderly, like clockwork.",
@@ -903,8 +879,6 @@
     "conceptSlug": "loops",
     "difficulty": "Beginner",
     "icon": "antdove",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A dove had built her nest on a branch that leaned over a cool stream. One parched afternoon, a little ant went down to the water to drink - and slipped in. The current gripped her at once, and every tiny kick only seemed to pull her further from the shore.",
       "The dove saw the struggle and plucked a wide leaf, letting it fall right beside the drowning ant. Step by patient step the ant hauled herself up the leaf, rested as it drifted, and climbed off safely onto the muddy bank.",
@@ -978,8 +952,6 @@
     "conceptSlug": "loops",
     "difficulty": "Beginner",
     "icon": "goldgoose",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "Long ago the Bodhisatta lived as a goose whose feathers shone like beaten gold. Flying over a poor hut one day, he saw a widow and her two daughters struggling for their daily bread, and his heart filled with pity.",
       "From that day a gentle routine began: each week the golden goose would return to the hut's roof and leave behind one single feather. The mother sold it at the market, and week after week, coin by coin, the little family climbed out of misery.",
@@ -1053,8 +1025,6 @@
     "conceptSlug": "loops",
     "difficulty": "Beginner",
     "icon": "monkeywedge",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A merchant's caravan halted in the forest at noon, and the woodcutters left a great log half split, its two halves held apart only by a wooden wedge. Nearby, a troop of monkeys came swinging down to play among the carts.",
       "One young monkey could not take his eyes off that wedge. What a strange wooden tongue, he thought, keeping the mighty log open! He settled astride the log, gripped the wedge in both hands, and began to tug - gently at first, then harder.",
@@ -1128,8 +1098,6 @@
     "conceptSlug": "lists",
     "difficulty": "Beginner",
     "icon": "elephant",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "In a village, six blind men heard that an elephant had arrived. They had never seen one, and each went to feel it with his hands.",
       "The first touched the side and cried, 'It is a wall!' The second felt the tusk and said, 'No, it is a spear!' The third touched the ear: 'It is a fan!'",
@@ -1203,8 +1171,6 @@
     "conceptSlug": "lists",
     "difficulty": "Beginner",
     "icon": "crowowls",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "For years the crows and the owls were bitter enemies. From a hidden cave fortress the owl king swooped out night after night, and each morning the crow kingdom woke to find more names missing from its once-great flock.",
       "So the crow council met. One minister said flee, another said make peace - and both plans were struck from the table. Only wise Meghavarna remained, offering a daring stratagem: let the flock attack him as a traitor and abandon him beside the owls' own cave.",
@@ -1278,8 +1244,6 @@
     "conceptSlug": "lists",
     "difficulty": "Beginner",
     "icon": "fivefriends",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "When a hunter's net swept down upon a flock of doves, their king Chitragriva gave a wise command: not one bird struggled alone. Flapping as one, the whole flock lifted the net into the sky and carried it to the mouse Hiranyaka, who gnawed every cord until all were free.",
       "From that day a friendship grew - dove and mouse, then the crow Lightwing with his watchful eyes, then the deer with his swift hooves, and at last the tortoise, slow but steadfast. Five very different creatures, each with his own gift, bound together in one band.",
@@ -1353,8 +1317,6 @@
     "conceptSlug": "lists",
     "difficulty": "Beginner",
     "icon": "elecaravan",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A merchant company preparing to cross the great wilderness sought out an ancient elephant as their guide, for he alone knew the desert's rhythm: rest through the burning day, march beneath the stars, and drink only at water holes tested in their proper turn.",
       "The old elephant formed his column with care. The strongest young bull walked first, testing the path for soft sand and lions; behind him came the mothers with their calves, sheltered in the very middle of the line; and the mightiest elders closed the rear, trunks raised against every threat.",
@@ -1428,8 +1390,6 @@
     "conceptSlug": "lists",
     "difficulty": "Beginner",
     "icon": "wisequail",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "In a forest clearing a fowler spread his great net over the ground where quails came to feed, and day after day he gathered up whatever birds he had snared. At last the flock chose a wise quail as their king, and he taught them a single clever plan.",
       "When the net fell, every quail was to slip her head through a mesh hole at once, then beat her wings together and rise as one. So it happened: net after net was lifted clean off the earth and carried away to a thorn bush while the fowler shook his empty hands.",
@@ -1503,8 +1463,6 @@
     "conceptSlug": "functions",
     "difficulty": "Beginner",
     "icon": "lion",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A lion lay sleeping in the forest when a little mouse ran right over his nose and woke him. The lion caught the mouse and raised a paw to crush it.",
       "'Please let me go,' squeaked the mouse. 'One day I may save you.' The lion laughed at such a tiny promise, but he let the mouse go.",
@@ -1578,8 +1536,6 @@
     "conceptSlug": "functions",
     "difficulty": "Beginner",
     "icon": "tortgeese",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "When the lake where tortoise Kambugriva lived began to dry, his two dear goose friends offered to carry him through the sky to a water that never failed. He could not fly - but the geese knew one flight that worked for any traveller who trusted them.",
       "Their plan was simple and reusable: a strong stick held between their beaks at both ends, and the passenger biting firmly onto the middle. One rule came with the ride - whatever you hear below, keep your mouth shut until you land.",
@@ -1653,8 +1609,6 @@
     "conceptSlug": "functions",
     "difficulty": "Beginner",
     "icon": "rurudeer",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "When great floods swept the river valley, a merchant found himself whirled downstream, crying for any help at all. From the forest came the golden deer Ruru, who plunged into the torrent, bore the struggling man upon his back, and set him safely on the bank.",
       "The grateful merchant asked what reward he could give. 'Only this,' said Ruru, 'tell no one where I dwell, for kings hunt golden deer.' The man swore it and walked home - carrying with him the one payment the deer had asked.",
@@ -1728,8 +1682,6 @@
     "conceptSlug": "functions",
     "difficulty": "Beginner",
     "icon": "jackaldrum",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A starving jackal wandered onto an old battlefield as evening fell - and froze. BOOM! A deep thunder rolled across the clearing again and again. Every hair on his back cried run, but hunger pinned him in place between fear and need.",
       "So instead of bolting, he gave himself a method: watch first, creep second, touch last. From a safe distance he studied the sound until he saw its secret - a low branch, swinging in the wind, striking a great drum hung in a treetop.",
@@ -1803,8 +1755,6 @@
     "conceptSlug": "functions",
     "difficulty": "Beginner",
     "icon": "sparreleph",
-    "xp": 60,
-    "projectXp": 40,
     "fable": [
       "A sparrow pair had built their nest on a leafy branch beside the river, and there their eggs lay warm beneath them. One scorching afternoon a wild elephant, mad with heat, came crashing to the shade - and rammed the tree until the whole branch snapped, nest and eggs crushed beneath him.",
       "The sparrow's mate wept over her broken home, but her tears turned to resolve. 'Strength is not mine,' she said, 'but friends are.' Word went out, and the helpers gathered: the woodpecker with his iron beak, the bee with her buzzing guile, and the old frog who knew every hollow of the shore.",

@@ -1,3 +1,6 @@
+import * as React from 'react';
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 // Animated post-quiz conclusion for the reality-bridge scenes (11–12).
 // Lines reveal in sequence. The glow layout renders the lines as one
 // centered, softly glowing sentence; an optional button gives a manual
@@ -7,8 +10,8 @@
 import { Fragment, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Sparkles } from 'lucide-react';
-import type { SceneConclusion } from '@/data';
-import { playSfx } from '@/audio/soundEngine';
+import type { SceneConclusion } from '../data';
+import { playSfx } from '../audio/soundEngine';
 
 interface ConclusionCardProps {
   conclusion: SceneConclusion;
@@ -16,6 +19,7 @@ interface ConclusionCardProps {
 }
 
 export default function ConclusionCard({ conclusion, onDone }: ConclusionCardProps) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
   const [revealed, setRevealed] = useState(0);
   const total = conclusion.lines.length;
   const allShown = revealed >= total;
@@ -27,18 +31,18 @@ export default function ConclusionCard({ conclusion, onDone }: ConclusionCardPro
   // Reveal lines one by one.
   useEffect(() => {
     if (allShown) return;
-    const t = window.setTimeout(() => {
+    const t = setTimeout(() => {
       setRevealed((n) => n + 1);
       playSfx('click');
     }, 700);
-    return () => window.clearTimeout(t);
+    return () => clearTimeout(t);
   }, [allShown, revealed]);
 
   // Auto-advance a beat after the last line (only when no manual button).
   useEffect(() => {
     if (!allShown || conclusion.buttonLabel) return;
-    const t = window.setTimeout(() => onDone(), 2400);
-    return () => window.clearTimeout(t);
+    const t = setTimeout(() => onDone(), 2400);
+    return () => clearTimeout(t);
   }, [allShown, conclusion.buttonLabel, onDone]);
 
   if (conclusion.glow) {

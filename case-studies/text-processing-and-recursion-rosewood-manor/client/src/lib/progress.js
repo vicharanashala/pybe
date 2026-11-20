@@ -3,13 +3,13 @@
 // PyBe is intentionally a no-database, no-auth prototype, so all progress
 // (which case, which part, which sub-step, completion state, reflections, seen reveals)
 // lives in `localStorage` under versioned keys with defensive parsing.
-const KEY = 'pybe.progress.v1';
-const REVEALS_KEY = 'pybe.reveals.v1';
+const KEY = 'pybe-learning-v1:rosewood-state';
+const REVEALS_KEY = 'pybe-learning-v1:rosewood-reveals';
 const CURRENT_VERSION = 1;
 
 export function loadSeenReveals() {
   try {
-    const raw = window.localStorage.getItem(REVEALS_KEY);
+    const raw = (window.localStorage.getItem(REVEALS_KEY) ?? window.localStorage.getItem('pybe.reveals.v1'));
     if (!raw) return [];
     const parsed = JSON.parse(raw);
     if (parsed && typeof parsed === 'object' && parsed.version === CURRENT_VERSION && Array.isArray(parsed.seen)) {
@@ -45,7 +45,7 @@ export function markRevealSeen(partId) {
 
 export function loadProgress() {
   try {
-    const raw = window.localStorage.getItem(KEY);
+    const raw = (window.localStorage.getItem(KEY) ?? window.localStorage.getItem('pybe.progress.v1'));
     const seenFromKey = loadSeenReveals();
     if (!raw) {
       const fresh = freshProgress();
@@ -94,9 +94,8 @@ export function saveProgress(progress) {
 
 export function resetProgress() {
   try {
-    window.localStorage.removeItem(KEY);
-    window.localStorage.removeItem(REVEALS_KEY);
-    window.localStorage.removeItem('pybe.ledger.v1');
+    window.localStorage.setItem(KEY,JSON.stringify(freshProgress()));
+    window.localStorage.setItem(REVEALS_KEY,'[]');
   } catch (error) {}
   return freshProgress();
 }

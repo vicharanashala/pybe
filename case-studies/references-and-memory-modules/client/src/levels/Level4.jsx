@@ -1,3 +1,9 @@
+import MemoryCodeExplanation from '../../../../../client/src/learning/MemoryCodeExplanation.jsx';
+import storyImage2 from '../../public/fest_registration_good.jpg';
+import storyImage1 from '../../public/fest_registration_bad.jpg';
+import storyImage0 from '../../public/fest_registration_intro.jpg';
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect } from 'react';
 import { Play, Info, Trash2, ArrowRight, Cpu } from 'lucide-react';
 import Quiz from '../components/Quiz';
@@ -5,6 +11,7 @@ import StorySlider from '../components/StorySlider';
 import { playThud, playSweep, playPop, unlockAudio } from '../utils/audio';
 
 const Level4 = ({ onCrash, onPass, RamBar }) => {
+  const {setTimeout}=useStoryTimers();
   const [ram, setRam] = useState(15);
   const [attendees, setAttendees] = useState([{ id: 1, index: 1, active: true, sweeping: false }]);
   const [mode, setMode] = useState('leak');
@@ -31,14 +38,14 @@ const Level4 = ({ onCrash, onPass, RamBar }) => {
   const storySlides = [
     {
       title: "Scene 1: The College Fest That Never Forgets",
-      image: "/fest_registration_intro.jpg",
+      image: storyImage0,
       text: "Your college is hosting a massive fest with thousands of students checking in for events, workshops, and competitions. The registration app tracks every student's details, but there's a hidden problem: when students leave the fest, what happens to the data their sessions no longer need?",
       buttonText: "See what happens...",
       color: "#60a5fa"
     },
     {
       title: "Scene 2: The Ghost Attendees Disaster",
-      image: "/fest_registration_bad.jpg",
+      image: storyImage1,
       text: "The developer makes a small but costly mistake: every student's temporary session data is appended to a permanent global list, and nothing is removed when the student leaves. Memory Bloat: thousands of unnecessary records keep consuming RAM; Ghost References: students who have already left still have their data retained in the application's tracking list; GC Blocked: Python cannot reclaim those objects while the list still references them, eventually slowing the registration system or crashing the server.",
       buttonText: "Simulate Disaster",
       color: "#ef4444"
@@ -46,7 +53,7 @@ const Level4 = ({ onCrash, onPass, RamBar }) => {
     null,
     {
       title: "Scene 3: Clear the Queue, Free the Memory",
-      image: "/fest_registration_good.jpg",
+      image: storyImage2,
       text: "The smart developer removes completed sessions from the temporary global list and releases any other unnecessary references. When an object's reference count reaches zero in CPython, its memory can be reclaimed automatically; del can remove a reference, but the object is freed only when no references remain. Now the registration system can reuse memory for incoming students instead of holding on to thousands of finished sessions.",
       buttonText: "Start Smart Simulation",
       color: "#10b981",
@@ -367,182 +374,7 @@ const Level4 = ({ onCrash, onPass, RamBar }) => {
       text: "Click any line above to inspect."
     };
 
-    return (
-      <div
-        key={`${selectedLine}-${explainStep}`}
-        className="line-explain-card"
-        style={{
-          borderLeft: `4px solid ${activePoint.color}`,
-          border: `1.5px solid ${borderAccent}`,
-          background: '#ffffff',
-          borderRadius: '14px',
-          boxShadow: '0 4px 18px rgba(47, 101, 100, 0.08)',
-          marginTop: '16px',
-          padding: '16px'
-        }}
-      >
-        {/* Top Header & Step Navigation */}
-        <div className="explain-top-bar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-          <div className="explain-step-pills" style={{ display: 'flex', gap: '6px' }}>
-            {points.map((p) => (
-              <button
-                key={p.step}
-                type="button"
-                onClick={() => setExplainStep(p.step)}
-                style={{
-                  background: explainStep === p.step ? p.color : '#faf6ee',
-                  color: explainStep === p.step ? '#ffffff' : '#7c7365',
-                  border: `1px solid ${explainStep === p.step ? p.color : '#e4dcc8'}`,
-                  borderRadius: '999px',
-                  padding: '4px 10px',
-                  fontSize: '0.74rem',
-                  fontWeight: 600,
-                  cursor: 'pointer'
-                }}
-              >
-                {p.shortTag}
-              </button>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            onClick={() => setSelectedLine(null)}
-            style={{
-              background: '#faf6ee',
-              border: '1px solid #e4dcc8',
-              color: '#7c7365',
-              cursor: 'pointer',
-              fontSize: '0.75rem',
-              padding: '3px 10px',
-              borderRadius: '999px',
-              fontWeight: 600
-            }}
-          >
-            ✕ Close
-          </button>
-        </div>
-
-        {/* Code Strip */}
-        <div style={{
-          background: '#faf6ee',
-          border: '1px solid #e4dcc8',
-          borderRadius: '8px',
-          padding: '8px 12px',
-          fontFamily: 'monospace',
-          fontSize: '0.84rem',
-          color: '#2b2b2b',
-          fontWeight: 600,
-          marginBottom: '12px'
-        }}>
-          {data.code}
-        </div>
-
-        {/* The 1 Active Focus Point Card */}
-        <div style={{
-          background: '#fffdfa',
-          border: '1px solid #e4dcc8',
-          borderLeft: `4px solid ${activePoint.color}`,
-          borderRadius: '10px',
-          padding: '12px 14px',
-          marginBottom: '12px'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-            <span style={{ fontSize: '0.7rem', fontWeight: 700, color: activePoint.color, background: activePoint.bg, padding: '2px 8px', borderRadius: '6px' }}>
-              POINT {activePoint.step} OF {points.length} • {activePoint.category}
-            </span>
-          </div>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-            <span style={{ fontSize: '1.2rem', lineHeight: '1' }}>{activePoint.icon}</span>
-            <div>
-              <strong style={{ fontSize: '0.9rem', color: '#2b2b2b', display: 'block', marginBottom: '4px' }}>
-                {activePoint.label}
-              </strong>
-              <p style={{ margin: 0, fontSize: '0.84rem', color: '#2b2b2b', lineHeight: '1.5' }}>
-                {activePoint.text}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Progress Bar */}
-        <div style={{ width: '100%', height: '4px', background: '#e4dcc8', borderRadius: '2px', overflow: 'hidden', marginBottom: '12px' }}>
-          <div
-            style={{
-              width: `${(explainStep / Math.max(points.length, 1)) * 100}%`,
-              height: '100%',
-              background: 'linear-gradient(90deg, #FA994F, #EB8975)',
-              transition: 'width 0.3s ease'
-            }}
-          />
-        </div>
-
-        {/* Bottom Interactive Flow Bar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <button
-            type="button"
-            onClick={() => setExplainStep(s => Math.max(s - 1, 1))}
-            disabled={explainStep === 1}
-            style={{
-              background: '#faf6ee',
-              border: '1px solid #e4dcc8',
-              color: explainStep === 1 ? '#c7beaf' : '#2b2b2b',
-              padding: '6px 14px',
-              borderRadius: '999px',
-              fontSize: '0.78rem',
-              fontWeight: 600,
-              cursor: explainStep === 1 ? 'not-allowed' : 'pointer'
-            }}
-          >
-            ← Prev
-          </button>
-
-          <span style={{ fontSize: '0.76rem', color: '#7c7365', fontWeight: 600 }}>
-            Point {explainStep} of {points.length}
-          </span>
-
-          {explainStep < points.length ? (
-            <button
-              type="button"
-              onClick={() => setExplainStep(s => Math.min(s + 1, points.length))}
-              style={{
-                background: 'linear-gradient(135deg, #FA994F, #EB8975)',
-                border: 'none',
-                color: '#ffffff',
-                padding: '6px 16px',
-                borderRadius: '999px',
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                cursor: 'pointer',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}
-            >
-              <span>Next Point</span>
-              <ArrowRight size={14} />
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => setSelectedLine(null)}
-              style={{
-                background: '#4f9a63',
-                border: 'none',
-                color: '#ffffff',
-                padding: '6px 16px',
-                borderRadius: '999px',
-                fontSize: '0.78rem',
-                fontWeight: 700,
-                cursor: 'pointer'
-              }}
-            >
-              Done ✓
-            </button>
-          )}
-        </div>
-      </div>
-    );
+    return <MemoryCodeExplanation selectedLine={selectedLine} step={explainStep} onStep={setExplainStep} onClose={()=>setSelectedLine(null)} isDanger={isDanger} points={points} activePoint={activePoint} code={data.code} showCategory doneLabel="Done ✓"/>;
   };
 
   const renderPreFlightCard = () => {

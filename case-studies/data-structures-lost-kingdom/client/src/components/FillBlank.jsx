@@ -15,7 +15,6 @@ export default function FillBlank({ items, chapterColor, chapterColorDim, onComp
   const [revealed, setRevealed] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [correct, setCorrect]   = useState(null); // true | false
-  const [allResults, setAllResults] = useState([]); // track results per item
 
   const item = items[current];
 
@@ -26,7 +25,6 @@ export default function FillBlank({ items, chapterColor, chapterColorDim, onComp
     setShowHint(false);
     const isCorrect = option === item.answer;
     setCorrect(isCorrect);
-    setAllResults((prev) => [...prev, isCorrect]);
   }
 
   function handleNext() {
@@ -37,7 +35,7 @@ export default function FillBlank({ items, chapterColor, chapterColorDim, onComp
       setCorrect(null);
       setShowHint(false);
     } else {
-      onComplete && onComplete(allResults.filter(Boolean).length, items.length);
+      onComplete && onComplete();
     }
   }
 

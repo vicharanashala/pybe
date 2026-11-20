@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useEffect, useState } from 'react';
 import { Sparkles, Check, X } from 'lucide-react';
 import { useTypewriter } from './useTypewriter';
@@ -58,7 +60,8 @@ function RoboDialogue({ lines, index, onAdvance, onDone, ctaLabel = 'Continue' }
   );
 }
 
-export default function ForVsWhileChoice({ onNext, onCrystal }) {
+export default function ForVsWhileChoice({ onNext }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [phase, setPhase] = useState('intro'); // intro | sort | feedback | discovery | conclusion | transition
   const [lineIndex, setLineIndex] = useState(0);
   const [placements, setPlacements] = useState({});
@@ -105,14 +108,13 @@ export default function ForVsWhileChoice({ onNext, onCrystal }) {
   }
 
   function checkAnswers() {
-    if (correctCount === SITUATIONS.length) onCrystal?.('blue');
     setPhase('feedback');
   }
 
   // -------------------- Step 1: Robo Thinks --------------------
   if (phase === 'intro') {
     return (
-      <div className="lp-scene lp-fw-scene">
+      <div data-robo-decision={phase} className="lp-scene lp-fw-scene">
         <span className="lp-concept-tag">Robo’s Decision</span>
         <h2>For Loop or While Loop?</h2>
         <div className="lp-fw-doors">
@@ -141,7 +143,7 @@ export default function ForVsWhileChoice({ onNext, onCrystal }) {
   if (phase === 'sort') {
     const unplaced = SITUATIONS.filter((s) => !placements[s.id]);
     return (
-      <div className="lp-scene lp-fw-scene">
+      <div data-robo-decision={phase} className="lp-scene lp-fw-scene">
         <span className="lp-concept-tag">Robo’s Decision</span>
         <h2>Sort each situation</h2>
         <p className="lp-scene-intro">Drag each card into the loop it belongs to — or tap a card, then tap a column.</p>
@@ -210,7 +212,7 @@ export default function ForVsWhileChoice({ onNext, onCrystal }) {
   // -------------------- Step 3: Feedback --------------------
   if (phase === 'feedback') {
     return (
-      <div className="lp-scene lp-fw-scene">
+      <div data-robo-decision={phase} className="lp-scene lp-fw-scene">
         <span className="lp-concept-tag">Robo’s Decision</span>
         <h2>{correctCount === SITUATIONS.length ? 'Perfect sort!' : 'Here\u2019s how they line up'}</h2>
 
@@ -251,13 +253,6 @@ export default function ForVsWhileChoice({ onNext, onCrystal }) {
           </div>
         </div>
 
-        {correctCount === SITUATIONS.length && (
-          <div className="lp-reward-toast lp-reward-inline">
-            <Sparkles size={16} className="lp-reward-icon" />
-            <span>Loop Crystal earned!</span>
-          </div>
-        )}
-
         <button className="lp-mini-btn lp-cta" onClick={() => setPhase('discovery')}>See the big picture {'→'}</button>
       </div>
     );
@@ -266,7 +261,7 @@ export default function ForVsWhileChoice({ onNext, onCrystal }) {
   // -------------------- Step 4: Final Discovery --------------------
   if (phase === 'discovery') {
     return (
-      <div className="lp-scene lp-fw-scene">
+      <div data-robo-decision={phase} className="lp-scene lp-fw-scene">
         <span className="lp-concept-tag">Robo’s Decision</span>
         <h2>The rule of thumb</h2>
         <div className="lp-fw-discovery-grid">
@@ -297,7 +292,7 @@ export default function ForVsWhileChoice({ onNext, onCrystal }) {
   // -------------------- Step 5: Robo Conclusion --------------------
   if (phase === 'conclusion') {
     return (
-      <div className="lp-scene lp-fw-scene">
+      <div data-robo-decision={phase} className="lp-scene lp-fw-scene">
         <span className="lp-concept-tag">Robo’s Decision</span>
         <h2>Robo smiles</h2>
         <div className="lp-fw-robo lp-fw-robo-happy" aria-hidden="true">{'🤖'}</div>
@@ -314,7 +309,7 @@ export default function ForVsWhileChoice({ onNext, onCrystal }) {
 
   // -------------------- Step 6: Transition --------------------
   return (
-    <div className="lp-scene lp-fw-scene">
+    <div data-robo-decision={phase} className="lp-scene lp-fw-scene">
       <span className="lp-concept-tag">Robo’s Decision</span>
       <h2>From idea to code</h2>
       <div className={`lp-fw-dissolve-wrap ${dissolved ? 'dissolved' : ''}`}>

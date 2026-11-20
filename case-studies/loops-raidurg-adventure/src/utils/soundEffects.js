@@ -18,6 +18,8 @@ class SoundEffects {
     }
   }
 
+  dispose() { const ctx = this.ctx; this.ctx = null; if (ctx && ctx.state !== 'closed') ctx.close().catch(() => {}); }
+
   toggleMute() {
     this.muted = !this.muted;
     return this.muted;

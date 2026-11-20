@@ -5,7 +5,7 @@
 
 import { motion } from 'framer-motion';
 import type { MotionValue } from 'framer-motion';
-import type { ChamberSpec, ObstacleSpec } from '@/data';
+import type { ChamberSpec, ObstacleSpec } from '../../data';
 import {
   COLONY_W,
   COLONY_H,

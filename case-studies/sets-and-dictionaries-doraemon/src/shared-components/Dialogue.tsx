@@ -1,3 +1,4 @@
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
 import React, { useState, useEffect } from 'react';
 import { GlassCard } from './GlassCard';
 import { ChevronRight, Terminal as TerminalIcon, Sparkles } from 'lucide-react';
@@ -11,12 +12,14 @@ interface DialogueProps {
   typingSpeed?: number; // ms per character, defaults to 25ms
 }
 
+const useStoryTimers=createStoryTimersHook(React);
 export const Dialogue: React.FC<DialogueProps> = ({
   dialogues,
   character,
   onComplete,
   typingSpeed = 20
 }) => {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [currentTextIndex, setCurrentTextIndex] = useState<number>(0);
   const [displayedText, setDisplayedText] = useState<string>('');
   const [isTyping, setIsTyping] = useState<boolean>(false);

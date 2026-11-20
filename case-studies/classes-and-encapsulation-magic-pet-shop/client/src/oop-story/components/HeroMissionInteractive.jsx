@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState } from 'react';
 import { Zap, Flame, Shield, Swords, Play, Sparkles, CheckCircle2 } from 'lucide-react';
 import { SoundService } from '../services/soundEffects';
@@ -7,6 +9,7 @@ export default function HeroMissionInteractive({
   onTriggerHeroAction,
   onSolved
 }) {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [selectedHero, setSelectedHero] = useState('zippy'); // 'zippy' | 'ember' | 'shieldy'
   const [actionLog, setActionLog] = useState(null);
   const [testedActions, setTestedActions] = useState({ zippy: false, ember: false, shieldy: false });

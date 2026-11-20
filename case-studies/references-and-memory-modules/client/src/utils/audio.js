@@ -1,12 +1,14 @@
 // Web Audio API Synthesizer for tactile feedback
+let audioContext=null;
+export function disposeAudio(){audioContext?.close().catch(()=>{});audioContext=null;}
 export const unlockAudio = () => {
-  if (!window.audioCtx) {
-    window.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
   }
-  if (window.audioCtx.state === 'suspended') {
-    window.audioCtx.resume();
+  if (audioContext.state === 'suspended') {
+    audioContext.resume();
   }
-  return window.audioCtx;
+  return audioContext;
 };
 
 const getAudioCtx = unlockAudio;

@@ -30,15 +30,15 @@ const hashWord = (word) => {
 };
 
 const SCENES = [
-  { title: 'The Million-Drawer Problem', img: '/sly_searching.png' },
-  { title: 'The Letter Scroll', img: '/sly_reading.png' },
-  { title: 'The Adding Pot', img: '/sly_reading.png' },
-  { title: 'The Wrap-Around Walk', img: '/sly_searching.png' },
-  { title: 'The Magic Formula', img: '/sly_reading.png' },
-  { title: 'Hide a Treasure', img: '/sly_finding.png' },
-  { title: 'Find It Again', img: '/sly_finding.png' },
-  { title: 'Oops! Two in One Drawer', img: '/sly_searching.png' },
-  { title: 'The Big Picture', img: '/sly_finding.png' }
+  { title: 'The Million-Drawer Problem', img: '/submissions/dictionaries-discovery-adventure/frontend/public/sly_searching.png' },
+  { title: 'The Letter Scroll', img: '/submissions/dictionaries-discovery-adventure/frontend/public/sly_reading.png' },
+  { title: 'The Adding Pot', img: '/submissions/dictionaries-discovery-adventure/frontend/public/sly_reading.png' },
+  { title: 'The Wrap-Around Walk', img: '/submissions/dictionaries-discovery-adventure/frontend/public/sly_searching.png' },
+  { title: 'The Magic Formula', img: '/submissions/dictionaries-discovery-adventure/frontend/public/sly_reading.png' },
+  { title: 'Hide a Treasure', img: '/submissions/dictionaries-discovery-adventure/frontend/public/sly_finding.png' },
+  { title: 'Find It Again', img: '/submissions/dictionaries-discovery-adventure/frontend/public/sly_finding.png' },
+  { title: 'Oops! Two in One Drawer', img: '/submissions/dictionaries-discovery-adventure/frontend/public/sly_searching.png' },
+  { title: 'The Big Picture', img: '/submissions/dictionaries-discovery-adventure/frontend/public/sly_finding.png' }
 ];
 
 /* ---------- small shared UI pieces ---------- */
@@ -967,7 +967,7 @@ export const HashVisualizer = ({ onComplete }) => {
   const common = { img, nerdMode };
 
   return (
-    <div className="hash-visualizer-container glass-card" style={{ padding: '24px', border: '1px solid var(--secondary)', background: 'rgba(0, 240, 255, 0.04)' }}>
+    <div data-hash-scene={scene} className="hash-visualizer-container glass-card" style={{ padding: '24px', border: '1px solid var(--secondary)', background: 'rgba(0, 240, 255, 0.04)' }}>
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '10px' }}>
         <div>
@@ -979,7 +979,7 @@ export const HashVisualizer = ({ onComplete }) => {
           </p>
         </div>
         <div style={{ fontSize: '0.78rem', background: 'rgba(255,255,255,0.08)', padding: '6px 12px', borderRadius: '12px', color: 'var(--accent)', border: '1px solid rgba(242,201,76,0.3)' }}>
-          🐱 Curious Cat Badge: <strong>{visualizerWordsTested.length}/5</strong> words tested
+          Words explored: <strong>{visualizerWordsTested.length}</strong>
         </div>
       </div>
 

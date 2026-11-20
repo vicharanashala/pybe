@@ -1,28 +1,25 @@
+import {cancelPython} from '../../../../../library/learning/python-client.mjs';
+import {createStoryPythonHook} from '../../../../../shared/story-python.mjs';
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+import {createArcadePythonBridge} from '../../../../../shared/story-arcade-python.mjs';
+const useStoryPython=createStoryPythonHook(React),useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect, useRef } from 'react';
 import { Rocket, Play, RotateCcw, AlertTriangle, CheckCircle, Terminal } from 'lucide-react';
 
-const Theme = {
-  bg: '#0a0f12',
-  cardBg: '#12181c',
-  border: '#1f2b34',
-  text: '#ffffff',
-  muted: '#7f93a1',
-  neonCyan: '#00f3ff',
-  neonGreen: '#39ff14',
-  neonPink: '#ff007f',
-  neonYellow: '#ffea00'
-};
+import {arcadeTheme as Theme} from '../../../../../shared/story-arcade-theme.mjs';
 
-export default function CodeInvadersPage() {
-  const [score, setScore] = useState(0);
+export default function CodeInvadersPage({onComplete}) {
+  const {run,running:runtimeRunning}=useStoryPython();
+  const epochRef=useRef(0);
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [lives, setLives] = useState(3);
   const [wave, setWave] = useState(1);
   const [isRunning, setIsRunning] = useState(false);
   const [logs, setLogs] = useState(['Laser shield initialized. Engagement script compiled.']);
   const [resultMessage, setResultMessage] = useState(null);
 
-  const [pyodide, setPyodide] = useState(null);
-  const [pyodideLoading, setPyodideLoading] = useState(false);
+  const [pyodide] = useState(()=>createArcadePythonBridge(run));
+  const pyodideLoading=runtimeRunning;
 
   const canvasRef = useRef(null);
   const timerRef = useRef(null);
@@ -40,7 +37,6 @@ export default function CodeInvadersPage() {
       { id: 3, x: 180, y: 30, active: true },
       { id: 4, x: 250, y: 40, active: true }
     ],
-    score: 0,
     lives: 3,
     wave: 1
   });
@@ -67,34 +63,13 @@ else:
   const [code, setCode] = useState(defaultCode);
 
   // Initialize Pyodide
-  const initPyodide = async () => {
-    if (pyodide) return pyodide;
-    setPyodideLoading(true);
-    try {
-      if (!window.loadPyodide) {
-        await new Promise((resolve, reject) => {
-          const script = document.createElement('script');
-          script.src = '/pyodide/pyodide.js';
-          script.onload = resolve;
-          script.onerror = () => reject(new Error('Failed to load local Pyodide files.'));
-          document.head.appendChild(script);
-        });
-      }
-      const py = await window.loadPyodide({ indexURL: '/pyodide/' });
-      setPyodide(py);
-      setPyodideLoading(false);
-      return py;
-    } catch (err) {
-      setLogs(prev => [...prev, `[ERROR] Failed to load Pyodide: ${err.message}`]);
-      setPyodideLoading(false);
-      return null;
-    }
-  };
+  const initPyodide = async () => pyodide;
 
   const handleReset = () => {
+    epochRef.current++;if(runtimeRunning)cancelPython();
     runningRef.current = false;
     setIsRunning(false);
-    clearInterval(timerRef.current);
+    clearTimeout(timerRef.current);
     
     gameState.current = {
       shipX: 150,
@@ -107,12 +82,10 @@ else:
         { id: 3, x: 180, y: 30, active: true },
         { id: 4, x: 250, y: 40, active: true }
       ],
-      score: 0,
-      lives: 3,
+        lives: 3,
       wave: 1
     };
 
-    setScore(0);
     setLives(3);
     setWave(1);
     setResultMessage(null);
@@ -191,21 +164,22 @@ else:
   };
 
   const startGameSimulation = async () => {
-    if (isRunning) return;
+    if (isRunning||runtimeRunning) return;
 
     // Load Pyodide
     const py = await initPyodide();
     if (!py) return;
 
     handleReset();
+    const epoch=epochRef.current;
     setIsRunning(true);
     runningRef.current = true;
-    setLogs(['Initiating AI Autopilot Defense...']);
+    setLogs(['Initiating Python Autopilot Defense...']);
 
     const state = gameState.current;
 
     const gameLoopStep = async () => {
-      if (!runningRef.current) return;
+      if (!runningRef.current||epochRef.current!==epoch) return;
 
       // 1. Advance Laser
       if (state.laserActive) {
@@ -235,17 +209,18 @@ else:
         setLogs(prev => [...prev, `[FATAL] Defense failed. Spaceship collapsed.`]);
         setResultMessage({
           success: false,
-          text: `Spaceship destroyed! Your autopilot scored ${state.score} points on Wave ${state.wave}.`
+          text: `Spaceship destroyed! Your autopilot reached Wave ${state.wave}.`
         });
         setIsRunning(false);
         runningRef.current = false;
-        clearInterval(timerRef.current);
+        clearTimeout(timerRef.current);
         return;
       }
 
       // Check Wave Complete (Respawn new wave)
       const activeCount = state.invaders.filter(i => i.active).length;
       if (activeCount === 0) {
+        onComplete?.();
         state.wave += 1;
         setWave(state.wave);
         setLogs(prev => [...prev, `✓ Wave ${state.wave - 1} cleared! Initializing Wave ${state.wave}...`]);
@@ -296,6 +271,7 @@ invader = InvaderThreat(${closest.x}, ${closest.y})
         try {
           await py.runPythonAsync(code);
 
+          if(!runningRef.current||epochRef.current!==epoch)return;
           const action = py.runPython('ship._action');
           if (action === 'left') {
             state.shipX = Math.max(15, state.shipX - 16);
@@ -309,6 +285,7 @@ invader = InvaderThreat(${closest.x}, ${closest.y})
             }
           }
         } catch (err) {
+          if(epochRef.current!==epoch)return;
           setLogs(prev => [...prev, `[ERROR] Autopilot crash: ${err.message}`]);
           setResultMessage({
             success: false,
@@ -316,7 +293,7 @@ invader = InvaderThreat(${closest.x}, ${closest.y})
           });
           setIsRunning(false);
           runningRef.current = false;
-          clearInterval(timerRef.current);
+          clearTimeout(timerRef.current);
           return;
         }
       }
@@ -330,27 +307,26 @@ invader = InvaderThreat(${closest.x}, ${closest.y})
           if (dist < 15) {
             invader.active = false;
             state.laserActive = false;
-            state.score += 100;
-            setScore(state.score);
-            setLogs(prev => [...prev, `[BLAST] Invader destroyed at (${Math.round(invader.x)}, ${Math.round(invader.y)}). +100 Score.`]);
+            setLogs(prev => [...prev, `[BLAST] Invader destroyed at (${Math.round(invader.x)}, ${Math.round(invader.y)}).`]);
           }
         });
       }
 
       // Render Frame
       drawGameFrame();
+      if(runningRef.current)timerRef.current=setTimeout(gameLoopStep,80);
     };
 
     // Draw initially
     drawGameFrame();
     
     // Play loop at ~80ms per frame
-    timerRef.current = setInterval(gameLoopStep, 80);
+    timerRef.current = setTimeout(gameLoopStep, 80);
   };
 
   useEffect(() => {
     drawGameFrame();
-    return () => clearInterval(timerRef.current);
+    return () => {runningRef.current=false;clearTimeout(timerRef.current);};
   }, []);
 
   return (
@@ -390,7 +366,7 @@ invader = InvaderThreat(${closest.x}, ${closest.y})
             disabled={isRunning || pyodideLoading}
             style={{
               background: isRunning ? '#162026' : Theme.neonGreen,
-              color: isRunning ? Theme.muted : '#0a0f12',
+              color: isRunning ? Theme.muted : '#fffaf3',
               border: 'none',
               borderRadius: 10,
               padding: '0.65rem 1.25rem',
@@ -404,7 +380,7 @@ invader = InvaderThreat(${closest.x}, ${closest.y})
               transition: 'all 0.2s ease'
             }}
           >
-            <Play size={16} /> {pyodideLoading ? 'Loading Engine...' : isRunning ? 'Shields Up...' : 'Start Game'}
+            <Play size={16} /> {isRunning ? 'Shields Up...' : pyodideLoading ? 'Preparing Python...' : 'Start Game'}
           </button>
           <button
             onClick={handleReset}
@@ -512,11 +488,6 @@ invader = InvaderThreat(${closest.x}, ${closest.y})
             fontFamily: 'monospace'
           }}>
             <div>
-              <div style={{ color: Theme.muted, fontSize: '0.72rem', letterSpacing: '0.05em' }}>HIGH SCORE</div>
-              <strong style={{ color: Theme.neonGreen, fontSize: '1.4rem', textShadow: `0 0 8px ${Theme.neonGreen}` }}>{score}</strong>
-            </div>
-
-            <div>
               <div style={{ color: Theme.muted, fontSize: '0.72rem', letterSpacing: '0.05em' }}>CURRENT WAVE</div>
               <strong style={{ color: Theme.neonYellow, fontSize: '1.4rem', textShadow: `0 0 8px ${Theme.neonYellow}` }}>WAVE {wave}</strong>
             </div>
@@ -531,7 +502,7 @@ invader = InvaderThreat(${closest.x}, ${closest.y})
 
       {/* Result cards */}
       {resultMessage && (
-        <div style={{
+        <div className="arcade-feedback" role="status" style={{
           background: resultMessage.success ? 'rgba(57,255,20,0.06)' : 'rgba(255,0,127,0.06)',
           border: resultMessage.success ? `1px solid ${Theme.neonGreen}` : `1px solid ${Theme.neonPink}`,
           borderRadius: 16,

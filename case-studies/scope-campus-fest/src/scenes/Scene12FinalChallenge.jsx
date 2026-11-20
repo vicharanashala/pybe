@@ -110,7 +110,6 @@ coding_lab()`,
           <div className="storyboard-header-section" style={{ textAlign: 'center', marginBottom: '1rem' }}>
             <span className="storyboard-chapter-tag">Scene 11 / 11</span>
             <h1 className="storyboard-title-text">Investigation Complete</h1>
-            <span className="storyboard-location-tag">🎓 Scope Mastered</span>
           </div>
 
           {/* Recap Summary Table */}
@@ -207,7 +206,7 @@ coding_lab()`,
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <div style={{ fontWeight: 800, fontSize: '0.85rem', color: '#fff', textAlign: 'left', marginBottom: '0.25rem' }}>
+            <div style={{ fontWeight: 800, fontSize: '0.85rem', color: 'var(--color-text-main)', textAlign: 'left', marginBottom: '0.25rem' }}>
               {activeChallenge.question}
             </div>
 

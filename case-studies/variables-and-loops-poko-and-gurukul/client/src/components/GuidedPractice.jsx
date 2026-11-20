@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { parsePythonCodeToMemory } from "../utils/pythonInterpreter";
 import "./GuidedPractice.css";
 
-export default function GuidedPractice({ data, onNext, onAddXp, onUpdateMemory }) {
+export default function GuidedPractice({ data, onNext, onUpdateMemory }) {
   const { title, subtitle, exercises } = data;
   const [currentExIdx, setCurrentExIdx] = useState(0);
   const [inputValue, setInputValue] = useState("");
@@ -33,7 +33,7 @@ export default function GuidedPractice({ data, onNext, onAddXp, onUpdateMemory }
       if (onUpdateMemory) {
         onUpdateMemory(memoryMap, `✨ Variable successfully stored in Poko's Memory!`, errors);
       }
-      if (onAddXp) onAddXp(25);
+
     } else {
       setIsCorrect(false);
       const fullLine = `${ex.prefix}${trimmed}`;
@@ -127,7 +127,7 @@ export default function GuidedPractice({ data, onNext, onAddXp, onUpdateMemory }
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
           >
-            <p>🎉 Excellent! Variable assigned successfully (+25 XP). Check Poko's Memory Storage on the right!</p>
+            <p>🎉 Excellent! Variable assigned successfully. Check Poko's Memory Storage on the right!</p>
           </motion.div>
         )}
 

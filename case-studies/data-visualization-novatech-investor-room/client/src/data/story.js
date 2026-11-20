@@ -1,7 +1,6 @@
 // How many wrong chart choices the investors tolerate before the deal breaks.
 // 1 = the original rule (one wrong chart ends the pitch). Set 2 or 3 for a gentler classroom mode.
 export const MAX_MISTAKES = 1;
-export const CONFIDENCE = { start: 48, correct: 7, wrong: -8, quizRight: 3, quizWrong: -3 };
 
 export const stages = [
   { id: 'welcome', eyebrow: 'NOVA-01 / INVESTOR DAY', title: 'The room is waiting.',

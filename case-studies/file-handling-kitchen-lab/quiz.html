@@ -34,11 +34,10 @@
       <div class="hero-divider"></div>
     </section>
 
-    <p class="quiz-intro">Pick an answer for each question. You'll get instant feedback and a final rank when you're done.</p>
+    <p class="quiz-intro">Pick an answer for each question. You'll get feedback and an explanation for each answer.</p>
 
     <div class="mcq-scoreboard">
-      <div class="mcq-stat"><span>Score</span><strong id="score-display">0 / 8</strong></div>
-      <div class="mcq-stat"><span>Streak</span><strong id="streak-display">0 🔥</strong></div>
+      <div class="mcq-stat"><span>Questions reviewed</span><strong id="answered-display">0 / 8</strong></div>
       <div class="mcq-progress">
         <div class="mcq-progress-fill" id="progress-fill"></div>
       </div>
@@ -114,9 +113,6 @@
       }
     ];
 
-    var score = 0;
-    var streak = 0;
-    var bestStreak = 0;
     var answered = {};
 
     function renderQuiz() {
@@ -153,25 +149,16 @@
           var mcq = MCQS.find(function (m) { return m.id === mcqId; });
           answered[mcqId] = chosen;
 
-          if (chosen === mcq.correct) {
-            score++;
-            streak++;
-            bestStreak = Math.max(bestStreak, streak);
-          } else {
-            streak = 0;
-          }
-
-          updateScoreboard();
+          updateProgress();
           renderQuiz();
           renderVerdict();
         });
       });
     }
 
-    function updateScoreboard() {
+    function updateProgress() {
       var count = Object.keys(answered).length;
-      document.getElementById('score-display').textContent = score + ' / ' + MCQS.length;
-      document.getElementById('streak-display').textContent = streak + ' 🔥';
+      document.getElementById('answered-display').textContent = count + ' / ' + MCQS.length;
       document.getElementById('progress-fill').style.width = (count / MCQS.length * 100) + '%';
     }
 
@@ -182,34 +169,14 @@
         return;
       }
 
-      var pct = Math.round((score / MCQS.length) * 100);
-      var rank, verdict;
-      if (pct === 100) {
-        rank = 'Head Chef';
-        verdict = 'Perfect score! You know the pantry inside and out — RAM, disk, and every reading method.';
-      } else if (pct >= 75) {
-        rank = 'Sous Chef';
-        verdict = 'Strong instincts. Review the one or two you missed and you\'re kitchen-ready.';
-      } else if (pct >= 50) {
-        rank = 'Line Cook';
-        verdict = 'You\'re getting there — revisit the chapters and try again.';
-      } else {
-        rank = 'Kitchen Helper';
-        verdict = 'The spice formulas need more study. Head back to Chapter 1 and work through the story again.';
-      }
-
       area.innerHTML = '<div class="mcq-verdict">' +
-        '<div class="verdict-score">' + score + ' / ' + MCQS.length + '</div>' +
-        '<div class="verdict-rank">"' + rank + '"</div>' +
-        '<p>' + verdict + '<br>Best streak: <strong>' + bestStreak + ' 🔥</strong></p>' +
+        '<h2>The Kitchen Review Is Complete</h2>' +
+        '<p>Review the explanations below, revisit either chapter, or try the questions again.</p>' +
         '<button type="button" id="retry-btn">Try Again ↺</button></div>';
 
       document.getElementById('retry-btn').addEventListener('click', function () {
-        score = 0;
-        streak = 0;
-        bestStreak = 0;
         answered = {};
-        updateScoreboard();
+        updateProgress();
         renderQuiz();
         renderVerdict();
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -217,7 +184,7 @@
     }
 
     renderQuiz();
-    updateScoreboard();
+    updateProgress();
   </script>
 </body>
 </html>

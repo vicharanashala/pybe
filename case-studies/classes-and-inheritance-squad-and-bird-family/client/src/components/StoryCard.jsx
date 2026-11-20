@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useTypewriter } from "./useTypewriter.js";
-import { parseSegments, segmentsLength } from "./storyContent.js";
+import { parseSegments, segmentsLength } from "./StoryContent.js";
 
 import { BirdParent, EagleChild, SparrowChild, PenguinChild, OwlChild, DuckChild } from "./BirdIllustration.jsx";
 

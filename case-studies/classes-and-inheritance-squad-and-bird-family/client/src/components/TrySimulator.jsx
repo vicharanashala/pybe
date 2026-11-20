@@ -1,4 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
+import React, { useState, useEffect, useRef } from "react";
 import { LEVELS } from "../levels.js";
 
 import { EagleChild, SparrowChild, PenguinChild, OwlChild, DuckChild } from "./BirdIllustration.jsx";
@@ -18,15 +20,15 @@ const ILLUSTRATIONS = {
 // toast on completion, and a richer layout. No new dependencies.
 
 export default function TrySimulator({ levelId, onComplete }) {
+  const {setTimeout,clearTimeout}=useStoryTimers();
+  const callTimer=useRef(null);
   const level = LEVELS[levelId];
   const Illustration = ILLUSTRATIONS[level.illustration];
   const [calledIds, setCalledIds] = useState([]);
   const [log, setLog] = useState([]);
   const [activeMethod, setActiveMethod] = useState(null);
   const [justCalled, setJustCalled] = useState(null); // id of method whose lines are still "typing in"
-  const [showXpToast, setShowXpToast] = useState(false);
   const consoleEndRef = useRef(null);
-  const wasDone = useRef(false);
 
   const done = calledIds.length === level.methods.length;
 
@@ -45,24 +47,14 @@ export default function TrySimulator({ levelId, onComplete }) {
     if (!calledIds.includes(method.id)) {
       setCalledIds((prev) => [...prev, method.id]);
     }
-    window.clearTimeout(call._t);
-    call._t = window.setTimeout(() => setJustCalled(null), 500);
+    clearTimeout(callTimer.current);
+    callTimer.current = setTimeout(() => setJustCalled(null), 500);
   }
 
   // Scroll the console to the newest line as it grows.
   useEffect(() => {
     consoleEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [log]);
-
-  // Fire the XP toast exactly once, the moment all methods have been tried.
-  useEffect(() => {
-    if (done && !wasDone.current) {
-      wasDone.current = true;
-      setShowXpToast(true);
-      const t = window.setTimeout(() => setShowXpToast(false), 2600);
-      return () => window.clearTimeout(t);
-    }
-  }, [done]);
 
   const triedPct = Math.round((calledIds.length / level.methods.length) * 100);
 
@@ -76,12 +68,7 @@ export default function TrySimulator({ levelId, onComplete }) {
             {level.difficultyLabel ? <span className="sim-difficulty-pill">{level.difficultyLabel}</span> : null}
           </p>
         </div>
-        {typeof level.xp === "number" && (
-          <div className="sim-xp-chip" aria-label={`Worth ${level.xp} XP`}>
-            <span className="sim-xp-chip-icon" aria-hidden="true">⚡</span>
-            {level.xp} XP
-          </div>
-        )}
+
       </div>
 
       <div className="simulator-grid sim-grid">
@@ -165,12 +152,7 @@ export default function TrySimulator({ levelId, onComplete }) {
         {level.nextLabel}
       </button>
 
-      {showXpToast && (
-        <div className="sim-xp-toast" role="status">
-          <span className="sim-xp-toast-icon" aria-hidden="true">⚡</span>
-          +{level.xp ?? 0} XP — all methods tried!
-        </div>
-      )}
+
     </div>
   );
 }

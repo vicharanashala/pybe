@@ -13,7 +13,6 @@ export default function QuizCard({ questions, chapterColor, chapterColorDim, onC
   const [current, setCurrent]   = useState(0);
   const [chosen, setChosen]     = useState(null);
   const [revealed, setRevealed] = useState(false);
-  const [score, setScore]       = useState(0);
 
   const q = questions[current];
   const letters = ['A', 'B', 'C', 'D'];
@@ -22,7 +21,6 @@ export default function QuizCard({ questions, chapterColor, chapterColorDim, onC
     if (revealed) return;
     setChosen(idx);
     setRevealed(true);
-    if (idx === q.correct) setScore((s) => s + 1);
   }
 
   function handleNext() {
@@ -31,8 +29,7 @@ export default function QuizCard({ questions, chapterColor, chapterColorDim, onC
       setChosen(null);
       setRevealed(false);
     } else {
-      const finalScore = chosen === q.correct ? score + 1 : score;
-      onComplete && onComplete(finalScore, questions.length);
+      onComplete && onComplete();
     }
   }
 
@@ -45,18 +42,6 @@ export default function QuizCard({ questions, chapterColor, chapterColorDim, onC
     >
       <div className="activity-label">
         🧠 Multiple Choice — Question {current + 1} of {questions.length}
-      </div>
-
-      {/* Score row */}
-      <div className="quiz-score-bar">
-        <div className="quiz-score-dots">
-          {questions.map((_, i) => {
-            let cls = 'quiz-score-dot';
-            if (i < current) cls += revealed && i === current - 1 ? '' : ' correct';
-            return <div key={i} className={cls} />;
-          })}
-        </div>
-        <span className="quiz-score-text">{score}/{questions.length} correct</span>
       </div>
 
       {/* Question */}

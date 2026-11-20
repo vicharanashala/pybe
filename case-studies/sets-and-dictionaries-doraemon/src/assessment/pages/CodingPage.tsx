@@ -119,13 +119,9 @@ export const CodingPage: React.FC<CodingPageProps> = ({
     setError(null);
     setHasVerified(false);
 
-    // 1. Run main execution to capture stdout & runtime errors
-    const result = await runPython(code);
-    setStdout(result.stdout);
-    setError(result.error);
-
-    // 2. Run assertion verification tests
     const verification = await verifyCode(code, currentChallenge.tests);
+    setStdout(verification.stdout);
+    setError(verification.error);
     setTestResults(verification.results);
     setHasVerified(true);
     setIsRunning(false);
@@ -168,6 +164,7 @@ export const CodingPage: React.FC<CodingPageProps> = ({
             return (
               <button
                 key={ch.id}
+                disabled={isRunning}
                 onClick={() => setActiveChallengeIndex(idx)}
                 style={{
                   padding: '6px 14px', borderRadius: '10px',
@@ -282,7 +279,7 @@ export const CodingPage: React.FC<CodingPageProps> = ({
                 display: 'flex', flexDirection: 'column', gap: '8px'
               }} className="animate-fade-in">
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontWeight: 900, fontSize: '14px' }}>
-                  <Award size={18} />
+                  <Check size={18} />
                   <span>🎉 Level {activeChallengeIndex + 1} Complete!</span>
                 </div>
                 <p style={{ fontSize: '12px', margin: 0, lineHeight: 1.4 }}>
@@ -380,9 +377,9 @@ export const CodingPage: React.FC<CodingPageProps> = ({
         <div style={{ flex: '2 2 480px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {/* Code Editor */}
           <div style={{ height: '320px', display: 'flex', flexDirection: 'column' }}>
-            <CodeEditor
+            <CodeEditor disabled={isRunning}
               code={code}
-              onChange={setCode}
+              onChange={value=>{setCode(value);handleClearConsole();}}
               onRun={handleRunCode}
             />
           </div>

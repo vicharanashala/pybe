@@ -1,3 +1,4 @@
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
 import React, { useState } from 'react';
 import { GlassCard } from '../../shared-components/GlassCard';
 import { Terminal, ArrowRight } from 'lucide-react';
@@ -15,7 +16,9 @@ const SAMPLE_DICT: KeyValueEntry[] = [
   { key: 'Bread', value: 'Press on textbook & eat', icon: '🍞' }
 ];
 
+const useStoryTimers=createStoryTimersHook(React);
 export const DictAnimator: React.FC = () => {
+  const {setTimeout,clearTimeout,setInterval,clearInterval}=useStoryTimers();
   const [activeKey, setActiveKey] = useState<string | null>('Light');
   const [isAnimating, setIsAnimating] = useState<boolean>(false);
 

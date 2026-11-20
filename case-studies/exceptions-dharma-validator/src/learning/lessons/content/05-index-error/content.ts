@@ -97,7 +97,6 @@ print(third_place([95, 88]))`,
   reflectionPrompt:
     "Every other student's answer to Drona was accurate — just not precise enough. Where else does 'technically true but too broad' fail the same way a bad index does?",
 
-  badgeUnlocked: "Lakshya-Bhedi — Piercer of the Precise Mark",
 };
 
 export default indexError;

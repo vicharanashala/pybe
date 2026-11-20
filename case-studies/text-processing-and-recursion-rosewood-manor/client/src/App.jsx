@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { api } from './lib/api';
+import authoredScenarios from './data/scenarios.json';
+import {createStoryProgressHook} from '../../../../shared/story-progress.mjs';
+const useStoryProgress=createStoryProgressHook(React);
 import { loadProgress, saveProgress, resetProgress, markRevealSeen } from './lib/progress';
 import LightningBackground from './components/LightningBackground';
 import Onboarding from './components/Onboarding';
@@ -11,17 +13,16 @@ import SuspectBoard from './components/SuspectBoard';
 import CodeModal from './components/CodeModal';
 import { computeBoard, scoreHistory } from './lib/leaderboard.mjs';
 
-export default function App() {
+export default function App({onComplete}) {
+  const [,complete]=useStoryProgress('rosewood-manor');
   const [phase, setPhase] = useState('storm'); // storm -> onboarding | manor
   const [scenarios, setScenarios] = useState([]);
   const [bootError, setBootError] = useState(null);
   const [progress, setProgress] = useState(() => loadProgress());
   const [activePartId, setActivePartId] = useState(null);
   const [results, setResults] = useState({}); // scenarioId -> latest mentor output (in-memory)
-  const [submitting, setSubmitting] = useState(false);
   const [ledgerOpen, setLedgerOpen] = useState(false);
   const [inspectingPart, setInspectingPart] = useState(null);
-  const [theme, setTheme] = useState(() => document.documentElement.dataset.theme || 'dark');
   const contentRef = useRef(null);
 
   function updateProgress(patch) {
@@ -34,7 +35,7 @@ export default function App() {
 
   useEffect(() => {
     let alive = true;
-    api('/scenarios')
+    Promise.resolve(authoredScenarios)
       .then((data) => {
         if (!alive) return;
         setScenarios(data);
@@ -87,7 +88,8 @@ export default function App() {
     const currentSlide = activePart?.slides?.[activeStepIndex];
     if (activePartId && currentSlide && (currentSlide.isCodeReveal || currentSlide.kind === 'code-reveal')) {
       markRevealSeen(activePartId);
-      const nowIso = new Date().toISOString();
+      complete(activePart._id);
+    const nowIso = new Date().toISOString();
       const alreadyCompleted = progress.completedParts?.includes(activePartId);
       const updatedCompletedParts = alreadyCompleted
         ? progress.completedParts
@@ -140,7 +142,7 @@ export default function App() {
     contentRef.current?.scrollTo({ top: 0 });
   }
 
-  async function submitChoice(choice, slide, attempts) {
+  function submitChoice(choice, slide, attempts) {
     if (!activePart) return;
     updateProgress({
       questionAttempts: {
@@ -148,30 +150,12 @@ export default function App() {
         [`${activePart._id}:${slide.id}`]: attempts
       }
     });
-    setSubmitting(true);
-    try {
-      const result = await api('/sessions', {
-        method: 'POST',
-        body: JSON.stringify({
-          learnerName: 'Guest learner',
-          scenarioId: activePart._id,
-          reasoning: choice.text,
-          promptText: slide.questionType === 'prompt' ? choice.text : 'Explain the evidence and the Python structure step by step.',
-          reflection: choice.text,
-          attempts
-        })
-      });
-      setResults((current) => ({ ...current, [activePart._id]: result }));
-      setStep((progress?.subStepIndex?.[activePartId] || 0) + 1);
-    } catch (error) {
-      console.error('Could not submit reasoning', error);
-    } finally {
-      setSubmitting(false);
-    }
+    setResults(current=>({...current,[activePart._id]:{recorded:true}}));
   }
 
   function sealPart() {
     if (!activePart) return;
+    complete(activePart._id);
     const nowIso = new Date().toISOString();
     const alreadySealed = progress.completedParts.includes(activePart._id);
     const completedParts = alreadySealed
@@ -207,7 +191,7 @@ export default function App() {
       setLedgerOpen(false);
       setActivePartId(null);
       setPhase('onboarding');
-      window.history.replaceState({}, '', window.location.pathname + window.location.search);
+      onComplete?.();
       return;
     }
     contentRef.current?.scrollTo({ top: 0 });
@@ -246,15 +230,6 @@ export default function App() {
     setActivePartId(null);
     setProgress(fresh);
     setPhase('onboarding');
-  }
-
-  function toggleTheme() {
-    const next = theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = next;
-    document.documentElement.style.colorScheme = next;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--ink').trim());
-    window.localStorage.setItem('pybe.theme', next);
-    setTheme(next);
   }
 
   if (phase === 'storm') {
@@ -307,8 +282,6 @@ export default function App() {
         activePartId={activePartId}
         onJumpToPart={selectPart}
         onOpenLedger={() => setLedgerOpen(true)}
-        theme={theme}
-        onToggleTheme={toggleTheme}
       />
 
       <div className="three-zone">
@@ -330,7 +303,7 @@ export default function App() {
               partTotal={partTotal}
               stepIndex={activeStepIndex}
               result={results[decoratedScenario._id] || null}
-              submitting={submitting}
+              submitting={false}
               caseClosed={caseClosed}
               showEvidence={showEvidence}
               inStory={Boolean(activeStory)}

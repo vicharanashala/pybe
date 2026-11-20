@@ -1,3 +1,5 @@
+import {createStoryTimersHook} from '../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 import React, { useState, useEffect } from 'react';
 import { soundEngine } from '../utils/soundEngine';
 
@@ -8,6 +10,7 @@ const PAIRS = [
 ];
 
 export default function Page11_BossMatchingGame() {
+  const {setTimeout}=useStoryTimers();
   const [selectedLeft, setSelectedLeft] = useState(null);
   const [matched, setMatched] = useState([]);
   const [wrongShakeLeft, setWrongShakeLeft] = useState(null);

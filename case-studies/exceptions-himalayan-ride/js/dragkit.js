@@ -9,6 +9,9 @@ const DragKit = (() => {
   let _dragClone = null;    // Visual clone during drag
   let _dropZones = [];      // Registered drop zones
   let _onDrop = null;       // Global drop callback
+  // Fixed drag previews use the viewport in the standalone story and the
+  // native study surface when embedded in PyBe.
+  const previewOffset = () => document.body.getRootNode().host?.getBoundingClientRect() || {left:0,top:0};
 
   /**
    * Make an element draggable.
@@ -50,8 +53,8 @@ const DragKit = (() => {
         opacity: 0.85;
         transform: scale(1.05);
         transition: none;
-        left: ${e.clientX - el.offsetWidth / 2}px;
-        top: ${e.clientY - el.offsetHeight / 2}px;
+        left: ${e.clientX - previewOffset().left - el.offsetWidth / 2}px;
+        top: ${e.clientY - previewOffset().top - el.offsetHeight / 2}px;
         width: ${el.offsetWidth}px;
       `;
       document.body.appendChild(_dragClone);
@@ -62,8 +65,8 @@ const DragKit = (() => {
     el.addEventListener('pointermove', (e) => {
       if (_dragging !== el || !_dragClone) return;
       hasMoved = true;
-      _dragClone.style.left = `${e.clientX - el.offsetWidth / 2}px`;
-      _dragClone.style.top = `${e.clientY - el.offsetHeight / 2}px`;
+      _dragClone.style.left = `${e.clientX - previewOffset().left - el.offsetWidth / 2}px`;
+      _dragClone.style.top = `${e.clientY - previewOffset().top - el.offsetHeight / 2}px`;
 
       // Hit-test drop zones
       _dropZones.forEach(dz => {

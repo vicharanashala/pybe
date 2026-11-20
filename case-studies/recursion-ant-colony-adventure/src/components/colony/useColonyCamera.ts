@@ -1,3 +1,6 @@
+import * as React from 'react';
+import {createStoryTimersHook} from '../../../../../shared/story-timers.mjs';
+const useStoryTimers=createStoryTimersHook(React);
 // Camera controller for the colony viewer.
 //
 // The camera is a center (cx, cy) plus a zoom level in the 800x620 SVG
@@ -17,7 +20,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSpring, useTransform } from 'framer-motion';
 import type { MotionValue } from 'framer-motion';
 import type { RefObject, PointerEvent as ReactPointerEvent } from 'react';
-import type { ChamberSpec, ObstacleSpec, SceneAction } from '@/data';
+import type { ChamberSpec, ObstacleSpec, SceneAction } from '../../data';
 import { COLONY_W, COLONY_H, type Pt } from './geometry';
 import {
   activityFocus,
@@ -71,6 +74,7 @@ export interface ColonyCamera {
 }
 
 export function useColonyCamera(args: UseColonyCameraArgs): ColonyCamera {
+  const {requestAnimationFrame}=useStoryTimers();
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState<{ w: number; h: number }>({
     w: COLONY_W,
@@ -193,6 +197,7 @@ export function useColonyCamera(args: UseColonyCameraArgs): ColonyCamera {
     const f = currentFocus();
     const isNewActivity = !!a && a.id !== lastFollowActivityRef.current;
     if (isNewActivity && f) {
+
       lastFollowActivityRef.current = a.id;
       const t = focusTarget(f);
       setTarget(t.x, t.y, clampZoom(frameRef.current.fitZoom * 1.18, frameRef.current));
@@ -228,7 +233,7 @@ export function useColonyCamera(args: UseColonyCameraArgs): ColonyCamera {
   const intro = useCallback(() => {
     // Defer one frame so scene-change state has settled and frameRef holds
     // the frame for the NEW scene before we compute the intro shot.
-    window.requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
       const fr = frameRef.current;
       const z = clampZoom(fr.fitZoom * 1.15, fr);
       cx.jump(fr.defaultCenter.x);

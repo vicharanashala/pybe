@@ -3,13 +3,12 @@ import { Sparkles } from 'lucide-react';
 import SceneShell from '../components/SceneShell';
 import GadgetChip from '../components/GadgetChip';
 import MemoryPocket from '../components/MemoryPocket';
-import RewardToast from '../components/RewardToast';
 import { GADGETS } from '../data/gadgets';
 
 // Scene 4 — Interactive Memory Boxes. The learner physically sorts each
 // gadget into the pocket it belongs in. Supports both drag & drop and a
 // tap-to-select / tap-a-pocket fallback for touch devices.
-export default function Scene4MemoryBoxes({ onNext, onGem }) {
+export default function Scene4MemoryBoxes({ onNext }) {
   const [placed, setPlaced] = useState({}); // gadgetId -> pocketId
   const [selected, setSelected] = useState(null);
   const [checked, setChecked] = useState(false);
@@ -30,7 +29,6 @@ export default function Scene4MemoryBoxes({ onNext, onGem }) {
 
   function checkAnswers() {
     setChecked(true);
-    if (correctCount === GADGETS.length) onGem?.();
   }
 
   const unplaced = GADGETS.filter((g) => !placed[g.id]);
@@ -84,7 +82,6 @@ export default function Scene4MemoryBoxes({ onNext, onGem }) {
         </p>
       )}
 
-      {checked && correctCount === GADGETS.length && <RewardToast label="Memory Gem earned!" />}
 
       {!checked ? (
         <button className="dm-btn dm-cta" onClick={checkAnswers} disabled={!allPlaced}>

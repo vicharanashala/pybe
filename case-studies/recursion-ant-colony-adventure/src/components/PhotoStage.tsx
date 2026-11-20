@@ -9,7 +9,7 @@
 
 import { useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { SceneImage } from '@/data';
+import type { SceneImage } from '../data';
 
 interface PhotoStageProps {
   images: SceneImage[];

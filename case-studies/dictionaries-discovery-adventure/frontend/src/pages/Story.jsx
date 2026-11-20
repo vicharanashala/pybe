@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -17,7 +17,6 @@ import {
   Terminal
 } from 'lucide-react';
 import { DrawerSimulation } from '../components/DrawerSimulation';
-import { RaceMode } from '../components/RaceMode';
 import { HashVisualizer } from '../components/HashVisualizer';
 import { InteractiveCodeBlock } from '../components/InteractiveCodeBlock';
 import { SpotTheBug } from '../components/SpotTheBug';
@@ -28,11 +27,12 @@ import { useGame } from '../context/GameContext';
 import { useSoundFX } from '../hooks/useSoundFX';
 
 export const Story = () => {
+  const top=useRef(null);
   const { page } = useParams();
   const navigate = useNavigate();
   const pageNum = parseInt(page, 10) || 1;
 
-  const { unlockBadge, unlockNextPage, nerdMode } = useGame();
+  const {unlockNextPage,nerdMode} = useGame();
   const { playClick, playSuccess } = useSoundFX();
 
   // Active step within each chapter: 'story' | 'lab' | 'quiz'
@@ -58,7 +58,7 @@ export const Story = () => {
   // When chapter changes, always start on story and scroll to top
   useEffect(() => {
     setActiveTab('story');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    top.current?.scrollIntoView({block:'start',behavior:'smooth'});
   }, [pageNum]);
 
   // Check if current chapter goals are fulfilled
@@ -80,12 +80,11 @@ export const Story = () => {
     playClick();
     unlockNextPage(pageNum);
 
-    if (pageNum === 1) unlockBadge('slow_poke');
-    if (pageNum === 2) unlockBadge('hash_wizard');
-    if (pageNum === 3) unlockBadge('spellcaster');
-    if (pageNum === 4) unlockBadge('master_thief');
+
+
+
     if (pageNum === 5) {
-      unlockBadge('trap_dodger');
+
       navigate('/story/finale');
       return;
     }
@@ -96,7 +95,7 @@ export const Story = () => {
   const handleTabSwitch = (tab) => {
     playClick();
     setActiveTab(tab);
-    window.scrollTo({ top: 120, behavior: 'smooth' });
+    top.current?.scrollIntoView({block:'start',behavior:'smooth'});
   };
 
   const fadeProps = {
@@ -112,38 +111,38 @@ export const Story = () => {
       title: 'Chapter 1: The Heist Begins',
       subtitle: 'The 1,000 Drawer Problem & Sequential Search O(N)',
       icon: <Skull size={32} color="var(--primary)" />,
-      image: '/sly_searching.png'
+      image: '/submissions/dictionaries-discovery-adventure/frontend/public/sly_searching.png'
     },
     2: {
       title: 'Chapter 2: The Wizard\'s Secret',
       subtitle: 'Sticker Keys, Values, and Instant O(1) Speed',
       icon: <Map size={32} color="var(--secondary)" />,
-      image: '/sly_finding.png'
+      image: '/submissions/dictionaries-discovery-adventure/frontend/public/sly_finding.png'
     },
     3: {
       title: 'Chapter 3: The Computer Spellbook',
       subtitle: 'Python Dictionary Syntax & Curly Bracket Magic',
       icon: <BookKey size={32} color="var(--primary)" />,
-      image: '/sly_reading.png'
+      image: '/submissions/dictionaries-discovery-adventure/frontend/public/sly_reading.png'
     },
     4: {
       title: 'Chapter 4: Execute the Spell',
       subtitle: 'Live Terminal Execution & Real-Time Lookup',
       icon: <Unlock size={32} color="var(--success)" />,
-      image: ch4Executed ? '/sly_finding.png' : '/sly_searching.png'
+      image: ch4Executed ? '/submissions/dictionaries-discovery-adventure/frontend/public/sly_finding.png' : '/submissions/dictionaries-discovery-adventure/frontend/public/sly_searching.png'
     },
     5: {
       title: 'Chapter 5: The Booby Trap',
       subtitle: 'Handling Missing Keys: KeyError vs .get()',
       icon: <ShieldAlert size={32} color="var(--error)" />,
-      image: ch5TrapDisarmed ? '/sly_finding.png' : '/sly_reading.png'
+      image: ch5TrapDisarmed ? '/submissions/dictionaries-discovery-adventure/frontend/public/sly_finding.png' : '/submissions/dictionaries-discovery-adventure/frontend/public/sly_reading.png'
     }
   };
 
   const currentMeta = chapterMeta[pageNum] || chapterMeta[1];
 
   return (
-    <div className="story-container">
+    <div ref={top} className="story-container" data-dictionary-chapter={pageNum} data-dictionary-tab={activeTab}>
       <div className="story-chapter">
         <div className="glass-card chapter-content-card">
           {/* Chapter Header */}
@@ -601,7 +600,7 @@ export const Story = () => {
                         onClick={handleProceed}
                         style={{ padding: '14px 28px', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '1rem', background: 'linear-gradient(135deg, var(--success), var(--secondary))', color: '#000' }}
                       >
-                        Enter Grand Finale & Claim Certificate 👑 <ArrowRight size={16} />
+                        Enter the Grand Finale <ArrowRight size={16} />
                       </button>
                     )}
                   </div>
@@ -620,7 +619,7 @@ export const Story = () => {
                   🗝️ Chapter {pageNum} Security Ward
                 </h3>
                 <p style={{ color: 'var(--text-muted)', margin: 0, fontSize: '0.92rem' }}>
-                  Answer these checkpoint challenges correctly to lower the dog's alarm, earn XP, and unlock the next chapter!
+                  Answer these checkpoint challenges to lower the dog's alarm and continue the story.
                 </p>
               </div>
 
@@ -853,7 +852,7 @@ export const Story = () => {
                       gap: '10px'
                     }}
                   >
-                    <span>{pageNum === 5 ? 'Enter Grand Finale & Claim Certificate' : `Proceed to Chapter ${pageNum + 1}`}</span>
+                    <span>{pageNum === 5 ? 'Enter the Grand Finale' : `Proceed to Chapter ${pageNum + 1}`}</span>
                     <ArrowRight size={20} />
                   </button>
                 </div>

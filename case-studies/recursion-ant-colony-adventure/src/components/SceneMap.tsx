@@ -4,17 +4,15 @@
 
 import { motion } from 'framer-motion';
 import { Check, Lock, Play, ChevronLeft, Trophy, Volume2, VolumeX, RotateCcw } from 'lucide-react';
-import type { Scene } from '@/data';
+import type { Scene } from '../data';
 
 interface SceneMapProps {
   scenes: Scene[];
   completedScenes: number[];
   lastSceneId: number;
-  xp: number;
   muted: boolean;
   onToggleMute: () => void;
   onSelect: (scene: Scene) => void;
-  onOpenAchievements: () => void;
   onExit: () => void;
   onReset: () => void;
 }
@@ -23,18 +21,16 @@ export default function SceneMap({
   scenes,
   completedScenes,
   lastSceneId,
-  xp,
   muted,
   onToggleMute,
   onSelect,
-  onOpenAchievements,
   onExit,
   onReset,
 }: SceneMapProps) {
   const nextSceneId = scenes.find((s) => !completedScenes.includes(s.id))?.id ?? scenes[scenes.length - 1].id;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-stone-900 via-stone-950 to-black px-4 py-8 sm:px-6">
+    <div className="ant-map min-h-screen bg-gradient-to-b from-stone-900 via-stone-950 to-black px-4 py-8 sm:px-6">
       {/* Header */}
       <div className="mx-auto mb-8 flex max-w-4xl items-center justify-between">
         <button
@@ -51,13 +47,6 @@ export default function SceneMap({
             aria-label={muted ? 'Unmute' : 'Mute'}
           >
             {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-          </button>
-          <button
-            onClick={onOpenAchievements}
-            className="flex items-center gap-1.5 rounded-full bg-stone-800/70 px-3 py-2 text-stone-200 transition hover:bg-stone-800"
-          >
-            <Trophy className="h-4 w-4 text-amber-300" />
-            <span className="text-sm font-semibold">{xp}</span>
           </button>
         </div>
       </div>
@@ -130,7 +119,6 @@ export default function SceneMap({
               </div>
 
               <div className="flex flex-shrink-0 items-center gap-2">
-                <span className="hidden text-xs font-semibold text-amber-300/80 sm:inline">+{scene.xp} XP</span>
                 {!isLocked && <Play className="h-5 w-5 text-stone-300" />}
               </div>
             </motion.button>
