@@ -2,11 +2,7 @@
 
 # PyBe — Python through stories
 
-We learn Python case studies through stories. The library organizes these story-based case studies by concept, and all 71 catalog entries open inside one warm-white and orange PyBe interface. Shared navigation, progress, timers, editors and Python execution support each story’s own learning sequence and special interactions. Every existing case study is retained. See [MIGRATION_STATUS.md](MIGRATION_STATUS.md) for implementation and verification details.
-
-Shared code does not mean a fixed teaching flow. Each study retains its story order, pacing, special interactions, and timing of concept/syntax reveals. [Teaching-flow preservation rules](shared/README.md) guide the migration; Flight 218 is a reference example.
-
-Integrated studies use their original React scenes, native adapters for their authored HTML/scripts, or shared widgets driven by their original ordered step data. Each option fits the authored story. Reviewed inline buttons dispatch to explicit local handlers; they do not depend on global functions or evaluated strings. Illustrations and audio remain part of their stories, with shared asset resolution and lifecycle cleanup. Written submissions render from their original Markdown. Authored utility styles use one root build toolchain, and chapter-based HTML stories keep browser Back/Forward inside the PyBe route. React stories with internal pages share an in-memory router and retain their own navigation controls.
+PyBe is an interactive platform that teaches Python through stories and case studies. Learners might investigate an airplane mystery, manage a royal kitchen, or explore a magical world. Each story invites them to make decisions, experiment, and solve problems before revealing the Python concepts and syntax behind their actions. The collection covers variables, loops, data structures, functions, object-oriented programming, exceptions, and more. Learners can choose different stories for the same concept, with activities, simulations, and coding exercises that suit each narrative. PyBe makes programming approachable and memorable by helping learners understand the purpose of code through exploration, feedback, and practice.
 
 ## Run locally
 
