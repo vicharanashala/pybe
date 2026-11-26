@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>The Sorting Investigation — Discover Python Sorting</title>
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="css/style.css?v=2.2">
+</head>
+<body>
+  <!-- Canvas for celebration confetti -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Application Header -->
+  <header class="app-header">
+    <div class="header-inner">
+      <a href="#" class="brand-wrapper" onclick="App.goToScreen(1); return false;">
+        <div id="header-brand-icon" class="brand-icon" aria-hidden="true">
+          <svg viewBox="0 0 36 36" width="36" height="36" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Sorting Investigation Emblem">
+            <defs>
+              <linearGradient id="embGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1e293b"/>
+                <stop offset="100%" stop-color="#0f172a"/>
+              </linearGradient>
+              <linearGradient id="embGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fef08a"/>
+                <stop offset="50%" stop-color="#f59e0b"/>
+                <stop offset="100%" stop-color="#d97706"/>
+              </linearGradient>
+            </defs>
+            <rect width="36" height="36" rx="8" fill="url(#embGrad)"/>
+            <circle cx="18" cy="18" r="14" fill="none" stroke="url(#embGold)" stroke-width="1.2" stroke-dasharray="2 1.5"/>
+            <circle cx="18" cy="9" r="2.5" fill="none" stroke="#f59e0b" stroke-width="1.2"/>
+            <rect x="13" y="12" width="10" height="13" rx="2" fill="#fef08a" fill-opacity="0.25" stroke="#f59e0b" stroke-width="1.2"/>
+            <line x1="18" y1="12" x2="18" y2="25" stroke="#d97706" stroke-width="0.8"/>
+            <circle cx="18" cy="19" r="2.5" fill="#f59e0b"/>
+            <circle cx="18" cy="19" r="1.2" fill="#ef4444"/>
+            <rect x="12" y="25" width="12" height="3" rx="1" fill="#b45309"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1>The Sorting Investigation</h1>
+          <span class="brand-tag">Scutari Hospital, 1854 • Python Learning Adventure</span>
+        </div>
+      </a>
+      <div class="header-actions">
+        <span id="header-progress-text" style="font-size: 0.825rem; font-weight: 700; color: var(--color-primary); background: var(--bg-accent-blue); padding: 0.25rem 0.65rem; border-radius: var(--radius-pill);">
+          Screen 1 of 8
+        </span>
+        <button type="button" id="btn-toggle-sound" class="btn btn-outline btn-sm" aria-label="Toggle sound effects">
+          🔊 Sound On
+        </button>
+        <button type="button" id="btn-history-info" class="btn btn-outline btn-sm" aria-label="View historical facts and notes">
+          📜 History Notes
+        </button>
+        <button type="button" id="btn-reset-progress" class="btn btn-outline btn-sm" style="color: var(--color-danger);" aria-label="Reset learning progress">
+          ↺ Reset
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Stepper / Breadcrumbs Bar -->
+  <nav class="stepper-nav" aria-label="Investigation progress steps">
+    <div class="stepper-inner" id="stepper-items">
+      <button type="button" class="step-btn active" data-screen="1">
+        <span class="step-badge">1</span> Start
+      </button>
+      <button type="button" class="step-btn" data-screen="2">
+        <span class="step-badge">2</span> Understand
+      </button>
+      <button type="button" class="step-btn" data-screen="3">
+        <span class="step-badge">3</span> Records
+      </button>
+      <button type="button" class="step-btn" data-screen="4">
+        <span class="step-badge">4</span> Visualize
+      </button>
+      <button type="button" class="step-btn" data-screen="5">
+        <span class="step-badge">5</span> Algorithms
+      </button>
+      <button type="button" class="step-btn" data-screen="6">
+        <span class="step-badge">6</span> Practise
+      </button>
+      <button type="button" class="step-btn" data-screen="7">
+        <span class="step-badge">7</span> Play
+      </button>
+      <button type="button" class="step-btn" data-screen="8">
+        <span class="step-badge">8</span> Mission
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Application Body -->
+  <main class="main-content">
+
+    <!-- ======================================================================
+         SCREEN 1: THE OPENING EXPERIENCE
+         ====================================================================== -->
+    <section id="screen-1" class="screen-section active" aria-labelledby="title-screen-1">
+      <div class="hero-container">
+        <div class="hero-text">
+          <span class="section-tag">Historical Adventure</span>
+          <h2 id="title-screen-1">THE SORTING INVESTIGATION</h2>
+          <p class="hero-tagline">"An investigation is waiting at Scutari Hospital."</p>
+          <p class="hero-description">
+            November 1854. You arrive at the British military hospital in Scutari during the Crimean War.
+            Piles of handwritten hospital records are completely unorganised.
+            Help sort and organise the medical evidence to reveal patterns that support vital hospital reforms.
+          </p>
+          <button type="button" id="btn-start-investigation" class="btn btn-primary btn-lg">
+            Start Investigation →
+          </button>
+        </div>
+        <div class="hero-art-box" id="hero-illustration-box">
+          <div class="historical-img-frame">
+            <img src="assets/images/hero_scutari_hospital.jpg" alt="The Hospital at Scutari (Lithograph by Day & Son, 1856, after William Simpson)" class="hero-historical-img">
+            <div class="historical-img-caption">The Hospital at Scutari (Lithograph by Day & Son, 1856, after William Simpson)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Roadmap Overview -->
+      <div class="journey-preview">
+        <h3 class="journey-title">Your Investigation Roadmap</h3>
+        <p class="journey-lead">One investigation, five connected stages. Each stage reuses the ideas from the one before it.</p>
+        <div class="journey-grid">
+          <div class="journey-step-item">
+            <div class="journey-step-num">STAGE 1 · UNDERSTAND</div>
+            <div class="journey-step-label">The case and the records</div>
+            <div style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.25rem;">Story & Evidence Room</div>
+          </div>
+          <div class="journey-step-item">
+            <div class="journey-step-num">STAGE 2 · VISUALIZE</div>
+            <div class="journey-step-label">Order records by hand</div>
+            <div style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.25rem;">Adjacent-swap sorting board</div>
+          </div>
+          <div class="journey-step-item">
+            <div class="journey-step-num">STAGE 3 · VISUALIZE</div>
+            <div class="journey-step-label">Watch the algorithms think</div>
+            <div style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.25rem;">One operation at a time</div>
+          </div>
+          <div class="journey-step-item">
+            <div class="journey-step-num">STAGE 4 · PRACTISE</div>
+            <div class="journey-step-label">Python sorted()</div>
+            <div style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.25rem;">Code and concept checks</div>
+          </div>
+          <div class="journey-step-item">
+            <div class="journey-step-num">STAGE 5 · PLAY & MISSION</div>
+            <div class="journey-step-label">Solve the supply crisis</div>
+            <div style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.25rem;">Apply everything you learned</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 2: THE HISTORICAL STORY
+         ====================================================================== -->
+    <section id="screen-2" class="screen-section" aria-labelledby="title-screen-2">
+      <div class="story-container">
+        <span class="section-tag">Understand · Story</span>
+        <h2 id="title-screen-2" class="section-title">The Scutari Inquiry</h2>
+        <p class="section-subtitle">First, understand why the records mattered. The historical story sets the problem that every later activity will solve.</p>
+
+        <div class="card story-card parchment-card">
+          <div id="story-visual-container" class="story-scene-visual">
+            <div class="historical-img-frame">
+              <img src="assets/images/story_scutari_nurses_1855.png" alt="Authentic contemporary 1855 coloured lithograph of nurses caring for patients in the military hospital at Scutari (Thomas Packer, Day & Son)" class="historical-story-img">
+              <div class="historical-img-caption">Nurses caring for wounded soldiers in the military hospital at Scutari (Coloured lithograph by Thomas Packer, published by Day & Son, London, 1855, Wellcome Collection)</div>
+            </div>
+          </div>
+          <h3 id="story-title" class="story-scene-title">Scene Title</h3>
+          <p id="story-narrative" class="story-scene-narrative">Scene narrative text.</p>
+
+          <div class="historical-fact-callout">
+            <span style="font-size: 1.25rem;">📜</span>
+            <span id="story-fact-text">Historical Fact note...</span>
+          </div>
+
+          <div class="story-nav-bar">
+            <button type="button" id="story-prev-btn" class="btn btn-outline">
+              ← Previous Scene
+            </button>
+            <div class="story-dots" id="story-dots-container">
+              <!-- Rendered via story.js -->
+            </div>
+            <button type="button" id="story-next-btn" class="btn btn-secondary">
+              Next Scene →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 3: EXPLORE THE EVIDENCE ROOM
+         ====================================================================== -->
+    <section id="screen-3" class="screen-section" aria-labelledby="title-screen-3">
+      <span class="section-tag">Understand · Evidence</span>
+      <h2 id="title-screen-3" class="section-title">The Scutari Hospital Ledgers</h2>
+      <p class="section-subtitle">
+        These five <strong>illustrative learning records</strong> are based on the need to organise hospital tallies. Compare two values: noticing order is the first step before visualising how algorithms create it.
+      </p>
+
+      <!-- Comparison Tool -->
+      <div class="evidence-comparator-box" id="evidence-comparison-display" aria-live="polite">
+        <!-- Rendered via evidence.js -->
+      </div>
+
+      <!-- Unordered Cards Grid -->
+      <div class="evidence-grid" id="evidence-cards-grid">
+        <!-- Rendered via evidence.js -->
+      </div>
+
+      <!-- Notice the problem callout -->
+      <div class="card" style="background: #fffbeb; border-color: #fde68a; margin-bottom: 2rem;">
+        <h4 style="color: #92400e; font-size: 1.05rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+          🔍 Investigator's Observation
+        </h4>
+        <p style="color: #78350f; font-size: 0.95rem;">
+          These admission numbers arrive in random order: <strong>[42, 19, 85, 64, 128]</strong>.
+          To determine which ward has the lowest or highest patient load, doctors had to waste precious time scanning back and forth through parchment.
+          Let's discover how <strong>sorting</strong> solves this immediately!
+        </p>
+      </div>
+
+      <div style="text-align: right;">
+        <button type="button" id="evidence-proceed-btn" class="btn btn-primary btn-lg">
+          Proceed to Sorting Game →
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 4: MAIN DRAG-AND-DROP SORTING GAME
+         ====================================================================== -->
+    <section id="screen-4" class="screen-section" aria-labelledby="title-screen-4">
+      <div class="game-header-bar">
+        <div>
+          <span class="section-tag">Visualize · By hand</span>
+          <h2 id="title-screen-4" class="section-title">The Sorting Board</h2>
+        </div>
+        <div class="level-indicator" id="game-level-chips">
+          <!-- Level chips rendered via sortGame.js -->
+        </div>
+      </div>
+
+      <div class="game-rule-banner">
+        <div id="game-rule-text" class="rule-highlight">
+          Arrange cards in Ascending order
+        </div>
+        <span style="font-size: 0.85rem; color: var(--text-muted);">
+          Swap neighbouring cards with ◀ / ▶ — the same adjacent move Bubble Sort uses.
+        </span>
+      </div>
+      <p class="stage-link">
+        This is the physical version of the comparisons you will watch in the algorithm visualizer. Only neighbouring records may cross.
+      </p>
+
+      <!-- Interactive Game Board -->
+      <div class="game-board">
+        <div class="cards-deck" id="game-cards-deck">
+          <!-- Rendered via sortGame.js -->
+        </div>
+      </div>
+
+      <div id="game-feedback-box" class="feedback-box" aria-live="polite">
+        <!-- Feedback messages -->
+      </div>
+
+      <!-- Controls -->
+      <div class="game-controls">
+        <div style="display: flex; gap: 0.75rem;">
+          <button type="button" id="game-check-btn" class="btn btn-primary">
+            ✓ Check Order
+          </button>
+          <button type="button" id="game-hint-btn" class="btn btn-outline">
+            💡 Hint
+          </button>
+          <button type="button" id="game-reset-btn" class="btn btn-secondary">
+            ↺ Reset Cards
+          </button>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-light);">
+          Tip: Sorting ascending means lowest number to highest. All ward numbers here are illustrative practice data.
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 5: INTERACTIVE SORTING SIMULATOR
+         ====================================================================== -->
+    <section id="screen-5" class="screen-section" aria-labelledby="title-screen-5">
+      <span class="section-tag">Visualize · Algorithms</span>
+      <h2 id="title-screen-5" class="section-title">Watch the Algorithm Think</h2>
+      <p class="section-subtitle">
+        You have already ordered records by hand. Now watch each algorithm make one meaningful decision at a time. At the end, apply the idea in a short check before continuing.
+      </p>
+
+      <div class="algo-switcher" role="tablist" aria-label="Sorting algorithm demonstration">
+        <button id="tab-sim-bubble" class="algo-tab-btn active" type="button" data-algo="bubble" role="tab" aria-selected="true" aria-controls="sim-interactive-panel">Bubble Sort</button>
+        <button id="tab-sim-insertion" class="algo-tab-btn" type="button" data-algo="insertion" role="tab" aria-selected="false" aria-controls="sim-interactive-panel">Insertion Sort</button>
+        <button id="tab-sim-merge" class="algo-tab-btn" type="button" data-algo="merge" role="tab" aria-selected="false" aria-controls="sim-interactive-panel">Merge Sort</button>
+        <button id="tab-sim-connection" class="algo-tab-btn algo-tab-btn-concept" type="button" data-algo="connection" role="tab" aria-selected="false" aria-controls="sim-connection-panel" aria-label="Connecting the Ideas: conceptual bridge between Merge Sort and Timsort Model">Connecting the Ideas <span class="concept-tab-badge" aria-hidden="true">concept</span></button>
+        <button id="tab-sim-timsort" class="algo-tab-btn" type="button" data-algo="timsort" role="tab" aria-selected="false" aria-controls="sim-interactive-panel">Timsort Model</button>
+        <button id="tab-sim-comparison" class="algo-tab-btn" type="button" data-algo="comparison" role="tab" aria-selected="false" aria-controls="sim-comparison-panel">Algorithm Comparison</button>
+      </div>
+
+      <div id="sim-algo-info-card" class="algo-info-card sim-brief" aria-live="polite">
+        <div class="sim-brief-head">
+          <h3 id="sim-algo-title">Bubble Sort</h3>
+          <span id="sim-algo-badge" class="algo-badge">Simple Pairwise Baseline</span>
+        </div>
+        <p id="sim-algo-desc" class="sim-brief-desc"></p>
+        <details class="sim-brief-more">
+          <summary>Complexity &amp; key terms</summary>
+          <p id="sim-algo-bigo" class="sim-brief-bigo"></p>
+          <dl class="sim-glossary">
+            <dt>Key</dt><dd>The value currently being held and moved into place in Insertion Sort. This is different from Python's <code>key=</code> function.</dd>
+            <dt>Run</dt><dd>A section that is already ordered in the requested direction.</dd>
+            <dt>Minrun</dt><dd>The minimum run length the Timsort teaching model extends to before merging.</dd>
+            <dt>Merge</dt><dd>Combine two ordered sections into one ordered section.</dd>
+            <dt>Auxiliary buffer</dt><dd>Extra temporary space used while merging.</dd>
+            <dt>Stable</dt><dd>Equal values keep their original arrival order.</dd>
+            <dt>Divide and conquer</dt><dd>Split a problem into smaller parts, solve each, then combine.</dd>
+          </dl>
+        </details>
+      </div>
+
+      <div id="sim-interactive-panel" role="tabpanel" aria-labelledby="tab-sim-bubble" tabindex="0">
+        <div class="sim-container">
+          <!-- Primary teaching path: visual -> explanation -> two controls -> progress. -->
+          <div class="sim-stage-shell">
+            <div class="sim-visual-stage" id="sim-stage" role="group" aria-label="Sorting visualization">
+              <!-- Algorithm-specific renderers are inserted by simulator.js. -->
+            </div>
+            <div class="sim-step-commentary" aria-live="polite">
+              <span class="sim-commentary-icon" aria-hidden="true">▸</span>
+              <div class="sim-commentary-copy">
+                <strong id="sim-commentary-label" class="sim-commentary-label">Ready</strong>
+                <p id="sim-commentary-text">Press Play or Next to begin.</p>
+                <p id="sim-commentary-why" class="sim-commentary-why" hidden></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="sim-controls" role="group" aria-label="Playback controls">
+            <div class="sim-transport">
+              <button type="button" id="sim-play-btn" class="btn btn-primary btn-sm" aria-pressed="false">▶ Play</button>
+              <button type="button" id="sim-next-btn" class="btn btn-secondary btn-sm">Next ▶</button>
+            </div>
+            <div class="sim-progress-wrap">
+              <div class="sim-progress" id="sim-progressbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Step 1 of 1">
+                <div class="sim-progress-fill" id="sim-progress-fill"></div>
+              </div>
+              <span id="sim-step-counter" class="sim-step-counter" aria-live="polite">Step 1 of 1</span>
+            </div>
+          </div>
+
+          <div id="sim-check-panel" class="sim-check-panel" style="display: none;" aria-live="polite">
+            <div class="sim-check-head">
+              <span class="sim-check-kicker">Check your understanding</span>
+              <p id="sim-check-question" class="sim-check-question"></p>
+            </div>
+            <div class="sim-check-options" role="group" aria-label="Understanding check options">
+              <button type="button" id="sim-check-option-a" class="btn btn-primary btn-sm"></button>
+              <button type="button" id="sim-check-option-b" class="btn btn-secondary btn-sm"></button>
+            </div>
+            <p id="sim-check-feedback" class="sim-check-feedback"></p>
+          </div>
+
+          <details class="sim-secondary sim-step-metrics">
+            <summary>Step data (optional)</summary>
+            <div class="sim-live-metrics" aria-label="Live step metrics">
+              <span>Comparisons <strong id="sim-metric-comps">0</strong></span>
+              <span><span id="sim-metric-moves-label">Movement steps</span> <strong id="sim-metric-moves">0</strong></span>
+              <span>Phase <strong id="sim-metric-phase">Initial State</strong></span>
+            </div>
+          </details>
+
+          <details id="sim-teaching-panel" class="sim-teaching-panel">
+            <summary>Why? Step details &amp; symbol key</summary>
+            <div class="sim-teach-grid">
+              <div class="sim-teach-item">
+                <span>Current state</span>
+                <strong id="sim-teach-state">—</strong>
+              </div>
+              <div class="sim-teach-item">
+                <span>Examining</span>
+                <strong id="sim-teach-examined">—</strong>
+              </div>
+              <div class="sim-teach-item">
+                <span>Condition</span>
+                <strong id="sim-teach-condition">—</strong>
+              </div>
+              <div class="sim-teach-item">
+                <span>Outcome</span>
+                <strong id="sim-teach-outcome">—</strong>
+              </div>
+              <div class="sim-teach-item">
+                <span>Change made</span>
+                <strong id="sim-teach-change">—</strong>
+              </div>
+              <div class="sim-teach-item">
+                <span>Still to examine</span>
+                <strong id="sim-teach-remaining">—</strong>
+              </div>
+              <div class="sim-teach-item sim-teach-item-wide">
+                <span>Sorted / complete</span>
+                <strong id="sim-teach-complete">—</strong>
+              </div>
+            </div>
+            <div id="sim-teaching-legend" class="sim-teaching-legend" aria-label="Symbol legend">—</div>
+          </details>
+
+          <details class="sim-advanced">
+            <summary>Data &amp; settings</summary>
+            <div class="sim-advanced-grid">
+              <div class="sim-advanced-field">
+                <span class="sim-advanced-label">Order</span>
+                <div class="mode-toggle-group" role="group" aria-label="Sorting Order Mode">
+                  <button type="button" id="sim-mode-asc" class="mode-toggle-btn active" aria-pressed="true">
+                    <span class="mode-arrow" aria-hidden="true">▲</span> Ascending
+                  </button>
+                  <button type="button" id="sim-mode-desc" class="mode-toggle-btn" aria-pressed="false">
+                    <span class="mode-arrow" aria-hidden="true">▼</span> Descending
+                  </button>
+                </div>
+              </div>
+
+              <div class="sim-advanced-field">
+                <label class="sim-advanced-label" for="sim-speed-select">Speed</label>
+                <select id="sim-speed-select">
+                  <option value="1600">Slow (1.6s)</option>
+                  <option value="900" selected>Normal (0.9s)</option>
+                  <option value="400">Fast (0.4s)</option>
+                </select>
+              </div>
+
+              <div class="sim-advanced-field">
+                <label class="sim-advanced-label" for="sim-input-dataset-select">Input data</label>
+                <select id="sim-input-dataset-select">
+                  <option value="ward_sample" selected>Ward sample [58, 24, 91, 12, 45]</option>
+                  <option value="random">Random</option>
+                  <option value="sorted">Already sorted</option>
+                  <option value="reversed">Reversed</option>
+                  <option value="nearly_sorted">Nearly sorted</option>
+                  <option value="duplicates">Duplicates</option>
+                </select>
+              </div>
+            </div>
+          </details>
+
+          <details class="sim-disclaimer">
+            <summary>About these teaching models</summary>
+            <p>
+              These animations use illustrative ward records to show how values compare and move. They are visual learning models, not Python's internal <code>sorted()</code> implementation. The Timsort tab is a simplified model of natural runs, short-run extension and merging; CPython also uses minrun sizing, a run stack and galloping optimizations.
+            </p>
+          </details>
+        </div>
+      </div>
+
+      <!-- Conceptual connection: an independent learning layer, not an algorithm. -->
+      <div id="sim-connection-panel" class="bridge-panel" role="tabpanel" aria-labelledby="tab-sim-connection" tabindex="0" style="display: none;">
+        <div class="bridge-head card">
+          <span class="bridge-eyebrow">Conceptual connection · before the Timsort Model</span>
+          <h3 id="bridge-title">Connecting the Ideas: From Insertion Sort and Merge Sort to TimSort</h3>
+          <p class="bridge-objective"><strong>Learning objective:</strong> Understand how TimSort combines the ideas of Insertion Sort and Merge Sort to efficiently sort partially ordered data.</p>
+          <p class="bridge-subtitle">This is a conceptual bridge, not another sorting algorithm. One set of ward records will carry us through all five stages.</p>
+        </div>
+
+        <div class="bridge-progress-wrap" aria-label="Conceptual connection progress">
+          <ol class="bridge-progress" id="bridge-progress-steps">
+            <li class="bridge-progress-step active" data-stage="0" aria-current="step"><span class="bridge-step-dot">A</span><span>The problem</span></li>
+            <li class="bridge-progress-step" data-stage="1"><span class="bridge-step-dot">B</span><span>Insertion idea</span></li>
+            <li class="bridge-progress-step" data-stage="2"><span class="bridge-step-dot">C</span><span>Merge idea</span></li>
+            <li class="bridge-progress-step" data-stage="3"><span class="bridge-step-dot">D</span><span>TimSort connection</span></li>
+            <li class="bridge-progress-step" data-stage="4"><span class="bridge-step-dot">E</span><span>Knowledge check</span></li>
+          </ol>
+          <div class="bridge-progress-bar" id="bridge-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20" aria-valuetext="Stage 1 of 5">
+            <div class="bridge-progress-fill" id="bridge-progress-fill"></div>
+          </div>
+        </div>
+
+        <div class="bridge-stage-card card" id="bridge-stage-card">
+          <div class="bridge-stage-meta">
+            <span class="bridge-stage-kicker" id="bridge-stage-kicker">Stage A · Understand the problem</span>
+            <span class="bridge-stage-counter" id="bridge-stage-counter">Stage 1 of 5</span>
+          </div>
+          <h4 id="bridge-stage-title">Real data is often partly ordered</h4>
+          <p id="bridge-stage-copy" class="bridge-stage-copy">Ward records may already arrive in useful runs: one shift might be recorded in arrival order, while another list is nearly ordered. A good sorting method should notice that instead of starting from nothing.</p>
+          <div id="bridge-visual" class="bridge-visual" aria-live="polite"></div>
+          <div class="bridge-explanation" aria-live="polite">
+            <span class="bridge-operation-label" id="bridge-operation-label">Why existing order matters</span>
+            <p id="bridge-explanation-text">The coloured groups are natural runs. Reusing this order is less work than rebuilding the whole list, and it is the starting point for TimSort.</p>
+          </div>
+          <div class="bridge-controls" role="group" aria-label="Conceptual connection controls">
+            <button type="button" id="bridge-prev-btn" class="btn btn-outline btn-sm" disabled>← Previous</button>
+            <button type="button" id="bridge-restart-btn" class="btn btn-outline btn-sm">↺ Restart</button>
+            <button type="button" id="bridge-next-btn" class="btn btn-primary btn-sm">Next stage →</button>
+            <button type="button" id="bridge-continue-btn" class="btn btn-secondary btn-sm" style="display: none;">Go to Timsort Model →</button>
+          </div>
+        </div>
+
+        <div id="bridge-check-panel" class="bridge-check card" style="display: none;" aria-live="polite">
+          <div class="bridge-check-head">
+            <span class="bridge-check-kicker">Stage E · Knowledge check</span>
+            <h4 id="bridge-check-question">Which statement best explains how TimSort uses the ideas from Insertion Sort and Merge Sort?</h4>
+          </div>
+          <div id="bridge-check-options" class="bridge-check-options" role="group" aria-label="Knowledge check answer options"></div>
+          <p id="bridge-check-feedback" class="bridge-check-feedback"></p>
+          <p id="bridge-complete-badge" class="bridge-complete-badge" hidden>✓ Connection understood — this learning step is complete.</p>
+        </div>
+      </div>
+
+      <div id="sim-comparison-panel" class="comparison-panel" role="tabpanel" aria-labelledby="tab-sim-comparison" tabindex="0" style="display: none;">
+        <div class="card comparison-intro-card">
+          <span class="comparison-eyebrow">Optional experiment · after the four algorithms</span>
+          <h3>Algorithm Comparison</h3>
+          <p id="comparison-purpose" class="comparison-purpose">
+            Different sorting algorithms can behave differently depending on the data they receive. Let's compare how they handle the same numbers.
+          </p>
+          <p class="comparison-subtitle">
+            Every algorithm gets the same 60-item dataset, so the comparison is meaningful. Choose a pattern below to run a fresh measurement; no results appear before that choice.
+          </p>
+          <div class="comp-dataset-toolbar" role="group" aria-label="Benchmark dataset">
+            <button class="comp-dataset-btn active" type="button" data-dataset="random" aria-pressed="true">
+              <strong>Random-like</strong><span>Mixed order, with no obvious shortcut.</span>
+            </button>
+            <button class="comp-dataset-btn" type="button" data-dataset="sorted" aria-pressed="false">
+              <strong>Already sorted</strong><span>Lowest to highest already, so little work remains.</span>
+            </button>
+            <button class="comp-dataset-btn" type="button" data-dataset="reversed" aria-pressed="false">
+              <strong>Reversed</strong><span>Highest to lowest; many pairs start in the wrong order.</span>
+            </button>
+            <button class="comp-dataset-btn" type="button" data-dataset="nearly_sorted" aria-pressed="false">
+              <strong>Nearly sorted</strong><span>Almost ordered, with only a few neighbouring pairs swapped.</span>
+            </button>
+            <button class="comp-dataset-btn" type="button" data-dataset="duplicates" aria-pressed="false">
+              <strong>Duplicates</strong><span>Only seven different values, repeated many times.</span>
+            </button>
+          </div>
+          <p id="comparison-pattern-help" class="comparison-pattern-help" aria-live="polite">
+            Currently selected: random-like — mixed order, with no obvious shortcut.
+          </p>
+          <div id="comparison-sample" class="comparison-sample" aria-live="polite">Choose a pattern to see its input sample and measured results.</div>
+        </div>
+
+        <div class="card comparison-results-card">
+          <p id="comparison-status-msg" class="comparison-status" aria-live="polite">
+            Choose a data pattern to run a benchmark.
+          </p>
+          <div id="comparison-loading" class="comparison-loading" role="status" aria-live="polite" hidden>
+            <span class="comparison-spinner" aria-hidden="true"></span>
+            Measuring four algorithms on 60 records…
+          </div>
+          <div id="comparison-results" class="comparison-results" aria-live="polite"></div>
+          <div id="comparison-chart" class="comparison-chart" role="img" aria-label="Comparisons made by each algorithm"></div>
+          <p id="comparison-interpretation" class="comparison-interpretation" aria-live="polite"></p>
+          <p id="comparison-success-badge" class="comparison-success-badge" hidden>
+            Investigation step complete — these results came from the local benchmark.
+          </p>
+
+          <details id="comparison-advanced" class="comparison-advanced">
+            <summary>Advanced results and technical details</summary>
+            <div class="comparison-table-wrap">
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Algorithm</th>
+                    <th>Comparisons</th>
+                    <th>Movement (algorithm-specific)</th>
+                    <th>Time (measured)</th>
+                    <th>Time complexity</th>
+                    <th>Space</th>
+                    <th>Stability</th>
+                  </tr>
+                </thead>
+                <tbody id="comparison-table-body">
+                  <tr><td colspan="7" class="comparison-empty">No benchmark results yet.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="comparison-notes">
+              <p><strong>Comparison</strong> = one invocation of a rich comparison operator on an instrumented educational value.</p>
+              <p><strong>Movement</strong> is not one shared metric: Bubble counts swaps, Insertion counts shifts plus placements, Merge counts auxiliary array writes, and CPython does not expose Timsort's internal movement count.</p>
+              <p><strong>Time</strong> is a single-shot local measurement. The pure-Python educational algorithms and CPython's built-in <code>sorted()</code> are not a like-for-like C-versus-Python race, so timing is not a rigorous performance ranking.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <div style="text-align: right; margin-top: 1.75rem;">
+        <button type="button" id="sim-proceed-btn" class="btn btn-primary btn-lg">
+          Practise with Python →
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 6: LEARN PYTHON sorted()
+         ====================================================================== -->
+    <section id="screen-6" class="screen-section" aria-labelledby="title-screen-6">
+      <span class="section-tag">Practise · Python</span>
+      <h2 id="title-screen-6" class="section-title">Mastering Python's sorted()</h2>
+      <p class="section-subtitle">
+        You now know what sorting operations do. Next, see how Python expresses the same ordered result in one line. Explore each control and compare the new list with the untouched original.
+      </p>
+
+      <!-- Key Concept Cards Grid -->
+      <div class="concept-grid">
+        <!-- Concept 1: Ascending default -->
+        <div class="card">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem; color: var(--color-primary); display: flex; align-items: center; gap: 0.5rem;">
+            <span>⬆</span> Default: Ascending Order
+          </h3>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem;">
+            When you call <code>sorted(my_list)</code>, Python orders values from <strong>smallest to largest</strong>.
+          </p>
+          <div class="code-card">
+            <button type="button" class="btn btn-outline btn-sm btn-copy-code" data-target="code-sample-1" style="position: absolute; top: 8px; right: 8px; font-size: 0.7rem; color: #cbd5e1; border-color: #475569;">Copy</button>
+            <pre id="code-sample-1"><code><span class="code-comment"># List of patient arrivals</span>
+numbers = [<span class="code-num">23</span>, <span class="code-num">8</span>, <span class="code-num">41</span>, <span class="code-num">15</span>, <span class="code-num">3</span>]
+
+result = <span class="code-fn">sorted</span>(numbers)
+<span class="code-fn">print</span>(result)
+
+<span class="code-comment"># Output: [3, 8, 15, 23, 41]</span></code></pre>
+          </div>
+        </div>
+
+        <!-- Concept 2: Descending with reverse=True -->
+        <div class="card">
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.75rem; color: #b45309; display: flex; align-items: center; gap: 0.5rem;">
+            <span>⬇</span> Descending with reverse=True
+          </h3>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem;">
+            Pass the argument <code>reverse=True</code> to order values from <strong>largest to smallest</strong>.
+          </p>
+          <div class="code-card">
+            <button type="button" class="btn btn-outline btn-sm btn-copy-code" data-target="code-sample-2" style="position: absolute; top: 8px; right: 8px; font-size: 0.7rem; color: #cbd5e1; border-color: #475569;">Copy</button>
+            <pre id="code-sample-2"><code><span class="code-comment"># Urgent cases first</span>
+numbers = [<span class="code-num">23</span>, <span class="code-num">8</span>, <span class="code-num">41</span>, <span class="code-num">15</span>, <span class="code-num">3</span>]
+
+result = <span class="code-fn">sorted</span>(numbers, <span class="code-param">reverse</span>=<span class="code-keyword">True</span>)
+<span class="code-fn">print</span>(result)
+
+<span class="code-comment"># Output: [41, 23, 15, 8, 3]</span></code></pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- Essential Distinction: Immutability -->
+      <div class="card" style="background: #f0fdf4; border-color: #bbf7d0; margin-bottom: 2rem;">
+        <h3 style="color: #166534; font-size: 1.15rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+          🛡️ Crucial Principle: Original Data is Never Modified!
+        </h3>
+        <p style="color: #14532d; font-size: 0.95rem; line-height: 1.6;">
+          <code>sorted()</code> does <strong>NOT</strong> change the original list. As a careful clerk might keep an original ledger intact while preparing a fresh sorted copy, Python creates and returns an entirely <strong>new list</strong>, leaving your original records completely intact.
+        </p>
+      </div>
+
+      <!-- Interactive 3-Column Pipeline Demo -->
+      <div class="interactive-demo-tray">
+        <div class="learn-tray-header">
+          <h4 style="font-size: 1.05rem; font-weight: 700;">Live Visual Pipeline</h4>
+          <div class="learn-tray-controls">
+            <label for="learn-dataset-select" style="font-size: 0.85rem; font-weight: 600;">Data:</label>
+            <select id="learn-dataset-select" style="padding: 0.3rem 0.6rem; border-radius: var(--radius-sm); border: 1px solid var(--border-light);">
+              <option value="admissions">Patient Admissions [23, 8, 41, 15, 3]</option>
+              <option value="blankets">Blanket Supplies [85, 12, 64, 45, 9]</option>
+              <option value="days">Recovery Days [14, 28, 7, 3, 21]</option>
+              <option value="wards">Ward Names (key=len)</option>
+              <option value="mixed_names">Mixed-case Names (key=str.lower)</option>
+              <option value="records">Hospital Records (dicts)</option>
+            </select>
+            <button type="button" id="learn-toggle-asc" class="btn btn-primary btn-sm" aria-pressed="true">Ascending</button>
+            <button type="button" id="learn-toggle-desc" class="btn btn-outline btn-sm" aria-pressed="false">reverse=True</button>
+          </div>
+        </div>
+
+        <div class="learn-control-row" role="group" aria-label="Sorting statement and key options">
+          <div class="mode-toggle-group" role="group" aria-label="sorted() versus list.sort()">
+            <button type="button" id="learn-mode-sorted" class="mode-toggle-btn active" aria-pressed="true">sorted() → new list</button>
+            <button type="button" id="learn-mode-sort" class="mode-toggle-btn" aria-pressed="false">.sort() → in-place</button>
+          </div>
+          <div class="mode-toggle-group" role="group" aria-label="Key function">
+            <button type="button" id="learn-key-none" class="mode-toggle-btn active" data-key-mode="none" aria-pressed="true">No key</button>
+            <button type="button" id="learn-key-len" class="mode-toggle-btn" data-key-mode="len" aria-pressed="false">key=len</button>
+            <button type="button" id="learn-key-lower" class="mode-toggle-btn" data-key-mode="lower" aria-pressed="false">key=str.lower</button>
+          </div>
+        </div>
+
+        <div class="pipeline-view">
+          <div class="pipeline-node" id="pipeline-original-box">
+            <!-- Rendered via pythonLearn.js -->
+          </div>
+          <div class="pipeline-arrow" style="font-size: 1.5rem;">➔</div>
+          <div class="pipeline-node" style="background: #0f172a; color: #f8fafc; font-family: var(--font-mono);">
+            <div style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 0.25rem;">Python Statement</div>
+            <div id="pipeline-code-display" style="font-size: 1rem; font-weight: 700;">
+              sorted(admissions)
+            </div>
+          </div>
+          <div class="pipeline-arrow" style="font-size: 1.5rem;">➔</div>
+          <div class="pipeline-node" id="pipeline-result-box">
+            <!-- Rendered via pythonLearn.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Stability demonstration -->
+      <div class="card" style="margin-top: 1.5rem; margin-bottom: 2rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.75rem;">
+          <h3 style="font-size: 1.1rem; color: var(--color-primary);">Stable Sorting: Equal Keys Keep Their Arrival Order</h3>
+          <button type="button" id="btn-toggle-stability" class="btn btn-outline btn-sm" aria-pressed="false">▶ Sort by Urgency (sorted())</button>
+        </div>
+        <div id="stability-cards-container" class="stability-cards"></div>
+        <div id="stability-status-text" class="feedback-box show" style="margin-top: 0.75rem;" aria-live="polite"></div>
+      </div>
+
+      <div class="screen-proceed-row">
+        <span id="learn-progress-hint" class="progress-hint" aria-live="polite"></span>
+        <button type="button" id="learn-proceed-btn" class="btn btn-primary btn-lg">
+          Practice Python Exercises →
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 7: PYTHON INTERACTIVE EXERCISES & LIVE RUNNER
+         ====================================================================== -->
+    <section id="screen-7" class="screen-section" aria-labelledby="title-screen-7">
+      <span class="section-tag">Play · Knowledge Check</span>
+      <h2 id="title-screen-7" class="section-title">Test Your Python Sorting Knowledge</h2>
+      <p class="section-subtitle">
+        Play with your understanding: first apply the operations you watched, then check the Python ideas from the previous screen. Feedback explains the misconception in each wrong answer so you can retry.
+      </p>
+
+      <p class="stage-link">All hospital numbers in these questions are illustrative practice data, not historical records.</p>
+
+      <!-- Exercise 1: Predict Output MCQ -->
+      <div class="exercise-card">
+        <div class="exercise-question">
+          1. Predict the Output: What will this Python code print?
+        </div>
+        <div class="code-card" style="margin-bottom: 1rem;">
+          <pre><code>days = [<span class="code-num">14</span>, <span class="code-num">3</span>, <span class="code-num">28</span>, <span class="code-num">7</span>]
+<span class="code-fn">print</span>(<span class="code-fn">sorted</span>(days))</code></pre>
+        </div>
+        <div class="options-list">
+          <button type="button" class="option-btn ex1-option" data-option="A">
+            <code>[3, 7, 14, 28]</code>
+          </button>
+          <button type="button" class="option-btn ex1-option" data-option="B">
+            <code>[28, 14, 7, 3]</code>
+          </button>
+          <button type="button" class="option-btn ex1-option" data-option="C">
+            <code>[14, 3, 28, 7]</code>
+          </button>
+          <button type="button" class="option-btn ex1-option" data-option="D">
+            <code>[3, 14, 7, 28]</code>
+          </button>
+        </div>
+        <div id="ex1-feedback" class="feedback-box" aria-live="polite"></div>
+      </div>
+
+      <!-- Exercise 2: Fill in the Blank -->
+      <div class="exercise-card">
+        <div class="exercise-question">
+          2. Complete the Statement: Sort the patient counts in descending order (highest first).
+        </div>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+          Fill in the missing argument inside the parentheses:
+        </p>
+        <div class="code-card" style="margin-bottom: 1rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+          <span>counts = [12, 85, 42]</span><br>
+          <span>result = sorted(counts, </span>
+          <input type="text" id="ex2-input" placeholder="argument" style="background: #1e293b; border: 1px solid #475569; color: #fef08a; font-family: var(--font-mono); font-size: 0.95rem; padding: 0.25rem 0.5rem; border-radius: 4px; width: 140px;">
+          <span>)</span>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button type="button" id="ex2-check-btn" class="btn btn-primary btn-sm">Check Answer</button>
+          <button type="button" id="ex2-hint-btn" class="btn btn-outline btn-sm">Hint</button>
+        </div>
+        <div id="ex2-feedback" class="feedback-box" aria-live="polite"></div>
+      </div>
+
+      <!-- Exercise 3: Concept / Immutability Check -->
+      <div class="exercise-card">
+        <div class="exercise-question">
+          3. Immutability Principle: What happens to the original list?
+        </div>
+        <div class="code-card" style="margin-bottom: 1rem;">
+          <pre><code>records = [<span class="code-num">50</span>, <span class="code-num">10</span>, <span class="code-num">30</span>]
+sorted_records = <span class="code-fn">sorted</span>(records)</code></pre>
+        </div>
+        <div class="options-list">
+          <button type="button" class="option-btn ex3-option" data-option="A">
+            <code>records</code> remains <code>[50, 10, 30]</code>; <code>sorted_records</code> is a new list <code>[10, 30, 50]</code>.
+          </button>
+          <button type="button" class="option-btn ex3-option" data-option="B">
+            <code>records</code> is permanently modified to <code>[10, 30, 50]</code>.
+          </button>
+          <button type="button" class="option-btn ex3-option" data-option="C">
+            Both lists are emptied.
+          </button>
+        </div>
+        <div id="ex3-feedback" class="feedback-box" aria-live="polite"></div>
+      </div>
+
+      <!-- Exercise 4: key=len fill-in -->
+      <div class="exercise-card">
+        <div class="exercise-question">
+          4. Custom Key: Sort ward names by name length.
+        </div>
+        <div class="code-card" style="margin-bottom: 1rem;">
+          <pre><code>wards = [<span class="code-str">"ICU"</span>, <span class="code-str">"Triage"</span>, <span class="code-str">"Surgical Ward"</span>]
+shortest_first = sorted(wards, </code><span style="color: #fef08a; font-family: var(--font-mono);">______</span><code>)</code></pre>
+        </div>
+        <div class="code-card" style="margin-bottom: 1rem; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+          <span>sorted(wards, </span>
+          <input type="text" id="ex4-input" placeholder="key argument" aria-label="Key argument" style="background: #1e293b; border: 1px solid #475569; color: #fef08a; font-family: var(--font-mono); font-size: 0.95rem; padding: 0.25rem 0.5rem; border-radius: 4px; width: 150px;">
+          <span>)</span>
+        </div>
+        <button type="button" id="btn-check-ex4" class="btn btn-primary btn-sm">Check Answer</button>
+        <div id="ex4-feedback" class="feedback-box" aria-live="polite"></div>
+      </div>
+
+      <!-- Exercise 5: lambda key MCQ -->
+      <div class="exercise-card">
+        <div class="exercise-question">
+          5. Which key extracts the <code>patients</code> value from each ward record for sorting?
+        </div>
+        <div class="options-list">
+          <button type="button" class="option-btn ex5-option" data-option="A"><code>key=w["patients"]</code></button>
+          <button type="button" class="option-btn ex5-option" data-option="B"><code>key=lambda w: w</code></button>
+          <button type="button" class="option-btn ex5-option" data-option="C"><code>key=lambda w: w["patients"]</code></button>
+        </div>
+        <div class="feedback-box" aria-live="polite"></div>
+      </div>
+
+      <!-- Exercise 6: stability MCQ -->
+      <div class="exercise-card">
+        <div class="exercise-question">
+          6. Two patients have the same urgency. What does a stable sort guarantee?
+        </div>
+        <div class="options-list">
+          <button type="button" class="option-btn ex6-option" data-option="A">They keep their original relative order.</button>
+          <button type="button" class="option-btn ex6-option" data-option="B">They are always removed from the result.</button>
+          <button type="button" class="option-btn ex6-option" data-option="C">Their keys are changed to make them different.</button>
+        </div>
+        <div class="feedback-box" aria-live="polite"></div>
+      </div>
+
+      <!-- Exercise 7: CPython algorithm MCQ -->
+      <div class="exercise-card">
+        <div class="exercise-question">
+          7. Which algorithm does CPython use internally for <code>sorted()</code> and <code>list.sort()</code>?
+        </div>
+        <div class="options-list">
+          <button type="button" class="option-btn ex7-option" data-option="A">Bubble Sort</button>
+          <button type="button" class="option-btn ex7-option" data-option="B">Timsort</button>
+          <button type="button" class="option-btn ex7-option" data-option="C">QuickSort</button>
+        </div>
+        <div class="feedback-box" aria-live="polite"></div>
+      </div>
+
+      <!-- Exercise 8: Bubble operation (reuses the Visualize stage) -->
+      <div class="exercise-card exercise-link">
+        <div class="exercise-question">
+          8. From Visualize: Bubble Sort finds two neighbouring records out of order. What happens next?
+        </div>
+        <div class="options-list">
+          <button type="button" class="option-btn ex8-option" data-option="A">Swap only that adjacent pair, then keep scanning.</button>
+          <button type="button" class="option-btn ex8-option" data-option="B">Move the larger record straight to the end in one jump.</button>
+        </div>
+        <div id="ex8-feedback" class="feedback-box" aria-live="polite"></div>
+      </div>
+
+      <!-- Exercise 9: Insertion operation -->
+      <div class="exercise-card exercise-link">
+        <div class="exercise-question">
+          9. From Visualize: Insertion Sort holds a key and shifts a larger record right. Why is the shift needed?
+        </div>
+        <div class="options-list">
+          <button type="button" class="option-btn ex9-option" data-option="A">It opens the stable slot for the held key without losing the larger record.</button>
+          <button type="button" class="option-btn ex9-option" data-option="B">It permanently removes the larger record from the prefix.</button>
+        </div>
+        <div id="ex9-feedback" class="feedback-box" aria-live="polite"></div>
+      </div>
+
+      <!-- Exercise 10: Merge operation -->
+      <div class="exercise-card exercise-link">
+        <div class="exercise-question">
+          10. From Visualize: during a merge, one ordered side becomes empty. What should happen next?
+        </div>
+        <div class="options-list">
+          <button type="button" class="option-btn ex10-option" data-option="A">Copy the remaining records from the other side without more comparisons.</button>
+          <button type="button" class="option-btn ex10-option" data-option="B">Split the remaining records again and merge later.</button>
+        </div>
+        <div id="ex10-feedback" class="feedback-box" aria-live="polite"></div>
+      </div>
+
+      <!-- Exercise 11: Timsort run operation -->
+      <div class="exercise-card exercise-link">
+        <div class="exercise-question">
+          11. From Visualize: the Timsort teaching model finds a descending run while the goal is ascending order. What happens first?
+        </div>
+        <div class="options-list">
+          <button type="button" class="option-btn ex11-option" data-option="A">Reverse the run so it matches the requested order.</button>
+          <button type="button" class="option-btn ex11-option" data-option="B">Ignore the run and sort everything with adjacent swaps.</button>
+        </div>
+        <div id="ex11-feedback" class="feedback-box" aria-live="polite"></div>
+      </div>
+
+      <!-- Exercise 12: Real Python Execution Playground -->
+      <div class="exercise-card">
+        <div class="exercise-question" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+          <span>12. Live Terminal: Execute Genuine Python Code</span>
+          <span id="terminal-status-indicator" class="terminal-status-indicator is-ready" style="font-size: 0.8rem; font-weight: 700;">Ready (local server)</span>
+        </div>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem;">
+          This code runs directly on your local Python server. Try editing the list or test different sorting arguments!
+        </p>
+
+        <!-- Presets Bar -->
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
+          <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-light); align-self: center;">Presets:</span>
+          <button id="btn-preset-asc" class="btn btn-primary active btn-sm terminal-preset-btn" type="button" aria-pressed="true">Ascending Sort</button>
+          <button id="btn-preset-desc" class="btn btn-outline btn-sm terminal-preset-btn" type="button" aria-pressed="false">Descending Sort</button>
+          <button id="btn-preset-imm" class="btn btn-outline btn-sm terminal-preset-btn" type="button" aria-pressed="false">list.sort()</button>
+          <button id="btn-preset-key-len" class="btn btn-outline btn-sm terminal-preset-btn" type="button" aria-pressed="false">key=len</button>
+          <button id="btn-preset-key-lambda" class="btn btn-outline btn-sm terminal-preset-btn" type="button" aria-pressed="false">key=lambda</button>
+          <button id="btn-preset-stability" class="btn btn-outline btn-sm terminal-preset-btn" type="button" aria-pressed="false">Stability</button>
+          <button id="btn-reset-terminal-code" class="btn btn-outline btn-sm" type="button">↺ Reset Code</button>
+        </div>
+
+        <div class="terminal-wrapper">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="terminal-dot td-red"></span>
+              <span class="terminal-dot td-yellow"></span>
+              <span class="terminal-dot td-green"></span>
+            </div>
+            <div class="terminal-title">python3 - scutari_investigation.py</div>
+            <div style="font-size: 0.75rem; color: #64748b;">Python 3 Backend</div>
+          </div>
+          <textarea id="terminal-code-input" class="code-editor-area" spellcheck="false" aria-label="Python code editor"># Scutari Hospital Blanket Supplies across 5 wards
+supplies = [150, 45, 230, 80, 15]
+
+# Sort from lowest supply to highest supply (Ascending)
+sorted_supplies = sorted(supplies)
+
+print("Original Supplies:", supplies)
+print("Lowest Supplies First:", sorted_supplies)</textarea>
+          <div class="terminal-actions">
+            <button type="button" id="btn-run-code" class="btn btn-success btn-sm">
+              ▶ Run Python Code
+            </button>
+            <span style="font-size: 0.75rem; color: #94a3b8;">
+              Localhost only • 2.5s timeout • Restricted educational runner (not a secure sandbox)
+            </span>
+          </div>
+          <div id="terminal-output-display" class="terminal-output" aria-live="polite">Click "Run Python Code" to execute...</div>
+        </div>
+      </div>
+
+      <div class="screen-proceed-row" style="margin-top: 1.5rem;">
+        <span id="exercises-progress-hint" class="progress-hint" aria-live="polite"></span>
+        <button type="button" id="exercises-proceed-btn" class="btn btn-secondary btn-lg">
+          Proceed to Final Investigation →
+        </button>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCREEN 8: FINAL INVESTIGATION & BADGE PRESENTATION
+         ====================================================================== -->
+    <section id="screen-8" class="screen-section" aria-labelledby="title-screen-8">
+      <span class="section-tag">Mission · Apply</span>
+      <h2 id="title-screen-8" class="section-title">The Scutari Barracks Emergency</h2>
+      <p class="section-subtitle">
+        You have visualized the operations, practised them in Python and played the checks. Now combine them: choose a priority order, verify it with Python and explain your decision.
+      </p>
+      <p class="stage-link">Illustrative scenario inspired by hospital supply planning. The ward deficit numbers below are fictional practice data, not a historical record.</p>
+
+      <!-- Mission Stage 1: Strategy Decision -->
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem;">
+          Step 1: Choose the Priority Strategy
+        </h3>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem;">
+          The illustrative blanket deficits across 5 wards are:
+          <strong>Ward A (38), Ward B (112), Ward C (15), Ward D (75), Ward E (94)</strong>.
+          Which sorting order should be applied so that the wards in greatest danger receive emergency supplies first?
+        </p>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button type="button" class="btn btn-outline mission-strat-btn" data-strat="ascending">
+            Ascending Order: <code>sorted(shortages)</code>
+          </button>
+          <button type="button" class="btn btn-outline mission-strat-btn" data-strat="descending">
+            Descending Order: <code>sorted(shortages, reverse=True)</code>
+          </button>
+        </div>
+        <div id="mission-strategy-feedback" class="feedback-box" aria-live="polite"></div>
+      </div>
+
+      <!-- Mission Stage 2: Execute Sorting -->
+      <div class="card" id="mission-step-2" style="margin-bottom: 1.5rem; display: none;">
+        <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem;">
+          Step 2: Calculate Priority Order with Python
+        </h3>
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem;">
+          Execute the sorting operation using Python's built-in <code>sorted(..., reverse=True)</code>:
+        </p>
+        <button type="button" id="mission-run-python-btn" class="btn btn-primary btn-sm" style="margin-bottom: 1rem;">
+          ▶ Execute Emergency Sort
+        </button>
+        <div class="terminal-wrapper" style="margin-top: 0.5rem;">
+          <pre id="mission-python-output" class="terminal-output mission-python-output" style="min-height: 50px;" aria-live="polite">Awaiting execution...</pre>
+        </div>
+      </div>
+
+      <!-- Mission Stage 3: Analytical Debrief Questions -->
+      <div class="card" id="mission-step-3" style="margin-bottom: 1.5rem; display: none;">
+        <h3 style="font-size: 1.2rem; margin-bottom: 0.75rem;">
+          Step 3: Investigation Debrief
+        </h3>
+        <div id="mission-requirements-list" class="mission-requirements-list" aria-live="polite"></div>
+
+        <div style="margin-bottom: 1.25rem;">
+          <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem;">
+            Q1: According to your descending sorted list <code>[112, 94, 75, 38, 15]</code>, which ward receives supplies first?
+          </p>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button type="button" class="btn btn-outline btn-sm mission-q1-btn" data-val="A">Ward A (38)</button>
+            <button type="button" class="btn btn-outline btn-sm mission-q1-btn" data-val="B">Ward B (112)</button>
+            <button type="button" class="btn btn-outline btn-sm mission-q1-btn" data-val="C">Ward C (15)</button>
+          </div>
+          <div id="mission-q1-feedback" class="feedback-box" aria-live="polite"></div>
+        </div>
+
+        <div>
+          <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem;">
+            Q2: In the Visualize stage, equal values kept their original arrival order. What is that property called?
+          </p>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button type="button" class="btn btn-outline btn-sm mission-q2-btn" data-val="STABLE">Stability</button>
+            <button type="button" class="btn btn-outline btn-sm mission-q2-btn" data-val="MUTATE">Mutation</button>
+          </div>
+          <div id="mission-q2-feedback" class="feedback-box" aria-live="polite"></div>
+        </div>
+
+        <div style="margin-top: 1.25rem;">
+          <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem;">
+            Q3: Which sorting algorithm does CPython use internally for <code>sorted()</code>?
+          </p>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="btn btn-outline btn-sm mission-q3-btn" data-val="BUBBLE" type="button">Bubble Sort</button>
+            <button class="btn btn-outline btn-sm mission-q3-btn" data-val="TIMSORT" type="button">Timsort</button>
+            <button class="btn btn-outline btn-sm mission-q3-btn" data-val="QUICKSORT" type="button">QuickSort</button>
+          </div>
+          <div id="mission-q3-feedback" class="feedback-box" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <!-- Award Celebration & Badge -->
+      <div id="mission-award-area" class="badge-celebration-box" style="display: none;" aria-live="polite">
+        <div class="badge-art" id="mission-badge-art">
+          <!-- Rendered via finalMission.js -->
+        </div>
+        <span class="section-tag" style="background: #fef3c7; color: #92400e;">Mission Accomplished</span>
+        <h2 style="font-size: 2rem; font-weight: 800; margin: 0.5rem 0 1rem; color: var(--text-main);">
+          Sorting Investigator — Mission Complete
+        </h2>
+        <p style="font-size: 1.05rem; color: var(--text-muted); max-width: 580px; margin: 0 auto;">
+          You successfully organized Scutari Hospital's records, discovered how sorting reveals hidden patterns, and mastered Python's <code>sorted()</code> function!
+        </p>
+
+        <!-- Summary of Skills Learned -->
+        <div class="skills-learned-grid">
+          <div class="skill-pill">
+            <span style="color: var(--color-success); font-size: 1.25rem;">✓</span>
+            <div>
+              <strong>Ascending Order</strong>
+              <div style="font-size: 0.75rem; color: var(--text-light);">Smallest to largest by default</div>
+            </div>
+          </div>
+          <div class="skill-pill">
+            <span style="color: var(--color-success); font-size: 1.25rem;">✓</span>
+            <div>
+              <strong>Descending Order</strong>
+              <div style="font-size: 0.75rem; color: var(--text-light);">Largest to smallest with reverse=True</div>
+            </div>
+          </div>
+          <div class="skill-pill">
+            <span style="color: var(--color-success); font-size: 1.25rem;">✓</span>
+            <div>
+              <strong>List Immutability</strong>
+              <div style="font-size: 0.75rem; color: var(--text-light);">Original records are safely preserved</div>
+            </div>
+          </div>
+          <div class="skill-pill">
+            <span style="color: var(--color-success); font-size: 1.25rem;">✓</span>
+            <div>
+              <strong>Historical Context</strong>
+              <div style="font-size: 0.75rem; color: var(--text-light);">Organized data empowered sanitation reforms</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <button type="button" id="mission-print-btn" class="btn btn-outline">
+            🖨️ Print / Save Summary
+          </button>
+          <button type="button" id="mission-restart-btn" class="btn btn-primary">
+            ↺ Restart Adventure
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================
+       MODAL: HISTORICAL NOTES & ETHICAL CONTEXT
+       ====================================================================== -->
+  <div id="modal-history" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-history-title">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-history-title" class="modal-title">Historical Notes & Ethical Context</h3>
+        <button type="button" id="modal-history-close" class="modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+      <div style="font-size: 0.95rem; color: var(--text-main); line-height: 1.6;">
+        <h4 style="color: var(--color-primary); margin-bottom: 0.35rem;">Florence Nightingale & Scutari Hospital (1854–1856)</h4>
+        <p style="margin-bottom: 1rem;">
+          In November 1854, Florence Nightingale and 38 volunteer nurses arrived at the British Army Barracks Hospital at Scutari (modern-day Üsküdar, Istanbul) during the Crimean War. They found wards overwhelmed by thousands of casualties, rampant cholera, typhus, and dysentery, contaminated water supplies, and severe shortages of food, medicine, and clean linens.
+        </p>
+
+        <h4 style="color: var(--color-primary); margin-bottom: 0.35rem;">The Sanitary Commission of 1855</h4>
+        <p style="margin-bottom: 1rem;">
+          In March 1855, the British government dispatched the Sanitary Commission, led by Dr. John Sutherland and engineer Robert Rawlinson. They flushed out blocked sewers, cleared cesspools underneath the barracks, improved ventilation, and provided clean water. Following these major structural and hygienic interventions, mortality rates plummeted drastically from over 40% to approximately 2%.
+        </p>
+
+        <h4 style="color: var(--color-primary); margin-bottom: 0.35rem;">The Role of Statistics & Data Organisation</h4>
+        <p style="margin-bottom: 1rem;">
+          Nightingale collected detailed clinical data during her time in Scutari. Upon returning to England, she collaborated with Dr. William Farr, a pioneer in medical statistics, to analyze mortality causes and design her famous polar area diagrams ("Rose charts"). These charts clearly proved to the British Parliament that preventable camp illnesses—not battlefield injuries—were the primary cause of British soldiers' deaths.
+        </p>
+
+        <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius-md); padding: 0.85rem; font-size: 0.85rem; color: #92400e;">
+          <strong>Important Historical Responsibility Note:</strong>
+          Organising data did not cure cholera or typhus on its own. Sanitation reforms, sewage flushing, fresh air, clean water, and hospital hygiene saved lives. However, meticulously recorded and sorted data provided the irrefutable evidence required to convince military and political leadership to implement and sustain those life-saving reforms.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL: RESET PROGRESS CONFIRMATION
+       ====================================================================== -->
+  <div id="modal-reset" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-reset-title">
+    <div class="modal-content" style="max-width: 440px; text-align: center;">
+      <h3 id="modal-reset-title" class="modal-title" style="margin-bottom: 0.75rem;">Reset Investigation Progress?</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+        This will clear your completed screens and return you to the opening scene. You can replay the entire sorting adventure at any time.
+      </p>
+      <div style="display: flex; justify-content: center; gap: 1rem;">
+        <button type="button" id="modal-cancel-reset-btn" class="btn btn-secondary">Cancel</button>
+        <button type="button" id="modal-confirm-reset-btn" class="btn btn-primary" style="background-color: var(--color-danger); border-color: var(--color-danger);">
+          Yes, Reset Progress
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/randomize.js?v=2.2"></script>
+  <script src="assets/illustrations.js?v=2.2"></script>
+  <script src="js/story.js?v=2.2"></script>
+  <script src="js/evidence.js?v=2.2"></script>
+  <script src="js/sortGame.js?v=2.2"></script>
+  <script src="js/simulator.js?v=2.2"></script>
+  <script src="js/timsortBridge.js?v=2.2"></script>
+  <script src="js/pythonLearn.js?v=2.2"></script>
+  <script src="js/exercises.js?v=2.2"></script>
+  <script src="js/finalMission.js?v=2.2"></script>
+  <script src="js/app.js?v=2.2"></script>
+</body>
+</html>
