@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PyBe — Async / Await & asyncio: The Skeld</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<div id="app">
+
+  <!-- ══════════════════════════════════════════════════════════
+       AMONG US CINEMATIC INTRO SCREEN (OVERLAY)
+       ══════════════════════════════════════════════════════════ -->
+  <div id="intro-screen" class="intro-overlay">
+    
+    <!-- Phase 1: Iconic "SHHHHHHH!" Screen -->
+    <div id="intro-shhh-phase" class="intro-phase">
+      <div class="shhh-box">
+        <svg class="shhh-crew-svg" viewBox="0 0 160 190" xmlns="http://www.w3.org/2000/svg">
+          <!-- Backpack -->
+          <path d="M 32 58 C 14 58, 14 116, 32 116 L 46 116 L 46 58 Z" fill="#880a0a" stroke="#101016" stroke-width="7"/>
+          <!-- Legs -->
+          <path d="M 46 128 L 46 158 C 46 168, 68 168, 68 158 L 68 132" fill="#880a0a" stroke="#101016" stroke-width="7"/>
+          <path d="M 84 128 L 84 158 C 84 168, 106 168, 106 158 L 106 128" fill="#c51111" stroke="#101016" stroke-width="7"/>
+          <!-- Body -->
+          <path d="M 46 64 C 46 22, 106 22, 106 64 C 106 82, 108 106, 104 132 L 46 132 Z" fill="#c51111" stroke="#101016" stroke-width="7"/>
+          <!-- Visor -->
+          <path d="M 68 46 L 112 46 C 128 46, 128 82, 112 82 L 68 82 C 52 82, 52 46, 68 46 Z" fill="#6dcff6" stroke="#101016" stroke-width="7"/>
+          <ellipse cx="88" cy="54" rx="14" ry="5" fill="#ffffff" opacity="0.8" transform="rotate(-6 88 54)"/>
+          <!-- Finger to visor (Shhh gesture) -->
+          <path d="M 94 88 L 94 60 C 94 54, 104 54, 104 60 L 104 88 Z" fill="#c51111" stroke="#101016" stroke-width="6"/>
+          <ellipse cx="99" cy="58" rx="5" ry="5" fill="#eb2222"/>
+        </svg>
+        <div class="shhh-text-banner">SHHHHHHH!</div>
+      </div>
+    </div>
+
+    <!-- Phase 2: Role Reveal (CREWMATE // There is 1 Impostor among us) -->
+    <div id="intro-role-phase" class="intro-phase" style="display: none;">
+      <div class="role-reveal-box">
+        <h1 class="role-main-title">CREWMATE</h1>
+        <div class="role-sub-title">
+          There is <span class="impostor-accent-text">1 Impostor</span> among us
+        </div>
+
+        <!-- The Lineup (Cyan Player in center, Green on left, Red on right) -->
+        <div class="crew-lineup-stage">
+          
+          <!-- Green Crewmate (Left) -->
+          <div class="lineup-crewmate crew-green">
+            <svg viewBox="0 0 140 170" width="80" height="100">
+              <path d="M 28 50 C 12 50 12 110 28 110 L 38 110 L 38 50 Z" fill="#0f5c1a" stroke="#101016" stroke-width="6"/>
+              <path d="M 40 120 L 40 148 C 40 158 60 158 60 148 L 60 125" fill="#0f5c1a" stroke="#101016" stroke-width="6"/>
+              <path d="M 78 122 L 78 148 C 78 158 98 158 98 148 L 98 120" fill="#1b9a2d" stroke="#101016" stroke-width="6"/>
+              <path d="M 40 60 C 40 20, 98 20, 98 60 C 98 75, 100 100, 98 125 L 40 125 Z" fill="#1b9a2d" stroke="#101016" stroke-width="6"/>
+              <path d="M 64 45 L 104 45 C 118 45, 118 78, 104 78 L 64 78 Z" fill="#9de2ff" stroke="#101016" stroke-width="6"/>
+              <ellipse cx="80" cy="53" rx="12" ry="4" fill="#ffffff" opacity="0.8"/>
+            </svg>
+            <span class="crew-tag-lbl">GREEN</span>
+          </div>
+
+          <!-- Cyan Player (Center, Front Spotlight) -->
+          <div class="lineup-crewmate crew-cyan player-spotlight">
+            <div class="you-indicator">▼ YOU</div>
+            <svg viewBox="0 0 140 170" width="110" height="135">
+              <path d="M 28 50 C 12 50 12 110 28 110 L 38 110 L 38 50 Z" fill="#09708a" stroke="#101016" stroke-width="7"/>
+              <path d="M 40 120 L 40 148 C 40 158 60 158 60 148 L 60 125" fill="#09708a" stroke="#101016" stroke-width="7"/>
+              <path d="M 78 122 L 78 148 C 78 158 98 158 98 148 L 98 120" fill="#38fedc" stroke="#101016" stroke-width="7"/>
+              <path d="M 40 60 C 40 20, 98 20, 98 60 C 98 75, 100 100, 98 125 L 40 125 Z" fill="#38fedc" stroke="#101016" stroke-width="7"/>
+              <path d="M 64 45 L 104 45 C 118 45, 118 78, 104 78 L 64 78 Z" fill="#e0f8ff" stroke="#101016" stroke-width="7"/>
+              <ellipse cx="80" cy="53" rx="14" ry="5" fill="#ffffff" opacity="0.9"/>
+            </svg>
+            <span class="crew-tag-lbl you-lbl">CYAN (ENGINEER)</span>
+          </div>
+
+          <!-- Red Crewmate (Right - The Suspicious One!) -->
+          <div class="lineup-crewmate crew-red">
+            <svg viewBox="0 0 140 170" width="80" height="100">
+              <path d="M 28 50 C 12 50 12 110 28 110 L 38 110 L 38 50 Z" fill="#880a0a" stroke="#101016" stroke-width="6"/>
+              <path d="M 40 120 L 40 148 C 40 158 60 158 60 148 L 60 125" fill="#880a0a" stroke="#101016" stroke-width="6"/>
+              <path d="M 78 122 L 78 148 C 78 158 98 158 98 148 L 98 120" fill="#c51111" stroke="#101016" stroke-width="6"/>
+              <path d="M 40 60 C 40 20, 98 20, 98 60 C 98 75, 100 100, 98 125 L 40 125 Z" fill="#c51111" stroke="#101016" stroke-width="6"/>
+              <path d="M 64 45 L 104 45 C 118 45, 118 78, 104 78 L 64 78 Z" fill="#6dcff6" stroke="#101016" stroke-width="6"/>
+              <ellipse cx="80" cy="53" rx="12" ry="4" fill="#ffffff" opacity="0.8"/>
+            </svg>
+            <span class="crew-tag-lbl">RED (?)</span>
+          </div>
+
+        </div>
+
+        <!-- Mission briefing card -->
+        <div class="intro-briefing-panel">
+          <div class="briefing-header">
+            <span class="briefing-badge">MISSION ORDERS</span>
+            <span class="briefing-location">SECTOR: ELECTRICAL BAY</span>
+          </div>
+          <p class="briefing-p">
+            Multiple ship subroutines are stalling in sequential execution. You must upgrade The Skeld to <strong>Python async / await & asyncio</strong> so tasks run concurrently without blocking.
+          </p>
+          <div class="briefing-alert">
+            ⚡ DO NOT BLOCK THE EVENT LOOP (And keep an eye on Red).
+          </div>
+        </div>
+
+        <!-- Start Button -->
+        <button id="btn-start-mission" class="btn-start-mission">
+          <span>🚀</span> ENTER THE SKELD
+        </button>
+
+      </div>
+    </div>
+
+  </div><!-- /intro-screen -->
+
+  <!-- ═══ TOP HUD: Skeld Spaceship Status Bar ═══ -->
+  <header id="hud-bar">
+    <div class="hud-left">
+      <div class="hud-badge">
+        <span class="hud-ship-icon">🛸</span>
+        <span class="hud-ship-name">THE SKELD // ELECTRICAL</span>
+      </div>
+      <div class="hud-loc">
+        <span class="loc-dot"></span>
+        <span id="hud-location-text">BAY: WIRING & NAVIGATION</span>
+      </div>
+    </div>
+
+    <div class="hud-center">
+      <div class="hud-stage-tracker">
+        <span id="hud-stage-title">SLIDE 1 / 16: BRIEFING: THE SEQUENTIAL TRAP</span>
+        <div class="hud-progress-bar">
+          <div id="hud-progress-fill" style="width: 6.25%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hud-right">
+      <button class="hud-mini-btn" id="btn-replay-intro" title="Replay intro cinematic">
+        🎬 INTRO
+      </button>
+      <div class="status-pill status-warn" id="hud-sys-status">
+        <span class="pulse-led"></span>
+        <span id="hud-status-text">SYSTEM: BLOCKED (DELAYED)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ MAIN WORKSPACE (Split Skeld Deck & Tablet Console) ═══ -->
+  <main id="workspace">
+
+    <!-- ── LEFT DECK: The Skeld Electrical & Crew Deck ── -->
+    <aside id="ship-deck">
+      
+      <!-- Porthole Window looking out into The Skeld hull & asteroid field -->
+      <div class="deck-porthole-container">
+        <div class="deck-porthole">
+          <div class="skeld-hull-shield"></div>
+          <div class="skeld-space-stars"></div>
+          <div class="skeld-asteroid"></div>
+          <div class="skeld-hull-wing"></div>
+        </div>
+        <div class="porthole-ring">
+          <div class="bolt b-top"></div>
+          <div class="bolt b-right"></div>
+          <div class="bolt b-bottom"></div>
+          <div class="bolt b-left"></div>
+        </div>
+      </div>
+
+      <!-- Skeld Hazard caution tape -->
+      <div class="hazard-strip">
+        <span>⚠ THE SKELD ELECTRICAL BAY // WATCH YOUR BACK ⚠</span>
+      </div>
+
+      <!-- Crewmate Speech Bubble (Always in Left Deck, never overlaps tablet) -->
+      <div id="speech-wrapper">
+        <div id="speech" class="speech-bubble">
+          <div class="speech-meta">
+            <span class="crew-badge" id="speech-badge">RED CREWMATE</span>
+            <span class="speech-tag" id="speech-tag">COMMS LOG</span>
+          </div>
+          <div id="speech-text">
+            yo... i have FIVE tasks and i'm doing them one after another 💀 totally normal behavior i guess
+          </div>
+        </div>
+      </div>
+
+      <!-- Crewmate Podium & Characters Area -->
+      <div class="crew-podium">
+        
+        <!-- Floor vent (Classic Among Us Skeld vent) -->
+        <div class="amongus-vent" id="deck-vent" title="Emergency maintenance vent (Totally safe... right?)">
+          <div class="vent-grate">
+            <span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <!-- 1. The Authentic Among Us Red Crewmate (Transforms into Impostor!) -->
+        <div id="crew-avatar" class="crew-container" title="Click me for a quip!">
+          <div class="crew-shadow"></div>
+          <svg class="crew-svg" viewBox="0 0 170 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#eb2222"/>
+                <stop offset="65%" stop-color="#c51111"/>
+                <stop offset="100%" stop-color="#8a0808"/>
+              </linearGradient>
+              <linearGradient id="backpackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#b51010"/>
+                <stop offset="100%" stop-color="#720606"/>
+              </linearGradient>
+              <!-- Normal innocent cyan visor -->
+              <linearGradient id="visorGrad" x1="15%" y1="15%" x2="90%" y2="90%">
+                <stop offset="0%" stop-color="#e4f9ff"/>
+                <stop offset="25%" stop-color="#a4e7ff"/>
+                <stop offset="65%" stop-color="#55bde6"/>
+                <stop offset="100%" stop-color="#227ea8"/>
+              </linearGradient>
+              <!-- Evil Impostor red visor -->
+              <linearGradient id="visorEvilGrad" x1="15%" y1="15%" x2="90%" y2="90%">
+                <stop offset="0%" stop-color="#ffb8b8"/>
+                <stop offset="30%" stop-color="#ff2244"/>
+                <stop offset="70%" stop-color="#b80018"/>
+                <stop offset="100%" stop-color="#540008"/>
+              </linearGradient>
+            </defs>
+
+            <!-- 1. Backpack -->
+            <path d="M 30 52 
+                     C 10 52, 10 114, 30 114 
+                     L 44 114 
+                     L 44 52 Z" 
+                  fill="url(#backpackGrad)" 
+                  stroke="#121216" stroke-width="7" stroke-linejoin="round"/>
+
+            <!-- 2. Left Leg -->
+            <path d="M 44 126 
+                     L 44 156 
+                     C 44 167, 66 167, 66 156 
+                     L 66 130" 
+                  fill="#9e0a0a" 
+                  stroke="#121216" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- 3. Right Leg -->
+            <path d="M 82 128 
+                     L 82 156 
+                     C 82 167, 104 167, 104 156 
+                     L 104 126" 
+                  fill="#c51111" 
+                  stroke="#121216" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- 4. Main Body Bean -->
+            <path d="M 44 64 
+                     C 44 20, 106 20, 106 64 
+                     C 106 82, 108 106, 104 132 
+                     L 44 132 
+                     C 40 106, 44 82, 44 64 Z" 
+                  fill="url(#bodyGrad)" 
+                  stroke="#121216" stroke-width="7" stroke-linejoin="round"/>
+
+            <!-- 5. Body Bottom Shadow -->
+            <path d="M 44 105 
+                     C 55 125, 95 125, 104 110 
+                     L 104 132 
+                     L 44 132 Z" 
+                  fill="#8a0808" opacity="0.85"/>
+
+            <!-- 6. Visor (Pill shape) -->
+            <path id="crew-visor-path" d="M 68 46 
+                     L 112 46 
+                     C 128 46, 128 82, 112 82 
+                     L 68 82 
+                     C 52 82, 52 46, 68 46 Z" 
+                  fill="url(#visorGrad)" 
+                  stroke="#121216" stroke-width="7" stroke-linejoin="round"/>
+
+            <!-- 7. Visor Reflection Glints -->
+            <ellipse id="crew-glint-1" cx="88" cy="54" rx="15" ry="5.5" 
+                     fill="#ffffff" opacity="0.9" transform="rotate(-6 88 54)"/>
+            <ellipse id="crew-glint-2" cx="76" cy="68" rx="6" ry="2.5" 
+                     fill="#ffffff" opacity="0.4" transform="rotate(-6 76 68)"/>
+
+            <!-- 8. Impostor Knife (Hidden initially, shown during reveal!) -->
+            <g id="impostor-knife" class="impostor-knife-graphic" style="display: none;">
+              <path d="M 120 95 L 152 75 C 158 85, 150 105, 128 108 Z" 
+                    fill="#e0e8f5" stroke="#121216" stroke-width="5" stroke-linejoin="round"/>
+              <path d="M 125 93 L 148 78 L 132 102 Z" fill="#ffffff" opacity="0.6"/>
+              <rect x="110" y="98" width="16" height="8" rx="2" fill="#555" stroke="#121216" stroke-width="4" transform="rotate(-30 115 100)"/>
+              <rect x="100" y="104" width="14" height="12" rx="3" fill="#884400" stroke="#121216" stroke-width="4" transform="rotate(-30 105 106)"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- 2. Dead Crewmate (Half body with bone, shown in stage 8) -->
+        <div id="dead-body-avatar" class="dead-body-container" style="display: none;">
+          <div class="crew-shadow" style="width: 110px;"></div>
+          <svg class="dead-body-svg" viewBox="0 0 150 120" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="deadCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#48e5ff"/>
+                <stop offset="60%" stop-color="#1db0d6"/>
+                <stop offset="100%" stop-color="#0a708a"/>
+              </linearGradient>
+            </defs>
+            <path d="M 38 68 L 38 98 C 38 108, 60 108, 60 98 L 60 72" fill="#0c7894" stroke="#121216" stroke-width="7" stroke-linejoin="round"/>
+            <path d="M 76 70 L 76 98 C 76 108, 98 108, 98 98 L 98 68" fill="#1db0d6" stroke="#121216" stroke-width="7" stroke-linejoin="round"/>
+            <path d="M 28 50 C 28 35, 108 35, 108 50 C 108 65, 104 76, 98 84 L 38 84 C 32 76, 28 65, 28 50 Z" fill="url(#deadCyanGrad)" stroke="#121216" stroke-width="7" stroke-linejoin="round"/>
+            <ellipse cx="68" cy="50" rx="36" ry="12" fill="#095469" stroke="#121216" stroke-width="6"/>
+            <path d="M 64 50 L 64 22 L 72 22 L 72 50 Z" fill="#ffffff" stroke="#121216" stroke-width="5"/>
+            <circle cx="63" cy="18" r="7" fill="#ffffff" stroke="#121216" stroke-width="5"/>
+            <circle cx="73" cy="18" r="7" fill="#ffffff" stroke="#121216" stroke-width="5"/>
+            <circle cx="63" cy="18" r="4.5" fill="#ffffff"/>
+            <circle cx="73" cy="18" r="4.5" fill="#ffffff"/>
+          </svg>
+        </div>
+
+        <!-- 3. Player Ghost (Translucent with halo, shown in stage 8) -->
+        <div id="ghost-avatar" class="ghost-container" style="display: none;">
+          <svg class="ghost-svg" viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ghostGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#b8f7ff" stop-opacity="0.85"/>
+                <stop offset="70%" stop-color="#3ad1f7" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#0a9ec4" stop-opacity="0.45"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="60" cy="16" rx="28" ry="7" fill="none" stroke="#ffe854" stroke-width="5" stroke-dasharray="8 4"/>
+            <rect x="62" y="44" width="36" height="22" rx="10" fill="#ffffff" opacity="0.9" stroke="#121216" stroke-width="4"/>
+            <path d="M 32 54 C 32 24, 88 24, 88 54 C 88 84, 94 100, 80 120 C 70 110, 64 125, 52 114 C 42 124, 32 108, 32 54 Z" fill="url(#ghostGrad)" stroke="#121216" stroke-width="6" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+      </div>
+
+      <!-- Skeld Telemetry Diagnostics -->
+      <div class="deck-stats">
+        <div class="stat-pill"><span class="k">MAP</span><span class="v">SKELD</span></div>
+        <div class="stat-pill"><span class="k">SLIDES</span><span class="v" id="stat-coros">1 / 16</span></div>
+        <div class="stat-pill"><span class="k">SHIP LOAD</span><span class="v" id="stat-load">94% (STALL)</span></div>
+      </div>
+    </aside>
+
+    <!-- ── RIGHT TABLET: Skeld Mainframe Terminal ── -->
+    <section id="terminal-section">
+      
+      <!-- Tablet Frame -->
+      <div class="tablet-frame">
+        <div class="t-screw sc-tl"></div>
+        <div class="t-screw sc-tr"></div>
+        <div class="t-screw sc-bl"></div>
+        <div class="t-screw sc-br"></div>
+
+        <!-- Tablet Screen Display -->
+        <div class="tablet-screen" id="tablet-screen-body">
+
+          <!-- Screen Header -->
+          <div class="screen-header">
+            <div class="screen-title-group">
+              <span class="screen-tag" id="screen-subtag">SECTION 1 OF 8 · THE BOTTLENECK</span>
+              <h2 id="stage-title">Briefing: The Sequential Trap</h2>
+            </div>
+            <div class="screen-status-badge">
+              <span class="term-dot"></span>
+              <span id="term-status-lbl">CONCEPT BRIEFING</span>
+            </div>
+          </div>
+
+          <!-- Section View Tabs (Shown on completed practice & final slides to avoid vertical overload) -->
+          <div id="view-tabs" class="view-tabs off">
+            <button class="view-tab-btn active" id="tab-primary">🛠 Practice</button>
+            <button class="view-tab-btn" id="tab-code">💡 Python Code</button>
+          </div>
+
+          <!-- Interactive Zone -->
+          <div id="i-zone" class="screen-interaction-area">
+            <!-- Dynamic stage interaction rendered here by app.js -->
+          </div>
+
+          <!-- Concept Reveal Card (Reveals after stage interaction) -->
+          <div id="concept" class="concept-card off">
+            <div class="concept-header">
+              <span class="concept-icon">💡</span>
+              <h3 id="c-title">⚡ The Problem: Blocking Code</h3>
+              <span class="concept-badge">PYTHON ASYNC ARCHITECTURE</span>
+            </div>
+            <div class="code-editor-wrap">
+              <div class="code-editor-bar">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+                <span class="code-filename">the_skeld_mission.py</span>
+              </div>
+              <pre id="c-code" class="code-snippet"></pre>
+            </div>
+            <div id="c-explain" class="concept-explanation">
+              When code runs sequentially, tasks that are just *waiting* block everything else.
+            </div>
+          </div>
+
+        </div><!-- /tablet-screen -->
+
+        <!-- Tablet Footer / Navigation Controls -->
+        <div class="tablet-footer">
+          <button class="t-btn btn-prev" id="btn-prev">
+            <span class="btn-arrow">◀</span> BACK
+          </button>
+
+          <div class="stage-stepper" id="dots">
+            <!-- Rendered by JS -->
+          </div>
+
+          <button class="t-btn btn-next" id="btn-next" disabled>
+            NEXT <span class="btn-arrow">▶</span>
+          </button>
+        </div>
+
+      </div><!-- /tablet-frame -->
+
+    </section>
+
+  </main>
+
+</div><!-- /app -->
+
+<script src="app.js"></script>
+</body>
+</html>
