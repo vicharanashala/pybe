@@ -3,566 +3,543 @@
    Author: Soumyashis Ghosh · @LuchaLibreAAA
    ══════════════════════════════════════════════════════════════════ */
 
-/* ── 16-Slide Expanded Curriculum & Dialogue ── */
+/* ── 16-Slide Sectioned Curriculum & Minimal-Data Design ── */
 const SCENES = [
-  /* ── MODULE 1: THE SYNCHRONOUS BOTTLENECK ── */
+  /* ── SECTION 1: THE BOTTLENECK ── */
   {
     stageNum: 1,
+    sectionTag: "SECTION 1 OF 8 · THE BOTTLENECK",
     title: "Briefing: The Sequential Trap",
     statusText: "SYSTEM: DIAGNOSTIC MODE",
     statusType: "warn",
-    speech: "yo cyan, welcome to electrical. the whole ship's systems are lagging because whoever coded this wrote everything in sequential python. it's giving dial-up internet in 2047 💀",
-    postSpeech: "exactly. computers are lightning fast, but when they sit waiting on I/O, they're literally just burning daylight.",
+    speech: "yo cyan, welcome to electrical. everything is lagging because whoever coded this used sequential python. dial-up vibes in 2047 💀",
+    postSpeech: "waiting on I/O freezes normal code. time to go async!",
     type: "theory-intro",
     theory: {
-      badge: "MODULE 1 // THE PROBLEM",
-      grid: [
+      badge: "MODULE 1 // SYNC VS ASYNC",
+      ctaText: "TRY THE BLOCKING QUEUE ▶",
+      sections: [
         {
+          tab: "1. The Problem",
+          cardClass: "sync-card",
           title: "Synchronous (Blocking)",
-          badge: "RUN-TO-COMPLETION",
+          badge: "FREEZES THREAD",
           badgeClass: "badge-red",
-          visual: "Task 1 ──[Waiting 12s]──> Task 2 ──[Waiting 8s]──> Done",
+          visual: "Task 1 [Wait 12s] ──▶ Task 2 [Wait 8s] ──▶ Done",
           bullets: [
-            "Code executes one line strictly after another.",
-            "If a line waits for a network ping, the <strong>entire process freezes</strong>.",
-            "The CPU sits completely idle while the clock runs."
+            "Runs strictly one task after another.",
+            "While waiting on a sensor, the <strong>entire program stalls</strong>."
           ]
         },
         {
+          tab: "2. Async Fix",
+          cardClass: "async-card",
           title: "Asynchronous (Cooperative)",
           badge: "NON-BLOCKING",
           badgeClass: "badge-green",
-          visual: "Task 1 ─[Pauses & Yields]─┐\nTask 2 ─[Executes During Wait]┘ ──> Concurrency!",
+          visual: "Task 1 [Yields Wait] ─┐\nTask 2 [Runs Now]    ─┴─▶ Done Together!",
           bullets: [
-            "Tasks can voluntarily pause while waiting on I/O.",
-            "While Task 1 is waiting on satellite ping, Task 2 makes progress.",
-            "Zero wasted time. Concurrency on a single thread!"
+            "Tasks pause voluntarily during I/O waits.",
+            "Other tasks make progress on the same thread."
+          ]
+        },
+        {
+          tab: "3. Core Rule",
+          cardClass: "rule-card",
+          title: "Why Async Matters",
+          badge: "KEY INSIGHT",
+          badgeClass: "badge-cyan",
+          visual: "# 95% of lag is waiting on hardware/network I/O:\ndef download():\n    wait_for_satellite(12)  # Blocks everything!",
+          bullets: [
+            "CPU is idle 95% of the time during network or sensor waits.",
+            "Async lets Python switch tasks instead of wasting idle time."
           ]
         }
-      ],
-      takeaway: "<strong>Core Principle:</strong> In software, 95% of 'waiting' is I/O (disk, sensors, APIs, networks). Blocking during I/O is the #1 cause of lag.",
-      btnText: "INSPECT THE BLOCKING TASK QUEUE ▶"
-    },
-    cTitle: "⚡ The Problem: Synchronous Blocking Execution",
-    cCode:
-`# Synchronous tasks freeze the entire thread while waiting:
-def download_data():
-    wait_for_satellite(12)  # Process is frozen here for 12 seconds!
-    return "done"
-
-# Nothing else can execute until download_data() returns.`,
-    cExplain: "Synchronous code runs strictly end-to-end. Any latency in external hardware halts the entire program."
+      ]
+    }
   },
   {
     stageNum: 2,
+    sectionTag: "SECTION 1 OF 8 · THE BOTTLENECK",
     title: "Experiment: The Blocking Disaster",
     statusText: "SYSTEM: BLOCKED (DELAYED)",
     statusType: "warn",
-    speech: "hit that run button and watch what happens when our 5 electrical tasks run back-to-back. spoiler alert: it's a disaster.",
-    postSpeech: "35 whole seconds while the ship drifts?? bro that is NOT it. fr fr not it at all. we need concurrency!",
+    speech: "hit run and watch 5 electrical tasks execute back-to-back. spoiler: it's an L.",
+    postSpeech: "35 whole seconds while the ship drifts?? bro that is NOT it. we need concurrency!",
     type: "seq-demo",
-    cTitle: "⚡ The Problem: Blocking / Sequential Execution",
+    cTitle: "⚡ Sequential Blocking Code",
     cCode:
-`# Each task runs only AFTER the previous one finishes:
-fix_wiring()       # 8s  — waiting on panel diagnostic
-download_nav()     # 12s — waiting on satellite ping
-empty_bins()       # 7s  — waiting on chute hydraulics
-reactor_check()    # 5s  — waiting on core sensor
-upload_manifest()  # 3s  — waiting on comms link
-
-# TOTAL WAIT: 35 seconds. Ship is drifting. Big L.`,
-    cExplain: "When code runs synchronously, any task waiting on I/O stops everything else from executing. The CPU sits idle while the clock runs."
+`fix_wiring()       # 8s
+download_nav()     # 12s
+empty_bins()       # 7s
+reactor_check()    # 5s
+upload_manifest()  # 3s
+# TOTAL: 35s — CPU sits idle between every step.`,
+    cExplain: "Synchronous tasks wait end-to-end. One slow I/O call stalls every task queued behind it."
   },
 
-  /* ── MODULE 2: COROUTINES (ASYNC DEF) ── */
+  /* ── SECTION 2: COROUTINES (ASYNC DEF) ── */
   {
     stageNum: 3,
+    sectionTag: "SECTION 2 OF 8 · COROUTINES",
     title: "Briefing: def vs. async def",
     statusText: "SYSTEM: LOGBOOK INSPECTION",
     statusType: "warn",
-    speech: "bro the previous crewmate left a logbook! normal functions are so stubborn—they start and refuse to pause. but coroutines?? they're cooperative!",
-    postSpeech: "slap async on a function and suddenly it's capable of pausing. W lore drop fr fr no cap 🫡",
+    speech: "normal functions are stubborn—they refuse to pause. coroutines?? they're cooperative!",
+    postSpeech: "slap async on a function and suddenly it can pause. W lore drop 🫡",
     type: "theory-intro",
     theory: {
-      badge: "MODULE 2 // COROUTINE ANATOMY",
-      grid: [
+      badge: "MODULE 2 // COROUTINES",
+      ctaText: "FLIP THE COROUTINE SWITCH ▶",
+      sections: [
         {
+          tab: "1. Standard def",
+          cardClass: "sync-card",
           title: "Standard Function (def)",
           badge: "STUBBORN",
           badgeClass: "badge-red",
-          visual: "def my_func():\n    # Once entered, it CANNOT be paused from outside.\n    # Holds the call stack captive until 'return'.",
+          visual: "def my_func():\n    # Runs straight to 'return'. Cannot pause.",
           bullets: [
-            "Has a single entry point and a single exit point.",
-            "Cannot yield control to let another function run.",
-            "Calling it immediately executes its body."
+            "Locks the call stack until finished.",
+            "Calling <code>my_func()</code> executes immediately."
           ]
         },
         {
+          tab: "2. async def",
+          cardClass: "async-card",
           title: "Coroutine Function (async def)",
           badge: "COOPERATIVE",
           badgeClass: "badge-green",
-          visual: "async def my_func():\n    # Declares a COROUTINE.\n    # Can be paused at 'await' and resumed later!",
+          visual: "async def my_func():\n    # Can pause & yield control while waiting!",
           bullets: [
-            "Can pause execution and resume where it left off.",
-            "Yields control back to the scheduler during waits.",
-            "Calling it returns a <strong>coroutine object</strong> (doesn't run yet!)."
+            "Can suspend mid-execution and resume later.",
+            "Calling it returns a <strong>coroutine object</strong> (doesn't run yet)."
+          ]
+        },
+        {
+          tab: "3. Core Rule",
+          cardClass: "rule-card",
+          title: "Declaring a Coroutine",
+          badge: "SYNTAX",
+          badgeClass: "badge-cyan",
+          visual: "async def fix_wiring():\n    return \"ready to pause\"",
+          bullets: [
+            "Add <code>async</code> before <code>def</code> to opt into cooperative multitasking."
           ]
         }
-      ],
-      takeaway: "<strong>Definition:</strong> A <code>coroutine</code> is a specialized Python function that can suspend its execution before reaching a return statement.",
-      btnText: "TRY THE COROUTINE SWITCH ▶"
-    },
-    cTitle: "🔧 Standard Functions vs. Coroutines",
-    cCode:
-`# 1. Standard Function:
-def sync_task():
-    return "executed immediately"
-
-# 2. Coroutine:
-async def async_task():
-    return "I am a coroutine object — execute me in an event loop!"`,
-    cExplain: "`async def` signals to Python that this function will run cooperatively inside an event loop."
+      ]
+    }
   },
   {
     stageNum: 4,
+    sectionTag: "SECTION 2 OF 8 · COROUTINES",
     title: "Hands-On: Declaring the Coroutine",
     statusText: "SYSTEM: CALIBRATING",
     statusType: "warn",
-    speech: "the logbook has the syntax. flip the switch to make fix_wiring a coroutine. let's cook!",
-    postSpeech: "based! it's officially a coroutine now. next we need to tell it WHERE to pause.",
+    speech: "flip the keyword switch to turn fix_wiring into a coroutine. let's cook!",
+    postSpeech: "based! officially a coroutine now. next we tell it WHERE to pause.",
     type: "make-async",
     cTitle: "🔧 Declaring Coroutines with async def",
     cCode:
-`# Standard function — runs straight through, cannot pause:
-def fix_wiring():
-    wait_for_panel()   # blocks the entire thread
-    return "fixed"
-
-# Coroutine function — CAN pause to let other tasks execute:
-async def fix_wiring():
-    await wait_for_panel()  # yields control while waiting!
+`async def fix_wiring():
+    await wait_for_panel()  # Can yield while waiting!
     return "fixed"`,
-    cExplain: "Adding `async def` defines a coroutine. Unlike regular functions, coroutines can pause execution at specific points and return control back to the scheduler."
+    cExplain: "Adding `async` defines a coroutine capable of pausing at `await` points."
   },
 
-  /* ── MODULE 3: THE AWAIT KEYWORD ── */
+  /* ── SECTION 3: THE AWAIT KEYWORD ── */
   {
     stageNum: 5,
+    sectionTag: "SECTION 3 OF 8 · SUSPENSION POINTS",
     title: "Briefing: The Anatomy of await",
     statusText: "SYSTEM: SYNTAX DECODE",
     statusType: "warn",
-    speech: "so what actually happens when you say await?? you're basically telling python: 'i'm waiting for the sensor, go run someone else's code until it's ready'. polite behavior fr.",
-    postSpeech: "remember the golden rule: await can ONLY be written inside an async def function. anywhere else is a straight SyntaxError.",
+    speech: "await basically tells python: 'i'm waiting on the sensor, go run someone else's task.' polite behavior fr.",
+    postSpeech: "golden rule: await ONLY lives inside async def. anywhere else is SyntaxError!",
     type: "theory-intro",
     theory: {
-      badge: "MODULE 3 // SUSPENSION POINTS",
-      grid: [
+      badge: "MODULE 3 // AWAIT",
+      ctaText: "PRACTICE AWAIT PLACEMENT ▶",
+      sections: [
         {
-          title: "The Role of await",
-          badge: "YIELD POINT",
+          tab: "1. What await Does",
+          cardClass: "async-card",
+          title: "Marking the Pause Point",
+          badge: "YIELD CONTROL",
           badgeClass: "badge-green",
-          visual: "result = await sense_panel()\n  │         │\n  │         └─> 'Hey loop, pause me until sense_panel() is done!'\n  └───────────> Resumes here with the return value",
+          visual: "result = await sense_panel()\n# Pauses here -> frees thread -> resumes with result",
           bullets: [
-            "Suspends the current coroutine until the operation completes.",
-            "Frees the single execution thread to run other pending tasks.",
-            "Unpacks the eventual return value once ready."
+            "Suspends only the current coroutine until the work finishes.",
+            "Frees the thread so other ready tasks can execute."
           ]
         },
         {
-          title: "The Golden Rules of await",
-          badge: "RULES",
+          tab: "2. Golden Rules",
+          cardClass: "sync-card",
+          title: "Where await Can Live",
+          badge: "STRICT RULES",
           badgeClass: "badge-red",
-          visual: "RULE 1: 'await' MUST be inside 'async def'.\nRULE 2: You can only await 'awaitables' (coroutines, Tasks, Futures).",
+          visual: "def bad():\n    await ping()  # ❌ SyntaxError!",
           bullets: [
-            "Writing <code>await</code> in a regular <code>def</code> is an immediate <code>SyntaxError</code>.",
-            "You cannot await non-awaitable values like integers or strings."
+            "<strong>Rule 1:</strong> <code>await</code> must sit inside an <code>async def</code>.",
+            "<strong>Rule 2:</strong> Only await awaitables (coroutines, Tasks)."
+          ]
+        },
+        {
+          tab: "3. Mental Model",
+          cardClass: "rule-card",
+          title: "The Coffee Counter Analogy",
+          badge: "INTUITION",
+          badgeClass: "badge-cyan",
+          visual: "Order drink ─▶ Step aside (await) ─▶ Next customer orders",
+          bullets: [
+            "You step aside while your drink brews instead of blocking the whole line."
           ]
         }
-      ],
-      takeaway: "<strong>Mental Model:</strong> Think of <code>await</code> as stepping aside at the coffee shop counter while the barista makes your drink, so the next customer can order.",
-      btnText: "PRACTICE AWAIT PLACEMENT ▶"
-    },
-    cTitle: "⏳ The await Keyword",
-    cCode:
-`async def fetch_telemetry():
-    # 'await' marks the exact suspension point:
-    reading = await sensor.read_pressure()
-    return reading * 2`,
-    cExplain: "`await` hands control back to the event loop. While the sensor is being read, the CPU executes other ready tasks."
+      ]
+    }
   },
   {
     stageNum: 6,
+    sectionTag: "SECTION 3 OF 8 · SUSPENSION POINTS",
     title: "Hands-On: Placing the Pause Point",
     statusText: "SYSTEM: SENSORS WAITING",
     statusType: "warn",
-    speech: "don't just slap await anywhere bestie. click the exact slot where the sensor pause happens!",
-    postSpeech: "await goes at the exact WAITING point! while the sensor loads, other tasks can run. galaxy brain energy fr",
+    speech: "don't slap await randomly bestie. click the exact slot where the sensor waits!",
+    postSpeech: "await goes right before the waiting call! galaxy brain energy fr",
     type: "place-await",
-    cTitle: "⏳ await: Suspending Execution",
+    cTitle: "⏳ Suspending Execution with await",
     cCode:
 `async def fix_wiring():
-    # 'await' pauses this coroutine until sense_panel() finishes.
-    # While paused, other coroutines make progress!
-    result = await sense_panel()
-    
+    result = await sense_panel()  # Yields while waiting
     connect_cables(result)
-    return "wiring fixed"
-
-# RULE: 'await' can ONLY be used inside an 'async def' function!`,
-    cExplain: "`await` suspends execution of the current coroutine until the awaited awaitable completes. It hands control back to the event loop so other tasks aren't blocked."
+    return "wiring fixed"`,
+    cExplain: "`await` pauses the coroutine at the sensor call and hands control back to the event loop."
   },
 
-  /* ── MODULE 4: THE EVENT LOOP (ASYNCIO.RUN) ── */
+  /* ── SECTION 4: THE EVENT LOOP (ASYNCIO.RUN) ── */
   {
     stageNum: 7,
+    sectionTag: "SECTION 4 OF 8 · EVENT LOOP",
     title: "Briefing: The Event Loop Engine",
     statusText: "SYSTEM: ARCHITECTURE CHECK",
     statusType: "warn",
-    speech: "bro called `fix_wiring()` and literally nothing happened 💀 coroutines don't run themselves! they need a manager. that's the Event Loop.",
-    postSpeech: "the event loop is the air traffic controller. asyncio.run() creates the runway and launches the flight.",
+    speech: "bro called fix_wiring() and literally nothing happened 💀 coroutines need a manager—the Event Loop.",
+    postSpeech: "asyncio.run() spins up the air traffic controller and launches your code.",
     type: "theory-intro",
     theory: {
-      badge: "MODULE 4 // THE DISPATCHER",
-      grid: [
+      badge: "MODULE 4 // DISPATCHER",
+      ctaText: "DISPATCH TO EVENT LOOP ▶",
+      sections: [
         {
-          title: "The Problem with Calling Coroutines",
-          badge: "COMMON TRAP",
+          tab: "1. The Trap",
+          cardClass: "sync-card",
+          title: "Calling a Coroutine Directly",
+          badge: "COMMON BUG",
           badgeClass: "badge-red",
-          visual: ">>> fix_wiring()\n<coroutine object fix_wiring at 0x7f9...>\n\n⚠️ RuntimeWarning: coroutine 'fix_wiring' was never awaited!",
+          visual: ">>> fix_wiring()\n<coroutine object at 0x7f9...>\n⚠️ RuntimeWarning: was never awaited!",
           bullets: [
-            "Invoking a coroutine function does NOT run its code.",
-            "It only creates and returns a dormant <code>coroutine object</code>.",
-            "It sits frozen in memory until an event loop drives it."
+            "Calling <code>fix_wiring()</code> only creates a dormant object.",
+            "Nothing inside its body actually executes yet."
           ]
         },
         {
+          tab: "2. The Engine",
+          cardClass: "async-card",
           title: "The Event Loop Solution",
-          badge: "THE ENGINE",
+          badge: "ORCHESTRATOR",
           badgeClass: "badge-green",
-          visual: "import asyncio\nasyncio.run(fix_wiring())\n\n1. Spawns Event Loop\n2. Executes coroutine to completion\n3. Closes loop cleanly",
+          visual: "import asyncio\nasyncio.run(fix_wiring())",
           bullets: [
-            "The <strong>Event Loop</strong> keeps a queue of all active tasks.",
-            "Continuously polls: 'Who is ready to resume? Who is still waiting?'",
-            "<code>asyncio.run()</code> is the official entry point for Python 3.7+."
+            "The Event Loop polls tasks and resumes paused coroutines.",
+            "<code>asyncio.run()</code> starts the loop, runs it, and closes cleanly."
+          ]
+        },
+        {
+          tab: "3. Core Rule",
+          cardClass: "rule-card",
+          title: "Top-Level Entry Point",
+          badge: "BEST PRACTICE",
+          badgeClass: "badge-cyan",
+          visual: "async def main(): ...\nasyncio.run(main())  # Call once at root",
+          bullets: [
+            "Use <code>asyncio.run()</code> once as the main entry point of your script."
           ]
         }
-      ],
-      takeaway: "<strong>Rule of Thumb:</strong> Use <code>asyncio.run()</code> once as the top-level main entry point of your program.",
-      btnText: "DISPATCH TO THE EVENT LOOP ▶"
-    },
-    cTitle: "🎛️ The Event Loop Dispatcher",
-    cCode:
-`import asyncio
-
-async def main():
-    print("Ship online!")
-
-# Starts the event loop, runs main(), and closes the loop:
-asyncio.run(main())`,
-    cExplain: "`asyncio.run()` is the bootstrap function that initializes the event loop and manages its lifecycle."
+      ]
+    }
   },
   {
     stageNum: 8,
+    sectionTag: "SECTION 4 OF 8 · EVENT LOOP",
     title: "Hands-On: Dispatching to the Loop",
     statusText: "SYSTEM: DISPATCHER READY",
     statusType: "warn",
-    speech: "take that coroutine package and load it into the dispatcher rotor. watch it spin up!",
-    postSpeech: "asyncio.run() handed it to the event loop and handled it cleanly! the dispatcher has rizz fr",
+    speech: "load that coroutine box into the dispatcher rotor. watch it spin!",
+    postSpeech: "asyncio.run() managed the whole lifecycle cleanly. W dispatcher!",
     type: "run-coro",
-    cTitle: "🎛️ The Event Loop: The Dispatcher",
+    cTitle: "🎛️ Running Coroutines via asyncio.run()",
     cCode:
 `import asyncio
 
 async def fix_wiring():
     await sense_panel()
-    return "wiring fixed"
 
-# Just calling fix_wiring() does NOT run it.
-# asyncio.run() starts the event loop and runs it:
-asyncio.run(fix_wiring())`,
-    cExplain: "Calling a coroutine returns a coroutine *object* — it doesn't execute it. `asyncio.run()` starts the event loop, hands it the coroutine, and manages its full lifecycle."
+asyncio.run(fix_wiring())  # Starts & cleans up loop`,
+    cExplain: "`asyncio.run()` creates the event loop, executes the coroutine to completion, and closes the loop."
   },
 
-  /* ── MODULE 5: CONCURRENT BATCHES (GATHER) ── */
+  /* ── SECTION 5: CONCURRENT BATCHES (GATHER) ── */
   {
     stageNum: 9,
+    sectionTag: "SECTION 5 OF 8 · CONCURRENCY",
     title: "Briefing: The Squad Goal (gather)",
     statusText: "SYSTEM: MULTI-TASK PLANNING",
     statusType: "warn",
-    speech: "if we just `await task1()` then `await task2()`... that's STILL sequential! we're not using the superpowers of async yet. enter: gather.",
-    postSpeech: "the math is so satisfying: total time equals the LONGEST task, not the sum of all tasks. that's concurrency baby!",
+    speech: "if we await task1 then await task2... that's STILL sequential! enter: asyncio.gather().",
+    postSpeech: "total time equals the LONGEST task, not the sum. math is mathing!",
     type: "theory-intro",
     theory: {
-      badge: "MODULE 5 // CONCURRENT BATCHING",
-      grid: [
+      badge: "MODULE 5 // BATCHING",
+      ctaText: "ASSEMBLE THE SQUAD ▶",
+      sections: [
         {
-          title: "Awaiting One by One (Still Slow)",
-          badge: "SEQUENTIAL ASYNC",
+          tab: "1. Sequential Await",
+          cardClass: "sync-card",
+          title: "Awaiting One by One",
+          badge: "STILL 27s",
           badgeClass: "badge-red",
-          visual: "await fix_wiring()    # Waits 8s\nawait download_nav()  # Waits 12s\nawait empty_bins()    # Waits 7s\n\nTotal Duration = 8 + 12 + 7 = 27 seconds!",
+          visual: "await fix_wiring()    # 8s\nawait download_nav()  # +12s\nawait empty_bins()    # +7s  => 27s total",
           bullets: [
-            "Even with <code>await</code>, writing them on separate lines runs them sequentially.",
-            "Task 2 does not start until Task 1 has fully finished."
+            "Separate <code>await</code> lines still run one after another.",
+            "Task 2 waits until Task 1 completely finishes."
           ]
         },
         {
-          title: "asyncio.gather() (True Concurrency)",
-          badge: "SQUAD BATCH",
+          tab: "2. gather() Squad",
+          cardClass: "async-card",
+          title: "asyncio.gather()",
+          badge: "ONLY 12s!",
           badgeClass: "badge-green",
-          visual: "await asyncio.gather(\n    fix_wiring(),    # Starts now (8s)\n    download_nav(),  # Starts now (12s)\n    empty_bins()     # Starts now (7s)\n)\nTotal Duration = max(8, 12, 7) = 12 seconds!",
+          visual: "await asyncio.gather(\n    fix_wiring(), download_nav(), empty_bins()\n)  # Runs all at once => 12s max!",
           bullets: [
-            "Starts all supplied coroutines <strong>concurrently</strong>.",
-            "Collects all results into a single list in the same order.",
-            "Completes as soon as the slowest task finishes!"
+            "Starts all tasks together on the event loop.",
+            "Collects results in order when the slowest task finishes."
+          ]
+        },
+        {
+          tab: "3. Formula",
+          cardClass: "rule-card",
+          title: "Concurrency Math",
+          badge: "TIME SAVED",
+          badgeClass: "badge-cyan",
+          visual: "Total Time = max(Task_1, Task_2, Task_3)",
+          bullets: [
+            "Duration depends on the slowest task, not the sum of all waits."
           ]
         }
-      ],
-      takeaway: "<strong>Formula:</strong> With <code>asyncio.gather()</code>, Time = Max(Task_1, Task_2, ...). You save massive amounts of idle time.",
-      btnText: "ASSEMBLE THE SQUAD ▶"
-    },
-    cTitle: "🔗 Coordinating Batches with asyncio.gather",
-    cCode:
-`import asyncio
-
-async def main():
-    # Launch tasks concurrently and await all results:
-    results = await asyncio.gather(
-        fetch_sensor_a(),
-        fetch_sensor_b()
-    )`,
-    cExplain: "`asyncio.gather()` bundles multiple coroutines together, scheduling them all concurrently on the event loop."
+      ]
+    }
   },
   {
     stageNum: 10,
+    sectionTag: "SECTION 5 OF 8 · CONCURRENCY",
     title: "Hands-On: The Squad: asyncio.gather()",
     statusText: "SYSTEM: BUNDLING TASKS",
     statusType: "warn",
-    speech: "click all three tasks to bundle them into the squad launcher. let's see how fast they finish together!",
-    postSpeech: "gather() ran them ALL concurrently! clock finished in 12s instead of 27s! genuinely so bussin fr fr 🔥",
+    speech: "click all three tasks to bundle them into gather(). watch the timer!",
+    postSpeech: "12s instead of 27s!! genuinely so bussin fr fr 🔥",
     type: "gather",
-    cTitle: "🔗 asyncio.gather(): Concurrent Coordination",
+    cTitle: "🔗 Concurrent Batching with asyncio.gather()",
     cCode:
-`import asyncio
-
-async def main():
-    # All three coroutines start immediately and run concurrently!
-    results = await asyncio.gather(
-        fix_wiring(),    # 8s
-        download_nav(),  # 12s
-        empty_bins()     # 7s
-    )
-    # Total execution time ≈ 12s (the longest task), NOT 27s!
-
-asyncio.run(main())`,
-    cExplain: "`asyncio.gather()` accepts multiple awaitables and coordinates them concurrently. The overall duration is determined by the slowest task, rather than their cumulative sum."
+`results = await asyncio.gather(
+    fix_wiring(),    # 8s
+    download_nav(),  # 12s
+    empty_bins()     # 7s
+)
+# Finishes in 12s (longest task), not 27s!`,
+    cExplain: "`asyncio.gather()` runs multiple awaitables concurrently and returns all results as a list."
   },
 
-  /* ── MODULE 6: DELAYS (SLEEP) ── */
+  /* ── SECTION 6: NON-BLOCKING DELAYS (SLEEP) ── */
   {
     stageNum: 11,
+    sectionTag: "SECTION 6 OF 8 · NON-BLOCKING DELAYS",
     title: "Briefing: The Deadly Sleep Trap",
     statusText: "SYSTEM: TIMING PROTOCOLS",
     statusType: "warn",
-    speech: "PSA: using `time.sleep()` in async code is the biggest rookie mistake in python. it puts the whole loop into a coma. `asyncio.sleep()` is the real goat.",
-    postSpeech: "time.sleep is literally an imposter move. always use await asyncio.sleep to yield control while waiting.",
+    speech: "using time.sleep() in async code puts the whole ship in a coma. asyncio.sleep() is the goat.",
+    postSpeech: "time.sleep is an impostor move. always await asyncio.sleep!",
     type: "theory-intro",
     theory: {
-      badge: "MODULE 6 // NON-BLOCKING DELAYS",
-      grid: [
+      badge: "MODULE 6 // SLEEP",
+      ctaText: "COMPARE TIMELINES ▶",
+      sections: [
         {
-          title: "time.sleep(10) [The Blocker]",
+          tab: "1. Blocking Sleep",
+          cardClass: "sync-card",
+          title: "time.sleep(10)",
           badge: "THREAD COMA",
           badgeClass: "badge-red",
-          visual: "import time\ntime.sleep(10)  # Halts the OS thread completely!\n\n❌ Event Loop is FROZEN.\n❌ No other coroutine can run.\n❌ Web servers drop connections.",
+          visual: "import time\ntime.sleep(10)  # ❌ Freezes entire OS thread!",
           bullets: [
-            "Tells the operating system to put the entire Python process to sleep.",
-            "The event loop cannot switch tasks during a <code>time.sleep</code>.",
-            "Defeats the entire purpose of writing async code."
+            "Locks the Python process; no other task can run.",
+            "Completely defeats the event loop."
           ]
         },
         {
-          title: "asyncio.sleep(10) [The Cooperator]",
+          tab: "2. Async Sleep",
+          cardClass: "async-card",
+          title: "await asyncio.sleep(10)",
           badge: "NON-BLOCKING",
           badgeClass: "badge-green",
-          visual: "import asyncio\nawait asyncio.sleep(10)  # Yields control!\n\n✅ Event loop runs other tasks for 10s.\n✅ Resumes this task when timer fires.\n✅ Server remains 100% responsive.",
+          visual: "import asyncio\nawait asyncio.sleep(10)  # ✅ Yields control!",
           bullets: [
-            "Registers a timer callback with the event loop.",
-            "Instantly relinquishes control so other coroutines proceed.",
-            "Used in production to model simulated delays, heartbeats, and retries."
+            "Pauses only this coroutine via an event-loop timer.",
+            "Other tasks keep running during the 10s wait."
+          ]
+        },
+        {
+          tab: "3. Core Rule",
+          cardClass: "rule-card",
+          title: "Avoid Blocking Libraries",
+          badge: "GOLDEN RULE",
+          badgeClass: "badge-cyan",
+          visual: "# Never mix blocking calls inside async def:\n# ❌ time.sleep(), requests.get()\n# ✅ asyncio.sleep(), httpx.AsyncClient()",
+          bullets: [
+            "Any blocking call stalls the entire single-threaded loop."
           ]
         }
-      ],
-      takeaway: "<strong>Golden Rule:</strong> Never call blocking synchronous libraries (like <code>time.sleep</code> or standard <code>requests.get</code>) inside an async function.",
-      btnText: "COMPARE TIMELINE CHARTS ▶"
-    },
-    cTitle: "💤 time.sleep vs asyncio.sleep",
-    cCode:
-`# WRONG — Freezes the entire event loop:
-import time
-time.sleep(5)
-
-# RIGHT — Yields control to other coroutines for 5 seconds:
-import asyncio
-await asyncio.sleep(5)`,
-    cExplain: "`asyncio.sleep` creates a non-blocking pause, allowing other tasks to utilize the CPU during the delay."
+      ]
+    }
   },
   {
     stageNum: 12,
+    sectionTag: "SECTION 6 OF 8 · NON-BLOCKING DELAYS",
     title: "Hands-On: The Timeline Showdown",
     statusText: "SYSTEM: REPAIRING REACTOR",
     statusType: "warn",
-    speech: "toggle between the two timelines. look at how much dead time time.sleep() creates compared to non-blocking sleep.",
-    postSpeech: "asyncio.sleep() yields control so others run during the wait! it's giving sacrifice for the greater good 🗿 based behavior",
+    speech: "toggle between the timelines and compare the dead time!",
+    postSpeech: "asyncio.sleep() lets other tasks work during the wait. based behavior 🗿",
     type: "sleep-compare",
-    cTitle: "💤 asyncio.sleep(): Yielding Control",
+    cTitle: "💤 Non-Blocking Delay with asyncio.sleep()",
     cCode:
-`import asyncio
-
-async def reactor_check():
-    print("Beginning diagnostic...")
-    # Does NOT block the thread — yields control to other tasks!
-    await asyncio.sleep(10)
-    print("Reactor nominal!")
-
-# NEVER use time.sleep() inside async code — it freezes the loop!
-# ALWAYS use await asyncio.sleep() to simulate or handle delays.`,
-    cExplain: "`asyncio.sleep(seconds)` is non-blocking. It pauses the current coroutine while letting the event loop execute other tasks. In contrast, `time.sleep()` freezes the entire Python process."
+`async def reactor_check():
+    await asyncio.sleep(10)  # Yields loop for 10s
+    return "nominal"`,
+    cExplain: "`asyncio.sleep()` yields control back to the event loop, unlike `time.sleep()` which freezes everything."
   },
 
-  /* ── MODULE 7: SYNTHESIS ── */
+  /* ── SECTION 7: ARCHITECTURAL SYNTHESIS ── */
   {
     stageNum: 13,
+    sectionTag: "SECTION 7 OF 8 · SYNTHESIS",
     title: "Briefing: The Master Blueprint",
     statusText: "SYSTEM: UPLINK ARCHITECTURE",
     statusType: "warn",
-    speech: "comms are almost back online. all we need is the master uplink script. let's review the four pillars before you assemble it.",
-    postSpeech: "you have the full blueprint now. assemble the final script without any bugs and The Skeld is saved!",
+    speech: "comms are almost back! quick recap of the 4 async pillars before you write the uplink.",
+    postSpeech: "you have the blueprint. wire up the final script!",
     type: "theory-intro",
     theory: {
-      badge: "MODULE 7 // ARCHITECTURAL SYNTHESIS",
-      grid: [
+      badge: "MODULE 7 // BLUEPRINT",
+      ctaText: "BUILD FINAL SCRIPT ▶",
+      sections: [
         {
-          title: "The 4 Pillars of Python Async",
+          tab: "1. The 4 Pillars",
+          cardClass: "async-card",
+          title: "Python Async Toolkit",
           badge: "ARCHITECTURE",
           badgeClass: "badge-green",
-          visual: "1. async def  ──> Declares the coroutine function\n2. await      ──> Yields control at I/O waiting points\n3. gather()   ──> Batches multiple coroutines concurrently\n4. run()      ──> Initializes the Event Loop manager",
+          visual: "1. async def  -> Define coroutine\n2. await      -> Yield during wait\n3. gather()   -> Run squad concurrently\n4. run()      -> Boot the Event Loop",
           bullets: [
-            "Every piece has a distinct, irreplaceable responsibility.",
-            "Omit <code>async def</code>: you cannot use <code>await</code>.",
-            "Omit <code>await</code>: you block the thread or get un-awaited coroutine warnings.",
-            "Omit <code>gather</code>: your tasks run sequentially.",
-            "Omit <code>run</code>: your program never starts."
+            "Every keyword has one distinct job.",
+            "Combine them cleanly for high-throughput Python."
           ]
         },
         {
-          title: "The Comms Uplink Mission",
-          badge: "FINAL OBJECTIVE",
-          badgeClass: "badge-red",
-          visual: "upload_manifest() needs to:\n- Declare as async\n- Yield non-blocking sleep(5)\n- Execute inside asyncio.run()",
+          tab: "2. Mission Spec",
+          cardClass: "rule-card",
+          title: "Comms Uplink Requirements",
+          badge: "FINAL GOAL",
+          badgeClass: "badge-cyan",
+          visual: "async def upload_manifest():\n    await asyncio.sleep(5)\nasyncio.run(upload_manifest())",
           bullets: [
-            "Uploads crew records and nav data to central fleet.",
-            "Will run concurrently with wiring and sensor loops."
+            "Make <code>upload_manifest</code> a coroutine.",
+            "Yield on sleep, then launch via <code>asyncio.run()</code>."
           ]
         }
-      ],
-      takeaway: "<strong>Final Milestone:</strong> You are about to construct a production-ready asynchronous Python program from scratch.",
-      btnText: "BUILD THE MASTER SCRIPT ▶"
-    },
-    cTitle: "📜 The Complete Asynchronous Pattern",
-    cCode:
-`import asyncio
-
-async def upload_manifest():
-    print("Uploading...")
-    await asyncio.sleep(5)
-    print("Upload complete!")
-
-async def main():
-    await asyncio.gather(upload_manifest())
-
-asyncio.run(main())`,
-    cExplain: "Combining `async def`, `await`, `gather`, and `run` creates a robust, cooperative, high-throughput program."
+      ]
+    }
   },
   {
     stageNum: 14,
+    sectionTag: "SECTION 7 OF 8 · SYNTHESIS",
     title: "Hands-On: Final Comms Uplink",
     statusText: "SYSTEM: READY FOR UPLINK",
     statusType: "warn",
-    speech: "pick the keyword chips below and snap them into their correct slots. no typos, no sus syntax!",
-    postSpeech: "LETS GOOO! Manifest uploaded, station fully restored. You're a certified 10x engineer bestie! W crew. fr fr no cap 🫡🎉",
+    speech: "snap the right keyword chips into the blanks. no sus syntax!",
+    postSpeech: "LETS GOOO! Station fully restored. Certified 10x engineer bestie! 🫡🎉",
     type: "fill-blanks",
-    cTitle: "✅ The Complete Python Async Architecture",
+    cTitle: "✅ Complete Python Async Pattern",
     cCode:
 `import asyncio
 
 async def upload_manifest():
-    print("Uploading nav data...")
     await asyncio.sleep(5)
-    print("Manifest uploaded!")
+    return "uploaded"
 
-async def main():
-    await asyncio.gather(
-        fix_wiring(),
-        download_nav(),
-        upload_manifest()
-    )
-
-# Start the event loop and execute the coordinated pipeline:
-asyncio.run(main())`,
-    cExplain: "The complete pattern: 1) Declare with `async def`, 2) Yield waits with `await`, 3) Bundle concurrent tasks with `asyncio.gather()`, and 4) Dispatch via `asyncio.run()`."
+asyncio.run(upload_manifest())`,
+    cExplain: "You combined `async def`, `await`, and `asyncio.run()` into a working non-blocking pipeline."
   },
 
-  /* ── MODULE 8: CLIMAX & IMPOSTOR REVEAL ── */
+  /* ── SECTION 8: CLIMAX & CHEAT SHEET ── */
   {
     stageNum: 15,
+    sectionTag: "SECTION 8 OF 8 · CLIMAX",
     title: "Story Beat: The Doors Slam Shut",
     statusText: "SECURITY ALERT: LOCKDOWN",
     statusType: "danger",
-    speech: "LETS GOOO! Comms are back, oxygen is 100%! You're a certified 10x engineer bestie... wait, why did the electrical doors just lock? 😳",
+    speech: "comms are back, oxygen is 100%! ...wait, why did the electrical doors just lock? 😳",
     postSpeech: "red is acting mad sus right now... step back from the vent!",
     type: "doors-shut",
-    cTitle: "⚠️ Security Lockdown: Electrical Compartment",
+    cTitle: "🔒 Security Override Log",
     cCode:
-`# ALERT: Internal Security Override Triggered
-# Location: The Skeld / Electrical Bay
-# Status: Doors Sealed
-# Active Entities: 2 (Cyan, Red)`,
-    cExplain: "The ship systems have been saved, but someone on board had a very different plan for Electrical bay."
+`# OVERRIDE: Internal Bulkhead Seal
+# SECTOR:   The Skeld / Electrical Bay
+# ENTITIES: 2 (Cyan, Red)
+# WARNING:  Vent activity detected`,
+    cExplain: "All ship systems are restored, leaving Cyan alone in Electrical with Red..."
   },
   {
     stageNum: 16,
+    sectionTag: "SECTION 8 OF 8 · EPILOGUE",
     title: "Climax: Emergency Meeting",
     statusText: "CRITICAL: IMPOSTOR ATTACK",
     statusType: "danger",
     speech: "thanks for fixing the oxygen and comms bestie...",
     postSpeech: "gg no re 💀",
     type: "impostor-reveal",
-    cTitle: "📜 Python asyncio: The Complete Cheat Sheet",
+    cTitle: "📜 Python asyncio Cheat Sheet",
     cCode:
-`# --- PYTHON ASYNC CHEAT SHEET ---
-# 1. Declare a coroutine:
-async def perform_task():
-    # 2. Yield control while waiting on I/O:
-    await asyncio.sleep(2)
-    return "done"
+`import asyncio
 
-# 3. Coordinate multiple concurrent coroutines:
+async def task():                # 1. Coroutine
+    await asyncio.sleep(2)       # 2. Non-blocking yield
+
 async def main():
-    results = await asyncio.gather(
-        perform_task(),
-        perform_task()
+    await asyncio.gather(        # 3. Concurrent batch
+        task(), task()
     )
 
-# 4. Initialize the event loop:
-asyncio.run(main())
-
-# ...and NEVER stand alone in Electrical with Red.`,
-    cExplain: "You have mastered async Python: coroutines (async def), non-blocking pauses (await), concurrent batches (asyncio.gather), non-blocking delays (asyncio.sleep), and the event loop dispatcher (asyncio.run)."
+asyncio.run(main())              # 4. Event Loop`,
+    cExplain: "Mastered: async def, await, asyncio.gather(), asyncio.sleep(), and asyncio.run()."
   }
 ];
 
 /* ── State ── */
 let cur = 0;
+let curTheorySec = 0;
+let activeViewTab = 'primary';
 let doneStages = new Set();
 let selectedWord = null;
 let gatheredTasks = [];
@@ -589,8 +566,12 @@ const ghostAvatar = document.getElementById('ghost-avatar');
 const statCoros = document.getElementById('stat-coros');
 const statLoad = document.getElementById('stat-load');
 
+const screenSubtag = document.getElementById('screen-subtag');
 const stageTitle = document.getElementById('stage-title');
 const termStatusLbl = document.getElementById('term-status-lbl');
+const viewTabs = document.getElementById('view-tabs');
+const tabPrimary = document.getElementById('tab-primary');
+const tabCode = document.getElementById('tab-code');
 const iZone = document.getElementById('i-zone');
 
 const conceptCard = document.getElementById('concept');
@@ -659,6 +640,33 @@ function highlightPython(code) {
   return s;
 }
 
+/* ── View Tab Switcher (Prevents screen overload by showing 1 pane at a time) ── */
+function switchStageTab(tab) {
+  activeViewTab = tab;
+  if (tab === 'code') {
+    iZone.classList.add('off');
+    conceptCard.classList.remove('off');
+    tabPrimary.classList.remove('active');
+    tabCode.classList.add('active');
+    tabCode.classList.remove('pulse-hint');
+  } else {
+    iZone.classList.remove('off');
+    conceptCard.classList.add('off');
+    tabPrimary.classList.add('active');
+    tabCode.classList.remove('active');
+  }
+}
+
+tabPrimary.onclick = () => switchStageTab('primary');
+tabCode.onclick = () => switchStageTab('code');
+
+function populateConceptCard(sc) {
+  if (!sc.cCode) return;
+  cTitle.textContent = sc.cTitle;
+  cCode.innerHTML = highlightPython(sc.cCode);
+  cExplain.textContent = sc.cExplain;
+}
+
 /* ── Navigation System ── */
 function initStepper() {
   dotsContainer.innerHTML = '';
@@ -679,6 +687,9 @@ function updateHUD() {
   const sc = SCENES[cur];
   hudStageTitle.textContent = `SLIDE ${cur + 1} / ${SCENES.length}: ${sc.title.toUpperCase()}`;
   hudProgressFill.style.width = `${((cur + 1) / SCENES.length) * 100}%`;
+  if (screenSubtag && sc.sectionTag) {
+    screenSubtag.textContent = sc.sectionTag;
+  }
 
   if (sc.statusType === 'danger') {
     hudSysStatus.className = 'status-pill status-danger';
@@ -688,7 +699,7 @@ function updateHUD() {
   } else if (doneStages.has(cur)) {
     hudSysStatus.className = 'status-pill status-ok';
     hudStatusText.textContent = "SYSTEM: NOMINAL (ASYNC ACTIVE)";
-    termStatusLbl.textContent = "STAGE COMPLETE";
+    termStatusLbl.textContent = sc.type === 'theory-intro' ? "CONCEPT BRIEFING" : "STAGE COMPLETE";
     termStatusLbl.parentElement.className = "screen-status-badge ok";
   } else {
     hudSysStatus.className = 'status-pill status-warn';
@@ -769,6 +780,7 @@ function resetAllToStart() {
   speechTag.textContent = "COMMS LOG";
 
   cur = 0;
+  curTheorySec = 0;
   doneStages = new Set();
   selectedWord = null;
   gatheredTasks = [];
@@ -785,6 +797,7 @@ function clearImpostorTimers() {
 function goToStage(idx) {
   clearImpostorTimers();
   cur = idx;
+  curTheorySec = 0;
   selectedWord = null;
   gatheredTasks = [];
 
@@ -809,22 +822,31 @@ function goToStage(idx) {
     setTimeout(() => crewAvatar.classList.remove('talking'), 700);
   }
 
-  conceptCard.classList.add('off');
+  // Configure view tabs cleanly per slide
+  viewTabs.classList.add('off');
+  tabCode.classList.remove('pulse-hint');
+  tabPrimary.textContent = cur === 15 ? '💀 Autopsy' : cur === 14 ? '🚨 Alert' : '🛠 Practice';
+  tabCode.textContent = cur === 15 ? '📜 Cheat Sheet' : cur === 14 ? '🔒 Security Log' : '💡 Python Code';
+  switchStageTab('primary');
+
   renderStageInteraction(sc);
   updateHUD();
 }
 
-/* ── Concept Card Unlocking ── */
+/* ── Concept Card Unlocking (Switches cleanly via #view-tabs, never crowds screen) ── */
 function unlockConcept(sc) {
-  if (doneStages.has(cur)) return;
+  const firstUnlock = !doneStages.has(cur);
   doneStages.add(cur);
 
-  cTitle.textContent = sc.cTitle;
-  cCode.innerHTML = highlightPython(sc.cCode);
-  cExplain.textContent = sc.cExplain;
-  conceptCard.classList.remove('off');
+  if (sc.cCode) {
+    populateConceptCard(sc);
+    if (sc.type !== 'theory-intro') {
+      viewTabs.classList.remove('off');
+      tabCode.classList.add('pulse-hint');
+    }
+  }
 
-  if (cur !== 15 && sc.type !== 'theory-intro') {
+  if (firstUnlock && cur !== 15 && sc.type !== 'theory-intro') {
     speechText.textContent = sc.postSpeech;
     crewAvatar.classList.add('talking');
     setTimeout(() => crewAvatar.classList.remove('talking'), 800);
@@ -834,7 +856,7 @@ function unlockConcept(sc) {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   INTERACTION RENDERERS (16 STAGES)
+   INTERACTION RENDERERS (16 STAGES · SECTIONED VIEWS)
    ══════════════════════════════════════════════════════════════════ */
 function renderStageInteraction(sc) {
   iZone.innerHTML = '';
@@ -843,10 +865,13 @@ function renderStageInteraction(sc) {
     iZone.innerHTML = `
       <div class="result-banner banner-success">
         <span>✅</span>
-        <div><strong>Stage interaction completed!</strong> Review the Python architecture below and proceed to the next module.</div>
+        <div>
+          <strong>Stage complete!</strong> Switch to <strong>💡 Python Code</strong> above or click <strong>NEXT ▶</strong>.
+        </div>
       </div>
     `;
-    unlockConcept(sc);
+    populateConceptCard(sc);
+    viewTabs.classList.remove('off');
     return;
   }
 
@@ -864,50 +889,59 @@ function renderStageInteraction(sc) {
   }
 }
 
-/* ── Generic Theory Intro Renderer ── */
+/* ── Generic Sectioned Theory Intro Renderer (1 Focused Section Per View) ── */
 function renderTheoryIntro(sc) {
   doneStages.add(cur);
   const t = sc.theory;
+  const sec = t.sections[curTheorySec] || t.sections[0];
+  const isLast = curTheorySec >= t.sections.length - 1;
+
   iZone.innerHTML = `
     <div class="theory-container">
       <div class="theory-badge-row">
         <span class="theory-tag">${t.badge}</span>
-        <span style="font-family: var(--font-mono); font-size: 10px; color: var(--text-muted);">CONCEPT DEEP DIVE</span>
+        <div class="section-pills">
+          ${t.sections.map((s, idx) => `
+            <button class="section-pill-btn ${idx === curTheorySec ? 'active' : ''}" onclick="selectTheorySection(${idx})">
+              ${s.tab}
+            </button>
+          `).join('')}
+        </div>
       </div>
 
-      <div class="theory-grid-2">
-        ${t.grid.map(c => `
-          <div class="theory-card ${c.badgeClass === 'badge-red' ? 'sync-card' : 'async-card'}">
-            <div class="theory-card-header">
-              <span class="theory-card-title">${c.title}</span>
-              <span class="theory-card-badge ${c.badgeClass}">${c.badge}</span>
-            </div>
-            <div class="theory-flow-visual" style="white-space: pre-wrap;">${esc(c.visual)}</div>
-            <ul class="theory-bullet-list">
-              ${c.bullets.map(b => `<li>${b}</li>`).join('')}
-            </ul>
-          </div>
-        `).join('')}
+      <div class="theory-card ${sec.cardClass}">
+        <div class="theory-card-header">
+          <span class="theory-card-title">${sec.title}</span>
+          <span class="theory-card-badge ${sec.badgeClass}">${sec.badge}</span>
+        </div>
+        <div class="theory-flow-visual">${esc(sec.visual)}</div>
+        <ul class="theory-bullet-list">
+          ${sec.bullets.map(b => `<li>${b}</li>`).join('')}
+        </ul>
       </div>
 
-      <div class="theory-takeaway-box">
-        ${t.takeaway}
+      <div class="theory-actions-row">
+        <span class="theory-step-hint">Part ${curTheorySec + 1} of ${t.sections.length}</span>
+        <button class="btn-theory-ready" id="btn-theory-proceed">
+          ${isLast ? t.ctaText : 'NEXT SECTION ▶'}
+        </button>
       </div>
-
-      <button class="btn-theory-ready" id="btn-theory-proceed">
-        <span>✓</span> ${t.btnText}
-      </button>
     </div>
   `;
 
   document.getElementById('btn-theory-proceed').onclick = () => {
-    unlockConcept(sc);
-    // Proceed to next slide automatically after clicking got it
-    if (cur < SCENES.length - 1) {
-      setTimeout(() => goToStage(cur + 1), 300);
+    if (!isLast) {
+      selectTheorySection(curTheorySec + 1);
+    } else if (cur < SCENES.length - 1) {
+      goToStage(cur + 1);
     }
   };
 }
+
+window.selectTheorySection = function(idx) {
+  curTheorySec = idx;
+  renderTheoryIntro(SCENES[cur]);
+};
 
 /* ── Stage 2: Sequential Demo ── */
 function renderSeqDemo(sc) {
@@ -1413,14 +1447,19 @@ function renderDoorsShut(sc) {
       <div class="doors-icon">🚨</div>
       <div class="doors-heading">ELECTRICAL DOORS SEALED</div>
       <p class="doors-subtext">
-        A loud pneumatic hiss echoes through the bulkheads. The heavy blast doors have slammed shut. The terminal displays an unauthorized security override...
+        Heavy blast doors just slammed shut behind you. Check the unauthorized security override.
       </p>
-      <button class="btn-action-primary" style="background: linear-gradient(135deg, #ff385c, #b80024); color: white;" onclick="unlockConcept(SCENES[cur])">
-        ⚠️ INVESTIGATE ELECTRICAL BAY
+      <button class="btn-action-primary" style="background: linear-gradient(135deg, #ff385c, #b80024); color: white;" onclick="investigateElectrical()">
+        ⚠️ INSPECT SECURITY LOG
       </button>
     </div>
   `;
 }
+
+window.investigateElectrical = function() {
+  unlockConcept(SCENES[cur]);
+  switchStageTab('code');
+};
 
 /* ── Stage 16: The Impostor Reveal & Kill Cutscene ── */
 function renderImpostorReveal(sc) {
@@ -1437,15 +1476,15 @@ function renderImpostorReveal(sc) {
     <div style="text-align: center; padding: 30px 10px; font-family: var(--font-mono); color: var(--accent-red);">
       <div style="font-size: 32px; animation: pulse-glow 0.6s infinite;">🚨</div>
       <div style="font-size: 16px; font-weight: 800; margin-top: 10px;">COMMUNICATIONS SEVERED</div>
-      <div style="font-size: 11px; color: #ff99a8; margin-top: 5px;">AN ENTITY HAS BREACHED ELECTRICAL DOORS...</div>
+      <div style="font-size: 11px; color: #ff99a8; margin-top: 5px;">AN ENTITY HAS BREACHED ELECTRICAL...</div>
     </div>
   `;
 
-  speechText.textContent = "thanks for fixing the oxygen, wiring, and nav comms bestie...";
+  speechText.textContent = "thanks for fixing the oxygen and comms bestie...";
   
   impostorTimerIds.push(setTimeout(() => {
     crewAvatar.classList.add('talking');
-    speechText.textContent = "you wrote fire async code ngl... but you made one fatal mistake...";
+    speechText.textContent = "fire async code ngl... but you made one fatal mistake...";
   }, 1800));
 
   impostorTimerIds.push(setTimeout(() => {
@@ -1455,7 +1494,7 @@ function renderImpostorReveal(sc) {
 
   impostorTimerIds.push(setTimeout(() => {
     crewAvatar.classList.add('talking');
-    speechText.textContent = "you awaited your last coroutine bro. it's giving skill issue. 💀";
+    speechText.textContent = "you awaited your last coroutine bro. skill issue. 💀";
   }, 5200));
 
   impostorTimerIds.push(setTimeout(() => {
@@ -1477,24 +1516,16 @@ function renderImpostorReveal(sc) {
 
           <div class="autopsy-report-card">
             <div class="autopsy-row">
-              <span class="ak">VICTIM</span>
-              <span class="av">Cyan Crewmate (Python Intern)</span>
-            </div>
-            <div class="autopsy-row">
               <span class="ak">CAUSE OF DEATH</span>
               <span class="av">Stood in Electrical awaiting I/O 💀</span>
             </div>
             <div class="autopsy-row">
-              <span class="ak">CODE EFFICIENCY</span>
-              <span class="av">100% Concurrency (All 16 Stages Mastered)</span>
-            </div>
-            <div class="autopsy-row">
-              <span class="ak">IMPOSTORS REMAINING</span>
-              <span class="av">1 (Red is currently venting into MedBay)</span>
+              <span class="ak">CODE STATUS</span>
+              <span class="av">100% Non-Blocking (16 / 16 Slides Complete)</span>
             </div>
             <div class="autopsy-row">
               <span class="ak">SURVIVAL TIP</span>
-              <span class="av">Never trust someone with def when you asked for async def</span>
+              <span class="av">Never trust def when you asked for async def</span>
             </div>
           </div>
 

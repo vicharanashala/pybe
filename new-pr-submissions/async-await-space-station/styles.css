@@ -1046,39 +1046,90 @@ html, body {
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   4. INTERACTIVE STAGE COMPONENTS (I-ZONE)
+   4. INTERACTIVE STAGE COMPONENTS (I-ZONE) & VIEW TABS
    ══════════════════════════════════════════════════════════════════ */
+.view-tabs {
+  display: inline-flex;
+  gap: 6px;
+  background: #060a14;
+  border: 1px solid #1a2742;
+  padding: 4px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  align-self: flex-start;
+}
+
+.view-tabs.off {
+  display: none;
+}
+
+.view-tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 6px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-tab-btn:hover {
+  color: #ffffff;
+}
+
+.view-tab-btn.active {
+  background: #172745;
+  color: var(--accent-cyan);
+  box-shadow: 0 2px 8px rgba(0, 240, 255, 0.15);
+}
+
+.view-tab-btn.pulse-hint {
+  animation: tab-glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes tab-glow {
+  0% { box-shadow: 0 0 0 rgba(0, 240, 255, 0); }
+  100% { box-shadow: 0 0 10px rgba(0, 240, 255, 0.45); color: var(--accent-cyan); }
+}
+
 .screen-interaction-area {
-  margin-bottom: 18px;
+  margin-bottom: 10px;
+}
+
+.screen-interaction-area.off {
+  display: none;
 }
 
 .i-prompt {
   font-size: 13.5px;
   line-height: 1.5;
   color: #cddbf0;
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .i-prompt strong {
   color: var(--accent-cyan);
 }
 
-/* Sequential Tasks List (Stage 1) */
+/* Sequential Tasks List (Stage 2) */
 .task-grid-seq {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 14px;
+  gap: 6px;
+  margin-bottom: 12px;
 }
 
 .seq-task-card {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   background: #111728;
   border: 1.5px solid #1c2740;
   border-radius: 8px;
-  padding: 10px 14px;
+  padding: 7px 12px;
   position: relative;
   overflow: hidden;
   transition: all 0.25s;
@@ -1886,8 +1937,8 @@ html, body {
 .theory-container {
   display: flex;
   flex-direction: column;
-  gap: 13px;
-  animation: fadeIn 0.3s ease;
+  gap: 14px;
+  animation: fadeIn 0.25s ease;
 }
 
 @keyframes fadeIn {
@@ -1899,6 +1950,8 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .theory-tag {
@@ -1909,25 +1962,52 @@ html, body {
   background: rgba(0, 240, 255, 0.1);
   color: var(--accent-cyan);
   border: 1px solid rgba(0, 240, 255, 0.3);
-  padding: 3px 8px;
+  padding: 4px 9px;
   border-radius: 4px;
 }
 
-.theory-grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+/* Segmented Section Pills inside Briefing */
+.section-pills {
+  display: inline-flex;
+  gap: 6px;
+  background: #060a14;
+  border: 1px solid #1a2742;
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.section-pill-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.section-pill-btn:hover {
+  color: #ffffff;
+}
+
+.section-pill-btn.active {
+  background: #172745;
+  color: var(--accent-cyan);
+  box-shadow: 0 2px 8px rgba(0, 240, 255, 0.18);
 }
 
 .theory-card {
   background: #080d1a;
   border: 1.5px solid #1a2742;
-  border-radius: 10px;
-  padding: 13px 15px;
+  border-radius: 12px;
+  padding: 20px 22px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  transition: all 0.25s;
+  gap: 14px;
+  animation: fadeIn 0.2s ease;
 }
 
 .theory-card.sync-card {
@@ -1939,61 +2019,88 @@ html, body {
   background: #091222;
 }
 
+.theory-card.rule-card {
+  border-top: 3px solid var(--accent-cyan);
+  background: #07111e;
+}
+
 .theory-card-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .theory-card-title {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 800;
   color: #ffffff;
 }
 
 .theory-card-badge {
   font-family: var(--font-mono);
-  font-size: 8.5px;
+  font-size: 9px;
   font-weight: 800;
-  padding: 2px 6px;
-  border-radius: 3px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.6px;
 }
 
 .badge-red { background: rgba(255, 56, 92, 0.15); color: var(--accent-red); }
 .badge-green { background: rgba(47, 233, 128, 0.15); color: var(--accent-green); }
+.badge-cyan { background: rgba(0, 240, 255, 0.15); color: var(--accent-cyan); }
 
 .theory-flow-visual {
   background: #040710;
   border: 1px solid #141f33;
-  border-radius: 6px;
-  padding: 8px 10px;
+  border-radius: 8px;
+  padding: 12px 14px;
   font-family: var(--font-mono);
-  font-size: 11px;
-  line-height: 1.6;
-  color: #a4b7d6;
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: #cfe0fc;
+  white-space: pre-wrap;
 }
 
 .theory-bullet-list {
-  font-size: 11.5px;
-  line-height: 1.5;
-  color: #8c9ebf;
-  padding-left: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #a8bad8;
+  padding-left: 18px;
 }
 
 .theory-bullet-list li {
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+}
+
+.theory-bullet-list li strong {
+  color: #ffffff;
 }
 
 .theory-takeaway-box {
   background: rgba(0, 240, 255, 0.06);
   border: 1px solid rgba(0, 240, 255, 0.25);
   border-left: 3px solid var(--accent-cyan);
-  border-radius: 0 6px 6px 0;
-  padding: 10px 14px;
-  font-size: 12px;
-  line-height: 1.5;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  font-size: 13px;
+  line-height: 1.55;
   color: #d0e2fa;
+}
+
+.theory-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.theory-step-hint {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
 }
 
 .btn-theory-ready {
@@ -2012,8 +2119,6 @@ html, body {
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(0, 240, 255, 0.35);
   transition: all 0.2s;
-  align-self: flex-start;
-  margin-top: 4px;
 }
 
 .btn-theory-ready:hover {
