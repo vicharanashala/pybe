@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Chai Ki Dukaan - Variables Seekho</title>
+<style>
+body{font-family:Arial;background:#fff3e0;text-align:center;padding:20px}
+.card{background:white;max-width:500px;margin:auto;padding:20px;border-radius:15px;box-shadow:0 4px 10px #ccc}
+button{background:#ff6d00;color:white;border:none;padding:12px 20px;border-radius:10px;font-size:16px;margin:5px;cursor:pointer}
+input{padding:10px;font-size:16px;width:80%;border-radius:8px;border:1px solid #ccc}
+.code{background:#222;color:#a5ff7a;padding:12px;border-radius:10px;text-align:left}
+</style>
+</head>
+<body>
+<div class="card">
+<h1>🍵 Chai Ki Dukaan</h1>
+<p id="story">Ram ne nayi chai ki dukaan kholi. Usko chai ka daam yaad rakhna hai. Python me hum isko <b>variable</b> me rakhte hai.</p>
+<div class="code" id="code">chai_price = ?<br>cups = 0<br>total_money = 0</div>
+<h2 id="q">Level 1: Chai ka daam kya rakhe? (10 likho)</h2>
+<input id="ans" placeholder="Yahan likho, jaise 10">
+<br><br>
+<button onclick="check()">Check Karo</button>
+<p id="result"></p>
+<p>💰 Paise: <span id="money">0</span> | ☕ Cup: <span id="cups">0</span></p>
+<button onclick="sell()">Chai Becho (+10 Rs)</button>
+</div>
+
+<script>
+let level = 1;
+let money = 0;
+let cups = 0;
+let price = 0;
+
+function check(){
+  let v = document.getElementById('ans').value.trim();
+  if(level==1 && v=="10"){
+    price=10;
+    document.getElementById('result').innerHTML="✅ Sahi! <b>chai_price = 10</b> ho gaya!";
+    document.getElementById('code').innerHTML="chai_price = 10<br>cups = 0<br>total_money = 0";
+    document.getElementById('q').innerHTML="Level 2: Ab 3 cup bechne ke liye 'Becho' dabao. Dekho cups aur paisa kaise badhta hai.";
+    level=2;
+  } else if(level==1){
+    document.getElementById('result').innerHTML="❌ Galat. 10 likho. Variable me value aise daalte hai: chai_price = 10";
+  } else if(level==2){
+    document.getElementById('result').innerHTML="Pehle neeche wala Becho button dabao 3 baar!";
+  } else if(level==3 && v=="30"){
+    document.getElementById('result').innerHTML="🎉 Jeet gaye! Tumne Variable seekh liya! <br>total_money = chai_price * cups = 10 * 3 = 30";
+  } else if(level==3){
+    document.getElementById('result').innerHTML="❌ Socho: 10 Rs wali 3 chai = kitni? 30 likho.";
+  }
+  document.getElementById('ans').value="";
+}
+function sell(){
+  if(level<2){ document.getElementById('result').innerHTML="Pehle Level 1 complete karo!"; return; }
+  cups++; money+=price;
+  document.getElementById('cups').innerText=cups;
+  document.getElementById('money').innerText=money;
+  document.getElementById('code').innerHTML=`chai_price = 10<br>cups = ${cups}<br>total_money = ${money}`;
+  if(cups>=3 && level==2){
+    level=3;
+    document.getElementById('q').innerHTML="Level 3: Final Sawal - 3 cup ka total kitna hua? Answer likho:";
+    document.getElementById('result').innerHTML="✅ 3 cup bech diye! Ab final sawal ka jawab do.";
+  }
+}
+</script>
+</body>
+</html>
